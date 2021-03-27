@@ -1,19 +1,19 @@
 package it.polimi.ingsw;
 
-public class Game {
-    private int numberofplayers;
-    public static void main( String[] args )
-    {
-
-    }
+public class SingleGame extends Game {
+    @Override
     public void Shuffle()
     {
 
     }
+
+    @Override
     public boolean Endgame()
     {
 
     }
+
+    @Override
     public int Victory()
     {
 
