@@ -2,9 +2,9 @@ package it.polimi.ingsw;
 
 public class Lorenzo {
     private String name;
-    private int number;
+    private int number; //posizione su tracciato
 
-    public int Lorenzomoves(int){
+    public int Lorenzomoves(int forward){
 
     }
 

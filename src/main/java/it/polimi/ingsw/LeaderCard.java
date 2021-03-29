@@ -4,7 +4,7 @@ import java.lang.reflect.Array;
 
 public class LeaderCard extends Card{
     private ResourceStructure priceR;
-    private Array<DevelopeCard> priceC; //dovrei dirgli lungo 2?
+    private DevelopeCard priceC[]; // lungo 2?
     private int skill;
 
     @Override

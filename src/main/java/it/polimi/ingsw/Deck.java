@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 public abstract class Deck {
     private ArrayList<Card> structure;
-    public Card getDeck()  //sostituire puntatori con arraylist
+    public Card getDeck()
     {
 
     }
-    public void setDeck()
+    public void setDeck(ArrayList<Card> structure)
     {
 
     }

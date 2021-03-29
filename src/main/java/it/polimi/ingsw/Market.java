@@ -1,12 +1,16 @@
 package it.polimi.ingsw;
 
 public class Market {
-    private ResourceStructure firstrow;
-    private ResourceStructure secondrow;
-    private ResourceStructure thirdrow;
+    private Resource matrix[][];
     private Resource extraball;
 
-    public Resource GetResource (boolean check, int number)
+    //prende le risorse dalla matrice
+    public Resource GetResource (boolean check, int number){
 
-    public void SetResource (boolean check, int number)
+    }
+
+    //inserisce la extraball nella matrice + nuova extraball
+    public void SetResource (boolean check, int number){
+
+    }
 }

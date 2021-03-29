@@ -1,21 +1,22 @@
 package it.polimi.ingsw;
 
-public class Storage {private Resource firstfloor;
+public class Storage {
+    private Resource firstfloor;
     private ResourceStructure secondfloor;
-    private ResourceStructure thirdfloor ;
-    private ResourceStructure additionalfloor ;
+    private ResourceStructure thirdfloor;
+    private ResourceStructure additionalfloor;
 
-}
 
-    public boolean getResource (int number, Resource) {
-        return boolean;
+    public boolean getResource(int number, Resource withdraw) {
+        return boolean ;
     }
 
-    public void setResource (int number, Resource) {
-        this.Resource = resource; //
+    public void setResource(int number, Resource deposit) {
+
     }
 
-    public int counterResource ()
+    public int counterResource() {
+    }
 }
 
-}
+

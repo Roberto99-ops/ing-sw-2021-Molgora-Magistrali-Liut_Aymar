@@ -2,11 +2,11 @@ package it.polimi.ingsw;
 import java.lang.String;
 
 public class Player {
+    private String name;
     private int number;
     private int developementquantity;
     private int pv;
     private int trackposition;
-    private String name;
     private Leaderdeck leadercards;
 
     public int getDevelopementquantity() {

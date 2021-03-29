@@ -1,11 +1,14 @@
 package it.polimi.ingsw;
-import java.lang.String;
+import Java.lang.String;
+
 public class DevelopeCard extends Card {
-    private String colour; //qui ci va enum o cosa?
+    //B, Y, P, G
+    private char colour;
     private int level;
     private ResourceStructure inputproduction;
     private ResourceStructure outputproduction;
-    public ResourceStructure Production(ResourceStructure inputproduction) //qui?
+
+    public ResourceStructure Production(ResourceStructure inputproduction)
     {
 
     }

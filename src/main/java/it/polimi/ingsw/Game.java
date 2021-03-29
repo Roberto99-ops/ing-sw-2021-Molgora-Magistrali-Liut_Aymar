@@ -2,6 +2,7 @@ package it.polimi.ingsw;
 
 public class Game {
     private int numberofplayers;
+
     public static void main( String[] args )
     {
 
@@ -16,6 +17,6 @@ public class Game {
     }
     public int Victory()
     {
-
+        return player;
     }
 }

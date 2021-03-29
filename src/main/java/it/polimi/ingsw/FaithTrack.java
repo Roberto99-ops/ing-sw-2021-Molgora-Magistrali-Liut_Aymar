@@ -1,17 +1,17 @@
 package it.polimi.ingsw;
 
 public class FaithTrack {
-    private int track;
+    private int position;
 
     public int GetPosition(){
+        return position;
+    }
+    public int VaticanReport(int position){
 
     }
-    public int VaticanReport(int){
 
-    }
-
-    public void SetPosition(int){
-
+    public void SetPosition(int position){
+        return position;
     }
 
 }

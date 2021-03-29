@@ -2,15 +2,16 @@ package it.polimi.ingsw;
 
 public class DevelopementSpace {
 
-    private DevelopeDecks structure;}
+    private DevelopeDecks structure;
 
-    public DevelopeDecks getStructure() {
+
+    public DevelopeDecks getCard() {
         return structure;
     }
 
-    public void setStructure(DevelopeCard structure) {
+    public void setCard(DevelopeCard structure) {
         this.structure = structure;
     }
 }
 
-}
+
