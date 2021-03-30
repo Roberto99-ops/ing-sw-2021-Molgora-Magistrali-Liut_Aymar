@@ -492,6 +492,8 @@ public class DevelopeCard extends Card {
     public void Print()
     {
         System.out.println("pv: " + this.getPv());
+        System.out.println("colour: " + this.colour);
+        System.out.println("cost: " + this.cost.getVector());
         System.out.println("inputproduction: " + this.inputproduction.getVector());
         System.out.println("outputproduction: " + this.outputproduction.getVector());
         System.out.println("level: " + this.level + "\n");
