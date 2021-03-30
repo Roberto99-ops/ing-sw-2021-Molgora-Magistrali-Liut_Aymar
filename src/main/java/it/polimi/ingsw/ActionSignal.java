@@ -13,7 +13,6 @@ public class ActionSignal {
             case 4:
             case 5:
             case 6:
-            default: System.out.println("Errore. Numero non valido!"); //questo messaggio di errore è solo un esempio
             //in Java, il break nello switch è opzionale
         }
     }
