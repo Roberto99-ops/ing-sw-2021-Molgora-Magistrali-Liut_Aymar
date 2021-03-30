@@ -1,5 +1,5 @@
 package it.polimi.ingsw;
-public class DevelopeCard extends Card {
+public class DevelopeCard{
     //B, Y, P, G
     private char colour;
     private int level;
