@@ -1,18 +1,20 @@
 package it.polimi.ingsw;
 import java.util.ArrayList;
 public class ResourceStructure {
-    private ArrayList <Resource> vector;
+    private ArrayList<Character> vector = new ArrayList<Character>();
+    public ArrayList<Character> getVector() { return vector; }
 
-    public ArrayList<Resource> getVector() {
-        return vector;
-    }
-
-    public void setVector(ArrayList<Resource> vector) {
+    public void setVector(ArrayList<Character> vector) {
         this.vector = vector;
     }
 
-    public *Resource Order(*Resource)
+    public ArrayList<Character> Order(ArrayList<Character> vector)
     {
+        return vector;
+    }
 
+    public ArrayList<Character> AddResource(int quantity, Character resource){
+        for(int i=0; i<quantity; i++) vector.add(resource);
+        return(vector);
     }
 }
