@@ -3,6 +3,7 @@ public class DevelopeCard extends Card {
     //B, Y, P, G
     private char colour;
     private int level;
+    private int pv;
     private ResourceStructure cost;
     private ResourceStructure inputproduction;
     private ResourceStructure outputproduction;
@@ -24,7 +25,7 @@ public class DevelopeCard extends Card {
             case 0:
                 this.level=1;
                 this.colour='G';
-                this.setPv(1);
+                this.pv=1;
                 this.cost.AddResource(2, 'B');
                 this.inputproduction.AddResource(1,'Y');
                 this.outputproduction.AddResource(1, 'R');
@@ -32,7 +33,7 @@ public class DevelopeCard extends Card {
             case 1:
                 this.level=1;
                 this.colour='P';
-                this.setPv(1);
+                this.pv=1;
                 this.cost.AddResource(2, 'P');
                 this.inputproduction.AddResource(1,'W');
                 this.outputproduction.AddResource(1, 'R');
@@ -40,7 +41,7 @@ public class DevelopeCard extends Card {
             case 2:
                 this.level=1;
                 this.colour='B';
-                this.setPv(1);
+                this.pv=1;
                 this.cost.AddResource(2, 'Y');
                 this.inputproduction.AddResource(1,'B');
                 this.outputproduction.AddResource(1, 'R');
@@ -48,7 +49,7 @@ public class DevelopeCard extends Card {
             case 3:
                 this.level=1;
                 this.colour='Y';
-                this.setPv(1);
+                this.pv=1;
                 this.cost.AddResource(2, 'W');
                 this.inputproduction.AddResource(1,'P');
                 this.outputproduction.AddResource(1, 'R');
@@ -56,7 +57,7 @@ public class DevelopeCard extends Card {
             case 4:
                 this.level=1;
                 this.colour='G';
-                this.setPv(2);
+                this.pv=2;
                 this.cost.AddResource(1, 'B');
                 this.cost.AddResource(1, 'W');
                 this.cost.AddResource(1, 'P');
@@ -66,7 +67,7 @@ public class DevelopeCard extends Card {
             case 5:
                 this.level=1;
                 this.colour='P';
-                this.setPv(2);
+                this.pv=2;
                 this.cost.AddResource(1, 'B');
                 this.cost.AddResource(1, 'Y');
                 this.cost.AddResource(1, 'P');
@@ -76,7 +77,7 @@ public class DevelopeCard extends Card {
             case 6:
                 this.level=1;
                 this.colour='B';
-                this.setPv(2);
+                this.pv=2;
                 this.cost.AddResource(1, 'Y');
                 this.cost.AddResource(1, 'W');
                 this.cost.AddResource(1, 'P');
@@ -86,7 +87,7 @@ public class DevelopeCard extends Card {
             case 7:
                 this.level=1;
                 this.colour='Y';
-                this.setPv(2);
+                this.pv=2;
                 this.cost.AddResource(1, 'B');
                 this.cost.AddResource(1, 'W');
                 this.cost.AddResource(1, 'Y');
@@ -96,7 +97,7 @@ public class DevelopeCard extends Card {
             case 8:
                 this.level=1;
                 this.colour='G';
-                this.setPv(3);
+                this.pv=3;
                 this.cost.AddResource(3, 'B');
                 this.inputproduction.AddResource(2,'P');
                 this.outputproduction.AddResource(1, 'Y');
@@ -106,7 +107,7 @@ public class DevelopeCard extends Card {
             case 9:
                 this.level=1;
                 this.colour='P';
-                this.setPv(3);
+                this.pv=3;
                 this.cost.AddResource(3, 'P');
                 this.inputproduction.AddResource(2,'Y');
                 this.outputproduction.AddResource(1, 'P');
@@ -116,7 +117,7 @@ public class DevelopeCard extends Card {
             case 10:
                 this.level=1;
                 this.colour='B';
-                this.setPv(3);
+                this.pv=3;
                 this.cost.AddResource(3, 'Y');
                 this.inputproduction.AddResource(2,'W');
                 this.outputproduction.AddResource(1, 'Y');
@@ -126,7 +127,7 @@ public class DevelopeCard extends Card {
             case 11:
                 this.level=1;
                 this.colour='Y';
-                this.setPv(3);
+                this.pv=3;
                 this.cost.AddResource(3, 'W');
                 this.inputproduction.AddResource(2,'B');
                 this.outputproduction.AddResource(1, 'Y');
@@ -136,7 +137,7 @@ public class DevelopeCard extends Card {
             case 12:
                 this.level=1;
                 this.colour='G';
-                this.setPv(4);
+                this.pv=4;
                 this.cost.AddResource(2, 'B');
                 this.cost.AddResource(2, 'Y');
                 this.inputproduction.AddResource(1,'P');
@@ -147,7 +148,7 @@ public class DevelopeCard extends Card {
             case 13:
                 this.level=1;
                 this.colour='P';
-                this.setPv(4);
+                this.pv=4;
                 this.cost.AddResource(2, 'P');
                 this.cost.AddResource(2, 'W');
                 this.inputproduction.AddResource(1,'Y');
@@ -158,7 +159,7 @@ public class DevelopeCard extends Card {
             case 14:
                 this.level=1;
                 this.colour='B';
-                this.setPv(4);
+                this.pv=4;
                 this.cost.AddResource(2, 'P');
                 this.cost.AddResource(2, 'Y');
                 this.inputproduction.AddResource(1,'B');
@@ -169,7 +170,7 @@ public class DevelopeCard extends Card {
             case 15:
                 this.level=1;
                 this.colour='Y';
-                this.setPv(4);
+                this.pv=4;
                 this.cost.AddResource(2, 'B');
                 this.cost.AddResource(2, 'W');
                 this.inputproduction.AddResource(1,'Y');
@@ -180,7 +181,7 @@ public class DevelopeCard extends Card {
             case 16:
                 this.level=2;
                 this.colour='G';
-                this.setPv(5);
+                this.pv=5;
                 this.cost.AddResource(4, 'B');
                 this.inputproduction.AddResource(1, 'W');
                 this.outputproduction.AddResource(2, 'R');
@@ -188,7 +189,7 @@ public class DevelopeCard extends Card {
             case 17:
                 this.level=2;
                 this.colour='P';
-                this.setPv(5);
+                this.pv=5;
                 this.cost.AddResource(4, 'P');
                 this.inputproduction.AddResource(1, 'Y');
                 this.outputproduction.AddResource(2, 'R');
@@ -196,7 +197,7 @@ public class DevelopeCard extends Card {
             case 18:
                 this.level=2;
                 this.colour='B';
-                this.setPv(5);
+                this.pv=5;
                 this.cost.AddResource(4, 'Y');
                 this.inputproduction.AddResource(1, 'P');
                 this.outputproduction.AddResource(2, 'R');
@@ -204,7 +205,7 @@ public class DevelopeCard extends Card {
             case 19:
                 this.level=2;
                 this.colour='Y';
-                this.setPv(5);
+                this.pv=5;
                 this.cost.AddResource(4, 'W');
                 this.inputproduction.AddResource(1, 'B');
                 this.outputproduction.AddResource(2, 'R');
@@ -212,7 +213,7 @@ public class DevelopeCard extends Card {
             case 20:
                 this.level=2;
                 this.colour='G';
-                this.setPv(6);
+                this.pv=6;
                 this.cost.AddResource(3, 'B');
                 this.cost.AddResource(2, 'P');
                 this.inputproduction.AddResource(1, 'B');
@@ -222,7 +223,7 @@ public class DevelopeCard extends Card {
             case 21:
                 this.level=2;
                 this.colour='P';
-                this.setPv(6);
+                this.pv=6;
                 this.cost.AddResource(3, 'P');
                 this.cost.AddResource(2, 'Y');
                 this.inputproduction.AddResource(1, 'Y');
@@ -232,7 +233,7 @@ public class DevelopeCard extends Card {
             case 22:
                 this.level=2;
                 this.colour='B';
-                this.setPv(6);
+                this.pv=6;
                 this.cost.AddResource(3, 'Y');
                 this.cost.AddResource(2, 'W');
                 this.inputproduction.AddResource(1, 'Y');
@@ -242,7 +243,7 @@ public class DevelopeCard extends Card {
             case 23:
                 this.level=2;
                 this.colour='Y';
-                this.setPv(6);
+                this.pv=6;
                 this.cost.AddResource(3, 'W');
                 this.cost.AddResource(2, 'B');
                 this.inputproduction.AddResource(1, 'W');
@@ -252,7 +253,7 @@ public class DevelopeCard extends Card {
             case 24:
                 this.level=2;
                 this.colour='G';
-                this.setPv(7);
+                this.pv=7;
                 this.cost.AddResource(5, 'B');
                 this.inputproduction.AddResource(2, 'Y');
                 this.outputproduction.AddResource(2, 'W');
@@ -261,7 +262,7 @@ public class DevelopeCard extends Card {
             case 25:
                 this.level=2;
                 this.colour='P';
-                this.setPv(7);
+                this.pv=7;
                 this.cost.AddResource(5, 'P');
                 this.inputproduction.AddResource(2, 'W');
                 this.outputproduction.AddResource(2, 'Y');
@@ -270,7 +271,7 @@ public class DevelopeCard extends Card {
             case 26:
                 this.level=2;
                 this.colour='B';
-                this.setPv(7);
+                this.pv=7;
                 this.cost.AddResource(5, 'Y');
                 this.inputproduction.AddResource(2, 'P');
                 this.outputproduction.AddResource(2, 'B');
@@ -279,7 +280,7 @@ public class DevelopeCard extends Card {
             case 27:
                 this.level=2;
                 this.colour='Y';
-                this.setPv(7);
+                this.pv=7;
                 this.cost.AddResource(5, 'W');
                 this.inputproduction.AddResource(2, 'B');
                 this.outputproduction.AddResource(2, 'P');
@@ -288,7 +289,7 @@ public class DevelopeCard extends Card {
             case 28:
                 this.level=2;
                 this.colour='G';
-                this.setPv(8);
+                this.pv=8;
                 this.cost.AddResource(3, 'B');
                 this.cost.AddResource(3, 'Y');
                 this.inputproduction.AddResource(1, 'Y');
@@ -298,7 +299,7 @@ public class DevelopeCard extends Card {
             case 29:
                 this.level=2;
                 this.colour='P';
-                this.setPv(8);
+                this.pv=8;
                 this.cost.AddResource(3, 'P');
                 this.cost.AddResource(3, 'B');
                 this.inputproduction.AddResource(1, 'W');
@@ -308,7 +309,7 @@ public class DevelopeCard extends Card {
             case 30:
                 this.level=2;
                 this.colour='B';
-                this.setPv(8);
+                this.pv=8;
                 this.cost.AddResource(3, 'W');
                 this.cost.AddResource(3, 'Y');
                 this.inputproduction.AddResource(1, 'P');
@@ -318,7 +319,7 @@ public class DevelopeCard extends Card {
             case 31:
                 this.level=2;
                 this.colour='Y';
-                this.setPv(8);
+                this.pv=8;
                 this.cost.AddResource(3, 'W');
                 this.cost.AddResource(3, 'P');
                 this.inputproduction.AddResource(1, 'B');
@@ -328,7 +329,7 @@ public class DevelopeCard extends Card {
             case 32:
                 this.level=3;
                 this.colour='G';
-                this.setPv(9);
+                this.pv=9;
                 this.cost.AddResource(6, 'B');
                 this.inputproduction.AddResource(2, 'Y');
                 this.outputproduction.AddResource(3, 'W');
@@ -337,7 +338,7 @@ public class DevelopeCard extends Card {
             case 33:
                 this.level=3;
                 this.colour='P';
-                this.setPv(9);
+                this.pv=9;
                 this.cost.AddResource(6, 'P');
                 this.inputproduction.AddResource(2, 'W');
                 this.outputproduction.AddResource(3, 'Y');
@@ -346,7 +347,7 @@ public class DevelopeCard extends Card {
             case 34:
                 this.level=3;
                 this.colour='B';
-                this.setPv(9);
+                this.pv=9;
                 this.cost.AddResource(6, 'Y');
                 this.inputproduction.AddResource(2, 'P');
                 this.outputproduction.AddResource(3, 'B');
@@ -355,7 +356,7 @@ public class DevelopeCard extends Card {
             case 35:
                 this.level=3;
                 this.colour='Y';
-                this.setPv(9);
+                this.pv=9;
                 this.cost.AddResource(6, 'W');
                 this.inputproduction.AddResource(2, 'B');
                 this.outputproduction.AddResource(3, 'P');
@@ -364,7 +365,7 @@ public class DevelopeCard extends Card {
             case 36:
                 this.level=3;
                 this.colour='G';
-                this.setPv(10);
+                this.pv=10;
                 this.cost.AddResource(5, 'B');
                 this.cost.AddResource(2, 'P');
                 this.inputproduction.AddResource(1, 'Y');
@@ -376,7 +377,7 @@ public class DevelopeCard extends Card {
             case 37:
                 this.level=3;
                 this.colour='P';
-                this.setPv(10);
+                this.pv=10;
                 this.cost.AddResource(5, 'P');
                 this.cost.AddResource(2, 'Y');
                 this.inputproduction.AddResource(1, 'W');
@@ -388,7 +389,7 @@ public class DevelopeCard extends Card {
             case 38:
                 this.level=3;
                 this.colour='B';
-                this.setPv(10);
+                this.pv=10;
                 this.cost.AddResource(5, 'Y');
                 this.cost.AddResource(2, 'W');
                 this.inputproduction.AddResource(1, 'Y');
@@ -400,7 +401,7 @@ public class DevelopeCard extends Card {
             case 39:
                 this.level=3;
                 this.colour='Y';
-                this.setPv(10);
+                this.pv=10;
                 this.cost.AddResource(5, 'W');
                 this.cost.AddResource(2, 'P');
                 this.inputproduction.AddResource(1, 'W');
@@ -412,7 +413,7 @@ public class DevelopeCard extends Card {
             case 40:
                 this.level=3;
                 this.colour='G';
-                this.setPv(11);
+                this.pv=11;
                 this.cost.AddResource(7, 'B');
                 this.inputproduction.AddResource(1, 'P');
                 this.outputproduction.AddResource(1, 'Y');
@@ -421,7 +422,7 @@ public class DevelopeCard extends Card {
             case 41:
                 this.level=3;
                 this.colour='P';
-                this.setPv(11);
+                this.pv=11;
                 this.cost.AddResource(7, 'P');
                 this.inputproduction.AddResource(1, 'Y');
                 this.outputproduction.AddResource(1, 'W');
@@ -430,7 +431,7 @@ public class DevelopeCard extends Card {
             case 42:
                 this.level=3;
                 this.colour='B';
-                this.setPv(11);
+                this.pv=11;
                 this.cost.AddResource(7, 'Y');
                 this.inputproduction.AddResource(1, 'W');
                 this.outputproduction.AddResource(1, 'B');
@@ -439,7 +440,7 @@ public class DevelopeCard extends Card {
             case 43:
                 this.level=3;
                 this.colour='Y';
-                this.setPv(11);
+                this.pv=11;
                 this.cost.AddResource(7, 'W');
                 this.inputproduction.AddResource(1, 'B');
                 this.outputproduction.AddResource(1, 'P');
@@ -448,7 +449,7 @@ public class DevelopeCard extends Card {
             case 44:
                 this.level=3;
                 this.colour='G';
-                this.setPv(12);
+                this.pv=12;
                 this.cost.AddResource(4, 'B');
                 this.cost.AddResource(4, 'Y');
                 this.inputproduction.AddResource(1, 'W');
@@ -458,7 +459,7 @@ public class DevelopeCard extends Card {
             case 45:
                 this.level=3;
                 this.colour='P';
-                this.setPv(12);
+                this.pv=12;
                 this.cost.AddResource(4, 'P');
                 this.cost.AddResource(4, 'B');
                 this.inputproduction.AddResource(1, 'Y');
@@ -468,7 +469,7 @@ public class DevelopeCard extends Card {
             case 46:
                 this.level=3;
                 this.colour='B';
-                this.setPv(12);
+                this.pv=12;
                 this.cost.AddResource(4, 'Y');
                 this.cost.AddResource(4, 'W');
                 this.inputproduction.AddResource(1, 'P');
@@ -478,7 +479,7 @@ public class DevelopeCard extends Card {
             case 47:
                 this.level=3;
                 this.colour='Y';
-                this.setPv(12);
+                this.pv=12;
                 this.cost.AddResource(4, 'P');
                 this.cost.AddResource(4, 'W');
                 this.inputproduction.AddResource(1, 'B');
@@ -491,7 +492,7 @@ public class DevelopeCard extends Card {
 
     public void Print()
     {
-        System.out.println("pv: " + this.getPv());
+        System.out.println("pv: " + this.pv);
         System.out.println("colour: " + this.colour);
         System.out.println("cost: " + this.cost.getVector());
         System.out.println("inputproduction: " + this.inputproduction.getVector());
