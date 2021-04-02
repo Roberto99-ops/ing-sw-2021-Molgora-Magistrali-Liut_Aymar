@@ -10,7 +10,7 @@ public class ActionStructure {
 
     //metodo che mischia le carte del mazzo
     public void ShuffleSignal(){
-        /*oggetto della classe Game*/.shuffle();
+        /*oggetto della classe Game*/
 
     }
 
