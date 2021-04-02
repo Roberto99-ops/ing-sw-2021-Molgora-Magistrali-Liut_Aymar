@@ -1,15 +1,16 @@
 package it.polimi.ingsw;
 
 public class Lorenzo {
-    private String name;
-    private int number; //posizione su tracciato
+    private String name = "Lorenzo Il Magnifico";
+    private int number = 0; //posizione su tracciato
 
     public int Lorenzomoves(int forward){
-        if (/*oggetto di ActionSignal.numero == #corrispondente al segnalino +2*/){
+        if (forward==2){
             number+=2;
-        } else if (/*oggetto di ActionSignal.numero == #corrispondente al segnalino +1*/){
+        } else if (forward==1){
             number++;
             //chiamo metodo Shuffle per ActionStructure qui?
+            ActionStucture.ShuffleSignal();
         }
         return number;
     }
