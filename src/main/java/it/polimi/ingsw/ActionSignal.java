@@ -4,15 +4,24 @@ public class ActionSignal {
     private int number;
 
     public void Action(int number){
-        //enumero i segnaili da 0 a 6
+        //enumero i segnalini da 1 a 7
         switch (number){
-            case 0:
-            case 1:
-            case 2:
-            case 3:
-            case 4:
-            case 5:
-            case 6:
+            case 1://blu-2
+
+            case 2://verde-2
+
+            case 3://viola-2
+
+            case 4://giallo-2
+
+            case 5://+2
+                Lorenzo.Lorenzomoves(2);
+
+            case 6://+2
+                Lorenzo.Lorenzomoves(2);
+
+            case 7://+1&Shuffle
+                Lorenzo.Lorenzomoves(1);
             //in Java, il break nello switch è opzionale
         }
     }
