@@ -28,8 +28,8 @@ public class LeaderCard{
                 //this.priceR.getVector().add('G');
                 //this.priceR.AddResource('G');
                 this.priceR=null;
-                this.priceC.add('Y');
-                this.priceC.add('G');
+                this.priceC.add('Y');  //queste carte non so se siano di livello 1
+                this.priceC.add('G');  //o di livello ininfluente
                 this.pv=2;
                 this.skill=0;
                 this.cardLevel=1;
@@ -155,7 +155,21 @@ public class LeaderCard{
     }
     public void Skill(int number)
     {
+        DevelopeCard card=new DevelopeCard();
+        switch (number)
+        {
+            case 0:
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
 
+                break;
+        }
     }
     public void Print()
     {

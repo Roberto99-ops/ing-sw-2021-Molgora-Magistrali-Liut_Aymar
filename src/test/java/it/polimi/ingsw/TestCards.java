@@ -11,12 +11,10 @@ public class TestCards {
             card.Print();
         }
         DevelopeCard card1 = new DevelopeCard();
-        for(int i=0; i<48; i++)
-        {
+        for(int i=0; i<48; i++) {
             card1.getCard(i);
-            System.out.println("DevelopCard "+i+ " :");
+            System.out.println("DevelopCard " + i + " :");
             card1.Print();
         }
-
     }
 }

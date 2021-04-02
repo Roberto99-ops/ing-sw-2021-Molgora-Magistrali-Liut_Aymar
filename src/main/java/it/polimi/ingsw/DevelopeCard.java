@@ -8,6 +8,30 @@ public class DevelopeCard{
     private ResourceStructure inputproduction;
     private ResourceStructure outputproduction;
 
+    public char getColour() {
+        return colour;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public int getPv() {
+        return pv;
+    }
+
+    public ResourceStructure getCost() {
+        return cost;
+    }
+
+    public ResourceStructure getInputproduction() {
+        return inputproduction;
+    }
+
+    public ResourceStructure getOutputproduction() {
+        return outputproduction;
+    }
+
     public ResourceStructure Production(ResourceStructure inputproduction)
     {
     outputproduction = new ResourceStructure();
