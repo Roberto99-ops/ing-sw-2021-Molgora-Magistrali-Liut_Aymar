@@ -13,7 +13,7 @@ public class StrongBox {
 
     }
 
-    public int counterResource (){
+    public int counterResource () {
 
     }
 
