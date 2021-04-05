@@ -171,6 +171,8 @@ public class LeaderCard{
                 break;
         }
     }
+
+    //serve solo per testare la classe
     public void Print()
     {
         System.out.println("pv: " + this.pv);

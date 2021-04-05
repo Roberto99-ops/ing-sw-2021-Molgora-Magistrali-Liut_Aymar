@@ -514,6 +514,7 @@ public class DevelopeCard{
         return this;
     }
 
+    //serve solo per testare la classe
     public void Print()
     {
         System.out.println("pv: " + this.pv);

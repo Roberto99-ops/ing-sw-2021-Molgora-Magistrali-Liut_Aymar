@@ -4,16 +4,19 @@ import java.util.Random;
 import java.util.ArrayList;
 
 public abstract class Deck <T>{
+    private ArrayList<T> structure;
+
+    //restituisce il mazzo
     public ArrayList<T> getStructure() {
         return structure;
     }
 
+    //in teoria non serve
     public void setStructure(ArrayList<T> structure) {
         this.structure = structure;
     }
 
-    private ArrayList<T> structure;
-
+    //pesca la carta in cima al mazzo
     public T getDeck(ArrayList<T> structure)
     {
         T firstElement;
@@ -22,6 +25,7 @@ public abstract class Deck <T>{
         return firstElement;
     }
 
+    //mischia il mazzo con una funzione random
     public ArrayList<T> setDeck(ArrayList<T> structure) //non so se funzionano pe riferimento o cosa
     {
         ArrayList<T> mixedStructure = new ArrayList<T>();

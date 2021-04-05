@@ -2,7 +2,7 @@ package it.polimi.ingsw;
 import java.util.ArrayList;
 public class ResourceStructure {
 
-    private ArrayList<Character> vector = new ArrayList<Character>();
+    private ArrayList<Character> vector = new ArrayList<Character>(); //è giusto istanziarlo così o va istanziato dentor ogni metodo?
 
 
     // ritorna l'arraylist in questione
@@ -23,6 +23,7 @@ public class ResourceStructure {
     }
 
     // controlla che un array list sia composto da una sola risorsa
+    //forse non serve
     public boolean checkEquality(ArrayList<Character> vector) {
         int counter = 0;
         Character first = vector.get(0);
@@ -40,7 +41,7 @@ public class ResourceStructure {
     }
 
 
-    public ArrayList<Character> AddResource (int quantity, Character resource) {
+    public ArrayList<Character> AddResource (int quantity, Character resource) {//differenza tipi primitivi e normali
         for(int i=0; i<quantity; i++) vector.add(resource);
         return(vector);
     }

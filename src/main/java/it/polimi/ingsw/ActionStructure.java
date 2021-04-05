@@ -16,7 +16,7 @@ public class ActionStructure {
 
     //metodo che mischia le carte del mazzo
     public void ShuffleSignal(){
-        theGame = new Game();
+        Game theGame = new Game();
         theGame.Shuffle();
         //oppure ho trovato questo metodo per mischiare un array usando libreria standard di Java
         //Collections.shuffle(Arrays.asList(structure))
