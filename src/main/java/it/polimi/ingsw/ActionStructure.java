@@ -20,6 +20,7 @@ public class ActionStructure {
         theGame.Shuffle();
         //oppure ho trovato questo metodo per mischiare un array usando libreria standard di Java
         //Collections.shuffle(Arrays.asList(structure))
+        AS_Counter=0;
     }
 
 }
