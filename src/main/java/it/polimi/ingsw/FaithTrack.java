@@ -50,5 +50,4 @@ public class FaithTrack {
     public void SetPosition(int position){
         this.position=position;
     }
-
 }
