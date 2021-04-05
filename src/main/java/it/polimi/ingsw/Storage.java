@@ -7,10 +7,10 @@ public class Storage {
 
 
         // controlla se sono presenti nel panel tot risorse di uno specifico tipo
-        public boolean getinStorage (int quantity, Character type) {                    // OK!!!!
+        public boolean getinStorage (int quantity, Character type) {                    // OK!!!!!!
            int counter = 0;
            for (int i=0; i < 6; i ++) {
-               if (this.panel.get(i) == type) {
+               if (this.panel.getVector().get(i) == type) {
                counter ++;
                                                  }
            }
@@ -22,11 +22,11 @@ public class Storage {
 
 
         // inserisce nel panel una data risorsa (se si può)
-        public void setinStorage (Character type, int position) {
+        public void setinStorage (char type, int position) {
 
             if (getinStorage(1, type) == true) {
-                this.panel.set(position, type) = type; // assengnazione giusta?
-            } else this.extrapanel.add(type) = true;  // assegnazione giusta?
+                this.panel.getVector().set(position, type);
+            } else this.extrapanel.getVector().add(type);
         }
 
 
@@ -38,12 +38,13 @@ public class Storage {
 
         // controlla se i sei spazi del panel rispettano le regole prefissate del gioco se non le rispetta chiama repairstorage
         public boolean checkStorage () {
-            if (    this.panel.get(0) != this.panel.get(1) &&
-                    this.panel.get(1) != this.panel.get(3) &&
-                    this.panel.get(0) != this.panel.get(3) &&
-                    this.panel.get(1) == this.panel.get(2) &&
-                    this.panel.get(3) == this.panel.get(4) &&
-                    this.panel.get(4) == this.panel.get(5)         ) // però possono essere anche vuoti! come posso eprimerlo?
+            //if(this.panel.getVector().size()==0) return true;
+            if (    this.panel.getVector().get(0) != this.panel.getVector().get(1) &&
+                    this.panel.getVector().get(1) != this.panel.getVector().get(3) &&
+                    this.panel.getVector().get(0) != this.panel.getVector().get(3) &&
+                    this.panel.getVector().get(1) == this.panel.getVector().get(2) &&
+                    this.panel.getVector().get(3) == this.panel.getVector().get(4) &&
+                    this.panel.getVector().get(4) == this.panel.getVector().get(5)         ) // però possono essere anche vuoti! come posso eprimerlo?
             { return true; } else {
                                 this.repairStorage();
                                 return false; }
@@ -51,6 +52,6 @@ public class Storage {
 
         // controlla le risorse extra che vanno ad incrementare i puntifede degli altri giocatori
         public int returnmoves () {
-            return this.extrapanel.size();
+            return this.extrapanel.getVector().size();
         }
 }

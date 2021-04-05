@@ -31,18 +31,16 @@ public class FaithTrack {
         } else if (this.position > 20 && this.position < 24) {
             return 16;
         } else if (this.position == 24) {
-           // Game.this.Victory();
            // Game.this.Endgame();
             return 20;
             /*
-            Game.this.Victory();
             Game.this.Endgame();
             é giusto scriverli così?
             dove li metto? in quale metodo? perchè potrei anche
             metterlo in vaticanreport oppure in incrementposittion
              */
         } else {
-            return 25; // cosa metto come finale???
+            return 25; // exception
         }
     }
 
@@ -57,7 +55,7 @@ public class FaithTrack {
         } else if (this.position > 18) {
             this.VR = 3;
         } else {
-            this.VR = 4;
+            this.VR = 4; //exception
         }
     }
 
