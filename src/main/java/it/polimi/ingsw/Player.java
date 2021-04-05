@@ -12,7 +12,11 @@ public class Player {
     private int VR=0; /*contatore che per ogni giocatore comincia da 0 e ogni volta che
                         qualcuno arriva in VR, si incrementa fino a 2 (#3 non serve perchè una volat che un segnalino
                         arriva alla fine del tracciato la partita finisce ).
-                        Così sappiamo qual è l'area VR in cui si trova il segnalino che è in vantaggio.*/
+                        Così sappiamo qual è l'area VR in cui si trova il segnalino che è in vantaggio.
+
+                        JUAN look in faith track, ho implementato lì
+
+                        */
 
     public int getDevelopementquantity() {
         return developementquantity;
