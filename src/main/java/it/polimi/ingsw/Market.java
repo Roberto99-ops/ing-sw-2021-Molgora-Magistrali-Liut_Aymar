@@ -1,11 +1,11 @@
 package it.polimi.ingsw;
 
 public class Market {
-    private Resource matrix[][];
-    private Resource extraball;
+    private Character matrix[][];
+    private Character extraball;
 
     //prende le risorse dalla matrice
-    public Resource GetResource (boolean check, int number) {
+    public Character GetResource (boolean check, int number) {
 
     }
 
