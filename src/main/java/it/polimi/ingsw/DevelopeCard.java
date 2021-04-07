@@ -32,10 +32,17 @@ public class DevelopeCard{
         return outputproduction;
     }
 
-    public ResourceStructure Production(ResourceStructure inputproduction)
+    //metodo che gestisce le produzioni,
+    //gli do in ingresso un array di risorse e la carta e se le ho attivo la produzione
+    public ResourceStructure Production(ResourceStructure arrayIn, DevelopeCard card) //throws Exception
     {
-    outputproduction = new ResourceStructure();
-    return outputproduction;
+    //quindi andrebbe fatto un controllo nella classe
+    //chiamante per fare questa cosa per ogni baule...
+    if(!arrayIn.getVector().contains(card.inputproduction))//throw(Exception(String "Input della produzione non posseduto") e)
+        return arrayIn;
+    arrayIn.getVector().removeAll(card.inputproduction.getVector());//!!!non testata
+    arrayIn.getVector().addAll(card.outputproduction.getVector());  //!!!non testata
+    return arrayIn;
     }
 
     //@Override
