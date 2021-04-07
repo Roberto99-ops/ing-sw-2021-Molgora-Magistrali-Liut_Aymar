@@ -1,5 +1,4 @@
 package it.polimi.ingsw;
-//import java.awt.geom.Area;
 import java.util.Random;
 import java.util.ArrayList;
 
@@ -25,8 +24,8 @@ public abstract class Deck <T>{
         return firstElement;
     }
 
-    //mischia il mazzo con una funzione random
-    public ArrayList<T> setDeck(ArrayList<T> structure) //non so se funzionano pe riferimento o cosa
+    //mischia il mazzo con una funzione random, chiedere se meglio così om con funzione nativa
+    public ArrayList<T> setDeck(ArrayList<T> structure)
     {
         ArrayList<T> mixedStructure = new ArrayList<T>();
         Random mixer = new Random();
