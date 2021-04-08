@@ -15,7 +15,7 @@ public class Market {
     check mi dice se è colonna/riga da sopra/sotto
     il metodo ritorna arraylist con le
      */
-     */
+
 
     public  ArrayList<Character> doMarket(int check, int number) {
         char temporaryball = this.extraball;
@@ -23,7 +23,7 @@ public class Market {
         equalmatrix = this.matrix;
         ArrayList<Character> vector = new ArrayList<Character>();
 
-        if (check == 1) {
+        /*if (check == 1) {
             for (int i = 0; i < 2; i++) {
                 this.matrix[i + 1][number] = equalmatrix[i][number];
                 i++;
@@ -32,9 +32,9 @@ public class Market {
             this.matrix[0][number] = temporaryball;
             this.extraball = equalmatrix[2][number];
             vector.add(equalmatrix[2][number]);
-        }
+        }*/
 
-        if (check == 1) {
+        if (check == 2) {
             for (int i = 0; i < 2; i++) {
                 this.matrix[2-i][number] = equalmatrix[2-i][number];
                 i++;
@@ -45,7 +45,7 @@ public class Market {
             vector.add(equalmatrix[0][number]);
         }
 
-        if (check == 3) {
+        /*if (check == 3) {
             for (int i = 0; i < 3; i++) {
                 this.matrix[number][i + 1] = equalmatrix[number][i];
                 i++;
@@ -54,9 +54,9 @@ public class Market {
             this.matrix[number][0] = temporaryball;
             this.extraball = equalmatrix[number][3];
             vector.add(equalmatrix[number][3]);
-        }
+        }*/
 
-        if (check == 4) {
+        if (check == 1) {
             for (int i = 0; i < 3; i++) {
                 this.matrix[number][3-i] = equalmatrix[number][3-i];
                 i++;
@@ -67,8 +67,8 @@ public class Market {
             vector.add(equalmatrix[number][0]);
         }
 
-    }
 
-    return vector;
+
+    return vector;}
 
 }

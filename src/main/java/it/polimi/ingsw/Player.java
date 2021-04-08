@@ -2,6 +2,9 @@ package it.polimi.ingsw;
 import java.lang.String;
 
 public class Player {
+
+    //ha bisogno di istanze di tutta la plancia
+
     private String name;  //forse va istanziato
     private int number;
     private int developementquantity;
@@ -15,7 +18,7 @@ public class Player {
                         Così sappiamo qual è l'area VR in cui si trova il segnalino che è in vantaggio.
 
                         JUAN look in faith track, ho implementato lì
-
+                        va in game
                         */
     public int getTrackposition() { return trackposition; }
 

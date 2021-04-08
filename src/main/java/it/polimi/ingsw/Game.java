@@ -1,6 +1,7 @@
 package it.polimi.ingsw;
 import java.util.ArrayList;
 
+
 public class Game {
     private static ArrayList<Player> players;
     private static DevelopeDecks developedecks[];  //dichiaro tutto static?
@@ -64,9 +65,8 @@ public class Game {
      */
     public boolean Endgame(Player actualplayer)
     {
-        Player player = new Player();
             //1)
-            if(actualplayer.getTrackposition()==21)   return true;
+            if(actualplayer.getTrackposition()>=24)   return true;
 
             //2)
             if(actualplayer.getDevelopementquantity()>=7)   return true;
@@ -86,7 +86,7 @@ public class Game {
         for(int i=0 ; i<players.size(); i++)
         {
             //1)
-            if(players.get(i).getTrackposition()==21)   return players.get(i).getName();
+            if(players.get(i).getTrackposition()>=24)   return players.get(i).getName();
 
             //2)
             if(winner.getPv() < players.get(i).getPv()) winner.equals(players.get(i));
