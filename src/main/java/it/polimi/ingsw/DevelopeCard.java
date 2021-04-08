@@ -1,4 +1,6 @@
 package it.polimi.ingsw;
+
+
 public class DevelopeCard{
     //B, Y, P, G
     private char colour;
@@ -32,8 +34,13 @@ public class DevelopeCard{
         return outputproduction;
     }
 
-    //metodo che gestisce le produzioni,
-    //gli do in ingresso un array di risorse e la carta e se le ho attivo la produzione
+
+    /**
+     * method that manage productions, it checks if I own the necessary resources to active the production
+     * @param arrayIn
+     * @param card
+     * @return
+     */
     public ResourceStructure Production(ResourceStructure arrayIn, DevelopeCard card) //throws Exception
     {
     //quindi andrebbe fatto un controllo nella classe
@@ -45,7 +52,11 @@ public class DevelopeCard{
     return arrayIn;
     }
 
-    //@Override
+    /**
+     * switch that lists all the develope cards
+     * @param number
+     * @return
+     */
     public DevelopeCard getCard(int number)
     {
         inputproduction = new ResourceStructure();

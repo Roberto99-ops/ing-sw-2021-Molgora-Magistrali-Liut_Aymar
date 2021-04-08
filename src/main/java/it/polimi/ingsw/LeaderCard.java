@@ -13,6 +13,10 @@ public class LeaderCard{
         return priceR;
     }
 
+    /**
+     * return priceC, priceC is an arraylist witch every cell is a resource (char)
+     * @return
+     */
     public ArrayList<Character> getPriceC() {
         return priceC;
     }
@@ -25,29 +29,27 @@ public class LeaderCard{
         return pv;
     }
 
+    /**
+     * return the skill, skill is the resource (char) that we usa in the Skill
+     * @return
+     */
     public char getSkill() {
         return skill;
     }
 
-    //priceC si può fare un arraylist di char in cui ogni elemento è il colore di una carta.
-    //per risparmiare strutture si potrebbe usare una lettera D per dire che la carta deve essere di livello 2.
-    //oppure un altro attributo che indica il livello della carta.
+
+    /**
+     * switch that lists all the leader cards
+     * @param number
+     * @return
+     */
     public LeaderCard getCard(int number)
     {
-        //ArrayList<Resource> array = new ArrayList<Resource>();
-        //Resource r = new Resource();
-        //LeaderCard card = new LeaderCard();
         this.priceR = new ResourceStructure();
         this.priceC = new ArrayList<Character>();
 
         switch(number) {
             case 0:
-                //r.setColour('Y');
-                //this.priceR.getVector().add('Y');
-                //this.priceR.AddResource('Y');
-                //r.setColour('G');
-                //this.priceR.getVector().add('G');
-                //this.priceR.AddResource('G');
                 this.priceR=null;
                 this.priceC.add('Y');  //queste carte non so se siano di livello 1
                 this.priceC.add('G');  //o di livello ininfluente
@@ -200,7 +202,13 @@ public class LeaderCard{
         }
     }*/
 
-    //skill che diminuisce il prezzo delle carte sviluppo di una certa risorsa
+
+    /**
+     * this skill decereases the develope card price of a specify resource
+     * @param card
+     * @param resource
+     * @return
+     */
     public ResourceStructure PriceSkill(DevelopeCard card, char resource)
     {
         ResourceStructure newCost = new ResourceStructure();
@@ -209,14 +217,24 @@ public class LeaderCard{
         return newCost;
     }
 
-    //skill che da un deposito in più
     //la gestione è tutta dentro player
+
+    /**
+     * this skill give to the player the additional storage layer
+     * @param resource
+     * @return
+     */
     public char AdditionalStorageSkill(char resource)
     {
         return resource;
     }
 
-    //skill che sostituisce le biglie bianche della riga/colonna selezionata con una certa risorsa
+    /**
+     * this skill "replace" white marbles in the row/column chosen, with marbles of a given colour
+     * @param resource
+     * @param row
+     * @return
+     */
     public ResourceStructure ConvertWhiteMarbleSkill(char resource, ResourceStructure row)
     {
         while(row.getVector().contains('W'))
@@ -227,9 +245,16 @@ public class LeaderCard{
         return row;
     }
 
-    //skill che fornisce un potere di produzione aggiuntivo, non so come abbiamo implementato i punti fede quindi per
+    //non so come abbiamo implementato i punti fede quindi per
     //ora li tratto solo come una risorsa rossa
     //non so se devo dargli in ingresso anche il baule o storage in modo da togliere quella risorsa
+
+    /**
+     * this skill give us an additional production we can do
+     * @param resource
+     * @param storage
+     * @return
+     */
     public ResourceStructure AdditionalProductionSkill(char resource, ResourceStructure storage)
     {
         if(!storage.getVector().contains(resource)) return null;

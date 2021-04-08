@@ -2,6 +2,10 @@ package it.polimi.ingsw;
 import java.util.Random;
 import java.util.ArrayList;
 
+/**
+ * abstract class with generics so we can override from developedeck and leaderdeck
+ * @param <T>
+ */
 public abstract class Deck <T>{
     private ArrayList<T> structure;
 
@@ -15,7 +19,11 @@ public abstract class Deck <T>{
         this.structure = structure;
     }
 
-    //pesca la carta in cima al mazzo
+    /**
+     * method that allow us to pick the card on the top of the deck
+     * @param structure
+     * @return
+     */
     public T getDeck(ArrayList<T> structure)
     {
         T firstElement;
@@ -24,7 +32,12 @@ public abstract class Deck <T>{
         return firstElement;
     }
 
-    //mischia il mazzo con una funzione random, chiedere se meglio così om con funzione nativa
+    //chiedere se meglio così o con funzione nativa
+    /**
+     * method that randomly mix the deck
+     * @param structure
+     * @return
+     */
     public ArrayList<T> setDeck(ArrayList<T> structure)
     {
         ArrayList<T> mixedStructure = new ArrayList<T>();

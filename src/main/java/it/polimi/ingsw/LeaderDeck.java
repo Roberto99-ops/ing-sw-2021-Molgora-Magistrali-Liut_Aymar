@@ -5,10 +5,7 @@ public class LeaderDeck extends Deck <LeaderCard>{
     private ArrayList<LeaderCard> structure;
 
     @Override
-    public ArrayList<LeaderCard> getStructure()
-    {
-        return structure;
-    }
+    public ArrayList<LeaderCard> getStructure() { return structure; }
 
     @Override
     public void setStructure(ArrayList<LeaderCard> structure)
