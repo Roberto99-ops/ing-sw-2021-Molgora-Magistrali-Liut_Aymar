@@ -18,4 +18,9 @@ public class DevelopeDecks extends Deck<DevelopeCard>{
     public void setStructure(ArrayList<DevelopeCard> structure) {
         this.structure = structure;
     }
+
+    public void Print()
+    {
+        for(int i=0; i<this.structure.size(); i++) this.structure.get(i).Print();
+    }
 }

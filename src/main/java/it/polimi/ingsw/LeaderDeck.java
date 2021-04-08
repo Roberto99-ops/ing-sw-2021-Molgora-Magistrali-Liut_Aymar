@@ -12,4 +12,9 @@ public class LeaderDeck extends Deck <LeaderCard>{
     {
         this.structure=structure;
     }
+
+    public void Print()
+    {
+        for(int i=0; i<this.structure.size(); i++) this.structure.get(i).Print();
+    }
 }
