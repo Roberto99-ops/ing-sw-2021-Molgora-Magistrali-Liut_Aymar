@@ -5,6 +5,7 @@ public class Game {
     private static ArrayList<Player> players;
     private static DevelopeDecks developedecks[];  //dichiaro tutto static?
     private static LeaderDeck leaderdeck;
+    private static Market market = new Market();
 
     /**
      * 1) shuffle all the decks
@@ -31,6 +32,7 @@ public class Game {
         while(true) {
             //3)
             turn.setActualplayer(players.get(actualplayer));
+            turn.main();
 
             //4)
             if (game.Endgame(players.get(actualplayer))) {
@@ -44,7 +46,7 @@ public class Game {
     }
 
     /**
-     * shuffle all the decks calling the random function
+     * shuffle all the decks and the market calling the random function
      */
     public void Shuffle()
     {
@@ -52,6 +54,8 @@ public class Game {
             developedecks[i].setStructure(developedecks[i].setDeck(developedecks[i].getStructure()));
 
         leaderdeck.setStructure(leaderdeck.setDeck(leaderdeck.getStructure()));
+
+        //market random
     }
 
     /**
