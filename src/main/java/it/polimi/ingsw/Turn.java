@@ -4,15 +4,24 @@ public class Turn {
     private Player actualplayer;
     private int action;
 
-    private Developementcard ShopCard() {
+    public Player getActualplayer() {
+        return actualplayer;
+    }
+
+    public void setActualplayer(Player actualplayer) {
+        this.actualplayer = actualplayer;
+    }
+
+
+    private DevelopeCard ShopCard() {
 
     }
 
-    public *Resource Buyresource(boolean choice, int quantity) {
+    public ResourceStructure Buyresource(boolean choice, int quantity) {
 
     }
 
-    private void Production(Cartasviluppo carta) {
+    private void Production(DevelopeCard carta) {
 
     }
 }

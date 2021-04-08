@@ -8,13 +8,13 @@ public class SingleGame extends Game {
     }
 
     @Override
-    public boolean Endgame()
+    public boolean Endgame(Player actualplayer)
     {
 
     }
 
     @Override
-    public int Victory()
+    public String Victory()
     {
 
     }
