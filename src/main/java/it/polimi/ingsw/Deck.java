@@ -50,4 +50,5 @@ public abstract class Deck <T>{
         }
         return mixedStructure;
     }
+
 }
