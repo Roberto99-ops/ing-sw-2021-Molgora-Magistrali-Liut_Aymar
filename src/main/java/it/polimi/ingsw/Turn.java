@@ -93,7 +93,7 @@ public class Turn {
     }
 
     /**
-     * active the producition of the given card
+     * active the production of the given card
      * @param card
      */
     private void Production(DevelopeCard card) {
@@ -102,5 +102,14 @@ public class Turn {
 
     private void Production(LeaderCard card) {
         this.actualplayer.setResources(card.Production(this.actualplayer.getResources,card));
+    }
+
+    /**
+     * Checks if someone can call the Vatican Report now, during his/her turn,
+     * and calls it.
+     */
+    private void CallVaticanReport(){
+        FaithTrack faithtrack= new FaithTrack();
+        faithtrack.VaticanReport();
     }
 }
