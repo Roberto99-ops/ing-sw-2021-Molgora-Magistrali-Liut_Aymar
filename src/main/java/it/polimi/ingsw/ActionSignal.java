@@ -3,6 +3,10 @@ package it.polimi.ingsw;
 public class ActionSignal {
     private int number;
 
+    /**
+     * Applies actions described by ActionSignals
+     * @param number
+     */
     public void Action(int number){
         Lorenzo Lore = new Lorenzo();
         //enumero i segnalini da 1 a 7
