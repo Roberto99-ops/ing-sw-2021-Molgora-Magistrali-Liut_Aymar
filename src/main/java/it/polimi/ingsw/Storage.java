@@ -32,7 +32,7 @@ public class Storage {
 
         // se viene lanciata un'exeption in setinstorage oppure in getinstorage si attiva e modifica arraylist
         public void repairStorage () {
-            // TOSTA IN CULO CANE PORCO
+
 
         }
 
