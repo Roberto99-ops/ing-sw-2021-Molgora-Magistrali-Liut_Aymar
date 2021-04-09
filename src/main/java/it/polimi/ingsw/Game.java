@@ -7,6 +7,24 @@ public class Game {
     private static DevelopeDecks developedecks[];  //dichiaro tutto static?
     private static LeaderDeck leaderdeck;
     private static Market market = new Market();
+    private static int VR=0;
+
+    /**
+     * Gets VaticanReport index
+     * @return
+     */
+    public static int getVR() {
+        return VR;
+    }
+
+    /**
+     * Sets VaticanReport index for all players
+     * @param vr
+     */
+    public static void setVR(int vr) {
+        Game.VR = vr;
+    }
+
 
     /**
      * 1) shuffle all the decks
