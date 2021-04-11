@@ -8,6 +8,7 @@ public class DevelopementSpace {
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     public DevelopeCard getCard(int choice) {
         int i = 0;
         if (choice == 1) {
@@ -74,6 +75,16 @@ public class DevelopementSpace {
         }
 
     }
+=======
+    public DevelopeDecks getCard() {
+        return structure;
+    }
+
+    public void setCard(DevelopeCard structure) {
+        this.structure = structure;
+
+    }
+>>>>>>> parent of fb965f5 ( news by Fra :))
 =======
     public DevelopeDecks getCard() {
         return structure;
