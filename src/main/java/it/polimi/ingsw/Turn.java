@@ -57,10 +57,11 @@ public class Turn {
      */
     private void ShopCard() {
         int choose=0;
+        Game game=new Game();
         DevelopeCard card = new DevelopeCard();
         System.out.println("Choose the number of the card you want to buy ");
         try{ choose = (char) System.in.read(); } catch (IOException e){ System.out.println(e);}
-        card.equals(game.getDevelopeCard(choose));
+        //card.equals(game.getCard(choose));  -> questo meth non esiste. Era forse getCard di DevelopeCard?
 
         if(!this.actualplayer.getResources().cotains(card.getCost())) return;
 
@@ -93,7 +94,7 @@ public class Turn {
     }
 
     /**
-     * active the producition of the given card
+     * active the production of the given card
      * @param card
      */
     private void Production(DevelopeCard card) {
