@@ -1,5 +1,10 @@
 package it.polimi.ingsw.model;
 
+import com.google.gson.*;
+import com.google.gson.JsonParser;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 
 public class DevelopeCard{
     //B, Y, P, G
@@ -34,505 +39,71 @@ public class DevelopeCard{
         return outputproduction;
     }
 
-
-    /**
-     * method that manage productions, it checks if I own the necessary resources to active the production
-     * @param arrayIn
-     * @param card
-     * @return
-     */
-    public ResourceStructure Production(ResourceStructure arrayIn, DevelopeCard card) //throws Exception
+    public ResourceStructure Production(ResourceStructure inputproduction)
     {
-    //quindi andrebbe fatto un controllo nella classe
-    //chiamante per fare questa cosa per ogni baule...
-    if(!arrayIn.getVector().contains(card.inputproduction))//throw(Exception(String "Input della produzione non posseduto") e)
-        return arrayIn;
-    arrayIn.getVector().removeAll(card.inputproduction.getVector());//!!!non testata
-    arrayIn.getVector().addAll(card.outputproduction.getVector());  //!!!non testata
-    return arrayIn;
+        outputproduction = new ResourceStructure();
+        return outputproduction;
     }
 
-    /**
-     * switch that lists all the develope cards
-     * @param number
-     * @return
-     */
-    public DevelopeCard getCard(int number)
+    //@Override
+    /*public DevelopeCard setCard(int number)
     {
         inputproduction = new ResourceStructure();
         outputproduction = new ResourceStructure();
         cost = new ResourceStructure();
-        switch (number)
-        {
-            case 0:
-                this.level=1;
-                this.colour='G';
-                this.pv=1;
-                this.cost.AddResource(2, 'B');
-                this.inputproduction.AddResource(1,'Y');
-                this.outputproduction.AddResource(1, 'R');
-                break;
-            case 1:
-                this.level=1;
-                this.colour='P';
-                this.pv=1;
-                this.cost.AddResource(2, 'P');
-                this.inputproduction.AddResource(1,'W');
-                this.outputproduction.AddResource(1, 'R');
-                break;
-            case 2:
-                this.level=1;
-                this.colour='B';
-                this.pv=1;
-                this.cost.AddResource(2, 'Y');
-                this.inputproduction.AddResource(1,'B');
-                this.outputproduction.AddResource(1, 'R');
-                break;
-            case 3:
-                this.level=1;
-                this.colour='Y';
-                this.pv=1;
-                this.cost.AddResource(2, 'W');
-                this.inputproduction.AddResource(1,'P');
-                this.outputproduction.AddResource(1, 'R');
-                break;
-            case 4:
-                this.level=1;
-                this.colour='G';
-                this.pv=2;
-                this.cost.AddResource(1, 'B');
-                this.cost.AddResource(1, 'W');
-                this.cost.AddResource(1, 'P');
-                this.inputproduction.AddResource(1,'W');
-                this.outputproduction.AddResource(1, 'P');
-                break;
-            case 5:
-                this.level=1;
-                this.colour='P';
-                this.pv=2;
-                this.cost.AddResource(1, 'B');
-                this.cost.AddResource(1, 'Y');
-                this.cost.AddResource(1, 'P');
-                this.inputproduction.AddResource(1,'Y');
-                this.outputproduction.AddResource(1, 'B');
-                break;
-            case 6:
-                this.level=1;
-                this.colour='B';
-                this.pv=2;
-                this.cost.AddResource(1, 'Y');
-                this.cost.AddResource(1, 'W');
-                this.cost.AddResource(1, 'P');
-                this.inputproduction.AddResource(1,'P');
-                this.outputproduction.AddResource(1, 'W');
-                break;
-            case 7:
-                this.level=1;
-                this.colour='Y';
-                this.pv=2;
-                this.cost.AddResource(1, 'B');
-                this.cost.AddResource(1, 'W');
-                this.cost.AddResource(1, 'Y');
-                this.inputproduction.AddResource(1,'B');
-                this.outputproduction.AddResource(1, 'Y');
-                break;
-            case 8:
-                this.level=1;
-                this.colour='G';
-                this.pv=3;
-                this.cost.AddResource(3, 'B');
-                this.inputproduction.AddResource(2,'P');
-                this.outputproduction.AddResource(1, 'Y');
-                this.outputproduction.AddResource(1, 'B');
-                this.outputproduction.AddResource(1, 'W');
-                break;
-            case 9:
-                this.level=1;
-                this.colour='P';
-                this.pv=3;
-                this.cost.AddResource(3, 'P');
-                this.inputproduction.AddResource(2,'Y');
-                this.outputproduction.AddResource(1, 'P');
-                this.outputproduction.AddResource(1, 'B');
-                this.outputproduction.AddResource(1, 'W');
-                break;
-            case 10:
-                this.level=1;
-                this.colour='B';
-                this.pv=3;
-                this.cost.AddResource(3, 'Y');
-                this.inputproduction.AddResource(2,'W');
-                this.outputproduction.AddResource(1, 'Y');
-                this.outputproduction.AddResource(1, 'B');
-                this.outputproduction.AddResource(1, 'P');
-                break;
-            case 11:
-                this.level=1;
-                this.colour='Y';
-                this.pv=3;
-                this.cost.AddResource(3, 'W');
-                this.inputproduction.AddResource(2,'B');
-                this.outputproduction.AddResource(1, 'Y');
-                this.outputproduction.AddResource(1, 'P');
-                this.outputproduction.AddResource(1, 'W');
-                break;
-            case 12:
-                this.level=1;
-                this.colour='G';
-                this.pv=4;
-                this.cost.AddResource(2, 'B');
-                this.cost.AddResource(2, 'Y');
-                this.inputproduction.AddResource(1,'P');
-                this.inputproduction.AddResource(1, 'W');
-                this.outputproduction.AddResource(2, 'Y');
-                this.outputproduction.AddResource(1, 'R');
-                break;
-            case 13:
-                this.level=1;
-                this.colour='P';
-                this.pv=4;
-                this.cost.AddResource(2, 'P');
-                this.cost.AddResource(2, 'W');
-                this.inputproduction.AddResource(1,'Y');
-                this.inputproduction.AddResource(1, 'B');
-                this.outputproduction.AddResource(2, 'W');
-                this.outputproduction.AddResource(1, 'R');
-                break;
-            case 14:
-                this.level=1;
-                this.colour='B';
-                this.pv=4;
-                this.cost.AddResource(2, 'P');
-                this.cost.AddResource(2, 'Y');
-                this.inputproduction.AddResource(1,'B');
-                this.inputproduction.AddResource(1, 'W');
-                this.outputproduction.AddResource(2, 'P');
-                this.outputproduction.AddResource(1, 'R');
-                break;
-            case 15:
-                this.level=1;
-                this.colour='Y';
-                this.pv=4;
-                this.cost.AddResource(2, 'B');
-                this.cost.AddResource(2, 'W');
-                this.inputproduction.AddResource(1,'Y');
-                this.inputproduction.AddResource(1, 'P');
-                this.outputproduction.AddResource(2, 'B');
-                this.outputproduction.AddResource(1, 'R');
-                break;
-            case 16:
-                this.level=2;
-                this.colour='G';
-                this.pv=5;
-                this.cost.AddResource(4, 'B');
-                this.inputproduction.AddResource(1, 'W');
-                this.outputproduction.AddResource(2, 'R');
-                break;
-            case 17:
-                this.level=2;
-                this.colour='P';
-                this.pv=5;
-                this.cost.AddResource(4, 'P');
-                this.inputproduction.AddResource(1, 'Y');
-                this.outputproduction.AddResource(2, 'R');
-                break;
-            case 18:
-                this.level=2;
-                this.colour='B';
-                this.pv=5;
-                this.cost.AddResource(4, 'Y');
-                this.inputproduction.AddResource(1, 'P');
-                this.outputproduction.AddResource(2, 'R');
-                break;
-            case 19:
-                this.level=2;
-                this.colour='Y';
-                this.pv=5;
-                this.cost.AddResource(4, 'W');
-                this.inputproduction.AddResource(1, 'B');
-                this.outputproduction.AddResource(2, 'R');
-                break;
-            case 20:
-                this.level=2;
-                this.colour='G';
-                this.pv=6;
-                this.cost.AddResource(3, 'B');
-                this.cost.AddResource(2, 'P');
-                this.inputproduction.AddResource(1, 'B');
-                this.inputproduction.AddResource(1, 'P');
-                this.outputproduction.AddResource(3, 'W');
-                break;
-            case 21:
-                this.level=2;
-                this.colour='P';
-                this.pv=6;
-                this.cost.AddResource(3, 'P');
-                this.cost.AddResource(2, 'Y');
-                this.inputproduction.AddResource(1, 'Y');
-                this.inputproduction.AddResource(1, 'P');
-                this.outputproduction.AddResource(3, 'B');
-                break;
-            case 22:
-                this.level=2;
-                this.colour='B';
-                this.pv=6;
-                this.cost.AddResource(3, 'Y');
-                this.cost.AddResource(2, 'W');
-                this.inputproduction.AddResource(1, 'Y');
-                this.inputproduction.AddResource(1, 'W');
-                this.outputproduction.AddResource(3, 'P');
-                break;
-            case 23:
-                this.level=2;
-                this.colour='Y';
-                this.pv=6;
-                this.cost.AddResource(3, 'W');
-                this.cost.AddResource(2, 'B');
-                this.inputproduction.AddResource(1, 'W');
-                this.inputproduction.AddResource(1, 'B');
-                this.outputproduction.AddResource(3, 'Y');
-                break;
-            case 24:
-                this.level=2;
-                this.colour='G';
-                this.pv=7;
-                this.cost.AddResource(5, 'B');
-                this.inputproduction.AddResource(2, 'Y');
-                this.outputproduction.AddResource(2, 'W');
-                this.outputproduction.AddResource(2, 'R');
-                break;
-            case 25:
-                this.level=2;
-                this.colour='P';
-                this.pv=7;
-                this.cost.AddResource(5, 'P');
-                this.inputproduction.AddResource(2, 'W');
-                this.outputproduction.AddResource(2, 'Y');
-                this.outputproduction.AddResource(2, 'R');
-                break;
-            case 26:
-                this.level=2;
-                this.colour='B';
-                this.pv=7;
-                this.cost.AddResource(5, 'Y');
-                this.inputproduction.AddResource(2, 'P');
-                this.outputproduction.AddResource(2, 'B');
-                this.outputproduction.AddResource(2, 'R');
-                break;
-            case 27:
-                this.level=2;
-                this.colour='Y';
-                this.pv=7;
-                this.cost.AddResource(5, 'W');
-                this.inputproduction.AddResource(2, 'B');
-                this.outputproduction.AddResource(2, 'P');
-                this.outputproduction.AddResource(2, 'R');
-                break;
-            case 28:
-                this.level=2;
-                this.colour='G';
-                this.pv=8;
-                this.cost.AddResource(3, 'B');
-                this.cost.AddResource(3, 'Y');
-                this.inputproduction.AddResource(1, 'Y');
-                this.outputproduction.AddResource(2, 'B');
-                this.outputproduction.AddResource(1, 'R');
-                break;
-            case 29:
-                this.level=2;
-                this.colour='P';
-                this.pv=8;
-                this.cost.AddResource(3, 'P');
-                this.cost.AddResource(3, 'B');
-                this.inputproduction.AddResource(1, 'W');
-                this.outputproduction.AddResource(2, 'P');
-                this.outputproduction.AddResource(1, 'R');
-                break;
-            case 30:
-                this.level=2;
-                this.colour='B';
-                this.pv=8;
-                this.cost.AddResource(3, 'W');
-                this.cost.AddResource(3, 'Y');
-                this.inputproduction.AddResource(1, 'P');
-                this.outputproduction.AddResource(2, 'W');
-                this.outputproduction.AddResource(1, 'R');
-                break;
-            case 31:
-                this.level=2;
-                this.colour='Y';
-                this.pv=8;
-                this.cost.AddResource(3, 'W');
-                this.cost.AddResource(3, 'P');
-                this.inputproduction.AddResource(1, 'B');
-                this.outputproduction.AddResource(2, 'Y');
-                this.outputproduction.AddResource(1, 'R');
-                break;
-            case 32:
-                this.level=3;
-                this.colour='G';
-                this.pv=9;
-                this.cost.AddResource(6, 'B');
-                this.inputproduction.AddResource(2, 'Y');
-                this.outputproduction.AddResource(3, 'W');
-                this.outputproduction.AddResource(2, 'R');
-                break;
-            case 33:
-                this.level=3;
-                this.colour='P';
-                this.pv=9;
-                this.cost.AddResource(6, 'P');
-                this.inputproduction.AddResource(2, 'W');
-                this.outputproduction.AddResource(3, 'Y');
-                this.outputproduction.AddResource(2, 'R');
-                break;
-            case 34:
-                this.level=3;
-                this.colour='B';
-                this.pv=9;
-                this.cost.AddResource(6, 'Y');
-                this.inputproduction.AddResource(2, 'P');
-                this.outputproduction.AddResource(3, 'B');
-                this.outputproduction.AddResource(2, 'R');
-                break;
-            case 35:
-                this.level=3;
-                this.colour='Y';
-                this.pv=9;
-                this.cost.AddResource(6, 'W');
-                this.inputproduction.AddResource(2, 'B');
-                this.outputproduction.AddResource(3, 'P');
-                this.outputproduction.AddResource(2, 'R');
-                break;
-            case 36:
-                this.level=3;
-                this.colour='G';
-                this.pv=10;
-                this.cost.AddResource(5, 'B');
-                this.cost.AddResource(2, 'P');
-                this.inputproduction.AddResource(1, 'Y');
-                this.inputproduction.AddResource(1, 'P');
-                this.outputproduction.AddResource(2, 'B');
-                this.outputproduction.AddResource(2, 'W');
-                this.outputproduction.AddResource(1, 'R');
-                break;
-            case 37:
-                this.level=3;
-                this.colour='P';
-                this.pv=10;
-                this.cost.AddResource(5, 'P');
-                this.cost.AddResource(2, 'Y');
-                this.inputproduction.AddResource(1, 'W');
-                this.inputproduction.AddResource(1, 'B');
-                this.outputproduction.AddResource(2, 'Y');
-                this.outputproduction.AddResource(2, 'P');
-                this.outputproduction.AddResource(1, 'R');
-                break;
-            case 38:
-                this.level=3;
-                this.colour='B';
-                this.pv=10;
-                this.cost.AddResource(5, 'Y');
-                this.cost.AddResource(2, 'W');
-                this.inputproduction.AddResource(1, 'Y');
-                this.inputproduction.AddResource(1, 'B');
-                this.outputproduction.AddResource(2, 'P');
-                this.outputproduction.AddResource(2, 'W');
-                this.outputproduction.AddResource(1, 'R');
-                break;
-            case 39:
-                this.level=3;
-                this.colour='Y';
-                this.pv=10;
-                this.cost.AddResource(5, 'W');
-                this.cost.AddResource(2, 'P');
-                this.inputproduction.AddResource(1, 'W');
-                this.inputproduction.AddResource(1, 'P');
-                this.outputproduction.AddResource(2, 'B');
-                this.outputproduction.AddResource(2, 'Y');
-                this.outputproduction.AddResource(1, 'R');
-                break;
-            case 40:
-                this.level=3;
-                this.colour='G';
-                this.pv=11;
-                this.cost.AddResource(7, 'B');
-                this.inputproduction.AddResource(1, 'P');
-                this.outputproduction.AddResource(1, 'Y');
-                this.outputproduction.AddResource(3, 'R');
-                break;
-            case 41:
-                this.level=3;
-                this.colour='P';
-                this.pv=11;
-                this.cost.AddResource(7, 'P');
-                this.inputproduction.AddResource(1, 'Y');
-                this.outputproduction.AddResource(1, 'W');
-                this.outputproduction.AddResource(3, 'R');
-                break;
-            case 42:
-                this.level=3;
-                this.colour='B';
-                this.pv=11;
-                this.cost.AddResource(7, 'Y');
-                this.inputproduction.AddResource(1, 'W');
-                this.outputproduction.AddResource(1, 'B');
-                this.outputproduction.AddResource(3, 'R');
-                break;
-            case 43:
-                this.level=3;
-                this.colour='Y';
-                this.pv=11;
-                this.cost.AddResource(7, 'W');
-                this.inputproduction.AddResource(1, 'B');
-                this.outputproduction.AddResource(1, 'P');
-                this.outputproduction.AddResource(3, 'R');
-                break;
-            case 44:
-                this.level=3;
-                this.colour='G';
-                this.pv=12;
-                this.cost.AddResource(4, 'B');
-                this.cost.AddResource(4, 'Y');
-                this.inputproduction.AddResource(1, 'W');
-                this.outputproduction.AddResource(3, 'Y');
-                this.outputproduction.AddResource(1, 'B');
-                break;
-            case 45:
-                this.level=3;
-                this.colour='P';
-                this.pv=12;
-                this.cost.AddResource(4, 'P');
-                this.cost.AddResource(4, 'B');
-                this.inputproduction.AddResource(1, 'Y');
-                this.outputproduction.AddResource(3, 'W');
-                this.outputproduction.AddResource(1, 'P');
-                break;
-            case 46:
-                this.level=3;
-                this.colour='B';
-                this.pv=12;
-                this.cost.AddResource(4, 'Y');
-                this.cost.AddResource(4, 'W');
-                this.inputproduction.AddResource(1, 'P');
-                this.outputproduction.AddResource(3, 'B');
-                this.outputproduction.AddResource(1, 'Y');
-                break;
-            case 47:
-                this.level=3;
-                this.colour='Y';
-                this.pv=12;
-                this.cost.AddResource(4, 'P');
-                this.cost.AddResource(4, 'W');
-                this.inputproduction.AddResource(1, 'B');
-                this.outputproduction.AddResource(3, 'P');
-                this.outputproduction.AddResource(1, 'W');
-                break;
-        }
+        this.level =
         return this;
+    }*/
+
+    /**
+     * use the number in input to read on the Json file the DevelopeCard I need.
+     * return a DevelopeCard with all the parametres of the card i meant.
+     * @param number
+     * @return
+     * @throws FileNotFoundException
+     */
+    public DevelopeCard setCard(int number) throws FileNotFoundException {
+
+        inputproduction = new ResourceStructure();
+        outputproduction = new ResourceStructure();
+        cost = new ResourceStructure();
+        int size;
+
+        FileReader stringa = new FileReader("Sources/DevelopeCards.json");
+        Object obj = JsonParser.parseReader(stringa);
+        JsonObject jsonObject = (JsonObject)obj;
+        //int num = jsonObject.get("ciao").getAsInt();
+        //System.out.println(num);
+        JsonArray cardsArray = (JsonArray)jsonObject.get("DevelopeCards");
+        JsonObject card = (JsonObject)cardsArray.get(number);
+
+        this.level = card.get("level").getAsInt();
+        this.colour = card.get("colour").getAsCharacter();
+        this.pv = card.get("pv").getAsInt();
+
+        size = card.get("cost").getAsJsonArray().size();
+        for(int i=0; cost.getVector().size() < size; i++)
+            cost.getVector().add(card.get("cost").getAsJsonArray().get(i).getAsCharacter());
+
+        size = card.get("inputproduction").getAsJsonArray().size();
+        for(int i=0; inputproduction.getVector().size() < size; i++)
+            inputproduction.getVector().add(card.get("inputproduction").getAsJsonArray().get(i).getAsCharacter());
+
+        size = card.get("outputproduction").getAsJsonArray().size();
+        for(int i=0; outputproduction.getVector().size() < size; i++)
+            outputproduction.getVector().add(card.get("outputproduction").getAsJsonArray().get(i).getAsCharacter());
+
+        return this;
+        //char colore = element.get("colour").getAsCharacter();
+        //System.out.println(colore);
+
+        //ArrayList<Character> costo =  new ArrayList<Character>();
+        //int size = element.get("cost").getAsJsonArray().size();
+        //for(int i=0; costo.size()<size; i++)
+        //    costo.add(element.get("cost").getAsJsonArray().get(i).getAsCharacter());
+        //System.out.println(costo);
     }
 
-    //serve solo per testare la classe
     public void Print()
     {
         System.out.println("pv: " + this.pv);
