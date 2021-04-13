@@ -1,4 +1,4 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.model;
 
 public class Storage {
             private ResourceStructure panel; // arraylist di 6 spazi di base
@@ -32,7 +32,7 @@ public class Storage {
 
         // se viene lanciata un'exeption in setinstorage oppure in getinstorage si attiva e modifica arraylist
         public void repairStorage () {
-
+            // TOSTA IN CULO CANE PORCO
 
         }
 

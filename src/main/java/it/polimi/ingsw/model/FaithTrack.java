@@ -1,4 +1,4 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.model;
 
 public class FaithTrack {
     private int PV_Track = 0; //a seconda di dove si trova il segnalino riceve tot PV: ex cella #17==9PV

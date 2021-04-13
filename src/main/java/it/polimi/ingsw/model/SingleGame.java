@@ -1,4 +1,4 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.model;
 
 public class SingleGame extends Game {
     @Override
@@ -10,12 +10,12 @@ public class SingleGame extends Game {
     @Override
     public boolean Endgame(Player actualplayer)
     {
-
+        return true;
     }
 
     @Override
     public String Victory()
     {
-
+        return "prova";
     }
 }

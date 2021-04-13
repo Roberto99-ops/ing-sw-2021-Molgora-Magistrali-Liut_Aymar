@@ -1,4 +1,4 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.model;
 import java.io.IOException;
 
 public class Turn {
@@ -40,7 +40,7 @@ public class Turn {
 
                                 //2.2)
                                 System.out.println("Which DevelopeCard do you want to enable(0=none)?\n");
-                                this.actualplayer.getDevelopecards().Print(); //non so come il player accede alle proprie carte sviluppo
+            //da decommentare                    this.actualplayer.getDevelopecards().Print(); //non so come il player accede alle proprie carte sviluppo
                                 try{ card = System.in.read(); } catch (IOException e){ System.out.println(e);}
                                 if(card!=0) this.Production(this.actualplayer.getLeadercards().getStructure().get(card));
 
@@ -57,15 +57,16 @@ public class Turn {
      */
     private void ShopCard() {
         int choose=0;
+        Game game=new Game();
         DevelopeCard card = new DevelopeCard();
         System.out.println("Choose the number of the card you want to buy ");
         try{ choose = (char) System.in.read(); } catch (IOException e){ System.out.println(e);}
-        card.equals(game.getDevelopeCard(choose));
+        //card.equals(game.getCard(choose));  -> questo meth non esiste. Era forse getCard di DevelopeCard?
 
-        if(!this.actualplayer.getResources().cotains(card.getCost())) return;
+    //da decommentare    if(!this.actualplayer.getResources().cotains(card.getCost())) return;
 
-        this.actualplayer.setResources(this.actualplayer.getResources().remove(card.getCost()));
-        this.actualplayer.getDevelopeCards.add(card);
+    //da decommentare    this.actualplayer.setResources(this.actualplayer.getResources().remove(card.getCost()));
+    //da decommentare    this.actualplayer.getDevelopeCards.add(card);
     }
 
     /**
@@ -87,20 +88,20 @@ public class Turn {
             System.out.println("Wich column do you want to take?\n");
         try{ number = System.in.read(); } catch (IOException e){ System.out.println(e); }
 
-        product.setVector(game.getMarket.doMarket(RoworCol, number)); //???
+    //da decommentare    product.setVector(game.getMarket.doMarket(RoworCol, number)); //???
 
         return product;
     }
 
     /**
-     * active the producition of the given card
+     * active the production of the given card
      * @param card
      */
     private void Production(DevelopeCard card) {
-        this.actualplayer.setResources(card.Production(this.actualplayer.getResources,card));
+    //da decommentare    this.actualplayer.setResources(card.Production(this.actualplayer.getResources,card));
     }
 
     private void Production(LeaderCard card) {
-        this.actualplayer.setResources(card.Production(this.actualplayer.getResources,card));
+    //    this.actualplayer.setResources(card.Production(this.actualplayer.getResources,card));
     }
 }

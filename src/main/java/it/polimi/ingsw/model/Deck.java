@@ -1,4 +1,4 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.model;
 import java.util.Random;
 import java.util.ArrayList;
 

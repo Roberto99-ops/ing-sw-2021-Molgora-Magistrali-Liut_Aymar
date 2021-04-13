@@ -1,4 +1,4 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.model;
 import java.util.ArrayList;
 //DOMANDA IMPORTANTE ma i mazzi vanno tenuti in memoria qui o nella classe Game?
 
