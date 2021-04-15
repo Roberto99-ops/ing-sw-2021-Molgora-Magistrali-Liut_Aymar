@@ -26,6 +26,10 @@ public class Turn {
         char again='n';
         int card=0;
 
+        //Ad ogni turno, effettuo il controllo del Vatican Report
+        FaithTrack faithTrack = new FaithTrack();
+        faithTrack.VaticanReport();
+
         //1)
         System.out.println("What do you want to do?\n\t1)Shop a developement card\n\t2)Take resources at the market\n\t3)Active a production\n");
         try{ action = System.in.read();
