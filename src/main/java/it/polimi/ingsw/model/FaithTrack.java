@@ -1,7 +1,7 @@
 package it.polimi.ingsw.model;
 
 public class FaithTrack {
-    private int PV_Track = 0; //a seconda di dove si trova il segnalino riceve tot PV: ex cella #17==9PV
+    //private int PV_Track = 0; a seconda di dove si trova il segnalino riceve tot PV: ex cella #17==9PV
     //Partirebbe da 0 così mentre avanza "raccoglie" i PV sul tracciato
     //oppure si può usare il PV di PLayer?
 
@@ -12,41 +12,64 @@ public class FaithTrack {
      * the Vatican Report again when they reach that area.
      */
     public void VaticanReport() {
-        int i, VR, Tposition, Pnumber;
+        int VR, Tposition, PV,timer_VR, n_player;
         Player player = new Player();
         Tposition = player.getTrackposition(); //riceve la posizione in cui si trova il segnalino sul tracciato
         Game game = new Game();
-        VR = game.getVR(); //prendo il valore attuale di VR
+        timer_VR=Game.getTimer_VR();
+        VR = Game.getVR(); //prendo il valore attuale di VR
+        PV = player.getPv();
+        n_player = Game.getN_players();
 
-        // caso in cui un giocatore arrivi per primo a fare il VR
-        if ((Tposition >= 8 && Tposition <= 15) && VR == 0) {
-            PV_Track += 2; //il VR della prima area vale 2
-            //controllo che i giocatori si trovino nell'area del VR e se lo sono sommo i punti
-            for (i = 0; i < 3; i++) {
-                if (Tposition > 4 && Tposition < 9) {
-                    PV_Track += 2;
-                }
+        //un player arriva per primo nell'area 1
+        if ((Tposition>=8)&&(VR==0)) {
+            PV+= 2; //il VR della prima area vale 2
+            player.setPv(PV);
+            Game.setTimer_VR(0); //setto il timer a 0 per cominciare il conteggio dei turni
+            return;
+        } else if ((Tposition>=5)&&(VR==0)) {
+            if ((timer_VR<(n_player))){
+                PV+= 2;
+                player.setPv(PV);
             }
-            game.setVR(1); //setta il VR di tutti i giocatori a 1 perchè la prima area è stata superata
-        } else if ((Tposition >= 16 && Tposition <= 23) && VR == 1) {
-            PV_Track += 3; // seconda area vale 3
-            for (i = 0; i < 3; i++) {
-                if (Tposition > 11 && Tposition < 17) {
-                    PV_Track += 3;
-                }
-            }
-            game.setVR(2);
-        } else if ((Tposition == 24) && VR == 2) {
-            PV_Track += 4; // terza area vale 4
-            for (i = 0; i < 3; i++) {
-                if (Tposition > 18) {
-                    PV_Track += 4;
-                }
-            }
-            //chiama EndGame() e Victory()
-            game.Endgame(player); //chiama poi victory()
+            timer_VR++;
+            Game.setTimer_VR(timer_VR); //una volta completato il giro, Vr viene settato a 1
+            return;
         }
 
+        //un player arriva nell'area 2
+        if ((Tposition>=16)&&(VR==1)) {
+            PV+= 3; //il VR della seconda area vale 3 -> aggiungo i p.ti direttamente a Player
+            player.setPv(PV);
+            Game.setTimer_VR(0); //setto il timer a 0 per cominciare il conteggio dei turni
+            return;
+        } else if ((Tposition>=12)&&(VR==1)) {
+            if ((timer_VR<(n_player))){
+                PV+= 3;
+                player.setPv(PV);
+            }
+            timer_VR++;
+            Game.setTimer_VR(timer_VR); //una volta completato il giro, Vr viene settato a 2
+            return;
+        }
+
+        //un player arriva nell'area 3
+        if ((Tposition>=24)&&(VR==2)) {
+            PV+= 4; //il VR della terza area vale 4 -> aggiungo i p.ti direttamente a Player
+            player.setPv(PV);
+            Game.setTimer_VR(0); //setto il timer a 0 per cominciare il conteggio dei turni
+        } else if ((Tposition>=19)&&(VR==2)) {
+            if ((timer_VR<(n_player))){
+                PV+= 4;
+                player.setPv(PV);
+            }
+            timer_VR++;
+            Game.setTimer_VR(timer_VR); //una volta completato il giro, Vr viene settato a 3
+            if (VR>=(n_player-1)) {
+                //chiama EndGame() e Victory()
+                game.Endgame(player); //chiama poi victory()
+            }
+        }
     }
 
 }
