@@ -1,4 +1,10 @@
 package it.polimi.ingsw.model;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.ArrayList;
 
 public class LeaderCard{
@@ -39,141 +45,38 @@ public class LeaderCard{
 
 
     /**
-     * switch that lists all the leader cards
+     * use the number in input to read on the Json file the LeaderCard I need.
+     * return a LeaderCard with all the parametres of the card I meant.
      * @param number
      * @return
+     * @throws FileNotFoundException
      */
-    public LeaderCard getCard(int number)
-    {
-        this.priceR = new ResourceStructure();
-        this.priceC = new ArrayList<Character>();
+    public LeaderCard setCard(int number) throws FileNotFoundException {
 
-        switch(number) {
-            case 0:
-                this.priceR=null;
-                this.priceC.add('Y');  //queste carte non so se siano di livello 1
-                this.priceC.add('G');  //o di livello ininfluente
-                this.pv=2;
-                this.skill='P';
-                this.cardLevel=1;
-                break;
-            case 1:
-                this.priceR=null;
-                this.priceC.add('B');
-                this.priceC.add('P');
-                this.cardLevel=1;
-                this.pv=2;
-                this.skill='B';
-                break;
-            case 2:
-                this.priceR=null;
-                this.priceC.add('G');
-                this.priceC.add('B');
-                this.cardLevel=1;
-                this.pv=2;
-                this.skill='G';
-                break;
-            case 3:
-                this.priceR=null;
-                this.priceC.add('Y');
-                this.priceC.add('P');
-                this.cardLevel=1;
-                this.pv=2;
-                this.skill='Y';
-                break;
-            case 4:
-                this.priceR.AddResource(5, 'Y');
-                this.priceC=null;
-                this.cardLevel=0;
-                this.pv=3;
-                this.skill='G';
-                break;
-            case 5:
-                this.priceR.AddResource(5, 'W');
-                this.priceC=null;
-                this.cardLevel=0;
-                this.pv=3;
-                this.skill='P';
-                break;
-            case 6:
-                this.priceR.AddResource(5, 'P');
-                this.priceC=null;
-                this.cardLevel=0;
-                this.pv=3;
-                this.skill='B';
-                break;
-            case 7:
-                this.priceR.AddResource(5, 'B');
-                this.priceC=null;
-                this.cardLevel=0;
-                this.pv=3;
-                this.skill='Y';
-                break;
-            case 8:
-                this.priceR=null;
-                this.priceC.add('Y');
-                this.priceC.add('Y');
-                this.priceC.add('B');
-                this.cardLevel=1;
-                this.pv=5;
-                this.skill='P';
-                break;
-            case 9:
-                this.priceR=null;
-                this.priceC.add('G');
-                this.priceC.add('G');
-                this.priceC.add('P');
-                this.cardLevel=1;
-                this.pv=5;
-                this.skill='B';
-                break;
-            case 10:
-                this.priceR=null;
-                this.priceC.add('B');
-                this.priceC.add('B');
-                this.priceC.add('Y');
-                this.cardLevel=1;
-                this.pv=5;
-                this.skill='G';
-                break;
-            case 11:
-                this.priceR=null;
-                this.priceC.add('P');
-                this.priceC.add('P');
-                this.priceC.add('G');
-                this.cardLevel=1;
-                this.pv=5;
-                this.skill='Y';
-                break;
-            case 12:
-                this.priceR=null;
-                this.priceC.add('Y');
-                this.cardLevel=2;
-                this.pv=4;
-                this.skill='B';
-                break;
-            case 13:
-                this.priceR=null;
-                this.priceC.add('B');
-                this.cardLevel=2;
-                this.pv=4;
-                this.skill='P';
-                break;
-            case 14:
-                this.priceR=null;
-                this.priceC.add('P');
-                this.cardLevel=2;
-                this.pv=4;
-                this.skill='G';
-                break;
-            case 15:
-                this.priceR=null;
-                this.priceC.add('G');
-                this.cardLevel=2;
-                this.pv=4;
-                this.skill='Y';
-                break;
-        }
+        priceR = new ResourceStructure();
+        priceC = new ArrayList<Character>();
+        int size;
+
+        FileReader stringa = new FileReader("Sources/LeaderCards.json");
+        Object obj = JsonParser.parseReader(stringa);
+        JsonObject jsonObject = (JsonObject) obj;
+        //int num = jsonObject.get("ciao").getAsInt();
+        //System.out.println(num);
+        JsonArray cardsArray = (JsonArray) jsonObject.get("LeaderCards");
+        JsonObject card = (JsonObject) cardsArray.get(number);
+
+        this.cardLevel = card.get("cardLevel").getAsInt();
+        this.skill = card.get("skill").getAsCharacter();
+        this.pv = card.get("pv").getAsInt();
+
+        size = card.get("priceR").getAsJsonArray().size();
+        for (int i = 0; priceR.getVector().size() < size; i++)
+            priceR.getVector().add(card.get("priceR").getAsJsonArray().get(i).getAsCharacter());
+
+        size = card.get("priceC").getAsJsonArray().size();
+        for (int i = 0; priceC.size() < size; i++)
+            priceC.add(card.get("priceC").getAsJsonArray().get(i).getAsCharacter());
+
         return this;
     }
 
@@ -204,7 +107,7 @@ public class LeaderCard{
 
 
     /**
-     * this skill decereases the develope card price of a specify resource
+     * this skill decreases the develope card price of a specify resource
      * @param card
      * @param resource
      * @return
