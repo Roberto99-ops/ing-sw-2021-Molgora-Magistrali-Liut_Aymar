@@ -11,6 +11,7 @@ public class Player {
     private int pv;
     private int trackposition;
     private LeaderDeck leadercards;  //e pure questo
+    //ogni player deve avere come attributi anche gli elementi della plancia credo
 
     /*
     private int VR=0; contatore che per ogni giocatore comincia da 0 e ogni volta che
@@ -58,4 +59,21 @@ public class Player {
      */
     public void increaseDevelopQuantity() { this.developementquantity = developementquantity+1; }
 
+    public DevelopeDecks getDevelopecards()
+    {//deve "intreccarsi" con la plancia in modo da restituire
+        //la lista delle carte sviluppo in cima ai mazzetti, forse servono solo quelli
+        //della prima fila in quanto la produzioni si fanno solo
+        //con le carte in cima ai mazzetti
+        return null;
+    }
+
+    public ResourceStructure getResources()
+    {
+        //stesso discorso della plancia anche qui,
+        //deve restituire le risorse totali, servono per attivare
+        //le produzioni
+        return null;
+    }
+
+    //quindi servono tutti i getter getStrongbox ecc...
 }
