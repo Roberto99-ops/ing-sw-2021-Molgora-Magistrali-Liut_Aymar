@@ -5,112 +5,128 @@
       "priceC": ["Y", "G"],
       "cardLevel": 1,
       "pv": 2,
-      "skill": "P"
+      "skill": "P",
+      "number": 0
     },
     {
       "priceR": [],
       "priceC": ["B", "P"],
       "cardLevel": 1,
       "pv": 2,
-      "skill": "B"
+      "skill": "B",
+      "number": 1
     },
     {
       "priceR": [],
       "priceC": ["G", "B"],
       "cardLevel": 1,
       "pv": 2,
-      "skill": "G"
+      "skill": "G",
+      "number": 2
     },
     {
       "priceR": [],
       "priceC": ["Y", "P"],
       "cardLevel": 1,
       "pv": 2,
-      "skill": "Y"
+      "skill": "Y",
+      "number": 3
     },
     {
       "priceR": ["Y", "Y", "Y", "Y", "Y"],
       "priceC": [],
       "cardLevel": 0,
       "pv": 3,
-      "skill": "G"
+      "skill": "G",
+      "number": 4
     },
     {
       "priceR": ["W", "W", "W", "W", "W"],
       "priceC": [],
       "cardLevel": 0,
       "pv": 3,
-      "skill": "P"
+      "skill": "P",
+      "number": 5
     },
     {
       "priceR": ["P", "P", "P", "P", "P"],
       "priceC": [],
       "cardLevel": 0,
       "pv": 3,
-      "skill": "B"
+      "skill": "B",
+      "number": 6
     },
     {
       "priceR": ["B", "B", "B", "B", "B"],
       "priceC": [],
       "cardLevel": 0,
       "pv": 3,
-      "skill": "Y"
+      "skill": "Y",
+      "number": 7
     },
     {
       "priceR": [],
       "priceC": ["Y", "Y", "B"],
       "cardLevel": 1,
       "pv": 5,
-      "skill": "P"
+      "skill": "P",
+      "number": 8
     },
     {
       "priceR": [],
       "priceC": ["G", "G", "P"],
       "cardLevel": 1,
       "pv": 5,
-      "skill": "B"
+      "skill": "B",
+      "number": 9
     },
     {
       "priceR": [],
       "priceC": ["B", "Y", "B"],
       "cardLevel": 1,
       "pv": 5,
-      "skill": "G"
+      "skill": "G",
+      "number": 10
     },
     {
       "priceR": [],
       "priceC": ["P", "P", "G"],
       "cardLevel": 1,
       "pv": 5,
-      "skill": "Y"
+      "skill": "Y",
+      "number": 11
     },
     {
       "priceR": [],
       "priceC": ["Y"],
       "cardLevel": 2,
       "pv": 4,
-      "skill": "B"
+      "skill": "B",
+      "number": 12
     },
     {
       "priceR": [],
       "priceC": ["B"],
       "cardLevel": 2,
       "pv": 4,
-      "skill": "P"
+      "skill": "P",
+      "number": 13
     },
     {
       "priceR": [],
       "priceC": ["P"],
       "cardLevel": 2,
       "pv": 4,
-      "skill": "G"
+      "skill": "G",
+      "number": 14
     },
     {
       "priceR": [],
       "priceC": ["G"],
       "cardLevel": 2,
       "pv": 4,
-      "skill": "Y"
+      "skill": "Y",
+      "number": 15
     }
   ]
 }
