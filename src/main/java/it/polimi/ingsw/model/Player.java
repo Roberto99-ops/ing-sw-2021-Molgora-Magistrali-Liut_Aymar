@@ -75,5 +75,17 @@ public class Player {
         return null;
     }
 
+    public ResourceStructure removeResource(char resource)
+    {
+        //deve rimuovere quest risorsa da this
+        return null;
+    }
+
+    public ResourceStructure addResource(char resource)
+    {
+        //deve aggiungere questa risorsa a this
+        return null;
+    }
+
     //quindi servono tutti i getter getStrongbox ecc...
 }
