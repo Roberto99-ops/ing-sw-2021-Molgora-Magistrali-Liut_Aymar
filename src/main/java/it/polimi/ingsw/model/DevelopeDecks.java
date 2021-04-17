@@ -1,13 +1,14 @@
 package it.polimi.ingsw.model;
 import java.util.ArrayList;
-//DOMANDA IMPORTANTE ma i mazzi vanno tenuti in memoria qui o nella classe Game?
 
 public class DevelopeDecks extends Deck<DevelopeCard>{
     private ArrayList<DevelopeCard> structure = new ArrayList<DevelopeCard>();
 
-    //qui, come anche in leaderdeck, uso questi get e set per accedere
-    //alla struttura, ovvero ai deck, per modificarli in pratica ho
-    // dei metodi generics in Deck --> setstructure non credo serva
+    /**
+     * these get and set let me to manage the structure
+     * to modify decks there are methods (generics) in Deck class
+     * @return
+     */
     @Override
     public ArrayList<DevelopeCard> getStructure() {
         return structure;
