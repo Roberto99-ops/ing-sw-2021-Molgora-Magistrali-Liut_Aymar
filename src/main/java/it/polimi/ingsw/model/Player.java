@@ -77,15 +77,16 @@ public class Player {
 
     public ResourceStructure removeResource(char resource)
     {
-        //deve rimuovere quest risorsa da this
+        //deve rimuovere quest risorsa dalla plancia, quindi probabilmente
+        //dovrebbero esserci dei metodi dentro agli elementi della plancia
+        //se non ci sono già
         return null;
     }
 
     public ResourceStructure addResource(char resource)
     {
-        //deve aggiungere questa risorsa a this
+        //deve aggiungere questa risorsa alla plancia, stesso discorso
         return null;
     }
-
     //quindi servono tutti i getter getStrongbox ecc...
 }
