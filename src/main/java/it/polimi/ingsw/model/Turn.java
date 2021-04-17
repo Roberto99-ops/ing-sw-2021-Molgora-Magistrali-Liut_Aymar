@@ -20,7 +20,7 @@ public class Turn {
      *      2.2) do the same with our Developecards
      * then the turn ends
      */
-    public void main() throws IOException {
+    public void main() {
         int action=0;
         char again='n';
         int card=0;
