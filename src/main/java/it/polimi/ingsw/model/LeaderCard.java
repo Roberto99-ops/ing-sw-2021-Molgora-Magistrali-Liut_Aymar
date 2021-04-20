@@ -57,7 +57,7 @@ public class LeaderCard{
         priceC = new ArrayList<Character>();
         int size;
 
-        FileReader stringa = new FileReader("Sources/LeaderCards.json");
+        FileReader stringa = new FileReader("src/main/resources/LeaderCards.json");
         Object obj = JsonParser.parseReader(stringa);
         JsonObject jsonObject = (JsonObject) obj;
         //int num = jsonObject.get("ciao").getAsInt();
@@ -159,7 +159,7 @@ public class LeaderCard{
      */
     public ResourceStructure AdditionalProductionSkill(char resource, ResourceStructure storage)
     {
-        if(!storage.getVector().contains(resource)) return null;
+        if(!storage.getVector().contains(resource)) return null; //sbagliata, resource la ricevo, non la pago credo
         storage.getVector().remove(resource);
         ResourceStructure production = new ResourceStructure();
         production.getVector().add('R');
