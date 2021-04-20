@@ -2,7 +2,7 @@ package it.polimi.ingsw.model;
 import java.util.ArrayList;
 
 public class LeaderDeck extends Deck <LeaderCard>{
-    private ArrayList<LeaderCard> structure;
+    private ArrayList<LeaderCard> structure = new ArrayList<LeaderCard>();
 
     /**
      * these get and set let me to manage the structure
