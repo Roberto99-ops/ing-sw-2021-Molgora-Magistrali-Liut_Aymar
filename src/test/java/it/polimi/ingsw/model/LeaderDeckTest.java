@@ -44,7 +44,6 @@ public class LeaderDeckTest {
         }
 
         deck.setStructure(deck.setDeck(deck.getStructure()));
-        System.out.println(deck.getStructure() + "\n"+ oldDeck.getStructure());
 
         for(int i=0; i <5; i++) {
             assertTrue(deck.getStructure().contains(oldDeck.getStructure().get(i)));
