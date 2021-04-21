@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 
 public class DevelopeCard{
+
     //B, Y, P, G
     private char colour;
     private int level;
@@ -14,6 +15,31 @@ public class DevelopeCard{
     private ResourceStructure cost;
     private ResourceStructure inputproduction;
     private ResourceStructure outputproduction;
+
+
+    public void setColour(char colour) {
+        this.colour = colour;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public void setPv(int pv) {
+        this.pv = pv;
+    }
+
+    public void setCost(ResourceStructure cost) {
+        this.cost = cost;
+    }
+
+    public void setInputproduction(ResourceStructure inputproduction) {
+        this.inputproduction = inputproduction;
+    }
+
+    public void setOutputproduction(ResourceStructure outputproduction) {
+        this.outputproduction = outputproduction;
+    }
 
     public char getColour() {
         return colour;
@@ -39,10 +65,12 @@ public class DevelopeCard{
         return outputproduction;
     }
 
-    public ResourceStructure Production(ResourceStructure inputproduction)
+    public ResourceStructure Production(ResourceStructure storage)//qui non ci va solo storage, ci va anche la cassaforte
     {
-        outputproduction = new ResourceStructure();
-        return outputproduction;
+        if(!storage.getVector().contains(this.inputproduction.getVector())) return null;
+        storage.getVector().remove(this.inputproduction.getVector());
+        storage.getVector().addAll(this.outputproduction.getVector());
+        return storage;
     }
 
     //@Override
@@ -69,7 +97,7 @@ public class DevelopeCard{
         cost = new ResourceStructure();
         int size;
 
-        FileReader stringa = new FileReader("Sources/DevelopeCards.json");
+        FileReader stringa = new FileReader("src/main/resources/DevelopeCards.json");
         Object obj = JsonParser.parseReader(stringa);
         JsonObject jsonObject = (JsonObject)obj;
         //int num = jsonObject.get("ciao").getAsInt();
