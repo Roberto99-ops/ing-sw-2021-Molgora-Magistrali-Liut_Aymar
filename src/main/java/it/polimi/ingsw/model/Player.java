@@ -4,6 +4,10 @@ import java.lang.String;
 public class Player {
 
     //ha bisogno di istanze di tutta la plancia
+    private Storage storage;
+    private StrongBox SBox;
+    private DevelopementSpace DSpace;
+
 
     private String name;  //forse va istanziato
     private int number;
@@ -13,15 +17,29 @@ public class Player {
     private LeaderDeck leadercards;  //e pure questo
     //ogni player deve avere come attributi anche gli elementi della plancia credo
 
-    /*
-    private int VR=0; contatore che per ogni giocatore comincia da 0 e ogni volta che
-                        qualcuno arriva in VR, si incrementa fino a 2 (#3 non serve perchè una volta che un segnalino
-                        arriva alla fine del tracciato la partita finisce ).
-                        Così sappiamo qual è l'area VR in cui si trova il segnalino che è in vantaggio.
+    public Storage getStorage() {
+        return storage;
+    }
 
-                        JUAN look in faith track, ho implementato lì
-                        va in game
-                        */
+    public void setStorage(Storage storage) {
+        this.storage = storage;
+    }
+
+    public StrongBox getSBox() {
+        return SBox;
+    }
+
+    public void setSBox(StrongBox SBox) {
+        this.SBox = SBox;
+    }
+    public DevelopementSpace getDSpace() {
+        return DSpace;
+    }
+
+    public void setDSpace(DevelopementSpace DSpace) {
+        this.DSpace = DSpace;
+    }
+
     public int getTrackposition() { return trackposition; }
 
     public LeaderDeck getLeadercards() { return leadercards; }
@@ -55,7 +73,7 @@ public class Player {
     }
 
     /**
-     * increase the counter that count the quantity of developement card that this player owns
+     * Counts the quantity of developement cards that this player owns
      */
     public void increaseDevelopQuantity() { this.developementquantity = developementquantity+1; }
 
