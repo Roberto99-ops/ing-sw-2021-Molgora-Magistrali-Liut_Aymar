@@ -5,6 +5,7 @@ import com.google.gson.JsonParser;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class LeaderCard{
@@ -13,7 +14,21 @@ public class LeaderCard{
     private ArrayList<Character> priceC;
     private int cardLevel;
     private int pv;
-    private char skill;
+    private String skill;
+    private char inputskill;
+    private int number;
+
+    public String getSkill() {
+        return skill;
+    }
+
+    public char getInputskill() {
+        return inputskill;
+    }
+
+    public int getNumber() {
+        return number;
+    }
 
     public ResourceStructure getPriceR() {
         return priceR;
@@ -33,14 +48,6 @@ public class LeaderCard{
 
     public int getPv() {
         return pv;
-    }
-
-    /**
-     * return the skill, skill is the resource (char) that we usa in the Skill
-     * @return
-     */
-    public char getSkill() {
-        return skill;
     }
 
 
@@ -66,7 +73,8 @@ public class LeaderCard{
         JsonObject card = (JsonObject) cardsArray.get(number);
 
         this.cardLevel = card.get("cardLevel").getAsInt();
-        this.skill = card.get("skill").getAsCharacter();
+        this.skill = card.get("skill").getAsString();
+        this.inputskill = card.get("inputskill").getAsCharacter();
         this.pv = card.get("pv").getAsInt();
 
         size = card.get("priceR").getAsJsonArray().size();
@@ -80,29 +88,29 @@ public class LeaderCard{
         return this;
     }
 
+
     //idea, switch con parametro e che a sua volta chiama una delle
     //4 funzioni di Skill che poi fanno il vero lavoro
     //OPPURE mi sa che è meglio semplicemente trattare tutti i casi nella classe player o turno --> perciò attributo
     //skill delle carte diventa un char
-    /*public void Skill(int number)
+    //number è il numero della carta ovvero la sua posizione nell'array
+    public ResourceStructure Skill()
     {
         DevelopeCard card=new DevelopeCard();
-        char resource;
-        switch (number)
-        {
-            case 0:
-                resource='P';
-                break;
-            case 1:
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-            case 4:
-                break;
-        }
-    }*/
+        try {
+            if (this.number < 12) {
+                if (this.number < 8) {
+                    if (this.number < 4) {
+    //da sistemare                    return this.PriceSkill(boh, this.skill);
+                    }
+                    return this.AdditionalStorageSkill(this.inputskill);
+                }
+    //da sistemare           return this.ConvertWhiteMarbleSkill(this.skill, boh);
+            }
+   //da sistemare         return this.AdditionalProductionSkill(this.skill, boh);
+        } catch(Exception e){System.out.println("Inexistent LeaderCard");}
+        return null;
+    }
 
 
     /**
@@ -119,16 +127,17 @@ public class LeaderCard{
         return newCost;
     }
 
-    //la gestione è tutta dentro player
-
     /**
-     * this skill give to the player the additional storage layer
+     * this skill give to the player the type fo resource that can be
+     * contained in the additional storage layer
      * @param resource
      * @return
      */
-    public char AdditionalStorageSkill(char resource)
+    public ResourceStructure AdditionalStorageSkill(char resource)
     {
-        return resource;
+        ResourceStructure resourceType = new ResourceStructure();
+        resourceType.AddResource(1, resource);
+        return resourceType;
     }
 
     /**
@@ -157,13 +166,15 @@ public class LeaderCard{
      * @param storage
      * @return
      */
-    public ResourceStructure AdditionalProductionSkill(char resource, ResourceStructure storage)
-    {
-        if(!storage.getVector().contains(resource)) return null; //sbagliata, resource la ricevo, non la pago credo
+    public ResourceStructure AdditionalProductionSkill(char resource, ResourceStructure storage) throws IOException {
+        char resourceChosen;    //storage in ingresso
+        if(!storage.getVector().contains(resource)) return null;
         storage.getVector().remove(resource);
         ResourceStructure production = new ResourceStructure();
-        production.getVector().add('R');
-        //qui va fatta la scelta della risorsa da produrre, come facciamo a chiderlo all'utente? printf scanf?
+        production.AddResource(1, 'R');
+        System.out.println("What resource do you want to produce?\n(B, G, Y, P)\t");
+        resourceChosen = (char)System.in.read();
+        production.AddResource(1, resourceChosen);
         return production;
     }
 
