@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model;
 
+import java.util.ArrayList;
+
 public class ActionSignal {
     private int number;
 
@@ -7,11 +9,22 @@ public class ActionSignal {
      * Applies actions described by ActionSignals
      * @param number
      */
-    public void Action(int number){
+    public static void Action(int number){
+        DevelopeDecks DDeck = new DevelopeDecks();
+        ArrayList<DevelopeCard> Deck = DDeck.getStructure();
         Lorenzo Lore = new Lorenzo();
+
+        if((Deck.isEmpty())==true){
+            //passo al mazzo successivo
+            //altrimenti continuo
+        };
         //enumero i segnalini da 1 a 7
         switch (number){
             case 1://blu-2
+                //prendo il mazzo, elimino la prima carta in cima e poi controllo se l'array è vuoto
+                //se non lo è, elimino l'altra carta. Se è vuoto invece, prendo un nuovo mazzo ed
+                //elimino la carta in cima
+
 
             case 2://verde-2
 
