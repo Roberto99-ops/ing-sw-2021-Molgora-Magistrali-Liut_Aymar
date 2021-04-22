@@ -4,6 +4,10 @@ import java.io.IOException;
 public class Turn {
     private Player actualplayer;
 
+    private Game game;
+    private int l= game.getLonely();
+    private ActionStructure aStructure;
+
     public Player getActualplayer() {
         return actualplayer;
     }
@@ -28,6 +32,11 @@ public class Turn {
         //Ad ogni turno, effettuo il controllo del Vatican Report
         FaithTrack faithTrack = new FaithTrack();
         faithTrack.VaticanReport();
+
+        //se sono in single game, ogni volta che tocca a me, prendo un segnalino ed eseguo la sua azione
+        if (l==1){
+            ActionSignal.Action(aStructure.PickSignal());
+        }
 
         //1)
         System.out.println("What do you want to do?\n\t1)Shop a developement card\n\t2)Take resources at the market\n\t3)Active a production\n");
@@ -107,4 +116,5 @@ public class Turn {
     private void Production(LeaderCard card) {
     //    this.actualplayer.setResources(card.Production(this.actualplayer.getResources,card));
     }
-}
+
+    }
