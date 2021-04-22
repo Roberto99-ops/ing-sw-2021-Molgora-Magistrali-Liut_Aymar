@@ -4,9 +4,9 @@ import java.lang.String;
 public class Player {
 
     //ha bisogno di istanze di tutta la plancia
-    private Storage storage;
-    private StrongBox SBox;
-    private DevelopementSpace DSpace;
+    private Storage storage = new Storage();
+    private StrongBox SBox = new StrongBox();
+    private DevelopementSpace DSpace = new DevelopementSpace();
 
 
     private String name;  //forse va istanziato
