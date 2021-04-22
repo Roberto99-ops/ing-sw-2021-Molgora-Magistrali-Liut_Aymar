@@ -65,23 +65,17 @@ public class DevelopeCard{
         return outputproduction;
     }
 
-    public ResourceStructure Production(ResourceStructure storage)//qui non ci va solo storage, ci va anche la cassaforte
+    public void DoProduction(Player player)
     {
-        if(!storage.getVector().contains(this.inputproduction.getVector())) return null;
-        storage.getVector().remove(this.inputproduction.getVector());
-        storage.getVector().addAll(this.outputproduction.getVector());
-        return storage;
+        if(player.getResources().getVector().contains(this.inputproduction.getVector())) {
+            for (int i = 0; i < this.inputproduction.getVector().size(); i++)
+                player.removeResource(this.inputproduction.getVector().get(i));
+            for (int i = 0; i < this.outputproduction.getVector().size(); i++)
+                player.addResource(this.outputproduction.getVector().get(i));
+        }
+        else System.out.println("You don't own enought Resources");
     }
 
-    //@Override
-    /*public DevelopeCard setCard(int number)
-    {
-        inputproduction = new ResourceStructure();
-        outputproduction = new ResourceStructure();
-        cost = new ResourceStructure();
-        this.level =
-        return this;
-    }*/
 
     /**
      * use the number in input to read on the Json file the DevelopeCard I need.
