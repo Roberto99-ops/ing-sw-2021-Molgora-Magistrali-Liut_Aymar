@@ -1,8 +1,11 @@
 package it.polimi.ingsw.model;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 
 public class Game {
+
+    public static int lonely;
     private static ArrayList<Player> players;
     private static int n_players;
     private static DevelopeDecks developedecks[];  //dichiaro tutto static?
@@ -10,6 +13,12 @@ public class Game {
     private static Market market;
     private static int VR=0;
     private static int timer_VR=0;
+
+    public static int getLonely() {
+        return lonely;
+    }
+
+
 
     public static int getTimer_VR() {
         return timer_VR;
@@ -70,10 +79,19 @@ public class Game {
         players = new ArrayList<Player>();
         Turn turn = new Turn();
         int actualplayer=0;
+        Scanner scan = new Scanner(System.in);
         //1)
         game.Shuffle();
 
         //2)
+        System.out.println("Do you want to play alone (A) or against other players(B)?");
+        if ((scan.nextLine())=="A"){
+            lonely=1;
+        } else if ((scan.nextLine())=="B"){
+            lonely=0;
+        } // aggiunta di errore nel caso in cui il carattero scelto non sia uno proposto
+
+        //3)
         //players.add()    ????
 
         setN_players();// mi setta la costante che riguarda il n_partecipanti
