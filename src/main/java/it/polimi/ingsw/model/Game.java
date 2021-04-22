@@ -8,8 +8,18 @@ public class Game {
     public static int lonely;
     private static ArrayList<Player> players;
     private static int n_players;
+
+    public static DevelopeDecks[] getDevelopedecks() {
+        return developedecks;
+    }
+
     private static DevelopeDecks developedecks[];  //dichiaro tutto static?
     private static LeaderDeck leaderdeck;
+
+    public static Market getMarket() {
+        return market;
+    }
+
     private static Market market;
     private static int VR=0;
     private static int timer_VR=0;
