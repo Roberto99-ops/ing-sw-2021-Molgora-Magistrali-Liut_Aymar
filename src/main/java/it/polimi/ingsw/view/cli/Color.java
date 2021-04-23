@@ -13,6 +13,13 @@ public enum Color {
 
     static final String RESET = "\u001B[0m";
 
+    static final void CLEAR()
+    {
+        for(int i=0; i<30; i++) {
+            System.out.println("\n");
+        }
+    }
+
 
     private String escape;
 
