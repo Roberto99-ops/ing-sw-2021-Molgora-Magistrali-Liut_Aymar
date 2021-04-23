@@ -3,7 +3,21 @@ package it.polimi.ingsw.model;
 public class Storage {
             private ResourceStructure panel; // arraylist di 6 spazi di base
             private ResourceStructure extrapanel;
+            private char typeExtrapanel= 'Z';  //carattere che per noi significa che il pannello extra non è attivo, non so se si può inzializzare così
 
+    public char getTypeExtrapanel() {
+        return typeExtrapanel;
+    }
+
+    public void setTypeExtrapanel(char typeExtrapanel) {
+        this.typeExtrapanel = typeExtrapanel;
+    }
+
+
+    //classe int getResource che restituisce la quantità di un certo tipo di risorsa
+    //classe deleteresources che cancella una cquantità di un tipo di risorsa
+    //metodo che restituisce proprio la struttura.
+    //attributo che dice se ho il piano extra, quindi quando ricevo risorse si gestisce qua lo smistamento.
 
 
         // controlla se sono presenti nel panel tot risorse di uno specifico tipo

@@ -4,6 +4,10 @@ public class Lorenzo {
     private String name = "Lorenzo Il Magnifico";
     private int number = 0; //posizione su tracciato
 
+    public int getNumber() {
+        return number;
+    }
+
     /**
      * Moves Lorenzo forward by 1 or 2 cells on the FaithTrack, according to the picked Signal
      * @param forward

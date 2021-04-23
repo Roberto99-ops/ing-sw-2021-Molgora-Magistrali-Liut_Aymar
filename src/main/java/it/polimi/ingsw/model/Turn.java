@@ -69,7 +69,7 @@ public class Turn {
      * the class asks to the costumer what card he do want to buy
      * then check if he own enought resources and complete the transaction
      */
-    private void ShopCard(Game game) {
+    public void ShopCard(Game game) {
         int choose = 0;
         DevelopeCard card = new DevelopeCard();
         ResourceStructure newcost = new ResourceStructure();

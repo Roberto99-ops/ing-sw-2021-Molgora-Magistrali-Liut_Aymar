@@ -25,7 +25,7 @@ public class DevelopeDecksTest {
 
         DevelopeCard card = new DevelopeCard();
         card.setCard(0);
-        DevelopeCard card1 = deck.getDeck(deck.getStructure());
+        DevelopeCard card1 = deck.Pick(deck.getStructure());
 
         assertEquals(card.getColour(), card1.getColour());
         assertEquals(card.getCost().getVector(), card1.getCost().getVector());
@@ -55,7 +55,7 @@ public class DevelopeDecksTest {
             oldDeck.getStructure().add(card);
         }
 
-        deck.setStructure(deck.setDeck(deck.getStructure()));
+        deck.setStructure(deck.shuffleDeck(deck.getStructure()));
 
         for(int i=0; i <5; i++) {
             assertTrue(deck.getStructure().contains(oldDeck.getStructure().get(i)));

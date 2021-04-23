@@ -2,7 +2,6 @@ package it.polimi.ingsw.model;
 
 public class SingleGame extends Game {
 
-
     @Override
     public void Shuffle()
     {

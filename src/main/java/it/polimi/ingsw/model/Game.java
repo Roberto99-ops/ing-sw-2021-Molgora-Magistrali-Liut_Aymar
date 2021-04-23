@@ -8,24 +8,21 @@ public class Game {
     public static int lonely;
     private static ArrayList<Player> players;
     private static int n_players;
-
-    public static DevelopeDecks[] getDevelopedecks() {
-        return developedecks;
-    }
-
     private static DevelopeDecks developedecks[];  //dichiaro tutto static?
     private static LeaderDeck leaderdeck;
-
-    public static Market getMarket() {
-        return market;
-    }
-
     private static Market market;
     private static int VR=0;
     private static int timer_VR=0;
 
+
     public static int getLonely() {
         return lonely;
+    }
+    public static DevelopeDecks[] getDevelopedecks() {
+        return developedecks;
+    }
+    public static Market getMarket() {
+        return market;
     }
 
 
@@ -74,7 +71,7 @@ public class Game {
 
 
     /**
-     * 1) shuffle all the decks
+     * 1) shuffle all the decks and market
      * 2) add all the players
      * starts a loop that
      * 3) calls turn for every player and
@@ -94,7 +91,7 @@ public class Game {
         game.Shuffle();
 
         //2)
-        System.out.println("Do you want to play alone (A) or against other players(B)?");
+        System.out.println("Do you want to play alone(A) or against other players(B)?");
         if ((scan.nextLine())=="A"){
             lonely=1;
         } else if ((scan.nextLine())=="B"){
@@ -129,9 +126,9 @@ public class Game {
     public void Shuffle()
     {
         for(int i=0; i<12; i++)
-            developedecks[i].setStructure(developedecks[i].setDeck(developedecks[i].getStructure()));
+            developedecks[i].setStructure(developedecks[i].shuffleDeck(developedecks[i].getStructure()));
 
-        leaderdeck.setStructure(leaderdeck.setDeck(leaderdeck.getStructure()));
+        leaderdeck.setStructure(leaderdeck.shuffleDeck(leaderdeck.getStructure()));
 
         //market random
     }

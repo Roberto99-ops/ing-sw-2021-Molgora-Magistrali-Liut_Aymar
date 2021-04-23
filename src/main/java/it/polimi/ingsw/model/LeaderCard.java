@@ -11,8 +11,8 @@ import java.util.ArrayList;
 public class LeaderCard{
 
     private ResourceStructure priceR;
-    private ArrayList<Character> priceC;
-    private int cardLevel;
+    private ArrayList<Character> priceC;  //this price is in DevelopeCard matching the color
+    private int cardLevel;  //level of the developecard I need to buy this card
     private int pv;
     private String skill;
     private char inputskill;
@@ -123,7 +123,7 @@ public class LeaderCard{
     {
         ResourceStructure newCost = new ResourceStructure();
         if(!card.getCost().getVector().contains(resource))  return card.getCost();
-        newCost.equals(card.getCost().getVector().remove(resource)); //!!!non testato
+        newCost.equals(card.getCost().getVector().remove(resource));
         return newCost;
     }
 
@@ -137,7 +137,7 @@ public class LeaderCard{
     {
         ResourceStructure resourceType = new ResourceStructure();
         resourceType.AddResource(1, resource);
-        return resourceType;
+        return resourceType;   //deve mettere a 1 il flag che dice che il player ha un piano in più nello storage
     }
 
     /**
@@ -175,7 +175,7 @@ public class LeaderCard{
         System.out.println("What resource do you want to produce?\n(B, G, Y, P)\t");
         resourceChosen = (char)System.in.read();
         production.AddResource(1, resourceChosen);
-        return production;
+        return production;  //copiare quello di developecard e al posto della risorsa rossa fare player.setposition++
     }
 
 

@@ -24,7 +24,7 @@ public abstract class Deck <T>{
      * @param structure
      * @return
      */
-    public T getDeck(ArrayList<T> structure)
+    public T Pick(ArrayList<T> structure)
     {
         T firstElement;
         firstElement=structure.get(0);
@@ -38,7 +38,7 @@ public abstract class Deck <T>{
      * @param structure
      * @return
      */
-    public ArrayList<T> setDeck(ArrayList<T> structure)
+    public ArrayList<T> shuffleDeck(ArrayList<T> structure)
     {
         ArrayList<T> mixedStructure = new ArrayList<T>();
         Random mixer = new Random();
