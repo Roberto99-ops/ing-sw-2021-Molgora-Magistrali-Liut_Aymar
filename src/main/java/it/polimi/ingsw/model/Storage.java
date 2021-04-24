@@ -1,9 +1,15 @@
 package it.polimi.ingsw.model;
+import java.util.ArrayList;
 
-public class Storage {
-            private ResourceStructure panel; // arraylist di 6 spazi di base
-            private ResourceStructure extrapanel;
-            private char typeExtrapanel= 'Z';  //carattere che per noi significa che il pannello extra non è attivo, non so se si può inzializzare così
+public class Storage extends ArrayList {
+
+    private ResourceStructure panel; // arraylist di 6 spazi di base
+    private ResourceStructure extrapanel;
+    private char typeExtrapanel= 'Z';  //carattere che per noi significa che il pannello extra non è attivo, non so se si può inzializzare così
+
+    public ResourceStructure getPanel() {
+        return panel;
+    }
 
     public char getTypeExtrapanel() {
         return typeExtrapanel;
@@ -13,8 +19,34 @@ public class Storage {
         this.typeExtrapanel = typeExtrapanel;
     }
 
+    //metodo che restituisce la quantità totale di risorse nel magazzino
 
-    //classe int getResource che restituisce la quantità di un certo tipo di risorsa
+    /**
+     * Counts how many resources are available inside the storage.
+     * It also prints quantities of each resource
+     * @return sum: how many resources are available inside the storage
+     */
+    public int getTotResourceStorage() {
+        int i, t, counter, sum = 0;
+        char[] types = {'W', 'R', 'B', 'G', 'P', 'Y'};
+        for (t = 0; t < 6; t++) { //controllo che la lettera #t...
+            counter = 0;
+            for (i = 0; i < panel.size(); i++) { //...sia presente dentro l'array
+                if (types[t] == (char) panel.get(i)) {
+                    counter++;
+                }
+            }
+            System.out.println(types[t] + ":" + counter); //stampo a video le quantità distinte
+            sum += counter;
+        }
+            return sum; //ritorno il tot di risorse nel magazzino
+    }
+
+
+
+    //(E' scritto nel metodo su "getTotResourceStorage")
+    // classe int getResource che restituisce la quantità di un certo tipo di risorsa
+
     //classe deleteresources che cancella una cquantità di un tipo di risorsa
     //metodo che restituisce proprio la struttura.
     //attributo che dice se ho il piano extra, quindi quando ricevo risorse si gestisce qua lo smistamento.
@@ -25,7 +57,7 @@ public class Storage {
            int counter = 0;
            for (int i=0; i < 6; i ++) {
                if (this.panel.getVector().get(i) == type) {
-               counter ++;
+               counter++;
                                                  }
            }
            if (counter == quantity && this.checkStorage() == true) {
