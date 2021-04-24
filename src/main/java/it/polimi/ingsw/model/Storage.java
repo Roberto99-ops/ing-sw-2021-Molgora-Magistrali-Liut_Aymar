@@ -19,6 +19,35 @@ public class Storage extends ArrayList {
         this.typeExtrapanel = typeExtrapanel;
     }
 
+    /**
+     * Counts the amount of one kind of resource
+     * @param neededRes: type of resource the player needs to pay/activate something
+     * @return counterS: the amount of that resource in Storage
+     */
+
+    //metodo che conta le risorse per verificare se è possibile usarle per acquistare una carta sviluppo
+    public int countTypeS(char neededRes){
+        int i=0, counterS=0;
+        if (panel.contains(neededRes)){
+            while(i!=panel.size()){
+                if(neededRes==(char)panel.get(i))
+                    counterS++;
+                i++;
+            }
+            i=0;
+            if (extrapanel.contains(neededRes)){
+                while(i!=extrapanel.size()){
+                    if(neededRes==(char)extrapanel.get(i))
+                        counterS++;
+                    i++;
+                }
+            }
+            return counterS;
+        }else{
+            return 0;
+        }
+    }
+
     //metodo che restituisce la quantità totale di risorse nel magazzino
 
     /*
@@ -27,8 +56,7 @@ public class Storage extends ArrayList {
      * It also prints quantities of each resource
      * @return sum: how many resources are available inside the storage
      */
-
-    public void getTotResourceStorage() {
+    /*public void getTotResourceStorage() {
         int i, t, counter;
                 //int sum = 0;
         char[] types = {'W', 'R', 'B', 'G', 'P', 'Y'};
@@ -44,6 +72,7 @@ public class Storage extends ArrayList {
         }
             //return sum; //ritorno il tot di risorse nel magazzino
     }
+     */
 
 
 
