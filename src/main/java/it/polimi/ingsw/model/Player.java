@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model;
+import java.io.IOException;
 import java.lang.String;
+import java.util.Scanner;
 
 public class Player {
 
@@ -93,12 +95,33 @@ public class Player {
         return null;
     }
 
-    public ResourceStructure removeResource(char resource)
-    {
-        //deve rimuovere quest risorsa dalla plancia, quindi probabilmente
-        //dovrebbero esserci dei metodi dentro agli elementi della plancia
-        //se non ci sono già
-        return null;
+
+
+    //chiedo quale risorsa vuole eliminare
+    //System.out.println ("Which type of resource would you like to remove from your Storage:? W,R,B,G,P,Y");
+    //try {choice = (char)System.in.read();} catch (IOException e) {
+    //    System.out.println("Choice not available");
+    //}
+
+    /**
+     * Removes one resource from the storage
+     * @param resource: da eliminare
+     */
+    public void removeResource(char resource) {
+        int i;
+        //char choice = 'W';
+
+        for (i=storage.size()-1; i>=-1 ;i--) {
+            if (resource==(char)storage.get(i) || i==-1){
+                break;
+            }
+        } //salto con l'indice i che mi indica la posizione
+        if (i==-1){
+            //caso in cui non c'è la risorsa richiesta da eliminare
+            System.out.println("La risorsa richiesta non c'è nel magazzino.");
+            return ;
+        }
+        storage.remove(i);//rimuovo la risorsa i-esima
     }
 
     public ResourceStructure addResource(char resource)
@@ -107,4 +130,16 @@ public class Player {
         return null;
     }
     //quindi servono tutti i getter getStrongbox ecc...
+
+    //mostra a video la uantità totale di risorse disponibili;
+
+    /**
+     * Counts all the available resources in Storage and in StrongBox
+     */
+    public void TotAvailableResources (){
+        int tot=0;
+        tot+= storage.getTotResourceStorage(); //registro risorse nel magazzino
+        tot+= SBox.getTotResourceSB();//registro risorse nel SB
+        System.out.println("Available Resources: "+ tot);
+    }
 }
