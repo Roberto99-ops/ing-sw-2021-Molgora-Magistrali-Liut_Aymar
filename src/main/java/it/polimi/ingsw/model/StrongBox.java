@@ -6,8 +6,9 @@ public class StrongBox {
     private int TotalResources;
 
     //metodo che conta e stampa tot risorse e anche distinte
-    public int getTotResourceSB() {
-        int i, t, counter, sum = 0;
+    public void getTotResourceSB() {
+        int i, t, counter;
+                //int sum = 0;
         char[] types = {'W', 'R', 'B', 'G', 'P', 'Y'};
         for (t = 0; t < 6; t++) { //controllo che la lettera #t...
             counter = 0;
@@ -17,9 +18,9 @@ public class StrongBox {
                 }
             }
             System.out.println(types[t] + ":" + counter); //stampo a video le quantità distinte
-            sum += counter;
+            //sum += counter;
         }
-        return sum; //ritorno il tot di risorse nel magazzino
+        //return sum; //ritorno il tot di risorse nel magazzino
     }
 
 
