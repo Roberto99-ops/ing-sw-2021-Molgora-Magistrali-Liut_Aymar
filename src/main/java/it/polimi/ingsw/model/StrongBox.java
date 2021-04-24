@@ -3,6 +3,25 @@ package it.polimi.ingsw.model;
 public class StrongBox {
 
     private ResourceStructure structure;
+    private int TotalResources;
+
+    //metodo che conta e stampa tot risorse e anche distinte
+    public int getTotResourceSB() {
+        int i, t, counter, sum = 0;
+        char[] types = {'W', 'R', 'B', 'G', 'P', 'Y'};
+        for (t = 0; t < 6; t++) { //controllo che la lettera #t...
+            counter = 0;
+            for (i = 0; i < structure.size(); i++) { //...sia presente dentro l'array
+                if (types[t] == (char) structure.get(i)) {
+                    counter++;
+                }
+            }
+            System.out.println(types[t] + ":" + counter); //stampo a video le quantità distinte
+            sum += counter;
+        }
+        return sum; //ritorno il tot di risorse nel magazzino
+    }
+
 
     //classe int getResource che restituisce la quantità di un certo tipo di risorsa
     //classe deleteresources che cancella una cquantità di un tipo di risorsa
