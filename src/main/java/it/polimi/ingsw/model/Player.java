@@ -111,8 +111,8 @@ public class Player {
         int i;
         //char choice = 'W';
 
-        for (i=storage.size()-1; i>=-1 ;i--) {
-            if (resource==(char)storage.get(i) || i==-1){
+        for (i=this.storage.size()-1; i>=-1 ;i--) {
+            if (resource==(char)this.storage.get(i) || i==-1){
                 break;
             }
         } //salto con l'indice i che mi indica la posizione
@@ -121,7 +121,7 @@ public class Player {
             System.out.println("La risorsa richiesta non c'è nel magazzino.");
             return ;
         }
-        storage.remove(i);//rimuovo la risorsa i-esima
+        this.storage.remove(i);//rimuovo la risorsa i-esima
     }
 
     public ResourceStructure addResource(char resource)
@@ -133,13 +133,16 @@ public class Player {
 
     //mostra a video la uantità totale di risorse disponibili;
 
+
     /**
      * Counts all the available resources in Storage and in StrongBox
      */
+    /*
     public void TotAvailableResources (){
         int tot=0;
         tot+= storage.getTotResourceStorage(); //registro risorse nel magazzino
         tot+= SBox.getTotResourceSB();//registro risorse nel SB
         System.out.println("Available Resources: "+ tot);
     }
+    */
 }
