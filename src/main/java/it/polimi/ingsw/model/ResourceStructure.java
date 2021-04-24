@@ -1,8 +1,8 @@
 package it.polimi.ingsw.model;
 import java.util.ArrayList;
-public class ResourceStructure {
+public class ResourceStructure extends ArrayList {
     /**
-     * resourcestructure is an arraylist of char wich can be W,R,B,G,P,Y
+     * resourcestructure is an arraylist of char which can be W,R,B,G,P,Y
      */
     private ArrayList<Character> vector = new ArrayList<Character>(); //è giusto istanziarlo così o va istanziato dentro ogni metodo?
 
