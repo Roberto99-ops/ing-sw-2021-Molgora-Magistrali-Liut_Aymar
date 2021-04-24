@@ -87,6 +87,11 @@ public class Turn {
             if (this.actualplayer.getLeadercards().getStructure().get(i).getNumber() < 4)
                 newcost = this.actualplayer.getLeadercards().getStructure().get(i).Skill();
 
+            //se le risorse presenti in Storage e SB sono sufficienti allora le risorse richieste le elimino e attivo la produzione
+            //IDEA: controllare quante risorse di un tipo si necessitano per comprare. Ex: W W Y.
+            //      Prima controllo se ho 2 o + W. Se ce le ho, passo a controllare se ho 1 o + Y
+            //      I metodi che danno la quantità di un certo tipo sia in Storage sia in SB sono stati fatti
+        //ex. if (newcost<=actualplayer.getStorage().countTypeS()+actualplayer.getStrongBox()...)
         this.actualplayer.getResources().getVector().remove(newcost);
 
         this.actualplayer.getDevelopecards().getStructure().add(card);
