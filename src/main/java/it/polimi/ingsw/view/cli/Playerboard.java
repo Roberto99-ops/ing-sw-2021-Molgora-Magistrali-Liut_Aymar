@@ -3,6 +3,7 @@ package it.polimi.ingsw.view.cli;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import it.polimi.ingsw.model.DevelopeDecks;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -16,6 +17,10 @@ public class Playerboard {
     Playerboard() throws FileNotFoundException {
         Perimeter();
         FaithTrack();
+        Storage();
+        Strongbox();
+        Productionspace();
+        Developementspace();
     }
 
     private void Perimeter()
@@ -43,7 +48,7 @@ public class Playerboard {
 
     private void FaithTrack() throws FileNotFoundException   //devo mettere lo sfondo di un altro colore
     {
-        int MAX_HIGH = VERT_SIZE/3-2;
+        int MAX_HIGH = 13;
         Color basecolor = Color.BACKGROUND_CYAN;
 
         for(int i=1; i<MAX_HIGH; i++)
@@ -146,6 +151,90 @@ public class Playerboard {
             for (int j = 0; j < SQUARE_LENGHT; j++)
                 playerboard[inizialVert-SQUARE_HIGH*LeftHighCorner_VERT+i][inizialHoriz+SQUARE_LENGHT*LeftHighCorner_HORIZ+j]= square[i][j];
     }
+
+    private void Storage()
+    {
+        int MAX_VERT_SIZE = VERT_SIZE-13-2-VERT_SIZE/4;
+        int MAX_HORIZ_SIZE = HORIZ_SIZE/4;
+        Color color = Color.STRONGBOX_COLOR;
+        String[][] storage = new String[MAX_VERT_SIZE][MAX_HORIZ_SIZE];
+        for (int i = 0; i < MAX_VERT_SIZE; i++)
+            for (int j = 0; j < MAX_HORIZ_SIZE; j++)
+                storage[i][j]=color + " " + Color.RESET;
+
+
+        int initialVert=14;
+        for (int i = 0; i < MAX_VERT_SIZE; i++)
+            for (int j = 0; j < MAX_HORIZ_SIZE; j++)
+                playerboard[initialVert+i][1+j]=storage[i][j];
+    }
+
+    private void Strongbox()
+    {
+        int MAX_VERT_SIZE = VERT_SIZE/4;
+        int MAX_HORIZ_SIZE = HORIZ_SIZE/4;
+        Color color = Color.STRONGBOX_COLOR;
+        String[][] strongbox = new String[MAX_VERT_SIZE][MAX_HORIZ_SIZE];
+        for (int i = 0; i < MAX_VERT_SIZE; i++)
+            for (int j = 0; j < MAX_HORIZ_SIZE; j++)
+                strongbox[i][j]=color + " " + Color.RESET;
+
+        int initialVert=33;
+
+        for (int i = 0; i < MAX_VERT_SIZE-1; i++)
+            playerboard[initialVert][i] = color + "_" + Color.RESET;
+        for (int i = 0; i < MAX_HORIZ_SIZE-1; i++)
+            playerboard[VERT_SIZE-2][i] = color + "_" + Color.RESET;
+
+        for (int i = 0; i < MAX_VERT_SIZE; i++)
+            playerboard[10+i][1] = color + "|" + Color.RESET;
+        for (int i = 0; i < MAX_VERT_SIZE; i++)
+            playerboard[initialVert+i][MAX_HORIZ_SIZE-1] = color + "|" + Color.RESET;
+
+
+
+        for (int i = 0; i < MAX_VERT_SIZE; i++)
+            for (int j = 0; j < MAX_HORIZ_SIZE; j++)
+                playerboard[initialVert+i][1+j]=strongbox[i][j];
+    }
+
+    private void Productionspace()
+    {
+        int MAX_VERT_SIZE = VERT_SIZE-13-2;
+        int MAX_HORIZ_SIZE = 17;
+        Color backgroundcolor = Color.BACKGROUND_GRAY;
+        String[][] productionspace = new String[MAX_VERT_SIZE][MAX_HORIZ_SIZE];
+        for (int i = 0; i < MAX_VERT_SIZE; i++)
+            for (int j = 0; j < MAX_HORIZ_SIZE; j++)
+                productionspace[i][j]=backgroundcolor + " " + Color.RESET;
+
+
+        int initialVert=14;
+        int initialHoriz=HORIZ_SIZE/4+2;
+        for (int i = 0; i < MAX_VERT_SIZE; i++)
+            for (int j = 0; j < MAX_HORIZ_SIZE; j++)
+                playerboard[initialVert+i][initialHoriz+j]=productionspace[i][j];
+    }
+
+
+    private void Developementspace()
+    {
+        int MAX_VERT_SIZE = VERT_SIZE-13-2;
+        int MAX_HORIZ_SIZE = HORIZ_SIZE/2+17;
+        Color backgroundcolor = Color.BACKGROUND_GREEN;
+        String[][] developementspace = new String[MAX_VERT_SIZE][MAX_HORIZ_SIZE];
+        for (int i = 0; i < MAX_VERT_SIZE; i++)
+            for (int j = 0; j < MAX_HORIZ_SIZE; j++)
+                developementspace[i][j]=backgroundcolor + " " + Color.RESET;
+
+
+        int initialVert=14;
+        int initialHoriz=HORIZ_SIZE/2-1-17;
+        for (int i = 0; i < MAX_VERT_SIZE; i++)
+            for (int j = 0; j < MAX_HORIZ_SIZE; j++)
+                playerboard[initialVert+i][initialHoriz+j]=developementspace[i][j];
+    }
+
 
     public void Print()
     {

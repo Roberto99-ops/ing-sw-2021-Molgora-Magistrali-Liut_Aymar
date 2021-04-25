@@ -13,6 +13,9 @@ public enum Color {
 
     BACKGROUND_YELLOW("\u001B[0m\u001B[0m\u001B[103m"),
     BACKGROUND_CYAN("\u001B[0m\u001B[0m\u001B[106m"),
+    BACKGROUND_GRAY("\u001B[0m\u001B[0m\u001B[047m"),
+    STRONGBOX_COLOR("\u001B[0m\u001B[90m\u001B[104m"),
+    BACKGROUND_GREEN("\u001B[0m\u001B[0m\u001B[042m"),
     BACKGROUND_PURPLE("\u001B[0m\u001B[97m\u001B[105m");
 
     static final String RESET = "\u001B[0m";
