@@ -1,13 +1,19 @@
 package it.polimi.ingsw.view.cli;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+
 public class Playerboard {
     private static final int VERT_SIZE = 30;
     private static final int HORIZ_SIZE = 150;  // posso farlo di 150?
 
     private String[][] playerboard = new String[VERT_SIZE][HORIZ_SIZE];
 
-    Playerboard()
-    {
+    Playerboard() throws FileNotFoundException {
         Perimeter();
         FaithTrack();
     }
@@ -35,7 +41,7 @@ public class Playerboard {
             playerboard[i][HORIZ_SIZE-1] = color + "║" + Color.RESET;
     }
 
-    private void FaithTrack()   //devo mettere lo sfondo di un altro colore
+    private void FaithTrack() throws FileNotFoundException   //devo mettere lo sfondo di un altro colore
     {
         int MAX_HIGH = VERT_SIZE/3;
         int SQUARE_HIGH = 3;
@@ -46,6 +52,24 @@ public class Playerboard {
             for (int j = 1; j < HORIZ_SIZE-1; j++)
                 playerboard[i][j]=Color.RESET + " ";
 
+        for (int i = 0; i < 25; i++) {
+            int LeftHighCorner_VERT;
+            int LeftHighCorner_HORIZ;
+            int content;
+
+            FileReader stringa = new FileReader("src/main/resources/CellsPosition.json");
+            Object obj = JsonParser.parseReader(stringa);
+            JsonObject jsonObject = (JsonObject)obj;
+            JsonArray cardsArray = (JsonArray)jsonObject.get("CellsPosition");
+            JsonObject card = (JsonObject)cardsArray.get(i);
+
+            LeftHighCorner_HORIZ = card.get("LeftHighCorner_HORIZ").getAsInt();
+            LeftHighCorner_VERT = card.get("LeftHighCorner_VERT").getAsInt();
+            content = card.get("content").getAsInt();
+
+            Square(LeftHighCorner_VERT, LeftHighCorner_HORIZ, content);
+        }
+        /*
         Square(0,0,0);
         Square(0,1,1);
         Square(0,2,2);
@@ -70,7 +94,7 @@ public class Playerboard {
         Square(2,15,21);
         Square(2,16,22);
         Square(2,17,23);   //da fare con json
-        Square(2,18,24);
+        Square(2,18,24);*/
 
     }
 
