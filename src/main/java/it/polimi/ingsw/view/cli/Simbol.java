@@ -19,7 +19,8 @@ public enum Simbol {
     FACCIA_FELICE("\u263B"),
     FACCIA_TRISTE("\u2639"),
     SEGNALINO_PAPALE("\u2657"),  //265D
-    PALLINO("\u25CF");
+    PALLINO("\u25CF"),
+    CROCE("✞");
 
     private String form;
 

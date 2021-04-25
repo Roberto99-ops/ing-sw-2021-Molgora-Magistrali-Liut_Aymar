@@ -46,11 +46,11 @@ public class Playerboard {
         int MAX_HIGH = VERT_SIZE/3;
         int SQUARE_HIGH = 3;
         int SQUARE_LENGHT = 6;
-        //Color basecolor = Color.RESET;
+        Color basecolor = Color.BACKGROUND_CYAN;
 
         for(int i=1; i<MAX_HIGH; i++)
             for (int j = 1; j < HORIZ_SIZE-1; j++)
-                playerboard[i][j]=Color.RESET + " ";
+                playerboard[i][j]=basecolor + " " + Color.RESET;
 
         for (int i = 0; i < 25; i++) {
             int LeftHighCorner_VERT;
@@ -123,11 +123,24 @@ public class Playerboard {
         square[SQUARE_HIGH-1][0] = Color.RED + "╚" + Color.RESET;
         square[SQUARE_HIGH-1][SQUARE_LENGHT-1] = Color.RED + "╝" + Color.RESET;
 
-        if(content>9)
-            square[1][(SQUARE_LENGHT-1)/2+1]="";
+        if(content>9 || content==0)
+            square[(SQUARE_HIGH-1)/2][(SQUARE_LENGHT-1)/2+1]="";
+        square[(SQUARE_HIGH-1)/2][(SQUARE_LENGHT-1)/2]=Color.YELLOW + String.valueOf(content).toString();
 
-        square[1][(SQUARE_LENGHT-1)/2]=Color.YELLOW + String.valueOf(content).toString();;
 
+        if(content%3==0 && content!=0)
+            for (int i = 1; i < SQUARE_HIGH-1; i++)
+                for (int j = 1; j < SQUARE_LENGHT-1; j++)
+                    square[i][j]=Color.BACKGROUND_YELLOW.getEscape() +  " " + Color.RESET;
+
+        if(content%8==0 && content!=0){
+            for (int i = 1; i < SQUARE_HIGH-1; i++)
+                for (int j = 1; j < SQUARE_LENGHT-1; j++)
+                    square[i][j] = Color.BACKGROUND_PURPLE + " " + Color.RESET;
+            square[SQUARE_HIGH-1][(SQUARE_LENGHT-1)/2]=Color.PURPLE.getEscape() + Simbol.SEGNALINO_PAPALE.getForm();
+        }
+
+        if(content==0)  square[1][(SQUARE_LENGHT-1)/2]=Color.PURPLE.getEscape() + Simbol.CROCE + Color.RESET;
 
         int inizialVert=7;
         int inizialHoriz=7;
