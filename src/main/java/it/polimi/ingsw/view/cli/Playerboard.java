@@ -8,7 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 
 public class Playerboard {
-    private static final int VERT_SIZE = 30;
+    private static final int VERT_SIZE = 45;
     private static final int HORIZ_SIZE = 150;  // posso farlo di 150?
 
     private String[][] playerboard = new String[VERT_SIZE][HORIZ_SIZE];
@@ -43,9 +43,7 @@ public class Playerboard {
 
     private void FaithTrack() throws FileNotFoundException   //devo mettere lo sfondo di un altro colore
     {
-        int MAX_HIGH = VERT_SIZE/3;
-        int SQUARE_HIGH = 3;
-        int SQUARE_LENGHT = 6;
+        int MAX_HIGH = VERT_SIZE/3-2;
         Color basecolor = Color.BACKGROUND_CYAN;
 
         for(int i=1; i<MAX_HIGH; i++)
@@ -100,7 +98,7 @@ public class Playerboard {
 
     private void Square(int LeftHighCorner_VERT, int LeftHighCorner_HORIZ, int content)
     {
-        int SQUARE_HIGH = 3;
+        int SQUARE_HIGH = 4;
         int SQUARE_LENGHT = 7;
         String[][] square = new String[SQUARE_HIGH][SQUARE_LENGHT];
 
@@ -142,7 +140,7 @@ public class Playerboard {
 
         if(content==0)  square[1][(SQUARE_LENGHT-1)/2]=Color.PURPLE.getEscape() + Simbol.CROCE + Color.RESET;
 
-        int inizialVert=7;
+        int inizialVert=9;
         int inizialHoriz=7;
         for (int i = 0; i < SQUARE_HIGH; i++)
             for (int j = 0; j < SQUARE_LENGHT; j++)
