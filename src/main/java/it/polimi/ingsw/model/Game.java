@@ -18,8 +18,8 @@ public class Game {
     public static int getLonely() {
         return lonely;
     }
-    public static DevelopeDecks[] getDevelopedecks() {
-        return developedecks;
+    public static DevelopeDecks getDevelopedecks(int i) {
+        return developedecks[i];
     }
     public static Market getMarket() {
         return market;
@@ -150,7 +150,7 @@ public class Game {
 
     /**
      * find the winner, for each player at 1)we check if the player is arrived at the end
-     * of the faith track, at 2)we check wich player has more Victory Points
+     * of the faith track, at 2)we check which player has more Victory Points
      * @return string
      */
     public String Victory()

@@ -67,7 +67,7 @@ public class Turn {
     /**
      * this method manages the purchase of a DevelopeCard.
      * the class asks to the costumer what card he do want to buy
-     * then check if he own enought resources and complete the transaction
+     * then check if he own enough resources and complete the transaction
      */
     public void ShopCard(Game game) {
         int choose = 0;
@@ -79,7 +79,7 @@ public class Turn {
         } catch (IOException e) {
             System.out.println(e);
         }
-        card.equals(game.getDevelopedecks()[choose].getStructure().get(0));
+        card.equals(game.getDevelopedecks(choose).getStructure().get(0));
 
         if (!this.actualplayer.getResources().getVector().contains(card.getCost())) return;
 
@@ -119,9 +119,9 @@ public class Turn {
         }
 
         if (RoworCol == 1)
-            System.out.println("Wich row do you want to take?\n");
+            System.out.println("Which row do you want to take?\n");
         if (RoworCol == 2)
-            System.out.println("Wich column do you want to take?\n");
+            System.out.println("Which column do you want to take?\n");
         try {
             number = System.in.read();
         } catch (IOException e) {
