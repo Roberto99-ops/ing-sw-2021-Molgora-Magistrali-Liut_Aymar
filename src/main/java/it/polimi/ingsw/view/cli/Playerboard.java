@@ -8,6 +8,9 @@ import it.polimi.ingsw.model.DevelopeDecks;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 
+/**
+ * this class draw the playerboard
+ */
 public class Playerboard {
     private static final int VERT_SIZE = 45;
     private static final int HORIZ_SIZE = 150;  // posso farlo di 150?
@@ -23,6 +26,9 @@ public class Playerboard {
         Developementspace();
     }
 
+    /**
+     * this class draw the perimeter of the playerboard
+     */
     private void Perimeter()
     {
         Color color = Color.BLACK;
@@ -46,6 +52,10 @@ public class Playerboard {
             playerboard[i][HORIZ_SIZE-1] = color + "║" + Color.RESET;
     }
 
+    /**
+     * this class draw the faith track space
+     * @throws FileNotFoundException
+     */
     private void FaithTrack() throws FileNotFoundException   //devo mettere lo sfondo di un altro colore
     {
         int MAX_HIGH = 13;
@@ -101,6 +111,13 @@ public class Playerboard {
 
     }
 
+    /**
+     * this class is called by the faithtrack class, it draw inside the faith track space
+     * the properly faith track
+     * @param LeftHighCorner_VERT = is a number that defines the vertical position of them cell's right corner
+     * @param LeftHighCorner_HORIZ = is a number that defines the horizontal position of them cell's right corner
+     * @param content = is the content of the cell (usually a number but it could be the faithmarker)
+     */
     private void Square(int LeftHighCorner_VERT, int LeftHighCorner_HORIZ, int content)
     {
         int SQUARE_HIGH = 4;
@@ -152,6 +169,9 @@ public class Playerboard {
                 playerboard[inizialVert-SQUARE_HIGH*LeftHighCorner_VERT+i][inizialHoriz+SQUARE_LENGHT*LeftHighCorner_HORIZ+j]= square[i][j];
     }
 
+    /**
+     * it draws the storage space inside the playerboard
+     */
     private void Storage()
     {
         int MAX_VERT_SIZE = VERT_SIZE-13-2-VERT_SIZE/4;
@@ -169,6 +189,9 @@ public class Playerboard {
                 playerboard[initialVert+i][1+j]=storage[i][j];
     }
 
+    /**
+     * it draws the strongbox space inside the playerboard
+     */
     private void Strongbox()
     {
         int MAX_VERT_SIZE = VERT_SIZE/4;
@@ -181,15 +204,15 @@ public class Playerboard {
 
         int initialVert=33;
 
-        for (int i = 0; i < MAX_VERT_SIZE-1; i++)
-            playerboard[initialVert][i] = color + "_" + Color.RESET;
-        for (int i = 0; i < MAX_HORIZ_SIZE-1; i++)
-            playerboard[VERT_SIZE-2][i] = color + "_" + Color.RESET;
+        for (int i = 1; i < MAX_HORIZ_SIZE-1; i++)
+            strongbox[0][i] = color + "_" + Color.RESET;
+        for (int i = 1; i < MAX_HORIZ_SIZE-1; i++)
+            strongbox[MAX_VERT_SIZE-1][i] = color + "_" + Color.RESET;
 
-        for (int i = 0; i < MAX_VERT_SIZE; i++)
-            playerboard[10+i][1] = color + "|" + Color.RESET;
-        for (int i = 0; i < MAX_VERT_SIZE; i++)
-            playerboard[initialVert+i][MAX_HORIZ_SIZE-1] = color + "|" + Color.RESET;
+        for (int i = 1; i < MAX_VERT_SIZE; i++)
+            strongbox[i][0] = color + "|" + Color.RESET;
+        for (int i = 1; i < MAX_VERT_SIZE; i++)
+            strongbox[i][MAX_HORIZ_SIZE-1] = color + "|" + Color.RESET;
 
 
 
@@ -198,6 +221,9 @@ public class Playerboard {
                 playerboard[initialVert+i][1+j]=strongbox[i][j];
     }
 
+    /**
+     * it draws the productionspace inside the playerboard (it hasn't any pratical function but it is for graphics)
+     */
     private void Productionspace()
     {
         int MAX_VERT_SIZE = VERT_SIZE-13-2;
@@ -216,7 +242,9 @@ public class Playerboard {
                 playerboard[initialVert+i][initialHoriz+j]=productionspace[i][j];
     }
 
-
+    /**
+     * it daws the developementspace inside the playerboard
+     */
     private void Developementspace()
     {
         int MAX_VERT_SIZE = VERT_SIZE-13-2;
@@ -236,6 +264,9 @@ public class Playerboard {
     }
 
 
+    /**
+     * it prints on the screen all the playeboard
+     */
     public void Print()
     {
         for (int i = 0; i < VERT_SIZE; i++) {
