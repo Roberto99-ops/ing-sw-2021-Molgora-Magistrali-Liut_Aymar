@@ -26,10 +26,11 @@ public class Storage extends ArrayList {
      */
 
     //metodo che conta le risorse per verificare se è possibile usarle per acquistare una carta sviluppo
-    public int countTypeS(char neededRes){
+
+    public int countTypeS(char neededRes) {
         int i=0, counterS=0;
-        if (panel.contains(neededRes)){
-            while(i!=panel.size()){
+        if (panel.contains(neededRes)) {
+            while(i!=panel.size()) {
                 if(neededRes==(char)panel.get(i))
                     counterS++;
                 i++;
@@ -43,22 +44,23 @@ public class Storage extends ArrayList {
                 }
             }
             return counterS;
-        }else{
+        } else {
             return 0;
         }
     }
 
     //metodo che restituisce la quantità totale di risorse nel magazzino
 
-    /*
+
     /**
      * Counts how many resources are available inside the storage.
      * It also prints quantities of each resource
      * @return sum: how many resources are available inside the storage
      */
-    /*public void getTotResourceStorage() {
+
+ public int getTotResourceStorage() {
         int i, t, counter;
-                //int sum = 0;
+                int sum = 0;
         char[] types = {'W', 'R', 'B', 'G', 'P', 'Y'};
         for (t = 0; t < 6; t++) { //controllo che la lettera #t...
             counter = 0;
@@ -68,23 +70,47 @@ public class Storage extends ArrayList {
                 }
             }
             System.out.println(types[t] + ":" + counter); //stampo a video le quantità distinte
-            //sum += counter;
+            sum += counter;
         }
-            //return sum; //ritorno il tot di risorse nel magazzino
+            return sum; //ritorno il tot di risorse nel magazzino
     }
-     */
 
 
 
-    //(E' scritto nel metodo su "getTotResourceStorage")
     // classe int getResource che restituisce la quantità di un certo tipo di risorsa
 
-    //classe deleteresources che cancella una cquantità di un tipo di risorsa
-    //metodo che restituisce proprio la struttura.
-    //attributo che dice se ho il piano extra, quindi quando ricevo risorse si gestisce qua lo smistamento.
+    /**
+     * returns the quantity of a certain type of resource
+     */
+
+    public int returnQuantity (int quantity, Character type) {
+        int counter = 0;
+        for (int i=0; i < 6; i ++) {
+            if (this.panel.getVector().get(i) == type) {
+                counter++; }
+        } return counter; }
+
+    //classe deleteresources che cancella una quantità di un tipo di risorsa
+
+    /**
+     * returns the quantity of a certain type of resource
+     */
+    public void deleteResources (int quantity, Character type) {
+        int counter = 0;
+        for (int i = 0; i < 6; i++) {
+            if (this.panel.getVector().get(i) == type) {
+                // this.panel.getVector().get(i) = 'B'; why is error?
+            }
+        }
+    }
 
 
         // controlla se sono presenti nel panel tot risorse di uno specifico tipo
+
+    /**
+     * check if there are any resources of a specific type in the panel
+     */
+
         public boolean getinStorage (int quantity, Character type) {                    // OK!!!!!!
            int counter = 0;
            for (int i=0; i < 6; i ++) {
@@ -100,6 +126,11 @@ public class Storage extends ArrayList {
 
 
         // inserisce nel panel una data risorsa (se si può)
+
+    /**
+     * inserts a given resource in the panel (if possible)
+     */
+
         public void setinStorage (char type, int position) {
 
             if (getinStorage(1, type) == true) {
@@ -108,28 +139,60 @@ public class Storage extends ArrayList {
         }
 
 
-        // se viene lanciata un'exeption in setinstorage oppure in getinstorage si attiva e modifica arraylist
-        public void repairStorage () {
-            // TOSTA IN CULO CANE PORCO
+    /**
+     * Check if the arraylist respects the rules of his impostationhow many resources are available inside the storage
+     * @return true if it's correcltly implemented, false if it's there are errors
+     */
 
-        }
-
-        // controlla se i sei spazi del panel rispettano le regole prefissate del gioco se non le rispetta chiama repairstorage
         public boolean checkStorage () {
-            //if(this.panel.getVector().size()==0) return true;
-            if (    this.panel.getVector().get(0) != this.panel.getVector().get(1) &&
-                    this.panel.getVector().get(1) != this.panel.getVector().get(3) &&
-                    this.panel.getVector().get(0) != this.panel.getVector().get(3) &&
-                    this.panel.getVector().get(1) == this.panel.getVector().get(2) &&
-                    this.panel.getVector().get(3) == this.panel.getVector().get(4) &&
-                    this.panel.getVector().get(4) == this.panel.getVector().get(5)         ) // però possono essere anche vuoti! come posso eprimerlo?
-            { return true; } else {
-                                this.repairStorage();
-                                return false; }
+
+            if(this.panel.getVector().size()==0) return true;
+
+            else if (   ( this.panel.getVector().get(0) != this.panel.getVector().get(1) ||
+                        this.panel.getVector().get(0) == 'B' ||
+                        this.panel.getVector().get(1) == 'B' )
+
+                    &&
+
+                    ( this.panel.getVector().get(1) != this.panel.getVector().get(3) ||
+                        this.panel.getVector().get(1) == 'B' ||
+                        this.panel.getVector().get(3) == 'B')
+                    &&
+
+                    ( this.panel.getVector().get(0) != this.panel.getVector().get(3) ||
+                        this.panel.getVector().get(0) == 'B' ||
+                        this.panel.getVector().get(3) == 'B')
+
+                    &&
+
+                    ( this.panel.getVector().get(1) == this.panel.getVector().get(2) ||
+                        this.panel.getVector().get(1) == 'B' ||
+                        this.panel.getVector().get(2) == 'B')
+                    &&
+
+                    (this.panel.getVector().get(3) == this.panel.getVector().get(4) ||
+                        this.panel.getVector().get(1) == 'B' ||
+                        this.panel.getVector().get(2) == 'B'
+                    ) &&
+
+                    ( this.panel.getVector().get(4) == this.panel.getVector().get(5) ||
+                    this.panel.getVector().get(4) == 'B' ||
+                    this.panel.getVector().get(5) == 'B')
+
+                ) {
+                return true; }
+
+            else {
+                return false; }
         }
 
         // controlla le risorse extra che vanno ad incrementare i puntifede degli altri giocatori
-        public int returnmoves () {
-            return this.extrapanel.getVector().size();
+
+    /**
+     * check the extra resources that increase the faith points of the other players
+     */
+
+            public int returnMoves () {
+                    return this.extrapanel.getVector().size();
+                }
         }
-}
