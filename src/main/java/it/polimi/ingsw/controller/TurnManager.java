@@ -58,7 +58,9 @@ public class TurnManager extends Turn{
 
                 System.out.println("Do you want to do another production(y/n)?\n");
                 try{ again = (char) System.in.read(); } catch (IOException e){ System.out.println(e);} }while(again=='y');}
-        } catch (IOException e){ System.out.println(e);}
+        } catch (IOException e){ System.out.println(e);} catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
     }

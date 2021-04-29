@@ -157,6 +157,7 @@ public class Player {
             if (resource==(char)this.storage.get(i) || i==-1){
                 break;
             }
+
         } //salto con l'indice i che mi indica la posizione
         if (i==-1){
             //caso in cui non c'è la risorsa richiesta da eliminare

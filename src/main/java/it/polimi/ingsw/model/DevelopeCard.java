@@ -67,13 +67,13 @@ public class DevelopeCard{
 
     public void DoProduction(Player player)
     {
-        if(player.getResources().getVector().contains(this.inputproduction.getVector())) {
+//da sistemare        if(player.getResources().getVector().contains(this.inputproduction.getVector())) {
             for (int i = 0; i < this.inputproduction.getVector().size(); i++)
                 player.removeResource(this.inputproduction.getVector().get(i));
             for (int i = 0; i < this.outputproduction.getVector().size(); i++)
                 player.addResource(this.outputproduction.getVector().get(i));
-        }
-        else System.out.println("You don't own enought Resources");
+//        }
+//        else System.out.println("You don't own enought Resources");
     }
 
 

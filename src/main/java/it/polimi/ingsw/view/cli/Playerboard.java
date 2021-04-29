@@ -16,7 +16,7 @@ public class Playerboard {
     private static final int HORIZ_SIZE = 150;  // posso farlo di 150?
 
     private String[][] playerboard = new String[VERT_SIZE][HORIZ_SIZE];
-
+    
     Playerboard() throws FileNotFoundException {
         Perimeter();
         FaithTrack();

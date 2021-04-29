@@ -24,7 +24,7 @@ public class Turn {
      * 2.2) do the same with our Developecards
      * then the turn ends
      */
-    public void main() {
+    public void main() throws Exception {
         int action = 0;
         char again = 'n';
         int card = 0;
@@ -37,7 +37,7 @@ public class Turn {
         if (l == 1) {
             ActionSignal.Action(aStructure.PickSignal());
         }
-
+/*
         //1)
         System.out.println("What do you want to do?\n\t1)Shop a developement card\n\t2)Take resources at the market\n\t3)Active a production\n");
         try {
@@ -60,7 +60,7 @@ public class Turn {
                 System.out.println("Do you want to do another production(y/n)?\n");
                 try{ again = (char) System.in.read(); } catch (IOException e){ System.out.println(e);} }while(again=='y');}
         } catch (IOException e){ System.out.println(e);}
-
+*/
 
     }
 
@@ -69,7 +69,7 @@ public class Turn {
      * the class asks to the costumer what card he do want to buy
      * then check if he own enough resources and complete the transaction
      */
-    public void ShopCard(Game game) {
+    public void ShopCard(Game game) throws Exception {
         int choose = 0;
         DevelopeCard card = new DevelopeCard();
         ResourceStructure newcost = new ResourceStructure();
@@ -81,7 +81,7 @@ public class Turn {
         }
         card.equals(game.getDevelopedecks(choose).getStructure().get(0));
 
-        if (!this.actualplayer.getResources().getVector().contains(card.getCost())) return;
+//da sistemare        if (!this.actualplayer.getResources().getVector().contains(card.getCost())) return;
 
         for (int i = 0; i < this.actualplayer.getLeadercards().getStructure().size(); i++)
             if (this.actualplayer.getLeadercards().getStructure().get(i).getNumber() < 4)
@@ -92,7 +92,7 @@ public class Turn {
             //      Prima controllo se ho 2 o + W. Se ce le ho, passo a controllare se ho 1 o + Y
             //      I metodi che danno la quantità di un certo tipo sia in Storage sia in SB sono stati fatti
         //ex. if (newcost<=actualplayer.getStorage().countTypeS()+actualplayer.getStrongBox()...)
-        this.actualplayer.getResources().getVector().remove(newcost);
+//da sistemare        this.actualplayer.getResources().getVector().remove(newcost);
 
         this.actualplayer.getDevelopecards().getStructure().add(card);
     }
