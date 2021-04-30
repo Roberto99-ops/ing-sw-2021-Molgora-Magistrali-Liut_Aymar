@@ -85,6 +85,9 @@ public class Player {
     //FaithTrack
     private int FTposition=0;
     public int getTrackposition() { return FTposition; }
+    public void increaseTrackposition() {
+        this.FTposition = FTposition + 1;
+    }
 
     /**
      * Adds 1 when the player buys a new DevelopementCard
@@ -97,7 +100,7 @@ public class Player {
      * @return a flag
      */
     public int CheckResources(ArrayList ResourceStructure) {
-        //flag per sapere se non elimino (0) o elimino in storage (1) o in strongbox-storage (2)
+        //flag per sapere se non possiedo tali risorse (0) o possiedo in storage (1) o in strongbox-storage (2)
         int ableTo = 0;
 
         //prendo la prima risorsa richiesta
