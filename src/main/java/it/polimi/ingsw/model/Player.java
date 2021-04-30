@@ -1,7 +1,6 @@
 package it.polimi.ingsw.model;
-import java.io.IOException;
 import java.lang.String;
-import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Player {
     //cose che appartengono solo al player:
@@ -40,7 +39,7 @@ public class Player {
 
     //Plancia
     private Storage storage = new Storage();
-    private StrongBox StrongBox = new StrongBox();
+    private StrongBox strongBox = new StrongBox();
     private DevelopementSpace DSpace = new DevelopementSpace();
     public Storage getStorage() {
         return storage;
@@ -51,10 +50,10 @@ public class Player {
     }
 
     public StrongBox getStrongBox() {
-        return StrongBox;
+        return strongBox;
     }
     public void setStrongBox(StrongBox StrongBox) {
-        this.StrongBox = StrongBox;
+        this.strongBox = StrongBox;
     }
 
     public DevelopementSpace getDSpace() {
@@ -76,7 +75,7 @@ public class Player {
     private DevelopeCard minideck3Top;
     DevelopeDecks TopCardsOnBoard = new DevelopeDecks();
 
-    private int developementquantity;
+    private int developementquantity=0;
     public int getDevelopementquantity() {
         return developementquantity;
     }
@@ -86,22 +85,52 @@ public class Player {
     private int FTposition=0;
     public int getTrackposition() { return FTposition; }
 
-
     /**
      * Adds 1 when the player buys a new DevelopementCard
      */
     public void increaseDevelopQuantity() { this.developementquantity = developementquantity+1; }
 
-    //questo metodo controlla che ho determinate risorse dentro a , in ordine, storage e strongbox-storage.
-    //Bisogna controllare costo produzione/carta
-    //restituisce un int
-    public void CheckResources(char ResourceStructure){
+    /**
+     * Checks if the quantity of needed resources are available in the storage and/or in the strongbox
+     * @param ResourceStructure : arraylist of needed resources
+     * @return a flag
+     */
+    public int CheckResources(ArrayList ResourceStructure) {
+        //flag per sapere se non elimino (0) o elimino in storage (1) o in strongbox-storage (2)
+        int ableTo = 0;
 
+        //prendo la prima risorsa richiesta
+        int i = ResourceStructure.size() - 1;
+        char typeResource;
+        int countNeed = 1;
+        while (i >= 0) {
+            typeResource = (char) ResourceStructure.get(i);
+            //conto quanto è richiesto di questa risorsa
+            while ((char) ResourceStructure.get(i) == (char) ResourceStructure.get(i - 1)) {
+                countNeed++;
+                i--;
+            }
+            //confronto quantità richiesta con quantità presente o in storage o in strongbox e storage
+            if (countNeed > storage.countTypeS(typeResource) + strongBox.countTypeSB(typeResource)) {
+                ableTo = 0;
+                System.out.println("Not enough resources.");
+                return 0;
+
+            } else if (countNeed <= storage.countTypeS(typeResource) + strongBox.countTypeSB(typeResource)) {
+                //ableTo = 2;
+                if (countNeed < storage.countTypeS(typeResource)) {
+                    ableTo = 1;
+                }
+
+            }
+        }
+        System.out.println("You have the needed quantity of resources. These will be removed from your storage and/or strongbox");
+        return 1;
     }
 
     /**
      * Gets the first card of each minideck in the DevelopementSpace
-     * @return
+     * @return arraylist of minidecks' topcards
      */
     //deve "intreccarsi" con la plancia in modo da restituire
     //la lista delle carte sviluppo in cima ai mazzetti, forse servono solo quelli
@@ -119,6 +148,7 @@ public class Player {
     }
 
     /*
+     NON FARE
     public ResourceStructure getResourcesStorage()
     {
         //stesso discorso della plancia anche qui,
@@ -168,7 +198,7 @@ public class Player {
     }
 
     //da dividere
-    public ResourceStructure addResource(char resource)
+    public ResourceStructure addResourceStorage(char resource)
     {
         /*IDEA: scelgo una risorsa e questa , che si trova dentro il resourcestructure, va inserita dentro il magazzino
         (se viene dal mercato)
@@ -177,7 +207,19 @@ public class Player {
         //deve aggiungere questa risorsa alla plancia, stesso discorso
         return null;
     }
-    //quindi servono tutti i getter getStrongbox ecc...
+
+    /**
+     * Adds a single specified resource inside the StrongBox
+     * @param resource : the resource the player will put in strongbox
+     */
+    public void addResourceStrongBox(char resource)
+    {
+        /*IDEA: scelgo una risorsa e questa , che si trova dentro il resourcestructure, va inserita dentro il magazzino
+        (se viene dal mercato)
+        */
+        this.strongBox.getStructure().add(resource);
+    }
+
 
     //mostra a video la uantità totale di risorse disponibili;
 
