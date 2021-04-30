@@ -6,7 +6,12 @@ public class DevelopementSpace {
     private DevelopeDecks minideck2;
     private DevelopeDecks minideck3;
 
-
+    /**
+     * Gets the first card on top of a specific minideck
+     * @param choice : which minideck do you want to consider
+     * @return  card on top of the selected minideck
+     * @throws Exception in case the choice made doesn't exists
+     */
     public DevelopeCard getCard(int choice) throws Exception{
         int i = 0;
         try {
