@@ -53,9 +53,10 @@ public class Turn {
 
                 //2.2)
                 System.out.println("Which DevelopeCard do you want to enable(0=none)?\n");
-                this.actualplayer.getDevelopecards().Print(); //non so come il player accede alle proprie carte sviluppo
+                this.actualplayer.TopCardsOnBoard.Print(); //l'arraylist di carte viene stampato
                 try{ card = System.in.read(); } catch (IOException e){ System.out.println(e);}
-                if(card>0) this.actualplayer.getDevelopecards().getStructure().get(card-1).DoProduction(this.actualplayer);
+                //prendo la carta nella posizione i-1 nell'arraylist ed eseguo la sua produzione
+                if(card>0) this.actualplayer.TopCardsOnBoard.getStructure().get(card-1).DoProduction(this.actualplayer);
 
                 System.out.println("Do you want to do another production(y/n)?\n");
                 try{ again = (char) System.in.read(); } catch (IOException e){ System.out.println(e);} }while(again=='y');}
