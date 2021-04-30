@@ -2,12 +2,13 @@ package it.polimi.ingsw.model;
 
 public class SingleGame extends Game {
 
-    @Override
-    public void Shuffle()
-    {
-        ActionStructure AStruct = new ActionStructure();
-        AStruct.ShuffleSignal(); //all'inizio del gioco
+    public static void  main (){
+        ActionStructure actionStructure = new ActionStructure();
+
+        //mischio i segnalini appena comincia la partita
+        actionStructure.ShuffleSignal();
     }
+
 
     @Override
     public boolean Endgame(Player actualplayer)
