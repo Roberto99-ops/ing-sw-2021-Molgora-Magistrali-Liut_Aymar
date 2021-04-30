@@ -1,4 +1,5 @@
 package it.polimi.ingsw.model;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -80,21 +81,20 @@ public class Game {
      */
     public static void main( String[] args ) throws Exception {
         Game game = new Game();
+        SingleGame singleGame = new SingleGame();
         developedecks = new DevelopeDecks[12];
         leaderdeck = new LeaderDeck();
         players = new ArrayList<Player>();
         Turn turn = new Turn();
         int actualplayer=0;
         Scanner scan = new Scanner(System.in);
-        //1)
-        game.Shuffle();
 
-        //2)
+        //1)
         System.out.println("Do you want to play alone(A) or against other players(B)?");
-        if ((scan.nextLine())=="A"){
-            lonely=1;
-        } else if ((scan.nextLine())=="B"){
-            lonely=0;
+        if ((scan.nextLine()) == "A") {
+            SingleGame.main();
+        } else if ((scan.nextLine()) == "B") {
+            game.Shuffle();
         } // aggiunta di errore nel caso in cui il carattero scelto non sia uno proposto
 
         //3)
