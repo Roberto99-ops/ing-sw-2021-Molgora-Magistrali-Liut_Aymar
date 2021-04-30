@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model;
 import java.lang.String;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Player {
     //cose che appartengono solo al player:
@@ -176,14 +177,13 @@ public class Player {
 
     /**
      * Removes one resource from the storage
-     * @param resource: da eliminare
+     * @param resource: the resource the player wants to delete
      */
     //da dividere per ambienti
     public void removeResource(char resource) {
         int i;
-        //char choice = 'W';
-
         for (i=this.storage.size()-1; i>=-1 ;i--) {
+            //mi sposto nella struttra finchè non ottengo indice della risorsa che voglio eliminare
             if (resource==(char)this.storage.get(i) || i==-1){
                 break;
             }
@@ -191,21 +191,48 @@ public class Player {
         } //salto con l'indice i che mi indica la posizione
         if (i==-1){
             //caso in cui non c'è la risorsa richiesta da eliminare
-            System.out.println("La risorsa richiesta non c'è nel magazzino.");
+            System.out.println("The asked resource is not in the storage.");
             return ;
         }
+        System.out.println("Resource "+storage.get(i)+" has been removed.");
         this.storage.remove(i);//rimuovo la risorsa i-esima
+
     }
 
-    //da dividere
-    public ResourceStructure addResourceStorage(char resource)
+    /**
+     * Adds a single specified resource inside the Storage
+     * @param resource : the resource the player will put in Storage
+     */
+    public void addResourceStorage(char resource)
     {
+        char choice;
+        Scanner scan = new Scanner(System.in);
+
         /*IDEA: scelgo una risorsa e questa , che si trova dentro il resourcestructure, va inserita dentro il magazzino
         (se viene dal mercato)
         */
+        //caso in cui il magazzino sia pieno
+        if(storage.size()>=6){
+            System.out.println("No more space available in Storage. Do you want to delete" + resource+ "(A) or something in your storage(B)?");
+            //il player vede il suo magazzino e sceglie se non aggiungere la char resource oppure se vuole eliminarne qualcuna e
+            //quale risorsa eliminare
+            if (scan.nextLine()=="A"){
+                System.out.println(resource+" deleted.");
+                return;
+            } else if (scan.nextLine()=="B"){
+                System.out.println("Select the resource in your storage you want to delete:");
+                choice = scan.next().charAt(0);
+                removeResource(choice);
+            }
+            return;
+            //caso in cui il magazzino abbia uno o + spazi vuoti
+        } else {
+            //bisogna controllare se la risorsa da aggiungere è già presente in un altro piano oppure no.
 
-        //deve aggiungere questa risorsa alla plancia, stesso discorso
-        return null;
+        }
+
+        //this.storage.getStructure().add(resource);
+        return;
     }
 
     /**
@@ -221,10 +248,10 @@ public class Player {
     }
 
 
-    //mostra a video la uantità totale di risorse disponibili;
+    //mostra a video la quantità totale di risorse disponibili;
 
 
-    ///**
+    /*
      //* Counts all the available resources in Storage and in StrongBox
     // */
     /*
