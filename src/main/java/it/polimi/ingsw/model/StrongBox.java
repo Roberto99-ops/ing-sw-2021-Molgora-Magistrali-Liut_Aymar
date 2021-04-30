@@ -6,6 +6,14 @@ public class StrongBox {
     private int TotalResources;
 
     /**
+     * Getter of Strongbox's structure
+     * @return structure of strongbox
+     */
+    public ResourceStructure getStructure() {
+        return structure;
+    }
+
+    /**
      * Counts the amount of one kind of resource
      * @param neededRes: type of resource the player needs to pay/activate something
      * @return counterSB: the amount of that resource in StrongBox
