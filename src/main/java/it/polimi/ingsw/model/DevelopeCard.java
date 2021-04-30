@@ -8,7 +8,7 @@ import java.io.FileReader;
 
 public class DevelopeCard{
 
-    //B, Y, P, G
+    //Colori carte: G,B,Y,P
     private char colour;
     private int level;
     private int pv;
@@ -71,7 +71,7 @@ public class DevelopeCard{
             for (int i = 0; i < this.inputproduction.getVector().size(); i++)
                 player.removeResource(this.inputproduction.getVector().get(i));
             for (int i = 0; i < this.outputproduction.getVector().size(); i++)
-                player.addResource(this.outputproduction.getVector().get(i));
+                player.addResourceStrongBox(this.outputproduction.getVector().get(i));
 //        }
 //        else System.out.println("You don't own enought Resources");
     }
