@@ -65,15 +65,42 @@ public class DevelopeCard{
         return outputproduction;
     }
 
+
+    /**
+     * this method do a production.
+     * (1)checks if the player owns enough resources to activate the production;
+     * (2)then if storage contains enough resources, it removes from there the input resources and add the output resources to the strongbox;
+     * (3)if the storage doesn't contain enough resources it does the same thing with the strongbox.
+     * it uses the (0,1,2) logic defined into the player.checkresources method to check where the resources are.
+     * @param player: is the player who wants to do a production
+     */
     public void DoProduction(Player player)
     {
-//da sistemare        if(player.getResources().getVector().contains(this.inputproduction.getVector())) {
-            for (int i = 0; i < this.inputproduction.getVector().size(); i++)
-                player.removeResource(this.inputproduction.getVector().get(i));
-            for (int i = 0; i < this.outputproduction.getVector().size(); i++)
-                player.addResourceStrongBox(this.outputproduction.getVector().get(i));
-//        }
-//        else System.out.println("You don't own enought Resources");
+        //(1)
+        if(player.CheckResources(this.inputproduction.getVector())!=0) {
+        //(2)
+            if(player.CheckResources(this.inputproduction.getVector())==1)
+            {
+                for(int i=0; i<this.inputproduction.getVector().size(); i++)
+                    player.removeResource(this.inputproduction.getVector().get(i));
+
+                for(int i=0; i<this.outputproduction.getVector().size(); i++)
+                    player.addResourceStrongBox(this.outputproduction.getVector().get(i)); }
+        //(3)
+            if(player.CheckResources(this.inputproduction.getVector())==2)
+            {
+                for(int i=0; i<this.inputproduction.getVector().size(); i++) {
+                    {
+                        if (player.getStorage().getPanel().contains(this.inputproduction.getVector().get(i)))
+                            player.removeResource(this.inputproduction.getVector().get(i));
+                        else
+                            player.getStrongBox().deleteResource(this.inputproduction.getVector().get(i));
+                    }
+                }
+                for(int i=0; i<this.outputproduction.getVector().size(); i++)
+                    player.addResourceStrongBox(this.outputproduction.getVector().get(i)); }
+           }
+        else System.out.println("You don't own enought Resources");
     }
 
 
@@ -94,8 +121,6 @@ public class DevelopeCard{
         FileReader stringa = new FileReader("src/main/resources/DevelopeCards.json");
         Object obj = JsonParser.parseReader(stringa);
         JsonObject jsonObject = (JsonObject)obj;
-        //int num = jsonObject.get("ciao").getAsInt();
-        //System.out.println(num);
         JsonArray cardsArray = (JsonArray)jsonObject.get("DevelopeCards");
         JsonObject card = (JsonObject)cardsArray.get(number);
 
@@ -116,14 +141,6 @@ public class DevelopeCard{
             outputproduction.getVector().add(card.get("outputproduction").getAsJsonArray().get(i).getAsCharacter());
 
         return this;
-        //char colore = element.get("colour").getAsCharacter();
-        //System.out.println(colore);
-
-        //ArrayList<Character> costo =  new ArrayList<Character>();
-        //int size = element.get("cost").getAsJsonArray().size();
-        //for(int i=0; costo.size()<size; i++)
-        //    costo.add(element.get("cost").getAsJsonArray().get(i).getAsCharacter());
-        //System.out.println(costo);
     }
 
     public void Print()
