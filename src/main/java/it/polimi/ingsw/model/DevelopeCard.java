@@ -129,15 +129,15 @@ public class DevelopeCard{
         this.pv = card.get("pv").getAsInt();
 
         size = card.get("cost").getAsJsonArray().size();
-        for(int i=0; cost.getVector().size() < size; i++)
+        for(int i=0; i < size; i++)
             cost.getVector().add(card.get("cost").getAsJsonArray().get(i).getAsCharacter());
 
         size = card.get("inputproduction").getAsJsonArray().size();
-        for(int i=0; inputproduction.getVector().size() < size; i++)
+        for(int i=0; i < size; i++)
             inputproduction.getVector().add(card.get("inputproduction").getAsJsonArray().get(i).getAsCharacter());
 
         size = card.get("outputproduction").getAsJsonArray().size();
-        for(int i=0; outputproduction.getVector().size() < size; i++)
+        for(int i=0; i < size; i++)
             outputproduction.getVector().add(card.get("outputproduction").getAsJsonArray().get(i).getAsCharacter());
 
         return this;

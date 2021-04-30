@@ -76,11 +76,11 @@ public class LeaderCard{
         this.pv = card.get("pv").getAsInt();
 
         size = card.get("priceR").getAsJsonArray().size();
-        for (int i = 0; priceR.getVector().size() < size; i++)
+        for (int i = 0; i < size; i++)
             priceR.getVector().add(card.get("priceR").getAsJsonArray().get(i).getAsCharacter());
 
         size = card.get("priceC").getAsJsonArray().size();
-        for (int i = 0; priceC.size() < size; i++)
+        for (int i = 0; i < size; i++)
             priceC.add(card.get("priceC").getAsJsonArray().get(i).getAsCharacter());
 
         return this;
