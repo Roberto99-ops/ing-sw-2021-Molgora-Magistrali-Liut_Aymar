@@ -65,7 +65,7 @@ public class ClientHandler implements Runnable {
      */
     private void handleClientConnection() throws IOException {
         try {
-            while (true) {
+            while (true) {//da commentare
                 /* read commands from the client, process them, and send replies */
                 Object next = input.readObject();
                 CommandMsg command = (CommandMsg) next;

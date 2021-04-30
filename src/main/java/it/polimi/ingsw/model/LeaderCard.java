@@ -73,8 +73,8 @@ public class LeaderCard{
         JsonObject card = (JsonObject) cardsArray.get(number);
 
         this.cardLevel = card.get("cardLevel").getAsInt();
-        this.skill = card.get("skill").getAsString();
-        this.inputskill = card.get("inputskill").getAsCharacter();
+        //this.skill = card.get("skill").getAsString();
+        this.inputskill = card.get("skill").getAsCharacter();
         this.pv = card.get("pv").getAsInt();
 
         size = card.get("priceR").getAsJsonArray().size();
