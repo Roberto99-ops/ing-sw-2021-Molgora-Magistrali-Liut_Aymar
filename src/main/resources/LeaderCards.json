@@ -5,128 +5,159 @@
       "priceC": ["Y", "G"],
       "cardLevel": 1,
       "pv": 2,
-      "skill": "P",
-      "number": 0
+      "inputskill": "P",
+      "number": 0,
+      "skill": "PriceSkill"
     },
     {
       "priceR": [],
       "priceC": ["B", "P"],
       "cardLevel": 1,
       "pv": 2,
-      "skill": "B",
-      "number": 1
+      "inputskill": "B",
+      "number": 1,
+      "skill": "PriceSkill"
+
     },
     {
       "priceR": [],
       "priceC": ["G", "B"],
       "cardLevel": 1,
       "pv": 2,
-      "skill": "G",
-      "number": 2
+      "inputskill": "G",
+      "number": 2,
+      "skill": "PriceSkill"
+
     },
     {
       "priceR": [],
       "priceC": ["Y", "P"],
       "cardLevel": 1,
       "pv": 2,
-      "skill": "Y",
-      "number": 3
+      "inputskill": "Y",
+      "number": 3,
+      "skill": "PriceSkill"
+
     },
     {
       "priceR": ["Y", "Y", "Y", "Y", "Y"],
       "priceC": [],
       "cardLevel": 0,
       "pv": 3,
-      "skill": "G",
-      "number": 4
+      "inputskill": "G",
+      "number": 4,
+      "skill": "AdditionalStorageSkill"
+
     },
     {
       "priceR": ["W", "W", "W", "W", "W"],
       "priceC": [],
       "cardLevel": 0,
       "pv": 3,
-      "skill": "P",
-      "number": 5
+      "inputskill": "P",
+      "number": 5,
+      "skill": "AdditionalStorageSkill"
+
     },
     {
       "priceR": ["P", "P", "P", "P", "P"],
       "priceC": [],
       "cardLevel": 0,
       "pv": 3,
-      "skill": "B",
-      "number": 6
+      "inputskill": "B",
+      "number": 6,
+      "skill": "AdditionalStorageSkill"
+
     },
     {
       "priceR": ["B", "B", "B", "B", "B"],
       "priceC": [],
       "cardLevel": 0,
       "pv": 3,
-      "skill": "Y",
-      "number": 7
+      "inputskill": "Y",
+      "number": 7,
+      "skill": "AdditionalStorageSkill"
+
     },
     {
       "priceR": [],
       "priceC": ["Y", "Y", "B"],
       "cardLevel": 1,
       "pv": 5,
-      "skill": "P",
-      "number": 8
+      "inputskill": "P",
+      "number": 8,
+      "skill": "ConvertWhiteMarbleSkill"
+
     },
     {
       "priceR": [],
       "priceC": ["G", "G", "P"],
       "cardLevel": 1,
       "pv": 5,
-      "skill": "B",
-      "number": 9
+      "inputskill": "B",
+      "number": 9,
+      "skill": "ConvertWhiteMarbleSkill"
+
     },
     {
       "priceR": [],
       "priceC": ["B", "Y", "B"],
       "cardLevel": 1,
       "pv": 5,
-      "skill": "G",
-      "number": 10
+      "inputskill": "G",
+      "number": 10,
+      "skill": "ConvertWhiteMarbleSkill"
+
     },
     {
       "priceR": [],
       "priceC": ["P", "P", "G"],
       "cardLevel": 1,
       "pv": 5,
-      "skill": "Y",
-      "number": 11
+      "inputskill": "Y",
+      "number": 11,
+      "skill": "ConvertWhiteMarbleSkill"
+
     },
     {
       "priceR": [],
       "priceC": ["Y"],
       "cardLevel": 2,
       "pv": 4,
-      "skill": "B",
-      "number": 12
+      "inputskill": "B",
+      "number": 12,
+      "skill": "AdditionalProductionSkill"
+
     },
     {
       "priceR": [],
       "priceC": ["B"],
       "cardLevel": 2,
       "pv": 4,
-      "skill": "P",
-      "number": 13
+      "inputskill": "P",
+      "number": 13,
+      "skill": "AdditionalProductionSkill"
+
     },
     {
       "priceR": [],
       "priceC": ["P"],
       "cardLevel": 2,
       "pv": 4,
-      "skill": "G",
-      "number": 14
+      "inputskill": "G",
+      "number": 14,
+      "skill": "AdditionalProductionSkill"
+
     },
     {
       "priceR": [],
       "priceC": ["G"],
       "cardLevel": 2,
       "pv": 4,
-      "skill": "Y",
-      "number": 15
+      "inputskill": "Y",
+      "number": 15,
+      "skill": "AdditionalProductionSkill"
+
     }
   ]
 }
