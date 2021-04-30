@@ -103,7 +103,6 @@ public class StrongBox {
     /**
      * it returns true if the number of resources in input are inside the structure
      */
-
     public boolean findResource(int number, char withdraw) {
         int counter = 0;
         for (int i = 0; i <= number; i++) {
@@ -119,6 +118,14 @@ public class StrongBox {
         }
     }
 
+    /**
+     * delete a resource inside the strongbox
+     * @param resource: the resource to delete
+     */
+    public void deleteResource(char resource)
+    {
+        this.structure.remove(resource);
+    }
 
 
     public void setResource(int number, char deposit) {
