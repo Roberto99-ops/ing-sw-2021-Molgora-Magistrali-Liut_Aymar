@@ -16,14 +16,7 @@ public class Turn {
         this.actualplayer = actualplayer;
     }
 
-    /**
-     * turn "main", it manages all the turn.
-     * 1)asks us what do we want to do
-     * 2)in case we choose to active a production, we join a while that active all the production we want
-     * 2.1)it lists us all our LeaderCards so we can choose to active one of that
-     * 2.2) do the same with our Developecards
-     * then the turn ends
-     */
+    //da spostare nel controller
     public void main() throws Exception {
         int action = 0;
         char again = 'n';
@@ -67,8 +60,8 @@ public class Turn {
 
     /**
      * this method manages the purchase of a DevelopeCard.
-     * the class asks to the costumer what card he do want to buy
-     * then check if he own enough resources and complete the transaction
+     * the class asks to the costumer what card he does want to buy
+     * then checks if he owns enough resources and complete the transaction
      */
     public void ShopCard(Game game) throws Exception {
         int choose = 0;
@@ -82,18 +75,34 @@ public class Turn {
         }
         card.equals(game.getDevelopedecks(choose).getStructure().get(0));
 
-//da sistemare        if (!this.actualplayer.getResources().getVector().contains(card.getCost())) return;
-
         for (int i = 0; i < this.actualplayer.getLeadercards().getStructure().size(); i++)
-            if (this.actualplayer.getLeadercards().getStructure().get(i).getNumber() < 4)
-                newcost = this.actualplayer.getLeadercards().getStructure().get(i).Skill();
+            if (this.actualplayer.getLeadercards().getStructure().get(i).getSkill() == "PriceSkill")
+                newcost = this.actualplayer.getLeadercards().getStructure().get(i).PriceSkill(card);
 
             //se le risorse presenti in Storage e SB sono sufficienti allora le risorse richieste le elimino e attivo la produzione
             //IDEA: controllare quante risorse di un tipo si necessitano per comprare. Ex: W W Y.
             //      Prima controllo se ho 2 o + W. Se ce le ho, passo a controllare se ho 1 o + Y
             //      I metodi che danno la quantità di un certo tipo sia in Storage sia in SB sono stati fatti
         //ex. if (newcost<=actualplayer.getStorage().countTypeS()+actualplayer.getStrongBox()...)
-//da sistemare        this.actualplayer.getResources().getVector().remove(newcost);
+
+        if (this.actualplayer.CheckResources(newcost)==0) return;
+
+        if (this.actualplayer.CheckResources(newcost)==1)
+        {
+            for(int i=0; i<newcost.getVector().size(); i++)
+                this.actualplayer.removeResource(newcost.getVector().get(i));
+        }
+
+        if(this.actualplayer.CheckResources(newcost)==2)
+        {
+            for(int i=0; i<newcost.getVector().size(); i++) {
+
+                    if (this.actualplayer.getStorage().getPanel().contains(newcost.getVector().get(i)))
+                        this.actualplayer.removeResource(newcost.getVector().get(i));
+                    else
+                        this.actualplayer.getStrongBox().deleteResource(newcost.getVector().get(i));
+                }
+        }
 
         this.actualplayer.getDevelopecards().getStructure().add(card);
     }
@@ -104,9 +113,8 @@ public class Turn {
      *
      * @param game
      * @return
-     * @throws IOException
      */
-    public ResourceStructure Buyresource(Game game) throws IOException {
+    public ResourceStructure Buyresource(Game game) {
         ResourceStructure product = new ResourceStructure();
         Market market = game.getMarket();
         int RoworCol = 0;
@@ -132,8 +140,8 @@ public class Turn {
         product.setVector(game.getMarket().doMarket(RoworCol, number));
 
         for (int i = 0; i < this.actualplayer.getLeadercards().getStructure().size(); i++)
-            if (this.actualplayer.getLeadercards().getStructure().get(i).getNumber() < 12 && this.actualplayer.getLeadercards().getStructure().get(i).getNumber() > 7)
-                product = this.actualplayer.getLeadercards().getStructure().get(i).Skill();
+            if (this.actualplayer.getLeadercards().getStructure().get(i).getSkill() == "ConvertWhiteMarbleSkill")
+                product = this.actualplayer.getLeadercards().getStructure().get(i).ConvertWhiteMarbleSkill(product);
 
         return product;
     }
