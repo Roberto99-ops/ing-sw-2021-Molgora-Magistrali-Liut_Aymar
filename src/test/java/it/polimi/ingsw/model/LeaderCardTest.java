@@ -67,8 +67,37 @@ public class LeaderCardTest {
         assertEquals('G', player.getStorage().getTypeExtrapanel());
     }
 
+
+    /**
+     * tests this skill with a resourcestructure containing all types.
+     * oss: the order of the new structure is different because the method adds
+     * the converted resources at the end of the structure.
+     * @throws FileNotFoundException
+     */
     @Test
-    public void convertWhiteMarbleSkill() {
+    public void convertWhiteMarbleSkill() throws FileNotFoundException {
+        LeaderCard card = new LeaderCard();
+        card.setCard(7);
+
+        ResourceStructure row = new ResourceStructure();
+        row.AddResource(1, 'B');
+        row.AddResource(1, 'W');
+        row.AddResource(1, 'G');
+        row.AddResource(1, 'P');
+        row.AddResource(1, 'W');
+        row.AddResource(1, 'Y');
+
+        row=card.ConvertWhiteMarbleSkill(row);
+
+        ResourceStructure newrow = new ResourceStructure();
+        newrow.AddResource(1, 'B');
+        newrow.AddResource(1, 'G');
+        newrow.AddResource(1, 'P');
+        newrow.AddResource(1, 'Y');
+        newrow.AddResource(1, 'P');
+        newrow.AddResource(1, 'P');
+
+        for(int i=0; i<newrow.size(); i++)  assertEquals(newrow.getVector().get(i), row.getVector().get(i));
     }
 
     @Test

@@ -121,8 +121,7 @@ public class LeaderCard{
         ResourceStructure newCost = new ResourceStructure();
         int pos;
         if(!card.getCost().getVector().contains(this.inputskill))  return card.getCost();
-        pos=card.getCost().firstOccurance(this.inputskill);
-        card.getCost().getVector().remove(pos);
+        card.getCost().Remove(this.inputskill);
         newCost = card.getCost();
         return newCost;
     }
@@ -146,8 +145,8 @@ public class LeaderCard{
     {
         while(row.getVector().contains('W'))
         {
-            row.getVector().remove('W');
-            row.getVector().add(this.inputskill);
+            row.Remove('W');
+            row.AddResource(1, this.inputskill);
         }
         return row;
     }
