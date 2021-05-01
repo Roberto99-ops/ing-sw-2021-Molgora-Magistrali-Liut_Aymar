@@ -4,6 +4,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import it.polimi.ingsw.model.DevelopeDecks;
+import it.polimi.ingsw.model.LeaderCard;
+import it.polimi.ingsw.model.Player;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -17,12 +19,12 @@ public class Playerboard {
 
     private String[][] playerboard = new String[VERT_SIZE][HORIZ_SIZE];
     
-    Playerboard() throws FileNotFoundException {
+    Playerboard(Player player) throws FileNotFoundException {
         Perimeter();
         FaithTrack();
         Storage();
         Strongbox();
-        Productionspace();
+        LeaderSpace(player);
         Developementspace();
     }
 
@@ -82,33 +84,6 @@ public class Playerboard {
 
             Square(LeftHighCorner_VERT, LeftHighCorner_HORIZ, content);
         }
-        /*
-        Square(0,0,0);
-        Square(0,1,1);
-        Square(0,2,2);
-        Square(1,2,3);
-        Square(2,2,4);
-        Square(2,3,5);
-        Square(2,4,6);
-        Square(2,5,7);
-        Square(2,6,8);
-        Square(2,7,9);
-        Square(1,7,10);
-        Square(0,7,11);
-        Square(0,8,12);
-        Square(0,9,13);
-        Square(0,10,14);
-        Square(0,11,15);
-        Square(0,12,16);
-        Square(1,12,17);
-        Square(2,12,18);
-        Square(2,13,19);
-        Square(2,14,20);
-        Square(2,15,21);
-        Square(2,16,22);
-        Square(2,17,23);   //da fare con json
-        Square(2,18,24);*/
-
     }
 
     /**
@@ -221,25 +196,102 @@ public class Playerboard {
                 playerboard[initialVert+i][1+j]=strongbox[i][j];
     }
 
+
     /**
-     * it draws the productionspace inside the playerboard (it hasn't any pratical function but it is for graphics)
+     * it draws the space where we can see our leaderecards
+     * @param player
      */
-    private void Productionspace()
+    private void LeaderSpace(Player player)
     {
-        int MAX_VERT_SIZE = VERT_SIZE-13-2;
+        int MAX_VERT_SIZE = (VERT_SIZE-13-4)/2;
         int MAX_HORIZ_SIZE = 17;
         Color backgroundcolor = Color.BACKGROUND_GRAY;
-        String[][] productionspace = new String[MAX_VERT_SIZE][MAX_HORIZ_SIZE];
+        String[][] leaderspace1 = new String[MAX_VERT_SIZE][MAX_HORIZ_SIZE];
+        String[][] leaderspace2 = new String[MAX_VERT_SIZE][MAX_HORIZ_SIZE];
         for (int i = 0; i < MAX_VERT_SIZE; i++)
             for (int j = 0; j < MAX_HORIZ_SIZE; j++)
-                productionspace[i][j]=backgroundcolor + " " + Color.RESET;
+            {leaderspace1[i][j]=backgroundcolor + " " + Color.RESET;
+                leaderspace2[i][j]=backgroundcolor + " " + Color.RESET;}
+
+        String[][] card1;
+        String[][] card2;
+        if(player.getLeadercards().getStructure().size()>0) {
+            card1 = DrawLeadercard(player.getLeadercards().getStructure().get(0));
+            if(player.getLeadercards().getStructure().size()==2)
+                card2 = DrawLeadercard(player.getLeadercards().getStructure().get(1));
+            else
+                card2 = DrawLeadercard(null);
+        }
+        else
+        { card1 = DrawLeadercard(null);
+            card2 = DrawLeadercard(null);}
+
+        for (int i = 0; i < MAX_VERT_SIZE-2; i++)
+            for (int j = 0; j < MAX_HORIZ_SIZE-2; j++) {
+                leaderspace1[i + 1][j + 1] = card1[i][j];
+                leaderspace2[i + 1][j + 1] = card2[i][j];
+            }
+
 
 
         int initialVert=14;
         int initialHoriz=HORIZ_SIZE/4+2;
         for (int i = 0; i < MAX_VERT_SIZE; i++)
+            for (int j = 0; j < MAX_HORIZ_SIZE; j++) {
+                playerboard[initialVert + i][initialHoriz + j] = leaderspace1[i][j];
+                playerboard[initialVert + i + MAX_VERT_SIZE + 2][initialHoriz + j] = leaderspace2[i][j];
+            }
+    }
+
+    /**
+     * draw the leadercards inside the leadercards space
+     * @param card: card to draw
+     * @return
+     */
+    private String[][] DrawLeadercard(LeaderCard card)
+    {
+        int MAX_VERT_SIZE = (VERT_SIZE-13-8)/2;
+        int MAX_HORIZ_SIZE = 17-2;
+        Color color = Color.BACKGROUND_PURPLE;
+        String[][] leadercard = new String[MAX_VERT_SIZE][MAX_HORIZ_SIZE];
+        for (int i = 0; i < MAX_VERT_SIZE; i++)
             for (int j = 0; j < MAX_HORIZ_SIZE; j++)
-                playerboard[initialVert+i][initialHoriz+j]=productionspace[i][j];
+                leadercard[i][j]=color + " " + Color.RESET;
+
+        for (int i = 1; i < MAX_HORIZ_SIZE-1; i++)
+            leadercard[0][i] = color + "_" + Color.RESET;
+        for (int i = 1; i < MAX_HORIZ_SIZE-1; i++)
+            leadercard[MAX_VERT_SIZE-1][i] = color + "_" + Color.RESET;
+
+        for (int i = 1; i < MAX_VERT_SIZE; i++)
+            leadercard[i][0] = color + "|" + Color.RESET;
+        for (int i = 1; i < MAX_VERT_SIZE; i++)
+            leadercard[i][MAX_HORIZ_SIZE-1] = color + "|" + Color.RESET;
+
+        leadercard=putString("cardLevel:", leadercard, 1, 2);
+        leadercard=putString("PV:", leadercard, 3, 2);
+        if(card.getPriceC().size()!=0)
+            leadercard=putString("priceC:", leadercard, 5, 2);
+        else
+            leadercard=putString("priceR:", leadercard, 5, 2);
+        leadercard=putString("skill:", leadercard, 7, 2);
+        leadercard=putString("inputskill:", leadercard, 9, 2);
+        return leadercard;
+    }
+
+    /**
+     * put a given string inside a given string matrix
+     * @param string: string tu out inside
+     * @param returned: matrix modified
+     * @param row: position where put the string
+     * @param column: position where put the string
+     * @return
+     */
+    private String[][] putString(String string, String[][] returned, int row, int column)
+    {
+        returned[row][column] = string;
+        for (int i = 1; i < string.length(); i++) returned[row][column+i] = "";
+        return returned;
     }
 
     /**
