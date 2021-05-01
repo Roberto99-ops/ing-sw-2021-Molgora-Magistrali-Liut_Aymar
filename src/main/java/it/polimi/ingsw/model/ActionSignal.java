@@ -2,11 +2,18 @@ package it.polimi.ingsw.model;
 
 
 public class ActionSignal {
+
+
     private int number;
 
     public int getNumber() {
         return number;
     }
+
+    public void setNumber(int number) {
+        this.number = number;
+    }
+
 
     /**
      * Applies actions described by ActionSignals
@@ -15,8 +22,7 @@ public class ActionSignal {
      * Case 7: Lorenzo moves forward by one space
      * @param number: according to the number received, it calls a specific action
      */
-    public static void Action(int number){
-        Lorenzo Lore = new Lorenzo();
+    public void Action(int number){
         int i;
         int countRemove=0;
 
@@ -47,7 +53,7 @@ public class ActionSignal {
                 i=3;
                 while (countRemove<2){
                     while (((Game.getDevelopedecks(i).getStructure().isEmpty()) && i<=11)){
-                        i+=4; //mi sposto da un mazzo all'altro finchè non ne trovo uno cpn carte
+                        i+=4; //mi sposto da un mazzo all'altro finchè non ne trovo uno con carte
                     }
                     //caso: non ho più carte in nessun mazzo
                     if (i==11 && (Game.getDevelopedecks(i).getStructure().isEmpty())){ //caso in cui arrivo all'ultimo mazzo
@@ -62,10 +68,10 @@ public class ActionSignal {
                 return;
 
             case 3://viola-2
-                i=0; //liv 1 blu
+                i=0;
                 while (countRemove<2){
                     while (((Game.getDevelopedecks(i).getStructure().isEmpty()) && i<=11)){
-                        i+=4; //mi sposto da un mazzo all'altro finchè non ne trovo uno cpn carte
+                        i+=4; //mi sposto da un mazzo all'altro finchè non ne trovo uno con carte
                     }
                     //caso: non ho più carte in nessun mazzo
                     if (i==8 && (Game.getDevelopedecks(i).getStructure().isEmpty())){ //caso in cui arrivo all'ultimo mazzo
@@ -80,10 +86,10 @@ public class ActionSignal {
                 return;
 
             case 4://giallo-2
-                i=1; //liv 1 blu
+                i=1;
                 while (countRemove<2){
                     while (((Game.getDevelopedecks(i).getStructure().isEmpty()) && i<=11)){
-                        i+=4; //mi sposto da un mazzo all'altro finchè non ne trovo uno cpn carte
+                        i+=4; //mi sposto da un mazzo all'altro finchè non ne trovo uno con carte
                     }
                     //caso: non ho più carte in nessun mazzo
                     if (i==9 && (Game.getDevelopedecks(i).getStructure().isEmpty())){ //caso in cui arrivo all'ultimo mazzo
@@ -98,14 +104,16 @@ public class ActionSignal {
                 return;
 
             case 5://+2
-                Lore.Lorenzomoves(2);
+                Lorenzo.Lorenzomoves(2);
+                break;
 
             case 6://+2
-                Lore.Lorenzomoves(2);
+                Lorenzo.Lorenzomoves(2);
+                break;
 
             case 7://+1&Shuffle
-                Lore.Lorenzomoves(1);
-            //in Java, il break nello switch è opzionale
+                Lorenzo.Lorenzomoves(1);
+                break;
         }
     }
 

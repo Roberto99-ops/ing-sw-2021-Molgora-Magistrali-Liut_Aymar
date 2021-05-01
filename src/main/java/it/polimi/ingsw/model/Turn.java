@@ -7,6 +7,7 @@ public class Turn {
     private Game game;
     private int l = game.getLonely();
     private ActionStructure aStructure;
+    private ActionSignal signal;
 
     public Player getActualplayer() {
         return actualplayer;
@@ -28,7 +29,7 @@ public class Turn {
 
         //se sono in single game, ogni volta che tocca a me, prendo un segnalino ed eseguo la sua azione
         if (l == 1) {
-            ActionSignal.Action(aStructure.PickSignal());
+            signal.Action(aStructure.PickSignal());
         }
 /*
         //1)

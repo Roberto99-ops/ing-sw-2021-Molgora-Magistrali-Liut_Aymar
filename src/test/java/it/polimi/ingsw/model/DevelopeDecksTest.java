@@ -3,7 +3,6 @@ package it.polimi.ingsw.model;
 import org.junit.Test;
 
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 

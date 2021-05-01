@@ -19,22 +19,22 @@ public class ActionStructureTest {
     public void pickSignal() throws FileNotFoundException {
         ActionSignal Signal = new ActionSignal();
         //case #1-4: deletes two cards from a Develope Deck
-        ArrayList<DevelopDecks> developDecks= new ArrayList<DevelopDecks>();
+        ArrayList<DevelopeDecks> developeDecks = new ArrayList<DevelopeDecks>();
         //sets all 12 decks with three cards
         for (int i=0; i<12 ; i++){
             //create a new deck at index 'i'
-            developDecks.add(i,new DevelopDecks());
+            developeDecks.add(i,new DevelopeDecks());
             for(int c=0; c<4; c++)
             {
                 DevelopeCard card = new DevelopeCard();
                 card.setCard(c);
-                developDecks.get(i).getStructure().add(card);
+                developeDecks.get(i).getStructure().add(card);
             }
         }
         DevelopeCard card1 = new DevelopeCard();
-        card1= developDecks.get(2).getStructure().get(2);
+        card1= developeDecks.get(2).getStructure().get(2);
         Signal.Action(1);
-        assertNotEquals(card1, developDecks.get(2).getStructure().get(0));
+        assertNotEquals(card1, developeDecks.get(2).getStructure().get(0));
 
 
 

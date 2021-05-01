@@ -13,6 +13,7 @@ public class TurnManager extends Turn{
     private Game game;
     private int l = game.getLonely();
     private ActionStructure aStructure;
+    private ActionSignal signal;
 
 
     /**
@@ -34,7 +35,7 @@ public class TurnManager extends Turn{
 
         //se sono in single game, ogni volta che tocca a me, prendo un segnalino ed eseguo la sua azione
         if (l == 1) {
-            ActionSignal.Action(aStructure.PickSignal());
+            signal.Action(aStructure.PickSignal());
         }
 
         //1)

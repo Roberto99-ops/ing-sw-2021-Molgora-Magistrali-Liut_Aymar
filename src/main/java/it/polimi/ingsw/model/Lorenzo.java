@@ -1,11 +1,17 @@
 package it.polimi.ingsw.model;
 
 public class Lorenzo {
-    private String name = "Lorenzo Il Magnifico";
-    private int number = 0; //posizione su tracciato
+    private static String name = "Lorenzo Il Magnifico";
 
-    public int getNumber() {
+
+    private static int number = 0; //posizione su tracciato
+
+    public static int getNumber() {
         return number;
+    }
+
+    public static void setNumber(int num) {
+        number = num;
     }
 
     /**
@@ -13,14 +19,13 @@ public class Lorenzo {
      * @param forward
      * @return
      */
-    public int Lorenzomoves(int forward){
-        ActionStructure Stack = new ActionStructure();
+    public static void Lorenzomoves(int forward){
         if (forward==2){
-            number+=2;
+            number=number+2;
         } else if (forward==1){
             number++;
-            Stack.ShuffleSignal();
+            ActionStructure.ShuffleSignal();
         }
-        return number;
+        return;
     }
 }

@@ -5,7 +5,7 @@ public class DevelopeDecks extends Deck<DevelopeCard>{
     private ArrayList<DevelopeCard> structure = new ArrayList<DevelopeCard>();
 
     /**
-     * these get and set let me to manage the structure
+     * these get and set let me manage the structure
      * to modify decks there are methods (generics) in Deck class
      * @return
      */

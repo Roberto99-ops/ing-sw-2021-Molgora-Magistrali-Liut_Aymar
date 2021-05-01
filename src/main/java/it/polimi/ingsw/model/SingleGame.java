@@ -1,6 +1,9 @@
 package it.polimi.ingsw.model;
 
 public class SingleGame extends Game {
+    private Lorenzo Lore = new Lorenzo();
+
+    public Lorenzo getLorenzo(){return Lore;}
 
     public static void  main (){
         ActionStructure actionStructure = new ActionStructure();
