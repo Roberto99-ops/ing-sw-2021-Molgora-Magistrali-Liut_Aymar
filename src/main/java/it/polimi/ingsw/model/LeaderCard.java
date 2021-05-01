@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class LeaderCard{
 
@@ -108,7 +109,7 @@ public class LeaderCard{
         } catch(Exception e){System.out.println("Inexistent LeaderCard");}
         return null;
     }
-/*
+*/
 
     /**
      * this skill decreases the develope card price of a specify resource
@@ -118,8 +119,11 @@ public class LeaderCard{
     public ResourceStructure PriceSkill(DevelopeCard card)
     {
         ResourceStructure newCost = new ResourceStructure();
+        int pos;
         if(!card.getCost().getVector().contains(this.inputskill))  return card.getCost();
-        newCost.equals(card.getCost().getVector().remove(this.inputskill));
+        pos=card.getCost().firstOccurance(this.inputskill);
+        card.getCost().getVector().remove(pos);
+        newCost = card.getCost();
         return newCost;
     }
 
