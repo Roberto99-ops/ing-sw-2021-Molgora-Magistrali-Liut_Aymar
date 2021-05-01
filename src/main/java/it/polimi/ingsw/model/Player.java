@@ -179,14 +179,13 @@ public class Player {
     //}
 
     /**
-     * Removes one resource from the storage
+     * Removes one resource from the storage.
      * @param resource: the resource the player wants to delete
      */
-    //da dividere per ambienti
     public void removeResource(char resource) {
         int i;
         for (i=this.storage.size()-1; i>=-1 ;i--) {
-            //mi sposto nella struttra finchè non ottengo indice della risorsa che voglio eliminare
+            //mi sposto nella struttura finchè non ottengo indice della risorsa che voglio eliminare
             if (resource==(char)this.storage.get(i) || i==-1){
                 break;
             }
@@ -199,8 +198,10 @@ public class Player {
         }
         System.out.println("Resource "+storage.get(i)+" has been removed.");
         this.storage.remove(i);//rimuovo la risorsa i-esima
-
     }
+
+    //Similar method is NOT needed in StrongBox since its space is unlimited.
+
 
     /**
      * Adds a single specified resource inside the Storage
@@ -217,8 +218,8 @@ public class Player {
         //caso in cui il magazzino sia pieno
         if(storage.size()>=6){
             System.out.println("No more space available in Storage. Do you want to delete" + resource+ "(A) or something in your storage(B)?");
-            //il player vede il suo magazzino e sceglie se non aggiungere la char resource oppure se vuole eliminarne qualcuna e
-            //quale risorsa eliminare
+            //il player vede il suo magazzino e sceglie se non aggiungere la char resource oppure se vuole eliminarne
+            // qualcuna e quale risorsa eliminare
             if (scan.nextLine()=="A"){
                 System.out.println(resource+" deleted.");
                 return;
@@ -230,6 +231,29 @@ public class Player {
             return;
             //caso in cui il magazzino abbia uno o + spazi vuoti
         } else {
+            int i=5;
+            //controllo se il magazzino contiene la risorsa
+            if (storage.getPanel().contains(resource)){
+                while ((char)storage.getPanel().get(i)!= resource && i>=0){
+                    i--;
+                }
+                if (i==0){
+                    //la risorsa si trova in cima al magazzino da sola->  elimino la risorsa da aggiungere
+                    System.out.println(resource+" deleted. It already esxists");
+                    return;
+                } //....
+            }
+            //mi muovo nel piano con 3 elementi
+            while(storage.getPanel().get(i)==null && i>2){
+                i--;
+            }
+            if (i==3){
+                storage.getPanel().add(resource);
+            }
+
+
+
+
             //bisogna controllare se la risorsa da aggiungere è già presente in un altro piano oppure no.
 
         }
