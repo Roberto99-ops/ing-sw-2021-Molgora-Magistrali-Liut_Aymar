@@ -68,4 +68,15 @@ public class ResourceStructure extends ArrayList {
         return i;
     }
 
+    /**
+     * remove the first resource of a specific type
+     * @param resource: resource to delete
+     */
+    public void Remove(char resource)
+    {
+        int i=0;
+        i=this.firstOccurance(resource);
+        this.getVector().remove(i);
+    }
+
 }
