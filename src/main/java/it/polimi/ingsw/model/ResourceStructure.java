@@ -56,4 +56,16 @@ public class ResourceStructure extends ArrayList {
     }
 
 
+    /**
+     * return the position of the first element of a specific type of resource
+     * @param resource
+     * @return
+     */
+    public int firstOccurance(char resource)
+    {
+        int i=0;
+        while(!this.getVector().contains(resource)) i++;
+        return i;
+    }
+
 }
