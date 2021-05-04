@@ -202,13 +202,11 @@ public class Player {
 
     //Similar method is NOT needed in StrongBox since its space is unlimited.
 
-
     /**
      * Adds a single specified resource inside the Storage
      * @param resource : the resource the player will put in Storage
      */
-    public void addResourceStorage(char resource)
-    {
+    public void addResourceStorage(char resource) {
         char choice;
         Scanner scan = new Scanner(System.in);
 
@@ -216,14 +214,14 @@ public class Player {
         (se viene dal mercato)
         */
         //caso in cui il magazzino sia pieno
-        if(storage.size()>=6){
-            System.out.println("No more space available in Storage. Do you want to delete" + resource+ "(A) or something in your storage(B)?");
+        if (storage.size() >= 6) {
+            System.out.println("No more space available in Storage. Do you want to delete" + resource + "(A) or something in your storage(B)?");
             //il player vede il suo magazzino e sceglie se non aggiungere la char resource oppure se vuole eliminarne
             // qualcuna e quale risorsa eliminare
-            if (scan.nextLine()=="A"){
-                System.out.println(resource+" deleted.");
+            if (scan.nextLine().equals("A")) {
+                System.out.println(resource + " deleted.");
                 return;
-            } else if (scan.nextLine()=="B"){
+            } else if (scan.nextLine().equals("B")) {
                 System.out.println("Select the resource in your storage you want to delete:");
                 choice = scan.next().charAt(0);
                 removeResource(choice);
@@ -231,34 +229,44 @@ public class Player {
             return;
             //caso in cui il magazzino abbia uno o + spazi vuoti
         } else {
-            int i=5;
-            //controllo se il magazzino contiene la risorsa
-            if (storage.getPanel().contains(resource)){
-                while ((char)storage.getPanel().get(i)!= resource && i>=0){
+            int i = 5;
+            //controllo se il magazzino contiene la risorsa già da qualche parte
+            //se c'è già:
+            if (storage.getPanel().contains(resource)) {
+                while ((char) storage.getPanel().get(i) != resource && i >= 0) {
                     i--;
                 }
-                if (i==0){
-                    //la risorsa si trova in cima al magazzino da sola->  elimino la risorsa da aggiungere
-                    System.out.println(resource+" deleted. It already esxists");
+                if (i == 0 || i == 2 || i == 5) {
+                    // i==0 : una risorsa di quel tipo presente in cima -> elimino la risorsa
+                    // i==2 : il secondo piano ha risorse di quel tipo -> elimino la risorsa
+                    // i==5 : il terzo piano ha risorse di quel tipo -> elimino la risorsa
+                    System.out.println(resource + " deleted. It already exists");
                     return;
-                } //....
+                }
+                // in tutti gli altri casi in cui un posto nei piani è libero
+                switch (i) {
+                    case 1:
+                        storage.getPanel().add(2, resource); //posto i==2 ora occupato
+                        break;
+                    case 3:
+                        storage.getPanel().add(4, resource); //posto i==4 ora occupato
+                        break;
+                    case 4:
+                        storage.getPanel().add(5, resource); //posto i==2 ora occupato
+                        break;
+                }
+                return;
             }
-            //mi muovo nel piano con 3 elementi
-            while(storage.getPanel().get(i)==null && i>2){
+            //se la risorsa non c'è:
+            while (storage.getPanel().get(i) != null && i >= 0) {
+                if (i == 0 || i == 1 || i == 3) {
+                    break;
+                }
                 i--;
             }
-            if (i==3){
-                storage.getPanel().add(resource);
-            }
-
-
-
-
-            //bisogna controllare se la risorsa da aggiungere è già presente in un altro piano oppure no.
-
+            storage.getPanel().add(i, resource); //aggiungo la risorsa nel primo piano (i==0) o nel secondo (i==1) o nel
+            // terzo (i==3)
         }
-
-        //this.storage.getStructure().add(resource);
         return;
     }
 
