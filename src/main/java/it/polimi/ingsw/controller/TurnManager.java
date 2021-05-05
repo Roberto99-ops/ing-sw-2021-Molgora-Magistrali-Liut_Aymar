@@ -49,8 +49,8 @@ public class TurnManager extends Turn{
                 System.out.println("Which LeaderCard do you want to enable(0=none)?\n");
                 this.actualplayer.getLeadercards().Print();
                 try{ card = System.in.read(); } catch (IOException e){ System.out.println(e);}
-                if(this.actualplayer.getLeadercards().getStructure().get(card-1).getSkill() == "AdditionalProductionSkill")
-                    this.actualplayer.getLeadercards().getStructure().get(card-1).AdditionalProductionSkill(this.actualplayer);
+                if(this.actualplayer.getLeadercards().getStructure().get(card-1).getSkill() == "ProductionSkill")
+                    this.actualplayer.getLeadercards().getStructure().get(card-1).ProductionSkill(this.actualplayer);
 
                 //2.2)
                 System.out.println("Which DevelopeCard do you want to enable(0=none)?\n");

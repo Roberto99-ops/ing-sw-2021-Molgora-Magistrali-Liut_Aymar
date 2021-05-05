@@ -46,7 +46,7 @@
       "pv": 3,
       "inputskill": "G",
       "number": 4,
-      "skill": "AdditionalStorageSkill"
+      "skill": "StorageSkill"
 
     },
     {
@@ -56,7 +56,7 @@
       "pv": 3,
       "inputskill": "P",
       "number": 5,
-      "skill": "AdditionalStorageSkill"
+      "skill": "StorageSkill"
 
     },
     {
@@ -66,7 +66,7 @@
       "pv": 3,
       "inputskill": "B",
       "number": 6,
-      "skill": "AdditionalStorageSkill"
+      "skill": "StorageSkill"
 
     },
     {
@@ -76,7 +76,7 @@
       "pv": 3,
       "inputskill": "Y",
       "number": 7,
-      "skill": "AdditionalStorageSkill"
+      "skill": "StorageSkill"
 
     },
     {
@@ -86,7 +86,7 @@
       "pv": 5,
       "inputskill": "P",
       "number": 8,
-      "skill": "ConvertWhiteMarbleSkill"
+      "skill": "WhiteMarbSkil"
 
     },
     {
@@ -96,7 +96,7 @@
       "pv": 5,
       "inputskill": "B",
       "number": 9,
-      "skill": "ConvertWhiteMarbleSkill"
+      "skill": "WhiteMarbSkil"
 
     },
     {
@@ -106,7 +106,7 @@
       "pv": 5,
       "inputskill": "G",
       "number": 10,
-      "skill": "ConvertWhiteMarbleSkill"
+      "skill": "WhiteMarbSkil"
 
     },
     {
@@ -116,7 +116,7 @@
       "pv": 5,
       "inputskill": "Y",
       "number": 11,
-      "skill": "ConvertWhiteMarbleSkill"
+      "skill": "WhiteMarbSkil"
 
     },
     {
@@ -126,7 +126,7 @@
       "pv": 4,
       "inputskill": "B",
       "number": 12,
-      "skill": "AdditionalProductionSkill"
+      "skill": "Prod.Skill"
 
     },
     {
@@ -136,7 +136,7 @@
       "pv": 4,
       "inputskill": "P",
       "number": 13,
-      "skill": "AdditionalProductionSkill"
+      "skill": "Prod.Skill"
 
     },
     {
@@ -146,7 +146,7 @@
       "pv": 4,
       "inputskill": "G",
       "number": 14,
-      "skill": "AdditionalProductionSkill"
+      "skill": "Prod.Skill"
 
     },
     {
@@ -156,7 +156,7 @@
       "pv": 4,
       "inputskill": "Y",
       "number": 15,
-      "skill": "AdditionalProductionSkill"
+      "skill": "Prod.Skill"
 
     }
   ]

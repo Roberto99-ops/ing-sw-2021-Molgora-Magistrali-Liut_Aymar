@@ -141,8 +141,8 @@ public class Turn {
         product.setVector(game.getMarket().doMarket(RoworCol, number));
 
         for (int i = 0; i < this.actualplayer.getLeadercards().getStructure().size(); i++)
-            if (this.actualplayer.getLeadercards().getStructure().get(i).getSkill() == "ConvertWhiteMarbleSkill")
-                product = this.actualplayer.getLeadercards().getStructure().get(i).ConvertWhiteMarbleSkill(product);
+            if (this.actualplayer.getLeadercards().getStructure().get(i).getSkill() == "WhiteMarbSkil")
+                product = this.actualplayer.getLeadercards().getStructure().get(i).WhiteMarbleSkill(product);
 
         return product;
     }

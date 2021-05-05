@@ -130,7 +130,7 @@ public class LeaderCard{
      * this skill activate the additional storage layer by specifying the type of resource it can contain
      * @param player: player that get the additional layer
      */
-    public void AdditionalStorageSkill(Player player)
+    public void StorageSkill(Player player)
     {
         player.getStorage().setTypeExtrapanel(this.inputskill);
     }
@@ -141,7 +141,7 @@ public class LeaderCard{
      * @param row: is the row of the market containing marbles
      * @return: the "new" row, where white marbles are substituted by marbles of the given color
      */
-    public ResourceStructure ConvertWhiteMarbleSkill(ResourceStructure row)
+    public ResourceStructure WhiteMarbleSkill(ResourceStructure row)
     {
         while(row.getVector().contains('W'))
         {
@@ -159,7 +159,7 @@ public class LeaderCard{
      * it uses the (0,1,2) logic defined into the player.checkresources method to check where the resources are.
      * @param player: is the player who wants to do a production
      */
-    public void AdditionalProductionSkill(Player player) throws IOException {
+    public void ProductionSkill(Player player) throws IOException {
 
         char resourcechosen;
         ResourceStructure resource = new ResourceStructure();
