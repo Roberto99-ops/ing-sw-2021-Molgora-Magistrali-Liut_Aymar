@@ -92,6 +92,7 @@ public class Game {
         System.out.println("Do you want to play alone(A) or against other players(B)?");
         if ((scan.nextLine()) == "A") {
             SingleGame.main();
+            return;
         } else if ((scan.nextLine()) == "B") {
             game.Shuffle();
         } // aggiunta di errore nel caso in cui il carattero scelto non sia uno proposto
