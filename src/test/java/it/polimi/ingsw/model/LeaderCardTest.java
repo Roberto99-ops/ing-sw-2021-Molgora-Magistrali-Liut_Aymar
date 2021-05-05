@@ -62,7 +62,7 @@ public class LeaderCardTest {
         LeaderCard card = new LeaderCard();
         card.setCard(4);
 
-        card.AdditionalStorageSkill(player);
+        card.StorageSkill(player);
 
         assertEquals('G', player.getStorage().getTypeExtrapanel());
     }
@@ -87,7 +87,7 @@ public class LeaderCardTest {
         row.AddResource(1, 'W');
         row.AddResource(1, 'Y');
 
-        row=card.ConvertWhiteMarbleSkill(row);
+        row=card.WhiteMarbleSkill(row);
 
         ResourceStructure newrow = new ResourceStructure();
         newrow.AddResource(1, 'B');

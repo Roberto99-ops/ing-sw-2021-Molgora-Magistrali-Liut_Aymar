@@ -15,9 +15,9 @@ public class PlayerboardTest {
         Player player = new Player();
         LeaderCard card1 = new LeaderCard();
         LeaderCard card2 = new LeaderCard();
-        card1.setCard(0);
+        card1.setCard(10);
         player.getLeadercards().getStructure().add(card1);
-        card2.setCard(6);
+        card2.setCard(15);
         player.getLeadercards().getStructure().add(card2);
         Playerboard playerboard = new Playerboard(player);
         playerboard.Print();

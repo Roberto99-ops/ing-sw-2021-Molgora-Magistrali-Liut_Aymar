@@ -9,6 +9,7 @@ import it.polimi.ingsw.model.Player;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.ArrayList;
 
 /**
  * this class draw the playerboard
@@ -268,14 +269,24 @@ public class Playerboard {
         for (int i = 1; i < MAX_VERT_SIZE; i++)
             leadercard[i][MAX_HORIZ_SIZE-1] = color + "|" + Color.RESET;
 
-        leadercard=putString("cardLevel:", leadercard, 1, 2);
-        leadercard=putString("PV:", leadercard, 3, 2);
-        if(card.getPriceC().size()!=0)
-            leadercard=putString("priceC:", leadercard, 5, 2);
-        else
-            leadercard=putString("priceR:", leadercard, 5, 2);
-        leadercard=putString("skill:", leadercard, 7, 2);
-        leadercard=putString("inputskill:", leadercard, 9, 2);
+        leadercard=putString("cardLevel: " + card.getCardLevel(), leadercard, 1, 1);
+        leadercard=putString("PV: " + card.getPv(), leadercard, 3, 1);
+        if(card.getPriceC().size()!=0) {
+            leadercard = putString("priceC:", leadercard, 5, 1);
+            leadercard = converSymbols(card.getPriceC(), leadercard, 5, 8);
+        }
+        else {
+            leadercard = putString("priceR:", leadercard, 5, 1);
+            converSymbols(card.getPriceR().getVector(), leadercard, 5, 8);
+        }
+        leadercard=putString("skill: " , leadercard, 7, 1);
+        leadercard=putString(card.getSkill() , leadercard, 8, 1);
+
+        leadercard=putString("inputskill:", leadercard, 10, 1);
+        ArrayList<Character> input = new ArrayList<>();
+        input.add(card.getInputskill());
+        converSymbols(input, leadercard, 10, 12);
+
         return leadercard;
     }
 
@@ -291,6 +302,43 @@ public class Playerboard {
     {
         returned[row][column] = string;
         for (int i = 1; i < string.length(); i++) returned[row][column+i] = "";
+        return returned;
+    }
+
+
+    /**
+     * generate a string containg a "ball" of the same colour of the colour of the resource for each resource.
+     * then put this string into the card and resize the card.
+     * @param resources: resources to convert into balls
+     * @param returned: matrix modified (it is the card)
+     * @param row: row where put the simbols
+     * @param column: column where put the simbols
+     * @return
+     */
+    private String[][] converSymbols(ArrayList<Character> resources, String[][] returned, int row, int column)
+    {
+        String simbols = new String();
+        for (int i = 0; i < resources.size(); i++) {
+            switch (resources.get(i)) {
+                case 'B':
+                    simbols += Color.BLUE.getEscape() + Simbol.PALLINO;
+                    break;
+                case 'Y':
+                    simbols += Color.YELLOW.getEscape() + Simbol.PALLINO;
+                    break;
+                case 'P':
+                    simbols += Color.PURPLE.getEscape() + Simbol.PALLINO;
+                    break;
+                case 'G':
+                    simbols += Color.GRAY.getEscape() + Simbol.PALLINO;
+                    break;
+            }
+        }
+
+        returned[row][column] = simbols;
+
+        for (int i = 1; i < resources.size(); i++) returned[row][column+i] = "";
+
         return returned;
     }
 
