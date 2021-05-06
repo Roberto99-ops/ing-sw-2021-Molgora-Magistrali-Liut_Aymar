@@ -11,6 +11,8 @@ public class SingleGame extends Game {
     private static Market market;
     private static int VR_SG=0;
     private static ActionStructure actionStructure = new ActionStructure();
+    private Player winner = new Player();
+
     //private static int timer_VR_SG=0;   non utile perchè Lorenzo non guadagna punti se si trova in area Vatican Report
 
     public static ArrayList<Player> getPlayers() {
@@ -66,6 +68,11 @@ public class SingleGame extends Game {
     }
     */
 
+    /**
+     * This is the main and it is executed at the beginnig of the game, if
+     * the player decides to play alone
+     * @throws Exception
+     */
     public static void  main () throws Exception {
         SingleGame singleGame = new SingleGame();
         Scanner scan = new Scanner(System.in);
@@ -101,36 +108,59 @@ public class SingleGame extends Game {
             turn.setActualplayer(players.get(actualplayer));
             turn.main();
 
-
-            /**DA RIVEDERE E CORREGGERE: INSERIRE I CASI SOLO PER CUI O LORE VINCE O IL PLAYER VINCE**/
-            //4)
             if (singleGame.Endgame(players.get(actualplayer))) {
                 System.out.println("The winner is " + singleGame.Victory());
                 return;
             }
 
             actualplayer++;
-            if(actualplayer>=players.size()) actualplayer=0;
+            if(actualplayer>=2) actualplayer=0;
         }
-
-
-
-
-
-
 
     }
 
-
+    /**
+     * Overrides method 'Endgame' in Game class. It checks if the
+     * requirements to call the end of the game are satisfied and sets
+     * the winner's name.
+     * @param actualplayer: the player playing in that turn (the player or Lorenzo)
+     * @return true if the game ends. False if not.
+     */
     @Override
     public boolean Endgame(Player actualplayer)
     {
-        return true;
+        //riprende i casi descritti in Game.Endgame +
+        //1)
+        if(actualplayer.getTrackposition()>=24) {
+            winner.setName(actualplayer.getName());
+            return true; //vince o Lorenzo o tu
+        }
+
+        //2)
+        if(actualplayer.getDevelopementquantity()>=7) {
+            winner.setName(players.get(0).getName());
+            return true; //vinci tu
+        }
+        // considero il caso in cui una colonna di carte non è più disponibile (vince Lorenzo)
+        //3)
+        if ((developedecks[0]==null&&developedecks[4]==null&&developedecks[8]==null)||(developedecks[1]==null&&developedecks[5]==null&&developedecks[9]==null)||
+                (developedecks[2]==null&&developedecks[6]==null&&developedecks[10]==null)||(developedecks[3]==null&&developedecks[7]==null&&developedecks[11]==null)){
+            winner.setName("Lorenzo il Magnifico");
+            return true;
+        }
+        return false;
+
     }
 
+
+    //volendo questo override potremmo toglierlo
+    /**
+     * Overrides method 'Victory' in Game class. It gets the winner's name
+     * @return the winner's name
+     */
     @Override
     public String Victory()
     {
-        return "prova";
+        return winner.getName();
     }
 }
