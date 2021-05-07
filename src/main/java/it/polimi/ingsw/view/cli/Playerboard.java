@@ -3,9 +3,7 @@ package it.polimi.ingsw.view.cli;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import it.polimi.ingsw.model.DevelopeDecks;
-import it.polimi.ingsw.model.LeaderCard;
-import it.polimi.ingsw.model.Player;
+import it.polimi.ingsw.model.*;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -14,17 +12,17 @@ import java.util.ArrayList;
 /**
  * this class draw the playerboard
  */
-public class Playerboard {
+public class Playerboard extends PaintCards{
     private static final int VERT_SIZE = 45;
     private static final int HORIZ_SIZE = 150;  // posso farlo di 150?
 
     private String[][] playerboard = new String[VERT_SIZE][HORIZ_SIZE];
-    
+
     Playerboard(Player player) throws FileNotFoundException {
         Perimeter();
         FaithTrack();
         Storage();
-        Strongbox();
+        Strongbox(player.getStrongBox().getStructure());
         LeaderSpace(player);
         Developementspace();
     }
@@ -88,7 +86,7 @@ public class Playerboard {
     }
 
     /**
-     * this class is called by the faithtrack class, it draw inside the faith track space
+     * this class is called by the faithtrack class, it draws inside the faith track space
      * the properly faith track
      * @param LeftHighCorner_VERT = is a number that defines the vertical position of them cell's right corner
      * @param LeftHighCorner_HORIZ = is a number that defines the horizontal position of them cell's right corner
@@ -168,7 +166,7 @@ public class Playerboard {
     /**
      * it draws the strongbox space inside the playerboard
      */
-    private void Strongbox()
+    private void Strongbox(ResourceStructure box)
     {
         int MAX_VERT_SIZE = VERT_SIZE/4;
         int MAX_HORIZ_SIZE = HORIZ_SIZE/4;
@@ -190,7 +188,17 @@ public class Playerboard {
         for (int i = 1; i < MAX_VERT_SIZE; i++)
             strongbox[i][MAX_HORIZ_SIZE-1] = color + "|" + Color.RESET;
 
+        //here it draws the resources
+        //!!!!it deletes all the resources in the strongbox
+        for(int j=1; box.size()>0; j++) {
+            ArrayList<Character> resources = new ArrayList<>();
+            for (int i = 0; box.size()>0 && i < MAX_HORIZ_SIZE-2; i++) {
+                resources.add((Character)box.get(0));
+                box.remove(0);
+            }
 
+            convertSymbols(resources, strongbox, j, 1);
+        }
 
         for (int i = 0; i < MAX_VERT_SIZE; i++)
             for (int j = 0; j < MAX_HORIZ_SIZE; j++)
@@ -234,7 +242,6 @@ public class Playerboard {
             }
 
 
-
         int initialVert=14;
         int initialHoriz=HORIZ_SIZE/4+2;
         for (int i = 0; i < MAX_VERT_SIZE; i++)
@@ -244,106 +251,9 @@ public class Playerboard {
             }
     }
 
-    /**
-     * draw the leadercards inside the leadercards space
-     * @param card: card to draw
-     * @return
-     */
-    private String[][] DrawLeadercard(LeaderCard card)
-    {
-        int MAX_VERT_SIZE = (VERT_SIZE-13-8)/2;
-        int MAX_HORIZ_SIZE = 17-2;
-        Color color = Color.BACKGROUND_PURPLE;
-        String[][] leadercard = new String[MAX_VERT_SIZE][MAX_HORIZ_SIZE];
-        for (int i = 0; i < MAX_VERT_SIZE; i++)
-            for (int j = 0; j < MAX_HORIZ_SIZE; j++)
-                leadercard[i][j]=color + " " + Color.RESET;
-
-        for (int i = 1; i < MAX_HORIZ_SIZE-1; i++)
-            leadercard[0][i] = color + "_" + Color.RESET;
-        for (int i = 1; i < MAX_HORIZ_SIZE-1; i++)
-            leadercard[MAX_VERT_SIZE-1][i] = color + "_" + Color.RESET;
-
-        for (int i = 1; i < MAX_VERT_SIZE; i++)
-            leadercard[i][0] = color + "|" + Color.RESET;
-        for (int i = 1; i < MAX_VERT_SIZE; i++)
-            leadercard[i][MAX_HORIZ_SIZE-1] = color + "|" + Color.RESET;
-
-        leadercard=putString("cardLevel: " + card.getCardLevel(), leadercard, 1, 1);
-        leadercard=putString("PV: " + card.getPv(), leadercard, 3, 1);
-        if(card.getPriceC().size()!=0) {
-            leadercard = putString("priceC:", leadercard, 5, 1);
-            leadercard = converSymbols(card.getPriceC(), leadercard, 5, 8);
-        }
-        else {
-            leadercard = putString("priceR:", leadercard, 5, 1);
-            converSymbols(card.getPriceR().getVector(), leadercard, 5, 8);
-        }
-        leadercard=putString("skill: " , leadercard, 7, 1);
-        leadercard=putString(card.getSkill() , leadercard, 8, 1);
-
-        leadercard=putString("inputskill:", leadercard, 10, 1);
-        ArrayList<Character> input = new ArrayList<>();
-        input.add(card.getInputskill());
-        converSymbols(input, leadercard, 10, 12);
-
-        return leadercard;
-    }
 
     /**
-     * put a given string inside a given string matrix
-     * @param string: string tu out inside
-     * @param returned: matrix modified
-     * @param row: position where put the string
-     * @param column: position where put the string
-     * @return
-     */
-    private String[][] putString(String string, String[][] returned, int row, int column)
-    {
-        returned[row][column] = string;
-        for (int i = 1; i < string.length(); i++) returned[row][column+i] = "";
-        return returned;
-    }
-
-
-    /**
-     * generate a string containg a "ball" of the same colour of the colour of the resource for each resource.
-     * then put this string into the card and resize the card.
-     * @param resources: resources to convert into balls
-     * @param returned: matrix modified (it is the card)
-     * @param row: row where put the simbols
-     * @param column: column where put the simbols
-     * @return
-     */
-    private String[][] converSymbols(ArrayList<Character> resources, String[][] returned, int row, int column)
-    {
-        String simbols = new String();
-        for (int i = 0; i < resources.size(); i++) {
-            switch (resources.get(i)) {
-                case 'B':
-                    simbols += Color.BLUE.getEscape() + Simbol.PALLINO;
-                    break;
-                case 'Y':
-                    simbols += Color.YELLOW.getEscape() + Simbol.PALLINO;
-                    break;
-                case 'P':
-                    simbols += Color.PURPLE.getEscape() + Simbol.PALLINO;
-                    break;
-                case 'G':
-                    simbols += Color.GRAY.getEscape() + Simbol.PALLINO;
-                    break;
-            }
-        }
-
-        returned[row][column] = simbols;
-
-        for (int i = 1; i < resources.size(); i++) returned[row][column+i] = "";
-
-        return returned;
-    }
-
-    /**
-     * it daws the developementspace inside the playerboard
+     * it draws the developementspace inside the playerboard
      */
     private void Developementspace()
     {

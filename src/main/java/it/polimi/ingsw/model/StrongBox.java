@@ -2,7 +2,7 @@ package it.polimi.ingsw.model;
 
 public class StrongBox {
 
-    private ResourceStructure structure;
+    private ResourceStructure structure = new ResourceStructure();
     private int TotalResources;
 
     /**
@@ -89,16 +89,6 @@ public class StrongBox {
             }
     }
 
-
-    /**
-     * just returns the structure
-     */
-
-    //metodo che restituisce proprio la struttura.
-
-    public ResourceStructure getStrongBox () {
-        return structure;
-    }
 
     /**
      * it returns true if the number of resources in input are inside the structure
