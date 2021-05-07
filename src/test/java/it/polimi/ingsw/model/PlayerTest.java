@@ -3,6 +3,7 @@ package it.polimi.ingsw.model;
 import org.junit.Test;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
@@ -56,6 +57,22 @@ public class PlayerTest {
 
     @Test
     public void removeResource() {
+        Player player = new Player();
+        player.getStorage().add('W');
+        player.getStorage().add('B');    //sicuro sia così?
+        player.getStorage().add('Y');
+        player.getStorage().add('G');
+        player.removeResource('B');
+
+        ArrayList<Character> list = new ArrayList<>();
+        list.add('W');
+        list.add('Y');
+        list.add('G');
+        for (int i = 0; i < list.size(); i++) assertEquals(list.get(i), player.getStorage().get(i));
+
+        player.removeResource('B');
+        for (int i = 0; i < list.size(); i++) assertEquals(list.get(i), player.getStorage().get(i));
+
     }
 
     @Test

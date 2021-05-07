@@ -188,7 +188,7 @@ public class Player {
      */
     public void removeResource(char resource) {
         int i;
-        for (i=this.storage.size()-1; i>=-1 ;i--) {
+        for (i=this.storage.size()-1; i>-1 ;i--) {
             //mi sposto nella struttura finchè non ottengo indice della risorsa che voglio eliminare
             if (resource==(char)this.storage.get(i) || i==-1){
                 break;
