@@ -80,6 +80,13 @@ public class Player {
     public int getDevelopementquantity() {
         return developementquantity;
     }
+    /**
+     * Adds 1 when the player buys a new DevelopementCard
+     */
+    public void increaseDevelopQuantity() { this.developementquantity = developementquantity+1; }
+    public void setDevelopementquantity(int developementquantity) {
+        this.developementquantity = developementquantity;
+    }
 
 
     //FaithTrack
@@ -89,10 +96,7 @@ public class Player {
         this.FTposition = FTposition + 1;
     }
 
-    /**
-     * Adds 1 when the player buys a new DevelopementCard
-     */
-    public void increaseDevelopQuantity() { this.developementquantity = developementquantity+1; }
+
 
     /**
      * Checks if the quantity of needed resources are available in the storage and/or in the strongbox
