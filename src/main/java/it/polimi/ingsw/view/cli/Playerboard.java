@@ -188,9 +188,11 @@ public class Playerboard extends PaintCards{
         for (int i = 1; i < MAX_VERT_SIZE; i++)
             strongbox[i][MAX_HORIZ_SIZE-1] = color + "|" + Color.RESET;
 
+        putString("STRONGBOX", strongbox, 1, 15);
+
         //here it draws the resources
         //!!!!it deletes all the resources in the strongbox
-        for(int j=1; box.size()>0; j++) {
+        for(int j=2; box.size()>0; j++) {
             ArrayList<Character> resources = new ArrayList<>();
             for (int i = 0; box.size()>0 && i < MAX_HORIZ_SIZE-2; i++) {
                 resources.add((Character)box.get(0));
