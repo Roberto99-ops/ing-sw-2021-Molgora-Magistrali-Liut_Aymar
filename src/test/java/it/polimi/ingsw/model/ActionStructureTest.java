@@ -19,32 +19,32 @@ public class ActionStructureTest {
     public void pickSignal() throws FileNotFoundException {
         ActionSignal Signal = new ActionSignal();
         //case #1-4: deletes two cards from a Develope Deck
-        ArrayList<DevelopeDecks> developeDecks = new ArrayList<DevelopeDecks>();
-        //sets all 12 decks with three cards
-        for (int i=0; i<12 ; i++){
-            //create a new deck at index 'i'
-            developeDecks.add(i,new DevelopeDecks());
-            for(int c=0; c<4; c++)
-            {
+        //sets all 12 decks with four cards
+
+        for (int n=0; n<12 ;n++) {
+            DevelopeDecks deck = new DevelopeDecks();
+            for (int i = 0; i < 5; i++) {
                 DevelopeCard card = new DevelopeCard();
-                card.setCard(c);
-                developeDecks.get(i).getStructure().add(card);
+                card.setCard(i);
+                deck.getStructure().add(card);
             }
+            //creo un mazzo con 4 carte e lo inserisco dentro l'array di Developedeck
+            Game.setDevelopedecks(deck, n);
         }
-        DevelopeCard card1 = new DevelopeCard();
-        card1= developeDecks.get(2).getStructure().get(2);
+
+        //prendo la prima carta del secondo mazzo di Developedecks
+        DevelopeCard card1 = Game.getDevelopedecks(2).getStructure().get(2);
+        //System.out.println(card1.getColour());
         Signal.Action(1);
-        assertNotEquals(card1, developeDecks.get(2).getStructure().get(0));
+        assertEquals(card1, Game.getDevelopedecks(2).getStructure().get(0));
 
 
-
-/*
         //case #5-6: Lorenzo moves forward by +2
         Lorenzo lore = new Lorenzo();
         Signal.Action(5); //calls Lorenzomoves(2) -> position:2
         assertEquals(2,lore.getNumber());
         //so, Lorenzo can move forward by +1 or +2
-*/
+
     }
 
     /**
