@@ -8,7 +8,7 @@ public class Game {
     public static int lonely;
     private static ArrayList<Player> players;
     private static int n_players;
-    private static DevelopeDecks developedecks[];  //dichiaro tutto static?
+    private static DevelopeDecks[] developedecks = new DevelopeDecks[12];
     private static LeaderDeck leaderdeck;
     private static Market market;
     private static int VR=0;
@@ -23,6 +23,9 @@ public class Game {
     }
     public static Market getMarket() {
         return market;
+    }
+    public static void setDevelopedecks(DevelopeDecks developedecks, int i) {
+        Game.developedecks[i] = developedecks;
     }
 
 
@@ -81,7 +84,6 @@ public class Game {
     public static void main( String[] args ) throws Exception {
         Game game = new Game();
         SingleGame singleGame = new SingleGame();
-        developedecks = new DevelopeDecks[12];
         leaderdeck = new LeaderDeck();
         players = new ArrayList<Player>();
         Turn turn = new Turn();
@@ -92,16 +94,16 @@ public class Game {
         System.out.println("Do you want to play alone(A) or against other players(B)?");
         if ((scan.nextLine()) == "A") {
             SingleGame.main();
-            return;
         } else if ((scan.nextLine()) == "B") {
             game.Shuffle();
+            //3)
+            //players.add()    ????
+
+            setN_players();// mi setta la costante che riguarda il n_partecipanti
+            // questa costante verrà usata quando chiamo VaticanReport
         } // aggiunta di errore nel caso in cui il carattero scelto non sia uno proposto
 
-        //3)
-        //players.add()    ????
 
-        setN_players();// mi setta la costante che riguarda il n_partecipanti
-                       // questa costante verrà usata quando chiamo VaticanReport
 
         while(true) {
             //3)
