@@ -6,7 +6,7 @@ public class SingleGame extends Game {
     //cosa ha:
     private static ArrayList<Player> players=new ArrayList<Player>(); //saranno due: il giocatore e Lorenzo
     private final static int n_players =2;
-    private static DevelopeDecks developedecks[];
+    //private static DevelopeDecks developedecks[];
     private static LeaderDeck leaderdeck;
     private static Market market;
     private static int VR_SG=0;
@@ -27,13 +27,13 @@ public class SingleGame extends Game {
         return n_players;
     }
 
-    public static DevelopeDecks[] getDevelopedecks() {
+    /*public static DevelopeDecks[] getDevelopedecks() {
         return developedecks;
     }
-
-    public static void setDevelopedecks(DevelopeDecks[] developedecks) {
+*/
+    /*public static void setDevelopedecks(DevelopeDecks[] developedecks) {
         SingleGame.developedecks = developedecks;
-    }
+    }*/
 
     public static LeaderDeck getLeaderdeck() {
         return leaderdeck;
@@ -92,8 +92,7 @@ public class SingleGame extends Game {
         //Si inizializza tutto:
         //- i segnalini azione (li mischio)
         ActionStructure.ShuffleSignal();
-        //- i dodici mazzi di Development Cards
-        developedecks = new DevelopeDecks[12];
+        //- i dodici mazzi di Development Cards (li prendo da Game)
         //- i LeaderDeck
         leaderdeck = new LeaderDeck();
 
@@ -143,8 +142,10 @@ public class SingleGame extends Game {
         }
         // considero il caso in cui una colonna di carte non è più disponibile (vince Lorenzo)
         //3)
-        if ((developedecks[0]==null&&developedecks[4]==null&&developedecks[8]==null)||(developedecks[1]==null&&developedecks[5]==null&&developedecks[9]==null)||
-                (developedecks[2]==null&&developedecks[6]==null&&developedecks[10]==null)||(developedecks[3]==null&&developedecks[7]==null&&developedecks[11]==null)){
+        if ((Game.getDevelopedecks(0)==null&&Game.getDevelopedecks(4)==null&&Game.getDevelopedecks(8)==null)||
+                (Game.getDevelopedecks(1)==null&&Game.getDevelopedecks(5)==null&&Game.getDevelopedecks(9)==null)||
+                    (Game.getDevelopedecks(2)==null&&Game.getDevelopedecks(6)==null&&Game.getDevelopedecks(10)==null)||
+                        (Game.getDevelopedecks(3)==null&&Game.getDevelopedecks(7)==null&&Game.getDevelopedecks(11)==null)){
             winner.setName("Lorenzo il Magnifico");
             return true;
         }
