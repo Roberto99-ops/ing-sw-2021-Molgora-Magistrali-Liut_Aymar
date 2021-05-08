@@ -7,6 +7,8 @@ public class Storage extends ArrayList {
     private ResourceStructure extrapanel;
     private char typeExtrapanel= 'Z';  //carattere che per noi significa che il pannello extra non è attivo, non so se si può inzializzare così
 
+    public  ResourceStructure getExtrapanel(){return extrapanel;}
+
     public ResourceStructure getPanel() {
         return panel;
     }
