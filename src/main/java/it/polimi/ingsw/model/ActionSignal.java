@@ -34,7 +34,7 @@ public class ActionSignal {
 
                 i=2; //liv 1 blu
                 while (countRemove<2){
-                    while (((Game.getDevelopedecks(i).getStructure().isEmpty()) && i<=11)){
+                    while (((Game.getDevelopedecks(i).getStructure().isEmpty()) && i<=10)){
                         i+=4; //mi sposto da un mazzo all'altro finchè non ne trovo uno cpn carte
                     }
                     //caso: non ho più carte in nessun mazzo
@@ -52,7 +52,7 @@ public class ActionSignal {
             case 2://verde-2
                 i=3;
                 while (countRemove<2){
-                    while (((Game.getDevelopedecks(i).getStructure().isEmpty()) && i<=11)){
+                    while (((Game.getDevelopedecks(i).getStructure().isEmpty()) && i<11)){
                         i+=4; //mi sposto da un mazzo all'altro finchè non ne trovo uno con carte
                     }
                     //caso: non ho più carte in nessun mazzo
@@ -70,7 +70,7 @@ public class ActionSignal {
             case 3://viola-2
                 i=0;
                 while (countRemove<2){
-                    while (((Game.getDevelopedecks(i).getStructure().isEmpty()) && i<=11)){
+                    while (((Game.getDevelopedecks(i).getStructure().isEmpty()) && i<8)){
                         i+=4; //mi sposto da un mazzo all'altro finchè non ne trovo uno con carte
                     }
                     //caso: non ho più carte in nessun mazzo
@@ -88,7 +88,7 @@ public class ActionSignal {
             case 4://giallo-2
                 i=1;
                 while (countRemove<2){
-                    while (((Game.getDevelopedecks(i).getStructure().isEmpty()) && i<=11)){
+                    while (((Game.getDevelopedecks(i).getStructure().isEmpty()) && i<9)){
                         i+=4; //mi sposto da un mazzo all'altro finchè non ne trovo uno con carte
                     }
                     //caso: non ho più carte in nessun mazzo
