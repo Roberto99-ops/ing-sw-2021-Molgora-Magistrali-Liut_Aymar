@@ -30,10 +30,10 @@ public class Player {
 
     //PV
     private int PV=0;
-    public int getPv() {
+    public  int getPv() {
         return PV;
     }
-    public void setPv(int pv) {
+    public  void setPv(int pv) {
         PV = pv;
     }
 
@@ -68,6 +68,24 @@ public class Player {
     //LeaderCards(2)
     private LeaderDeck leadercards = new LeaderDeck();
     public LeaderDeck getLeadercards() { return leadercards; }
+    private int skill1=0;
+    private int skill2=0;
+
+    public int getSkill1(){
+        return  skill1;
+    }
+
+    public int getSkill2(){
+        return skill2;
+    }
+
+    public void setSkill1(int skill){
+        skill1=skill;
+    }
+
+    public void setSkill2(int skill){
+        skill2=skill;
+    }
 
 
     //carte sviluppo in DevelopementSpace
@@ -91,7 +109,7 @@ public class Player {
 
     //FaithTrack
     private int FTposition=0;
-    public int getTrackposition() { return FTposition; }
+    public  int getTrackposition() { return FTposition; }
     public void increaseTrackposition() {
         this.FTposition = FTposition + 1;
     }
@@ -100,39 +118,60 @@ public class Player {
 
     /**
      * Checks if the quantity of needed resources are available in the storage and/or in the strongbox
-     * @param ResourceStructure : arraylist of needed resources
+     * @param vectorResources : arraylist of needed resources
      * @return a flag
      */
-    public int CheckResources(ArrayList ResourceStructure) {
+    public int CheckResources(ArrayList<Character> vectorResources) {
         //flag per sapere se non possiedo tali risorse (0) o possiedo in storage (1) o in strongbox-storage (2)
         int ableTo = 0;
 
-        //prendo la prima risorsa richiesta
-        int i = ResourceStructure.size() - 1;
+        //la prima risorsa che considero è l'ultima della arraylist (che si suppone ordinato)
+        int i = vectorResources.size() - 1;
         char typeResource;
-        int countNeed = 1;
+        int countNeed = 1; //dato che l'arraylist non sarà vuoto, di sicuro ci vorrà almeno una risorsa del primo tipo che si considera
         while (i >= 0) {
-            typeResource = (char) ResourceStructure.get(i);
-            //conto quanto è richiesto di questa risorsa
-            while ((char) ResourceStructure.get(i) == (char) ResourceStructure.get(i - 1)) {
+            typeResource = vectorResources.get(i);
+            //conto quanto è richiesto di questa risorsa: se la risorsa successiva è == a quella precedente, allora aumento il contatore
+            while (vectorResources.get(i) == vectorResources.get(i - 1)) {
                 countNeed++;
                 i--;
             }
+            //una volta finito di contare le risorse dello stesso tipo
             //confronto quantità richiesta con quantità presente o in storage o in strongbox e storage
             if (countNeed > storage.countTypeS(typeResource) + strongBox.countTypeSB(typeResource)) {
-                ableTo = 0;
+                //risorse insufficienti
                 System.out.println("Not enough resources.");
                 return 0;
 
             } else if (countNeed <= storage.countTypeS(typeResource) + strongBox.countTypeSB(typeResource)) {
-                //ableTo = 2;
+                ableTo = 2;
                 if (countNeed < storage.countTypeS(typeResource)) {
                     ableTo = 1;
                 }
+            }
+            //ricomincio il while
+        }
+        //una volta finito il controllo, dico al giocatore da dove si possono eliminare le risorse
+        if (ableTo == 1) {
+            System.out.println("You have the needed quantity of resources. These will be removed from your storage");
+            //rimuovo tutte le risorse di cui ho bisogno, dallo storage
+            for(i = vectorResources.size() - 1;i>=0 ;i--){
+                removeResource(vectorResources.get(i));
+            }
 
+        } else if (ableTo == 2) {
+            System.out.println("You have the needed quantity of resources. These will be removed from your storage and strongbox");
+            //rimuovo tutte le risorse di cui ho bisogno, dallo storage
+            for(i = vectorResources.size() - 1;i>=0 ;i--) {
+                if (removeResource(vectorResources.get(i))) {
+                    vectorResources.remove(i);//rimuovo l'elemento che viene trovato e rimosso dallo storage
+                }
+            }
+            //ottengo così il vettore aggiornato con le risorse da cercare nello strongbox
+            for(i= vectorResources.size()-1;i>=0;i--){
+                strongBox.getStructure().remove(vectorResources.get(i)); //elimino la risorsa voluta dallo strongbox
             }
         }
-        System.out.println("You have the needed quantity of resources. These will be removed from your storage and/or strongbox");
         return 1;
     }
 
@@ -186,11 +225,16 @@ public class Player {
      * Removes one resource from the storage.
      * @param resource: the resource the player wants to delete
      */
-    public void removeResource(char resource) {
+    public boolean removeResource(char resource) {
         int i;
-        for (i=this.storage.size()-1; i>-1 ;i--) {
+        ArrayList<Character> vector = storage.getPanel();
+        //caso in cui l'abilità del piano aggiuntivo sia abilitata
+        if (leadercards.getStructure().get(0).getSkill().equals("StorageSkill") || leadercards.getStructure().get(1).getSkill().equals("StorageSkill")){
+            vector.addAll(storage.getExtrapanel()); //aggiungo tutti gli elementi nel pannello extra nel vettore fittizio
+        }
+        for (i=vector.size()-1; i>=-1 ;i--) {
             //mi sposto nella struttura finchè non ottengo indice della risorsa che voglio eliminare
-            if (resource==(char)this.storage.get(i) || i==-1){
+            if (resource==vector.get(i) || i==-1){
                 break;
             }
 
@@ -198,10 +242,11 @@ public class Player {
         if (i==-1){
             //caso in cui non c'è la risorsa richiesta da eliminare
             System.out.println("The asked resource is not in the storage.");
-            return ;
+            return false;
         }
         System.out.println("Resource "+storage.get(i)+" has been removed.");
-        this.storage.remove(i);//rimuovo la risorsa i-esima
+        storage.remove(i);//rimuovo la risorsa i-esima
+        return true;
     }
 
     //Similar method is NOT needed in StrongBox since its space is unlimited.
@@ -219,7 +264,11 @@ public class Player {
         */
         //caso in cui il magazzino sia pieno
         if (storage.size() >= 6) {
-            System.out.println("No more space available in Storage. Do you want to delete" + resource + "(A) or something in your storage(B)?");
+            System.out.println("No more space available in Storage.");
+            //la risorsa non può essere aggiunta e allora la elimino
+
+            /* CASO PRECEDENTE (sbagliato)
+            Do you want to delete" + resource + "(A) or something in your storage(B)?
             //il player vede il suo magazzino e sceglie se non aggiungere la char resource oppure se vuole eliminarne
             // qualcuna e quale risorsa eliminare
             if (scan.nextLine().equals("A")) {
@@ -232,6 +281,7 @@ public class Player {
             }
             return;
             //caso in cui il magazzino abbia uno o + spazi vuoti
+             */
         } else {
             int i = 5;
             //controllo se il magazzino contiene la risorsa già da qualche parte
