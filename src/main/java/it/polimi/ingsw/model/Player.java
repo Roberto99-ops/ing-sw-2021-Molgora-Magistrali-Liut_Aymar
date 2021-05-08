@@ -228,7 +228,7 @@ public class Player {
     public boolean removeResource(char resource) {
         int i;
         ArrayList<Character> vector = storage.getPanel();
-        //caso in cui l'abilità del piano aggiuntivo sia abilitata
+        //caso in cui l'abilità del piano aggiuntivo sia abilitata:
         if (leadercards.getStructure().get(0).getSkill().equals("StorageSkill") || leadercards.getStructure().get(1).getSkill().equals("StorageSkill")){
             vector.addAll(storage.getExtrapanel()); //aggiungo tutti gli elementi nel pannello extra nel vettore fittizio
         }
@@ -244,8 +244,15 @@ public class Player {
             System.out.println("The asked resource is not in the storage.");
             return false;
         }
-        System.out.println("Resource "+storage.get(i)+" has been removed.");
-        storage.remove(i);//rimuovo la risorsa i-esima
+        System.out.println("Resource "+vector.get(i)+" has been removed.");
+        if (i > 5) {
+            //l'elemento si trova nel pannello extra
+            i=i-5;
+            storage.getExtrapanel().remove(i);
+        } else {
+            //l'elemento si trova nello storage normale
+            storage.remove(i);//rimuovo la risorsa i-esima
+        }
         return true;
     }
 
