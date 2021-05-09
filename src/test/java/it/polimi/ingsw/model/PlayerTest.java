@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Random;
 
 import static org.junit.Assert.*;
 
@@ -78,9 +79,24 @@ public class PlayerTest {
 
     @Test
     public void addResourceStorage() {
+
     }
 
     @Test
     public void addResourceStrongBox() {
+        Player player = new Player();
+        StrongBox strongbox = new StrongBox();
+
+        Character[] resources = {'P', 'Y', 'G', 'B'};
+        Random mixer = new Random();
+        for (int i = 0; i < 10; i++) {
+            int mix = mixer.nextInt(4);
+            strongbox.getStructure().add(resources[mix]);
+            player.addResourceStrongBox(resources[mix]);
+        }
+
+        for (int i = 0; i < strongbox.getStructure().size(); i++)
+            assertEquals(strongbox.getStructure().get(i), player.getStrongBox().getStructure().get(i));
+
     }
 }
