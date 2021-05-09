@@ -14,12 +14,6 @@ public class SingleGameTest {
 
 
     @Test
-    public void main() throws Exception {
-        SingleGame.main();
-
-    }
-
-    @Test
     public void endgame() throws FileNotFoundException {
 
         SingleGame singleGame = new SingleGame();
