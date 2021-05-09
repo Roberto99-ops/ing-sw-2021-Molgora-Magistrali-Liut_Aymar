@@ -110,6 +110,7 @@ public class Player {
     //FaithTrack
     private int FTposition=0;
     public  int getTrackposition() { return FTposition; }
+    public void setTrackposition(int num) { FTposition=num; }
     public void increaseTrackposition() {
         this.FTposition = FTposition + 1;
     }
