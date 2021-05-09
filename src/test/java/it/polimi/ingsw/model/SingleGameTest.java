@@ -12,13 +12,6 @@ public class SingleGameTest {
     Player plyr = new Player();
     Player Lore;
 
-
-    @Test
-    public void main() throws Exception {
-        SingleGame.main();
-
-    }
-
     @Test
     public void endgame() throws FileNotFoundException {
 
