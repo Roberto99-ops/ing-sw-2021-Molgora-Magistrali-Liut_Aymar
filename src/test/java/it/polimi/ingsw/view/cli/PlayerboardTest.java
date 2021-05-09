@@ -26,7 +26,7 @@ public class PlayerboardTest {
 
         Character[] resources = {'P', 'Y', 'G', 'B'};
         Random mixer = new Random();
-        for (int i = 0; i < 290; i++) {
+        for (int i = 0; i < 300; i++) {
             int mix = mixer.nextInt(4);
             player.addResourceStrongBox(resources[mix]);
         }
