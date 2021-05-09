@@ -19,38 +19,12 @@ public class Playerboard extends PaintCards{
     private String[][] playerboard = new String[VERT_SIZE][HORIZ_SIZE];
 
     Playerboard(Player player) throws FileNotFoundException {
-        Perimeter();
+        Perimeter(playerboard, VERT_SIZE, HORIZ_SIZE, Color.BLACK);
         FaithTrack();
         Storage();
         Strongbox(player.getStrongBox().getStructure());
         LeaderSpace(player);
         Developementspace();
-    }
-
-    /**
-     * this class draw the perimeter of the playerboard
-     */
-    private void Perimeter()
-    {
-        Color color = Color.BLACK;
-        for (int i = 0; i < VERT_SIZE; i++)
-            for (int j = 0; j < HORIZ_SIZE; j++)
-                playerboard[i][j] = color + " " + Color.RESET;
-
-        playerboard[0][0] = color + "╔" + Color.RESET;
-        playerboard[0][HORIZ_SIZE-1] = color + "╗" + Color.RESET;
-        playerboard[VERT_SIZE-1][0] = color + "╚" + Color.RESET;
-        playerboard[VERT_SIZE-1][HORIZ_SIZE-1] = color + "╝" + Color.RESET;
-
-        for (int i = 1; i < HORIZ_SIZE-1; i++)
-            playerboard[0][i] = color + "═" + Color.RESET;
-        for (int i = 1; i < HORIZ_SIZE-1; i++)
-            playerboard[VERT_SIZE-1][i] = color + "═" + Color.RESET;
-
-        for (int i = 1; i < VERT_SIZE-1; i++)
-            playerboard[i][0] = color + "║" + Color.RESET;
-        for (int i = 1; i < VERT_SIZE-1; i++)
-            playerboard[i][HORIZ_SIZE-1] = color + "║" + Color.RESET;
     }
 
     /**
@@ -275,16 +249,8 @@ public class Playerboard extends PaintCards{
                 playerboard[initialVert+i][initialHoriz+j]=developementspace[i][j];
     }
 
-
-    /**
-     * it prints on the screen all the playeboard
-     */
     public void Print()
     {
-        for (int i = 0; i < VERT_SIZE; i++) {
-            for (int j = 0; j < HORIZ_SIZE; j++)
-                System.out.print(playerboard[i][j]);
-            System.out.print("\n");
-        }
+        Print(playerboard, VERT_SIZE, HORIZ_SIZE);
     }
 }
