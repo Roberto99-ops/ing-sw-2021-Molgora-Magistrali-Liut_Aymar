@@ -11,7 +11,16 @@ public class SingleGame extends Game {
     private static Market market;
     private static int VR_SG=0;
     private static ActionStructure actionStructure = new ActionStructure();
-    private Player winner = new Player();
+
+    public static Player getWinner() {
+        return winner;
+    }
+
+    public static void setWinner(Player winner) {
+        SingleGame.winner = winner;
+    }
+
+    private static Player winner = new Player();
 
     //private static int timer_VR_SG=0;   non utile perchè Lorenzo non guadagna punti se si trova in area Vatican Report
 
@@ -137,15 +146,15 @@ public class SingleGame extends Game {
 
         //2)
         if(actualplayer.getDevelopementquantity()>=7) {
-            winner.setName(players.get(0).getName());
+            winner.setName(actualplayer.getName());
             return true; //vinci tu
         }
         // considero il caso in cui una colonna di carte non è più disponibile (vince Lorenzo)
         //3)
-        if ((Game.getDevelopedecks(0)==null&&Game.getDevelopedecks(4)==null&&Game.getDevelopedecks(8)==null)||
-                (Game.getDevelopedecks(1)==null&&Game.getDevelopedecks(5)==null&&Game.getDevelopedecks(9)==null)||
-                    (Game.getDevelopedecks(2)==null&&Game.getDevelopedecks(6)==null&&Game.getDevelopedecks(10)==null)||
-                        (Game.getDevelopedecks(3)==null&&Game.getDevelopedecks(7)==null&&Game.getDevelopedecks(11)==null)){
+        if ((Game.getDevelopedecks(0).getStructure().isEmpty() && Game.getDevelopedecks(4).getStructure().isEmpty() && Game.getDevelopedecks(8).getStructure().isEmpty())||
+                (Game.getDevelopedecks(1).getStructure().isEmpty() && Game.getDevelopedecks(5).getStructure().isEmpty() && Game.getDevelopedecks(9).getStructure().isEmpty())||
+                    (Game.getDevelopedecks(2).getStructure().isEmpty() && Game.getDevelopedecks(6).getStructure().isEmpty() && Game.getDevelopedecks(10).getStructure().isEmpty())||
+                        (Game.getDevelopedecks(3).getStructure().isEmpty() && Game.getDevelopedecks(7).getStructure().isEmpty() && Game.getDevelopedecks(11).getStructure().isEmpty())){
             winner.setName("Lorenzo il Magnifico");
             return true;
         }
