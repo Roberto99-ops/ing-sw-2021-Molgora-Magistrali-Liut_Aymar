@@ -5,10 +5,11 @@ import it.polimi.ingsw.model.Market;
 public class MarketView extends Utility{
     private static final int VERT_SIZE = 30;
     private static final int HORIZ_SIZE = 80;
-    private String[][] market = new String[VERT_SIZE][HORIZ_SIZE];
+    private String[][] market;
 
     MarketView(Market gamemarket)
     {
+        market = new String[VERT_SIZE][HORIZ_SIZE];
         Perimeter(market, VERT_SIZE, HORIZ_SIZE, Color.BLACK);
         Space();
         drawMarbles(gamemarket);

@@ -16,9 +16,10 @@ public class Playerboard extends PaintCards{
     private static final int VERT_SIZE = 45;
     private static final int HORIZ_SIZE = 150;  // posso farlo di 150?
 
-    private String[][] playerboard = new String[VERT_SIZE][HORIZ_SIZE];
+    private String[][] playerboard;
 
     Playerboard(Player player) throws FileNotFoundException {
+        playerboard = new String[VERT_SIZE][HORIZ_SIZE];
         Perimeter(playerboard, VERT_SIZE, HORIZ_SIZE, Color.BLACK);
         FaithTrack();
         Storage();
