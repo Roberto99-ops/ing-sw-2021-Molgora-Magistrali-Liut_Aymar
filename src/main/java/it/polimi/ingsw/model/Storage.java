@@ -1,11 +1,15 @@
 package it.polimi.ingsw.model;
 import java.util.ArrayList;
 
-public class Storage extends ArrayList {
+public class Storage extends ArrayList<Character> {
 
-    private ResourceStructure panel; // arraylist di 6 spazi di base
-    private ResourceStructure extrapanel;
+    private ResourceStructure panel = new ResourceStructure(); // arraylist di 6 spazi di base
+    private ResourceStructure extrapanel = new ResourceStructure();
     private char typeExtrapanel= 'Z';  //carattere che per noi significa che il pannello extra non è attivo, non so se si può inzializzare così
+
+    public void setPanel(ResourceStructure panel) {
+        this.panel = panel;
+    }
 
     public  ResourceStructure getExtrapanel(){return extrapanel;}
 
@@ -31,24 +35,22 @@ public class Storage extends ArrayList {
 
     public int countTypeS(char neededRes) {
         int i=0, counterS=0;
-        if (panel.contains(neededRes)) {
-            while(i!=panel.size()) {
-                if(neededRes==(char)panel.get(i))
+        if (panel.getVector().contains(neededRes)) {
+            while(i!=panel.getVector().size()) {
+                if(neededRes== panel.getVector().get(i))
                     counterS++;
                 i++;
             }
             i=0;
-            if (extrapanel.contains(neededRes)){
-                while(i!=extrapanel.size()){
-                    if(neededRes==(char)extrapanel.get(i))
+            if (extrapanel.getVector().contains(neededRes)){
+                while(i!=extrapanel.getVector().size()){
+                    if(neededRes==extrapanel.getVector().get(i))
                         counterS++;
                     i++;
                 }
             }
-            return counterS;
-        } else {
-            return 0;
         }
+        return counterS;
     }
 
     //metodo che restituisce la quantità totale di risorse nel magazzino
@@ -67,7 +69,7 @@ public class Storage extends ArrayList {
         for (t = 0; t < 6; t++) { //controllo che la lettera #t...
             counter = 0;
             for (i = 0; i < panel.size(); i++) { //...sia presente dentro l'array
-                if (types[t] == (char) panel.get(i)) {
+                if (types[t] ==  panel.getVector().get(i)) {
                     counter++;
                 }
             }
