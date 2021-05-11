@@ -2,9 +2,32 @@ package it.polimi.ingsw.model;
 
 public class DevelopementSpace {
 
-    private DevelopeDecks minideck1;
-    private DevelopeDecks minideck2;
-    private DevelopeDecks minideck3;
+    private DevelopeDecks minideck1 = new DevelopeDecks();
+    private DevelopeDecks minideck2 = new DevelopeDecks();
+    private DevelopeDecks minideck3 = new DevelopeDecks();
+    public void setMinideck1(DevelopeDecks minideck1) {
+        this.minideck1 = minideck1;
+    }
+
+    public void setMinideck2(DevelopeDecks minideck2) {
+        this.minideck2 = minideck2;
+    }
+
+    public void setMinideck3(DevelopeDecks minideck3) {
+        this.minideck3 = minideck3;
+    }
+
+    public DevelopeDecks getMinideck1() {
+        return minideck1;
+    }
+
+    public DevelopeDecks getMinideck2() {
+        return minideck2;
+    }
+
+    public DevelopeDecks getMinideck3() {
+        return minideck3;
+    }
 
     /**
      * Gets the first card on top of a specific minideck
