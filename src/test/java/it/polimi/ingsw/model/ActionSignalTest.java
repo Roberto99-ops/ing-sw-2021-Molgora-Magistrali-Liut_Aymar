@@ -8,6 +8,9 @@ import static org.junit.Assert.*;
 
 public class ActionSignalTest {
 
+    /**
+     * Tests if the number of a specific ActionSignal has been gotten correctly
+     */
     @Test
     public void getNumber() {
         ActionSignal actionSignal= new ActionSignal();
@@ -16,6 +19,10 @@ public class ActionSignalTest {
         assertEquals(actionSignal.getNumber(),num);
     }
 
+    /**
+     * Tests if the action linked to a specific ActionSignal is called and executed correctly
+     * @throws FileNotFoundException: excepection thrown when a Developecard is not set correctly
+     */
     @Test
     public void action() throws FileNotFoundException {
         ActionSignal actionSignal= new ActionSignal();

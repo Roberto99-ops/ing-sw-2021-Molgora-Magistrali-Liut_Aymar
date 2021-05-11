@@ -13,6 +13,11 @@ public class SingleGameTest {
     Player Lore;
 
 
+    /**
+     * Tests if SingleGame class checks correctly the situation of every player on its turn and if it calls the end of
+     * the game
+     * @throws FileNotFoundException
+     */
     @Test
     public void endgame() throws FileNotFoundException {
 
@@ -71,6 +76,9 @@ public class SingleGameTest {
 
     }
 
+    /**
+     * Tests if the winner is set correctly
+     */
     @Test
     public void victory() {
         SingleGame singleGame = new SingleGame();

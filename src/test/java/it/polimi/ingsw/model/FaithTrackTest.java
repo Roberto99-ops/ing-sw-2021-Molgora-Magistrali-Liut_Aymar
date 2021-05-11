@@ -8,6 +8,9 @@ import static org.junit.Assert.*;
 
 public class FaithTrackTest {
 
+    /**
+     * Tests if the VaticanReport is called and executed correctly in different situations
+     */
     @Test
     public void vaticanReport() {
         Player player1 = new Player();

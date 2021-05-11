@@ -6,6 +6,9 @@ import static org.junit.Assert.*;
 
 public class LorenzoTest {
 
+    /**
+     * Tests if the number given to Lorenzo (character) is the one we gave to him
+     */
     @Test
     public void setNumber() {
         int number=0;
@@ -14,6 +17,11 @@ public class LorenzoTest {
         assertNotEquals(0,Lorenzo.getNumber());
     }
 
+    /**
+     * Tests if Lorenzo (character) moves correctly when one of these actions is called.
+     * It also checks if ActionStructure has been shuffled when the player picks ActionSignal #7-> Lorenzo moves forward
+     * by 1 + shuffle ActionStructure
+     */
     @Test
     public void lorenzomoves() {
         Lorenzo lorenzo = new Lorenzo();
