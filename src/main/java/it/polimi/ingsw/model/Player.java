@@ -132,31 +132,35 @@ public class Player {
         //flag per sapere se non possiedo tali risorse (0) o possiedo in storage (1) o in strongbox-storage (2)
         int ableTo = 0;
 
-
-
         //la prima risorsa che considero è l'ultima della arraylist (che si suppone ordinato)
         int i = vectorResources.size()-1;
         char typeResource;
+
         while (i >= 0) {
+            int countType=0;
             //vedo qual'è la risorsa i-esima che sto considerando
             typeResource = vectorResources.get(i);
-            //conto quanto c'è bisogno di una determinata risorsa
-            int countNeed = (int) storage.getPanel().getVector().stream().count();
+            //conto quanto c'è bisogno di una determinata risorsa nel vettore dato
+            while ( i >= 0) {
+                if (vectorResources.get(i) == typeResource) countType++;
+                i--;
+            }
+            //int countType = (int) storage.getPanel().getVector().stream().count();
             //una volta finito di contare le risorse dello stesso tipo
             //confronto quantità richiesta con quantità presente o in storage o in strongbox e storage
-            if (countNeed > storage.countTypeS(typeResource) + strongBox.countTypeSB(typeResource)) {
+            if (countType > storage.countTypeS(typeResource) + strongBox.countTypeSB(typeResource)) {
                 //risorse insufficienti
                 System.out.println("Not enough resources.");
                 return 0;
 
-            } else if (countNeed <= storage.countTypeS(typeResource) + strongBox.countTypeSB(typeResource)) {
+            } else if (countType <= storage.countTypeS(typeResource) + strongBox.countTypeSB(typeResource)) {
                 ableTo = 2;
-                if (countNeed <= storage.countTypeS(typeResource)) {
+                if (countType <= storage.countTypeS(typeResource)) {
                     ableTo = 1;
                 }
             }
             //ricomincio il while
-            i = i - countNeed;
+            i = i - countType;
         }
         if (ableTo == 1) {
             System.out.println("You have the needed quantity of resources. These will be removed from your storage");
@@ -233,33 +237,39 @@ public class Player {
      */
     public boolean removeResource(char resource) {
         int i;
-        ArrayList<Character> vector = storage.getPanel();
-        //caso in cui l'abilità del piano aggiuntivo sia abilitata:
-        if (leadercards.getStructure().get(0).getSkill().equals("StorageSkill") || leadercards.getStructure().get(1).getSkill().equals("StorageSkill")){
-            vector.addAll(storage.getExtrapanel()); //aggiungo tutti gli elementi nel pannello extra nel vettore fittizio
+        ArrayList<Character> vector = new ArrayList<Character>();
+        for (int c=0;c<6;c++){
+            vector.add(storage.getPanel().getVector().get(c));
         }
-        for (i=vector.size()-1; i>=-1 ;i--) {
-            //mi sposto nella struttura finchè non ottengo indice della risorsa che voglio eliminare
-            if (resource==vector.get(i) || i==-1){
-                break;
+        for (int c=0; c<2; c++){
+            vector.add(storage.getExtrapanel().getVector().get(c));
+        }
+        //caso in cui l'abilità del piano aggiuntivo sia abilitata:
+        /*if (leadercards.getStructure().get(0).getSkill().equals("StorageSkill") || leadercards.getStructure().get(1).getSkill().equals("StorageSkill")){
+            vector.addAll(storage.getExtrapanel().getVector()); //aggiungo tutti gli elementi nel pannello extra nel vettore fittizio
+        }*/
+        if (vector.contains(resource)) {
+            for (i = vector.size() - 1; i >= 0; i--) {
+                //mi sposto nella struttura finchè non ottengo indice della risorsa che voglio eliminare
+                if (resource == vector.get(i)) {
+                    break;
+                }
             }
-
-        } //salto con l'indice i che mi indica la posizione
-        if (i==-1){
+            System.out.println("Resource "+vector.get(i)+" has been removed.");
+            if (i > 5) {
+                //l'elemento si trova nel pannello extra
+                i=i-5;
+                storage.getExtrapanel().getVector().set(i,'N');
+            } else {
+                //l'elemento si trova nello storage normale
+                storage.getPanel().getVector().set(i,'N');//rimuovo la risorsa i-esima
+            }
+            return true;
+        } else {
             //caso in cui non c'è la risorsa richiesta da eliminare
             System.out.println("The asked resource is not in the storage.");
             return false;
         }
-        System.out.println("Resource "+vector.get(i)+" has been removed.");
-        if (i > 5) {
-            //l'elemento si trova nel pannello extra
-            i=i-5;
-            storage.getExtrapanel().remove(i);
-        } else {
-            //l'elemento si trova nello storage normale
-            storage.remove(i);//rimuovo la risorsa i-esima
-        }
-        return true;
     }
 
     //Similar method is NOT needed in StrongBox since its space is unlimited.
