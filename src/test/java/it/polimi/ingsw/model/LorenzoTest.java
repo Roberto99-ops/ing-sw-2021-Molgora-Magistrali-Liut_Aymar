@@ -11,10 +11,12 @@ public class LorenzoTest {
      */
     @Test
     public void setNumber() {
+        Lorenzo lorenzo = new Lorenzo();
         int number=0;
         number++;
-        Lorenzo.setNumber(number);
-        assertNotEquals(0,Lorenzo.getNumber());
+        lorenzo.setNumber(number);
+        assertNotEquals(0,lorenzo.getNumber());
+        lorenzo.setNumber(0);
     }
 
     /**
