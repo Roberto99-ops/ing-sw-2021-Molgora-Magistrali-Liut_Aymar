@@ -62,7 +62,9 @@ public class ActionStructureTest {
 
         //case #5-6: Lorenzo moves forward by +2
         Lorenzo lore = new Lorenzo();
+        System.out.println(lore.getNumber());
         Signal.Action(5); //calls Lorenzomoves(2) -> position:2
+        System.out.println(lore.getNumber());
         assertEquals(2,lore.getNumber());
         //so, Lorenzo can move forward by +1 or +2
 
@@ -74,6 +76,8 @@ public class ActionStructureTest {
         assertEquals(3, lore.getNumber());
         assertNotEquals(arr, actionStructure.getStructure()); //con il segnalino #7, ho anche lo shuffle della pila di segnalini
         assertEquals(0, actionStructure.getAS_Counter());
+
+        lore.setNumber(0);
     }
 
     /**

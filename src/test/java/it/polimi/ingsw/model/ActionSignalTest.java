@@ -80,5 +80,6 @@ public class ActionSignalTest {
         assertEquals(3, lore.getNumber());
         assertNotEquals(arr, actionStructure.getStructure()); //con il segnalino #7, ho anche lo shuffle della pila di segnalini
         assertEquals(0, actionStructure.getAS_Counter());
+        lore.setNumber(0);
     }
 }
