@@ -26,9 +26,30 @@ public class PlayerTest {
         assertEquals(2,player.getDevelopementquantity());
     }
 
+    //FATTO
     @Test
     public void checkResources() {
-
+        Player player = new Player();
+        //inizializzo il suo storage (panel e extrapanel)
+        player.getStorage().getPanel().getVector().add('G');
+        player.getStorage().getPanel().getVector().add('B');
+        player.getStorage().getPanel().getVector().add('B');
+        player.getStorage().getPanel().getVector().add('Y');
+        player.getStorage().getPanel().getVector().add('Y');
+        player.getStorage().getPanel().getVector().add('Y');
+        player.getStorage().getExtrapanel().getVector().add('G');
+        player.getStorage().getExtrapanel().getVector().add('G');
+        //inizializzo strongbox
+        player.getStrongBox().getStructure().add('N');
+        //mi viene dato un arraylist di risorse desiderate
+        ArrayList<Character> vector = new ArrayList<Character>();
+        vector.add('Y');
+        vector.add('B');
+        vector.add('B');
+        assertEquals(1,player.CheckResources(vector));
+        assertTrue(player.getStorage().getPanel().getVector().get(1)=='N');
+        assertTrue(player.getStorage().getPanel().getVector().get(2)=='N');
+        assertTrue(player.getStorage().getPanel().getVector().get(5)=='N');
 
     }
 
@@ -67,10 +88,28 @@ public class PlayerTest {
         assertEquals(TopCards.getStructure(), player.getTopCardsOnBoard().getStructure());
     }
 
-    //DA FARE
+    //FATTO
     @Test
     public void removeResource(){
         Player player = new Player();
+        player.getStorage().setTypeExtrapanel('G');
+        //inizializzo lo storage (quindi panel ed extrapanel)
+        //considero panel ed extrapanel con elementi
+        player.getStorage().getPanel().getVector().add('G');
+        player.getStorage().getPanel().getVector().add('B');
+        player.getStorage().getPanel().getVector().add('B');
+        player.getStorage().getPanel().getVector().add('Y');
+        player.getStorage().getPanel().getVector().add('Y');
+        player.getStorage().getPanel().getVector().add('Y');
+        player.getStorage().getExtrapanel().getVector().add('G');
+        player.getStorage().getExtrapanel().getVector().add('G');
+        //scelgo la risorsa da eliminare
+        char resource = 'B';
+        assertTrue(player.removeResource(resource));
+        assertTrue(player.getStorage().getPanel().getVector().get(2)=='N');
+
+
+/* (PRECEDENTE-SBAGLIATO)
         DevelopementSpace DSpace = new DevelopementSpace();
         ResourceStructure storage = new ResourceStructure();
         player.getStorage().setinStorage('W', 0);
@@ -87,7 +126,7 @@ public class PlayerTest {
 
         player.removeResource('B');
         for (int i = 0; i < list.size(); i++) assertEquals(list.get(i), player.getStorage().get(i));
-
+*/
     }
 
     //FATTO
