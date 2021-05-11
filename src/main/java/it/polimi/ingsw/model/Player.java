@@ -269,13 +269,13 @@ public class Player {
      * @param resource : the resource the player will put in Storage
      */
     public boolean addResourceStorage(char resource) {
-
         /*IDEA: scelgo una risorsa e questa , che si trova dentro il resourcestructure, va inserita dentro il magazzino
         (se viene dal mercato)
         */
-        //caso in cui il magazzino sia pieno
+        //caso in cui il magazzino sia pieno (sia extrapanel sia panel)
         if (storage.countTypeS('N')==0) {
-            System.out.println("No more space available in Storage."+storage.countTypeS('N'));
+            System.out.println("No more space available in Storage.");
+            return false;
             //la risorsa non può essere aggiunta e allora la elimino
 
             /* CASO PRECEDENTE (sbagliato)
@@ -295,18 +295,33 @@ public class Player {
              */
         } else {
             int i = 5;
-            //controllo se il magazzino contiene la risorsa già da qualche parte
-            //se c'è già:
+            int countExtraN = 0;
+            for (int c = 1; c >= 0; c--) {
+                if (storage.getExtrapanel().getVector().get(c) == 'N') countExtraN++;
+            }
+            //controllo se extrapanel sia dello stesso tipo e se ha degli spazi liberi
+            if (storage.getTypeExtrapanel() == resource && countExtraN > 0) {
+                if (storage.getExtrapanel().getVector().get(0) == 'N') {
+                    storage.getExtrapanel().getVector().set(0, resource);
+                } else if (storage.getExtrapanel().getVector().get(1) == 'N') {
+                    storage.getExtrapanel().getVector().set(1, resource);
+                    return true;
+                }
+            } else if (storage.getTypeExtrapanel()!=resource && countExtraN== storage.countTypeS(resource)){
+                System.out.println("No more space available in Storage.");
+
+            }
+            //controllo panel:
+            //-se c'è già una presente vedo se aggiungerne un'altra
             if (storage.getPanel().getVector().contains(resource)) {
-                while ( storage.getPanel().getVector().get(i) != resource && i >= 0) {
+                while (storage.getPanel().getVector().get(i) != resource && i >= 0) {
                     i--;
                 }
-                if (i == 0 || i == 2 || i == 5 ) {
+                if (i == 0 || i == 2 || i == 5) {
                     // i==0 : una risorsa di quel tipo presente in cima -> elimino la risorsa
                     // i==2 : il secondo piano ha risorse di quel tipo -> elimino la risorsa
                     // i==5 : il terzo piano ha risorse di quel tipo -> elimino la risorsa
                     System.out.println(resource + " deleted. It already exists");
-                    return true;
                 }
                 // in tutti gli altri casi in cui un posto nei piani è libero
                 switch (i) {
@@ -321,34 +336,23 @@ public class Player {
                         break;
                 }
                 return true;
+            } else {
+                //se la risorsa non c'è:
+                if (storage.getPanel().getVector().get(0) == 'N') {
+                    i = 0;
+                } else if ((storage.getPanel().getVector().get(1) == 'N') && (storage.getPanel().getVector().get(2) == 'N')) {
+                    i = 1;
+                } else if ((storage.getPanel().getVector().get(3) == 'N') && (storage.getPanel().getVector().get(4) == 'N') && (storage.getPanel().getVector().get(5) == 'N')) {
+                    i = 3;
+                }
+
+                storage.getPanel().getVector().set(i, resource); //aggiungo la risorsa nel primo piano (i==0) o nel secondo (i==1) o nel
+                // terzo (i==3)
+                return true;
             }
-            //se la risorsa non c'è:
-            if (storage.getPanel().getVector().get(0) == 'N'){
-                i=0;
-            }else if((storage.getPanel().getVector().get(1) == 'N')&&(storage.getPanel().getVector().get(2) == 'N')){
-                i=1;
-            }else if ((storage.getPanel().getVector().get(3) == 'N')&&(storage.getPanel().getVector().get(4) == 'N')&&(storage.getPanel().getVector().get(5) == 'N')){
-                i=3;
-            }
+            //conto il numero di N in extrapanel
 
-
-
-
-          /*
-                || ((storage.getPanel().getVector().get(1) == 'N')&&(storage.getPanel().getVector().get(0) == 'N'))||
-                    (storage.getPanel().getVector().get(0) == 'N'&&storage.getPanel().getVector().get(0) == 'N'&&storage.getPanel().getVector().get(0) == 'N'))
-            while ((storage.getPanel().getVector().get(i) != 'N' || !(i == 0 || i == 1 || i == 3))&& i<6 ) {
-                //if (i == 0 || i == 1 || i == 3) {
-                // break;
-                //}
-                i++;
-            }*/
-
-            storage.getPanel().getVector().set(i, resource); //aggiungo la risorsa nel primo piano (i==0) o nel secondo (i==1) o nel
-            // terzo (i==3)
-            return true;
         }
-        return false;
     }
 
     /**
