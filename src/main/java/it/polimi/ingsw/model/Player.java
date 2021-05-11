@@ -2,6 +2,8 @@ package it.polimi.ingsw.model;
 import java.lang.String;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Collections;
+
 
 public class Player {
     //cose che appartengono solo al player:
@@ -89,10 +91,14 @@ public class Player {
 
 
     //carte sviluppo in DevelopementSpace
-    private DevelopeCard minideck1Top;
-    private DevelopeCard minideck2Top;
-    private DevelopeCard minideck3Top;
-    DevelopeDecks TopCardsOnBoard = new DevelopeDecks();
+    private DevelopeCard minideck1Top=new DevelopeCard();
+    private DevelopeCard minideck2Top=new DevelopeCard();
+    private DevelopeCard minideck3Top=new DevelopeCard();
+    private DevelopeDecks TopCardsOnBoard = new DevelopeDecks();
+
+    public DevelopeDecks getTopCardsOnBoard() {
+        return TopCardsOnBoard;
+    }
 
     private int developementquantity=0;
     public int getDevelopementquantity() {
@@ -126,17 +132,16 @@ public class Player {
         //flag per sapere se non possiedo tali risorse (0) o possiedo in storage (1) o in strongbox-storage (2)
         int ableTo = 0;
 
+
+
         //la prima risorsa che considero è l'ultima della arraylist (che si suppone ordinato)
-        int i = vectorResources.size() - 1;
+        int i = vectorResources.size()-1;
         char typeResource;
-        int countNeed = 1; //dato che l'arraylist non sarà vuoto, di sicuro ci vorrà almeno una risorsa del primo tipo che si considera
         while (i >= 0) {
+            //vedo qual'è la risorsa i-esima che sto considerando
             typeResource = vectorResources.get(i);
-            //conto quanto è richiesto di questa risorsa: se la risorsa successiva è == a quella precedente, allora aumento il contatore
-            while (vectorResources.get(i) == vectorResources.get(i - 1)) {
-                countNeed++;
-                i--;
-            }
+            //conto quanto c'è bisogno di una determinata risorsa
+            int countNeed = (int) storage.getPanel().getVector().stream().count();
             //una volta finito di contare le risorse dello stesso tipo
             //confronto quantità richiesta con quantità presente o in storage o in strongbox e storage
             if (countNeed > storage.countTypeS(typeResource) + strongBox.countTypeSB(typeResource)) {
@@ -146,13 +151,13 @@ public class Player {
 
             } else if (countNeed <= storage.countTypeS(typeResource) + strongBox.countTypeSB(typeResource)) {
                 ableTo = 2;
-                if (countNeed < storage.countTypeS(typeResource)) {
+                if (countNeed <= storage.countTypeS(typeResource)) {
                     ableTo = 1;
                 }
             }
             //ricomincio il while
+            i = i - countNeed;
         }
-        //una volta finito il controllo, dico al giocatore da dove si possono eliminare le risorse
         if (ableTo == 1) {
             System.out.println("You have the needed quantity of resources. These will be removed from your storage");
             //rimuovo tutte le risorse di cui ho bisogno, dallo storage
@@ -185,11 +190,11 @@ public class Player {
     //della prima fila in quanto la produzioni si fanno solo
     //con le carte in cima ai mazzetti
     public DevelopeDecks getDevelopecards() throws Exception {
-        minideck1Top=this.DSpace.getCard(1);
+        minideck1Top=DSpace.getMinideck1().getStructure().get(0);
         TopCardsOnBoard.getStructure().add(minideck1Top);
-        minideck2Top=this.DSpace.getCard(2);
+        minideck2Top=DSpace.getMinideck2().getStructure().get(0);
         TopCardsOnBoard.getStructure().add(minideck2Top);
-        minideck3Top=this.DSpace.getCard(3);
+        minideck3Top=DSpace.getMinideck3().getStructure().get(0);
         TopCardsOnBoard.getStructure().add(minideck3Top);
         //ho creato un arraylist con le carte in cima ai minideck
         return TopCardsOnBoard ;//ritorna l'arraylist;
@@ -263,16 +268,14 @@ public class Player {
      * Adds a single specified resource inside the Storage
      * @param resource : the resource the player will put in Storage
      */
-    public void addResourceStorage(char resource) {
-        char choice;
-        Scanner scan = new Scanner(System.in);
+    public boolean addResourceStorage(char resource) {
 
         /*IDEA: scelgo una risorsa e questa , che si trova dentro il resourcestructure, va inserita dentro il magazzino
         (se viene dal mercato)
         */
         //caso in cui il magazzino sia pieno
-        if (storage.size() >= 6) {
-            System.out.println("No more space available in Storage.");
+        if (storage.countTypeS('N')==0) {
+            System.out.println("No more space available in Storage."+storage.countTypeS('N'));
             //la risorsa non può essere aggiunta e allora la elimino
 
             /* CASO PRECEDENTE (sbagliato)
@@ -294,42 +297,58 @@ public class Player {
             int i = 5;
             //controllo se il magazzino contiene la risorsa già da qualche parte
             //se c'è già:
-            if (storage.getPanel().contains(resource)) {
-                while ((char) storage.getPanel().get(i) != resource && i >= 0) {
+            if (storage.getPanel().getVector().contains(resource)) {
+                while ( storage.getPanel().getVector().get(i) != resource && i >= 0) {
                     i--;
                 }
-                if (i == 0 || i == 2 || i == 5) {
+                if (i == 0 || i == 2 || i == 5 ) {
                     // i==0 : una risorsa di quel tipo presente in cima -> elimino la risorsa
                     // i==2 : il secondo piano ha risorse di quel tipo -> elimino la risorsa
                     // i==5 : il terzo piano ha risorse di quel tipo -> elimino la risorsa
                     System.out.println(resource + " deleted. It already exists");
-                    return;
+                    return true;
                 }
                 // in tutti gli altri casi in cui un posto nei piani è libero
                 switch (i) {
                     case 1:
-                        storage.getPanel().add(2, resource); //posto i==2 ora occupato
+                        storage.getPanel().getVector().set(2, resource); //posto i==2 ora occupato
                         break;
                     case 3:
-                        storage.getPanel().add(4, resource); //posto i==4 ora occupato
+                        storage.getPanel().getVector().set(4, resource); //posto i==4 ora occupato
                         break;
                     case 4:
-                        storage.getPanel().add(5, resource); //posto i==2 ora occupato
+                        storage.getPanel().getVector().set(5, resource); //posto i==5 ora occupato
                         break;
                 }
-                return;
+                return true;
             }
             //se la risorsa non c'è:
-            while (storage.getPanel().get(i) != null && i >= 0) {
-                if (i == 0 || i == 1 || i == 3) {
-                    break;
-                }
-                i--;
+            if (storage.getPanel().getVector().get(0) == 'N'){
+                i=0;
+            }else if((storage.getPanel().getVector().get(1) == 'N')&&(storage.getPanel().getVector().get(2) == 'N')){
+                i=1;
+            }else if ((storage.getPanel().getVector().get(3) == 'N')&&(storage.getPanel().getVector().get(4) == 'N')&&(storage.getPanel().getVector().get(5) == 'N')){
+                i=3;
             }
-            storage.getPanel().add(i, resource); //aggiungo la risorsa nel primo piano (i==0) o nel secondo (i==1) o nel
+
+
+
+
+          /*
+                || ((storage.getPanel().getVector().get(1) == 'N')&&(storage.getPanel().getVector().get(0) == 'N'))||
+                    (storage.getPanel().getVector().get(0) == 'N'&&storage.getPanel().getVector().get(0) == 'N'&&storage.getPanel().getVector().get(0) == 'N'))
+            while ((storage.getPanel().getVector().get(i) != 'N' || !(i == 0 || i == 1 || i == 3))&& i<6 ) {
+                //if (i == 0 || i == 1 || i == 3) {
+                // break;
+                //}
+                i++;
+            }*/
+
+            storage.getPanel().getVector().set(i, resource); //aggiungo la risorsa nel primo piano (i==0) o nel secondo (i==1) o nel
             // terzo (i==3)
+            return true;
         }
-        return;
+        return false;
     }
 
     /**
