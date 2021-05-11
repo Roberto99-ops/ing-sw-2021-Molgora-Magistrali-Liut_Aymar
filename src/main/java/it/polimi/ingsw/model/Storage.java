@@ -26,7 +26,7 @@ public class Storage extends ArrayList<Character> {
     }
 
     /**
-     * Counts the amount of one kind of resource
+     * Counts the amount of one kind of resource in panel and extrapanel
      * @param neededRes: type of resource the player needs to pay/activate something
      * @return counterS: the amount of that resource in Storage
      */
@@ -35,21 +35,20 @@ public class Storage extends ArrayList<Character> {
 
     public int countTypeS(char neededRes) {
         int i=0, counterS=0;
-        if (panel.getVector().contains(neededRes)) {
             while(i!=panel.getVector().size()) {
-                if(neededRes== panel.getVector().get(i))
+                if (neededRes == panel.getVector().get(i))
                     counterS++;
                 i++;
             }
+
             i=0;
-            if (extrapanel.getVector().contains(neededRes)){
                 while(i!=extrapanel.getVector().size()){
                     if(neededRes==extrapanel.getVector().get(i))
                         counterS++;
                     i++;
                 }
-            }
-        }
+
+
         return counterS;
     }
 
