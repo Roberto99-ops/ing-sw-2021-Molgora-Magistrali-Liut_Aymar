@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class LeaderCard{
+public class LeaderCard {
 
     private ResourceStructure priceR;
     private ArrayList<Character> priceC;  //this price is in DevelopeCard matching the color
