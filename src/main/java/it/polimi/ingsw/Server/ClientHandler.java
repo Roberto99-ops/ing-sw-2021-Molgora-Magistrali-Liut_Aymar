@@ -65,10 +65,10 @@ public class ClientHandler implements Runnable {
      */
     private void handleClientConnection() throws IOException {
         try {
-            while (true) {//da commentare
+            while (!client.isClosed()) {
                 /* read commands from the client, process them, and send replies */
                 Object next = input.readObject();
-                CommandMsg command = (CommandMsg) next;
+                CommandMsg command = (CommandMsg) next;//qui o pattern state o classi o json
                 command.processMessage(this);
             }
         } catch (ClassNotFoundException | ClassCastException e) {
