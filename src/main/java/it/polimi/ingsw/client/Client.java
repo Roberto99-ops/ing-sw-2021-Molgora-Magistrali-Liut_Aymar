@@ -35,11 +35,12 @@ public class Client {
             System.out.println("protocol violation");
         }
 
+        ObjectOutputStream output = new ObjectOutputStream(server.getOutputStream());
         String something;
         System.out.print("Write your name: ");
         something=scan.nextLine();
-        ObjectOutputStream output = new ObjectOutputStream(server.getOutputStream());
-        output.writeUTF(something);
+        output.writeByte(1);
+        output.writeUTF("rick");
         output.flush();
         //output.writeBytes(something);
         while(true){

@@ -3,9 +3,17 @@ import java.util.ArrayList;
 
 public class Storage extends ArrayList<Character> {
 
-    private ResourceStructure panel = new ResourceStructure(); // arraylist di 6 spazi di base
-    private ResourceStructure extrapanel = new ResourceStructure();
+    private static int LungPanel = 6;
+    private static int LungExtrapanel = 2;
+    private ResourceStructure panel; // arraylist di 6 spazi di base
+    private ResourceStructure extrapanel;
     private char typeExtrapanel= 'Z';  //carattere che per noi significa che il pannello extra non è attivo, non so se si può inzializzare così
+
+    Storage()
+    {
+        panel = new ResourceStructure();
+        extrapanel = new ResourceStructure();
+    }
 
     public void setPanel(ResourceStructure panel) {
         this.panel = panel;
