@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Server;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Random;
@@ -9,10 +10,10 @@ public class Server {
     private static Random random = new Random();
 
     //non deve essere costante la porta
-    //il numero di porta viene generato casualmente tra 0 e 7
-    public static int SOCKET_PORT = random.nextInt(8);
+    //il numero di porta viene generato casualmente tra 2000 e 4000
+    public static int SOCKET_PORT = 1111;//random.nextInt(8);
 
-    public static void main (){
+    public static void main(String[] args){
         //apro la porta # ...
         ServerSocket socket;
         try {
@@ -33,6 +34,7 @@ public class Server {
                 ClientHandler clientHandler = new ClientHandler(client);
                 //bisogna creare un nuovo thread che si occupi di gestire il clienthandler
                 Thread thread = new Thread(clientHandler, "server_" + client.getInetAddress());
+                thread.start();
             } catch (IOException e) {
                 System.out.println("connection dropped");
             }

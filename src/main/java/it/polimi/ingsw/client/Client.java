@@ -2,6 +2,7 @@ package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.Server.Server;
 
+import javax.swing.*;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -9,11 +10,11 @@ import java.util.Scanner;
 import java.io.IOException;
 
 public class Client {
-    public void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Scanner scan = new Scanner(System.in);
 
         System.out.println("Insert IP address of Server ");
-        String ip=scan.nextLine();
+        String ip = scan.nextLine();
 
         /*Per aprire connessione col server*/
         Socket server;
@@ -34,9 +35,24 @@ public class Client {
             System.out.println("protocol violation");
         }
 
-        try {
+        String something;
+        System.out.print("Write your name: ");
+        something=scan.nextLine();
+        ObjectOutputStream output = new ObjectOutputStream(server.getOutputStream());
+        output.writeUTF(something);
+        output.flush();
+        //output.writeBytes(something);
+        while(true){
+            System.out.print("Write something: ");
+            something = scan.nextLine();
+            output.writeBytes(something);
+            //System.out.println(something);
+        }//while(something!="close");
+
+        /*try {
             server.close();
-        } catch (IOException e) { }
+        } catch (IOException e) { }*/
+
     }
 
 

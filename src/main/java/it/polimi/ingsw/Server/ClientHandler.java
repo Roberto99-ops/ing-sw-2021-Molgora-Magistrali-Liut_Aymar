@@ -65,13 +65,16 @@ public class ClientHandler implements Runnable {
      */
     private void handleClientConnection() throws IOException {
         try {
+            String name = input.readUTF();//.readObject();
+            System.out.println("Name of the client is: " + name);
             while (!client.isClosed()) {
                 /* read commands from the client, process them, and send replies */
-                Object next = input.readObject();
-                CommandMsg command = (CommandMsg) next;//qui o pattern state o classi o json
-                command.processMessage(this);
+                String next = input.readUTF();
+                //CommandMsg command = (CommandMsg) next;//qui o pattern state o classi o json
+                //command.processMessage(this);
+                System.out.println("Client " + name + " sent " + next);
             }
-        } catch (ClassNotFoundException | ClassCastException e) {
+        } catch (ClassCastException e) {
             System.out.println("invalid stream from client");
         }
     }
