@@ -3,6 +3,7 @@ package it.polimi.ingsw.client;
 import it.polimi.ingsw.Server.Server;
 
 import javax.swing.*;
+import java.io.DataOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -35,24 +36,26 @@ public class Client {
             System.out.println("protocol violation");
         }*/
 
-        ObjectOutputStream output = new ObjectOutputStream(server.getOutputStream());
+        DataOutputStream output = new DataOutputStream(server.getOutputStream());
         String something;
         System.out.print("Write your name: ");
-        something=scan.nextLine();
-        output.writeByte(1);
-        output.writeUTF("rick");
+        something = scan.nextLine();
+        output.writeUTF(something);
         output.flush();
-        //output.writeBytes(something);
-        while(true){
+
+        while(!server.isClosed()){
             System.out.print("Write something: ");
             something = scan.nextLine();
-            output.writeBytes(something);
-            //System.out.println(something);
-        }//while(something!="close");
-
-        /*try {
-            server.close();
-        } catch (IOException e) { }*/
+            output.writeUTF(something);
+            output.flush();
+            if(something.equals("close")) {
+                try {
+                    output.close();
+                    server.close();
+                } catch (IOException e) {
+                }
+            }
+        }
 
     }
 

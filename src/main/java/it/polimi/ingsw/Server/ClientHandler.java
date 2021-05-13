@@ -4,6 +4,7 @@ import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.Server.messages.AnswerMsg;
 import it.polimi.ingsw.Server.messages.CommandMsg;
 
+import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -13,7 +14,7 @@ public class ClientHandler implements Runnable {
 
     private Socket client;
     private ObjectOutputStream output;
-    private ObjectInputStream input;
+    private DataInputStream input;
     private Game game;
 
 
@@ -36,13 +37,13 @@ public class ClientHandler implements Runnable {
     public void run() {
         try {
             output = new ObjectOutputStream(client.getOutputStream());
-            input = new ObjectInputStream(client.getInputStream());
+            input = new DataInputStream(client.getInputStream());
         } catch (IOException e) {
             System.out.println("could not open connection to " + client.getInetAddress());
             return;
         }
 
-        System.out.println("Connected to " + client.getInetAddress());
+        System.out.println("Connected to: " + client.getInetAddress());
 
         try {
             handleClientConnection();
@@ -67,12 +68,14 @@ public class ClientHandler implements Runnable {
         try {
             String name = input.readUTF();//.readObject();
             System.out.println("Name of the client is: " + name);
+
             while (!client.isClosed()) {
                 /* read commands from the client, process them, and send replies */
                 String next = input.readUTF();
                 //CommandMsg command = (CommandMsg) next;//qui o pattern state o classi o json
                 //command.processMessage(this);
                 System.out.println("Client " + name + " sent " + next);
+                if(next == "close") input.close();
             }
         } catch (ClassCastException e) {
             System.out.println("invalid stream from client");
