@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.Random;
 
 public class Server {
@@ -13,7 +14,9 @@ public class Server {
     //il numero di porta viene generato casualmente tra 2000 e 4000
     public static int SOCKET_PORT = 1111;//random.nextInt(8);
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws UnknownHostException {
+        System.out.println(InetAddress.getLocalHost());
+
         //apro la porta # ...
         ServerSocket socket;
         try {

@@ -26,14 +26,14 @@ public class Client {
         }
         System.out.println("Connected");
 
-        try {
+        /*try {
             ObjectOutputStream output = new ObjectOutputStream(server.getOutputStream());
             ObjectInputStream input = new ObjectInputStream(server.getInputStream());
         } catch (IOException e) {
             System.out.println("server has died");
         } catch (ClassCastException e) {
             System.out.println("protocol violation");
-        }
+        }*/
 
         ObjectOutputStream output = new ObjectOutputStream(server.getOutputStream());
         String something;
