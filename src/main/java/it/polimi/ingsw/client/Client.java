@@ -3,12 +3,9 @@ package it.polimi.ingsw.client;
 import it.polimi.ingsw.Server.Server;
 
 import javax.swing.*;
-import java.io.DataOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
-import java.io.IOException;
 
 public class Client {
     public static void main(String[] args) throws IOException {
@@ -36,17 +33,17 @@ public class Client {
             System.out.println("protocol violation");
         }*/
 
-        DataOutputStream output = new DataOutputStream(server.getOutputStream());
+        PrintWriter output = new PrintWriter(server.getOutputStream());
         String something;
         System.out.print("Write your name: ");
         something = scan.nextLine();
-        output.writeUTF(something);
+        output.println(something);
         output.flush();
 
         while(!server.isClosed()){
             System.out.print("Write something: ");
             something = scan.nextLine();
-            output.writeUTF(something);
+            output.println(something);
             output.flush();
             if(something.equals("close")) {
                 try {

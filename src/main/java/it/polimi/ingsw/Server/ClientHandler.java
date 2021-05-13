@@ -5,10 +5,9 @@ import it.polimi.ingsw.Server.messages.AnswerMsg;
 import it.polimi.ingsw.Server.messages.CommandMsg;
 
 import java.io.DataInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.Socket;
+import java.util.concurrent.TimeUnit;
 
 public class ClientHandler implements Runnable {
 
@@ -24,17 +23,59 @@ public class ClientHandler implements Runnable {
      *
      * @param client The socket connection to the client.
      */
-    public ClientHandler(Socket client) {
+     ClientHandler(Socket client) {
         this.client = client;
         this.game = new Game();
     }
 
 
-    /**
-     * Connects to the client and runs the event loop.
-     */
-    @Override
-    public void run() {
+
+
+    private void handleClientConnection() throws IOException
+    {
+        System.out.println("Connected to " + client.getInetAddress());
+        //per mandare qualcosa al client
+        PrintWriter outputToClient = new PrintWriter(client.getOutputStream(),true);
+        //per ricevere qualcosa dal client
+        BufferedReader inputFromClient = new BufferedReader(new InputStreamReader(client.getInputStream()));
+
+
+
+        try {
+            while (client.isConnected()) {
+                try {
+
+                    /* read a String from the stream and write an uppercase string in response */
+                    String message = "";
+
+                    message= inputFromClient.readLine();
+                    System.out.println(message);
+                    outputToClient.println("Nice to meet u");
+                    outputToClient.flush();
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                ///* simulate a complex computation*/
+                    //TimeUnit.SECONDS.sleep(10);
+                //} catch (InterruptedException e) { }
+
+
+                /*
+                try {
+                    /* simulate a complex computation
+                    TimeUnit.SECONDS.sleep(10);
+                } catch (InterruptedException e) { }*/
+
+                //output.println(message.toUpperCase());
+            }
+        } catch (ClassCastException e) {
+            System.out.println("invalid stream from client");
+        }
+
+        client.close();
+    }
+    /*
         try {
             output = new ObjectOutputStream(client.getOutputStream());
             input = new DataInputStream(client.getInputStream());
@@ -64,13 +105,14 @@ public class ClientHandler implements Runnable {
      *
      * @throws IOException If a communication error occurs.
      */
+    /*
     private void handleClientConnection() throws IOException {
         try {
             String name = input.readUTF();//.readObject();
             System.out.println("Name of the client is: " + name);
 
             while (!client.isClosed()) {
-                /* read commands from the client, process them, and send replies */
+                /* read commands from the client, process them, and send replies
                 String next = input.readUTF();
                 //CommandMsg command = (CommandMsg) next;//qui o pattern state o classi o json
                 //command.processMessage(this);
@@ -81,7 +123,18 @@ public class ClientHandler implements Runnable {
             System.out.println("invalid stream from client");
         }
     }
-
+*/
+    /**
+     * Connects to the client and runs the event loop.
+     */
+    @Override
+    public void run() {
+        try {
+            handleClientConnection();
+        } catch (IOException e) {
+            System.out.println("client " + client.getInetAddress() + " connection dropped");
+        }
+    }
 
     /**
      * The game instance associated with this client.
