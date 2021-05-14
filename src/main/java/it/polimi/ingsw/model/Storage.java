@@ -6,7 +6,7 @@ import java.util.List;
 public class Storage extends ArrayList<Character> {
 
 
-    private ArrayList <Character> panel = new ArrayList <Character> (List.of('W','W','W','W','W','W')); // arraylist di 6 spazi di base
+    private ArrayList <Character> panel = new ArrayList <Character> (List.of('N','N','N','N','N','N')); // arraylist di 6 spazi di base
     private ResourceStructure extrapanel;
     private char typeExtrapanel= 'Z';  //carattere che per noi significa che il pannello extra non è attivo, non so se si può inzializzare così
 
@@ -78,6 +78,7 @@ public class Storage extends ArrayList<Character> {
      int counterY = 0;
      int counterR = 0;
      int counterG = 0;
+     int counterW = 0;
      int sum = 0;
 
      for (int i = 5; i >= 0; i--) {
@@ -86,6 +87,11 @@ public class Storage extends ArrayList<Character> {
 
              case 'B': {
                  counterB++;
+                 break;
+             }
+
+             case 'W': {
+                 counterW++;
                  break;
              }
 
@@ -116,8 +122,10 @@ public class Storage extends ArrayList<Character> {
      System.out.println( " Y : " + counterY);
      System.out.println( " P : " + counterP);
      System.out.println( " R : " + counterR);
+     System.out.println( " W : " + counterW);
 
-     sum = counterB + counterG + counterR + counterY + counterP;
+
+     sum = counterB + counterG + counterR + counterY + counterP + counterW;
 
      return sum;
  }
@@ -143,10 +151,13 @@ public class Storage extends ArrayList<Character> {
      */
     public void deleteResources (int quantity, Character type) {
         int counter = 0;
-        for (int i = 5; i >= 0; i--) {
+        int i = 5;
+        while (i >= 0 && counter < quantity) {
             if (this.panel.get(i) == type) {
-           this.panel.set(i, 'W');
+           this.panel.set(i, 'N');
+           counter ++;
             }
+            i--;
         }
     }
 
@@ -191,35 +202,35 @@ public class Storage extends ArrayList<Character> {
 
 
             if (   ( this.panel.get(0) != this.panel.get(1) ||
-                        this.panel.get(0) == 'B' ||
-                        this.panel.get(1) == 'B' )
+                        this.panel.get(0) == 'N' ||
+                        this.panel.get(1) == 'N' )
 
                     &&
 
                     ( this.panel.get(1) != this.panel.get(3) ||
-                        this.panel.get(1) == 'B' ||
-                        this.panel.get(3) == 'B')
+                        this.panel.get(1) == 'N' ||
+                        this.panel.get(3) == 'N')
                     &&
 
                     ( this.panel.get(0) != this.panel.get(3) ||
-                        this.panel.get(0) == 'B' ||
-                        this.panel.get(3) == 'B')
+                        this.panel.get(0) == 'N' ||
+                        this.panel.get(3) == 'N')
 
                     &&
 
                     ( this.panel.get(1) == this.panel.get(2) ||
-                        this.panel.get(1) == 'B' ||
-                        this.panel.get(2) == 'B')
+                        this.panel.get(1) == 'N' ||
+                        this.panel.get(2) == 'N')
                     &&
 
                     (this.panel.get(3) == this.panel.get(4) ||
-                        this.panel.get(1) == 'B' ||
-                        this.panel.get(2) == 'B'
+                        this.panel.get(1) == 'N' ||
+                        this.panel.get(2) == 'N'
                     ) &&
 
                     ( this.panel.get(4) == this.panel.get(5) ||
-                    this.panel.get(4) == 'B' ||
-                    this.panel.get(5) == 'B')
+                    this.panel.get(4) == 'N' ||
+                    this.panel.get(5) == 'N')
 
                 ) {
                 return true; }

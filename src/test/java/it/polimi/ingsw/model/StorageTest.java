@@ -20,8 +20,8 @@ public class StorageTest {
         box.setinStorage('W',3);
         box.setinStorage('W',4);
         box.setinStorage('W',5);
-        box.printPanel();
         box.deleteResources(1,'W');
+        box.printPanel();
 
         scat.setinStorage('B',0);
         scat.setinStorage('P',1);
@@ -31,8 +31,8 @@ public class StorageTest {
         scat.setinStorage('W',5);
         scat.printPanel();
 
-        assertEquals(4, scat.getTotResourceStorage());
-        assertEquals(4, scat.getTotResourceStorage());
+        assertEquals(5, box.getTotResourceStorage());
+        assertEquals(6, scat.getTotResourceStorage());
         assertEquals(1, box.countTypeS('B'));
         assertEquals(2, box.countTypeS('P'));
         assertEquals(true, box.checkStorage());
