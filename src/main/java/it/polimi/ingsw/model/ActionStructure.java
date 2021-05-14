@@ -7,6 +7,13 @@ public class ActionStructure {
     private static int[] structure = {1,2,3,4,5,6,7};
     private static int AS_Counter=0;//ActionSignal_counter conta il segnalino che è stato preso (da 0 a 6 -> posti nella pila)
 
+    public static int getAS_Counter() {
+        return AS_Counter;
+    }
+
+    public static void setAS_Counter(int AS_Counter) {
+        ActionStructure.AS_Counter = AS_Counter;
+    }
     public static int[] getStructure() {
         return structure;
     }
@@ -31,7 +38,7 @@ public class ActionStructure {
      */
     public static void ShuffleSignal(){
         Collections.shuffle(Arrays.asList(structure));
-        AS_Counter=0;
+        AS_Counter=6;
     }
 
 }

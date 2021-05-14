@@ -1,8 +1,12 @@
 package it.polimi.ingsw.model;
 
 public class Lorenzo {
+
     private static String name = "Lorenzo Il Magnifico";
 
+    public static String getName() {
+        return name;
+    }
 
     private static int number = 0; //posizione su tracciato
 

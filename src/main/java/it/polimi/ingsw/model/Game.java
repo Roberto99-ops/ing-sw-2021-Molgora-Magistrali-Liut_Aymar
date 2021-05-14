@@ -8,11 +8,19 @@ public class Game {
     public static int lonely;
     private static ArrayList<Player> players;
     private static int n_players;
-    private static DevelopeDecks developedecks[];  //dichiaro tutto static?
+    private static DevelopeDecks[] developedecks = new DevelopeDecks[12];
     private static LeaderDeck leaderdeck;
     private static Market market;
     private static int VR=0;
-    private static int timer_VR=0;
+    //private static int timer_VR=0;
+
+    public static ArrayList<Player> getPlayers() {
+        return players;
+    }
+
+    public static void setPlayers(ArrayList<Player> players) {
+        Game.players = players;
+    }
 
 
     public static int getLonely() {
@@ -24,10 +32,13 @@ public class Game {
     public static Market getMarket() {
         return market;
     }
+    public static void setDevelopedecks(DevelopeDecks developedecks, int i) {
+        Game.developedecks[i] = developedecks;
+    }
 
 
 
-    public static int getTimer_VR() {
+    /*public static int getTimer_VR() {
         return timer_VR;
     }
 
@@ -39,13 +50,13 @@ public class Game {
         }
         Game.timer_VR = timer_VR;
     }
-
+    */
     public static int getN_players() {
         return n_players;
     }
 
-    public static void setN_players() {
-        n_players=players.size();
+    public static void setN_players(int num) {
+        n_players=num;
     }
 
 
@@ -59,13 +70,10 @@ public class Game {
 
     /**
      * Sets VaticanReport index for all players when all players have ended their after the call of VaticanReport
-     * @param timer_VR int
+     *
      */
-    public static void setVR(int timer_VR) {
-
-        if (timer_VR>=(n_players-1)) {  //finito il giro, aumento VR
-            Game.VR++;
-        }
+    public static void setVR(int num) {
+        VR=num;
         return;
     }
 
@@ -81,7 +89,6 @@ public class Game {
     public static void main( String[] args ) throws Exception {
         Game game = new Game();
         SingleGame singleGame = new SingleGame();
-        developedecks = new DevelopeDecks[12];
         leaderdeck = new LeaderDeck();
         players = new ArrayList<Player>();
         Turn turn = new Turn();
@@ -94,13 +101,16 @@ public class Game {
             SingleGame.main();
         } else if ((scan.nextLine()) == "B") {
             game.Shuffle();
+            //3)
+            //players.add()    ????
+
+            Game.setPlayers(players);
+
+            setN_players(players.size());// mi setta la costante che riguarda il n_partecipanti
+            // questa costante verrà usata quando chiamo VaticanReport
         } // aggiunta di errore nel caso in cui il carattero scelto non sia uno proposto
 
-        //3)
-        //players.add()    ????
 
-        setN_players();// mi setta la costante che riguarda il n_partecipanti
-                       // questa costante verrà usata quando chiamo VaticanReport
 
         while(true) {
             //3)

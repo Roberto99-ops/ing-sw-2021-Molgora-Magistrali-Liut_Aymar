@@ -1,38 +1,40 @@
 package it.polimi.ingsw.model;
 import java.util.ArrayList;
 
-public class Storage extends ArrayList {
+public class Storage extends ArrayList<Character> {
 
-    private ResourceStructure panel = new ResourceStructure(); // arraylist di 6 spazi di base
-    private ResourceStructure extrapanel = new ResourceStructure();
+    private static int LungPanel = 6;
+    private static int LungExtrapanel = 2;
+    private ResourceStructure panel; // arraylist di 6 spazi di base
+    private ResourceStructure extrapanel;
     private char typeExtrapanel= 'Z';  //carattere che per noi significa che il pannello extra non è attivo, non so se si può inzializzare così
 
-
-
-    public void inizializePanel () {
-        for (int i = 0; i < this.panel.getVector().size(); i++ ) {
-            this.panel.getVector().set(i, 'B');
-        }
+    Storage()
+    {
+        panel = new ResourceStructure();
+        extrapanel = new ResourceStructure();
     }
 
+    public void setPanel(ResourceStructure panel) {
+        this.panel = panel;
+    }
 
+    public  ResourceStructure getExtrapanel(){return extrapanel;}
 
     public ResourceStructure getPanel() {
         return panel;
     }
 
-
     public char getTypeExtrapanel() {
         return typeExtrapanel;
     }
-
 
     public void setTypeExtrapanel(char typeExtrapanel) {
         this.typeExtrapanel = typeExtrapanel;
     }
 
     /**
-     * Counts the amount of one kind of resource
+     * Counts the amount of one kind of resource in panel and extrapanel
      * @param neededRes: type of resource the player needs to pay/activate something
      * @return counterS: the amount of that resource in Storage
      */
@@ -41,34 +43,24 @@ public class Storage extends ArrayList {
 
     public int countTypeS(char neededRes) {
         int i=0, counterS=0;
-        if (this.panel.contains(neededRes)) {
-            while(i!=this.panel.size()) {
-                if(neededRes==(char)this.panel.get(i))
+            while(i!=panel.getVector().size()) {
+                if (neededRes == panel.getVector().get(i))
                     counterS++;
                 i++;
             }
+
             i=0;
-            if (this.extrapanel.contains(neededRes)){
-                while(i!=this.extrapanel.size()){
-                    if(neededRes==(char)this.extrapanel.get(i))
+                while(i!=extrapanel.getVector().size()){
+                    if(neededRes==extrapanel.getVector().get(i))
                         counterS++;
                     i++;
                 }
-            }
-            return counterS;
-        } else {
-            return 0;
-        }
+
+
+        return counterS;
     }
 
-
-
-
-    public void printPanel () {
-        for (int i=0; i < this.panel.getVector().size() ;  i++) {
-            System.out.println (this.panel.getVector().get(i)) ;
-        }
-    }
+    //metodo che restituisce la quantità totale di risorse nel magazzino
 
 
     /**
@@ -77,15 +69,14 @@ public class Storage extends ArrayList {
      * @return sum: how many resources are available inside the storage
      */
 
-
  public int getTotResourceStorage() {
         int i, t, counter;
                 int sum = 0;
-        char[] types = {'W', 'R', 'G', 'P', 'Y'}; // ho tolto 'B'
+        char[] types = {'W', 'R', 'B', 'G', 'P', 'Y'};
         for (t = 0; t < 6; t++) { //controllo che la lettera #t...
             counter = 0;
-            for (i = 0; i < this.panel.size(); i++) { //...sia presente dentro l'array
-                if (types[t] == (char) this.panel.get(i)) {
+            for (i = 0; i < panel.size(); i++) { //...sia presente dentro l'array
+                if (types[t] ==  panel.getVector().get(i)) {
                     counter++;
                 }
             }
@@ -112,8 +103,6 @@ public class Storage extends ArrayList {
 
     //classe deleteresources che cancella una quantità di un tipo di risorsa
 
-
-
     /**
      * returns the quantity of a certain type of resource
      */
@@ -121,12 +110,10 @@ public class Storage extends ArrayList {
         int counter = 0;
         for (int i = 0; i < 6; i++) {
             if (this.panel.getVector().get(i) == type) {
-             this.panel.getVector().remove(i);
-             this.panel.set(i,'B');
+                // this.panel.getVector().get(i) = 'B'; why is error?
             }
         }
     }
-
 
 
         // controlla se sono presenti nel panel tot risorse di uno specifico tipo
@@ -159,9 +146,8 @@ public class Storage extends ArrayList {
 
             if (getinStorage(1, type) == true) {
                 this.panel.getVector().set(position, type);
-            } else this.extrapanel.getVector().set( position, type);
+            } else this.extrapanel.getVector().add(type);
         }
-
 
 
     /**
@@ -210,8 +196,6 @@ public class Storage extends ArrayList {
             else {
                 return false; }
         }
-
-
 
         // controlla le risorse extra che vanno ad incrementare i puntifede degli altri giocatori
 

@@ -25,7 +25,7 @@ public class Turn {
 
         //Ad ogni turno, effettuo il controllo del Vatican Report
         FaithTrack faithTrack = new FaithTrack();
-        faithTrack.VaticanReport();
+        faithTrack.VaticanReport(actualplayer);
 
         //se sono in single game, ogni volta che tocca a me, prendo un segnalino ed eseguo la sua azione
         if (l == 1) {

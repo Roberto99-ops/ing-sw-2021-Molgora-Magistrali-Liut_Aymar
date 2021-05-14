@@ -4,8 +4,12 @@ public class ResourceStructure extends ArrayList {
     /**
      * resourcestructure is an arraylist of char which can be W,R,B,G,P,Y
      */
-    private ArrayList<Character> vector = new ArrayList<Character>(); //è giusto istanziarlo così o va istanziato dentro ogni metodo?
+    private ArrayList<Character> vector; //è giusto istanziarlo così o va istanziato dentro ogni metodo?
 
+    ResourceStructure()
+    {
+        vector = new ArrayList<>();
+    }
 
     public ArrayList<Character> getVector() { return vector; }
 
