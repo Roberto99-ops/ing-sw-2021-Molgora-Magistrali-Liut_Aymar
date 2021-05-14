@@ -31,14 +31,14 @@ public class PlayerTest {
     public void checkResources() {
         Player player = new Player();
         //inizializzo il suo storage (panel e extrapanel)
-        player.getStorage().getPanel().getVector().add('G');
-        player.getStorage().getPanel().getVector().add('B');
-        player.getStorage().getPanel().getVector().add('B');
-        player.getStorage().getPanel().getVector().add('Y');
-        player.getStorage().getPanel().getVector().add('Y');
-        player.getStorage().getPanel().getVector().add('Y');
-        player.getStorage().getExtrapanel().getVector().add('G');
-        player.getStorage().getExtrapanel().getVector().add('G');
+        player.getStorage().getPanel().add('G');
+        player.getStorage().getPanel().add('B');
+        player.getStorage().getPanel().add('B');
+        player.getStorage().getPanel().add('Y');
+        player.getStorage().getPanel().add('Y');
+        player.getStorage().getPanel().add('Y');
+        player.getStorage().getExtrapanel().add('G');
+        player.getStorage().getExtrapanel().add('G');
         //inizializzo strongbox
         player.getStrongBox().getStructure().add('N');
         //mi viene dato un arraylist di risorse desiderate
@@ -47,9 +47,9 @@ public class PlayerTest {
         vector.add('B');
         vector.add('B');
         assertEquals(1,player.CheckResources(vector));
-        assertTrue(player.getStorage().getPanel().getVector().get(1)=='N');
-        assertTrue(player.getStorage().getPanel().getVector().get(2)=='N');
-        assertTrue(player.getStorage().getPanel().getVector().get(5)=='N');
+        assertTrue(player.getStorage().getPanel().get(1)=='N');
+        assertTrue(player.getStorage().getPanel().get(2)=='N');
+        assertTrue(player.getStorage().getPanel().get(5)=='N');
 
     }
 
@@ -95,18 +95,18 @@ public class PlayerTest {
         player.getStorage().setTypeExtrapanel('G');
         //inizializzo lo storage (quindi panel ed extrapanel)
         //considero panel ed extrapanel con elementi
-        player.getStorage().getPanel().getVector().add('G');
-        player.getStorage().getPanel().getVector().add('B');
-        player.getStorage().getPanel().getVector().add('B');
-        player.getStorage().getPanel().getVector().add('Y');
-        player.getStorage().getPanel().getVector().add('Y');
-        player.getStorage().getPanel().getVector().add('Y');
-        player.getStorage().getExtrapanel().getVector().add('G');
-        player.getStorage().getExtrapanel().getVector().add('G');
+        player.getStorage().getPanel().add('G');
+        player.getStorage().getPanel().add('B');
+        player.getStorage().getPanel().add('B');
+        player.getStorage().getPanel().add('Y');
+        player.getStorage().getPanel().add('Y');
+        player.getStorage().getPanel().add('Y');
+        player.getStorage().getExtrapanel().add('G');
+        player.getStorage().getExtrapanel().add('G');
         //scelgo la risorsa da eliminare
         char resource = 'B';
         assertTrue(player.removeResource(resource));
-        assertTrue(player.getStorage().getPanel().getVector().get(2)=='N');
+        assertTrue(player.getStorage().getPanel().get(2)=='N');
 
 
 /* (PRECEDENTE-SBAGLIATO)
@@ -137,38 +137,38 @@ public class PlayerTest {
         //caso1: storage vuoto in cui aggiungo il primo elemnto in cima
         //considero uno storage vuoto
         for(int i=0; i<6; i++){
-            player.getStorage().getPanel().getVector().add('N'); //N: null= non c'è niente
+            player.getStorage().getPanel().add('N'); //N: null= non c'è niente
         }
         for (int i=0; i<2; i++){
-            player.getStorage().getExtrapanel().getVector().add('N');
+            player.getStorage().getExtrapanel().add('N');
         }
         //riempiamo lo storage (in cima) del player con una sola risorsa
         assertTrue(player.addResourceStorage('G'));
-        assertTrue(player.getStorage().getPanel().getVector().get(0)=='G');
+        assertTrue(player.getStorage().getPanel().get(0)=='G');
 
         //caso2: ho una sola risorsa nel 2o piano
-        player.getStorage().getPanel().getVector().set(1,'W');
+        player.getStorage().getPanel().set(1,'W');
         assertTrue(player.addResourceStorage('W'));
-        assertTrue(player.getStorage().getPanel().getVector().get(2)=='W'); //il terzo elemento (== il secondo sul secondo piano)
+        assertTrue(player.getStorage().getPanel().get(2)=='W'); //il terzo elemento (== il secondo sul secondo piano)
         //è quello inserito
 
         //caso3: ho risorse sul primo e secondo piano e un po' sul terzo e ne voglio aggiungere una in quest'ultimo
-        for(int i=3; i<5 ;i++)player.getStorage().getPanel().getVector().set(i, 'Y');
+        for(int i=3; i<5 ;i++)player.getStorage().getPanel().set(i, 'Y');
         assertTrue(player.addResourceStorage('Y'));
-        assertTrue(player.getStorage().getPanel().getVector().get(5)=='Y');
+        assertTrue(player.getStorage().getPanel().get(5)=='Y');
 
         //caso4a: ho lo storage completo e ho spazio in Extrapanel di tipo B. Dico che la risorsa da mettere è di tipo A
         assertTrue(player.addResourceStorage('A')); //questo stampa una volta 'No more space available' giustamente
 
         //caso4b: decido di aggiungere una risorsa in Extrapanel di tipo B
         assertTrue(player.addResourceStorage('B'));
-        assertTrue(player.getStorage().getExtrapanel().getVector().get(0)=='B');
-        assertTrue(player.getStorage().getExtrapanel().getVector().get(1)=='N');
+        assertTrue(player.getStorage().getExtrapanel().get(0)=='B');
+        assertTrue(player.getStorage().getExtrapanel().get(1)=='N');
 
         //caso 4c: elimino la risorsa in cima allo storage e aggiungo una rsorsa di tipo B. questa dovrebbe andare in extrapanel
-        player.getStorage().getPanel().getVector().set(0,'N');
+        player.getStorage().getPanel().set(0,'N');
         assertTrue(player.addResourceStorage('B'));
-        assertTrue(player.getStorage().getExtrapanel().getVector().get(1)=='B');
+        assertTrue(player.getStorage().getExtrapanel().get(1)=='B');
 
 
 

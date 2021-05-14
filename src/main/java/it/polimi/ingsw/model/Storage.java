@@ -1,27 +1,31 @@
 package it.polimi.ingsw.model;
 import java.util.ArrayList;
+import java.util.List;
+
 
 public class Storage extends ArrayList<Character> {
 
-    private static int LungPanel = 6;
-    private static int LungExtrapanel = 2;
-    private ResourceStructure panel; // arraylist di 6 spazi di base
+
+    private ArrayList <Character> panel = new ArrayList <Character> (List.of('W','W','W','W','W','W')); // arraylist di 6 spazi di base
     private ResourceStructure extrapanel;
     private char typeExtrapanel= 'Z';  //carattere che per noi significa che il pannello extra non è attivo, non so se si può inzializzare così
 
-    Storage()
-    {
-        panel = new ResourceStructure();
-        extrapanel = new ResourceStructure();
-    }
 
     public void setPanel(ResourceStructure panel) {
         this.panel = panel;
     }
 
-    public  ResourceStructure getExtrapanel(){return extrapanel;}
+    public void printPanel () {
+        for (int i = 0; i < 6; i ++) {
+            System.out.println(this.panel.get(i));
+        }
+        System.out.println("\n");
+    }
 
-    public ResourceStructure getPanel() {
+
+    public  ArrayList <Character> getExtrapanel(){return extrapanel;}
+
+    public ArrayList <Character> getPanel() {
         return panel;
     }
 
@@ -43,18 +47,17 @@ public class Storage extends ArrayList<Character> {
 
     public int countTypeS(char neededRes) {
         int i=0, counterS=0;
-            while(i!=panel.getVector().size()) {
-                if (neededRes == panel.getVector().get(i))
+            while(i!=this.panel.size()) {
+                if (neededRes == this.panel.get(i))
                     counterS++;
                 i++;
             }
 
             i=0;
-                while(i!=extrapanel.getVector().size()){
-                    if(neededRes==extrapanel.getVector().get(i))
+                 /** while(i!=this.extrapanel.size()){
+                    if(neededRes==this.extrapanel.get(i))
                         counterS++;
-                    i++;
-                }
+                    i++;  } */
 
 
         return counterS;
@@ -70,22 +73,54 @@ public class Storage extends ArrayList<Character> {
      */
 
  public int getTotResourceStorage() {
-        int i, t, counter;
-                int sum = 0;
-        char[] types = {'W', 'R', 'B', 'G', 'P', 'Y'};
-        for (t = 0; t < 6; t++) { //controllo che la lettera #t...
-            counter = 0;
-            for (i = 0; i < panel.size(); i++) { //...sia presente dentro l'array
-                if (types[t] ==  panel.getVector().get(i)) {
-                    counter++;
-                }
-            }
-            System.out.println(types[t] + ":" + counter); //stampo a video le quantità distinte
-            sum += counter;
-        }
-            return sum; //ritorno il tot di risorse nel magazzino
-    }
+     int counterB = 0;
+     int counterP = 0;
+     int counterY = 0;
+     int counterR = 0;
+     int counterG = 0;
+     int sum = 0;
 
+     for (int i = 5; i >= 0; i--) {
+
+         switch (this.panel.get(i)) {
+
+             case 'B': {
+                 counterB++;
+                 break;
+             }
+
+             case 'P': {
+                 counterP++;
+                 break;
+             }
+
+             case 'Y': {
+                 counterY++;
+                 break;
+             }
+
+             case 'R': {
+                 counterR++;
+                 break;
+             }
+
+             case 'G': {
+                 counterG++;
+                 break;
+             }
+         }
+     }
+
+     System.out.println( " B : " + counterB);
+     System.out.println( " G : " + counterG);
+     System.out.println( " Y : " + counterY);
+     System.out.println( " P : " + counterP);
+     System.out.println( " R : " + counterR);
+
+     sum = counterB + counterG + counterR + counterY + counterP;
+
+     return sum;
+ }
 
 
     // classe int getResource che restituisce la quantità di un certo tipo di risorsa
@@ -97,7 +132,7 @@ public class Storage extends ArrayList<Character> {
     public int returnQuantity (int quantity, Character type) {
         int counter = 0;
         for (int i=0; i < 6; i ++) {
-            if (this.panel.getVector().get(i) == type) {
+            if (this.panel.get(i) == type) {
                 counter++; }
         } return counter; }
 
@@ -108,9 +143,9 @@ public class Storage extends ArrayList<Character> {
      */
     public void deleteResources (int quantity, Character type) {
         int counter = 0;
-        for (int i = 0; i < 6; i++) {
-            if (this.panel.getVector().get(i) == type) {
-                // this.panel.getVector().get(i) = 'B'; why is error?
+        for (int i = 5; i >= 0; i--) {
+            if (this.panel.get(i) == type) {
+           this.panel.set(i, 'W');
             }
         }
     }
@@ -125,7 +160,7 @@ public class Storage extends ArrayList<Character> {
         public boolean getinStorage (int quantity, Character type) {                    // OK!!!!!!
            int counter = 0;
            for (int i=0; i < 6; i ++) {
-               if (this.panel.getVector().get(i) == type) {
+               if (this.panel.get(i) == type) {
                counter++;
                                                  }
            }
@@ -143,10 +178,7 @@ public class Storage extends ArrayList<Character> {
      */
 
         public void setinStorage (char type, int position) {
-
-            if (getinStorage(1, type) == true) {
-                this.panel.getVector().set(position, type);
-            } else this.extrapanel.getVector().add(type);
+            this.panel.set(position, type);
         }
 
 
@@ -157,38 +189,37 @@ public class Storage extends ArrayList<Character> {
 
         public boolean checkStorage () {
 
-            if(this.panel.getVector().size()==0) return true;
 
-            else if (   ( this.panel.getVector().get(0) != this.panel.getVector().get(1) ||
-                        this.panel.getVector().get(0) == 'B' ||
-                        this.panel.getVector().get(1) == 'B' )
-
-                    &&
-
-                    ( this.panel.getVector().get(1) != this.panel.getVector().get(3) ||
-                        this.panel.getVector().get(1) == 'B' ||
-                        this.panel.getVector().get(3) == 'B')
-                    &&
-
-                    ( this.panel.getVector().get(0) != this.panel.getVector().get(3) ||
-                        this.panel.getVector().get(0) == 'B' ||
-                        this.panel.getVector().get(3) == 'B')
+            if (   ( this.panel.get(0) != this.panel.get(1) ||
+                        this.panel.get(0) == 'B' ||
+                        this.panel.get(1) == 'B' )
 
                     &&
 
-                    ( this.panel.getVector().get(1) == this.panel.getVector().get(2) ||
-                        this.panel.getVector().get(1) == 'B' ||
-                        this.panel.getVector().get(2) == 'B')
+                    ( this.panel.get(1) != this.panel.get(3) ||
+                        this.panel.get(1) == 'B' ||
+                        this.panel.get(3) == 'B')
                     &&
 
-                    (this.panel.getVector().get(3) == this.panel.getVector().get(4) ||
-                        this.panel.getVector().get(1) == 'B' ||
-                        this.panel.getVector().get(2) == 'B'
+                    ( this.panel.get(0) != this.panel.get(3) ||
+                        this.panel.get(0) == 'B' ||
+                        this.panel.get(3) == 'B')
+
+                    &&
+
+                    ( this.panel.get(1) == this.panel.get(2) ||
+                        this.panel.get(1) == 'B' ||
+                        this.panel.get(2) == 'B')
+                    &&
+
+                    (this.panel.get(3) == this.panel.get(4) ||
+                        this.panel.get(1) == 'B' ||
+                        this.panel.get(2) == 'B'
                     ) &&
 
-                    ( this.panel.getVector().get(4) == this.panel.getVector().get(5) ||
-                    this.panel.getVector().get(4) == 'B' ||
-                    this.panel.getVector().get(5) == 'B')
+                    ( this.panel.get(4) == this.panel.get(5) ||
+                    this.panel.get(4) == 'B' ||
+                    this.panel.get(5) == 'B')
 
                 ) {
                 return true; }
