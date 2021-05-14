@@ -20,7 +20,7 @@ public class Client {
         /*Per aprire connessione col server*/
         Socket server;
         try {
-            server = new Socket(ip, Server.SOCKET_PORT);
+            server = new Socket(ip, Server.SOCKET_PORT);  //ipServer Roby: 95.250.236.230
         } catch (IOException e) {
             System.out.println("server unreachable");
             return;

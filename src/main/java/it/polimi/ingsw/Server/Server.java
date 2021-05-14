@@ -10,15 +10,17 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Random;
 
+//dobbiamo usare javaSE??
+
 public class Server {
     private static Random random = new Random();
 
     //non deve essere costante la porta
-    //il numero di porta viene generato casualmente tra 2000 e 4000
-    public static int SOCKET_PORT = 1111;//random.nextInt(8);
+    //il numero di porta viene generato casualmente tra 1000 e 1050
+    public static int SOCKET_PORT = 1000;//random.nextInt(8);
 
     public static void main(String[] args) throws IOException {
-        System.out.println(InetAddress.getLocalHost());
+        System.out.println("Internal ip: " + InetAddress.getLocalHost());
 
         //apro la porta # ...
         ServerSocket socket;

@@ -74,7 +74,7 @@ public class ClientHandler implements Runnable {
                 String next = input.readUTF();
                 //CommandMsg command = (CommandMsg) next;//qui o pattern state o classi o json
                 //command.processMessage(this);
-                System.out.println("Client " + name + " sent " + next);
+                System.out.println("Client " + name + " sent: " + next);
                 if(next == "close") input.close();
             }
         } catch (ClassCastException e) {
