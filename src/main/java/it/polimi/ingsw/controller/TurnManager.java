@@ -40,21 +40,22 @@ public class TurnManager extends Turn{
         }
 
         //1)
-        System.out.println("What do you want to do?\n\t1)Shop a developement card\n\t2)Take resources at the market\n\t3)Active a production\n");
+        System.out.println("What do you want to do?\n\t1)Shop a developement card" +
+                "\n\t2)Take resources at the market\n\t3)Active a production\n"); // CLIENTHENDLER
         try {
             action = System.in.read();
             if (action == 1) this.ShopCard(game);
             if (action == 2) this.Buyresource(game);
             //2)
             if(action == 3) { do{//2.1)
-                System.out.println("Which LeaderCard do you want to enable(0=none)?\n");
+                System.out.println("Which LeaderCard do you want to enable(0=none)?\n"); // CLIENTHENDLER
                 this.actualplayer.getLeadercards().Print();
                 try{ card = System.in.read(); } catch (IOException e){ System.out.println(e);}
                 if(this.actualplayer.getLeadercards().getStructure().get(card-1).getSkill() == "ProductionSkill")
                     this.actualplayer.getLeadercards().getStructure().get(card-1).ProductionSkill(this.actualplayer);
 
                 //2.2)
-                System.out.println("Which DevelopeCard do you want to enable(0=none)?\n");
+                System.out.println("Which DevelopeCard do you want to enable(0=none)?\n"); // CLIENTHENDLER
                 this.actualplayer.getDevelopecards().Print(); //non so come il player accede alle proprie carte sviluppo
                 try{ card = System.in.read(); } catch (IOException e){ System.out.println(e);}
                 if(card>0) this.actualplayer.getDevelopecards().getStructure().get(card-1).DoProduction(this.actualplayer);
