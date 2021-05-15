@@ -12,7 +12,7 @@ import java.util.ArrayList;
 /**
  * this class draw the playerboard
  */
-public class Playerboard extends PaintCards{
+public class Playerboard extends PaintCards {
     private static final int VERT_SIZE = 45;
     private static final int HORIZ_SIZE = 150;  // posso farlo di 150?
 
@@ -32,6 +32,7 @@ public class Playerboard extends PaintCards{
      * this class draw the faith track space
      * @throws FileNotFoundException
      */
+
     private void FaithTrack() throws FileNotFoundException   //devo mettere lo sfondo di un altro colore
     {
         int MAX_HIGH = 13;
@@ -121,6 +122,7 @@ public class Playerboard extends PaintCards{
     /**
      * it draws the storage space inside the playerboard
      */
+
     private void Storage()
     {
         int MAX_VERT_SIZE = VERT_SIZE-13-2-VERT_SIZE/4;
@@ -138,9 +140,11 @@ public class Playerboard extends PaintCards{
                 playerboard[initialVert+i][1+j]=storage[i][j];
     }
 
+
     /**
      * it draws the strongbox space inside the playerboard
      */
+
     private void Strongbox(ResourceStructure box)
     {
         int MAX_VERT_SIZE = VERT_SIZE/4;
@@ -187,6 +191,7 @@ public class Playerboard extends PaintCards{
      * it draws the space where we can see our leaderecards
      * @param player
      */
+
     private void LeaderSpace(Player player)
     {
         int MAX_VERT_SIZE = (VERT_SIZE-13-4)/2;
@@ -232,6 +237,7 @@ public class Playerboard extends PaintCards{
     /**
      * it draws the developementspace inside the playerboard
      */
+
     private void Developementspace()
     {
         int MAX_VERT_SIZE = VERT_SIZE-13-2;

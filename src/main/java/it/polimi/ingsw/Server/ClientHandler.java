@@ -24,6 +24,7 @@ public class ClientHandler implements Runnable {
      *
      * @param client The socket connection to the client.
      */
+
     public ClientHandler(Socket client) {
         this.client = client;
         this.game = new Game();
@@ -33,6 +34,7 @@ public class ClientHandler implements Runnable {
     /**
      * Connects to the client and runs the event loop.
      */
+
     @Override
     public void run() {
         try {
@@ -64,6 +66,7 @@ public class ClientHandler implements Runnable {
      *
      * @throws IOException If a communication error occurs.
      */
+
     private void handleClientConnection() throws IOException {
         try {
             String name = input.readUTF();//.readObject();
@@ -99,6 +102,7 @@ public class ClientHandler implements Runnable {
      * @param answerMsg The message to be sent.
      * @throws IOException If a communication error occurs.
      */
+
     public void sendAnswerMessage(AnswerMsg answerMsg) throws IOException {
         output.writeObject((Object) answerMsg);
     }

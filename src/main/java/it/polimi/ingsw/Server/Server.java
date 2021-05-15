@@ -33,7 +33,9 @@ public class Server {
             System.exit(1);
             return;
         }
-        //...e il server si mette in ascolto. Per ogni nuova connessione stabilita, viene creato un nuovo thread di ClientHandler
+        //...e il server si mette in ascolto.
+        // Per ogni nuova connessione stabilita, viene creato un nuovo thread di ClientHandlerù
+
         while (true) {
             try {
                 /* accepts connections; for every connection we accept,
@@ -60,7 +62,7 @@ public class Server {
 
                 //ora il server può cominciare a ricevere e a mandare
                 //la prima cosa che fa è aspettare il 'name' da client
-                String message = inPut.readLine();
+                String message = input.readLine();
                 System.out.println(message);
 
 
@@ -86,6 +88,7 @@ public class Server {
                     if (message.compareToIgnoreCase("Exit") == 0) done = true;
                 }
                  */
+
             } catch (IOException e) {
                 System.out.println("connection dropped");
             }

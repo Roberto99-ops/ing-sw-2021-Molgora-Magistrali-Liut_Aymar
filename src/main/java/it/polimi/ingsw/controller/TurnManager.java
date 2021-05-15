@@ -24,6 +24,7 @@ public class TurnManager extends Turn{
      * 2.2) do the same with our Developecards
      * then the turn ends
      */
+
     public void main(Game game) {
         int action = 0;
         char again = 'n';

@@ -2,12 +2,13 @@ package it.polimi.ingsw.view.cli;
 
 import it.polimi.ingsw.model.Market;
 
-public class MarketView extends Utility{
+public class MarketView extends Utility {
     private static final int VERT_SIZE = 30;
     private static final int HORIZ_SIZE = 67;
     private String[][] market;
 
     MarketView(Market gamemarket)
+
     {
         market = new String[VERT_SIZE][HORIZ_SIZE];
         Perimeter(market, VERT_SIZE, HORIZ_SIZE, Color.BLACK);

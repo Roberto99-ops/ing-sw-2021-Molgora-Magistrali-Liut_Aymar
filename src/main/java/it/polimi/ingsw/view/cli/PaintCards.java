@@ -4,13 +4,14 @@ import it.polimi.ingsw.model.LeaderCard;
 
 import java.util.ArrayList;
 
-public abstract class PaintCards extends Utility{
+public abstract class PaintCards extends Utility {
 
     /**
      * draw the leadercards
      * @param card: card to draw
      * @return
      */
+
     public String[][] DrawLeadercard(LeaderCard card)
     {
         int MAX_VERT_SIZE = (45-13-8)/2;

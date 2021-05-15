@@ -12,7 +12,7 @@ public class Game {
     private static LeaderDeck leaderdeck;
     private static Market market;
     private static int VR=0;
-    //private static int timer_VR=0;
+    private static int timer_VR=0;
 
     public static ArrayList<Player> getPlayers() {
         return players;
@@ -38,7 +38,7 @@ public class Game {
 
 
 
-    /*public static int getTimer_VR() {
+    public static int getTimer_VR() {
         return timer_VR;
     }
 
@@ -50,7 +50,8 @@ public class Game {
         }
         Game.timer_VR = timer_VR;
     }
-    */
+
+
     public static int getN_players() {
         return n_players;
     }
@@ -64,6 +65,7 @@ public class Game {
      * Gets VaticanReport index
      * @return int VR
      */
+
     public static int getVR() {
         return VR;
     }
@@ -72,6 +74,7 @@ public class Game {
      * Sets VaticanReport index for all players when all players have ended their after the call of VaticanReport
      *
      */
+
     public static void setVR(int num) {
         VR=num;
         return;
@@ -86,6 +89,7 @@ public class Game {
      * 4) checks if the game is ended
      * @param args string
      */
+
     public static void main( String[] args ) throws Exception {
         Game game = new Game();
         SingleGame singleGame = new SingleGame();
@@ -145,6 +149,7 @@ public class Game {
      * check if the game is ended, checking the actualplayer faith track(1) and developequantity(2)
      * @return boolean
      */
+
     public boolean Endgame(Player actualplayer)
     {
             //1)
@@ -157,10 +162,11 @@ public class Game {
     }
 
     /**
-     * find the winner, for each player at 1)we check if the player is arrived at the end
-     * of the faith track, at 2)we check which player has more Victory Points
+     * find the winner, for each player at 1) we check if the player is arrived at the end
+     * of the faith track, at 2) we check which player has more Victory Points
      * @return string
      */
+
     public String Victory()
     {
         Player winner = new Player();
