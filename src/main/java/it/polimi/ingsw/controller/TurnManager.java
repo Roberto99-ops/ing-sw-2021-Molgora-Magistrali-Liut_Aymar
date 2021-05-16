@@ -6,10 +6,11 @@ import it.polimi.ingsw.model.*;
 
 import java.io.IOException;
 
-public class TurnManager extends Turn{
+public class TurnManager extends Turn {
+
+    // inizializzazione di view e model
 
     private Player actualplayer;
-
     private Game game;
     private int l = game.getLonely();
     private ActionStructure aStructure;
@@ -25,7 +26,7 @@ public class TurnManager extends Turn{
      * then the turn ends
      */
 
-    public void main(Game game) {
+    public void main() throws Exception {
         int action = 0;
         char again = 'n';
         int card = 0;
@@ -40,33 +41,72 @@ public class TurnManager extends Turn{
         }
 
         //1)
-        System.out.println("What do you want to do?\n\t1)Shop a developement card" +
-                "\n\t2)Take resources at the market\n\t3)Active a production\n"); // CLIENTHENDLER
-        try {
-            action = System.in.read();
-            if (action == 1) this.ShopCard(game);
-            if (action == 2) this.Buyresource(game);
-            //2)
-            if(action == 3) { do{//2.1)
-                System.out.println("Which LeaderCard do you want to enable(0=none)?\n"); // CLIENTHENDLER
-                this.actualplayer.getLeadercards().Print();
-                try{ card = System.in.read(); } catch (IOException e){ System.out.println(e);}
-                if(this.actualplayer.getLeadercards().getStructure().get(card-1).getSkill() == "ProductionSkill")
-                    this.actualplayer.getLeadercards().getStructure().get(card-1).ProductionSkill(this.actualplayer);
+        if (l == 0) {
 
-                //2.2)
-                System.out.println("Which DevelopeCard do you want to enable(0=none)?\n"); // CLIENTHENDLER
-                this.actualplayer.getDevelopecards().Print(); //non so come il player accede alle proprie carte sviluppo
-                try{ card = System.in.read(); } catch (IOException e){ System.out.println(e);}
-                if(card>0) this.actualplayer.getDevelopecards().getStructure().get(card-1).DoProduction(this.actualplayer);
+            System.out.println("What do you want to do?\n\t1)Shop a developement card\n\t2)Take resources at the market\n\t3)Active a production\n");
+            // CLIENTHENDLER
 
-                System.out.println("Do you want to do another production(y/n)?\n");
-                try{ again = (char) System.in.read(); } catch (IOException e){ System.out.println(e);} }while(again=='y');}
-        } catch (IOException e){ System.out.println(e);} catch (Exception e) {
-            e.printStackTrace();
+
+            try { //CLIENTHENDLER
+                action = System.in.read();
+                if (action == 1) this.ShopCard(game);
+
+                // CONTROLLER:
+                // IN) IL NUMERO DI CARTE DA COMPRARE
+                // OUT) RIMUOVE LE RISORSE DI COSTO CARTA DALLA PLANCIA e AGGIUNGE NELLE CARTE SVILUPPO DI PLAYER LE CARTE VOLUTE
+
+
+                if (action == 2) this.Buyresource(game);
+
+                // CONTROLLER:
+                // IN) N^ COLONNA/RIGA DEL MERCATO
+                // OUT) CAMBIA IL MERCATO e RITORNA LE RISORSE COMPRATE
+
+
+                if (action == 3) {
+                    do { //2.1)
+                        System.out.println("Which LeaderCard do you want to enable(0=none)?\n");
+                        this.actualplayer.getLeadercards().Print();
+                        try {
+                            card = System.in.read();
+                        } catch (IOException e) {
+                            System.out.println(e);
+                        }
+                        if (card > 0) {
+                            this.actualplayer.getLeadercards().getStructure().get(card - 1).getSkill();
+                        }
+
+                        //2.2)
+                        System.out.println("Which DevelopeCard do you want to enable(0=none)?\n"); // CLIENTHENDLER
+                        this.actualplayer.getTopCardsOnBoard().Print(); //l'arraylist di carte viene stampato
+                        try {
+                            card = System.in.read();
+                        } catch (IOException e) {
+                            System.out.println(e);
+                        }
+                        //prendo la carta nella posizione i-1 nell'arraylist ed eseguo la sua produzione
+                        if (card > 0) {
+                            this.actualplayer.getTopCardsOnBoard().getStructure().get(card - 1).DoProduction(this.actualplayer);
+                        }
+
+                        System.out.println("Do you want to do another production(y/n)?\n"); // CLIENTHENDLER
+                        try {
+                            again = (char) System.in.read();
+                        } catch (IOException e) {
+                            System.out.println(e);
+                        }
+                    } while (again == 'y');
+                }
+
+            } catch (IOException e) {
+                System.out.println(e);
+            }
         }
-
-
     }
-
 }
+
+
+// CONTROLLER:
+// IN) QUALE CARTA VUOI PRODURRE? LEADER/DEVELOPEMENT e SE CONTINUARE A PRODURRE ---> PRINT
+// OUT1)
+// OUT2) DO PRODUCTION: RIMUOVE DA STORAGE E AGGIUNGE IN STRONGBOX

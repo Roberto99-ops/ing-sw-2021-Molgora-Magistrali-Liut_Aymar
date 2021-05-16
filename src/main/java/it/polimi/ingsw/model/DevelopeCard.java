@@ -100,7 +100,7 @@ public class DevelopeCard{
                 for(int i=0; i<this.outputproduction.getVector().size(); i++)
                     player.addResourceStrongBox(this.outputproduction.getVector().get(i)); }
            }
-        else System.out.println("You don't own enought Resources");
+        else System.out.println("You don't own enough Resources");
     }
 
 

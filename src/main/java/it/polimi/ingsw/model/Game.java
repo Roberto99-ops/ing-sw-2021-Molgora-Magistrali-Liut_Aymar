@@ -14,33 +14,55 @@ public class Game {
     private static int VR=0;
     private static int timer_VR=0;
 
+
+    /**
+     * getter and setter
+     * @return
+     */
+
     public static ArrayList<Player> getPlayers() {
+
         return players;
     }
 
     public static void setPlayers(ArrayList<Player> players) {
+
         Game.players = players;
+    }
+
+    public static LeaderDeck getLeaderdeck() {
+        return leaderdeck;
+    }
+
+    public static void setLeaderdeck(LeaderDeck leaderdeck) {
+        Game.leaderdeck = leaderdeck;
     }
 
 
     public static int getLonely() {
+
         return lonely;
     }
+
     public static DevelopeDecks getDevelopedecks(int i) {
+
         return developedecks[i];
     }
+
     public static Market getMarket() {
+
         return market;
     }
+
     public static void setDevelopedecks(DevelopeDecks developedecks, int i) {
+
         Game.developedecks[i] = developedecks;
     }
-
-
 
     public static int getTimer_VR() {
         return timer_VR;
     }
+
 
     public static void setTimer_VR(int timer_VR) {
         if (timer_VR>=3){
@@ -52,28 +74,22 @@ public class Game {
     }
 
 
+
     public static int getN_players() {
         return n_players;
     }
+
 
     public static void setN_players(int num) {
         n_players=num;
     }
 
 
-    /**
-     * Gets VaticanReport index
-     * @return int VR
-     */
-
     public static int getVR() {
+
         return VR;
     }
 
-    /**
-     * Sets VaticanReport index for all players when all players have ended their after the call of VaticanReport
-     *
-     */
 
     public static void setVR(int num) {
         VR=num;
@@ -81,60 +97,11 @@ public class Game {
     }
 
 
-    /**
-     * 1) shuffle all the decks and market
-     * 2) add all the players
-     * starts a loop that
-     * 3) calls turn for every player and
-     * 4) checks if the game is ended
-     * @param args string
-     */
-
-    public static void main( String[] args ) throws Exception {
-        Game game = new Game();
-        SingleGame singleGame = new SingleGame();
-        leaderdeck = new LeaderDeck();
-        players = new ArrayList<Player>();
-        Turn turn = new Turn();
-        int actualplayer=0;
-        Scanner scan = new Scanner(System.in);
-
-        //1)
-        System.out.println("Do you want to play alone(A) or against other players(B)?");
-        if ((scan.nextLine()) == "A") {
-            SingleGame.main();
-        } else if ((scan.nextLine()) == "B") {
-            game.Shuffle();
-            //3)
-            //players.add()    ????
-
-            Game.setPlayers(players);
-
-            setN_players(players.size());// mi setta la costante che riguarda il n_partecipanti
-            // questa costante verrà usata quando chiamo VaticanReport
-        } // aggiunta di errore nel caso in cui il carattero scelto non sia uno proposto
-
-
-
-        while(true) {
-            //3)
-            turn.setActualplayer(players.get(actualplayer));
-            turn.main();
-
-            //4)
-            if (game.Endgame(players.get(actualplayer))) {
-                System.out.println("The winner is " + game.Victory());
-                return;
-            }
-
-            actualplayer++;
-            if(actualplayer>=players.size()) actualplayer=0;
-        }
-    }
 
     /**
      * shuffle all the decks and the market calling the random function
      */
+
     public void Shuffle()
     {
         for(int i=0; i<12; i++)
@@ -142,8 +109,9 @@ public class Game {
 
         leaderdeck.setStructure(leaderdeck.shuffleDeck(leaderdeck.getStructure()));
 
-        //market random
+        market.randomizeMarket();
     }
+
 
     /**
      * check if the game is ended, checking the actualplayer faith track(1) and developequantity(2)
@@ -153,13 +121,17 @@ public class Game {
     public boolean Endgame(Player actualplayer)
     {
             //1)
-            if(actualplayer.getTrackposition()>=24)   return true;
+            if(actualplayer.getTrackposition()>=24)
+                return true;
 
             //2)
-            if(actualplayer.getDevelopementquantity()>=7)   return true;
+            else if(actualplayer.getDevelopementquantity()>=7)
+                return true;
 
-        return false;
+            else
+                return false;
     }
+
 
     /**
      * find the winner, for each player at 1) we check if the player is arrived at the end
@@ -167,17 +139,20 @@ public class Game {
      * @return string
      */
 
+
     public String Victory()
     {
         Player winner = new Player();
         winner.setPv(0);
-        for(int i=0 ; i<players.size(); i++)
+        for(int i=0 ; i < players.size(); i++)
         {
             //1)
-            if(players.get(i).getTrackposition()>=24)   return players.get(i).getName();
+            if(players.get(i).getTrackposition()>=24)
+                return players.get(i).getName();
 
             //2)
-            if(winner.getPv() < players.get(i).getPv()) winner.equals(players.get(i));
+            else if(winner.getPv() < players.get(i).getPv())
+                winner.equals(players.get(i));
 
         }
         return winner.getName();

@@ -1,19 +1,22 @@
 package it.polimi.ingsw.model;
 import java.io.IOException;
 
-public class Turn {
-    private Player actualplayer;
 
+public class Turn {
+
+    private Player actualplayer;
     private Game game;
     private int l = game.getLonely();
     private ActionStructure aStructure;
     private ActionSignal signal;
 
     public Player getActualplayer() {
+
         return actualplayer;
     }
 
     public void setActualplayer(Player actualplayer) {
+
         this.actualplayer = actualplayer;
     }
 
@@ -59,11 +62,14 @@ public class Turn {
 
     }
 
+
+
     /**
      * this method manages the purchase of a DevelopeCard.
      * the class asks to the costumer what card he does want to buy
      * then checks if he owns enough resources and complete the transaction
      */
+
     public void ShopCard(Game game) throws Exception {
         int choose = 0;
         DevelopeCard card = new DevelopeCard();
@@ -83,7 +89,6 @@ public class Turn {
             //se le risorse presenti in Storage e SB sono sufficienti allora le risorse richieste le elimino e attivo la produzione
             //IDEA: controllare quante risorse di un tipo si necessitano per comprare. Ex: W W Y.
             //      Prima controllo se ho 2 o + W. Se ce le ho, passo a controllare se ho 1 o + Y
-            //      I metodi che danno la quantità di un certo tipo sia in Storage sia in SB sono stati fatti
         //ex. if (newcost<=actualplayer.getStorage().countTypeS()+actualplayer.getStrongBox()...)
 
         if (this.actualplayer.CheckResources(newcost)==0) return;
@@ -115,6 +120,7 @@ public class Turn {
      * @param game
      * @return
      */
+
     public ResourceStructure Buyresource(Game game) {
         ResourceStructure product = new ResourceStructure();
         Market market = game.getMarket();
@@ -148,3 +154,4 @@ public class Turn {
     }
 
 }
+
