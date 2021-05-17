@@ -40,6 +40,7 @@ public class MarketTest {
             for (int j = 0; j < 3; j ++) {
                 for (int k = 0; k < 4; k++) {
                     pimpa [j][k] = obj.get(i);
+                    i ++;
             }
         }
 
@@ -48,14 +49,28 @@ public class MarketTest {
         bowl.printMatrix();
 
 
+
         assertEquals(bowl.getExtraball(), 'B');
         assertEquals(bowl.getMatrix(), pimpa);
         ArrayList<Character> pre = new ArrayList<>();
-       pre.add('P');
-       pre.add('R');
-       pre.add('Y');
-       pre.add('Y');
-       // assertEquals( pre , bowl.doMarket(2, 2));
+
+           pre.add('Y');
+           pre.add('Y');
+           pre.add('R');
+           pre.add('P');
+
+
+
+       assertEquals( pre , bowl.doMarket(1, 1));
+
+        ArrayList<Character> dec = new ArrayList<>();
+
+        dec.add('W');
+        dec.add('R');
+        dec.add('G');
+
+
+        // assertEquals( dec , bowl.doMarket(2, 1));
 
     }
 

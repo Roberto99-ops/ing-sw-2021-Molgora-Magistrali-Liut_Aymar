@@ -52,7 +52,14 @@ public class Market {
     public  ArrayList<Character> doMarket(int check, int number) {
         char temporaryball = this.extraball;
         char[][] equalmatrix = new char[3][4];
-        equalmatrix = this.matrix;
+
+
+        for (int j = 0; j < 3; j ++) {
+            for (int k = 0; k < 4; k++) {
+                equalmatrix [j][k] = this.matrix [j][k];
+            }
+        }
+
         ArrayList<Character> vector = new ArrayList<Character>();
 
         if (check == 2) {
