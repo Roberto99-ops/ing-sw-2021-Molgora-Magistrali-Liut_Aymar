@@ -4,11 +4,15 @@ import java.io.IOException;
 
 public class Turn {
 
-    private Player actualplayer;
-    private Game game;
-    private int l = game.getLonely();
-    private ActionStructure aStructure;
-    private ActionSignal signal;
+    public Player actualplayer;
+    public Game game;
+    public int l = game.getLonely();
+    public ActionStructure aStructure;
+    public ActionSignal signal;
+
+    public ActionSignal getSignal() {
+        return signal;
+    }
 
     public Player getActualplayer() {
 

@@ -10,13 +10,6 @@ public class TurnManager extends Turn {
 
     // inizializzazione di view e model
 
-    private Player actualplayer;
-    private Game game;
-    private int l = game.getLonely();
-    private ActionStructure aStructure;
-    private ActionSignal signal;
-
-
     /**
      * turn "main", it manages all the turn.
      * 1)asks us what do we want to do

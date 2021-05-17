@@ -20,7 +20,7 @@ public class Game {
      * @return
      */
 
-    public static ArrayList<Player> getPlayers() {
+    public ArrayList<Player> getPlayers() {
 
         return players;
     }
@@ -30,11 +30,11 @@ public class Game {
         Game.players = players;
     }
 
-    public static LeaderDeck getLeaderdeck() {
+    public LeaderDeck getLeaderdeck() {
         return leaderdeck;
     }
 
-    public static void setLeaderdeck(LeaderDeck leaderdeck) {
+    public void setLeaderdeck(LeaderDeck leaderdeck) {
         Game.leaderdeck = leaderdeck;
     }
 

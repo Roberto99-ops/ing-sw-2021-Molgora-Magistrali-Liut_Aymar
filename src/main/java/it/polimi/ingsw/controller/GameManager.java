@@ -19,23 +19,11 @@ public class GameManager extends Game {
     // inizializzazione di view e model
 
 
-
-    public static int lonely;
-    private static ArrayList<Player> players;
-    private static int n_players;
-    private static DevelopeDecks[] developedecks = new DevelopeDecks[12];
-    private static LeaderDeck leaderdeck;
-    private static Market market;
-    private static int VR=0;
-
-
-
     public static void main(String[] args) throws Exception {
         Game game = new Game();
         SingleGame singleGame = new SingleGame();
         // game.getLeaderdeck() = new LeaderDeck();
-        leaderdeck = new LeaderDeck();
-        players = new ArrayList<Player>();
+        // leaderdeck = new LeaderDeck();
         Turn turn = new Turn();
         int actualplayer = 0;
         Scanner scan = new Scanner(System.in);
@@ -45,10 +33,10 @@ public class GameManager extends Game {
         if ((scan.nextLine()) == "A") {
             // collegamento client-server
             Player player1 = new Player();
-            players.add(player1);
+            game.getPlayers().add(player1);
             System.out.println("Choose your NAME"); //CLIENTHENDLER
-            players.get(0).setName(scan.nextLine());
-            players.get(0).setNumber(1);
+            game.getPlayers().get(0).setName(scan.nextLine());
+            game.getPlayers().get(0).setNumber(1);
         } else if ((scan.nextLine()) == "B") {
             // chiudi il collegamento
         }
@@ -63,30 +51,30 @@ public class GameManager extends Game {
             int n_players = scan.nextInt();
             for (int i = 1; i < n_players; i++) {
                 Player temporaryplayer = new Player();
-                players.add(temporaryplayer);
+                game.getPlayers().add(temporaryplayer);
                 System.out.println("Choose your NAME"); //CLIENTHENDLER
-                players.get(i).setName(scan.nextLine());
-                players.get(i).setNumber(i+1);
+                game.getPlayers().get(i).setName(scan.nextLine());
+                game.getPlayers().get(i).setNumber(i+1);
             }
 
-            game.setPlayers(players);
+            game.setPlayers(game.getPlayers());
 
         } // aggiunta di errore nel caso in cui il carattere scelto non sia uno proposto
 
 
         while (true) {
             //3)
-            turn.setActualplayer(players.get(actualplayer));
+            turn.setActualplayer(game.getPlayers().get(actualplayer));
             turn.main();
 
             //4)
-            if (game.Endgame(players.get(actualplayer))) {
+            if (game.Endgame(game.getPlayers().get(actualplayer))) {
                 System.out.println("The winner is " + game.Victory()); // CLIENTHENDLER
                 return;
             }
 
             actualplayer++;
-            if (actualplayer >= players.size()) actualplayer = 0;
+            if (actualplayer >= game.getPlayers().size()) actualplayer = 0;
         }
     }
 }
