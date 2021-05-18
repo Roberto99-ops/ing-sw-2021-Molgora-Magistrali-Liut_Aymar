@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Collections;
 
 public class ActionStructure {
+
     private static int[] structure = {1,2,3,4,5,6,7};
     private static int AS_Counter=0;//ActionSignal_counter conta il segnalino che è stato preso (da 0 a 6 -> posti nella pila)
 
@@ -17,6 +18,10 @@ public class ActionStructure {
     public static int[] getStructure() {
         return structure;
     }
+    public static void setStructure(int[] structure) {
+        ActionStructure.structure = structure;
+    }
+
 
     /**
      * Picks the first Signal available on the stack, calls its action and puts it back, at the
