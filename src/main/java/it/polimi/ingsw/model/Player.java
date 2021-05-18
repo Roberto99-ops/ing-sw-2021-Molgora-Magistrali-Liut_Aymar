@@ -114,6 +114,10 @@ public class Player {
 
 
     //FaithTrack
+    private FaithTrack faithTrack = new FaithTrack();
+    public FaithTrack getFaithTrack() {
+        return faithTrack;
+    }
     private int FTposition=0;
     public  int getTrackposition() { return FTposition; }
     public void setTrackposition(int num) { FTposition=num; }
