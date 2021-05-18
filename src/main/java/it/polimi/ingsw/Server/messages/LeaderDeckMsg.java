@@ -27,6 +27,7 @@ public class LeaderDeckMsg extends NetworkMessage{
      * @return the deck of leadercard
      * @throws FileNotFoundException
      */
+
     public LeaderDeck getDeck() throws FileNotFoundException {
         LeaderDeck deck = new LeaderDeck();
         for (int i = 0; i < this.getArray().size(); i++) {

@@ -16,7 +16,7 @@ public class StrongboxMsg extends NetworkMessage {
 
     public StrongboxMsg(ResourceStructure strong)
     {
-        this.strongBox=strong;
+        this.strongBox = strong;
     }
 
     public ResourceStructure getStrongBox() {
@@ -29,4 +29,6 @@ public class StrongboxMsg extends NetworkMessage {
         // After this, you can handle transient fields or
         // special initialization that happens in the constructor
     }*/
+
+
 }
