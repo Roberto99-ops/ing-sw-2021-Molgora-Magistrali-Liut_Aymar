@@ -3,6 +3,15 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class SingleGame extends Game {
+
+    public  ArrayList<Player> getPlayers() {
+        return players;
+    }
+
+    public static void setPlayers(ArrayList<Player> players) {
+        SingleGame.players = players;
+    }
+
     //cosa ha:
     private static ArrayList<Player> players=new ArrayList<Player>(); //saranno due: il giocatore e Lorenzo
     private final static int n_players =2;
@@ -24,13 +33,7 @@ public class SingleGame extends Game {
 
     //private static int timer_VR_SG=0;   non utile perchè Lorenzo non guadagna punti se si trova in area Vatican Report
 
-    public static ArrayList<Player> getPlayers() {
-        return players;
-    }
 
-    public static void setPlayers(ArrayList<Player> players) {
-        SingleGame.players = players;
-    }
 
     public static int getN_players() {
         return n_players;

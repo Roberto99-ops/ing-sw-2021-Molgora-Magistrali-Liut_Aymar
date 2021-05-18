@@ -24,6 +24,14 @@ public class Turn {
         this.actualplayer = actualplayer;
     }
 
+    public Game getGame() {
+        return game;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
+    }
+
     //da spostare nel controller
     public void main() throws Exception {
         int action = 0;
@@ -32,7 +40,7 @@ public class Turn {
 
         //Ad ogni turno, effettuo il controllo del Vatican Report
         FaithTrack faithTrack = new FaithTrack();
-        faithTrack.VaticanReport(actualplayer);
+        faithTrack.VaticanReport(actualplayer, game);
 
         //se sono in single game, ogni volta che tocca a me, prendo un segnalino ed eseguo la sua azione
         if (l == 1) {

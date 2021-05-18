@@ -1,6 +1,8 @@
 package it.polimi.ingsw.model;
 
 public class FaithTrack {
+
+
     //private int PV_Track = 0; a seconda di dove si trova il segnalino riceve tot PV: ex cella #17==9PV
     //Partirebbe da 0 così mentre avanza "raccoglie" i PV sul tracciato
     //oppure si può usare il PV di PLayer?
@@ -11,14 +13,14 @@ public class FaithTrack {
      * VR changes according to which area is reached by the player ahead, so the others will not be able to call
      * the Vatican Report again when they reach that area.
      */
-    public void VaticanReport(Player actualplayer) {
+    public void VaticanReport(Player actualplayer, Game game) {
 
         //un player arriva per primo nell'area 1
         if ((actualplayer.getTrackposition()>=8)&&(Game.getVR()==0)) {
             //controllo se ci sono giocatori nell'area e do loro dei punti
-            for (int i=0; i<Game.getN_players(); i++){
-                if (Game.getPlayers().get(i).getTrackposition()>=5){
-                    Game.getPlayers().get(i).setPv((Game.getPlayers().get(i).getPv()+2));
+            for (int i=0; i<game.getN_players(); i++){
+                if (game.getPlayers().get(i).getTrackposition()>=5){
+                    game.getPlayers().get(i).setPv((game.getPlayers().get(i).getPv()+2));
                 }
             }
             Game.setVR(1);//una volta completato il giro, Vr viene settato a 1
@@ -29,11 +31,11 @@ public class FaithTrack {
         if ((actualplayer.getTrackposition()>=16)&&(Game.getVR()==1)) {
             //controllo se ci sono giocatori nell'area e do loro dei punti
             for (int i=0; i<Game.getN_players(); i++){
-                if (Game.getPlayers().get(i).getTrackposition()>=12){
-                    Game.getPlayers().get(i).setPv((Game.getPlayers().get(i).getPv()+3));
+                if (game.getPlayers().get(i).getTrackposition()>=12){
+                    game.getPlayers().get(i).setPv((game.getPlayers().get(i).getPv()+3));
                 }
             }
-            Game.setVR(2);//una volta completato il giro, Vr viene settato a 1
+            game.setVR(2);//una volta completato il giro, Vr viene settato a 1
             return;
         }
 
@@ -59,12 +61,12 @@ public class FaithTrack {
 
         if ((actualplayer.getTrackposition()>=24)&&(Game.getVR()==2)) {
             //controllo se ci sono giocatori nell'area e do loro dei punti
-            for (int i=0; i<Game.getN_players(); i++){
-                if (Game.getPlayers().get(i).getTrackposition()>=19){
-                    Game.getPlayers().get(i).setPv((Game.getPlayers().get(i).getPv()+4));
+            for (int i=0; i<game.getN_players(); i++){
+                if (game.getPlayers().get(i).getTrackposition()>=19){
+                    game.getPlayers().get(i).setPv((game.getPlayers().get(i).getPv()+4));
                 }
             }
-            Game.setVR(3);//una volta completato il giro, Vr viene settato a 1
+            game.setVR(3);//una volta completato il giro, Vr viene settato a 1
             return;
         }
 
