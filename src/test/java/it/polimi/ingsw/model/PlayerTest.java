@@ -95,12 +95,13 @@ public class PlayerTest {
         player.getStorage().setTypeExtrapanel('G');
         //inizializzo lo storage (quindi panel ed extrapanel)
         //considero panel ed extrapanel con elementi
-        player.getStorage().getPanel().add('G');
-        player.getStorage().getPanel().add('B');
-        player.getStorage().getPanel().add('B');
-        player.getStorage().getPanel().add('Y');
-        player.getStorage().getPanel().add('Y');
-        player.getStorage().getPanel().add('Y');
+        player.getStorage().getPanel().set(0,'G');
+        for (int i=1; i<3; i++){
+            player.getStorage().getPanel().set(i,'B');
+        }
+        for (int i=3; i<6; i++){
+            player.getStorage().getPanel().set(i,'Y');
+        }
         player.getStorage().getExtrapanel().add('G');
         player.getStorage().getExtrapanel().add('G');
         //scelgo la risorsa da eliminare
