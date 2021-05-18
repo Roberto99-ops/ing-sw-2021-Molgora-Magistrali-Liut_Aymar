@@ -55,7 +55,7 @@ public class SingleGame extends Game {
         SingleGame.leaderdeck = leaderdeck;
     }
 
-    public static Market getMarket() {
+    public  Market getMarket() {
         return market;
     }
 
