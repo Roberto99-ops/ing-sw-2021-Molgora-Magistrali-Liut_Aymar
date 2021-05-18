@@ -9,10 +9,10 @@ import java.util.ArrayList;
  * the structure sended is an array of integer.
  * every element of the array is the position fo that card into the json file.
  */
-public class LeaderDeckMessage extends NetworkMessage{
+public class LeaderDeckMsg extends NetworkMessage{
     private ArrayList<Integer> array;
 
-    public LeaderDeckMessage()
+    public LeaderDeckMsg()
     {
         array = new ArrayList<>();
     }
