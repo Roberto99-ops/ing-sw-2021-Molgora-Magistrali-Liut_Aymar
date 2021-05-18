@@ -88,7 +88,8 @@ public class ActionStructureTest {
         //case #7: shuffling the actions' structure
         int[] structure = {1,2,3,4,5,6,7};
         ActionStructure actionStructure = new ActionStructure();
-        Collections.shuffle(Arrays.asList(ActionStructure.getStructure()));
+        actionStructure.ShuffleSignal();
+        //Collections.shuffle(Arrays.asList(ActionStructure.getStructure()));
         //confront actionStructure.structure and this.structure
         assertNotEquals(structure, actionStructure.getStructure());
 
