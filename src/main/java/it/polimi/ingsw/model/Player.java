@@ -242,9 +242,11 @@ public class Player {
     public boolean removeResource(char resource) {
         int i;
         ArrayList<Character> vector = new ArrayList<Character>();
+        //aggiungo gli elementi dello storage nel vettore
         for (int c=0;c<6;c++){
             vector.add(storage.getPanel().get(c));
         }
+        //aggiungo gli elemento dello strongbox
         for (int c=0; c<2; c++){
             vector.add(storage.getExtrapanel().get(c));
         }

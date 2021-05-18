@@ -6,8 +6,8 @@ import java.util.List;
 public class Storage extends ArrayList<Character> {
 
 
-    private ArrayList <Character> panel = new ArrayList <Character> (List.of('N','N','N','N','N','N')); // arraylist di 6 spazi di base
-    private ResourceStructure extrapanel;
+    private ArrayList<Character> panel = new ArrayList <Character> (List.of('N','N','N','N','N','N')); // arraylist di 6 spazi di base
+    private ResourceStructure extrapanel = new ResourceStructure();
     private char typeExtrapanel= 'Z';  //carattere che per noi significa che il pannello extra non è attivo, non so se si può inzializzare così
 
 
