@@ -5,6 +5,19 @@ import it.polimi.ingsw.model.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/*
+
+public static int lonely;
+private static ArrayList<Player> players;
+private static int n_players;
+private static DevelopeDecks[] developedecks = new DevelopeDecks[12];
+private static LeaderDeck leaderdeck;
+private static Market market;
+private static int VR=0;
+private static int timer_VR=0;
+
+        */
+
 /**
  * 1) shuffle all the decks and market
  * 2) add all the players
@@ -34,6 +47,7 @@ public class GameManager extends Game {
             // collegamento client-server
             Player player1 = new Player();
             game.getPlayers().add(player1);
+            // obserable
             System.out.println("Choose your NAME"); //CLIENTHENDLER
             game.getPlayers().get(0).setName(scan.nextLine());
             game.getPlayers().get(0).setNumber(1);
