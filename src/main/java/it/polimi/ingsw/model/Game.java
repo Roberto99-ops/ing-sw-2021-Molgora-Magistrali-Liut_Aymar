@@ -30,7 +30,7 @@ public class Game {
         Game.players = players;
     }
 
-    public LeaderDeck getLeaderdeck() {
+    public static LeaderDeck getLeaderdeck() {
         return leaderdeck;
     }
 

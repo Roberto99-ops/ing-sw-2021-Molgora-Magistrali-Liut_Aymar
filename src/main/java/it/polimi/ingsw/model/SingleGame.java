@@ -47,7 +47,7 @@ public class SingleGame extends Game {
         SingleGame.developedecks = developedecks;
     }*/
 
-    public  LeaderDeck getLeaderdeck() {
+    public static LeaderDeck getLeaderdeck() {
         return leaderdeck;
     }
 
