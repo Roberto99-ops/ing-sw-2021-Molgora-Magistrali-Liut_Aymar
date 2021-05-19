@@ -58,24 +58,21 @@ public class DevelopementSpace {
 
         if (choice == 1) {
             i = minideck1.getStructure().size();
-            if ((minideck1.getStructure().get(i - 1).getColour() == structure.getColour() && minideck1.getStructure().get(1).getLevel() == structure.getLevel() - 1)
-                    || i == 0)
+            if (i == 0 || (minideck1.getStructure().get(i - 1).getColour() == structure.getColour() && minideck1.getStructure().get(i - 1).getLevel() == structure.getLevel() - 1))
                 minideck1.getStructure().add(structure);
         }
 
 
         if (choice == 2) {
             i = minideck2.getStructure().size();
-            if ((minideck2.getStructure().get(i - 1).getColour() == structure.getColour() && minideck2.getStructure().get(1).getLevel() == structure.getLevel() - 1)
-                    || i == 0)
+            if (i == 0 || (minideck2.getStructure().get(i - 1).getColour() == structure.getColour() && minideck2.getStructure().get(i - 1).getLevel() == structure.getLevel() - 1))
                 minideck2.getStructure().add(structure);
         }
 
 
         if (choice == 3) {
             i = minideck3.getStructure().size();
-            if ((minideck3.getStructure().get(i - 1).getColour() == structure.getColour() && minideck3.getStructure().get(1).getLevel() == structure.getLevel() - 1)
-                    || i == 0)
+            if (i == 0 || (minideck3.getStructure().get(i - 1).getColour() == structure.getColour() && minideck3.getStructure().get(i - 1).getLevel() == structure.getLevel() - 1))
                 minideck3.getStructure().add(structure);
         }
 
@@ -86,7 +83,7 @@ public class DevelopementSpace {
     public boolean checkDeck(DevelopeDecks minideck) {
         if ((minideck.getStructure().size() == 3) && ((minideck.getStructure().get(2).getColour()) == (minideck.getStructure().get(1).getColour())) &&
                 (minideck.getStructure().get(1).getColour()) == (minideck.getStructure().get(0).getColour()) &&
-                (minideck.getStructure().get(0).getLevel() == 1) && (minideck.getStructure().get(1).getLevel() == 2) && (minideck.getStructure().get(2).getLevel() == 2) ||
+                (minideck.getStructure().get(0).getLevel() == 1) && (minideck.getStructure().get(1).getLevel() == 2) && (minideck.getStructure().get(2).getLevel() == 3) ||
                 (minideck.getStructure().size() == 2) &&
                         (minideck.getStructure().get(1).getColour()) == (minideck.getStructure().get(0).getColour()) &&
                         (minideck.getStructure().get(0).getLevel() == 1) && (minideck.getStructure().get(1).getLevel() == 2)||

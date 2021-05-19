@@ -6,7 +6,7 @@ import com.google.gson.JsonParser;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 
-public class DevelopeCard{
+public class DevelopeCard {
 
     //Colori carte: G,B,Y,P
     private char colour;
