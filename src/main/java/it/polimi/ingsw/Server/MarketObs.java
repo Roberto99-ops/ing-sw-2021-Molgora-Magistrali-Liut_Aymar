@@ -6,7 +6,7 @@ import it.polimi.ingsw.model.Game;
  * observ the Market in model returning the essential information about it
  */
 
-public abstract class MarketView {
+public abstract class MarketObs {
 
     public char[][] getMatrixView(Game game) {
         return game.getMarket().getMatrix();
