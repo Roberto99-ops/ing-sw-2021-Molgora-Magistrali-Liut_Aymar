@@ -10,7 +10,7 @@ public class Lorenzo {
 
     private static int number = 0; //posizione su tracciato
 
-    public static int getNumber() {
+    public  int getNumber() {
         return number;
     }
 
