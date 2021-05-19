@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class SingleGame extends Game {
 
-    public  ArrayList<Player> getPlayers() {
+    public static ArrayList<Player> getPlayers() {
         return players;
     }
 

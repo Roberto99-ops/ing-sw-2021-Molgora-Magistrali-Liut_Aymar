@@ -20,7 +20,7 @@ public class Game {
      * @return
      */
 
-    public ArrayList<Player> getPlayers() {
+    public static ArrayList<Player> getPlayers() {
 
         return players;
     }

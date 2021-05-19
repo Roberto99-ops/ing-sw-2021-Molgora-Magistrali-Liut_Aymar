@@ -23,7 +23,7 @@ public class Storage extends ArrayList<Character> {
     }
 
 
-    public  ArrayList <Character> getExtrapanel(){return extrapanel;}
+    public  ArrayList <Character> getExtrapanel() { return extrapanel;}
 
     public ArrayList <Character> getPanel() {
         return panel;
