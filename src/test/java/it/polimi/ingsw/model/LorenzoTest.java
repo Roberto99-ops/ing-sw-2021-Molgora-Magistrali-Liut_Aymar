@@ -32,6 +32,6 @@ public class LorenzoTest {
         lorenzo.Lorenzomoves(1);
         assertEquals(3, lorenzo.getNumber());
         int[] arr = {1,2,3,4,5,6,7};
-        assertNotEquals(arr, ActionStructure.getStructure());
+        assertNotEquals(arr, SingleGame.getActionStructure());
     }
 }

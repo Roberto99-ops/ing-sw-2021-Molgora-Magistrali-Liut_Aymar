@@ -89,6 +89,11 @@ public class ActionStructureTest {
         int[] structure = {1,2,3,4,5,6,7};
         ActionStructure actionStructure = new ActionStructure();
         actionStructure.ShuffleSignal();
+        /*int[] temp;
+        temp=actionStructure.getStructure();
+        for(int i=0; i<7;i++) {
+            System.out.println(temp[i]);
+        }*/
         //Collections.shuffle(Arrays.asList(ActionStructure.getStructure()));
         //confront actionStructure.structure and this.structure
         assertNotEquals(structure, actionStructure.getStructure());

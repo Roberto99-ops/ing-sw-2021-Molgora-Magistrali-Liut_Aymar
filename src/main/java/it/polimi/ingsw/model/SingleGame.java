@@ -71,6 +71,8 @@ public class SingleGame extends Game {
         SingleGame.VR_SG = VR_SG;
     }
 
+    public static ActionStructure getActionStructure(){return actionStructure;}
+
     /*public static int getTimer_VR_SG() {
         return timer_VR_SG;
     }
@@ -93,7 +95,7 @@ public class SingleGame extends Game {
         Player you= new Player();
         players.add(you);
         you.setNumber(1);
-        //si chiede il nome/username
+       //si chiede il nome/username
         System.out.println("What's your name?");
         you.setName(scan.nextLine());
         //si aggiunge Lorenzo come secondo giocatore
@@ -103,7 +105,7 @@ public class SingleGame extends Game {
         LM.setName(lore.getName());
         //Si inizializza tutto:
         //- i segnalini azione (li mischio)
-        ActionStructure.ShuffleSignal();
+        singleGame.actionStructure.ShuffleSignal();
         //- i dodici mazzi di Development Cards (li prendo da Game)
         //- i LeaderDeck
         leaderdeck = new LeaderDeck();

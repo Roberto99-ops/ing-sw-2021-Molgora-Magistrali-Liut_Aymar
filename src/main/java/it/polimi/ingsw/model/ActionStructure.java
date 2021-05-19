@@ -2,24 +2,25 @@ package it.polimi.ingsw.model;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Random;
 
 public class ActionStructure {
 
-    private static int[] structure = {1,2,3,4,5,6,7};
-    private static int AS_Counter=0;//ActionSignal_counter conta il segnalino che è stato preso (da 0 a 6 -> posti nella pila)
+    private  int[] structure = {1,2,3,4,5,6,7};
+    private  int AS_Counter=0;//ActionSignal_counter conta il segnalino che è stato preso (da 0 a 6 -> posti nella pila)
 
-    public static int getAS_Counter() {
+    public  int getAS_Counter() {
         return AS_Counter;
     }
 
-    public static void setAS_Counter(int AS_Counter) {
-        ActionStructure.AS_Counter = AS_Counter;
+    public  void setAS_Counter(int AS_Counter) {
+        this.AS_Counter = AS_Counter;
     }
-    public static int[] getStructure() {
+    public  int[] getStructure() {
         return structure;
     }
-    public static void setStructure(int[] structure) {
-        ActionStructure.structure = structure;
+    public  void setStructure(int[] structure) {
+        this.structure = structure;
     }
 
 
@@ -41,8 +42,15 @@ public class ActionStructure {
     /**
      * Shuffles the Signals' stack
      */
-    public static void ShuffleSignal(){
-        Collections.shuffle(Arrays.asList(structure));
+    public  void ShuffleSignal(){
+        Random random = new Random();
+        for (int i=0; i < getStructure().length;i++){
+            int indice = random.nextInt(getStructure().length);
+            int temp = getStructure()[indice];
+            structure[indice]= structure[i];
+            structure[i]=temp;
+        }
+        //Collections.shuffle(Arrays.asList(structure));
         AS_Counter=6;
     }
 

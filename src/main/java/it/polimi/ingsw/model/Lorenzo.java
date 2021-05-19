@@ -28,7 +28,7 @@ public class Lorenzo {
             number=number+2;
         } else if (forward==1){
             number++;
-            ActionStructure.ShuffleSignal();
+            SingleGame.getActionStructure().ShuffleSignal();
         }
         return;
     }
