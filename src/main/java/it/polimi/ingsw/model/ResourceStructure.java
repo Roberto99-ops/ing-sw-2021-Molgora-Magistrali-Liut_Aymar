@@ -4,7 +4,7 @@ public class ResourceStructure extends ArrayList {
     /**
      * resourcestructure is an arraylist of char which can be W,R,B,G,P,Y
      */
-    private ArrayList<Character> vector; //è giusto istanziarlo così o va istanziato dentro ogni metodo?
+    private ArrayList<Character> vector;
 
     ResourceStructure()
     {
@@ -34,13 +34,14 @@ public class ResourceStructure extends ArrayList {
      */
     public boolean checkEquality(ArrayList<Character> vector) {
         int counter = 0;
+        if(vector.size()==0) return true;
         Character first = vector.get(0);
-        for(int i=0; i <= vector.size(); i++) {
+        for(int i=0; i < vector.size(); i++) {
             if (vector.get(i) == first) {
                 counter ++;
             }
         }
-    if (counter == vector.size() + 1) {
+    if (counter == vector.size()) {
         return true;
     } else {
         return false;
@@ -68,7 +69,7 @@ public class ResourceStructure extends ArrayList {
     public int firstOccurance(char resource)
     {
         int i=0;
-        while(!this.getVector().contains(resource)) i++;
+        while(this.getVector().get(i) != resource) i++;
         return i;
     }
 
