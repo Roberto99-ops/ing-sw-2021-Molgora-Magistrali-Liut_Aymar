@@ -8,8 +8,16 @@ public class ActionStructureMsg extends NetworkMessage{
     private ActionStructure actionStructure = new ActionStructure();
 
 
+    /**
+     * Prepares the data the Server is going to send to the Client about the ActionSignal picked
+     * @param actionStructure the data requested
+     */
     public ActionStructureMsg(ActionStructure actionStructure){this.actionStructure=actionStructure;}
 
+    /**
+     * Sends the data of the ActionSignal picked by the Player in SingleGame mode
+     * @return the data requested
+     */
     public ActionStructure getActionStructure(){
         return actionStructure;
     }

@@ -5,6 +5,10 @@ import it.polimi.ingsw.model.Lorenzo;
 public class LorenzoMsg extends NetworkMessage{
     private Lorenzo lorenzo = new Lorenzo();
 
+    /**
+     * Sets the data of Lorenzo we want the Server to send to the Client
+     * @param lorenzo is data we send to the Client
+     */
     public LorenzoMsg (Lorenzo lorenzo){this.lorenzo=lorenzo;}
 
     //ho bisogno di comunicare la posizione di lorenzo sul tracciato
@@ -15,7 +19,11 @@ public class LorenzoMsg extends NetworkMessage{
      */
     public int getTrackPositionLore(){return lorenzo.getNumber();}
 
-    /*public Lorenzo getLorenzo() {
+    /**
+     * Sends as a message to the client, the data of Lorenzo
+     * @return the data of Lorenzo
+     */
+    public Lorenzo getLorenzo() {
         return lorenzo;
-    }*/
+    }
 }

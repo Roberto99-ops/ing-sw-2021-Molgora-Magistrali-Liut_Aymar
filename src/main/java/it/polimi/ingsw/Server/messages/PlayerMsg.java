@@ -6,14 +6,14 @@ public class PlayerMsg extends NetworkMessage{
     private Player player;
 
     /**
-     * Prepares the data of the Player we want the Server to send the Client
+     * Prepares the data of the Player we want the Server to send to the Client
      * @param player: data requested about the player
      */
     public PlayerMsg(Player player){
         this.player=player;
     }
     /**
-     * Returns data about a Player
+     * Returns data about the Player
      * @return player: data requested about the player
      */
     public Player getPlayer() {

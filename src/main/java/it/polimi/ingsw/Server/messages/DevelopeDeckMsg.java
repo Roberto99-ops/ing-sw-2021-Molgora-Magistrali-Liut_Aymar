@@ -7,8 +7,8 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 /**
- * the structure sended is an array of integer.
- * every element of the array is the position fo that card into the json file.
+ * The structure sent is an array of integers.
+ * Every element of the array is the position of that card into the json file.
  */
 public class DevelopeDeckMsg extends NetworkMessage{
     private ArrayList<Integer> array;
@@ -23,12 +23,11 @@ public class DevelopeDeckMsg extends NetworkMessage{
     }
 
     /**
-     * this method has to be called by the receiver, to "unpack" the array of integer and
-     * trasform it into a deck of developecards.
-     * @return the deck of developecards
+     * This method needs to be called by the receiver, to "unpack" the array of integer and
+     * transform it into a deck of Developecards.
+     * @return the deck of Developecards
      * @throws FileNotFoundException
      */
-
     public DevelopeDecks getDeck() throws FileNotFoundException {
         DevelopeDecks deck = new DevelopeDecks();
         for (int i = 0; i < this.getArray().size(); i++) {

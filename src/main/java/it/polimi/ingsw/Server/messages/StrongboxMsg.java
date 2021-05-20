@@ -14,11 +14,19 @@ import java.util.ArrayList;
 public class StrongboxMsg extends NetworkMessage {
     private ResourceStructure strongBox;
 
+    /**
+     * Prepares the data the Server is going to send to the Client about the situation of StrongBox
+     * @param strong the actual situation of StrongBox
+     */
     public StrongboxMsg(ResourceStructure strong)
     {
         this.strongBox = strong;
     }
 
+    /**
+     * Sends the data of the situation of StrongBox
+     * @return the data requested
+     */
     public ResourceStructure getStrongBox() {
         return strongBox;
     }

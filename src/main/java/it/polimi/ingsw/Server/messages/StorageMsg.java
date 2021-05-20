@@ -5,10 +5,18 @@ import it.polimi.ingsw.model.Storage;
 public class StorageMsg extends NetworkMessage{
     private Storage storage= new Storage();
 
+    /**
+     * Prepares the data the Server is going to send to the Client about the situation of Storage
+     * @param storage the actual situation of storage
+     */
     public StorageMsg(Storage storage){
         this.storage=storage;
     }
 
+    /**
+     * Sends the data of the situation of Storage
+     * @return the data requested
+     */
     public Storage getStorage() {
         return storage;
     }

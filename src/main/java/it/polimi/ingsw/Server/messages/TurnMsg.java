@@ -9,7 +9,19 @@ public class TurnMsg extends NetworkMessage {
     private Game game = new Game();
     private int choice;
 
+    /**
+     * Prepares the data the Server is going to send to the Client about the current Turn
+     * @param turn the data requested
+     */
+    public TurnMsg(Turn turn){this.turn=turn;}
 
+    /**
+     * Sends the data of the current Turn
+     * @return the data requested
+     */
+    public Turn getTurn(){
+        return turn;
+    }
 
 
     public void setChoice(int choice) {
