@@ -6,7 +6,7 @@ public class ResourceStructure extends ArrayList {
      */
     private ArrayList<Character> vector;
 
-    ResourceStructure()
+    public ResourceStructure()
     {
         vector = new ArrayList<>();
     }

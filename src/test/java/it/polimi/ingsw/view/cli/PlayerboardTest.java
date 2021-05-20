@@ -6,6 +6,7 @@ import it.polimi.ingsw.model.ResourceStructure;
 import org.junit.Test;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
@@ -30,11 +31,22 @@ public class PlayerboardTest {
             int mix = mixer.nextInt(4);
             player.addResourceStrongBox(resources[mix]);
         }
-        ResourceStructure boh = player.getStrongBox().getStructure();
+
+        ResourceStructure panel = new ResourceStructure();
+        panel.add('P');
+        panel.add('Y');
+        panel.add('G');
+        panel.add('B');
+        panel.add('Y');
+        panel.add('B');
+        player.getStorage().setPanel(panel);
+
+        player.getStorage().setTypeExtrapanel('Y');
+        player.getStorage().getExtrapanel().add('P');
+        player.getStorage().getExtrapanel().add('Y');
+
         Playerboard playerboard = new Playerboard(player);
         playerboard.Print();
-        card2.setCard(9);
-        //playerboard = new Playerboard(player);
-        //playerboard.Print();
+
     }
 }

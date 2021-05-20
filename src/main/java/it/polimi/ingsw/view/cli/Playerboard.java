@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class Playerboard extends PaintCards {
     private static final int VERT_SIZE = 45;
-    private static final int HORIZ_SIZE = 150;  // posso farlo di 150?
+    private static final int HORIZ_SIZE = 150;
 
     private String[][] playerboard;
 
@@ -22,7 +22,7 @@ public class Playerboard extends PaintCards {
         playerboard = new String[VERT_SIZE][HORIZ_SIZE];
         Perimeter(playerboard, VERT_SIZE, HORIZ_SIZE, Color.BLACK);
         FaithTrack();
-        Storage();
+        Storage(player.getStorage());
         Strongbox(player.getStrongBox().getStructure());
         LeaderSpace(player);
         Developementspace();
@@ -123,8 +123,9 @@ public class Playerboard extends PaintCards {
      * it draws the storage space inside the playerboard
      */
 
-    private void Storage()
+    private void Storage(Storage playerStorage)
     {
+        //Storage playerStorage = player.getStorage();
         int MAX_VERT_SIZE = VERT_SIZE-13-2-VERT_SIZE/4;
         int MAX_HORIZ_SIZE = HORIZ_SIZE/4;
         Color color = Color.STRONGBOX_COLOR;
@@ -133,6 +134,60 @@ public class Playerboard extends PaintCards {
             for (int j = 0; j < MAX_HORIZ_SIZE; j++)
                 storage[i][j]=color + " " + Color.RESET;
 
+        //here I draw the storage spaces
+        putString("STORAGE", storage, 1, 16);
+        for (int i = 0; i < 3; i++) storage[4][18+i] = Color.RESET + "_";
+        for (int i = 0; i < 7; i++) storage[7][16+i] = Color.RESET + "_";
+        for (int i = 0; i < 11; i++) storage[10][14+i] = Color.RESET + "_";
+        
+        //here I draw the marbles in the storage
+        int lung = playerStorage.getPanel().size();
+        if(lung > 0) {
+            ArrayList<Character> panel = new ArrayList<>();
+            panel.add(playerStorage.getPanel().get(0));
+            convertSymbols(panel, storage, 4, 19);
+            if(lung > 1){
+                panel.remove(0);
+                panel.add(playerStorage.getPanel().get(1));
+                convertSymbols(panel, storage, 7, 17);
+                if(lung > 2) {
+                    panel.remove(0);
+                    panel.add(playerStorage.getPanel().get(2));
+                    convertSymbols(panel, storage, 7, 21);
+                    if(lung > 3) {
+                        panel.remove(0);
+                        panel.add(playerStorage.getPanel().get(3));
+                        convertSymbols(panel, storage, 10, 16);
+                        if(lung > 4) {
+                            panel.remove(0);
+                            panel.add(playerStorage.getPanel().get(4));
+                            convertSymbols(panel, storage, 10, 19);
+                            if(lung > 5) {
+                                panel.remove(0);
+                                panel.add(playerStorage.getPanel().get(5));
+                                convertSymbols(panel, storage, 10, 22);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        if(playerStorage.getTypeExtrapanel()!='Z') {
+            putString("EXTRAPANEL", storage, 15, 15);
+            for (int i = 0; i < 7; i++) storage[17][16 + i] = Color.RESET + "_";
+            int lung1 = playerStorage.getExtrapanel().size();
+            if (lung1 > 0) {
+                ArrayList<Character> panel = new ArrayList<>();
+                panel.add(playerStorage.getExtrapanel().get(0));
+                convertSymbols(panel, storage, 17, 17);
+                if (lung1 > 1) {
+                    panel.remove(0);
+                    panel.add(playerStorage.getExtrapanel().get(1));
+                    convertSymbols(panel, storage, 17, 21);
+                }
+            }
+        }
 
         int initialVert=14;
         for (int i = 0; i < MAX_VERT_SIZE; i++)
