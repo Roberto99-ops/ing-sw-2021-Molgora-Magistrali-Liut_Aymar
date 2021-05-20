@@ -1,4 +1,5 @@
 package it.polimi.ingsw.model;
+import java.io.Serializable;
 import java.util.Random;
 import java.util.ArrayList;
 
@@ -6,7 +7,7 @@ import java.util.ArrayList;
  * abstract class with generics so we can override from developedeck and leaderdeck
  * @param <T>
  */
-public abstract class Deck <T>{
+public abstract class Deck <T> implements Serializable {
     private ArrayList<T> structure;
 
     //restituisce il mazzo

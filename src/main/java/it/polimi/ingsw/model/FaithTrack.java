@@ -1,6 +1,8 @@
 package it.polimi.ingsw.model;
 
-public class FaithTrack {
+import java.io.Serializable;
+
+public class FaithTrack implements Serializable {
 
 
     private int PV_Track = 0;

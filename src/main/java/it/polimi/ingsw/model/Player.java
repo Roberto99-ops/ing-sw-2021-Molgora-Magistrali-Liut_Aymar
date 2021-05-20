@@ -1,11 +1,12 @@
 package it.polimi.ingsw.model;
+import java.io.Serializable;
 import java.lang.String;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Collections;
 
 
-public class Player {
+public class Player implements Serializable {
     //cose che appartengono solo al player:
     //Nome, Numero, PV, Posizione tracciato fede, Plancia, LeaderCards(2)
     //Carte Sviluppo acquistate

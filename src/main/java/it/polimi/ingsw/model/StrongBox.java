@@ -1,6 +1,8 @@
 package it.polimi.ingsw.model;
 
-public class StrongBox {
+import java.io.Serializable;
+
+public class StrongBox implements Serializable {
 
     private ResourceStructure structure = new ResourceStructure();
     private int TotalResources;

@@ -1,9 +1,10 @@
 package it.polimi.ingsw.model;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class Storage extends ArrayList<Character> {
+public class Storage extends ArrayList<Character> implements Serializable {
 
 
     private ArrayList<Character> panel = new ArrayList <Character> (List.of('N','N','N','N','N','N')); // arraylist di 6 spazi di base

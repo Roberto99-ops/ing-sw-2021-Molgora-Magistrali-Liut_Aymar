@@ -1,6 +1,8 @@
 package it.polimi.ingsw.model;
 
-public class DevelopementSpace {
+import java.io.Serializable;
+
+public class DevelopementSpace implements Serializable {
 
     private DevelopeDecks minideck1 = new DevelopeDecks();
     private DevelopeDecks minideck2 = new DevelopeDecks();

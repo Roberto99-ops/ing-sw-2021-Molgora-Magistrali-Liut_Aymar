@@ -9,6 +9,9 @@ public class TurnMsg extends NetworkMessage {
     private Game game = new Game();
     private int choice;
 
+
+
+
     public void setChoice(int choice) {
         this.choice = choice;
     }
