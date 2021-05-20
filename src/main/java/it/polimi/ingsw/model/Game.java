@@ -49,7 +49,7 @@ public class Game {
         return developedecks[i];
     }
 
-    public Market getMarket() {
+    public static Market getMarket() {
 
         return market;
     }
