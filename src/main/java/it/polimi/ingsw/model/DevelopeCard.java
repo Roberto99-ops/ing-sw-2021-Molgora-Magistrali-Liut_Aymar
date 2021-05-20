@@ -74,7 +74,7 @@ public class DevelopeCard {
      * it uses the (0,1,2) logic defined into the player.checkresources method to check where the resources are.
      * @param player: is the player who wants to do a production
      */
-    public void DoProduction(Player player)
+    public int DoProduction(Player player)
     {
         //(1)
         if(player.CheckResources(this.inputproduction.getVector())!=0) {
@@ -99,8 +99,10 @@ public class DevelopeCard {
                 }
                 for(int i=0; i<this.outputproduction.getVector().size(); i++)
                     player.addResourceStrongBox(this.outputproduction.getVector().get(i)); }
+            return 1;
            }
         else System.out.println("You don't own enough Resources");
+        return 0;
     }
 
 

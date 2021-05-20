@@ -82,7 +82,7 @@ public class Turn {
      * then checks if he owns enough resources and complete the transaction
      */
 
-    public void ShopCard(Game game) throws Exception {
+    public int ShopCard(Game game) throws Exception {
         int choose = 0;
         DevelopeCard card = new DevelopeCard();
         ResourceStructure newcost = new ResourceStructure();
@@ -103,7 +103,7 @@ public class Turn {
             //      Prima controllo se ho 2 o + W. Se ce le ho, passo a controllare se ho 1 o + Y
         //ex. if (newcost<=actualplayer.getStorage().countTypeS()+actualplayer.getStrongBox()...)
 
-        if (this.actualplayer.CheckResources(newcost)==0) return;
+        if (this.actualplayer.CheckResources(newcost)==0) return 0;
 
         if (this.actualplayer.CheckResources(newcost)==1)
         {
@@ -123,6 +123,7 @@ public class Turn {
         }
 
         this.actualplayer.getDevelopecards().getStructure().add(card);
+        return 1;
     }
 
     /**

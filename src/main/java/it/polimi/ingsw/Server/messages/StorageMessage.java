@@ -1,4 +1,4 @@
-package it.polimi.ingsw.Server.messages;
+/*package it.polimi.ingsw.Server.messages;
 
 import it.polimi.ingsw.model.ResourceStructure;
 import it.polimi.ingsw.model.Storage;
@@ -15,6 +15,8 @@ public class StorageMessage extends NetworkMessage {
 
     /*
     implementation
-     */
+
 
 }
+*/
+
