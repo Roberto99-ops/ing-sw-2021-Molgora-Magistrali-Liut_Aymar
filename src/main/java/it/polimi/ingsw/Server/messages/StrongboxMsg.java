@@ -12,27 +12,16 @@ import java.util.ArrayList;
  * so the java.io.Serializable interface has no difficulty serializing it.
  */
 public class StrongboxMsg extends NetworkMessage {
-    private StrongBox strongBox = new StrongBox();
+    private ResourceStructure strongBox;
 
-    public StrongboxMsg(StrongBox strong)
+    public StrongboxMsg(ResourceStructure strong)
     {
         this.strongBox = strong;
     }
 
-    public StrongBox getStrongBox() {
+    public ResourceStructure getStrongBox() {
         return strongBox;
     }
-
-    public String available() {
-        return "Available resources in your strongbox:\nRocks(G): "+strongBox.countTypeSB('G')+"\nShields(B): "+strongBox.countTypeSB('B')+"\nServants(P): "+strongBox.countTypeSB('P')+"\nCoins(Y): "+strongBox.countTypeSB('Y')+"\n";
-    }
-
-   /* private void readObject(ObjectInputStream serialized) throws ClassNotFoundException, IOException
-    {
-        serialized.defaultReadObject();
-        // After this, you can handle transient fields or
-        // special initialization that happens in the constructor
-    }*/
 
 
 }
