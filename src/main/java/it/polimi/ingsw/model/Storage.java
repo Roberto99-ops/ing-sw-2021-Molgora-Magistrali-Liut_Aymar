@@ -76,9 +76,9 @@ public class Storage extends ArrayList<Character> {
      int counterB = 0;
      int counterP = 0;
      int counterY = 0;
-     //int counterR = 0;
+     int counterR = 0;
      int counterG = 0;
-     //int counterW = 0;
+     int counterW = 0;
      int sum = 0;
 
      for (int i = 5; i >= 0; i--) {
@@ -90,10 +90,10 @@ public class Storage extends ArrayList<Character> {
                  break;
              }
 
-             /*case 'W': {
+             case 'W': {
                  counterW++;
                  break;
-             }*/
+             }
 
              case 'P': {
                  counterP++;
@@ -105,10 +105,10 @@ public class Storage extends ArrayList<Character> {
                  break;
              }
 
-             /*case 'R': {
+             case 'R': {
                  counterR++;
                  break;
-             }*/
+             }
 
              case 'G': {
                  counterG++;
@@ -121,11 +121,11 @@ public class Storage extends ArrayList<Character> {
      System.out.println( " G : " + counterG);
      System.out.println( " Y : " + counterY);
      System.out.println( " P : " + counterP);
-     //System.out.println( " R : " + counterR);
-     //System.out.println( " W : " + counterW);
+     System.out.println( " R : " + counterR);
+     System.out.println( " W : " + counterW);
 
 
-     sum = counterB + counterG  + counterY + counterP ;
+     sum = counterB + counterG  + counterY + counterP + counterW + counterR;
 
      return sum;
  }
