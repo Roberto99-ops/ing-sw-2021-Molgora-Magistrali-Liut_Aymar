@@ -12,15 +12,19 @@ import java.util.ArrayList;
  * so the java.io.Serializable interface has no difficulty serializing it.
  */
 public class StrongboxMsg extends NetworkMessage {
-    private ResourceStructure strongBox;
+    private StrongBox strongBox = new StrongBox();
 
-    public StrongboxMsg(ResourceStructure strong)
+    public StrongboxMsg(StrongBox strong)
     {
         this.strongBox = strong;
     }
 
-    public ResourceStructure getStrongBox() {
+    public StrongBox getStrongBox() {
         return strongBox;
+    }
+
+    public String available() {
+        return "Available resources in your strongbox:\nRocks(G): "+strongBox.countTypeSB('G')+"\nShields(B): "+strongBox.countTypeSB('B')+"\nServants(P): "+strongBox.countTypeSB('P')+"\nCoins(Y): "+strongBox.countTypeSB('Y')+"\n";
     }
 
    /* private void readObject(ObjectInputStream serialized) throws ClassNotFoundException, IOException
