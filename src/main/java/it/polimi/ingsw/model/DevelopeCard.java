@@ -5,8 +5,9 @@ import com.google.gson.JsonParser;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.Serializable;
 
-public class DevelopeCard {
+public class DevelopeCard implements Serializable {
 
     //Colori carte: G,B,Y,P
     private char colour;
