@@ -8,7 +8,7 @@ public class ActionStructureMsg extends NetworkMessage{
     private ActionStructure actionStructure = new ActionStructure();
 
 
-    public ActionStructureMsg(ActionStructure actionStructure){this.actionStructure.setStructure(actionStructure.getStructure());}
+    public ActionStructureMsg(ActionStructure actionStructure){this.actionStructure=actionStructure;}
 
     public ActionStructure getActionStructure(){
         return actionStructure;
