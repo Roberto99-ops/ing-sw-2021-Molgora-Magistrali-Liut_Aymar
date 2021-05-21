@@ -1,8 +1,9 @@
 package it.polimi.ingsw.model;
 import java.io.IOException;
+import java.io.Serializable;
 
 
-public class Turn {
+public class Turn implements Serializable {
 
     public Player actualplayer;
     public Game game;
