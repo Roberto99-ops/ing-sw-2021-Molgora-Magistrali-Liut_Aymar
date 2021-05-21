@@ -14,8 +14,8 @@ public class SingleGame extends Game {
 
     //cosa ha:
     private static ArrayList<Player> players=new ArrayList<Player>(); //saranno due: il giocatore e Lorenzo
-    private final static int n_players =2;
-    //private static DevelopeDecks developedecks[];
+    private final static int n_players = 2;
+    private static DevelopeDecks developedecks[];
     private static LeaderDeck leaderdeck;
     private static Market market;
     private static int VR_SG=0;
@@ -39,13 +39,13 @@ public class SingleGame extends Game {
         return n_players;
     }
 
-    /*public static DevelopeDecks[] getDevelopedecks() {
+    public static DevelopeDecks[] getDevelopedecks() {
         return developedecks;
     }
-*/
-    /*public static void setDevelopedecks(DevelopeDecks[] developedecks) {
+
+    public static void setDevelopedecks(DevelopeDecks[] developedecks) {
         SingleGame.developedecks = developedecks;
-    }*/
+    }
 
     public static LeaderDeck getLeaderdeck() {
         return leaderdeck;

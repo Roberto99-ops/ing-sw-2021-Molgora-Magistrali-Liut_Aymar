@@ -19,7 +19,7 @@ public class TurnManager extends Turn {
      */
 
     /**
-     * turn "main", it manages all the turn.
+     * turnmanager manages all the turn.
      * 1)asks us what do we want to do
      * 2)in case we choose to active a production, we join a while that active all the production we want
      * 2.1)it lists us all our LeaderCards so we can choose to active one of that

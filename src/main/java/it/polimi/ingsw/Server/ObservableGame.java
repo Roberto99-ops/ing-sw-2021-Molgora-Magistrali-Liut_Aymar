@@ -141,9 +141,6 @@ public class ObservableGame {
 
 
 
-
-
-
     public void addObserver(Observer n_actualplayer) {
 
         this.observers.add(n_actualplayer);
@@ -160,7 +157,9 @@ public class ObservableGame {
 
 
 // notify allObservers
-
+   public void notifyAllObservers() {
+      // metodo che notifica a tutti gli observers (giocatori) che c'è stato un cambiamento nel model
+    }
 
 }
 
