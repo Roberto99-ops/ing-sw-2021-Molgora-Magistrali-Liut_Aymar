@@ -13,6 +13,7 @@ public class MarketView extends Utility {
         market = new String[VERT_SIZE][HORIZ_SIZE];
         Perimeter(market, VERT_SIZE, HORIZ_SIZE, Color.BACKGROUND_GRAY);
 
+        putString("MARKET", market, 1, 30);
         drawExtramarble(gamemarket.getExtraball());
 
         Space(gamemarket);
