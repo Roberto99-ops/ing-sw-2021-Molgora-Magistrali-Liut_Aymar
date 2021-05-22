@@ -18,6 +18,7 @@ public class PlayerboardTest {
     @Test
     public void print() throws FileNotFoundException {
         Player player = new Player();
+        player.setTrackposition(8);
         LeaderCard card1 = new LeaderCard();
         LeaderCard card2 = new LeaderCard();
         card1.setCard(10);

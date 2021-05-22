@@ -21,7 +21,7 @@ public class Playerboard extends PaintCards {
     Playerboard(Player player) throws FileNotFoundException {
         playerboard = new String[VERT_SIZE][HORIZ_SIZE];
         Perimeter(playerboard, VERT_SIZE, HORIZ_SIZE, Color.BLACK);
-        FaithTrack();
+        FaithTrack(player.getTrackposition());
         Storage(player.getStorage());
         Strongbox(player.getStrongBox().getStructure());
         LeaderSpace(player);
@@ -33,7 +33,7 @@ public class Playerboard extends PaintCards {
      * @throws FileNotFoundException
      */
 
-    private void FaithTrack() throws FileNotFoundException   //devo mettere lo sfondo di un altro colore
+    private void FaithTrack(int trackPosition) throws FileNotFoundException   //devo mettere lo sfondo di un altro colore
     {
         int MAX_HIGH = 13;
         Color basecolor = Color.BACKGROUND_CYAN;
@@ -57,7 +57,7 @@ public class Playerboard extends PaintCards {
             LeftHighCorner_VERT = card.get("LeftHighCorner_VERT").getAsInt();
             content = card.get("content").getAsInt();
 
-            Square(LeftHighCorner_VERT, LeftHighCorner_HORIZ, content);
+            Square(LeftHighCorner_VERT, LeftHighCorner_HORIZ, content, trackPosition);
         }
     }
 
@@ -68,7 +68,7 @@ public class Playerboard extends PaintCards {
      * @param LeftHighCorner_HORIZ = is a number that defines the horizontal position of them cell's right corner
      * @param content = is the content of the cell (usually a number but it could be the faithmarker)
      */
-    private void Square(int LeftHighCorner_VERT, int LeftHighCorner_HORIZ, int content)
+    private void Square(int LeftHighCorner_VERT, int LeftHighCorner_HORIZ, int content, int trackPosition)
     {
         int SQUARE_HIGH = 4;
         int SQUARE_LENGHT = 7;
@@ -93,7 +93,7 @@ public class Playerboard extends PaintCards {
         square[SQUARE_HIGH-1][0] = Color.RED + "╚" + Color.RESET;
         square[SQUARE_HIGH-1][SQUARE_LENGHT-1] = Color.RED + "╝" + Color.RESET;
 
-        if(content>9 || content==0)
+        if(content>9)
             square[(SQUARE_HIGH-1)/2][(SQUARE_LENGHT-1)/2+1]="";
         square[(SQUARE_HIGH-1)/2][(SQUARE_LENGHT-1)/2]=Color.YELLOW + String.valueOf(content).toString();
 
@@ -110,7 +110,10 @@ public class Playerboard extends PaintCards {
             square[SQUARE_HIGH-1][(SQUARE_LENGHT-1)/2]=Color.PURPLE.getEscape() + Simbol.SEGNALINO_PAPALE.getForm();
         }
 
-        if(content==0)  square[1][(SQUARE_LENGHT-1)/2]=Color.PURPLE.getEscape() + Simbol.CROCE + Color.RESET;
+        if(content==trackPosition) {
+            square[1][(SQUARE_LENGHT - 1) / 2] = Color.PURPLE.getEscape() + Simbol.CROCE + Color.RESET;
+            square[1][((SQUARE_LENGHT - 1)/2)+1] = "";
+        }
 
         int inizialVert=9;
         int inizialHoriz=7;
@@ -172,7 +175,8 @@ public class Playerboard extends PaintCards {
                 }
             }
         }
-        
+
+        //draw the extrapanel if the player has one
         if(playerStorage.getTypeExtrapanel()!='Z') {
             putString("EXTRAPANEL", storage, 15, 15);
             for (int i = 0; i < 7; i++) storage[17][16 + i] = Color.RESET + "_";
