@@ -74,6 +74,59 @@ public abstract class Utility {
     }
 
     /**
+     * converts a char color ('Y', 'P', 'G', 'B') into a real color
+     * @param color: the color to convert
+     * @return
+     */
+    public String convertColor(Character color) {
+
+        String returned = new String();
+        switch (color) {
+            case 'B':
+                returned = Color.BLUE.getEscape();
+                break;
+            case 'Y':
+                returned = Color.YELLOW.getEscape();
+                break;
+            case 'P':
+                returned = Color.PURPLE.getEscape();
+                break;
+            case 'G':
+                returned = Color.GREEN.getEscape();
+                break;
+        }
+        return returned;
+    }
+
+    /**
+     * converts a char color ('Y', 'P', 'G', 'B') into a real color (BACKGOURND)
+     * @param color: the color to convert
+     * @return
+     */
+    public String convertBackground(Character color) {
+
+        String returned = new String();
+        switch (color) {
+            case 'B':
+                returned = Color.BACKGROUND_BLUE.getEscape();
+                break;
+            case 'Y':
+                returned = Color.BACKGROUND_YELLOW.getEscape();
+                break;
+            case 'P':
+                returned = Color.BACKGROUND_PURPLE.getEscape();
+                break;
+            case 'G':
+                returned = Color.BACKGROUND_GREEN.getEscape();
+                break;
+            case 'W':
+                returned = Color.BLACK.getEscape();
+                break;
+        }
+        return returned;
+    }
+
+    /**
      * puts a given string inside a given string matrix
      * @param string: string tu out inside
      * @param returned: matrix modified

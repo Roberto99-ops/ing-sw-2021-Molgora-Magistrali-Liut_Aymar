@@ -94,29 +94,4 @@ public abstract class PaintCards extends Utility {
             for (int j = 0; j < MAX_HORIZ_SIZE; j++)
                 space[row + i][column + j] = developecard[i][j];
     }
-
-    /**
-     * converts a char color ('Y', 'P', 'G', 'B') into a real color
-     * @param color: the color to convert
-     * @return
-     */
-    private String convertColor(Character color) {
-
-        String returned = new String();
-        switch (color) {
-            case 'B':
-                returned = Color.BLUE.getEscape();
-                break;
-            case 'Y':
-                returned = Color.YELLOW.getEscape();
-                break;
-            case 'P':
-                returned = Color.PURPLE.getEscape();
-                break;
-            case 'G':
-                returned = Color.GREEN.getEscape();
-                break;
-        }
-        return returned;
-    }
 }
