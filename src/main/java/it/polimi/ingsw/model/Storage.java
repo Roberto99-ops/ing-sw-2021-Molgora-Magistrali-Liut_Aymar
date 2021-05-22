@@ -7,10 +7,15 @@ import java.util.List;
 public class Storage extends ArrayList<Character> implements Serializable {
 
 
-    private ArrayList<Character> panel = new ArrayList <Character> (List.of('N','N','N','N','N','N')); // arraylist di 6 spazi di base
-    private ResourceStructure extrapanel = new ResourceStructure();
+    private ArrayList<Character> panel;
+    private ResourceStructure extrapanel;
     private char typeExtrapanel= 'Z';  //carattere che per noi significa che il pannello extra non è attivo, non so se si può inzializzare così
 
+    public Storage(){
+        panel = new ArrayList <Character> (List.of('N','N','N','N','N','N')); // arraylist di 6 spazi di base
+        extrapanel = new ResourceStructure();
+        extrapanel.AddResource(2, 'N');
+    }
 
     public void setPanel(ResourceStructure panel) {
         this.panel = panel;
