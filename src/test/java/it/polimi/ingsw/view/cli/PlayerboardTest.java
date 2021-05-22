@@ -1,5 +1,6 @@
 package it.polimi.ingsw.view.cli;
 
+import it.polimi.ingsw.model.DevelopeCard;
 import it.polimi.ingsw.model.LeaderCard;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.ResourceStructure;
@@ -18,6 +19,7 @@ public class PlayerboardTest {
     @Test
     public void print() throws FileNotFoundException {
         Player player = new Player();
+        player.setName("Gianfrancioschio");
         player.setTrackposition(8);
         LeaderCard card1 = new LeaderCard();
         LeaderCard card2 = new LeaderCard();
@@ -46,6 +48,17 @@ public class PlayerboardTest {
         player.getStorage().getExtrapanel().add('P');
         player.getStorage().getExtrapanel().add('Y');
 
+        for (int i = 0; i < 3; i++) {
+            DevelopeCard Dcard1 = new DevelopeCard();
+            DevelopeCard Dcard2 = new DevelopeCard();
+            DevelopeCard Dcard3 = new DevelopeCard();
+            Dcard1.setCard(i);
+            Dcard2.setCard(i + 10);
+            Dcard3.setCard(i + 20);
+            player.getDSpace().getMinideck1().getStructure().add(Dcard1);
+            player.getDSpace().getMinideck2().getStructure().add(Dcard2);
+            player.getDSpace().getMinideck3().getStructure().add(Dcard3);
+        }
         Playerboard playerboard = new Playerboard(player);
         playerboard.Print();
 

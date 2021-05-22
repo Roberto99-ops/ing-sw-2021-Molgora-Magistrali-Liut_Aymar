@@ -22,10 +22,11 @@ public class Playerboard extends PaintCards {
         playerboard = new String[VERT_SIZE][HORIZ_SIZE];
         Perimeter(playerboard, VERT_SIZE, HORIZ_SIZE, Color.BLACK);
         FaithTrack(player.getTrackposition());
+        putString(player.getName(), playerboard, 1, 70);
         Storage(player.getStorage());
         Strongbox(player.getStrongBox().getStructure());
         LeaderSpace(player);
-        Developementspace();
+        Developementspace(player.getDSpace());
     }
 
     /**
@@ -297,7 +298,7 @@ public class Playerboard extends PaintCards {
      * it draws the developementspace inside the playerboard
      */
 
-    private void Developementspace()
+    private void Developementspace(DevelopementSpace DSpace)
     {
         int MAX_VERT_SIZE = VERT_SIZE-13-2;
         int MAX_HORIZ_SIZE = HORIZ_SIZE/2+17;
@@ -307,6 +308,40 @@ public class Playerboard extends PaintCards {
             for (int j = 0; j < MAX_HORIZ_SIZE; j++)
                 developementspace[i][j]=backgroundcolor + " " + Color.RESET;
 
+        putString("DEVELOPEMENTSPACE", developementspace, 2, 40);
+
+        //draw first minideck
+        int minideck1Leng = DSpace.getMinideck1().getStructure().size();
+        if(minideck1Leng > 0) {
+            DrawDevelopecard(DSpace.getMinideck1().getStructure().get(0), developementspace, 12, 10);
+            if(minideck1Leng > 1) {
+                DrawDevelopecard(DSpace.getMinideck1().getStructure().get(1), developementspace, 10, 10);
+                if(minideck1Leng > 2)
+                    DrawDevelopecard(DSpace.getMinideck1().getStructure().get(2), developementspace, 8, 10);
+            }
+        }
+
+        //draw second minideck
+        int minideck2Leng = DSpace.getMinideck2().getStructure().size();
+        if(minideck2Leng > 0) {
+            DrawDevelopecard(DSpace.getMinideck2().getStructure().get(0), developementspace, 12, 40);
+            if(minideck2Leng > 1) {
+                DrawDevelopecard(DSpace.getMinideck2().getStructure().get(1), developementspace, 10, 40);
+                if(minideck2Leng > 2)
+                    DrawDevelopecard(DSpace.getMinideck2().getStructure().get(2), developementspace, 8, 40);
+            }
+        }
+
+        //draw first minideck
+        int minideck3Leng = DSpace.getMinideck3().getStructure().size();
+        if(minideck1Leng > 0) {
+            DrawDevelopecard(DSpace.getMinideck3().getStructure().get(0), developementspace, 12, 70);
+            if(minideck1Leng > 1) {
+                DrawDevelopecard(DSpace.getMinideck3().getStructure().get(1), developementspace, 10, 70);
+                if(minideck1Leng > 2)
+                    DrawDevelopecard(DSpace.getMinideck3().getStructure().get(2), developementspace, 8, 70);
+            }
+        }
 
         int initialVert=14;
         int initialHoriz=HORIZ_SIZE/2-1-17;
