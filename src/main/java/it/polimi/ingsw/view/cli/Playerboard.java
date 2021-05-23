@@ -264,18 +264,18 @@ public class Playerboard extends PaintCards {
             {leaderspace1[i][j]=backgroundcolor + " " + Color.RESET;
                 leaderspace2[i][j]=backgroundcolor + " " + Color.RESET;}
 
-        String[][] card1;
-        String[][] card2;
+        String[][] card1 = new String[12][15];
+        String[][] card2 = new String[12][15];
         if(player.getLeadercards().getStructure().size()>0) {
-            card1 = DrawLeadercard(player.getLeadercards().getStructure().get(0));
+            DrawLeadercard(player.getLeadercards().getStructure().get(0), card1, 0, 0);
             if(player.getLeadercards().getStructure().size()==2)
-                card2 = DrawLeadercard(player.getLeadercards().getStructure().get(1));
+                DrawLeadercard(player.getLeadercards().getStructure().get(1), card2, 0, 0);
             else
-                card2 = DrawLeadercard(null);
+                DrawLeadercard(null, card2, 0, 0);
         }
         else
-        { card1 = DrawLeadercard(null);
-            card2 = DrawLeadercard(null);}
+        { DrawLeadercard(null, card1, 0, 0);
+            DrawLeadercard(null, card2, 0, 0);}
 
         for (int i = 0; i < MAX_VERT_SIZE-2; i++)
             for (int j = 0; j < MAX_HORIZ_SIZE-2; j++) {

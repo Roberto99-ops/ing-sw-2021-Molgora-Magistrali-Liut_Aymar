@@ -19,14 +19,14 @@ public class DevelopeDecksView extends PaintCards {
             for (int j = 0; j < HORIZ_SIZE; j++)
                 space[i][j] = " ";
 
-        drawCard(decks);
+        drawCards(decks);
     }
 
     /**
-     * draw a developecard
+     * draw all developecards at the top of the decks
      * @param decks: all the 12 decks of the game
      */
-    private void drawCard(DevelopeDecks[] decks)
+    private void drawCards(DevelopeDecks[] decks)
     {
         int contH=0;
         int contV=0;
