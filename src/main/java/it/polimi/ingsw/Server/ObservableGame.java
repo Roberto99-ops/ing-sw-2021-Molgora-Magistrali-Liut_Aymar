@@ -19,7 +19,7 @@ public class ObservableGame {
     private static int timer_VR=0;
 */
 
-    private List<Observer> observers = new List<Observer>() {
+    private static List<Observer> observers = new List<Observer>() {
 
         @Override
         public int size() {
@@ -157,8 +157,23 @@ public class ObservableGame {
 
 
 // notify allObservers
-   public void notifyAllObservers() {
-      // metodo che notifica a tutti gli observers (giocatori) che c'è stato un cambiamento nel model
+   public static void notifyAllObservers() {
+       for (int i = 0; i < observers.size(); i++) {
+           ObserverGame.updateDevelopementDecks();
+           ObserverGame.updateLeaderDeck();
+           ObserverGame.updateMarket();
+           ObserverGame.updateTimer_VR();
+           ObserverGame.updateVR();
+       }
+
+   }
+
+       public static void personalObservers (Player actualplayer) {
+
+               ObserverGame.updateDevelopementSpace(actualplayer);
+               ObserverGame.updateStorage(actualplayer);
+               ObserverGame.updateStrongbox(actualplayer);
+
     }
 
 }
