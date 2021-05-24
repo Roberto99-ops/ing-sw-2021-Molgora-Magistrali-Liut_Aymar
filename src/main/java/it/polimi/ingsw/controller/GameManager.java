@@ -1,5 +1,8 @@
 package it.polimi.ingsw.controller;
 
+import it.polimi.ingsw.Server.ObservableGame;
+import it.polimi.ingsw.Server.Observer;
+import it.polimi.ingsw.Server.ObserverGame;
 import it.polimi.ingsw.model.*;
 
 import java.util.ArrayList;
@@ -34,6 +37,7 @@ public class GameManager extends Game {
 
     public static void main(String[] args) throws Exception {
         Game game = new Game();
+        ObservableGame obsG = new ObservableGame();
         SingleGame singleGame = new SingleGame();
         // game.getLeaderdeck() = new LeaderDeck();
         // leaderdeck = new LeaderDeck();
@@ -46,8 +50,9 @@ public class GameManager extends Game {
         if ((scan.nextLine()) == "A") {
             // collegamento client-server
             Player player1 = new Player();
+            Observer obs1 = new ObserverGame(); // meglio con player ?
             game.getPlayers().add(player1);
-            // obserable
+            obsG.addObserver(obs1);
             System.out.println("Choose your NAME"); //CLIENTHENDLER
             game.getPlayers().get(0).setName(scan.nextLine());
             game.getPlayers().get(0).setNumber(1);
@@ -65,7 +70,9 @@ public class GameManager extends Game {
             int n_players = scan.nextInt();
             for (int i = 1; i < n_players; i++) {
                 Player temporaryplayer = new Player();
+                Observer temporaryobserver = new ObserverGame();
                 game.getPlayers().add(temporaryplayer);
+                obsG.addObserver(temporaryobserver); // meglio con player???
                 System.out.println("Choose your NAME"); //CLIENTHENDLER
                 game.getPlayers().get(i).setName(scan.nextLine());
                 game.getPlayers().get(i).setNumber(i+1);

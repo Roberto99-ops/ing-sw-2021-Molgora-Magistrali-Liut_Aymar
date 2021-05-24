@@ -39,6 +39,7 @@ public class TurnManager extends Turn {
         //se sono in single game, ogni volta che tocca a me, prendo un segnalino ed eseguo la sua azione
         if (l == 1) {
             signal.Action(aStructure.PickSignal());
+
         }
 
         //1)
