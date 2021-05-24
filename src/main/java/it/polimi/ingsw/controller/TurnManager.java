@@ -1,5 +1,8 @@
 package it.polimi.ingsw.controller;
 
+import it.polimi.ingsw.Server.ObservableGame;
+import it.polimi.ingsw.Server.ObserverGame;
+import it.polimi.ingsw.Server.ObserverSingleGame;
 import it.polimi.ingsw.model.ActionSignal;
 import it.polimi.ingsw.model.FaithTrack;
 import it.polimi.ingsw.model.*;
@@ -39,6 +42,7 @@ public class TurnManager extends Turn {
         //se sono in single game, ogni volta che tocca a me, prendo un segnalino ed eseguo la sua azione
         if (l == 1) {
             signal.Action(aStructure.PickSignal());
+            ObserverSingleGame.updateActionStructure(); // è giusto inserirlo qui right ????
 
         }
 
@@ -52,6 +56,9 @@ public class TurnManager extends Turn {
             try { //CLIENTHENDLER
                 action = System.in.read();
                 if (action == 1) this.ShopCard(game);
+                // ObserverGame.updateStorage();
+                // ObserverGame.updateStrongbox();
+                // ObserverGame.updateDevelopementSpace();
 
                 // CONTROLLER:
                 // IN) IL NUMERO DI CARTE DA COMPRARE
@@ -59,6 +66,8 @@ public class TurnManager extends Turn {
 
 
                 if (action == 2) this.Buyresource(game);
+
+                // ObserverGame.updateMarket();
 
                 // CONTROLLER:
                 // IN) N^ COLONNA/RIGA DEL MERCATO
@@ -89,6 +98,8 @@ public class TurnManager extends Turn {
                         //prendo la carta nella posizione i-1 nell'arraylist ed eseguo la sua produzione
                         if (card > 0) {
                             this.actualplayer.getTopCardsOnBoard().getStructure().get(card - 1).DoProduction(this.actualplayer);
+                            // ObserverGame.updateStorage();
+                            // ObserverGame.updateStrongbox();
                         }
 
                         System.out.println("Do you want to do another production(y/n)?\n"); // CLIENTHENDLER

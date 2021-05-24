@@ -5,7 +5,7 @@ import it.polimi.ingsw.model.SingleGame;
 
 public class ObserverSingleGame extends ObserverGame {
 
-    public void updateActionStructure() {
+    public static void updateActionStructure() {
         ActionStructure actualActionStructure = SingleGame.getActionStructure();
         System.out.println("actionstructuremessage");
         ObservableGame.notifyAllObservers();
