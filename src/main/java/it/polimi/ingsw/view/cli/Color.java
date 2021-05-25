@@ -20,6 +20,7 @@ public enum Color {
     BACKGROUND_PURPLE("\u001B[0m\u001B[97m\u001B[105m");
 
     static final String RESET = "\u001B[0m";
+    static final String CLEAR = "\033[H\033[2J";
 
     static final void CLEAR()
     {
