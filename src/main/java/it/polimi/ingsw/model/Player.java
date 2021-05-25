@@ -42,9 +42,9 @@ public class Player implements Serializable {
 
 
     //Plancia
-    private Storage storage = new Storage();
+    private  Storage storage = new Storage();
     private StrongBox strongBox = new StrongBox();
-    private DevelopementSpace DSpace = new DevelopementSpace();
+    private  DevelopementSpace DSpace = new DevelopementSpace();
     public Storage getStorage() {
         return storage;
     }

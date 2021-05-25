@@ -5,8 +5,6 @@ import it.polimi.ingsw.model.*;
 
 public class ObserverGame extends Player {
 
-    private Player playerObservable;
-
     public static void updateMarket() {
         Market actualMarket = Game.getMarket();
         System.out.println("marketmessage");
@@ -28,23 +26,23 @@ public class ObserverGame extends Player {
         ObservableGame.notifyAllObservers();
     }
 
-    public static void updateStorage(Player actualplayer) {
-        Storage actualStorage = Game.getPlayers().get(actualplayer.getNumber()).getStorage();
+    public void updateStorage() {
+        Storage actualStorage = this.getStorage();
         System.out.println("storagemessage");
-        ObservableGame.notifyAllObservers();
+        ObservableGame.personalObservers(this);
     }
 
-    public static void updateStrongbox(Player actualplayer) {
-        StrongBox actualStrongbox = Game.getPlayers().get(actualplayer.getNumber()).getStrongBox();
+    public void updateStrongbox() {
+        StrongBox actualStrongbox = this.getStrongBox();
         System.out.println("strongboxmessage");
-        ObservableGame.personalObservers(actualplayer);
+        ObservableGame.personalObservers(this);
     }
 
 
-    public static void updateDevelopementSpace(Player actualplayer) {
-        DevelopementSpace actualDevelopementSpace = Game.getPlayers().get(actualplayer.getNumber()).getDSpace();
+    public void updateDevelopementSpace() {
+        DevelopementSpace actualDevelopementSpace = this.getDSpace();
         System.out.println("strongboxmessage");
-        ObservableGame.personalObservers(actualplayer);
+        ObservableGame.personalObservers(this);
     }
 
     public static void updateTimer_VR () {

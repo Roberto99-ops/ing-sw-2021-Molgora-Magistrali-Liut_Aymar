@@ -168,11 +168,11 @@ public class ObservableGame {
 
    }
 
-       public static void personalObservers (Player actualplayer) {
+       public static void personalObservers (ObserverGame observerGame) {
 
-               ObserverGame.updateDevelopementSpace(actualplayer);
-               ObserverGame.updateStorage(actualplayer);
-               ObserverGame.updateStrongbox(actualplayer);
+               observerGame.updateDevelopementSpace();
+               observerGame.updateStorage();
+               observerGame.updateStrongbox();
 
     }
 
