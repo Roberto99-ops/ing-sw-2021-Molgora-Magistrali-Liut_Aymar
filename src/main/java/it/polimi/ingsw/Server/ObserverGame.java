@@ -3,7 +3,7 @@ package it.polimi.ingsw.Server;
 import it.polimi.ingsw.Server.messages.MarketMessage;
 import it.polimi.ingsw.model.*;
 
-public class ObserverGame implements Observer {
+public class ObserverGame extends Player {
 
     private Player playerObservable;
 

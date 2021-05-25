@@ -19,7 +19,7 @@ public class ObservableGame {
     private static int timer_VR=0;
 */
 
-    private static List<Observer> observers = new List<Observer>() {
+    private static List<ObserverGame> observers = new List<ObserverGame>() {
 
         @Override
         public int size() {
@@ -37,7 +37,7 @@ public class ObservableGame {
         }
 
         @Override
-        public Iterator<Observer> iterator() {
+        public Iterator<ObserverGame> iterator() {
             return null;
         }
 
@@ -52,7 +52,7 @@ public class ObservableGame {
         }
 
         @Override
-        public boolean add(Observer observer) {
+        public boolean add(ObserverGame observer) {
             return false;
         }
 
@@ -67,12 +67,12 @@ public class ObservableGame {
         }
 
         @Override
-        public boolean addAll(Collection<? extends Observer> c) {
+        public boolean addAll(Collection<? extends ObserverGame> c) {
             return false;
         }
 
         @Override
-        public boolean addAll(int index, Collection<? extends Observer> c) {
+        public boolean addAll(int index, Collection<? extends ObserverGame> c) {
             return false;
         }
 
@@ -92,22 +92,22 @@ public class ObservableGame {
         }
 
         @Override
-        public Observer get(int index) {
+        public ObserverGame get(int index) {
             return null;
         }
 
         @Override
-        public Observer set(int index, Observer element) {
+        public ObserverGame set(int index, ObserverGame element) {
             return null;
         }
 
         @Override
-        public void add(int index, Observer element) {
+        public void add(int index, ObserverGame element) {
 
         }
 
         @Override
-        public Observer remove(int index) {
+        public ObserverGame remove(int index) {
             return null;
         }
 
@@ -122,17 +122,17 @@ public class ObservableGame {
         }
 
         @Override
-        public ListIterator<Observer> listIterator() {
+        public ListIterator<ObserverGame> listIterator() {
             return null;
         }
 
         @Override
-        public ListIterator<Observer> listIterator(int index) {
+        public ListIterator<ObserverGame> listIterator(int index) {
             return null;
         }
 
         @Override
-        public List<Observer> subList(int fromIndex, int toIndex) {
+        public List<ObserverGame> subList(int fromIndex, int toIndex) {
             return null;
         }
     };
@@ -141,7 +141,7 @@ public class ObservableGame {
 
 
 
-    public void addObserver(Observer n_actualplayer) {
+    public void addObserver(ObserverGame n_actualplayer) {
 
         this.observers.add(n_actualplayer);
 
@@ -149,7 +149,7 @@ public class ObservableGame {
 
 
 
-    public void removeObserver(Observer n_actualplayer) {
+    public void removeObserver(ObserverGame n_actualplayer) {
 
         this.observers.remove(n_actualplayer);
 
