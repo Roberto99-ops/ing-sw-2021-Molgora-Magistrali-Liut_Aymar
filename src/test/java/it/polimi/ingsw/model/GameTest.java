@@ -3,6 +3,7 @@ package it.polimi.ingsw.model;
 import org.junit.Test;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
@@ -10,6 +11,9 @@ public class GameTest {
 
     Game giocotest = new Game();
     Player francesco = new Player();
+    Player roberto = new Player();
+    Player juan = new Player();
+
 
 
     @Test
@@ -48,6 +52,43 @@ public class GameTest {
         System.out.println("game is finished because francesco have got 7 develope cards");
 
     }
+
+
+
+    @Test
+
+    public void victorygametest() throws FileNotFoundException {
+
+        ArrayList<Player> players = new ArrayList<Player>();
+        giocotest.setPlayers(players);
+        giocotest.getPlayers().add(francesco);
+        giocotest.getPlayers().add(roberto);
+        giocotest.getPlayers().add(juan);
+
+
+
+        francesco.setName("Francesco");
+        roberto.setName("Roberto");
+        juan.setName("Juan");
+
+        francesco.setPv(31);
+        roberto.setPv(45);
+        juan.setPv(28);
+
+        francesco.setTrackposition(19);
+        roberto.setTrackposition(20);
+        juan.setTrackposition(24);
+
+
+        assertNotEquals("Francesco", giocotest.Victory());
+        System.out.println("Francesco is not the winner");
+        assertEquals("Juan", giocotest.Victory());
+        System.out.println("Juan is the winner");
+        assertNotEquals("Roberto", giocotest.Victory());
+        System.out.println("Roberto is the winner");
+
+    }
+
 
     }
 

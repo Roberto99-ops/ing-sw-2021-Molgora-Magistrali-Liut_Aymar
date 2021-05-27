@@ -6,13 +6,6 @@ import java.util.Scanner;
 
 public class SingleGame extends Game {
 
-    public static ArrayList<Player> getPlayers() {
-        return players;
-    }
-
-    public static void setPlayers(ArrayList<Player> players) {
-        SingleGame.players = players;
-    }
 
     //cosa ha:
     private static ArrayList<Player> players=new ArrayList<Player>(); //saranno due: il giocatore e Lorenzo

@@ -23,12 +23,12 @@ public class Game implements Serializable {
      * @return
      */
 
-    public static ArrayList<Player> getPlayers() {
+    public ArrayList<Player> getPlayers() {
 
         return players;
     }
 
-    public static void setPlayers(ArrayList<Player> players) {
+    public void setPlayers(ArrayList<Player> players) {
 
         Game.players = players;
     }
@@ -153,7 +153,6 @@ public class Game implements Serializable {
 
     public String Victory()
     {
-        Player winner = new Player();
         winner.setPv(0);
         for(int i=0 ; i < players.size(); i++)
         {

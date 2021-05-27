@@ -21,8 +21,8 @@ public class FaithTrackTest {
         plyr.add(player1);
         plyr.add(player2);
         plyr.add(player3);
-        Game.setPlayers(plyr);
-        Game.setN_players(3);
+        game.setPlayers(plyr);
+        game.setN_players(3);
 
         //sposto player1 nella posizione #8, dentro area1 per il VR
         for(int i=0; i<9;i++ ){
