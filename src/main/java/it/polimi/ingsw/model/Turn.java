@@ -33,48 +33,6 @@ public class Turn implements Serializable {
         this.game = game;
     }
 
-    //da spostare nel controller
-    public void main() throws Exception {
-        int action = 0;
-        char again = 'n';
-        int card = 0;
-
-        //Ad ogni turno, effettuo il controllo del Vatican Report
-        FaithTrack faithTrack = new FaithTrack();
-        faithTrack.VaticanReport(actualplayer, game);
-
-        //se sono in single game, ogni volta che tocca a me, prendo un segnalino ed eseguo la sua azione
-        if (l == 1) {
-            signal.Action(aStructure.PickSignal());
-        }
-/*
-        //1)
-        System.out.println("What do you want to do?\n\t1)Shop a developement card\n\t2)Take resources at the market\n\t3)Active a production\n");
-        try {
-            action = System.in.read();
-            if (action == 1) this.ShopCard(game);
-            if (action == 2) this.Buyresource(game);
-            //2)
-            if(action == 3) { do{//2.1)
-                System.out.println("Which LeaderCard do you want to enable(0=none)?\n");
-                this.actualplayer.getLeadercards().Print();
-                try{ card = System.in.read(); } catch (IOException e){ System.out.println(e);}
-                if(card>0) this.actualplayer.getLeadercards().getStructure().get(card-1).Skill();
-
-                //2.2)
-                System.out.println("Which DevelopeCard do you want to enable(0=none)?\n");
-                this.actualplayer.TopCardsOnBoard.Print(); //l'arraylist di carte viene stampato
-                try{ card = System.in.read(); } catch (IOException e){ System.out.println(e);}
-                //prendo la carta nella posizione i-1 nell'arraylist ed eseguo la sua produzione
-                if(card>0) this.actualplayer.TopCardsOnBoard.getStructure().get(card-1).DoProduction(this.actualplayer);
-
-                System.out.println("Do you want to do another production(y/n)?\n");
-                try{ again = (char) System.in.read(); } catch (IOException e){ System.out.println(e);} }while(again=='y');}
-        } catch (IOException e){ System.out.println(e);}
-*/
-
-    }
-
 
 
     /**
@@ -131,13 +89,13 @@ public class Turn implements Serializable {
      * this method manages the action of buying resources at the market.
      * the player choose which row/column and call the manager market method
      *
-     * @param game
+     * @param
      * @return
      */
 
-    public ResourceStructure Buyresource(Game game) {
+    public ResourceStructure Buyresource() {
         ResourceStructure product = new ResourceStructure();
-        Market market = game.getMarket();
+        Market market = Game.getMarket();
         int RoworCol = 0;
         int number = 0;
 

@@ -65,7 +65,7 @@ public class TurnManager extends Turn {
                 // OUT) RIMUOVE LE RISORSE DI COSTO CARTA DALLA PLANCIA e AGGIUNGE NELLE CARTE SVILUPPO DI PLAYER LE CARTE VOLUTE
 
 
-                if (action == 2) this.Buyresource(game);
+                if (action == 2) this.Buyresource();
 
                 // ObserverGame.updateMarket();
 

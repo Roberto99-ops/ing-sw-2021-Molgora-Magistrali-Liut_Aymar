@@ -14,6 +14,8 @@ public class Game implements Serializable {
     private static Market market;
     private static int VR=0;
     private static int timer_VR=0;
+    private static Player winner = new Player();
+
 
 
     /**
@@ -72,6 +74,14 @@ public class Game implements Serializable {
             timer_VR=0;
         }
         Game.timer_VR = timer_VR;
+    }
+
+    public static Player getWinner() {
+        return winner;
+    }
+
+    public static void setWinner(Player winner) {
+        Game.winner = winner;
     }
 
 

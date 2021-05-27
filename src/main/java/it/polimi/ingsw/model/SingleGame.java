@@ -1,4 +1,6 @@
 package it.polimi.ingsw.model;
+import it.polimi.ingsw.controller.TurnManager;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -21,15 +23,7 @@ public class SingleGame extends Game {
     private static int VR_SG=0;
     private static ActionStructure actionStructure = new ActionStructure();
 
-    public static Player getWinner() {
-        return winner;
-    }
 
-    public static void setWinner(Player winner) {
-        SingleGame.winner = winner;
-    }
-
-    private static Player winner = new Player();
 
     //private static int timer_VR_SG=0;   non utile perchè Lorenzo non guadagna punti se si trova in area Vatican Report
 
@@ -119,7 +113,8 @@ public class SingleGame extends Game {
         while(true) {
             //ogni giocatore esegue il suo turno
             turn.setActualplayer(players.get(actualplayer));
-            turn.main();
+            // turn,main ??? posso mettere turn manager ????
+
 
             if (singleGame.Endgame(players.get(actualplayer))) {
                 System.out.println("The winner is " + singleGame.Victory());
@@ -145,13 +140,13 @@ public class SingleGame extends Game {
         //riprende i casi descritti in Game.Endgame +
         //1)
         if(actualplayer.getTrackposition()>=24) {
-            winner.setName(actualplayer.getName());
+            getWinner().setName(actualplayer.getName());
             return true; //vince o Lorenzo o tu
         }
 
         //2)
         if(actualplayer.getDevelopementquantity()>=7) {
-            winner.setName(actualplayer.getName());
+            getWinner().setName(actualplayer.getName());
             return true; //vinci tu
         }
         // considero il caso in cui una colonna di carte non è più disponibile (vince Lorenzo)
@@ -160,7 +155,7 @@ public class SingleGame extends Game {
                 (Game.getDevelopedecks(1).getStructure().isEmpty() && Game.getDevelopedecks(5).getStructure().isEmpty() && Game.getDevelopedecks(9).getStructure().isEmpty())||
                     (Game.getDevelopedecks(2).getStructure().isEmpty() && Game.getDevelopedecks(6).getStructure().isEmpty() && Game.getDevelopedecks(10).getStructure().isEmpty())||
                         (Game.getDevelopedecks(3).getStructure().isEmpty() && Game.getDevelopedecks(7).getStructure().isEmpty() && Game.getDevelopedecks(11).getStructure().isEmpty())){
-            winner.setName("Lorenzo il Magnifico");
+            getWinner().setName("Lorenzo il Magnifico");
             return true;
         }
         return false;
@@ -176,6 +171,6 @@ public class SingleGame extends Game {
     @Override
     public String Victory()
     {
-        return winner.getName();
+        return getWinner().getName();
     }
 }

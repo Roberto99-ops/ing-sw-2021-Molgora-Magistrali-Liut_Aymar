@@ -38,7 +38,7 @@ public class GameManager extends Game {
         SingleGame singleGame = new SingleGame();
         // game.getLeaderdeck() = new LeaderDeck();
         // leaderdeck = new LeaderDeck();
-        Turn turn = new Turn();
+        TurnManager turnmanager = new TurnManager();
         int actualplayer = 0;
         Scanner scan = new Scanner(System.in);
 
@@ -82,8 +82,9 @@ public class GameManager extends Game {
 
         while (true) {
             //3)
-            turn.setActualplayer(game.getPlayers().get(actualplayer));
-            turn.main();
+            turnmanager.setActualplayer(game.getPlayers().get(actualplayer));
+            turnmanager.main(); // ?? se il main è in tour manager come faccio a chiamarlo?
+
 
             //4)
             if (game.Endgame(game.getPlayers().get(actualplayer))) {
