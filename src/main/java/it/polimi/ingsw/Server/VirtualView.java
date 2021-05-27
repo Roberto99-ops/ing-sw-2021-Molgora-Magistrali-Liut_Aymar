@@ -5,7 +5,7 @@ public class VirtualView {
 
     // rappresenta il client dentro al server
     //
-    // obeserver observable su model internet, comunica al controller le scelte dell'utente. // FRA una classe
+    // obeserver observable su model internet, comunica al controller le scelte dell'utente. // una classe
     // che osserva il model e che se la virtual view riceve le notifiche lo sa
 
 

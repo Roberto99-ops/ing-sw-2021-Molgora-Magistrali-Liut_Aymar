@@ -10,7 +10,9 @@ import java.util.ArrayList;
  * The structure sent is an array of integers.
  * Every element of the array is the position of that card into the json file.
  */
-public class DevelopeDeckMsg extends NetworkMessage{
+
+public class DevelopeDeckMsg extends NetworkMessage {
+
     private ArrayList<Integer> array;
 
     public DevelopeDeckMsg()
@@ -28,6 +30,7 @@ public class DevelopeDeckMsg extends NetworkMessage{
      * @return the deck of Developecards
      * @throws FileNotFoundException
      */
+
     public DevelopeDecks getDeck() throws FileNotFoundException {
         DevelopeDecks deck = new DevelopeDecks();
         for (int i = 0; i < this.getArray().size(); i++) {

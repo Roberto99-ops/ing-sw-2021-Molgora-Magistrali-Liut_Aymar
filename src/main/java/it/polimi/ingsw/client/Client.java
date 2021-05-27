@@ -16,7 +16,7 @@ import java.io.IOException;
 public class Client {
     //Di seguito verranno istanziati elementi che il client userà per aggiornare l'utente sul gioco (questi elementi sono
     // salvati dentro il ServerHandler che sta all'interno del Client stesso):
-    //questa è una copia  del player e dei suoi dati/carte presenti nel server. Questa istanza permette al client di
+    // questa è una copia  del player e dei suoi dati/carte presenti nel server. Questa istanza permette al client di
     // avere tutti i dati ricevuti dal clienthandler in modo ordinato e di visualizzarli quando ne ha bisogno
     private Player playerSH = new Player();
     //questa è una copia del market nel caso in cui il giocatore giochi in compagnia
@@ -108,7 +108,7 @@ public class Client {
             something = scan.nextLine();
             output.writeUTF(something);
             output.flush();
-            if(something.equals("close")) {*/
+            if(something.equals("close")) { */
         try {
             input.close();
             server.close();
