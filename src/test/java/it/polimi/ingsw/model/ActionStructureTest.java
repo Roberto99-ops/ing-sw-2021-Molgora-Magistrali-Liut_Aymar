@@ -61,11 +61,11 @@ public class ActionStructureTest {
         assertTrue(Game.getDevelopedecks(9).getStructure().isEmpty());
 
         //case #5-6: Lorenzo moves forward by +2
-        Lorenzo lore = new Lorenzo();
-        System.out.println(lore.getNumber());
+        //Lorenzo lore = new Lorenzo();
+        System.out.println(SingleGame.getLorenzo().getNumber());
         Signal.Action(5); //calls Lorenzomoves(2) -> position:2
-        System.out.println(lore.getNumber());
-        assertEquals(2,lore.getNumber());
+        System.out.println(SingleGame.getLorenzo().getNumber());
+        assertEquals(2,SingleGame.getLorenzo().getNumber());
         //so, Lorenzo can move forward by +1 or +2
 
         //controllo AS_Counter e considero il caso#7: Lorenzo si sposta in avanti di +1 e mischio i segnalini
@@ -73,11 +73,11 @@ public class ActionStructureTest {
         int[] arr = {1,2,3,4,5,6,7};
         actionStructure.setAS_Counter(6);
         actionStructure.PickSignal(); // chiamerà l'azione del segnalino 7 -> +1 e shuffle
-        assertEquals(3, lore.getNumber());
+        assertEquals(3, SingleGame.getLorenzo().getNumber());
         assertNotEquals(arr, actionStructure.getStructure()); //con il segnalino #7, ho anche lo shuffle della pila di segnalini
         assertEquals(0, actionStructure.getAS_Counter());
 
-        lore.setNumber(0);
+        SingleGame.getLorenzo().setNumber(0);
     }
 
     /**
