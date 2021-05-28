@@ -3,7 +3,7 @@ package it.polimi.ingsw.Server.messages;
 import it.polimi.ingsw.model.Lorenzo;
 
 public class LorenzoMsg extends NetworkMessage{
-    private Lorenzo lorenzo = new Lorenzo();
+    private Lorenzo lorenzo;
 
     /**
      * Sets the data of Lorenzo we want the Server to send to the Client
