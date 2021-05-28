@@ -1,16 +1,20 @@
 package it.polimi.ingsw.model;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
 
-public class ActionStructure {
+public class ActionStructure implements Serializable {
 
     private  int[] structure = {1,2,3,4,5,6,7};
     private  int AS_Counter=0;//ActionSignal_counter conta il segnalino che è stato preso (da 0 a 6 -> posti nella pila)
 
     public  int getAS_Counter() {
         return AS_Counter;
+    }
+    public  int getActionSignal(int i){
+        return structure[i];
     }
 
     public  void setAS_Counter(int AS_Counter) {
