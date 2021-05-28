@@ -6,10 +6,11 @@ import com.google.gson.JsonParser;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class LeaderCard {
+public class LeaderCard implements Serializable {
 
     private ResourceStructure priceR;
     private ArrayList<Character> priceC;  //this price is in DevelopeCard matching the color

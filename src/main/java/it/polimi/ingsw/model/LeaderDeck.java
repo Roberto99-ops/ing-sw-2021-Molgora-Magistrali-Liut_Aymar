@@ -1,7 +1,8 @@
 package it.polimi.ingsw.model;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class LeaderDeck extends Deck <LeaderCard> {
+public class LeaderDeck extends Deck <LeaderCard> implements Serializable {
     private ArrayList<LeaderCard> structure = new ArrayList<LeaderCard>();
 
     /**
