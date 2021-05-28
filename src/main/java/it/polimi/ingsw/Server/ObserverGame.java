@@ -1,6 +1,6 @@
 package it.polimi.ingsw.Server;
 
-import it.polimi.ingsw.Server.messages.MarketMessage;
+import it.polimi.ingsw.Server.messages.MarketMsg;
 import it.polimi.ingsw.model.*;
 
 
