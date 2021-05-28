@@ -15,12 +15,15 @@ public class SingleGame extends Game {
     private static Market market;
     private static int VR_SG=0;
     private static ActionStructure actionStructure = new ActionStructure();
+    private static Lorenzo lorenzo = new Lorenzo();
 
 
 
     //private static int timer_VR_SG=0;   non utile perchè Lorenzo non guadagna punti se si trova in area Vatican Report
 
-
+    public static Lorenzo getLorenzo(){
+        return lorenzo;
+    }
 
     public static int getN_players() {
         return n_players;
@@ -86,10 +89,10 @@ public class SingleGame extends Game {
         System.out.println("What's your name?");
         you.setName(scan.nextLine());
         //si aggiunge Lorenzo come secondo giocatore
-        Lorenzo lore = new Lorenzo();
+        //Lorenzo lore = new Lorenzo();
         Player LM = new Player();
         players.add(LM);
-        LM.setName(lore.getName());
+        LM.setName(lorenzo.getName());
         //Si inizializza tutto:
         //- i segnalini azione (li mischio)
         singleGame.actionStructure.ShuffleSignal();
