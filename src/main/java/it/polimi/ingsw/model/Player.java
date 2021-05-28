@@ -56,9 +56,10 @@ public class Player implements Serializable {
     public StrongBox getStrongBox() {
         return strongBox;
     }
-    public void setStrongBox(StrongBox StrongBox) {
-        this.strongBox = StrongBox;
+    /*public void setStrongBox(StrongBox strongBox) {
+        this.strongBox = strongBox;
     }
+     */
 
     public DevelopementSpace getDSpace() {
         return DSpace;
@@ -70,6 +71,7 @@ public class Player implements Serializable {
 
     //LeaderCards(2)
     private LeaderDeck leadercards = new LeaderDeck();
+    public void setLeadercards(LeaderDeck leadercards){this.leadercards=leadercards;}
     public LeaderDeck getLeadercards() { return leadercards; }
     private int skill1=0;
     private int skill2=0;
@@ -92,6 +94,34 @@ public class Player implements Serializable {
 
 
     //carte sviluppo in DevelopementSpace
+    private DevelopeDecks minideck1 = new DevelopeDecks();
+    private DevelopeDecks minideck2 = new DevelopeDecks();
+    private DevelopeDecks minideck3 = new DevelopeDecks();
+
+    public DevelopeDecks getMinideck1() {
+        return minideck1;
+    }
+
+    public void setMinideck1(DevelopeDecks minideck1) {
+        this.minideck1 = minideck1;
+    }
+
+    public DevelopeDecks getMinideck2() {
+        return minideck2;
+    }
+
+    public void setMinideck2(DevelopeDecks minideck2) {
+        this.minideck2 = minideck2;
+    }
+
+    public DevelopeDecks getMinideck3() {
+        return minideck3;
+    }
+
+    public void setMinideck3(DevelopeDecks minideck3) {
+        this.minideck3 = minideck3;
+    }
+
     private DevelopeCard minideck1Top=new DevelopeCard();
     private DevelopeCard minideck2Top=new DevelopeCard();
     private DevelopeCard minideck3Top=new DevelopeCard();
