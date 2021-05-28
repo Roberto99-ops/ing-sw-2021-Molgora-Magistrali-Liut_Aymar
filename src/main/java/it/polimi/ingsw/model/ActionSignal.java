@@ -25,6 +25,7 @@ public class ActionSignal {
     public void Action(int number){
         int i;
         int countRemove=0;
+        //Lorenzo lorenzo = SingleGame.getLorenzo();
 
         switch (number){
             case 1://blu-2
@@ -104,15 +105,18 @@ public class ActionSignal {
                 return;
 
             case 5://+2
-                Lorenzo.Lorenzomoves(2);
+                SingleGame.getLorenzo().forwardTwo();
+                //Lorenzo.Lorenzomoves(2);
                 break;
 
             case 6://+2
-                Lorenzo.Lorenzomoves(2);
+                SingleGame.getLorenzo().forwardTwo();
+                //Lorenzo.Lorenzomoves(2);
                 break;
 
             case 7://+1&Shuffle
-                Lorenzo.Lorenzomoves(1);
+                SingleGame.getLorenzo().forwardOne();
+                //Lorenzo.Lorenzomoves(1);
                 break;
         }
     }
