@@ -7,7 +7,7 @@ public class MarketView extends Utility {
     private static final int HORIZ_SIZE = 67;
     private String[][] market;
 
-    MarketView(Market gamemarket)
+    public MarketView(Market gamemarket)
 
     {
         market = new String[VERT_SIZE][HORIZ_SIZE];
