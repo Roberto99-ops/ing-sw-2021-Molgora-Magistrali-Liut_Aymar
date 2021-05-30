@@ -4,8 +4,10 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import it.polimi.ingsw.Server.messages.*;
+import it.polimi.ingsw.controller.GameManager;
 import it.polimi.ingsw.model.*;
 
+import javax.swing.*;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -17,8 +19,10 @@ public class ClientHandler implements Runnable {
 
     private Socket client;
     private ObjectOutputStream output;
-    private DataInputStream input;
+    private ObjectInputStream input;
     private Game game;
+    private Player player;
+    private int number;
 
 
     /**
@@ -28,9 +32,10 @@ public class ClientHandler implements Runnable {
      * @param client The socket connection to the client.
      */
 
-    public ClientHandler(Socket client) {
+    public ClientHandler(Socket client, int numberofsocket) {
         this.client = client;
-        this.game = new Game();
+        this.player = new Player();
+        this.number = numberofsocket;
     }
 
 
@@ -42,7 +47,7 @@ public class ClientHandler implements Runnable {
     public void run() {
         try {
             output = new ObjectOutputStream(client.getOutputStream());
-            input = new DataInputStream(client.getInputStream());
+            input = new ObjectInputStream(client.getInputStream());
         } catch (IOException e) {
             System.out.println("could not open connection to " + client.getInetAddress());
             return;
@@ -72,17 +77,37 @@ public class ClientHandler implements Runnable {
 
     private void handleClientConnection() throws IOException {
         try {
-            /*TURNO - FATTO
-            Player player = new Player();
-            player.setName("Mario Bros");
-            Turn turn = new Turn();
-            turn.setActualplayer(player);
-
-            TurnMsg msg = new TurnMsg(turn);
-            output.writeObject(msg);
+            //TURNO - FATTO
+            //Player player = new Player();
+            output.writeObject("What's your name?");
             output.flush();
+            String next = (String)input.readObject();
+            player.setName(next);
 
-             */
+            if(this.number==1) {
+                output.writeObject(player.getName() + " do you want to play alone?(yes/no)");
+                output.flush();
+                next = (String) input.readObject();
+                if(next == "yes")   game = new SingleGame();
+                else    game = new Game();
+                //game.getPlayers().add(player);
+            }
+
+            PlayerMsg msg = new PlayerMsg(player);
+            output.writeObject(msg);
+
+            output.writeObject("Turn Finished");
+            output.flush();
+            //GameManager.main(game);
+
+            //Turn turn = new Turn();
+            //turn.setActualplayer(player);
+
+           // TurnMsg msg = new TurnMsg(turn);
+           // output.writeObject(msg);
+           // output.flush();
+
+
 
             /*PLAYER - FATTO
             Player player = new Player();
@@ -186,9 +211,12 @@ public class ClientHandler implements Runnable {
             //            System.out.println("Client " + name + " sent: " + next);
             //            if(next == "close")
             output.close();
+            input.close();
             //        }
-        } catch (ClassCastException e) {
+        } catch (ClassCastException | ClassNotFoundException e) {
             System.out.println("invalid stream from client");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
