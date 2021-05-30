@@ -62,8 +62,19 @@ public class ObserverTest {
 
     @Test
 
-    public void updateDevelopementDecksTest () throws FileNotFoundException {
+    public void updateDevelopementSpaceTest () throws FileNotFoundException {
 
+        ObserverGame observertested = new ObserverGame();
+
+        for (int i = 0; i < 2; i++) {
+
+            DevelopeCard card = new DevelopeCard();
+            card.setCard(i);
+            observertested.getDSpace().setCard(card, 1);
+            observertested.getDSpace().setCard(card, 2);
+            observertested.getDSpace().setCard(card, 3);
+            observertested.updateDevelopementSpace();
+        }
 
     }
 

@@ -60,7 +60,7 @@ public class ObserverGame extends Player {
 
     public void updateDevelopementSpace() {
         DevelopementSpace actualDevelopementSpace = this.getDSpace();
-        System.out.println("strongboxmessage");
+        System.out.println("developementspacemessage");
 
     }
 
