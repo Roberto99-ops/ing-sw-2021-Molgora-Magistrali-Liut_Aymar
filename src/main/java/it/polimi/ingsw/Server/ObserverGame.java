@@ -45,6 +45,7 @@ public class ObserverGame extends Player {
 
     public void updateStorage() {
         Storage actualStorage = this.getStorage();
+        this.getStorage().printPanel();
         System.out.println("storagemessage");
 
     }
