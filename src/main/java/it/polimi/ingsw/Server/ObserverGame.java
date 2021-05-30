@@ -52,6 +52,7 @@ public class ObserverGame extends Player {
 
     public void updateStrongbox() {
         StrongBox actualStrongbox = this.getStrongBox();
+        this.getStrongBox().printAll();
         System.out.println("strongboxmessage");
 
     }
