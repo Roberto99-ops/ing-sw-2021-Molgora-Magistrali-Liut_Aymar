@@ -3,6 +3,10 @@ package it.polimi.ingsw.client;
 import it.polimi.ingsw.Server.Server;
 import it.polimi.ingsw.Server.messages.*;
 import it.polimi.ingsw.model.*;
+import it.polimi.ingsw.view.cli.CliManager;
+import it.polimi.ingsw.view.cli.DevelopeDecksView;
+import it.polimi.ingsw.view.cli.MarketView;
+import it.polimi.ingsw.view.cli.Playerboard;
 
 import javax.swing.*;
 import java.io.DataOutputStream;
@@ -18,13 +22,25 @@ public class Client {
     // salvati dentro il ServerHandler che sta all'interno del Client stesso):
     // questa è una copia  del player e dei suoi dati/carte presenti nel server. Questa istanza permette al client di
     // avere tutti i dati ricevuti dal clienthandler in modo ordinato e di visualizzarli quando ne ha bisogno
-    private Player playerSH = new Player();
+    private static Player player;
     //questa è una copia del market nel caso in cui il giocatore giochi in compagnia
-    private Market marketSH = new Market();
+    private static Market market;
     //questa è una copia dei segnalini che possono essere pescati dal giocatore quando gioca da solo
-    private ActionStructure actionStructureSH = new ActionStructure();
+    private static ActionSignal actionSignal;
+
+    private static DevelopeDecks[] DDecks;
+
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
+        player = new Player();
+        //market = new Market();
+        actionSignal = new ActionSignal();
+        DDecks = new DevelopeDecks[12];
+        Playerboard board;
+        //MarketView marketView = new MarketView(market);
+        DevelopeDecksView DDecksView = new DevelopeDecksView(DDecks);
+        //actionsignalview
+
         Scanner scan = new Scanner(System.in);
 
         System.out.println("Insert IP address of Server ");
@@ -48,6 +64,19 @@ public class Client {
         //            System.out.println("protocol violation");
         //        }
         Object next = input.readObject();
+        do{
+            if(next.getClass().equals(String.class)) {
+                System.out.println(next);
+                String string = scan.nextLine();
+                output.writeObject(string);
+                output.flush();
+            }
+            else
+                CliManager.Update(next, player);
+            next = input.readObject();
+        }while(!next.equals("Turn Finished"));   //ci aspettiamo un messaggio di turno finito a fine turno
+
+
 
         /*TURNO - FATTO
         TurnMsg msg = (TurnMsg)next;
@@ -110,8 +139,9 @@ public class Client {
             output.flush();
             if(something.equals("close")) { */
         try {
-            input.close();
             server.close();
+            input.close();
+            output.close();
         } catch (IOException ex) { System.out.println("Server close gone wrong");}
     }
 
