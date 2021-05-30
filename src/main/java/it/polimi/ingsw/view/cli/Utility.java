@@ -64,6 +64,9 @@ public abstract class Utility {
                 case 'W':
                     simbols += Color.WHITE.getEscape() + Simbol.PALLINO;
                     break;
+                case 'N':
+                    simbols += Color.RESET + '_';
+                    break;
             }
         }
 
