@@ -32,7 +32,7 @@ public abstract class PaintCards extends Utility {
         for (int i = 1; i < MAX_VERT_SIZE; i++)
             leadercard[i][MAX_HORIZ_SIZE - 1] = color + "|" + Color.RESET;
 
-        if (card.getPriceC() != null || card.getPriceR() != null) {
+        if (card!= null) {
             putString("cardLevel: " + card.getCardLevel(), leadercard, 1, 1);
             putString("PV: " + card.getPv(), leadercard, 3, 1);
             if (card.getPriceC().size() != 0) {
