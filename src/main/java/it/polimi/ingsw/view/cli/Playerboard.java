@@ -18,7 +18,7 @@ public class Playerboard extends PaintCards {
 
     private String[][] playerboard;
 
-    Playerboard(Player player) throws FileNotFoundException {
+    public Playerboard(Player player) throws FileNotFoundException {
         playerboard = new String[VERT_SIZE][HORIZ_SIZE];
         Perimeter(playerboard, VERT_SIZE, HORIZ_SIZE, Color.BLACK);
         FaithTrack(player.getTrackposition());
@@ -34,7 +34,7 @@ public class Playerboard extends PaintCards {
      * @throws FileNotFoundException
      */
 
-    private void FaithTrack(int trackPosition) throws FileNotFoundException   //devo mettere lo sfondo di un altro colore
+    public void FaithTrack(int trackPosition) throws FileNotFoundException   //devo mettere lo sfondo di un altro colore
     {
         int MAX_HIGH = 13;
         Color basecolor = Color.BACKGROUND_CYAN;
@@ -69,7 +69,7 @@ public class Playerboard extends PaintCards {
      * @param LeftHighCorner_HORIZ = is a number that defines the horizontal position of them cell's right corner
      * @param content = is the content of the cell (usually a number but it could be the faithmarker)
      */
-    private void Square(int LeftHighCorner_VERT, int LeftHighCorner_HORIZ, int content, int trackPosition)
+    public void Square(int LeftHighCorner_VERT, int LeftHighCorner_HORIZ, int content, int trackPosition)
     {
         int SQUARE_HIGH = 4;
         int SQUARE_LENGHT = 7;
@@ -127,7 +127,7 @@ public class Playerboard extends PaintCards {
      * it draws the storage space inside the playerboard
      */
 
-    private void Storage(Storage playerStorage)
+    public void Storage(Storage playerStorage)
     {
         //Storage playerStorage = player.getStorage();
         int MAX_VERT_SIZE = VERT_SIZE-13-2-VERT_SIZE/4;
@@ -205,7 +205,7 @@ public class Playerboard extends PaintCards {
      * it draws the strongbox space inside the playerboard
      */
 
-    private void Strongbox(ResourceStructure box)
+    public void Strongbox(ResourceStructure box)
     {
         int MAX_VERT_SIZE = VERT_SIZE/4;
         int MAX_HORIZ_SIZE = HORIZ_SIZE/4;
@@ -252,7 +252,7 @@ public class Playerboard extends PaintCards {
      * @param player
      */
 
-    private void LeaderSpace(Player player)
+    public void LeaderSpace(Player player)
     {
         int MAX_VERT_SIZE = (VERT_SIZE-13-4)/2;
         int MAX_HORIZ_SIZE = 17;
@@ -298,7 +298,7 @@ public class Playerboard extends PaintCards {
      * it draws the developementspace inside the playerboard
      */
 
-    private void Developementspace(DevelopementSpace DSpace)
+    public void Developementspace(DevelopementSpace DSpace)
     {
         int MAX_VERT_SIZE = VERT_SIZE-13-2;
         int MAX_HORIZ_SIZE = HORIZ_SIZE/2+17;
