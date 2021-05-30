@@ -45,12 +45,14 @@ public class ObserverGame extends Player {
 
     public void updateStorage() {
         Storage actualStorage = this.getStorage();
+        this.getStorage().printPanel();
         System.out.println("storagemessage");
 
     }
 
     public void updateStrongbox() {
         StrongBox actualStrongbox = this.getStrongBox();
+        this.getStrongBox().printAll();
         System.out.println("strongboxmessage");
 
     }
@@ -58,7 +60,7 @@ public class ObserverGame extends Player {
 
     public void updateDevelopementSpace() {
         DevelopementSpace actualDevelopementSpace = this.getDSpace();
-        System.out.println("strongboxmessage");
+        System.out.println("developementspacemessage");
 
     }
 

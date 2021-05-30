@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.Server.ObserverGame;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -9,6 +10,9 @@ public class StorageTest {
     @Test
 
     public void checkStorage() {
+
+
+        ObserverGame observertested = new ObserverGame();
 
         Storage box = new Storage();
         Storage scat = new Storage();
