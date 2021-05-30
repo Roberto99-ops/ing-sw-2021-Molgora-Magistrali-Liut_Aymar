@@ -12,7 +12,7 @@ public class DevelopeDecksView extends PaintCards {
     private final int HORIZ_SIZE = 66;
     private String [][] space;
 
-    DevelopeDecksView(DevelopeDecks[] decks)
+    public DevelopeDecksView(DevelopeDecks[] decks)
     {
         space = new String[VERT_SIZE][HORIZ_SIZE];
         for (int i = 0; i < VERT_SIZE; i++)
@@ -36,7 +36,7 @@ public class DevelopeDecksView extends PaintCards {
             if(i>=4 && i<8) contV = 1;
             if(i>=8) contV = 2;
 
-            if(decks[i].getStructure().size() != 0)
+            if(decks[i]!=null && decks[i].getStructure().size() != 0)
                 DrawDevelopecard(decks[i].getStructure().get(0), space, 12 * contV, 16 * contH);
 
             contH++;
