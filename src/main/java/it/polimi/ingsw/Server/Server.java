@@ -16,7 +16,7 @@ public class Server {
     private static Random random = new Random();
 
     //non deve essere costante la porta
-    //il numero di porta viene generato casualmente tra 1000 e 1050
+    //il numero di porta viene generato casualmente tra 1000 e 1050 per il fisso e tra 2000 e 2050 per il portatile
     public static int SOCKET_PORT = 1000;//random.nextInt(8);
 
     public static void main(String[] args) throws IOException {
@@ -35,14 +35,15 @@ public class Server {
         }
         //...e il server si mette in ascolto.
         // Per ogni nuova connessione stabilita, viene creato un nuovo thread di ClientHandlerù
-
+        int numberofsockets=0; //serve cosicchè il primo giocatore sappia di essere il primo e crei la partita
         while (true) {
             try {
                 /* accepts connections; for every connection we accept,
                  * create -- a new Thread executing a ClientHandler -- */
                 Socket client = socket.accept();
                 //il clientHandler si occupa di gestire la connessione con il client
-                ClientHandler clientHandler = new ClientHandler(client);
+                numberofsockets++;
+                ClientHandler clientHandler = new ClientHandler(client, numberofsockets);
                 //bisogna creare un nuovo thread che si occupi di gestire il clienthandler
                 Thread thread = new Thread(clientHandler, "server_" + client.getInetAddress());
                 thread.start();
