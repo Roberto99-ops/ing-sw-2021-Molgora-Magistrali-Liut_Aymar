@@ -98,8 +98,8 @@ public class ClientHandler implements Runnable {
                     singleGameManager.main();
                 }
                 else    {
-                    gameManager = new GameManager(this);
-                    gameManager.main();
+                    // gameManager = new GameManager(this);
+                    // gameManager.main();
                 }
 
             }

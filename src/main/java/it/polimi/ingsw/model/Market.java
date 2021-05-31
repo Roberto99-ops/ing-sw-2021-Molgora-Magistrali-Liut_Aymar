@@ -7,7 +7,12 @@ import java.util.Collections;
 public class Market {
 
     private char[][] matrix = new char[3][4];
-    private char extraball;
+    private char extraball = 'B';
+
+
+    private int i = 0;
+
+
 
     /**
      this method randomize market

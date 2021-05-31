@@ -31,10 +31,10 @@ public class ObserverGame extends Player {
 
     public static void updateDevelopementDecks() {
         for (int i = 0; i < 12; i++) {
-       // DevelopeDecks[] actualDevelopementDecks = Game.getDevelopedecks(i);
-        System.out.println("developedeckmessage");
-
+            DevelopeDecks actualDevelopementDecks = Game.getDevelopedecks(i);
+            System.out.println("developedeckmessage n #" + i);
         }
+
     }
 
     public static void updateLeaderDeck() {
