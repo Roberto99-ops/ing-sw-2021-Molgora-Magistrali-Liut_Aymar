@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import it.polimi.ingsw.Server.messages.*;
 import it.polimi.ingsw.controller.GameManager;
+import it.polimi.ingsw.controller.SingleGameManager;
 import it.polimi.ingsw.model.*;
 
 import javax.swing.*;
@@ -17,10 +18,15 @@ import java.util.Random;
 
 public class ClientHandler implements Runnable {
 
+    public Player getPlayer() {
+        return player;
+    }
+
     private Socket client;
     private ObjectOutputStream output;
     private ObjectInputStream input;
-    private Game game;
+    private GameManager gameManager;
+    private SingleGameManager singleGameManager;
     private Player player;
     private int number;
 
@@ -36,6 +42,7 @@ public class ClientHandler implements Runnable {
         this.client = client;
         this.player = new Player();
         this.number = numberofsocket;
+        this.player.setNumber(number);
     }
 
 
@@ -79,25 +86,25 @@ public class ClientHandler implements Runnable {
         try {
             //TURNO - FATTO
             //Player player = new Player();
-            output.writeObject("What's your name?");
-            output.flush();
-            String next = (String)input.readObject();
+            this.sendMessage("What's yout name?");
+            String next = this.receiveMessage();
             player.setName(next);
 
             if(this.number==1) {
-                output.writeObject(player.getName() + " do you want to play alone?(yes/no)");
-                output.flush();
-                next = (String) input.readObject();
-                if(next == "yes")   game = new SingleGame();
-                else    game = new Game();
-                //game.getPlayers().add(player);
+                this.sendMessage(player.getName() + " do you want to play alone?(yes/no)");
+                next = this.receiveMessage();
+                if(next.equals("yes")) {
+                    singleGameManager = new SingleGameManager(this);
+                    singleGameManager.main();
+                }
+                else    {
+                    gameManager = new GameManager(this);
+                    gameManager.main();
+                }
+
             }
 
-            PlayerMsg msg = new PlayerMsg(player);
-            output.writeObject(msg);
 
-            output.writeObject("Turn Finished");
-            output.flush();
             //GameManager.main(game);
 
             //Turn turn = new Turn();
@@ -226,19 +233,19 @@ public class ClientHandler implements Runnable {
      *
      * @return The game instance.
      */
-    public Game getGame() {
+    /*public Game getGame() {
         return game;
+    }*/
+
+
+
+    public void sendMessage(Object msg) throws IOException {
+        output.writeObject(msg);
+        output.flush();
     }
 
-
-    /**
-     * Sends a message to the client.
-     *
-     * @param answerMsg The message to be sent.
-     * @throws IOException If a communication error occurs.
-     */
-
-    public void sendAnswerMessage(AnswerMsg answerMsg) throws IOException {
-        output.writeObject((Object) answerMsg);
+    public String receiveMessage() throws IOException, ClassNotFoundException {
+        String next = (String)input.readObject();
+        return next;
     }
 }
