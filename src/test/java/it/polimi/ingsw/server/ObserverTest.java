@@ -1,10 +1,7 @@
 package it.polimi.ingsw.server;
 
 import it.polimi.ingsw.Server.ObserverGame;
-import it.polimi.ingsw.model.DevelopeCard;
-import it.polimi.ingsw.model.DevelopeDecks;
-import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.Storage;
+import it.polimi.ingsw.model.*;
 import org.junit.Test;
 
 import java.io.FileNotFoundException;
@@ -132,6 +129,34 @@ public class ObserverTest {
     }
 
 
+    @Test
+
+    public void updateLeaderDeck () throws FileNotFoundException {
+
+        LeaderDeck deck = new LeaderDeck();
+        LeaderDeck oldDeck = new LeaderDeck();
+
+        for(int i=0; i<5; i++)
+        {
+            LeaderCard card = new LeaderCard();
+            card.setCard(i);
+            deck.getStructure().add(card);
+            oldDeck.getStructure().add(card);
+        }
+
+
+        Game.setLeaderdeck(deck);
+
+        Game.getLeaderdeck().Print();
+
+        deck.setStructure(deck.shuffleDeck(deck.getStructure()));
+
+        ObserverGame.updateLeaderDeck();
+
+        Game.getLeaderdeck().Print();
+
+
+    }
 
 
 

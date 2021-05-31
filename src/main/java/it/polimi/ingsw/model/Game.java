@@ -37,7 +37,7 @@ public class Game implements Serializable {
         return leaderdeck;
     }
 
-    public void setLeaderdeck(LeaderDeck leaderdeck) {
+    public static void setLeaderdeck(LeaderDeck leaderdeck) {
         Game.leaderdeck = leaderdeck;
     }
 
