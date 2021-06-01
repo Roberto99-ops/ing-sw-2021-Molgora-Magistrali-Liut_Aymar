@@ -45,12 +45,12 @@ public class DevelopeDeckMsg extends NetworkMessage {
      * @return the deck of Developecards
      * @throws FileNotFoundException
 
-    public DevelopeDecks getDeck() throws FileNotFoundException {
-        DevelopeDecks deck = new DevelopeDecks();
+    public DevelopeDecks[] getDeck() throws FileNotFoundException {
+        DevelopeDecks[] deck = new DevelopeDecks[12];
         for (int i = 0; i < this.getArray().size(); i++) {
             DevelopeCard card = new DevelopeCard();
             card.setCard(this.getArray().get(i));
-            deck.getStructure().add(card);
+            deck[i%4].getStructure().add(card);
         }
         return deck;
     }
