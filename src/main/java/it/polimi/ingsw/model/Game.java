@@ -9,13 +9,20 @@ public class Game implements Serializable {
     public static int lonely;
     private static ArrayList<Player> players;
     private static int n_players;
-    private static DevelopeDecks[] developedecks = new DevelopeDecks[12];
+    private static DevelopeDecks[] developedecks;
     private static LeaderDeck leaderdeck;
     private static Market market;
     private static int VR=0;
     private static int timer_VR=0;
-    private static Player winner = new Player();
+    private static Player winner;
 
+    public Game()
+    {
+        players = new ArrayList<>();
+        developedecks = new DevelopeDecks[12];
+        leaderdeck = new LeaderDeck();
+        market = new Market();
+    }
 
 
     /**
