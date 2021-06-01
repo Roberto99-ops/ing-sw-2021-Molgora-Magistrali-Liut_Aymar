@@ -13,9 +13,10 @@ public class ObserverTest {
 
 
 
-    @Test
 
-    public void updateMarketTest () throws FileNotFoundException {
+
+    /**
+        public void updateMarketTest () throws FileNotFoundException {
 
         Game game = new Game();
         ObserverGame observertested = new ObserverGame();
@@ -26,7 +27,7 @@ public class ObserverTest {
         observertested.updateMarket();
 
 
-    }
+    } */
 
 
 
