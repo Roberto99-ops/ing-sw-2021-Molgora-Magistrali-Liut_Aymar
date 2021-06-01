@@ -77,7 +77,7 @@ public class SingleGame extends Game {
      * the player decides to play alone
      * @throws Exception
      */
-    public static void  main () throws Exception {
+    /*public static void  main () throws Exception {
         SingleGame singleGame = new SingleGame();
         Scanner scan = new Scanner(System.in);
         //la modalità SingleGame è stata creata e attivata in Game-main quando il giocatore sceglie di giocare da solo
@@ -121,7 +121,7 @@ public class SingleGame extends Game {
             if(actualplayer>=2) actualplayer=0;
         }
 
-    }
+    }*/
 
     /**
      * Overrides method 'Endgame' in Game class. It checks if the
