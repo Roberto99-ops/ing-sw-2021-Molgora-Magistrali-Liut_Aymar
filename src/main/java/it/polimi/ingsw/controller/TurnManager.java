@@ -1,5 +1,6 @@
 package it.polimi.ingsw.controller;
 
+import it.polimi.ingsw.Server.ClientHandler;
 import it.polimi.ingsw.Server.ObservableGame;
 import it.polimi.ingsw.Server.ObserverGame;
 import it.polimi.ingsw.Server.ObserverSingleGame;
@@ -9,7 +10,7 @@ import it.polimi.ingsw.model.*;
 
 import java.io.IOException;
 
-public class TurnManager extends Turn {
+public class TurnManager{
 
     // inizializzazione di view e model
 
@@ -29,33 +30,31 @@ public class TurnManager extends Turn {
      * 2.2) do the same with our Developecards
      * then the turn ends
      */
-
-    public void main() throws Exception {
-        int action = 0;
-        char again = 'n';
-        int card = 0;
+    //actualplayer è la posizione del gocatore attuale nell'array dei giocatori di game
+    public void main(ClientHandler client, Game game, int actualplayer) throws Exception {
+        Turn turn = new Turn();
+        turn.setActualplayer(game.getPlayers().get(actualplayer));
+        Player player = turn.getActualplayer();
 
         //Ad ogni turno, effettuo il controllo del Vatican Report
         FaithTrack faithTrack = new FaithTrack();
-        faithTrack.VaticanReport(actualplayer, game);
+        faithTrack.VaticanReport(player, game);
 
         //se sono in single game, ogni volta che tocca a me, prendo un segnalino ed eseguo la sua azione
-        if (l == 1) {
-            signal.Action(aStructure.PickSignal());
+        if (game.getClass().equals(SingleGame.class)) {
+            turn.getSignal().Action(turn.getaStructure().PickSignal());
             ObserverSingleGame.updateActionStructure(); // è giusto inserirlo qui right ????
 
         }
 
         //1)
-        if (l == 0) {
+        //sta roba la posso fare sempre no? indipendentemente che sia partita singola o con piu player
 
-            System.out.println("What do you want to do?\n\t1)Shop a developement card\n\t2)Take resources at the market\n\t3)Active a production\n");
-            // CLIENTHENDLER
+            client.sendMessage("What do you want to do?\n\t1)Shop a developement card\n\t2)Take resources at the market\n\t3)Active a production\n");
+            String action = client.receiveMessage();
 
-
-            try { //CLIENTHENDLER
-                action = System.in.read();
-                if (action == 1) this.ShopCard(game);
+            try {
+                if (action.equals("1")) turn.ShopCard(game);
                 // ObserverGame.updateStorage();
                 // ObserverGame.updateStrongbox();
                 // ObserverGame.updateDevelopementSpace();
@@ -65,7 +64,7 @@ public class TurnManager extends Turn {
                 // OUT) RIMUOVE LE RISORSE DI COSTO CARTA DALLA PLANCIA e AGGIUNGE NELLE CARTE SVILUPPO DI PLAYER LE CARTE VOLUTE
 
 
-                if (action == 2) this.Buyresource();
+                if (action.equals("2")) turn.Buyresource();
 
                 // ObserverGame.updateMarket();
 
@@ -74,47 +73,37 @@ public class TurnManager extends Turn {
                 // OUT) CAMBIA IL MERCATO e RITORNA LE RISORSE COMPRATE
 
 
-                if (action == 3) {
+                if (action.equals("3")) {
                     do { //2.1)
-                        System.out.println("Which LeaderCard do you want to enable(0=none)?\n");
-                        this.actualplayer.getLeadercards().Print();
-                        try {
-                            card = System.in.read();
-                        } catch (IOException e) {
-                            System.out.println(e);
-                        }
-                        if (card > 0) {
-                            this.actualplayer.getLeadercards().getStructure().get(card - 1).getSkill();
+                        client.sendMessage("Which LeaderCard do you want to enable(0=none)?\n");
+                        client.sendMessage(turn.getActualplayer().getLeadercards());
+                        String cardChosen = client.receiveMessage();
+                        if (!cardChosen.equals("0")) {
+                            int card = cardChosen.charAt(0) - 48;  //converts a char into the correspondant int
+                            turn.getActualplayer().getLeadercards().getStructure().get(card - 1).getSkill();
                         }
 
                         //2.2)
-                        System.out.println("Which DevelopeCard do you want to enable(0=none)?\n"); // CLIENTHENDLER
-                        this.actualplayer.getTopCardsOnBoard().Print(); //l'arraylist di carte viene stampato
-                        try {
-                            card = System.in.read();
-                        } catch (IOException e) {
-                            System.out.println(e);
-                        }
-                        //prendo la carta nella posizione i-1 nell'arraylist ed eseguo la sua produzione
-                        if (card > 0) {
-                            this.actualplayer.getTopCardsOnBoard().getStructure().get(card - 1).DoProduction(this.actualplayer);
+                        client.sendMessage("Which DevelopeCard do you want to enable(0=none)?\n");
+                        client.sendMessage(turn.getActualplayer().getTopCardsOnBoard());
+                        cardChosen = client.receiveMessage();
+                        if (!cardChosen.equals("0")) {
+                            int card = cardChosen.charAt(0) - 48;  //converts a char into the correspondant int
+                            turn.getActualplayer().getTopCardsOnBoard().getStructure().get(card - 1).DoProduction(turn.getActualplayer());
                             // ObserverGame.updateStorage();
                             // ObserverGame.updateStrongbox();
                         }
 
-                        System.out.println("Do you want to do another production(y/n)?\n"); // CLIENTHENDLER
-                        try {
-                            again = (char) System.in.read();
-                        } catch (IOException e) {
-                            System.out.println(e);
-                        }
-                    } while (again == 'y');
+                        client.sendMessage("Do you want to do another production(yes/no)?\n");
+                        action = client.receiveMessage();
+
+                    } while (action.equals("yes"));
                 }
 
             } catch (IOException e) {
                 System.out.println(e);
             }
-        }
+
     }
 }
 
