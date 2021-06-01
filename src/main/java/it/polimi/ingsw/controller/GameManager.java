@@ -2,6 +2,7 @@ package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.Server.ClientHandler;
 import it.polimi.ingsw.Server.ObservableGame;
+import it.polimi.ingsw.Server.ObserverGame;
 import it.polimi.ingsw.model.*;
 
 import java.util.ArrayList;
@@ -71,10 +72,9 @@ public class GameManager{
         System.out.println("Do you want to start a game? yes (A) no (B)"); //CLIENTHENDLER
         if ((scan.nextLine()) == "A") {
             // collegamento client-server
-            Player player1 = new Player();
-            // Observer obs1 = new ObserverGame(); // meglio con player ?
+            ObserverGame player1 = new ObserverGame();
             game.getPlayers().add(player1);
-            // obsG.addObserver(obs1);
+            obsG.addObserver(player1);
             System.out.println("Choose your NAME"); //CLIENTHENDLER
             game.getPlayers().get(0).setName(scan.nextLine());
             game.getPlayers().get(0).setNumber(1);
@@ -91,10 +91,9 @@ public class GameManager{
             System.out.println("Insert the number of players:"); //CLIENTHENDLER
             int n_players = scan.nextInt();
             for (int i = 1; i < n_players; i++) {
-                Player temporaryplayer = new Player();
-                // Observer temporaryobserver = new ObserverGame();
+                ObserverGame temporaryplayer = new ObserverGame();
                 game.getPlayers().add(temporaryplayer);
-                // obsG.addObserver(temporaryobserver); // meglio con player???
+                obsG.addObserver(temporaryplayer);
                 System.out.println("Choose your NAME"); //CLIENTHENDLER
                 game.getPlayers().get(i).setName(scan.nextLine());
                 game.getPlayers().get(i).setNumber(i+1);

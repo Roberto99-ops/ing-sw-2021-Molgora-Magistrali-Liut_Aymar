@@ -13,7 +13,7 @@ import java.io.IOException;
  * it manages a game in singleplayer. it doesn't extend GameManger because
  * it would have simply overrided the main method that is static and that's not possible.
  */
-public class SingleGameManager{
+public class SingleGameManager {
 
     private static Game game;
     private static ClientHandler client;
