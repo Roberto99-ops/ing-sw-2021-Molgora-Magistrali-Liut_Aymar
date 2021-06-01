@@ -219,6 +219,7 @@ public class ClientHandler implements Runnable {
             //            if(next == "close")
             output.close();
             input.close();
+            client.close();
             //        }
         } catch (ClassCastException | ClassNotFoundException e) {
             System.out.println("invalid stream from client");
@@ -238,12 +239,22 @@ public class ClientHandler implements Runnable {
     }*/
 
 
-
+    /**
+     * this method send a message to the client
+     * @param msg: message to send (it could be any type of message so we pass an Object)
+     * @throws IOException
+     */
     public void sendMessage(Object msg) throws IOException {
         output.writeObject(msg);
         output.flush();
     }
 
+    /**
+     * this method receive a message from the client
+     * @return: return a string as we expect always a string as a message from the client.
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     public String receiveMessage() throws IOException, ClassNotFoundException {
         String next = (String)input.readObject();
         return next;
