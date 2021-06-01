@@ -7,11 +7,7 @@ import java.util.Collections;
 public class Market {
 
     private char[][] matrix = new char[3][4];
-    private char extraball = 'B';
-
-
-    private int i = 0;
-
+    private char extraball;
 
 
     /**
@@ -101,7 +97,9 @@ public class Market {
             }
         }
 
-
+    public void setResourceinMarket (int row, int column, char input) {
+            this.matrix[row][column] = input;
+    }
 
     public char[][] getMatrix() {
         return matrix;

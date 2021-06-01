@@ -122,10 +122,26 @@ public class Game implements Serializable {
 
     public void Shuffle()
     {
+
         for(int i=0; i<12; i++)
             developedecks[i].setStructure(developedecks[i].shuffleDeck(developedecks[i].getStructure()));
 
         leaderdeck.setStructure(leaderdeck.shuffleDeck(leaderdeck.getStructure()));
+
+
+        market.setExtraball('B');
+        market.setResourceinMarket(0,0,'B');
+        market.setResourceinMarket(0,1,'G');
+        market.setResourceinMarket(0,2,'G');
+        market.setResourceinMarket(0,3,'P');
+        market.setResourceinMarket(1,0,'P');
+        market.setResourceinMarket(1,1,'R');
+        market.setResourceinMarket(1,2,'Y');
+        market.setResourceinMarket(1,3,'Y');
+        market.setResourceinMarket(2,0,'W');
+        market.setResourceinMarket(2,1,'W');
+        market.setResourceinMarket(2,2,'W');
+        market.setResourceinMarket(2,3,'W');
 
         market.randomizeMarket();
     }

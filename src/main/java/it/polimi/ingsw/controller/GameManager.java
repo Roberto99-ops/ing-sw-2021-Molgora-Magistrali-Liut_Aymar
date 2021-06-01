@@ -43,7 +43,7 @@ public class GameManager{
     private static final Game game = new Game();
     private static ArrayList<ClientHandler> clientList = new ArrayList<>();
 
-    public GameManager(ClientHandler client)
+    public GameManager (ClientHandler client)
     {
         clientList.add(client);
     }
@@ -62,7 +62,7 @@ public class GameManager{
         //game = new Game();
         ObservableGame obsG = new ObservableGame();
         SingleGame singleGame = new SingleGame();
-        // game.getLeaderdeck() = new LeaderDeck();
+        // Game.getLeaderdeck() = new LeaderDeck();
         // leaderdeck = new LeaderDeck();
         TurnManager turnmanager = new TurnManager();
         int actualplayer = 0;
@@ -86,15 +86,15 @@ public class GameManager{
 
         System.out.println("Do you want to play alone(A) or against other players(B)?"); //CLIENTHENDLER
         if ((scan.nextLine()) == "A") {
-            //SingleGame.main();
+            SingleGameManager.main();
         } else if ((scan.nextLine()) == "B") {
-            System.out.println("Insert the number of players:"); //CLIENTHENDLER
+            System.out.println("Insert the number of players:"); // CLIENTHENDLER
             int n_players = scan.nextInt();
             for (int i = 1; i < n_players; i++) {
                 ObserverGame temporaryplayer = new ObserverGame();
                 game.getPlayers().add(temporaryplayer);
                 obsG.addObserver(temporaryplayer);
-                System.out.println("Choose your NAME"); //CLIENTHENDLER
+                System.out.println("Choose your NAME"); // CLIENTHENDLER
                 game.getPlayers().get(i).setName(scan.nextLine());
                 game.getPlayers().get(i).setNumber(i+1);
             }
