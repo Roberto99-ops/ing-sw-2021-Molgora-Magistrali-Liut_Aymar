@@ -5,11 +5,11 @@ import java.io.Serializable;
 
 public class Turn implements Serializable {
 
-    public Player actualplayer;
-    public Game game;
-    public int l = game.getLonely();
-    public ActionStructure aStructure;
-    public ActionSignal signal;
+    private Player actualplayer;
+    private Game game;
+    private int l = game.getLonely();
+    private ActionStructure aStructure;
+    private ActionSignal signal;
 
     public ActionSignal getSignal() {
         return signal;
