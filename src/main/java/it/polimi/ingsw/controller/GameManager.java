@@ -1,8 +1,10 @@
 package it.polimi.ingsw.controller;
 
+import it.polimi.ingsw.Server.ClientHandler;
 import it.polimi.ingsw.Server.ObservableGame;
 import it.polimi.ingsw.model.*;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /*
@@ -27,13 +29,36 @@ private static int timer_VR=0;
  * @param
  */
 
-public class GameManager extends Game {
+public class GameManager{
+    //private Game game;
+
+    /*public GameManager(Game gamein) throws Exception {
+        this.game = gamein;
+        this.main();
+    }*/
 
     // inizializzazione di view e model
 
+    private static final Game game = new Game();
+    private static ArrayList<ClientHandler> clientList = new ArrayList<>();
 
-    public static void main(String[] args) throws Exception {
-        Game game = new Game();
+    public GameManager(ClientHandler client)
+    {
+        clientList.add(client);
+    }
+
+    public GameManager() {
+    }
+
+
+
+    public static void main() throws Exception {
+        //passare a questa classe l'istanza di clienthandler così da poter chiamare
+        //i supi metodi per inviare e ricevere e poter anche condividire l'istanza
+        //comune a tutti di game? ciò vuol dire fare attenzione alla sincronizzazione
+        //tra i thread perchè saranno tutti attivi contemporaneamente su gamemanager.
+        //(ma forse lo saranno su istanze diverse di gamemanager?) forse farlo static?
+        //game = new Game();
         ObservableGame obsG = new ObservableGame();
         SingleGame singleGame = new SingleGame();
         // game.getLeaderdeck() = new LeaderDeck();
@@ -61,7 +86,7 @@ public class GameManager extends Game {
 
         System.out.println("Do you want to play alone(A) or against other players(B)?"); //CLIENTHENDLER
         if ((scan.nextLine()) == "A") {
-            SingleGame.main();
+            //SingleGame.main();
         } else if ((scan.nextLine()) == "B") {
             System.out.println("Insert the number of players:"); //CLIENTHENDLER
             int n_players = scan.nextInt();
@@ -82,8 +107,8 @@ public class GameManager extends Game {
 
         while (true) {
             //3)
-            turnmanager.setActualplayer(game.getPlayers().get(actualplayer));
-            turnmanager.main(); // ?? se il main è in tour manager come faccio a chiamarlo?
+            //turnmanager.setActualplayer(game.getPlayers().get(actualplayer));
+            turnmanager.main(clientList.get(0), game, 0); // contatore per i players, non è get(0) ma get(i)
 
 
             //4)
