@@ -15,6 +15,30 @@ public class GameTest {
     Player juan = new Player();
 
 
+    @Test
+
+    public void shuffletest() throws FileNotFoundException {
+
+    Market market = new Market();
+        market.setExtraball('B');
+        market.setResourceinMarket(0,0,'B');
+        market.setResourceinMarket(0,1,'G');
+        market.setResourceinMarket(0,2,'G');
+        market.setResourceinMarket(0,3,'P');
+        market.setResourceinMarket(1,0,'P');
+        market.setResourceinMarket(1,1,'R');
+        market.setResourceinMarket(1,2,'Y');
+        market.setResourceinMarket(1,3,'Y');
+        market.setResourceinMarket(2,0,'W');
+        market.setResourceinMarket(2,1,'W');
+        market.setResourceinMarket(2,2,'W');
+        market.setResourceinMarket(2,3,'W');
+
+        Game.Shuffle();
+    Game.getMarket().printMatrix();
+    assertNotEquals(market, Game.getMarket());
+
+    }
 
     @Test
 

@@ -120,14 +120,15 @@ public class Game implements Serializable {
      * shuffle all the decks and the market calling the random function
      */
 
-    public void Shuffle()
+    public static void Shuffle()
     {
 
-        for(int i=0; i<12; i++)
+        /** for(int i=0; i<12; i++)
             developedecks[i].setStructure(developedecks[i].shuffleDeck(developedecks[i].getStructure()));
 
         leaderdeck.setStructure(leaderdeck.shuffleDeck(leaderdeck.getStructure()));
 
+        */
 
         market.setExtraball('B');
         market.setResourceinMarket(0,0,'B');

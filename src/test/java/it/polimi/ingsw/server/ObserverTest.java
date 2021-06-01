@@ -15,19 +15,35 @@ public class ObserverTest {
 
 
 
-    /**
-        public void updateMarketTest () throws FileNotFoundException {
+  @Test
 
-        Game game = new Game();
+  public void updateMarketTest () throws FileNotFoundException {
+
+
         ObserverGame observertested = new ObserverGame();
-        game.getMarket().randomizeMarket();
-        game.getMarket().printMatrix();
-        game.getMarket().randomizeMarket();
-        game.getMarket().printMatrix();
+        Game.Shuffle();
+        Game.getMarket().setExtraball('B');
+        Game.getMarket().setResourceinMarket(0,0,'B');
+        Game.getMarket().setResourceinMarket(0,1,'G');
+        Game.getMarket().setResourceinMarket(0,2,'G');
+        Game.getMarket().setResourceinMarket(0,3,'P');
+        Game.getMarket().setResourceinMarket(1,0,'P');
+        Game.getMarket().setResourceinMarket(1,1,'R');
+        Game.getMarket().setResourceinMarket(1,2,'Y');
+        Game.getMarket().setResourceinMarket(1,3,'Y');
+        Game.getMarket().setResourceinMarket(2,0,'W');
+        Game.getMarket().setResourceinMarket(2,1,'W');
+        Game.getMarket().setResourceinMarket(2,2,'W');
+        Game.getMarket().setResourceinMarket(2,3,'W');
+        Game.getMarket().printMatrix();
+
+        Game.getMarket().randomizeMarket();
+        Game.getMarket().printMatrix();
         observertested.updateMarket();
+        Game.getMarket().randomizeMarket();
+        Game.getMarket().printMatrix();
 
-
-    } */
+    }
 
 
 
