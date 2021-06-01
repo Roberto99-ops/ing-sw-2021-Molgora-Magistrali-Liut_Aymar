@@ -7,17 +7,27 @@ import java.io.FileNotFoundException;
 import java.lang.ref.Cleaner;
 
 /**
- * this class recognize what type of message the client received;
- * then update the view.
+ * this class recognizes what type of message the client received;
+ * then updates the view.
  */
 public class CliManager {
 
     private static Market market;
-    private static DevelopeDecks DDecks;
+    private static DevelopeDecks[] DDecks;
     private static LeaderDeck LDeck;
     private static ActionSignal signal;
 
+    /**
+     * this method recognizes what type of message is receiving.
+     * @param msg: msg received
+     * @param player: old player istance (maybe not necessary, it depends if we can print
+     *              playerboard every time we receive an update)
+     * @throws FileNotFoundException
+     */
     public static void Update(Object msg, Player player) throws FileNotFoundException {
+        /**
+         * in case we receive a Market message we update the Market view and print it.
+         */
         if(msg.getClass().equals(MarketMsg.class)) {
             market = new Market();
             MarketMsg marketMsg = (MarketMsg)msg;
@@ -39,6 +49,9 @@ public class CliManager {
             LeaderDeckMsg leaderDeckMsg = (LeaderDeckMsg) msg;
             player.setLeadercards(leaderDeckMsg.getDeck());
         }*/
+        /**
+         * in case we receive a player message we update the playerboard and print it
+         */
         if(msg.getClass().equals(PlayerMsg.class)) {
             PlayerMsg playerMsg = (PlayerMsg) msg;
             player.setLeadercards(playerMsg.getPlayer().getLeadercards());
@@ -56,7 +69,40 @@ public class CliManager {
             Playerboard board = new Playerboard(player);
             board.Print();
         }
-        //...
 
+        /**
+         * in case we receive a DDeck message we update it and print.
+         */
+        if(msg.getClass().equals(DevelopeDeckMsg.class)) {
+            DevelopeDeckMsg DDeckMsg = (DevelopeDeckMsg) msg;
+            //perchè è stato modificato il messaggio developedecks?
+            DDecks = new DevelopeDecks[12];
+            for (int i = 0; i < 12; i++) {
+                DDecks[i].setStructure(DDeckMsg.getDeck()[i].getStructure());
+            }
+            DevelopeDecksView DDecksView = new DevelopeDecksView(DDecks);
+            DDecksView.Print();
+        }
+
+        /**
+         * in case we receive a LDeck message we and print (we receive it only at the start of the game)
+         */
+        if(msg.getClass().equals(LeaderDeckMsg.class)) {
+            LeaderDeckMsg LDeckMsg = (LeaderDeckMsg) msg;
+            LDeck = new LeaderDeck();
+            LDeck.setStructure(LDeckMsg.getDeck().getStructure());
+            LeaderChooseView LView = new LeaderChooseView(LDeck);
+            LView.Print();
+        }
+
+        /**
+         * in case we receive a ActionSignal message we update it and print it.
+         */
+        if(msg.getClass().equals(ActionSignalMsg.class)) {
+           ActionSignalMsg ActionMsg = (ActionSignalMsg) msg;
+           signal = new ActionSignal();
+           signal.setNumber(ActionMsg.getAction().getNumber()); //credo ci sia bisogno di un json per i signal e tutto, come per le carte
+           //actionview, che poi alla fine è un'estensione di playerboard FORSE
+        }
     }
 }
