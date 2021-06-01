@@ -15,7 +15,7 @@ import java.io.IOException;
  */
 public class SingleGameManager{
 
-    private static SingleGame game;
+    private static Game game;
     private static ClientHandler client;
     private static Player L;
 
@@ -52,6 +52,6 @@ public class SingleGameManager{
     private static void Shuffle()
     {
         SingleGame.getActionStructure().ShuffleSignal();
-        //mischiare mazzi e mercato
+        //game.Shuffle(); non ho ancora capito come devono essre "mischiati" i mazzetti ma vanno mishcaiti dentro shuffle credo
     }
 }
