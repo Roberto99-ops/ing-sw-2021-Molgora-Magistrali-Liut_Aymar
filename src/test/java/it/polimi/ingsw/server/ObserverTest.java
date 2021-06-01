@@ -1,13 +1,13 @@
 package it.polimi.ingsw.server;
 
 import it.polimi.ingsw.Server.ObserverGame;
-import it.polimi.ingsw.model.DevelopeCard;
-import it.polimi.ingsw.model.DevelopeDecks;
-import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.Storage;
+import it.polimi.ingsw.model.*;
 import org.junit.Test;
 
 import java.io.FileNotFoundException;
+
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 
 public class ObserverTest {
 
@@ -17,14 +17,14 @@ public class ObserverTest {
 
     public void updateMarketTest () throws FileNotFoundException {
 
-        /** Game game = new Game();
+        Game game = new Game();
         ObserverGame observertested = new ObserverGame();
         game.getMarket().randomizeMarket();
         game.getMarket().printMatrix();
         game.getMarket().randomizeMarket();
         game.getMarket().printMatrix();
         observertested.updateMarket();
-         */
+
 
     }
 
@@ -74,6 +74,7 @@ public class ObserverTest {
             observertested.getDSpace().setCard(card, 2);
             observertested.getDSpace().setCard(card, 3);
             observertested.updateDevelopementSpace();
+
         }
 
     }
@@ -98,9 +99,71 @@ public class ObserverTest {
 
     }
 
+    @Test
+
+    public void updateDevelopementDecks () throws FileNotFoundException {
+
+        ObserverGame observertested = new ObserverGame();
+        Game game = new Game();
+        DevelopeDecks deck = new DevelopeDecks();
+        DevelopeDecks oldDeck = new DevelopeDecks();
+
+        for(int i=0; i<5; i++)
+        {
+            DevelopeCard card = new DevelopeCard();
+            card.setCard(i);
+            deck.getStructure().add(card);
+
+        }
+
+        Game.setDevelopedecks(deck,1);
+
+        Game.getDevelopedecks(1).Print();
+
+        deck.setStructure(deck.shuffleDeck(deck.getStructure()));
+
+        ObserverGame.updateDevelopementDecks();
+
+        Game.getDevelopedecks(1).Print();
+
+    }
+
+
+    @Test
+
+    public void updateLeaderDeck () throws FileNotFoundException {
+
+        LeaderDeck deck = new LeaderDeck();
+        LeaderDeck oldDeck = new LeaderDeck();
+
+        for(int i=0; i<5; i++)
+        {
+            LeaderCard card = new LeaderCard();
+            card.setCard(i);
+            deck.getStructure().add(card);
+            oldDeck.getStructure().add(card);
+        }
+
+
+        Game.setLeaderdeck(deck);
+
+        Game.getLeaderdeck().Print();
+
+        deck.setStructure(deck.shuffleDeck(deck.getStructure()));
+
+        ObserverGame.updateLeaderDeck();
+
+        Game.getLeaderdeck().Print();
+
+
+    }
 
 
 
 
 }
+
+
+
+
 

@@ -41,7 +41,7 @@ public class SingleGame extends Game {
         return leaderdeck;
     }
 
-    public void setLeaderdeck(LeaderDeck leaderdeck) {
+    public static void setLeaderdeck(LeaderDeck leaderdeck) {
         SingleGame.leaderdeck = leaderdeck;
     }
 
