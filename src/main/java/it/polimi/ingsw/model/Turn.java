@@ -8,6 +8,27 @@ public class Turn implements Serializable {
     private Player actualplayer;
     private Game game;
     private int l = game.getLonely();
+
+    public int getL() {
+        return l;
+    }
+
+    public void setL(int l) {
+        this.l = l;
+    }
+
+    public ActionStructure getaStructure() {
+        return aStructure;
+    }
+
+    public void setaStructure(ActionStructure aStructure) {
+        this.aStructure = aStructure;
+    }
+
+    public void setSignal(ActionSignal signal) {
+        this.signal = signal;
+    }
+
     private ActionStructure aStructure;
     private ActionSignal signal;
 
