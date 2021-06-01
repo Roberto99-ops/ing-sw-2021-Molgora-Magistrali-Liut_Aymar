@@ -12,16 +12,22 @@ import java.util.ArrayList;
  */
 
 public class DevelopeDeckMsg extends NetworkMessage {
-    private DevelopeDecks developeDecks = new DevelopeDecks();
-    //private ArrayList<Integer> array;
+
+    //private DevelopeDecks developeDecks = new DevelopeDecks();
+    private ArrayList<Integer> array;
+
+    private ArrayList<Integer> getArray() {
+        return array;
+    }
+
 
     /**
      * Setter for the instance 'developeDecks': it will be the data sent to the client
      * @param developeDecks
      */
-    public  DevelopeDeckMsg(DevelopeDecks developeDecks){
-        this.developeDecks = developeDecks;
-    }
+    //public  DevelopeDeckMsg(DevelopeDecks developeDecks){
+      //  this.developeDecks = developeDecks;
+    //}
 
     /*public void DevelopeDeckMsgAB()
     {
@@ -37,14 +43,14 @@ public class DevelopeDeckMsg extends NetworkMessage {
      * Getter for the data we want the Server to send to the Client
      * @return
      */
-    public DevelopeDecks getDeck(){return developeDecks;}
+   // public DevelopeDecks getDeck(){return developeDecks;}
 
-    /*
+    /**
      * This method needs to be called by the receiver, to "unpack" the array of integer and
      * transform it into a deck of Developecards.
      * @return the deck of Developecards
      * @throws FileNotFoundException
-
+     */
     public DevelopeDecks[] getDeck() throws FileNotFoundException {
         DevelopeDecks[] deck = new DevelopeDecks[12];
         for (int i = 0; i < this.getArray().size(); i++) {
@@ -55,5 +61,5 @@ public class DevelopeDeckMsg extends NetworkMessage {
         return deck;
     }
 
-     */
+
 }
