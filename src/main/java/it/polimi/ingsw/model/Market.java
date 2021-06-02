@@ -1,10 +1,11 @@
 package it.polimi.ingsw.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
-public class Market {
+public class Market implements Serializable {
 
     private char[][] matrix = new char[3][4];
     private char extraball;
