@@ -40,7 +40,7 @@ public class TurnManager{
         //se sono in single game, ogni volta che tocca a me, prendo un segnalino ed eseguo la sua azione
         if (game.getClass().equals(SingleGame.class)) {
             turn.getSignal().Action(turn.getaStructure().PickSignal());
-            ObserverSingleGame.updateActionStructure(); // è giusto inserirlo qui right ????
+            // ObserverSingleGame.updateActionStructure(); // è giusto inserirlo qui right ????
         }
 
         //1)
