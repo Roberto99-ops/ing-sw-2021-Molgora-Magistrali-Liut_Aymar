@@ -45,16 +45,20 @@ public class Client {
 
         System.out.println("Insert IP address of Server ");
         String ip = scan.nextLine();
+        System.out.println("Insert Port number of Server ");
+        String serverport = scan.nextLine();
+
 
         /*Per aprire connessione col server*/
         Socket server;
         try {
-            server = new Socket(ip, Server.SOCKET_PORT);  //ipServer Roby: 95.250.236.230
+            server = new Socket(ip, Integer.parseInt(serverport));  //ipServer Roby: 95.250.236.230
         } catch (IOException e) {
             System.out.println("server unreachable");
             return;
         }
         System.out.println("Connected");
+
 
         //try {
         ObjectOutputStream output = new ObjectOutputStream(server.getOutputStream());
