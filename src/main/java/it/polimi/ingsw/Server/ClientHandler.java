@@ -18,7 +18,7 @@ import java.util.Random;
 
 public class ClientHandler implements Runnable {
 
-    public ObserverGame getPlayer() {
+    public ObserverSingleGame getPlayer() {
         return player;
     }
 
@@ -27,7 +27,7 @@ public class ClientHandler implements Runnable {
     private ObjectInputStream input;
     private GameManager gameManager;  //non sono attributi
     private SingleGameManager singleGameManager; //non sono attributi
-    private ObserverGame player;
+    private ObserverSingleGame player;
     private int number;
 
 
@@ -40,7 +40,7 @@ public class ClientHandler implements Runnable {
 
     public ClientHandler(Socket client, int numberofsocket) {
         this.client = client;
-        this.player = new ObserverGame();
+        this.player = new ObserverSingleGame();
         this.number = numberofsocket;
         this.player.setNumber(number);
     }
