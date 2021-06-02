@@ -125,6 +125,9 @@ public abstract class Utility {
             case 'W':
                 returned = Color.BLACK.getEscape();
                 break;
+            case 'R':
+                returned = Color.BACKGROUND_RED.getEscape();
+                break;
         }
         return returned;
     }
