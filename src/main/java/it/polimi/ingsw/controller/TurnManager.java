@@ -32,14 +32,14 @@ public class TurnManager{
      */
     //actualplayer è la posizione del gocatore attuale nell'array dei giocatori di game
     public void main(ClientHandler client, Game game, int actualplayer) throws Exception {
-        Turn turn = new Turn(client);
+        Turn turn = new Turn();
         turn.setActualplayer(game.getPlayers().get(actualplayer));
         Player player = turn.getActualplayer();
 
 
         //se sono in single game, ogni volta che tocca a me, prendo un segnalino ed eseguo la sua azione
         if (game.getClass().equals(SingleGame.class)) {
-            turn.getaStructure().PickSignal();
+            turn.getSignal().Action(turn.getaStructure().PickSignal());
             ObserverSingleGame.updateActionStructure(); // è giusto inserirlo qui right ????
         }
 

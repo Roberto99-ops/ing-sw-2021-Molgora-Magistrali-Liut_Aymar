@@ -2,6 +2,7 @@ package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.Server.ClientHandler;
 import it.polimi.ingsw.Server.ObserverGame;
+import it.polimi.ingsw.Server.ObserverSingleGame;
 import it.polimi.ingsw.Server.messages.PlayerMsg;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Player;
@@ -32,12 +33,13 @@ public class SingleGameManager {
     }
 
     public static void main() throws Exception {
-        Player player = client.getPlayer();
+        ObserverSingleGame player = client.getPlayer();
         PlayerMsg msg = new PlayerMsg(player);
         client.sendMessage(msg);
         game.getPlayers().add(player);
         //mischiare segnalini e carte e market
         Shuffle();
+        player.updateActionStructure(client);
 
         while(!game.Endgame(player)) {
             TurnManager turnManager = new TurnManager();
