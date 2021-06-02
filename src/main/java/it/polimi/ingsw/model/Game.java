@@ -1,4 +1,5 @@
 package it.polimi.ingsw.model;
+import java.io.FileNotFoundException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -20,6 +21,9 @@ public class Game implements Serializable {
     {
         players = new ArrayList<>();
         developedecks = new DevelopeDecks[12];
+        for (int i = 0; i < 12; i++) {
+            developedecks[i] = new DevelopeDecks();
+        }
         leaderdeck = new LeaderDeck();
         market = new Market();
     }
@@ -120,15 +124,94 @@ public class Game implements Serializable {
      * shuffle all the decks and the market calling the random function
      */
 
-    public static void Shuffle()
-    {
+    public void Shuffle() throws FileNotFoundException {
 
-        /** for(int i=0; i<12; i++)
+
+//per mazzo verde
+        for (int i=3; i<12; i+=4){
+            for (int c=3; c>=0; c--){
+                DevelopeCard developeCard = new DevelopeCard();
+                int num = 44-(c*4);
+                developeCard.setCard(num);
+                developedecks[i].getStructure().add(developeCard);
+                System.out.print(num + " ");
+            }
+        }
+        System.out.println();
+        //per mazzi blu
+        for (int i=2; i<12; i+=4){
+            for (int c=3; c>=0; c--){
+                DevelopeCard developeCard = new DevelopeCard();
+                int num = 46-(c*4);
+                developeCard.setCard(num);
+                developedecks[i].getStructure().add(developeCard);
+                System.out.print(num + " ");
+            }
+        }
+        System.out.println();
+
+        //per mazzi gialli
+        for (int i=1; i<12; i+=4){
+            for (int c=3; c>=0; c--){
+                DevelopeCard developeCard = new DevelopeCard();
+                int num = 47-(c*4);
+                developeCard.setCard(num);
+                developedecks[i].getStructure().add(developeCard);
+                System.out.print(num + " ");
+            }
+        }
+        System.out.println();
+
+        //per mazzi blu
+        for (int i=0; i<12; i+=4){
+            for (int c=3; c>=0; c--){
+                DevelopeCard developeCard = new DevelopeCard();
+                int num = 45-(c*4);
+                developeCard.setCard(num);
+                developedecks[i].getStructure().add(developeCard);
+                System.out.print(num + " ");
+            }
+        }
+        System.out.println();
+        System.out.println();
+
+
+        //developedecks = new DevelopeDecks[12];
+        for (int i = 11; i >= 0; i--) {
+            for (int j = 0; j < 4; j++) {
+                DevelopeCard card = new DevelopeCard();
+
+                int num = (i/4 + 1) * (i) + j*4;
+                num = num * (num/16 + 1);
+                card.setCard(num); //da sistemare sto calcolo in setcard
+                developedecks[i].getStructure().add(card);
+                System.out.print(num + " ");
+            }
+            System.out.println();
+        }
+
+        for (int j = 3; j >= 0; j--) {
+            for (int k = 0; k < 3; k++) {
+                for (int i = 0; i < 15; i++) {
+                    DevelopeCard card = new DevelopeCard();
+                    card.setCard(i);
+                    developedecks[j].getStructure().add(card);
+                }
+            }
+        }
+
+
+        for(int i=0; i<12; i++)
             developedecks[i].setStructure(developedecks[i].shuffleDeck(developedecks[i].getStructure()));
 
+
+
+        for (int i = 0; i < 16; i++) {
+            LeaderCard card = new LeaderCard();
+            leaderdeck.getStructure().add(card);
+        }
         leaderdeck.setStructure(leaderdeck.shuffleDeck(leaderdeck.getStructure()));
 
-        */
 
         market.setExtraball('B');
         market.setResourceinMarket(0,0,'B');

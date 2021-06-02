@@ -36,15 +36,11 @@ public class TurnManager{
         turn.setActualplayer(game.getPlayers().get(actualplayer));
         Player player = turn.getActualplayer();
 
-        //Ad ogni turno, effettuo il controllo del Vatican Report
-        FaithTrack faithTrack = new FaithTrack();
-        faithTrack.VaticanReport(player, game);
 
         //se sono in single game, ogni volta che tocca a me, prendo un segnalino ed eseguo la sua azione
         if (game.getClass().equals(SingleGame.class)) {
             turn.getSignal().Action(turn.getaStructure().PickSignal());
             ObserverSingleGame.updateActionStructure(); // è giusto inserirlo qui right ????
-
         }
 
         //1)
@@ -104,6 +100,9 @@ public class TurnManager{
                 System.out.println(e);
             }
 
+        //Ad ogni turno, effettuo il controllo del Vatican Report
+        FaithTrack faithTrack = new FaithTrack();
+        faithTrack.VaticanReport(player, game);
     }
 }
 

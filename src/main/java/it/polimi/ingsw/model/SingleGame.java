@@ -1,6 +1,8 @@
 package it.polimi.ingsw.model;
+import it.polimi.ingsw.Server.ClientHandler;
 import it.polimi.ingsw.controller.TurnManager;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -10,12 +12,22 @@ public class SingleGame extends Game {
     //cosa ha:
     private static ArrayList<Player> players=new ArrayList<Player>(); //saranno due: il giocatore e Lorenzo
     private final static int n_players = 2;
-    private static DevelopeDecks developedecks[];
+    //private static DevelopeDecks developedecks[];
     private static LeaderDeck leaderdeck;
     private static Market market;
     private static int VR_SG=0;
-    private static ActionStructure actionStructure = new ActionStructure();
-    private static Lorenzo lorenzo = new Lorenzo();
+    private static ActionStructure actionStructure;
+    private static Lorenzo lorenzo;
+
+    public SingleGame()
+    {
+        //developedecks = new DevelopeDecks[12];
+        leaderdeck = new LeaderDeck();
+        market = new Market();
+        actionStructure = new ActionStructure();
+        lorenzo = new Lorenzo();
+    }
+
 
 
 
@@ -29,13 +41,13 @@ public class SingleGame extends Game {
         return n_players;
     }
 
-    public static DevelopeDecks[] getDevelopedecks() {
+    /*public static DevelopeDecks[] getDevelopedecks() {
         return developedecks;
     }
 
     public static void setDevelopedecks(DevelopeDecks[] developedecks) {
         SingleGame.developedecks = developedecks;
-    }
+    }*/
 
     public static LeaderDeck getLeaderdeck() {
         return leaderdeck;
@@ -137,7 +149,13 @@ public class SingleGame extends Game {
         //1)
         if(actualplayer.getTrackposition()>=24) {
             getWinner().setName(actualplayer.getName());
-            return true; //vince o Lorenzo o tu
+            return true; //vinci tu
+        }
+
+        if(this.getLorenzo().getNumber() >= 24)
+        {
+            getWinner().setName("Lorenzo il Magnifico");
+            return true; //vince lorenzo
         }
 
         //2)
@@ -168,5 +186,12 @@ public class SingleGame extends Game {
     public String Victory()
     {
         return getWinner().getName();
+    }
+
+
+    @Override
+    public void Shuffle() throws FileNotFoundException {
+        actionStructure.ShuffleSignal();
+        super.Shuffle();
     }
 }
