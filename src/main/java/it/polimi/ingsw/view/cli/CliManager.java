@@ -76,10 +76,11 @@ public class CliManager {
         if(msg.getClass().equals(DevelopeDeckMsg.class)) {
             DevelopeDeckMsg DDeckMsg = (DevelopeDeckMsg) msg;
             //perchè è stato modificato il messaggio developedecks?
-            DDecks = new DevelopeDecks[12];
-            for (int i = 0; i < 12; i++) {
+            DDecks = DDeckMsg.getDecks();
+            /*for (int i = 0; i < 12; i++) {
+                DDecks[i] = DDeckMsg.getDecks();
                 DDecks[i].setStructure(DDeckMsg.getDeck()[i].getStructure());
-            }
+            }*/
             DevelopeDecksView DDecksView = new DevelopeDecksView(DDecks);
             DDecksView.Print();
         }
