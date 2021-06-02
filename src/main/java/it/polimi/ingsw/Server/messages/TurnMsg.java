@@ -5,7 +5,8 @@ import it.polimi.ingsw.model.*;
 import java.util.Scanner;
 
 public class TurnMsg extends NetworkMessage {
-    private Turn turn = new Turn();
+
+    /*private Turn turn = new Turn();
     private Game game = new Game();
     private int choice;
 
@@ -13,13 +14,13 @@ public class TurnMsg extends NetworkMessage {
      * Prepares the data the Server is going to send to the Client about the current Turn
      * @param turn the data requested
      */
-    public TurnMsg(Turn turn){this.turn=turn;}
+    //public TurnMsg(Turn turn){this.turn=turn;}
 
     /**
      * Sends the data of the current Turn
      * @return the data requested
      */
-    public Turn getTurn(){
+    /*public Turn getTurn(){
         return turn;
     }
 
@@ -42,7 +43,7 @@ public class TurnMsg extends NetworkMessage {
         -attivare la produzione
      */
 
-    private void Choice(int choice) throws Exception {
+   /* private void Choice(int choice) throws Exception {
         if (choice == 1) {
             //prendo risorse dal market
             //manda market all'utente così può scegliere la riga/col
@@ -64,7 +65,7 @@ public class TurnMsg extends NetworkMessage {
      * Sends the client the cards at the top of each minideck, so the user can choose which one he/she wants to use
      * @return a Develop Deck with all the cards from the minidecks
      */
-    private DevelopeDecks DevelopementSpaceMsg(){
+   /* private DevelopeDecks DevelopementSpaceMsg(){
         DevelopeDecks topDevelopementSpace = new DevelopeDecks();
         //creo una struttura di carte con quelle in cima al DSpace
         topDevelopementSpace.getStructure().add(turn.getActualplayer().getDSpace().getMinideck1().getStructure().get(0));
@@ -81,7 +82,7 @@ public class TurnMsg extends NetworkMessage {
      * @param topCard is the card choosen from the Development Space by the user
      * @return a string that tells the user the result of the prduction
      */
-    private String Production(int topCard){
+   /* private String Production(int topCard){
         DevelopeCard developeCard = new DevelopeCard();
 
         if (topCard==0){
@@ -109,7 +110,7 @@ public class TurnMsg extends NetworkMessage {
      * Sends the client a copy of the actual situation of the Market
      * @return the copy of Market
      */
-    private Market MarketMsg() {
+    /*private Market MarketMsg() {
         return game.getMarket();
     }
 
@@ -118,7 +119,7 @@ public class TurnMsg extends NetworkMessage {
      * @return a string that tells the client if a card has been bought (specifying its specs) or not
      * @throws Exception
      */
-    private String CardBought() throws Exception {
+    /*private String CardBought() throws Exception {
         //compro una carta sviluppo
         if (turn.ShopCard(game) == 0) {
             //non ho acquistato niente
@@ -131,5 +132,5 @@ public class TurnMsg extends NetworkMessage {
         return "Error";
     }
 
-
+*/
 }
