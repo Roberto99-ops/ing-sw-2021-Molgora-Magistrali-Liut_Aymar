@@ -38,10 +38,10 @@ public class ClientHandler implements Runnable {
      * @param client The socket connection to the client.
      */
 
-    public ClientHandler(Socket client, int numberofsocket) {
+    public ClientHandler(Socket client, int numberofsockets) {
         this.client = client;
         this.player = new ObserverSingleGame();
-        this.number = numberofsocket;
+        this.number = numberofsockets;
         this.player.setNumber(number);
     }
 
@@ -52,6 +52,7 @@ public class ClientHandler implements Runnable {
 
     @Override
     public void run() {
+
         try {
             output = new ObjectOutputStream(client.getOutputStream());
             input = new ObjectInputStream(client.getInputStream());
@@ -61,6 +62,15 @@ public class ClientHandler implements Runnable {
         }
 
         System.out.println("Connected to: " + client.getInetAddress());
+
+        /*//mando messaggio con elenco delle porte aperte
+        try {
+            this.sendMessage("You can connect to one of these ports:\n\t1010\n\t1020\n\t1030\n\t1040\n\t1050\n");
+            String msg= this.receiveMessage();
+
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }*/
 
         try {
             handleClientConnection();
@@ -86,7 +96,7 @@ public class ClientHandler implements Runnable {
         try {
             //TURNO - FATTO
             //Player player = new Player();
-            this.sendMessage("What's yout name?");
+            this.sendMessage("What's your name?");
             String next = this.receiveMessage();
             player.setName(next);
 

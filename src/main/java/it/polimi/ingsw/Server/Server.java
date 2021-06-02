@@ -8,6 +8,7 @@ import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.Random;
 
 //dobbiamo usare javaSE??
@@ -17,16 +18,60 @@ public class Server {
 
     //non deve essere costante la porta
     //il numero di porta viene generato casualmente tra 1000 e 1050 per il fisso e tra 2000 e 2050 per il portatile
-    public static int SOCKET_PORT = 1000;//random.nextInt(8);
+    //public static int SOCKET_PORT = 1050;//random.nextInt(8);
+
+    /*
+    public static int SOCKET_PORT_A=1000;
+    public static int SOCKET_PORT_B=1001;
+
+    public static int SOCKET_PORT_C=1005;
+    public static int SOCKET_PORT_D=1006;
+
+
+    public static int SOCKET_PORT_E=1010;
+    public static int SOCKET_PORT_F=1011;
+
+
+    public static int SOCKET_PORT_G=1015;
+    public static int SOCKET_PORT_H=1016;
+
+    public static int SOCKET_PORT_I=1020;
+    public static int SOCKET_PORT_J=1021;
+
+    public static int SOCKET_PORT_K=1025;
+    public static int SOCKET_PORT_L=1026;
+
+
+    public static int SOCKET_PORT_M=1030;
+    public static int SOCKET_PORT_N=1031;
+
+    public static int SOCKET_PORT_O=1035;
+    public static int SOCKET_PORT_P=1036;
+
+
+    public static int SOCKET_PORT_Q=1040;
+    public static int SOCKET_PORT_R=1041;
+
+    public static int SOCKET_PORT_S=1045;
+    public static int SOCKET_PORT_T=1046;
+    */
+
+    public static int SOCKET_PORT_U=1050;
+
+    //public static int SOCKET_PORT_WELCOME=1000;
 
     public static void main(String[] args) throws IOException {
         System.out.println("Internal ip: " + InetAddress.getLocalHost());
 
-        //apro la porta # ...
+        //apro le porte # ...
+        ArrayList<ServerSocket> openSockets = new ArrayList<>();
         ServerSocket socket;
         try {
-            //... creando un socket per quel numero di porta
-            socket = new ServerSocket(SOCKET_PORT);
+            //... creando un socket per quei numeri di porta
+            for (int i=1000;i<1020;i++){
+                socket = new ServerSocket(i);
+                openSockets.add(socket);
+            }
             System.out.println("Server is running");
         } catch (IOException e) {
             System.out.println("cannot open server socket");
@@ -40,7 +85,11 @@ public class Server {
             try {
                 /* accepts connections; for every connection we accept,
                  * create -- a new Thread executing a ClientHandler -- */
-                Socket client = socket.accept();
+                Socket client= new Socket();
+                for (int i=0; i<20; i++) {
+                    client = openSockets.get(i).accept();
+                    if (client.isConnected()) break;
+                }
                 //il clientHandler si occupa di gestire la connessione con il client
                 numberofsockets++;
                 ClientHandler clientHandler = new ClientHandler(client, numberofsockets);
