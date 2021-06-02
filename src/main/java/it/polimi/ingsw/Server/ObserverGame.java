@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Server;
 
-import it.polimi.ingsw.Server.messages.MarketMsg;
+import it.polimi.ingsw.Server.messages.*;
+import it.polimi.ingsw.client.Client;
 import it.polimi.ingsw.model.*;
 
 
@@ -22,25 +23,30 @@ per aggiornamenti del tipo planciastringhe per messaggio "video" esempio su chi 
 
 public class ObserverGame extends Player {
 
+
+
+
     public static void updateMarket() {
         Market actualMarket = Game.getMarket();
         System.out.println("marketmessage");
 
-
     }
 
-    public static void updateDevelopementDecks() {
+    public static void updateDevelopementDecks(ClientHandler clh) {
         for (int i = 0; i < 12; i++) {
             DevelopeDecks actualDevelopementDecks = Game.getDevelopedecks(i);
-            System.out.println("developedeckmessage n #" + i);
+            //DevelopeDecks msg = new DevelopeDeckMsg(actualDevelopementDecks);
+            //clh.sendMessage("developementdecksupdated");
+            //clh.sendMessage(msg);
         }
 
     }
 
-    public static void updateLeaderDeck() {
+    public static void updateLeaderDeck(ClientHandler clh) {
         LeaderDeck actualLeaderDeck = Game.getLeaderdeck();
-        System.out.println("leaderdeckmessage");
-
+        LeaderDeckMsg msg = new LeaderDeckMsg(actualLeaderDeck);
+        //clh.sendMessage("leaderdeckupdated");
+        //clh.sendMessage(msg);
     }
 
     public void updateStorage() {
