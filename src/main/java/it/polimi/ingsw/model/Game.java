@@ -68,6 +68,11 @@ public class Game implements Serializable {
         return market;
     }
 
+    public static void setMarket(Market market) {
+
+      Game.market = market;
+    }
+
     public static void setDevelopedecks(DevelopeDecks developedecks, int i) {
 
         Game.developedecks[i] = developedecks;
