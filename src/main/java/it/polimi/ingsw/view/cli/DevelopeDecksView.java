@@ -28,18 +28,18 @@ public class DevelopeDecksView extends PaintCards {
      */
     private void drawCards(DevelopeDecks[] decks)
     {
-        int contH=0;
-        int contV=0;
+        int contH=3;
+        int contV=2;
         for (int i = 0; i < 12; i++) {
-            if(i%4 == 0) contH=0;
+            if(contH < 0) contH=3;
 
             if(i>=4 && i<8) contV = 1;
-            if(i>=8) contV = 2;
+            if(i>=8) contV = 0;
 
             if(decks[i]!=null && decks[i].getStructure().size() != 0)
                 DrawDevelopecard(decks[i].getStructure().get(0), space, 12 * contV, 16 * contH);
 
-            contH++;
+            contH--;
         }
     }
 
