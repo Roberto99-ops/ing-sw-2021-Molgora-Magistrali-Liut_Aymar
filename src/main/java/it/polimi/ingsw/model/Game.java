@@ -126,7 +126,9 @@ public class Game implements Serializable {
 
     public void Shuffle() throws FileNotFoundException {
 
+        //k is needed to order the decks in the required order
         for (int i = 0; i < 12; i++) {
+            int k = i;
             DevelopeDecks deck = new DevelopeDecks();
             for (int j = 0; j < 4; j++) {
                 DevelopeCard card = new DevelopeCard();
@@ -140,14 +142,19 @@ public class Game implements Serializable {
 
                 card.setCard(num);
                 deck.getStructure().add(card);
+
             }
-            developedecks[i].setStructure(deck.getStructure());
+
+            if(i==0 || i==4 || i==8) k+=3;
+            if (i==1 || i==5 || i==9) k -= 1;
+            if (i==3 || i==7 || i==11) k -= 2;
+
+            developedecks[k].setStructure(deck.getStructure());
         }
 
 
         for(int i=0; i<12; i++)
             developedecks[i].setStructure(developedecks[i].shuffleDeck(developedecks[i].getStructure()));
-
 
 
         for (int i = 0; i < 16; i++) {
