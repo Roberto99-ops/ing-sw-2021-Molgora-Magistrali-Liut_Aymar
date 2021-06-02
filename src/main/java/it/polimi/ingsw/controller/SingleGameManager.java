@@ -7,6 +7,7 @@ import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.SingleGame;
 import it.polimi.ingsw.model.Turn;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /**
@@ -15,7 +16,7 @@ import java.io.IOException;
  */
 public class SingleGameManager {
 
-    private static Game game;
+    private static SingleGame game;
     private static ClientHandler client;
     private static Player L;
 
@@ -49,9 +50,8 @@ public class SingleGameManager {
         client.sendMessage(winner);
     }
 
-    private static void Shuffle()
-    {
+    private static void Shuffle() throws FileNotFoundException {
         SingleGame.getActionStructure().ShuffleSignal();
-        //game.Shuffle(); non ho ancora capito come devono essre "mischiati" i mazzetti ma vanno mishcaiti dentro shuffle credo
+        game.Shuffle();
     }
 }
