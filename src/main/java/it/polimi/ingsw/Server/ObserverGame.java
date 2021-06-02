@@ -39,9 +39,11 @@ public class ObserverGame extends Player {
 
     public static void updateDevelopementDecks(ClientHandler clh) throws IOException {
         for (int i = 0; i < 12; i++) {
-            ArrayList <DevelopeCard> actualDevelopeDecks = Game.getDevelopedecks(i).getStructure();
-            // DevelopeDeckMsg msg = new DevelopeDeckMsg(actualDevelopeDecks);
-            // clh.sendMessage(msg);
+            DevelopeDecks[] actualDevelopeDecks = new DevelopeDecks[12];
+            for (int j = 0; j < 12; j++)
+                actualDevelopeDecks[i] = Game.getDevelopedecks(i);
+            DevelopeDeckMsg msg = new DevelopeDeckMsg(actualDevelopeDecks);
+            clh.sendMessage(msg);
         }
 
     }
