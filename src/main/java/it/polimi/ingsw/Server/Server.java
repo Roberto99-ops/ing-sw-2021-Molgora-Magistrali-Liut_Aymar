@@ -15,7 +15,7 @@ import java.util.Random;
 
 public class Server {
     private static Random random = new Random();
-
+    private final static int SO_TIMEOUT = 10;
     //non deve essere costante la porta
     //il numero di porta viene generato casualmente tra 1000 e 1050 per il fisso e tra 2000 e 2050 per il portatile
     //public static int SOCKET_PORT = 1050;//random.nextInt(8);
@@ -56,7 +56,6 @@ public class Server {
     public static int SOCKET_PORT_T=1046;
     */
 
-    public static int SOCKET_PORT_U=1050;
 
     //public static int SOCKET_PORT_WELCOME=1000;
 
@@ -70,6 +69,7 @@ public class Server {
             //... creando un socket per quei numeri di porta
             for (int i=1000;i<1020;i++){
                 socket = new ServerSocket(i);
+                socket.setSoTimeout(SO_TIMEOUT);
                 openSockets.add(socket);
             }
             System.out.println("Server is running");
@@ -82,22 +82,24 @@ public class Server {
         // Per ogni nuova connessione stabilita, viene creato un nuovo thread di ClientHandlerù
         int numberofsockets=0; //serve cosicchè il primo giocatore sappia di essere il primo e crei la partita
         while (true) {
-            try {
-                /* accepts connections; for every connection we accept,
-                 * create -- a new Thread executing a ClientHandler -- */
-                Socket client= new Socket();
-                for (int i=0; i<20; i++) {
+            /* accepts connections; for every connection we accept,
+             * create -- a new Thread executing a ClientHandler -- */
+            Socket client= new Socket();
+            for(int i=0; !client.isConnected(); i++) {
+                if(i==20) i=0;
+                try {
                     client = openSockets.get(i).accept();
-                    if (client.isConnected()) break;
-                }
-                //il clientHandler si occupa di gestire la connessione con il client
-                numberofsockets++;
-                ClientHandler clientHandler = new ClientHandler(client, numberofsockets);
-                //bisogna creare un nuovo thread che si occupi di gestire il clienthandler
-                Thread thread = new Thread(clientHandler, "server_" + client.getInetAddress());
-                thread.start();
-                //il client handler a questo punto è attivo e i messaggi vanno gestiti tra lui e il client
-                //System.out.println("QUI");
+                }catch (IOException e) {}
+                //if (client.isConnected()) break;
+            }
+            //il clientHandler si occupa di gestire la connessione con il client
+            numberofsockets++;
+            ClientHandler clientHandler = new ClientHandler(client, numberofsockets);
+            //bisogna creare un nuovo thread che si occupi di gestire il clienthandler
+            Thread thread = new Thread(clientHandler, "server_" + client.getInetAddress());
+            thread.start();
+            //il client handler a questo punto è attivo e i messaggi vanno gestiti tra lui e il client
+            //System.out.println("QUI");
 
 
                 /* (IL SERVER NON MANDA MESSAGGI MA È SOLO IL CLIENTHANDLER E IL CLIENT CHE LO FANNO)
@@ -138,13 +140,6 @@ public class Server {
                     if (message.compareToIgnoreCase("Exit") == 0) done = true;
                 }
                  */
-
-            } catch (IOException e) {
-                System.out.println("connection dropped");
-            }
-
-
-
 
 
         }
