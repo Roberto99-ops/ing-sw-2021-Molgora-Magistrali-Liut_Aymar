@@ -8,7 +8,7 @@ public class ObserverSingleGame extends ObserverGame {
     public static void updateActionStructure() {
         ActionStructure actualActionStructure = SingleGame.getActionStructure();
         System.out.println("actionstructuremessage");
-        ObservableGame.notifyAllObservers();
+        // ObservableGame.notifyAllObservers();
     }
 
 }
