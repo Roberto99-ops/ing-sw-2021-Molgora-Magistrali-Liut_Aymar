@@ -126,8 +126,6 @@ public class Game implements Serializable {
 
     public void Shuffle() throws FileNotFoundException {
 
-
-        System.out.print("\n\n");
         for (int i = 0; i < 12; i++) {
             DevelopeDecks deck = new DevelopeDecks();
             for (int j = 0; j < 4; j++) {
