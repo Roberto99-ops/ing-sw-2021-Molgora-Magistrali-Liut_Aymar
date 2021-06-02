@@ -4,6 +4,9 @@ import it.polimi.ingsw.Server.messages.*;
 import it.polimi.ingsw.client.Client;
 import it.polimi.ingsw.model.*;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
 
 /*
 
@@ -26,59 +29,57 @@ public class ObserverGame extends Player {
 
 
 
-    public static void updateMarket() {
+    public static void updateMarket(ClientHandler clh) throws IOException {
         Market actualMarket = Game.getMarket();
-        System.out.println("marketmessage");
+        MarketMsg msg = new MarketMsg(actualMarket);
+        clh.sendMessage(msg);
 
     }
 
-    public static void updateDevelopementDecks(ClientHandler clh) {
+
+    public static void updateDevelopementDecks(ClientHandler clh) throws IOException {
         for (int i = 0; i < 12; i++) {
-            DevelopeDecks actualDevelopementDecks = Game.getDevelopedecks(i);
-            //DevelopeDecks msg = new DevelopeDeckMsg(actualDevelopementDecks);
-            //clh.sendMessage("developementdecksupdated");
-            //clh.sendMessage(msg);
+            ArrayList <DevelopeCard> actualDevelopeDecks = Game.getDevelopedecks(i).getStructure();
+            // DevelopeDeckMsg msg = new DevelopeDeckMsg(actualDevelopeDecks);
+            // clh.sendMessage(msg);
         }
 
     }
 
-    public static void updateLeaderDeck(ClientHandler clh) {
+    public static void updateLeaderDeck(ClientHandler clh) throws IOException {
         LeaderDeck actualLeaderDeck = Game.getLeaderdeck();
         LeaderDeckMsg msg = new LeaderDeckMsg(actualLeaderDeck);
-        //clh.sendMessage("leaderdeckupdated");
-        //clh.sendMessage(msg);
+        clh.sendMessage(msg);
     }
 
-    public void updateStorage() {
+    public void updateStorage(ClientHandler clh) throws IOException {
         Storage actualStorage = this.getStorage();
-        this.getStorage().printPanel();
-        System.out.println("storagemessage");
-
+        StorageMsg msg = new StorageMsg(actualStorage);
+        clh.sendMessage(msg);
     }
 
-    public void updateStrongbox() {
+    public void updateStrongbox(ClientHandler clh) throws IOException {
         StrongBox actualStrongbox = this.getStrongBox();
-        this.getStrongBox().printAll();
-        System.out.println("strongboxmessage");
-
+        StrongboxMsg msg = new StrongboxMsg(actualStrongbox.getStructure());
+        clh.sendMessage(msg);
     }
 
 
-    public void updateDevelopementSpace() {
+    public void updateDevelopementSpace(ClientHandler clh) throws IOException {
         DevelopementSpace actualDevelopementSpace = this.getDSpace();
-        System.out.println("developementspacemessage");
+
 
     }
 
-    public static void updateTimer_VR () {
+    public static void updateTimer_VR (ClientHandler clh) throws IOException {
         int actualTimer_VR = Game.getTimer_VR();
-        System.out.println("Timer_VR:" + actualTimer_VR );
+        clh.sendMessage("new Timer_VR" + actualTimer_VR);
 
     }
 
-    public static void updateVR () {
+    public static void updateVR (ClientHandler clh) throws IOException {
         int actualVR = Game.getVR();
-        System.out.println("VR:" + actualVR );
+        clh.sendMessage("new Timer_VR" + actualVR);
 
     }
 
