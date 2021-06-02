@@ -1,4 +1,10 @@
 package it.polimi.ingsw.model;
+import it.polimi.ingsw.Server.ClientHandler;
+import it.polimi.ingsw.Server.messages.DevelopeDeckMsg;
+import it.polimi.ingsw.Server.messages.MarketMsg;
+import it.polimi.ingsw.Server.messages.PlayerMsg;
+import it.polimi.ingsw.client.Client;
+
 import java.io.IOException;
 import java.io.Serializable;
 
@@ -8,6 +14,17 @@ public class Turn implements Serializable {
     private Player actualplayer;
     private Game game;
     private int l = game.getLonely();
+    private ActionStructure aStructure;
+    private ActionSignal signal;
+    private ClientHandler client;
+
+    public Turn(ClientHandler clientin)
+    {
+        aStructure = new ActionStructure();
+        signal = new ActionSignal();
+        client = clientin;
+        actualplayer = client.getPlayer();
+    }
 
     public int getL() {
         return l;
@@ -28,9 +45,6 @@ public class Turn implements Serializable {
     public void setSignal(ActionSignal signal) {
         this.signal = signal;
     }
-
-    private ActionStructure aStructure;
-    private ActionSignal signal;
 
     public ActionSignal getSignal() {
         return signal;
@@ -63,16 +77,21 @@ public class Turn implements Serializable {
      */
 
     public int ShopCard(Game game) throws Exception {
-        int choose = 0;
-        DevelopeCard card = new DevelopeCard();
+        DevelopeCard card;
         ResourceStructure newcost = new ResourceStructure();
-        System.out.println("Choose the number of the card you want to buy ");
-        try {
-            choose = (char) System.in.read();
-        } catch (IOException e) {
-            System.out.println(e);
+        DevelopeDecks[] gameDeck = new DevelopeDecks[12];
+        for (int i = 0; i < 12; i++) {
+            gameDeck[i] = Game.getDevelopedecks(i);
         }
-        card.equals(game.getDevelopedecks(choose).getStructure().get(0));
+
+        DevelopeDeckMsg msg = new DevelopeDeckMsg(gameDeck);
+        client.sendMessage(msg);
+
+        client.sendMessage("Choose the number of the card you want to buy ");
+
+        String next = client.receiveMessage();
+        int cardNum = next.charAt(0) - 48;
+        card = gameDeck[cardNum].getStructure().get(0);
 
         for (int i = 0; i < this.actualplayer.getLeadercards().getStructure().size(); i++)
             if (this.actualplayer.getLeadercards().getStructure().get(i).getSkill() == "PriceSkill")
@@ -114,28 +133,25 @@ public class Turn implements Serializable {
      * @return
      */
 
-    public ResourceStructure Buyresource() {
+    public ResourceStructure Buyresource() throws IOException, ClassNotFoundException {
         ResourceStructure product = new ResourceStructure();
         Market market = Game.getMarket();
-        int RoworCol = 0;
-        int number = 0;
+        int RoworCol;
+        int number;
 
-        System.out.println("Do you want to choose a row or a column?\n\t1)Row\n\t2)Column\n");
-        try {
-            RoworCol = System.in.read();
-        } catch (IOException e) {
-            System.out.println(e);
-        }
+        MarketMsg msg = new MarketMsg(market);
+        client.sendMessage(msg);
+
+        client.sendMessage("Do you want to choose a row or a column?\n\t1)Row\n\t2)Column\n");
+        String next = client.receiveMessage();
+        RoworCol = next.charAt(0) - 48;
 
         if (RoworCol == 1)
-            System.out.println("Which row do you want to take?\n");
+            client.sendMessage("Which row do you want to take?\n");
         if (RoworCol == 2)
-            System.out.println("Which column do you want to take?\n");
-        try {
-            number = System.in.read();
-        } catch (IOException e) {
-            System.out.println(e);
-        }
+            client.sendMessage("Which column do you want to take?\n");
+        next = client.receiveMessage();
+        number = next.charAt(0) - 48;
 
         product.setVector(game.getMarket().doMarket(RoworCol, number));
 
