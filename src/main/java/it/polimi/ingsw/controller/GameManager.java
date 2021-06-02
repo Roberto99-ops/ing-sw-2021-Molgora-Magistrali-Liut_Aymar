@@ -30,7 +30,7 @@ private static int timer_VR=0;
  * @param
  */
 
-public class GameManager{
+public class GameManager {
     //private Game game;
 
     /*public GameManager(Game gamein) throws Exception {
