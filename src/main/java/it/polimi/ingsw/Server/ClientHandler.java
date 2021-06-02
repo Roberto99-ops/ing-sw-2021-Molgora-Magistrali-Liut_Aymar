@@ -25,8 +25,8 @@ public class ClientHandler implements Runnable {
     private Socket client;
     private ObjectOutputStream output;
     private ObjectInputStream input;
-    private GameManager gameManager;
-    private SingleGameManager singleGameManager;
+    private GameManager gameManager;  //non sono attributi
+    private SingleGameManager singleGameManager; //non sono attributi
     private Player player;
     private int number;
 
