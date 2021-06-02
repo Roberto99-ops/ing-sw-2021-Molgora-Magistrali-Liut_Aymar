@@ -63,7 +63,7 @@ public abstract class PaintCards extends Utility {
      * @return
      */
     public void DrawDevelopecard(DevelopeCard card, String[][] space, int row, int column) {
-        int MAX_VERT_SIZE = (45 - 13 - 8) / 2;
+        int MAX_VERT_SIZE = 12;
         int MAX_HORIZ_SIZE = 17 - 2;
         String color = convertColor(card.getColour());
         String[][] developecard = new String[MAX_VERT_SIZE][MAX_HORIZ_SIZE];

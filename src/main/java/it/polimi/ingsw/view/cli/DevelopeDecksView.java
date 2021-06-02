@@ -20,6 +20,7 @@ public class DevelopeDecksView extends PaintCards {
                 space[i][j] = " ";
 
         drawCards(decks);
+        putIndicators();
     }
 
     /**
@@ -41,6 +42,16 @@ public class DevelopeDecksView extends PaintCards {
 
             contH--;
         }
+    }
+
+    private void putIndicators()
+    {
+        space[VERT_SIZE-10][HORIZ_SIZE-1] = "0";
+        space[VERT_SIZE-22][HORIZ_SIZE-1] = "4";
+        space[VERT_SIZE-34][HORIZ_SIZE-1] = "8";
+        space[VERT_SIZE-3][HORIZ_SIZE-27] = "1";
+        space[VERT_SIZE-3][HORIZ_SIZE-42] = "2";
+        space[VERT_SIZE-3][HORIZ_SIZE-59] = "3";
     }
 
     public void Print()
