@@ -96,12 +96,12 @@ public class ClientHandler implements Runnable {
         try {
             //TURNO - FATTO
             //Player player = new Player();
-            this.sendMessage("What's your name?");
+            this.sendMessage("What's your name? ");
             String next = this.receiveMessage();
             player.setName(next);
 
             if(this.number==1) {
-                this.sendMessage(player.getName() + " do you want to play alone?(yes/no)");
+                this.sendMessage(player.getName() + " do you want to play alone?(yes/no) ");
                 next = this.receiveMessage();
                 if(next.equals("yes")) {
                     singleGameManager = new SingleGameManager(this);

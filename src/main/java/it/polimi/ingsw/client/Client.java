@@ -46,7 +46,7 @@ public class Client {
 
         System.out.print("Insert IP address of Server: ");
         String ip = scan.nextLine();
-        System.out.print("Insert Port number of Server \n(if don't needed just press enter): ");
+        System.out.print("\nInsert Port number of Server (if don't needed just press enter): ");
         String serverport = scan.nextLine();
 
 
@@ -58,10 +58,10 @@ public class Client {
             else
                 server = new Socket(ip, 1000);
         } catch (IOException e) {
-            System.out.println("server unreachable");
+            System.out.println("\nserver unreachable");
             return;
         }
-        System.out.println("Connected");
+        System.out.println("\nConnected");
 
 
         //try {
@@ -74,7 +74,7 @@ public class Client {
         Object next = input.readObject();
         do{
             if(next.getClass().equals(String.class)) {
-                System.out.println(next);
+                System.out.print("\n" + next);
                 String string = scan.nextLine();
                 output.writeObject(string);
                 output.flush();
@@ -150,7 +150,7 @@ public class Client {
             server.close();
             input.close();
             output.close();
-        } catch (IOException ex) { System.out.println("Server close gone wrong");}
+        } catch (IOException ex) { System.out.println("\nServer close gone wrong");}
     }
 
 
