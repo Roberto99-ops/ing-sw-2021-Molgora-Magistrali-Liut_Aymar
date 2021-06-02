@@ -34,7 +34,7 @@ public class GameTest {
         market.setResourceinMarket(2,2,'W');
         market.setResourceinMarket(2,3,'W');
 
-        Game.Shuffle();
+        giocotest.Shuffle();
     Game.getMarket().printMatrix();
     assertNotEquals(market, Game.getMarket());
 
