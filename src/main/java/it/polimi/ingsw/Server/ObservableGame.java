@@ -9,6 +9,8 @@ import java.util.*;
 
 public class ObservableGame {
 
+    ClientHandler clh;
+
    /** public static int lonely;
     private static ArrayList<Player> players;
     private static int n_players;
@@ -156,23 +158,22 @@ public class ObservableGame {
     }
 
 
-// notify allObservers
-   public static void notifyAllObservers() {
+   public static void notifyAllObservers(ClientHandler clh, ObserverGame n_actualplayer) throws Exception {
        for (int i = 0; i < observers.size(); i++) {
-           ObserverGame.updateDevelopementDecks();
-           ObserverGame.updateLeaderDeck();
-           ObserverGame.updateMarket();
-           ObserverGame.updateTimer_VR();
-           ObserverGame.updateVR();
+           n_actualplayer.updateDevelopementDecks(clh);
+           n_actualplayer.updateLeaderDeck(clh);
+           n_actualplayer.updateMarket(clh);
+           n_actualplayer.updateTimer_VR(clh);
+           n_actualplayer.updateVR(clh);
        }
 
    }
 
-       public static void personalObservers (ObserverGame observerGame) {
+       public static void personalObservers (ClientHandler clh, ObserverGame n_actualplayer) throws Exception {
 
-               observerGame.updateDevelopementSpace();
-               observerGame.updateStorage();
-               observerGame.updateStrongbox();
+           n_actualplayer.updateDevelopementSpace(clh);
+           n_actualplayer.updateStorage(clh);
+           n_actualplayer.updateStrongbox(clh);
 
     }
 
