@@ -21,13 +21,6 @@ public class Player implements Serializable {
         leadercards = new LeaderDeck();
         skill1 = 0;
         skill2 = 0;
-        minideck1 = new DevelopeDecks();
-        minideck2 = new DevelopeDecks();
-        minideck3 = new DevelopeDecks();
-        minideck1Top = new DevelopeCard();
-        minideck2Top = new DevelopeCard();
-        minideck3Top = new DevelopeCard();
-        TopCardsOnBoard = new DevelopeDecks();
         developementquantity = 0;
         faithTrack = new FaithTrack();
 
