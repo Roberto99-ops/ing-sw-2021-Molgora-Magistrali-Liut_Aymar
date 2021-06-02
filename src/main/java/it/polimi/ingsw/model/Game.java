@@ -68,11 +68,6 @@ public class Game implements Serializable {
         return market;
     }
 
-    public static void setMarket(Market market) {
-
-      Game.market = market;
-    }
-
     public static void setDevelopedecks(DevelopeDecks developedecks, int i) {
 
         Game.developedecks[i] = developedecks;
@@ -132,77 +127,23 @@ public class Game implements Serializable {
     public void Shuffle() throws FileNotFoundException {
 
 
-//per mazzo verde
-        for (int i=3; i<12; i+=4){
-            for (int c=3; c>=0; c--){
-                DevelopeCard developeCard = new DevelopeCard();
-                int num = 44-(c*4);
-                developeCard.setCard(num);
-                developedecks[i].getStructure().add(developeCard);
-                System.out.print(num + " ");
-            }
-        }
-        System.out.println();
-        //per mazzi blu
-        for (int i=2; i<12; i+=4){
-            for (int c=3; c>=0; c--){
-                DevelopeCard developeCard = new DevelopeCard();
-                int num = 46-(c*4);
-                developeCard.setCard(num);
-                developedecks[i].getStructure().add(developeCard);
-                System.out.print(num + " ");
-            }
-        }
-        System.out.println();
-
-        //per mazzi gialli
-        for (int i=1; i<12; i+=4){
-            for (int c=3; c>=0; c--){
-                DevelopeCard developeCard = new DevelopeCard();
-                int num = 47-(c*4);
-                developeCard.setCard(num);
-                developedecks[i].getStructure().add(developeCard);
-                System.out.print(num + " ");
-            }
-        }
-        System.out.println();
-
-        //per mazzi blu
-        for (int i=0; i<12; i+=4){
-            for (int c=3; c>=0; c--){
-                DevelopeCard developeCard = new DevelopeCard();
-                int num = 45-(c*4);
-                developeCard.setCard(num);
-                developedecks[i].getStructure().add(developeCard);
-                System.out.print(num + " ");
-            }
-        }
-        System.out.println();
-        System.out.println();
-
-
-        //developedecks = new DevelopeDecks[12];
-        for (int i = 11; i >= 0; i--) {
+        System.out.print("\n\n");
+        for (int i = 0; i < 12; i++) {
+            DevelopeDecks deck = new DevelopeDecks();
             for (int j = 0; j < 4; j++) {
                 DevelopeCard card = new DevelopeCard();
 
-                int num = (i/4 + 1) * (i) + j*4;
-                num = num * (num/16 + 1);
-                card.setCard(num); //da sistemare sto calcolo in setcard
-                developedecks[i].getStructure().add(card);
-                System.out.print(num + " ");
-            }
-            System.out.println();
-        }
-
-        for (int j = 3; j >= 0; j--) {
-            for (int k = 0; k < 3; k++) {
-                for (int i = 0; i < 15; i++) {
-                    DevelopeCard card = new DevelopeCard();
-                    card.setCard(i);
-                    developedecks[j].getStructure().add(card);
+                int num = (i) + j*4;
+                if(i >= 4)
+                { num = (16+i%4) + j*4;
+                    if(i >= 8)
+                        num = (32+i%4) + j*4;
                 }
+
+                card.setCard(num);
+                deck.getStructure().add(card);
             }
+            developedecks[i].setStructure(deck.getStructure());
         }
 
 
