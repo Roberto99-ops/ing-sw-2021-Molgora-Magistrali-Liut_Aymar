@@ -135,29 +135,34 @@ public class Turn implements Serializable {
 
     public ResourceStructure Buyresource() throws IOException, ClassNotFoundException {
         ResourceStructure product = new ResourceStructure();
-        Market market = Game.getMarket();
-        int RoworCol;
+        int RoworCol = 0;
         int number;
 
-        MarketMsg msg = new MarketMsg(market);
+        MarketMsg msg = new MarketMsg(Game.getMarket());
         client.sendMessage(msg);
 
-        client.sendMessage("Do you want to choose a row or a column?\n\t1)Row\n\t2)Column\n");
+        client.sendMessage("Do you want to choose a row or a column?");
         String next = client.receiveMessage();
-        RoworCol = next.charAt(0) - 48;
 
-        if (RoworCol == 1)
+        if (next.equals("row")) {
             client.sendMessage("Which row do you want to take?\n");
-        if (RoworCol == 2)
+            RoworCol = 1;
+        }
+        if (next.equals("column")) {
             client.sendMessage("Which column do you want to take?\n");
+            RoworCol = 2;
+        }
         next = client.receiveMessage();
         number = next.charAt(0) - 48;
 
-        product.setVector(game.getMarket().doMarket(RoworCol, number));
+        product.setVector(Game.getMarket().doMarket(RoworCol, number));
 
         for (int i = 0; i < this.actualplayer.getLeadercards().getStructure().size(); i++)
             if (this.actualplayer.getLeadercards().getStructure().get(i).getSkill() == "WhiteMarbSkil")
                 product = this.actualplayer.getLeadercards().getStructure().get(i).WhiteMarbleSkill(product);
+
+        msg = new MarketMsg(Game.getMarket());
+        client.sendMessage(msg);
 
         return product;
     }
