@@ -13,7 +13,6 @@ public class Turn implements Serializable {
 
     private Player actualplayer;
     private Game game;
-    private int l = game.getLonely();
     private ActionStructure aStructure;
     private ActionSignal signal;
     private ClientHandler client;
@@ -24,14 +23,6 @@ public class Turn implements Serializable {
         signal = new ActionSignal();
         client = clientin;
         actualplayer = client.getPlayer();
-    }
-
-    public int getL() {
-        return l;
-    }
-
-    public void setL(int l) {
-        this.l = l;
     }
 
     public ActionStructure getaStructure() {
