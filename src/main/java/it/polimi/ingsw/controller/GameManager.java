@@ -3,10 +3,13 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.Server.ClientHandler;
 import it.polimi.ingsw.Server.ObservableGame;
 import it.polimi.ingsw.Server.ObserverGame;
+import it.polimi.ingsw.Server.messages.AnswerMsg;
+import it.polimi.ingsw.Server.messages.NetworkMessage;
 import it.polimi.ingsw.model.*;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.UUID;
 
 /*
 
@@ -41,14 +44,13 @@ public class GameManager {
     // inizializzazione di view e model
 
     private static final Game game = new Game();
-    private static ArrayList<ClientHandler> clientList = new ArrayList<>();
+    private static ArrayList<ClientHandler> clientList;
+    private static ClientHandler firstclient;
 
-    public GameManager (ClientHandler client)
-    {
-        clientList.add(client);
-    }
 
     public GameManager() {
+        clientList = new ArrayList<>();
+        clientList.add(0, firstclient);
     }
 
 
@@ -60,6 +62,7 @@ public class GameManager {
         //tra i thread perchè saranno tutti attivi contemporaneamente su gamemanager.
         //(ma forse lo saranno su istanze diverse di gamemanager?) forse farlo static?
         //game = new Game();
+
         ObservableGame obsG = new ObservableGame();
         SingleGame singleGame = new SingleGame();
         // Game.getLeaderdeck() = new LeaderDeck();
@@ -69,28 +72,46 @@ public class GameManager {
         Scanner scan = new Scanner(System.in);
 
         //1)
-        System.out.println("Do you want to start a game? yes (A) no (B)"); //CLIENTHENDLER
-        if ((scan.nextLine()) == "A") {
-            // collegamento client-server
+
+
+        clientList.get(0).sendMessage("Do you want to start a game? yes (A) no (B)");
+
+
+
+        if ((clientList.get(0).receiveMessage() == "A")) {
+
+            // collegamento client-server primo giocatore
             ObserverGame player1 = new ObserverGame();
             game.getPlayers().add(player1);
             obsG.addObserver(player1);
-            System.out.println("Choose your NAME"); //CLIENTHENDLER
-            game.getPlayers().get(0).setName(scan.nextLine());
+            clientList.get(0).sendMessage("Choose a Name");
+            game.getPlayers().get(0).setName(clientList.get(0).receiveMessage());
             game.getPlayers().get(0).setNumber(1);
-        } else if ((scan.nextLine()) == "B") {
+
+        } else if ((clientList.get(0).receiveMessage() == "B")) {
+
             // chiudi il collegamento
         }
 
 
 
-        System.out.println("Do you want to play alone(A) or against other players(B)?"); //CLIENTHENDLER
+        clientList.get(0).sendMessage("Do you want to play alone(A) or against other players(B)?");
         if ((scan.nextLine()) == "A") {
+
+            // answermessage
+
             SingleGameManager.main();
         } else if ((scan.nextLine()) == "B") {
-            System.out.println("Insert the number of players:"); // CLIENTHENDLER
+
+            // answermessage
+
+            clientList.get(0).sendMessage("Insert the number of players:");
             int n_players = scan.nextInt();
+
+            // aanswermessage
+
             for (int i = 1; i < n_players; i++) {
+
                 ObserverGame temporaryplayer = new ObserverGame();
                 game.getPlayers().add(temporaryplayer);
                 obsG.addObserver(temporaryplayer);
