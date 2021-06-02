@@ -11,8 +11,29 @@ public class Player implements Serializable {
     //Nome, Numero, PV, Posizione tracciato fede, Plancia, LeaderCards(2)
     //Carte Sviluppo acquistate
 
+    public Player()
+    {
+        name = new String();
+        PV=0;
+        storage = new Storage();
+        strongBox = new StrongBox();
+        DSpace = new DevelopementSpace();
+        leadercards = new LeaderDeck();
+        skill1 = 0;
+        skill2 = 0;
+        minideck1 = new DevelopeDecks();
+        minideck2 = new DevelopeDecks();
+        minideck3 = new DevelopeDecks();
+        minideck1Top = new DevelopeCard();
+        minideck2Top = new DevelopeCard();
+        minideck3Top = new DevelopeCard();
+        TopCardsOnBoard = new DevelopeDecks();
+        developementquantity = 0;
+        faithTrack = new FaithTrack();
+
+    }
     //Nome
-    private String name = new String();
+    private String name;
     public String getName() {
         return name;
     }
@@ -32,7 +53,7 @@ public class Player implements Serializable {
 
 
     //PV
-    private int PV=0;
+    private int PV;
     public  int getPv() {
         return PV;
     }
@@ -42,9 +63,9 @@ public class Player implements Serializable {
 
 
     //Plancia
-    private  Storage storage = new Storage();
-    private StrongBox strongBox = new StrongBox();
-    private  DevelopementSpace DSpace = new DevelopementSpace();
+    private  Storage storage;
+    private StrongBox strongBox;
+    private  DevelopementSpace DSpace;
     public Storage getStorage() {
         return storage;
     }
@@ -70,11 +91,11 @@ public class Player implements Serializable {
 
 
     //LeaderCards(2)
-    private LeaderDeck leadercards = new LeaderDeck();
+    private LeaderDeck leadercards;
     public void setLeadercards(LeaderDeck leadercards){this.leadercards=leadercards;}
     public LeaderDeck getLeadercards() { return leadercards; }
-    private int skill1=0;
-    private int skill2=0;
+    private int skill1;
+    private int skill2;
 
     public int getSkill1(){
         return  skill1;
@@ -94,9 +115,9 @@ public class Player implements Serializable {
 
 
     //carte sviluppo in DevelopementSpace
-    private DevelopeDecks minideck1 = new DevelopeDecks();
-    private DevelopeDecks minideck2 = new DevelopeDecks();
-    private DevelopeDecks minideck3 = new DevelopeDecks();
+    private DevelopeDecks minideck1;
+    private DevelopeDecks minideck2;
+    private DevelopeDecks minideck3;
 
     public DevelopeDecks getMinideck1() {
         return minideck1;
@@ -122,16 +143,16 @@ public class Player implements Serializable {
         this.minideck3 = minideck3;
     }
 
-    private DevelopeCard minideck1Top=new DevelopeCard();
-    private DevelopeCard minideck2Top=new DevelopeCard();
-    private DevelopeCard minideck3Top=new DevelopeCard();
-    private DevelopeDecks TopCardsOnBoard = new DevelopeDecks();
+    private DevelopeCard minideck1Top;
+    private DevelopeCard minideck2Top;
+    private DevelopeCard minideck3Top;
+    private DevelopeDecks TopCardsOnBoard;
 
     public DevelopeDecks getTopCardsOnBoard() {
         return TopCardsOnBoard;
     }
 
-    private int developementquantity=0;
+    private int developementquantity;
     public int getDevelopementquantity() {
         return developementquantity;
     }
@@ -145,7 +166,7 @@ public class Player implements Serializable {
 
 
     //FaithTrack
-    private FaithTrack faithTrack = new FaithTrack();
+    private FaithTrack faithTrack;
     public FaithTrack getFaithTrack() {
         return faithTrack;
     }

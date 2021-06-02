@@ -13,10 +13,23 @@ import java.util.ArrayList;
 
 public class DevelopeDeckMsg extends NetworkMessage {
 
-    //private DevelopeDecks developeDecks = new DevelopeDecks();
-    private ArrayList<Integer> array;
+    private DevelopeDecks[] developeDecks;
 
-    private ArrayList<Integer> getArray() {
+    public DevelopeDeckMsg(DevelopeDecks[] decks)
+    {
+        developeDecks = new DevelopeDecks[12];
+        for (int i = 0; i < 12; i++) {
+            developeDecks[i] = decks[i];
+        }
+    }
+
+    public DevelopeDecks[] getDecks()
+    {
+        return developeDecks;
+    }
+    //private ArrayList<Integer> array;
+
+    /*private ArrayList<Integer> getArray() {
         return array;
     }
 
@@ -25,9 +38,17 @@ public class DevelopeDeckMsg extends NetworkMessage {
      * Setter for the instance 'developeDecks': it will be the data sent to the client
      * @param developeDecks
      */
-    //public  DevelopeDeckMsg(DevelopeDecks developeDecks){
-      //  this.developeDecks = developeDecks;
-    //}
+   /* public void DevelopeDeckMsg(DevelopeDecks[] developeDecks){
+        int nDecks = developeDecks.length;
+        int totalCards = 0;
+        for (int i = 0; i < nDecks; i++) {
+            totalCards += developeDecks[i].getStructure().size();
+        }
+
+        for (int i = 0; i < totalCards; i++) {
+            array.add()
+        }
+    }
 
     /*public void DevelopeDeckMsgAB()
     {
@@ -51,7 +72,7 @@ public class DevelopeDeckMsg extends NetworkMessage {
      * @return the deck of Developecards
      * @throws FileNotFoundException
      */
-    public DevelopeDecks[] getDeck() throws FileNotFoundException {
+    /*public DevelopeDecks[] getDeck() throws FileNotFoundException {
         DevelopeDecks[] deck = new DevelopeDecks[12];
         for (int i = 0; i < this.getArray().size(); i++) {
             DevelopeCard card = new DevelopeCard();
@@ -59,7 +80,7 @@ public class DevelopeDeckMsg extends NetworkMessage {
             deck[i%4].getStructure().add(card);
         }
         return deck;
-    }
+    }*/
 
 
 }
