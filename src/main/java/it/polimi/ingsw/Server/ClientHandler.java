@@ -86,7 +86,7 @@ public class ClientHandler implements Runnable {
         try {
             //TURNO - FATTO
             //Player player = new Player();
-            this.sendMessage("What's yout name?");
+            this.sendMessage("What's your name?");
             String next = this.receiveMessage();
             player.setName(next);
 
