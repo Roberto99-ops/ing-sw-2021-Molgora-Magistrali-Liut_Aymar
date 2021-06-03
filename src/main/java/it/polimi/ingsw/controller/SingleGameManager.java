@@ -32,6 +32,7 @@ public class SingleGameManager {
     }
 
     public static void main() throws Exception {
+        client.sendMessage("clean screen");
         ObserverSingleGame player = client.getPlayer();
         game.getPlayers().add(player);
 
@@ -45,6 +46,7 @@ public class SingleGameManager {
         client.sendMessage("Choose another one: ");
         choice = Integer.parseInt(client.receiveMessage());
         player.getLeadercards().getStructure().add(leaderChoice.getStructure().get(choice));
+        client.sendMessage("clean screen");
 
         PlayerMsg msg = new PlayerMsg(player, game);
         client.sendMessage(msg);

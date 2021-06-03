@@ -4,6 +4,7 @@ import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.view.cli.CliManager;
 import it.polimi.ingsw.view.cli.DevelopeDecksView;
 import it.polimi.ingsw.view.cli.Playerboard;
+import it.polimi.ingsw.view.cli.Utility;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -68,10 +69,15 @@ public class Client {
         Object next = input.readObject();
         do{
             if(next.getClass().equals(String.class)) {
-                System.out.print("\n" + next);
-                String string = scan.nextLine();
-                output.writeObject(string);
-                output.flush();
+                if(next.equals("clean screen")){
+                    Utility.Clean();
+                }
+                else {
+                    System.out.print("\n" + next);
+                    String string = scan.nextLine();
+                    output.writeObject(string);
+                    output.flush();
+                }
             }
             else
                 CliManager.update(next, player);
