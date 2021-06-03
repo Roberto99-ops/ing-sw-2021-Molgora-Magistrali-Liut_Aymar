@@ -33,7 +33,6 @@ public class Game implements Serializable {
      * getter and setter
      * @return
      */
-
     public ArrayList<Player> getPlayers() {
 
         return players;
@@ -123,7 +122,6 @@ public class Game implements Serializable {
     /**
      * shuffle all the decks and the market calling the random function
      */
-
     public void shuffle() throws FileNotFoundException {
 
         //k is needed to order the decks in the required order
@@ -159,6 +157,7 @@ public class Game implements Serializable {
 
         for (int i = 0; i < 16; i++) {
             LeaderCard card = new LeaderCard();
+            card.setCard(i);
             leaderdeck.getStructure().add(card);
         }
         leaderdeck.setStructure(leaderdeck.shuffleDeck(leaderdeck.getStructure()));
@@ -186,7 +185,6 @@ public class Game implements Serializable {
      * check if the game is ended, checking the actualplayer faith track(1) and developequantity(2)
      * @return boolean
      */
-
     public boolean callEndgame(Player actualplayer)
     {
             //1)
@@ -207,8 +205,6 @@ public class Game implements Serializable {
      * of the faith track, at 2) we check which player has more Victory Points
      * @return string
      */
-
-
     public String callVictory()
     {
         winner.setPv(0);
@@ -224,5 +220,21 @@ public class Game implements Serializable {
 
         }
         return winner.getName();
+    }
+
+    /**
+     * this method give to the player 4 leadercards to choose
+     * @return: the 4 cards
+     */
+    public LeaderDeck leaderChoice()
+    {
+        LeaderDeck deck = new LeaderDeck();
+        for (int i = 0; i < 4; i++) {
+            LeaderCard card;
+            card = Game.getLeaderdeck().getStructure().get(0);
+            deck.getStructure().add(card);
+            Game.getLeaderdeck().getStructure().remove(0);
+        }
+        return deck;
     }
 }
