@@ -1,9 +1,6 @@
 package it.polimi.ingsw.view.cli;
 
-import it.polimi.ingsw.model.DevelopeCard;
-import it.polimi.ingsw.model.LeaderCard;
-import it.polimi.ingsw.model.Player;
-import it.polimi.ingsw.model.ResourceStructure;
+import it.polimi.ingsw.model.*;
 import org.junit.Test;
 
 import java.io.FileNotFoundException;
@@ -59,7 +56,17 @@ public class PlayerboardTest {
             player.getDSpace().getMinideck2().getStructure().add(Dcard2);
             player.getDSpace().getMinideck3().getStructure().add(Dcard3);
         }
-        Playerboard playerboard = new Playerboard(player);
+        SingleGame game = new SingleGame();
+        SingleGame.getLorenzo().setNumber(10);
+        for (int i = 0; i < 4; i++) {
+            Player person = new Player();
+            person.setName("RICARDOMARTINEZ");
+            person.setPv(100);
+            game.getPlayers().add(person);
+        }
+
+        SingleGame.getActionStructure().ShuffleSignal();
+        Playerboard playerboard = new Playerboard(player, game);
         playerboard.Print();
 
     }

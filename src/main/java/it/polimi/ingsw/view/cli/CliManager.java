@@ -16,6 +16,7 @@ public class CliManager {
     private static DevelopeDecks[] DDecks;
     private static LeaderDeck LDeck;
     private static ActionSignal signal;
+    private static Game game;
 
     /**
      * this method recognizes what type of message is receiving.
@@ -66,7 +67,21 @@ public class CliManager {
             player.setNumber(playerMsg.getPlayer().getNumber());
             player.setPv(playerMsg.getPlayer().getPv());
 
-            Playerboard board = new Playerboard(player);
+            if(playerMsg.getSingleorNot())
+                game = new SingleGame();
+            else
+                game = new Game();
+
+            for (int i = 0; i < playerMsg.getPlayers().size(); i++)
+                game.getPlayers().add(playerMsg.getPlayers().get(i));
+
+            if(playerMsg.getSingleorNot()){
+                SingleGame.getLorenzo().setNumber(playerMsg.getLorenzo());
+               // SingleGame.getActionStructure().get.getActionSignal(0) = playerMsg.getSignal();i think this is to fix, it shouldn't work but it does
+            }
+
+
+            Playerboard board = new Playerboard(player, game);
             board.Print();
         }
 
