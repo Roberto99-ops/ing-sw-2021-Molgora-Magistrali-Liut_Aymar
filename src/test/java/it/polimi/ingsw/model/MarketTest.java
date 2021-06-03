@@ -16,15 +16,20 @@ public class MarketTest {
         char [][] pimpa = new char[3][4];
 
         ArrayList<Character> obj = new ArrayList<>();
+
         obj.add('B');
+
+
         obj.add('B');
         obj.add('G');
         obj.add('G');
         obj.add('P');
+
         obj.add('P');
         obj.add('R');
         obj.add('Y');
         obj.add('Y');
+
         obj.add('W');
         obj.add('W');
         obj.add('W');
@@ -54,23 +59,25 @@ public class MarketTest {
         assertEquals(bowl.getMatrix(), pimpa);
         ArrayList<Character> pre = new ArrayList<>();
 
-           pre.add('Y');
-           pre.add('Y');
-           pre.add('R');
            pre.add('P');
+           pre.add('G');
+           pre.add('G');
+           pre.add('B');
 
 
 
-       assertEquals( pre , bowl.doMarket(1, 1));
+       assertEquals( pre , bowl.doMarket(2, 0));
 
         ArrayList<Character> dec = new ArrayList<>();
 
         dec.add('W');
-        dec.add('R');
-        dec.add('G');
+        dec.add('P');
+        dec.add('B');
+
+        bowl.printMatrix();
 
 
-        // assertEquals( dec , bowl.doMarket(2, 1));
+        // assertEquals( dec , bowl.doMarket(1, 0));
 
     }
 
