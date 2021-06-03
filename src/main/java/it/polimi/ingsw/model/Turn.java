@@ -130,7 +130,7 @@ public class Turn implements Serializable {
         MarketMsg msg = new MarketMsg(Game.getMarket());
         client.sendMessage(msg);
 
-        client.sendMessage("Do you want to choose a row or a column?");
+        client.sendMessage("Do you want to choose a row or a column? ");
         String next = client.receiveMessage();
 
         if (next.equals("row")) {
