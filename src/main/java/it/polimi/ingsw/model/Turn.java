@@ -146,7 +146,7 @@ public class Turn implements Serializable {
         next = client.receiveMessage();
         number = next.charAt(0) - 48;
 
-        product.setVector(Game.getMarket().doMarket(RoworCol, number));
+        product.setVector(Game.getMarket().doMarket(RoworCol, number, actualplayer));
 
         for (int i = 0; i < this.actualplayer.getLeadercards().getStructure().size(); i++)
             if (this.actualplayer.getLeadercards().getStructure().get(i).getSkill() == "WhiteMarbSkil")
