@@ -6,7 +6,7 @@ import it.polimi.ingsw.model.LeaderDeck;
  * this class draw the 4 leadercard that the player can choose at the gamestart
  */
 public class LeaderChooseView extends PaintCards{
-    private final int VERT_SIZE = 28;
+    private final int VERT_SIZE = 30;
     private final int HORIZ_SIZE = 36;
     private String [][] space;
 
@@ -18,6 +18,10 @@ public class LeaderChooseView extends PaintCards{
                 space[i][j] = " ";
 
         drawCard(deck);
+        space[0][7] = "0";
+        space[0][25] = "1";
+        space[27][7] = "2";
+        space[27][25] = "3";
     }
 
     /**
@@ -33,7 +37,7 @@ public class LeaderChooseView extends PaintCards{
 
             if(i>=2) contV = 1;
 
-            drawLeadercard(deck.getStructure().get(i), space, 14 * contV, 18 * contH);
+            drawLeadercard(deck.getStructure().get(i), space, 14 * contV+1, 18 * contH);
 
             contH++;
         }
