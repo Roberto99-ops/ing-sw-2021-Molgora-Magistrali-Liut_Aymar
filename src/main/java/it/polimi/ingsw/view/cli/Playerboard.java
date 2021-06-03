@@ -84,61 +84,61 @@ public class Playerboard extends PaintCards {
      */
     private void Square(int LeftHighCorner_VERT, int LeftHighCorner_HORIZ, int content, int trackPosition, int Lorenzo)
     {
-        int SQUARE_HIGH = 4;
+        int SQUARE_HEIGHT = 4;
         int SQUARE_LENGHT = 7;
-        String[][] square = new String[SQUARE_HIGH][SQUARE_LENGHT];
+        String[][] square = new String[SQUARE_HEIGHT][SQUARE_LENGHT];
 
-        for (int i = 0; i < SQUARE_HIGH; i++)
+        for (int i = 0; i < SQUARE_HEIGHT; i++)
             for (int j = 0; j < SQUARE_LENGHT; j++)
                 square[i][j]=" ";
 
         for (int i = 0; i < SQUARE_LENGHT; i++)
             square[0][i] = Color.RED + "═";
         for (int i = 0; i < SQUARE_LENGHT; i++)
-            square[SQUARE_HIGH-1][i]=Color.RED + "═";
+            square[SQUARE_HEIGHT-1][i]=Color.RED + "═";
 
-        for (int i = 0; i < SQUARE_HIGH; i++)
+        for (int i = 0; i < SQUARE_HEIGHT; i++)
             square[i][0]=Color.RED + "║";
-        for (int i = 0; i < SQUARE_HIGH; i++)
+        for (int i = 0; i < SQUARE_HEIGHT; i++)
             square[i][SQUARE_LENGHT-1]=Color.RED + "║";
 
         square[0][0] = Color.RED + "╔" + Color.RESET;
         square[0][SQUARE_LENGHT-1] = Color.RED + "╗" + Color.RESET;
-        square[SQUARE_HIGH-1][0] = Color.RED + "╚" + Color.RESET;
-        square[SQUARE_HIGH-1][SQUARE_LENGHT-1] = Color.RED + "╝" + Color.RESET;
+        square[SQUARE_HEIGHT-1][0] = Color.RED + "╚" + Color.RESET;
+        square[SQUARE_HEIGHT-1][SQUARE_LENGHT-1] = Color.RED + "╝" + Color.RESET;
 
         if(content>9)
-            square[(SQUARE_HIGH-1)/2][(SQUARE_LENGHT-1)/2+1]="";
-        square[(SQUARE_HIGH-1)/2][(SQUARE_LENGHT-1)/2]=Color.YELLOW + String.valueOf(content).toString();
+            square[(SQUARE_HEIGHT-1)/2][(SQUARE_LENGHT-1)/2+1]="";
+        square[(SQUARE_HEIGHT-1)/2][(SQUARE_LENGHT-1)/2]=Color.YELLOW + String.valueOf(content).toString();
 
 
         if(content%3==0 && content!=0)
-            for (int i = 1; i < SQUARE_HIGH-1; i++)
+            for (int i = 1; i < SQUARE_HEIGHT-1; i++)
                 for (int j = 1; j < SQUARE_LENGHT-1; j++)
                     square[i][j]=Color.BACKGROUND_YELLOW.getEscape() +  " " + Color.RESET;
 
         if(content%8==0 && content!=0){
-            for (int i = 1; i < SQUARE_HIGH-1; i++)
+            for (int i = 1; i < SQUARE_HEIGHT-1; i++)
                 for (int j = 1; j < SQUARE_LENGHT-1; j++)
                     square[i][j] = Color.BACKGROUND_PURPLE + " " + Color.RESET;
-            square[SQUARE_HIGH-1][(SQUARE_LENGHT-1)/2]=Color.PURPLE.getEscape() + Simbol.SEGNALINO_PAPALE.getForm();
+            square[SQUARE_HEIGHT-1][(SQUARE_LENGHT-1)/2]=Color.PURPLE.getEscape() + Simbol.SEGNALINO_PAPALE.getForm();
         }
 
         if(content==trackPosition) {
             square[1][(SQUARE_LENGHT - 1) / 2 - 1] = Color.PURPLE.getEscape() + Simbol.CROCE + Color.RESET;
-            square[1][((SQUARE_LENGHT - 1)/2)] = "";
+            square[1][((SQUARE_LENGHT - 1)/2)] = " ";
         }
 
         if(content==Lorenzo) {
             square[2][(SQUARE_LENGHT - 1) / 2] = Color.WHITE.getEscape() + Simbol.CROCE + Color.RESET;
-            square[2][((SQUARE_LENGHT - 1)/2) + 1] = "";
+            square[2][((SQUARE_LENGHT - 1)/2) + 1] = " ";
         }
 
         int inizialVert=9;
         int inizialHoriz=7;
-        for (int i = 0; i < SQUARE_HIGH; i++)
+        for (int i = 0; i < SQUARE_HEIGHT; i++)
             for (int j = 0; j < SQUARE_LENGHT; j++)
-                playerboard[inizialVert-SQUARE_HIGH*LeftHighCorner_VERT+i][inizialHoriz+SQUARE_LENGHT*LeftHighCorner_HORIZ+j]= square[i][j];
+                playerboard[inizialVert-SQUARE_HEIGHT*LeftHighCorner_VERT+i][inizialHoriz+SQUARE_LENGHT*LeftHighCorner_HORIZ+j]= square[i][j];
     }
 
 
