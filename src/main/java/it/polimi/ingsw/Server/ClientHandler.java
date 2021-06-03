@@ -61,7 +61,7 @@ public class ClientHandler implements Runnable {
             return;
         }
 
-        System.out.println("Connected to: " + client.getInetAddress());
+        System.out.println("Connected to: " + client.getInetAddress() + " at port #" + client.getLocalPort());
 
         /*//mando messaggio con elenco delle porte aperte
         try {
