@@ -51,7 +51,7 @@ public class Market implements Serializable {
      */
 
 
-    public ArrayList<Character> doMarket(int check, int number) {
+    public ArrayList<Character> doMarket(int check, int number, Player actualplayer) {
         char temporaryball = this.extraball;
         char[][] equalmatrix = new char[3][4];
 
@@ -94,6 +94,10 @@ public class Market implements Serializable {
 
             }
 
+            for (int i = 0; i < 5 ; i ++ ) {
+
+                actualplayer.getStorage().setinStorage(vector.get(i), 1);
+            }
 
             return vector;
         }
