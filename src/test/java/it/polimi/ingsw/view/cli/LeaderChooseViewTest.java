@@ -17,6 +17,6 @@ public class LeaderChooseViewTest extends TestCase {
         }
 
         LeaderChooseView Lchoose = new LeaderChooseView(deck);
-        Lchoose.Print();
+        Lchoose.print();
     }
 }

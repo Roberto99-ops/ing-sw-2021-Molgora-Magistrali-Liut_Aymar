@@ -1,10 +1,6 @@
 package it.polimi.ingsw.model;
-import it.polimi.ingsw.Server.ClientHandler;
-import it.polimi.ingsw.controller.TurnManager;
 
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 public class SingleGame extends Game {
 
@@ -25,7 +21,7 @@ public class SingleGame extends Game {
         //leaderdeck = new LeaderDeck();
         //market = new Market();
         actionStructure = new ActionStructure();
-        actionStructure.ShuffleSignal();
+        actionStructure.shuffleSignal();
         lorenzo = new Lorenzo();
     }
 
@@ -144,7 +140,7 @@ public class SingleGame extends Game {
      * @return true if the game ends. False if not.
      */
     @Override
-    public boolean Endgame(Player actualplayer)
+    public boolean callEndgame(Player actualplayer)
     {
         //riprende i casi descritti in Game.Endgame +
         //1)
@@ -184,15 +180,15 @@ public class SingleGame extends Game {
      * @return the winner's name
      */
     @Override
-    public String Victory()
+    public String callVictory()
     {
         return getWinner().getName();
     }
 
 
     @Override
-    public void Shuffle() throws FileNotFoundException {
-        actionStructure.ShuffleSignal();
-        super.Shuffle();
+    public void shuffle() throws FileNotFoundException {
+        actionStructure.shuffleSignal();
+        super.shuffle();
     }
 }

@@ -3,13 +3,10 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.Server.ClientHandler;
 import it.polimi.ingsw.Server.ObservableGame;
 import it.polimi.ingsw.Server.ObserverGame;
-import it.polimi.ingsw.Server.messages.AnswerMsg;
-import it.polimi.ingsw.Server.messages.NetworkMessage;
 import it.polimi.ingsw.model.*;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.UUID;
 
 /*
 
@@ -132,8 +129,8 @@ public class GameManager {
 
 
             //4)
-            if (game.Endgame(game.getPlayers().get(actualplayer))) {
-                System.out.println("The winner is " + game.Victory()); // CLIENTHENDLER
+            if (game.callEndgame(game.getPlayers().get(actualplayer))) {
+                System.out.println("The winner is " + game.callVictory()); // CLIENTHENDLER
                 return;
             }
 

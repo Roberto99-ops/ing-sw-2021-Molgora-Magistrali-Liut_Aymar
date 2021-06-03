@@ -5,8 +5,6 @@ import org.junit.Test;
 
 import java.util.Random;
 
-import static org.junit.Assert.*;
-
 public class MarketViewTest {
 
     @Test
@@ -26,6 +24,6 @@ public class MarketViewTest {
 
         MarketView marketview = new MarketView(market);
 
-        marketview.Print();
+        marketview.print();
     }
 }

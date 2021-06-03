@@ -3,7 +3,6 @@ package it.polimi.ingsw.model;
 import org.junit.Test;
 
 import java.io.FileNotFoundException;
-import java.lang.management.PlatformLoggingMXBean;
 
 import static org.junit.Assert.*;
 
@@ -59,16 +58,16 @@ public class DevelopeCardTest {
         assertEquals(1, card.getPv());
 
         ResourceStructure array = new ResourceStructure();
-        array.AddResource(2, 'B');
+        array.addResource(2, 'B');
         assertEquals(array.getVector().get(0), card.getCost().getVector().get(0));
         assertEquals(array.getVector().get(1), card.getCost().getVector().get(1));
 
         ResourceStructure array1 = new ResourceStructure();
-        array1.AddResource(1,'Y');
+        array1.addResource(1,'Y');
         assertEquals(array1.getVector().get(0), card.getInputproduction().getVector().get(0));
 
         ResourceStructure array2 = new ResourceStructure();
-        array2.AddResource(1,'R');
+        array2.addResource(1,'R');
         assertEquals(array2.getVector().get(0), card.getOutputproduction().getVector().get(0));
     }
 }

@@ -20,8 +20,8 @@ public class LeaderCardTest {
         ResourceStructure array = new ResourceStructure();
         assertEquals(array, card.getPriceR());
 
-        array.AddResource(1, 'Y');
-        array.AddResource(1, 'G');
+        array.addResource(1, 'Y');
+        array.addResource(1, 'G');
         assertEquals(array.getVector().get(0), card.getPriceC().get(0));
         assertEquals(array.getVector().get(1), card.getPriceC().get(1));
 
@@ -45,8 +45,8 @@ public class LeaderCardTest {
         ResourceStructure cost = new ResourceStructure();
         ResourceStructure newcost = new ResourceStructure();
 
-        newcost=leadercard.PriceSkill(develcard);
-        cost.AddResource(1,'P');
+        newcost=leadercard.changePriceSkill(develcard);
+        cost.addResource(1,'P');
         assertEquals(1, newcost.getVector().size());
         assertEquals(cost.getVector().get(0), newcost.getVector().get(0));
     }
@@ -62,7 +62,7 @@ public class LeaderCardTest {
         LeaderCard card = new LeaderCard();
         card.setCard(4);
 
-        card.StorageSkill(player);
+        card.addStorageSkill(player);
 
         assertEquals('G', player.getStorage().getTypeExtrapanel());
     }
@@ -80,22 +80,22 @@ public class LeaderCardTest {
         card.setCard(7);
 
         ResourceStructure row = new ResourceStructure();
-        row.AddResource(1, 'B');
-        row.AddResource(1, 'W');
-        row.AddResource(1, 'G');
-        row.AddResource(1, 'P');
-        row.AddResource(1, 'W');
-        row.AddResource(1, 'Y');
+        row.addResource(1, 'B');
+        row.addResource(1, 'W');
+        row.addResource(1, 'G');
+        row.addResource(1, 'P');
+        row.addResource(1, 'W');
+        row.addResource(1, 'Y');
 
-        row=card.WhiteMarbleSkill(row);
+        row=card.changeWhiteMarbleSkill(row);
 
         ResourceStructure newrow = new ResourceStructure();
-        newrow.AddResource(1, 'B');
-        newrow.AddResource(1, 'G');
-        newrow.AddResource(1, 'P');
-        newrow.AddResource(1, 'Y');
-        newrow.AddResource(1, 'P');
-        newrow.AddResource(1, 'P');
+        newrow.addResource(1, 'B');
+        newrow.addResource(1, 'G');
+        newrow.addResource(1, 'P');
+        newrow.addResource(1, 'Y');
+        newrow.addResource(1, 'P');
+        newrow.addResource(1, 'P');
 
         for(int i=0; i<newrow.size(); i++)  assertEquals(newrow.getVector().get(i), row.getVector().get(i));
     }

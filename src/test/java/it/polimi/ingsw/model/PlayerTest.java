@@ -2,7 +2,6 @@ package it.polimi.ingsw.model;
 
 import org.junit.Test;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -46,7 +45,7 @@ public class PlayerTest {
         vector.add('Y');
         vector.add('B');
         vector.add('B');
-        assertEquals(1,player.CheckResources(vector));
+        assertEquals(1,player.checkResources(vector));
         assertTrue(player.getStorage().getPanel().get(1)=='N');
         assertTrue(player.getStorage().getPanel().get(2)=='N');
         assertTrue(player.getStorage().getPanel().get(5)=='N');

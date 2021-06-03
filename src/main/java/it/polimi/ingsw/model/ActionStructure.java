@@ -1,8 +1,6 @@
 package it.polimi.ingsw.model;
 
 import java.io.Serializable;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Random;
 
 public class ActionStructure implements Serializable {
@@ -31,22 +29,20 @@ public class ActionStructure implements Serializable {
     /**
      * Picks the first Signal available on the stack, calls its action and puts it back, at the
      * end of the stack
-     * @return
      */
-    public int PickSignal(){
+    public void pickSignal(){
         ActionSignal Signal = new ActionSignal();
-        Signal.Action(structure[AS_Counter]); //chiamo il metodo del segnalino in base al suo numero
+        Signal.action(structure[AS_Counter]); //chiamo il metodo del segnalino in base al suo numero
         AS_Counter++;
         if (AS_Counter==7){ //se arrivo alla fine della pila torno su, al posto 0
             AS_Counter=0;
         }
-        return AS_Counter;
     }
 
     /**
      * Shuffles the Signals' stack
      */
-    public  void ShuffleSignal(){
+    public  void shuffleSignal(){
         Random random = new Random();
         for (int i=0; i < getStructure().length;i++){
             int indice = random.nextInt(getStructure().length);

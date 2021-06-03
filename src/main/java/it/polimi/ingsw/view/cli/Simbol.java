@@ -20,8 +20,10 @@ public enum Simbol {
     FACCIA_TRISTE("\u2639"),
     SEGNALINO_PAPALE("\u2657"),  //265D
     PALLINO("\u25CF"),
+    //CROCE("\u271E"),
     CROCE("✞"),
     QUADRATO("■");
+    //SMALL_SPACE("\u2006");
     private String form;
 
     Simbol(String form)

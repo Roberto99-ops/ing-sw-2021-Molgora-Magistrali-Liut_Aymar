@@ -4,12 +4,7 @@ import it.polimi.ingsw.model.*;
 import org.junit.Test;
 
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Random;
-
-import static org.junit.Assert.*;
 
 public class PlayerboardTest {
 
@@ -65,7 +60,7 @@ public class PlayerboardTest {
             game.getPlayers().add(person);
         }
 
-        SingleGame.getActionStructure().ShuffleSignal();
+        SingleGame.getActionStructure().shuffleSignal();
         Playerboard playerboard = new Playerboard(player, game);
         playerboard.Print();
 

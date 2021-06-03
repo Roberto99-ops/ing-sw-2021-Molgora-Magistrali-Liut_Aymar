@@ -22,7 +22,7 @@ public class ActionSignal {
      * Case 7: Lorenzo moves forward by one space
      * @param number: according to the number received, it calls a specific action
      */
-    public void Action(int number){
+    public void action(int number){
         int i;
         int countRemove=0;
         //Lorenzo lorenzo = SingleGame.getLorenzo();

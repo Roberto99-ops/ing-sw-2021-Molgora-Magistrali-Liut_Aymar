@@ -1,8 +1,6 @@
 package it.polimi.ingsw.view.cli;
 
-import it.polimi.ingsw.model.DevelopeCard;
 import it.polimi.ingsw.model.DevelopeDecks;
-import it.polimi.ingsw.model.Game;
 
 /**
  * draw the decks of developecards of the game
@@ -38,7 +36,7 @@ public class DevelopeDecksView extends PaintCards {
             if(i>=8) contV = 0;
 
             if(decks[i]!=null && decks[i].getStructure().size() != 0)
-                DrawDevelopecard(decks[i].getStructure().get(0), space, 12 * contV, 16 * contH);
+                drawDevelopecard(decks[i].getStructure().get(0), space, 12 * contV, 16 * contH);
 
             contH--;
         }
@@ -54,7 +52,7 @@ public class DevelopeDecksView extends PaintCards {
         space[VERT_SIZE-3][HORIZ_SIZE-59] = "3";
     }
 
-    public void Print()
+    public void print()
     {
         Print(space, VERT_SIZE, HORIZ_SIZE);
     }

@@ -34,7 +34,7 @@ public class GameTest {
         market.setResourceinMarket(2,2,'W');
         market.setResourceinMarket(2,3,'W');
 
-        giocotest.Shuffle();
+        giocotest.shuffle();
     Game.getMarket().printMatrix();
     assertNotEquals(market, Game.getMarket());
 
@@ -51,28 +51,28 @@ public class GameTest {
 
         for(int i=0; i<24 ;i++) francesco.increaseTrackposition();
         //controllo che il nome restituito sia francesco
-        giocotest.Endgame(francesco);
-        assertTrue(giocotest.Endgame(francesco));
+        giocotest.callEndgame(francesco);
+        assertTrue(giocotest.callEndgame(francesco));
         System.out.println("game finished because francesco have reached 24th position");
 
         //considero ora la posizione di francesco in 23
 
         francesco.setTrackposition(23);
-        assertFalse(giocotest.Endgame(francesco));
+        assertFalse(giocotest.callEndgame(francesco));
         System.out.println("game is not finished because francesco haven't reached 24th position");
 
         //caso2a: il giocatore ha solo 6 carte sviluppo
         //aumento la quantità di carte di francesco a 6
 
         for (int i=0; i<6;i++) francesco.increaseDevelopQuantity();
-        giocotest.Endgame(francesco);
-        assertFalse(giocotest.Endgame(francesco));
+        giocotest.callEndgame(francesco);
+        assertFalse(giocotest.callEndgame(francesco));
         System.out.println("game is not finished because francesco haven't got 7 develope cards");
 
         //caso 2b: francesco compra la settima carta sviluppo
         francesco.increaseDevelopQuantity();
-        giocotest.Endgame(francesco);
-        assertTrue(giocotest.Endgame(francesco));
+        giocotest.callEndgame(francesco);
+        assertTrue(giocotest.callEndgame(francesco));
         System.out.println("game is finished because francesco have got 7 develope cards");
 
     }
@@ -104,11 +104,11 @@ public class GameTest {
         juan.setTrackposition(24);
 
 
-        assertNotEquals("Francesco", giocotest.Victory());
+        assertNotEquals("Francesco", giocotest.callVictory());
         System.out.println("Francesco is not the winner");
-        assertEquals("Juan", giocotest.Victory());
+        assertEquals("Juan", giocotest.callVictory());
         System.out.println("Juan is the winner");
-        assertNotEquals("Roberto", giocotest.Victory());
+        assertNotEquals("Roberto", giocotest.callVictory());
         System.out.println("Roberto is the winner");
 
     }

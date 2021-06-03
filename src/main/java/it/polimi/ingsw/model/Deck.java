@@ -25,7 +25,7 @@ public abstract class Deck <T> implements Serializable {
      * @param structure
      * @return
      */
-    public T Pick(ArrayList<T> structure)
+    public T pick(ArrayList<T> structure)
     {
         T firstElement;
         firstElement=structure.get(0);

@@ -20,7 +20,7 @@ public class LeaderDeckTest {
 
         LeaderCard card = new LeaderCard();
         card.setCard(0);
-        LeaderCard card1 = deck.Pick(deck.getStructure());
+        LeaderCard card1 = deck.pick(deck.getStructure());
 
         assertEquals(card.getCardLevel(), card1.getCardLevel());
         assertEquals(card.getPriceC(), card1.getPriceC());

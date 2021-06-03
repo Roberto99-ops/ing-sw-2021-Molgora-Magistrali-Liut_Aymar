@@ -14,23 +14,23 @@ public class MarketView extends Utility {
         Perimeter(market, VERT_SIZE, HORIZ_SIZE, Color.BACKGROUND_GRAY);
 
         putString("MARKET", market, 1, 30);
-        drawExtramarble(gamemarket.getExtraball());
+        drawExtraMarble(gamemarket.getExtraball());
 
-        Space(gamemarket);
+        space(gamemarket);
         for (int i = 20; i < VERT_SIZE-1; i++)
             market[i][10]=Color.BACKGROUND_GRAY + "║" + Color.RESET;
         for (int i = 50; i < HORIZ_SIZE-1; i++)
             market[5][i]=Color.BACKGROUND_GRAY + "═" + Color.RESET;
 
         drawArrows();
-
+        drawNumbers();
     }
 
     /**
      * draw the space composed by the 12 squares that coantain the marbles
      * @param gamemarket: the market to draw
      */
-    private void Space(Market gamemarket)
+    private void space(Market gamemarket)
     {
         int MAX_VERT_SIZE=7*3-2;
         int MAX_HORIZ_SIZE=12*4-3;
@@ -79,7 +79,7 @@ public class MarketView extends Utility {
      * draw the extramarble
      * @param colorMarble: color of the extramarble
      */
-    private void drawExtramarble(Character colorMarble)
+    private void drawExtraMarble(Character colorMarble)
     {
         Color color = Color.BACKGROUND_GRAY;
         String marbleColor = convertBackground(colorMarble);
@@ -179,8 +179,20 @@ public class MarketView extends Utility {
             }
     }
 
+    /**
+     * draw the number of the row/column to choose
+     */
+    private void drawNumbers()
+    {
+        for (Integer i = 0; i < 3; i++) {
+            market[8+i*6][8] = Color.BACKGROUND_GRAY + i.toString() + Color.RESET;
+        }
+        for (Integer i = 0; i < 4; i++) {
+            market[4][16+11*i] = Color.BACKGROUND_GRAY + i.toString() + Color.RESET;
+        }
+    }
 
-    public void Print()
+    public void print()
     {
         Print(market, VERT_SIZE, HORIZ_SIZE);
     }

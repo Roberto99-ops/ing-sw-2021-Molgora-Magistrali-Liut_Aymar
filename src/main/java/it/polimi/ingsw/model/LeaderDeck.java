@@ -20,7 +20,7 @@ public class LeaderDeck extends Deck <LeaderCard> implements Serializable {
         this.structure=structure;
     }
 
-    public void Print()
+    public void print()
     {
         for(int i=0; i<this.structure.size(); i++) this.structure.get(i).Print();
     }

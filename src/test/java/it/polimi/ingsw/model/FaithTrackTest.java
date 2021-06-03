@@ -33,7 +33,7 @@ public class FaithTrackTest {
             player2.increaseTrackposition();
         }
         FaithTrack faithTrack = new FaithTrack();
-        faithTrack.VaticanReport(player1, game);
+        faithTrack.callVaticanReport(player1, game);
         //controllo che il giocatore abbia guadagnato due PV per essere arrivato per primo nella prima area del VR
         assertEquals(2,player1.getPv()); //player1 ha guadagnato due PV
         assertEquals(2,player2.getPv()); //player2 ha guadagnato due PV
@@ -48,7 +48,7 @@ public class FaithTrackTest {
         for(int i=0; i<7;i++ ){
             player2.increaseTrackposition();
         }
-        faithTrack.VaticanReport(player3, game); //player3 chiama per primo il VR dell'area 2
+        faithTrack.callVaticanReport(player3, game); //player3 chiama per primo il VR dell'area 2
         //controllo che il giocatore abbia guadagnato tre PV per essere arrivato per primo nella prima area del VR
         assertEquals(2,player1.getPv()); //player1 ha guadagnato due PV
         assertEquals(5,player2.getPv()); //player2 ha guadagnato due PV
@@ -63,7 +63,7 @@ public class FaithTrackTest {
         for(int i=0; i<7;i++ ){
             player2.increaseTrackposition();
         }
-        faithTrack.VaticanReport(player1, game); //player3 chiama per primo il VR dell'area 2
+        faithTrack.callVaticanReport(player1, game); //player3 chiama per primo il VR dell'area 2
         //controllo che il giocatore abbia guadagnato tre PV per essere arrivato per primo nella prima area del VR
         assertEquals(6,player1.getPv()); //player1 ha guadagnato due PV
         assertEquals(9,player2.getPv()); //player2 ha guadagnato due PV

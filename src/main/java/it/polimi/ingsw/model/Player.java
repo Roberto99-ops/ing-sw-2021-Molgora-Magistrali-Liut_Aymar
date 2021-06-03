@@ -177,7 +177,7 @@ public class Player implements Serializable {
      * @param vectorResources : arraylist of needed resources
      * @return a flag
      */
-    public int CheckResources(ArrayList<Character> vectorResources) {
+    public int checkResources(ArrayList<Character> vectorResources) {
         //flag per sapere se non possiedo tali risorse (0) o possiedo in storage (1) o in strongbox-storage (2)
         int ableTo = 0;
 

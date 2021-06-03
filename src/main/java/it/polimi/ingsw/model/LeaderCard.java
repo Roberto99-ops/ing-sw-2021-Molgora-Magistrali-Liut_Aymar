@@ -8,7 +8,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class LeaderCard implements Serializable {
 
@@ -117,12 +116,12 @@ public class LeaderCard implements Serializable {
      * @param card: card in input to decrease price
      * @return: the "new" cost
      */
-    public ResourceStructure PriceSkill(DevelopeCard card)
+    public ResourceStructure changePriceSkill(DevelopeCard card)
     {
         ResourceStructure newCost = new ResourceStructure();
         int pos;
         if(!card.getCost().getVector().contains(this.inputskill))  return card.getCost();
-        card.getCost().Remove(this.inputskill);
+        card.getCost().removeThis(this.inputskill);
         newCost = card.getCost();
         return newCost;
     }
@@ -131,7 +130,7 @@ public class LeaderCard implements Serializable {
      * this skill activate the additional storage layer by specifying the type of resource it can contain
      * @param player: player that get the additional layer
      */
-    public void StorageSkill(Player player)
+    public void addStorageSkill(Player player)
     {
         player.getStorage().setTypeExtrapanel(this.inputskill);
     }
@@ -142,12 +141,12 @@ public class LeaderCard implements Serializable {
      * @param row: is the row of the market containing marbles
      * @return: the "new" row, where white marbles are substituted by marbles of the given color
      */
-    public ResourceStructure WhiteMarbleSkill(ResourceStructure row)
+    public ResourceStructure changeWhiteMarbleSkill(ResourceStructure row)
     {
         while(row.getVector().contains('W'))
         {
-            row.Remove('W');
-            row.AddResource(1, this.inputskill);
+            row.removeThis('W');
+            row.addResource(1, this.inputskill);
         }
         return row;
     }
@@ -160,28 +159,28 @@ public class LeaderCard implements Serializable {
      * it uses the (0,1,2) logic defined into the player.checkresources method to check where the resources are.
      * @param player: is the player who wants to do a production
      */
-    public void ProductionSkill(Player player) throws IOException {
+    public void doProductionSkill(Player player) throws IOException {
 
         char resourcechosen;
         ResourceStructure resource = new ResourceStructure();
         resource.add(this.inputskill);
 
         //(1)
-        if(player.CheckResources(resource)!=0) {
+        if(player.checkResources(resource)!=0) {
 
             player.increaseTrackposition();
             System.out.println("What resource do you want to produce?\n(B, G, Y, P)\t");
             resourcechosen = (char)System.in.read();
 
             //(2)
-            if(player.CheckResources(resource)==1)
+            if(player.checkResources(resource)==1)
             {
                 player.removeResource(this.inputskill);
 
                 player.addResourceStrongBox(resourcechosen); }
 
             //(3)
-            if(player.CheckResources(resource)==2)
+            if(player.checkResources(resource)==2)
             {
                 if(player.getStorage().getPanel().contains(this.inputskill))
                         player.removeResource(this.inputskill);
@@ -190,7 +189,7 @@ public class LeaderCard implements Serializable {
 
                 player.addResourceStrongBox(resourcechosen); }
         }
-        else System.out.println("You don't own enought Resources");
+        else System.out.println("You don't own enough Resources");
     }
 
 

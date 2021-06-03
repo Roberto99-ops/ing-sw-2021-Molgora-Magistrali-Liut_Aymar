@@ -21,10 +21,10 @@ public class Playerboard extends PaintCards {
     public Playerboard(Player player, Game game) throws FileNotFoundException {
         playerboard = new String[VERT_SIZE][HORIZ_SIZE];
         Perimeter(playerboard, VERT_SIZE, HORIZ_SIZE, Color.BLACK);
-        FaithTrack(player.getTrackposition(), game);
+        drawFaithTrack(player.getTrackposition(), game);
         putString(player.getName(), playerboard, 1, 70);
-        Storage(player.getStorage());
-        Strongbox(player.getStrongBox().getStructure());
+        drawStorage(player.getStorage());
+        drawStrongbox(player.getStrongBox().getStructure());
         LeaderSpace(player);
         Developementspace(player.getDSpace());
         PointsSpace(game);
@@ -38,7 +38,7 @@ public class Playerboard extends PaintCards {
      * @param game: the game the player is playing so we can know if it is a Singlegame or a Game
      * @throws FileNotFoundException
      */
-    private void FaithTrack(int trackPosition, Game game) throws FileNotFoundException   //devo mettere lo sfondo di un altro colore
+    private void drawFaithTrack(int trackPosition, Game game) throws FileNotFoundException   //devo mettere lo sfondo di un altro colore
     {
         int MAX_HIGH = 13;
         int Lorenzo = -1;  //setted to -1 so if is a game mutiplayer it doesn0t effect
@@ -69,7 +69,7 @@ public class Playerboard extends PaintCards {
             LeftHighCorner_VERT = card.get("LeftHighCorner_VERT").getAsInt();
             content = card.get("content").getAsInt();
 
-            Square(LeftHighCorner_VERT, LeftHighCorner_HORIZ, content, trackPosition, Lorenzo);
+            drawSquare(LeftHighCorner_VERT, LeftHighCorner_HORIZ, content, trackPosition, Lorenzo);
         }
     }
 
@@ -82,46 +82,46 @@ public class Playerboard extends PaintCards {
      * @param trackPosition: the position of the player on the track
      * @param Lorenzo: the position of Lorenzo on the track
      */
-    private void Square(int LeftHighCorner_VERT, int LeftHighCorner_HORIZ, int content, int trackPosition, int Lorenzo)
+    private void drawSquare(int LeftHighCorner_VERT, int LeftHighCorner_HORIZ, int content, int trackPosition, int Lorenzo)
     {
-        int SQUARE_HIGH = 4;
+        int SQUARE_HEIGHT = 4;
         int SQUARE_LENGHT = 7;
-        String[][] square = new String[SQUARE_HIGH][SQUARE_LENGHT];
+        String[][] square = new String[SQUARE_HEIGHT][SQUARE_LENGHT];
 
-        for (int i = 0; i < SQUARE_HIGH; i++)
+        for (int i = 0; i < SQUARE_HEIGHT; i++)
             for (int j = 0; j < SQUARE_LENGHT; j++)
                 square[i][j]=" ";
 
         for (int i = 0; i < SQUARE_LENGHT; i++)
             square[0][i] = Color.RED + "═";
         for (int i = 0; i < SQUARE_LENGHT; i++)
-            square[SQUARE_HIGH-1][i]=Color.RED + "═";
+            square[SQUARE_HEIGHT-1][i]=Color.RED + "═";
 
-        for (int i = 0; i < SQUARE_HIGH; i++)
+        for (int i = 0; i < SQUARE_HEIGHT; i++)
             square[i][0]=Color.RED + "║";
-        for (int i = 0; i < SQUARE_HIGH; i++)
+        for (int i = 0; i < SQUARE_HEIGHT; i++)
             square[i][SQUARE_LENGHT-1]=Color.RED + "║";
 
         square[0][0] = Color.RED + "╔" + Color.RESET;
         square[0][SQUARE_LENGHT-1] = Color.RED + "╗" + Color.RESET;
-        square[SQUARE_HIGH-1][0] = Color.RED + "╚" + Color.RESET;
-        square[SQUARE_HIGH-1][SQUARE_LENGHT-1] = Color.RED + "╝" + Color.RESET;
+        square[SQUARE_HEIGHT-1][0] = Color.RED + "╚" + Color.RESET;
+        square[SQUARE_HEIGHT-1][SQUARE_LENGHT-1] = Color.RED + "╝" + Color.RESET;
 
         if(content>9)
-            square[(SQUARE_HIGH-1)/2][(SQUARE_LENGHT-1)/2+1]="";
-        square[(SQUARE_HIGH-1)/2][(SQUARE_LENGHT-1)/2]=Color.YELLOW + String.valueOf(content).toString();
+            square[(SQUARE_HEIGHT-1)/2][(SQUARE_LENGHT-1)/2+1]="";
+        square[(SQUARE_HEIGHT-1)/2][(SQUARE_LENGHT-1)/2]=Color.YELLOW + String.valueOf(content).toString();
 
 
         if(content%3==0 && content!=0)
-            for (int i = 1; i < SQUARE_HIGH-1; i++)
+            for (int i = 1; i < SQUARE_HEIGHT-1; i++)
                 for (int j = 1; j < SQUARE_LENGHT-1; j++)
                     square[i][j]=Color.BACKGROUND_YELLOW.getEscape() +  " " + Color.RESET;
 
         if(content%8==0 && content!=0){
-            for (int i = 1; i < SQUARE_HIGH-1; i++)
+            for (int i = 1; i < SQUARE_HEIGHT-1; i++)
                 for (int j = 1; j < SQUARE_LENGHT-1; j++)
                     square[i][j] = Color.BACKGROUND_PURPLE + " " + Color.RESET;
-            square[SQUARE_HIGH-1][(SQUARE_LENGHT-1)/2]=Color.PURPLE.getEscape() + Simbol.SEGNALINO_PAPALE.getForm();
+            square[SQUARE_HEIGHT-1][(SQUARE_LENGHT-1)/2]=Color.PURPLE.getEscape() + Simbol.SEGNALINO_PAPALE.getForm();
         }
 
         if(content==trackPosition) {
@@ -136,9 +136,9 @@ public class Playerboard extends PaintCards {
 
         int inizialVert=9;
         int inizialHoriz=7;
-        for (int i = 0; i < SQUARE_HIGH; i++)
+        for (int i = 0; i < SQUARE_HEIGHT; i++)
             for (int j = 0; j < SQUARE_LENGHT; j++)
-                playerboard[inizialVert-SQUARE_HIGH*LeftHighCorner_VERT+i][inizialHoriz+SQUARE_LENGHT*LeftHighCorner_HORIZ+j]= square[i][j];
+                playerboard[inizialVert-SQUARE_HEIGHT*LeftHighCorner_VERT+i][inizialHoriz+SQUARE_LENGHT*LeftHighCorner_HORIZ+j]= square[i][j];
     }
 
 
@@ -146,7 +146,7 @@ public class Playerboard extends PaintCards {
      * it draws the storage space inside the playerboard
      * @param playerStorage: the storage of the player
      */
-    private void Storage(Storage playerStorage)
+    private void drawStorage(Storage playerStorage)
     {
         //Storage playerStorage = player.getStorage();
         int MAX_VERT_SIZE = VERT_SIZE-13-2-VERT_SIZE/4;
@@ -224,7 +224,7 @@ public class Playerboard extends PaintCards {
      * it draws the strongbox space inside the playerboard
      * @param box: the player strongbox
      */
-    private void Strongbox(ResourceStructure box)
+    private void drawStrongbox(ResourceStructure box)
     {
         int MAX_VERT_SIZE = VERT_SIZE/4;
         int MAX_HORIZ_SIZE = HORIZ_SIZE/4;
@@ -285,15 +285,15 @@ public class Playerboard extends PaintCards {
         String[][] card1 = new String[12][15];
         String[][] card2 = new String[12][15];
         if(player.getLeadercards().getStructure().size()>0) {
-            DrawLeadercard(player.getLeadercards().getStructure().get(0), card1, 0, 0);
+            drawLeadercard(player.getLeadercards().getStructure().get(0), card1, 0, 0, player.getSkill1());
             if(player.getLeadercards().getStructure().size()==2)
-                DrawLeadercard(player.getLeadercards().getStructure().get(1), card2, 0, 0);
+                drawLeadercard(player.getLeadercards().getStructure().get(1), card2, 0, 0, player.getSkill2());
             else
-                DrawLeadercard(null, card2, 0, 0);
+                drawLeadercard(null, card2, 0, 0, 0);
         }
         else
-        { DrawLeadercard(null, card1, 0, 0);
-            DrawLeadercard(null, card2, 0, 0);}
+        { drawLeadercard(null, card1, 0, 0, 0);
+            drawLeadercard(null, card2, 0, 0, 0);}
 
         for (int i = 0; i < MAX_VERT_SIZE-2; i++)
             for (int j = 0; j < MAX_HORIZ_SIZE-2; j++) {
@@ -330,33 +330,33 @@ public class Playerboard extends PaintCards {
         //draw first minideck
         int minideck1Leng = DSpace.getMinideck1().getStructure().size();
         if(minideck1Leng > 0) {
-            DrawDevelopecard(DSpace.getMinideck1().getStructure().get(0), developementspace, 14, 10);
+            drawDevelopecard(DSpace.getMinideck1().getStructure().get(0), developementspace, 14, 10);
             if(minideck1Leng > 1) {
-                DrawDevelopecard(DSpace.getMinideck1().getStructure().get(1), developementspace, 12, 10);
+                drawDevelopecard(DSpace.getMinideck1().getStructure().get(1), developementspace, 12, 10);
                 if(minideck1Leng > 2)
-                    DrawDevelopecard(DSpace.getMinideck1().getStructure().get(2), developementspace, 10, 10);
+                    drawDevelopecard(DSpace.getMinideck1().getStructure().get(2), developementspace, 10, 10);
             }
         }
 
         //draw second minideck
         int minideck2Leng = DSpace.getMinideck2().getStructure().size();
         if(minideck2Leng > 0) {
-            DrawDevelopecard(DSpace.getMinideck2().getStructure().get(0), developementspace, 14, 40);
+            drawDevelopecard(DSpace.getMinideck2().getStructure().get(0), developementspace, 14, 40);
             if(minideck2Leng > 1) {
-                DrawDevelopecard(DSpace.getMinideck2().getStructure().get(1), developementspace, 12, 40);
+                drawDevelopecard(DSpace.getMinideck2().getStructure().get(1), developementspace, 12, 40);
                 if(minideck2Leng > 2)
-                    DrawDevelopecard(DSpace.getMinideck2().getStructure().get(2), developementspace, 10, 40);
+                    drawDevelopecard(DSpace.getMinideck2().getStructure().get(2), developementspace, 10, 40);
             }
         }
 
         //draw first minideck
         int minideck3Leng = DSpace.getMinideck3().getStructure().size();
         if(minideck1Leng > 0) {
-            DrawDevelopecard(DSpace.getMinideck3().getStructure().get(0), developementspace, 14, 70);
+            drawDevelopecard(DSpace.getMinideck3().getStructure().get(0), developementspace, 14, 70);
             if(minideck1Leng > 1) {
-                DrawDevelopecard(DSpace.getMinideck3().getStructure().get(1), developementspace, 12, 70);
+                drawDevelopecard(DSpace.getMinideck3().getStructure().get(1), developementspace, 12, 70);
                 if(minideck1Leng > 2)
-                    DrawDevelopecard(DSpace.getMinideck3().getStructure().get(2), developementspace, 10, 70);
+                    drawDevelopecard(DSpace.getMinideck3().getStructure().get(2), developementspace, 10, 70);
             }
         }
 
