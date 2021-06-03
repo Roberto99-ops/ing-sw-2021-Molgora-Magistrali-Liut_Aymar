@@ -18,8 +18,12 @@ import java.util.Random;
 
 public class ClientHandler implements Runnable {
 
-    public ObserverSingleGame getPlayer() {
+    public ObserverGame getPlayer() {
         return player;
+    }
+
+    public ObserverSingleGame getSinglePlayer() {
+        return singleplayer;
     }
 
     private Socket client;
@@ -27,7 +31,8 @@ public class ClientHandler implements Runnable {
     private ObjectInputStream input;
     private GameManager gameManager;  //non sono attributi
     private SingleGameManager singleGameManager; //non sono attributi
-    private ObserverSingleGame player;
+    private ObserverSingleGame singleplayer;
+    private ObserverGame player;
     private int number;
 
 
@@ -92,10 +97,10 @@ public class ClientHandler implements Runnable {
      * @throws IOException If a communication error occurs.
      */
 
-    private void handleClientConnection() throws IOException {
+    public void handleClientConnection() throws IOException {
         try {
             //TURNO - FATTO
-            //Player player = new Player();
+
             this.sendMessage("What's your name? ");
             String next = this.receiveMessage();
             player.setName(next);
