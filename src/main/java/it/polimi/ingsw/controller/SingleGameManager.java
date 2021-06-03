@@ -33,7 +33,7 @@ public class SingleGameManager {
 
     public static void main() throws Exception {
         client.sendMessage("clean screen");
-        ObserverSingleGame player = client.getPlayer();
+        ObserverSingleGame player = client.getSinglePlayer();
         game.getPlayers().add(player);
 
         Shuffle();
