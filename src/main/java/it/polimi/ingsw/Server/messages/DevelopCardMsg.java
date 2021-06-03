@@ -28,10 +28,10 @@ public class DevelopCardMsg extends NetworkMessage {
      * Gets a specific card and its information directly from the Json File
      * @param number the number of the wanted card inside the Json File
      * @return the card on that index
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException in case the card wanted doesn't exist
      */
     //per prendere una carta dal file json
-    public DevelopeCard JsonDevelopCard(int number) throws FileNotFoundException {
+    public DevelopeCard jsonDevelopCard(int number) throws FileNotFoundException {
         developeCard=developeCard.setCard(number);
         return developeCard;
     }

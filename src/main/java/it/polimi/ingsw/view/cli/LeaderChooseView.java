@@ -33,13 +33,13 @@ public class LeaderChooseView extends PaintCards{
 
             if(i>=2) contV = 1;
 
-            DrawLeadercard(deck.getStructure().get(i), space, 14 * contV, 18 * contH);
+            drawLeadercard(deck.getStructure().get(i), space, 14 * contV, 18 * contH);
 
             contH++;
         }
     }
 
-    public void Print()
+    public void print()
     {
         Print(space, VERT_SIZE, HORIZ_SIZE);
     }

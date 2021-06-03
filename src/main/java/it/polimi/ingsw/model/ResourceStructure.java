@@ -55,7 +55,7 @@ public class ResourceStructure extends ArrayList {
      * @param resource
      * @return
      */
-    public ArrayList<Character> AddResource (int quantity, Character resource) {//differenza tipi primitivi e normali
+    public ArrayList<Character> addResource(int quantity, Character resource) {//differenza tipi primitivi e normali
         for(int i=0; i<quantity; i++) vector.add(resource);
         return(vector);
     }
@@ -77,7 +77,7 @@ public class ResourceStructure extends ArrayList {
      * remove the first resource of a specific type
      * @param resource: resource to delete
      */
-    public void Remove(char resource)
+    public void removeThis(char resource)
     {
         int i=0;
         i=this.firstOccurance(resource);

@@ -13,7 +13,7 @@ public abstract class PaintCards extends Utility {
      * @param card: card to draw
      * @return
      */
-    public void DrawLeadercard(LeaderCard card, String[][] space, int row, int column) {
+    public void drawLeadercard(LeaderCard card, String[][] space, int row, int column) {
         int MAX_VERT_SIZE = (45 - 13 - 8) / 2;
         int MAX_HORIZ_SIZE = 17 - 2;
         Color color = Color.BACKGROUND_PURPLE;
@@ -62,7 +62,7 @@ public abstract class PaintCards extends Utility {
      * @param card
      * @return
      */
-    public void DrawDevelopecard(DevelopeCard card, String[][] space, int row, int column) {
+    public void drawDevelopecard(DevelopeCard card, String[][] space, int row, int column) {
         int MAX_VERT_SIZE = 12;
         int MAX_HORIZ_SIZE = 17 - 2;
         String color = convertColor(card.getColour());

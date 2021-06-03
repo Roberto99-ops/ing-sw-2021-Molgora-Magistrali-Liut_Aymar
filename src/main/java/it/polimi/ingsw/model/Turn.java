@@ -2,8 +2,6 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.Server.ClientHandler;
 import it.polimi.ingsw.Server.messages.DevelopeDeckMsg;
 import it.polimi.ingsw.Server.messages.MarketMsg;
-import it.polimi.ingsw.Server.messages.PlayerMsg;
-import it.polimi.ingsw.client.Client;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -67,7 +65,7 @@ public class Turn implements Serializable {
      * then checks if he owns enough resources and complete the transaction
      */
 
-    public int ShopCard(Game game) throws Exception {
+    public int shopCard(Game game) throws Exception {
         DevelopeCard card;
         ResourceStructure newcost = new ResourceStructure();
         DevelopeDecks[] gameDeck = new DevelopeDecks[12];
@@ -86,22 +84,22 @@ public class Turn implements Serializable {
 
         for (int i = 0; i < this.actualplayer.getLeadercards().getStructure().size(); i++)
             if (this.actualplayer.getLeadercards().getStructure().get(i).getSkill() == "PriceSkill")
-                newcost = this.actualplayer.getLeadercards().getStructure().get(i).PriceSkill(card);
+                newcost = this.actualplayer.getLeadercards().getStructure().get(i).changePriceSkill(card);
 
             //se le risorse presenti in Storage e SB sono sufficienti allora le risorse richieste le elimino e attivo la produzione
             //IDEA: controllare quante risorse di un tipo si necessitano per comprare. Ex: W W Y.
             //      Prima controllo se ho 2 o + W. Se ce le ho, passo a controllare se ho 1 o + Y
         //ex. if (newcost<=actualplayer.getStorage().countTypeS()+actualplayer.getStrongBox()...)
 
-        if (this.actualplayer.CheckResources(newcost)==0) return 0;
+        if (this.actualplayer.checkResources(newcost)==0) return 0;
 
-        if (this.actualplayer.CheckResources(newcost)==1)
+        if (this.actualplayer.checkResources(newcost)==1)
         {
             for(int i=0; i<newcost.getVector().size(); i++)
                 this.actualplayer.removeResource(newcost.getVector().get(i));
         }
 
-        if(this.actualplayer.CheckResources(newcost)==2)
+        if(this.actualplayer.checkResources(newcost)==2)
         {
             for(int i=0; i<newcost.getVector().size(); i++) {
 
@@ -124,7 +122,7 @@ public class Turn implements Serializable {
      * @return
      */
 
-    public ResourceStructure Buyresource() throws IOException, ClassNotFoundException {
+    public ResourceStructure buyResource() throws IOException, ClassNotFoundException {
         ResourceStructure product = new ResourceStructure();
         int RoworCol = 0;
         int number;
@@ -150,7 +148,7 @@ public class Turn implements Serializable {
 
         for (int i = 0; i < this.actualplayer.getLeadercards().getStructure().size(); i++)
             if (this.actualplayer.getLeadercards().getStructure().get(i).getSkill() == "WhiteMarbSkil")
-                product = this.actualplayer.getLeadercards().getStructure().get(i).WhiteMarbleSkill(product);
+                product = this.actualplayer.getLeadercards().getStructure().get(i).changeWhiteMarbleSkill(product);
 
         msg = new MarketMsg(Game.getMarket());
         client.sendMessage(msg);

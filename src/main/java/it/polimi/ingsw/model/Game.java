@@ -124,7 +124,7 @@ public class Game implements Serializable {
      * shuffle all the decks and the market calling the random function
      */
 
-    public void Shuffle() throws FileNotFoundException {
+    public void shuffle() throws FileNotFoundException {
 
         //k is needed to order the decks in the required order
         for (int i = 0; i < 12; i++) {
@@ -187,7 +187,7 @@ public class Game implements Serializable {
      * @return boolean
      */
 
-    public boolean Endgame(Player actualplayer)
+    public boolean callEndgame(Player actualplayer)
     {
             //1)
             if(actualplayer.getTrackposition()>=24)
@@ -209,7 +209,7 @@ public class Game implements Serializable {
      */
 
 
-    public String Victory()
+    public String callVictory()
     {
         winner.setPv(0);
         for(int i=0 ; i < players.size(); i++)

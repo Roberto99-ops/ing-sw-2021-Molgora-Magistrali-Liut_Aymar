@@ -1,10 +1,8 @@
 package it.polimi.ingsw.model;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
@@ -40,8 +38,8 @@ public class SingleGameTest {
         //sposto il giocatore alla posizione 24
         for(int i=0; i<24 ;i++)  plyr.increaseTrackposition();
         //controllo che il nome restituito sia quello del giocatore plyr
-        singleGame.Endgame(plyr);
-        assertTrue(singleGame.Endgame(plyr));
+        singleGame.callEndgame(plyr);
+        assertTrue(singleGame.callEndgame(plyr));
         assertEquals("Ale",singleGame.getWinner().getName());
 
         //considero ora la posizione di plyr in 23
@@ -50,12 +48,12 @@ public class SingleGameTest {
         //caso2a: il giocatore ha solo 6 carte sviluppo
         //aumento la quantità di carte di plyr a 6
         for (int i=0; i<6;i++) plyr.increaseDevelopQuantity();
-        singleGame.Endgame(plyr);
-        assertFalse(singleGame.Endgame(plyr));
+        singleGame.callEndgame(plyr);
+        assertFalse(singleGame.callEndgame(plyr));
         //caso 2b: plyr compra la settima carta sviluppo
         plyr.increaseDevelopQuantity();
-        singleGame.Endgame(plyr);
-        assertTrue(singleGame.Endgame(plyr));
+        singleGame.callEndgame(plyr);
+        assertTrue(singleGame.callEndgame(plyr));
         assertEquals("Ale",singleGame.getWinner().getName());
 
         //tolgo una carta a plyr: ora ha 6 carte
@@ -70,8 +68,8 @@ public class SingleGameTest {
             }
         }
         System.out.println(plyr.getDevelopementquantity()+"   "+ plyr.getTrackposition()+"   "+Game.getDevelopedecks(0).getStructure());
-        singleGame.Endgame(plyr);
-        assertTrue(singleGame.Endgame(plyr));
+        singleGame.callEndgame(plyr);
+        assertTrue(singleGame.callEndgame(plyr));
         assertEquals("Lorenzo il Magnifico", singleGame.getWinner().getName());
 
     }
@@ -84,6 +82,6 @@ public class SingleGameTest {
         SingleGame singleGame = new SingleGame();
         plyr.setName("Ale");
         SingleGame.setWinner(plyr);
-        assertEquals("Ale", singleGame.Victory() );
+        assertEquals("Ale", singleGame.callVictory() );
     }
 }

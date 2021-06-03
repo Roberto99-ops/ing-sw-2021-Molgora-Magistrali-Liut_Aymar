@@ -24,7 +24,7 @@ public class DevelopeDecksTest {
 
         DevelopeCard card = new DevelopeCard();
         card.setCard(0);
-        DevelopeCard card1 = deck.Pick(deck.getStructure());
+        DevelopeCard card1 = deck.pick(deck.getStructure());
 
         assertEquals(card.getColour(), card1.getColour());
         assertEquals(card.getCost().getVector(), card1.getCost().getVector());

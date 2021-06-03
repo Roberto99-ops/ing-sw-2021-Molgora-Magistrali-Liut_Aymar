@@ -16,7 +16,7 @@ public class FaithTrack implements Serializable {
      * VR changes according to which area is reached by the player ahead, so the others will not be able to call
      * the Vatican Report again when they reach that area.
      */
-    public void VaticanReport(Player actualplayer, Game game) {
+    public void callVaticanReport(Player actualplayer, Game game) {
 
         //un player arriva per primo nell'area 1
         if ((actualplayer.getTrackposition()>=8)&&(Game.getVR()==0)) {

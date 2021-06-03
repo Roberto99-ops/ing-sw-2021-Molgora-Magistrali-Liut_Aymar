@@ -1,10 +1,6 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.Server.ClientHandler;
-import it.polimi.ingsw.Server.ObservableGame;
-import it.polimi.ingsw.Server.ObserverGame;
-import it.polimi.ingsw.Server.ObserverSingleGame;
-import it.polimi.ingsw.model.ActionSignal;
 import it.polimi.ingsw.model.FaithTrack;
 import it.polimi.ingsw.model.*;
 
@@ -38,6 +34,7 @@ public class TurnManager{
 
         //se sono in single game, ogni volta che tocca a me, prendo un segnalino ed eseguo la sua azione
         if (game.getClass().equals(SingleGame.class)) {
+            //turn.getaStructure().PickSignal();
             //turn.getSignal().Action(turn.getaStructure().PickSignal());
             //ObserverSingleGame.updateActionStructure(); // è giusto inserirlo qui right ????
         }
@@ -51,7 +48,7 @@ public class TurnManager{
             String action = client.receiveMessage();
 
             try {
-                if (action.equals("1")) turn.ShopCard(game);
+                if (action.equals("1")) turn.shopCard(game);
                 // ObserverGame.updateStorage();
                 // ObserverGame.updateStrongbox();
                 // ObserverGame.updateDevelopementSpace();
@@ -61,7 +58,7 @@ public class TurnManager{
                 // OUT) RIMUOVE LE RISORSE DI COSTO CARTA DALLA PLANCIA e AGGIUNGE NELLE CARTE SVILUPPO DI PLAYER LE CARTE VOLUTE
 
 
-                if (action.equals("2")) turn.Buyresource();
+                if (action.equals("2")) turn.buyResource();
 
                 // ObserverGame.updateMarket();
 
@@ -86,7 +83,7 @@ public class TurnManager{
                         cardChosen = client.receiveMessage();
                         if (!cardChosen.equals("0")) {
                             int card = cardChosen.charAt(0) - 48;  //converts a char into the correspondant int
-                            turn.getActualplayer().getTopCardsOnBoard().getStructure().get(card - 1).DoProduction(turn.getActualplayer());
+                            turn.getActualplayer().getTopCardsOnBoard().getStructure().get(card - 1).doProduction(turn.getActualplayer());
                             // ObserverGame.updateStorage();
                             // ObserverGame.updateStrongbox();
                         }
@@ -103,7 +100,7 @@ public class TurnManager{
 
         //Ad ogni turno, effettuo il controllo del Vatican Report
         FaithTrack faithTrack = new FaithTrack();
-        faithTrack.VaticanReport(player, game);
+        faithTrack.callVaticanReport(player, game);
     }
 }
 

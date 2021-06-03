@@ -1,16 +1,13 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.Server.ClientHandler;
-import it.polimi.ingsw.Server.ObserverGame;
 import it.polimi.ingsw.Server.ObserverSingleGame;
 import it.polimi.ingsw.Server.messages.PlayerMsg;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.SingleGame;
-import it.polimi.ingsw.model.Turn;
 
 import java.io.FileNotFoundException;
-import java.io.IOException;
 
 /**
  * it manages a game in singleplayer. it doesn't extend GameManger because
@@ -42,18 +39,18 @@ public class SingleGameManager {
         Shuffle();
         player.updateActionStructure(client);
 
-        while(!game.Endgame(player)) {
+        while(!game.callEndgame(player)) {
             TurnManager turnManager = new TurnManager();
             turnManager.main(client, game, 0);
             client.sendMessage("Turn Finished");
         }
 
-        String winner = game.Victory();
+        String winner = game.callVictory();
         client.sendMessage(winner);
     }
 
     private static void Shuffle() throws FileNotFoundException {
-        SingleGame.getActionStructure().ShuffleSignal();
-        game.Shuffle();
+        SingleGame.getActionStructure().shuffleSignal();
+        game.shuffle();
     }
 }

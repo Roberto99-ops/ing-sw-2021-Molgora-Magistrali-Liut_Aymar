@@ -21,8 +21,8 @@ public class DevelopeDecks extends Deck<DevelopeCard> implements Serializable {
         this.structure = structure;
     }
 
-    public void Print()
+    public void print()
     {
-        for(int i=0; i<this.structure.size(); i++) this.structure.get(i).Print();
+        for(int i=0; i<this.structure.size(); i++) this.structure.get(i).print();
     }
 }

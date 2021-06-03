@@ -30,7 +30,7 @@ public class Lorenzo implements Serializable {
      */
     public void forwardOne(){
         number++;
-        SingleGame.getActionStructure().ShuffleSignal();
+        SingleGame.getActionStructure().shuffleSignal();
     }
 
     /*

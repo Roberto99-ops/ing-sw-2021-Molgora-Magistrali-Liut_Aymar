@@ -1,19 +1,13 @@
 package it.polimi.ingsw.client;
 
-import it.polimi.ingsw.Server.Server;
-import it.polimi.ingsw.Server.messages.*;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.view.cli.CliManager;
 import it.polimi.ingsw.view.cli.DevelopeDecksView;
-import it.polimi.ingsw.view.cli.MarketView;
 import it.polimi.ingsw.view.cli.Playerboard;
 
-import javax.swing.*;
-import java.io.DataOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.Arrays;
 import java.util.Scanner;
 import java.io.IOException;
 
@@ -80,7 +74,7 @@ public class Client {
                 output.flush();
             }
             else
-                CliManager.Update(next, player);
+                CliManager.update(next, player);
             next = input.readObject();
         }while(!next.equals("Turn Finished"));   //ci aspettiamo un messaggio di turno finito a fine turno
 

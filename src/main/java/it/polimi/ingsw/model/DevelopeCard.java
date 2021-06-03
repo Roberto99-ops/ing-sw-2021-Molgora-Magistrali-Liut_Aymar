@@ -75,12 +75,12 @@ public class DevelopeCard implements Serializable {
      * it uses the (0,1,2) logic defined into the player.checkresources method to check where the resources are.
      * @param player: is the player who wants to do a production
      */
-    public int DoProduction(Player player)
+    public int doProduction(Player player)
     {
         //(1)
-        if(player.CheckResources(this.inputproduction.getVector())!=0) {
+        if(player.checkResources(this.inputproduction.getVector())!=0) {
         //(2)
-            if(player.CheckResources(this.inputproduction.getVector())==1)
+            if(player.checkResources(this.inputproduction.getVector())==1)
             {
                 for(int i=0; i<this.inputproduction.getVector().size(); i++)
                     player.removeResource(this.inputproduction.getVector().get(i));
@@ -88,7 +88,7 @@ public class DevelopeCard implements Serializable {
                 for(int i=0; i<this.outputproduction.getVector().size(); i++)
                     player.addResourceStrongBox(this.outputproduction.getVector().get(i)); }
         //(3)
-            if(player.CheckResources(this.inputproduction.getVector())==2)
+            if(player.checkResources(this.inputproduction.getVector())==2)
             {
                 for(int i=0; i<this.inputproduction.getVector().size(); i++) {
                     {
@@ -146,7 +146,7 @@ public class DevelopeCard implements Serializable {
         return this;
     }
 
-    public void Print()
+    public void print()
     {
         System.out.println("pv: " + this.pv);
         System.out.println("colour: " + this.colour);

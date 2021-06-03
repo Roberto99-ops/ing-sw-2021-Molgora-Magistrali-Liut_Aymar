@@ -4,7 +4,6 @@ import it.polimi.ingsw.Server.messages.*;
 import it.polimi.ingsw.model.*;
 
 import java.io.FileNotFoundException;
-import java.lang.ref.Cleaner;
 
 /**
  * this class recognizes what type of message the client received;
@@ -25,7 +24,7 @@ public class CliManager {
      *              playerboard every time we receive an update)
      * @throws FileNotFoundException
      */
-    public static void Update(Object msg, Player player) throws FileNotFoundException {
+    public static void update(Object msg, Player player) throws FileNotFoundException {
         /**
          * in case we receive a Market message we update the Market view and print it.
          */
@@ -35,7 +34,7 @@ public class CliManager {
             market.setMatrix(marketMsg.getMarket().getMatrix());
             market.setExtraball(marketMsg.getMarket().getExtraball());
             MarketView marketView = new MarketView(market);
-            marketView.Print();
+            marketView.print();
         }
 
         /*if(msg.getClass().equals(StorageMsg.class)) {
@@ -97,7 +96,7 @@ public class CliManager {
                 DDecks[i].setStructure(DDeckMsg.getDeck()[i].getStructure());
             }*/
             DevelopeDecksView DDecksView = new DevelopeDecksView(DDecks);
-            DDecksView.Print();
+            DDecksView.print();
         }
 
         /**
@@ -108,7 +107,7 @@ public class CliManager {
             LDeck = new LeaderDeck();
             LDeck.setStructure(LDeckMsg.getDeck().getStructure());
             LeaderChooseView LView = new LeaderChooseView(LDeck);
-            LView.Print();
+            LView.print();
         }
 
         /**

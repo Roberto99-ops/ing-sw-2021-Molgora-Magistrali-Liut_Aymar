@@ -14,7 +14,7 @@ public class Storage extends ArrayList<Character> implements Serializable {
     public Storage(){
         panel = new ArrayList <Character> (List.of('N','N','N','N','N','N')); // arraylist di 6 spazi di base
         extrapanel = new ResourceStructure();
-        extrapanel.AddResource(2, 'N');
+        extrapanel.addResource(2, 'N');
     }
 
     public void setPanel(ResourceStructure panel) {
