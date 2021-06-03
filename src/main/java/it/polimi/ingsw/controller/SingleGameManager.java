@@ -18,7 +18,7 @@ import java.io.IOException;
  */
 public class SingleGameManager {
 
-    private static SingleGame game;
+    private static Game game;
     private static ClientHandler client;
     private static Player L;
 
@@ -34,17 +34,16 @@ public class SingleGameManager {
 
     public static void main() throws Exception {
         ObserverSingleGame player = client.getPlayer();
-        PlayerMsg msg = new PlayerMsg(player);
-        client.sendMessage(msg);
         game.getPlayers().add(player);
-        //mischiare segnalini e carte e market
+        PlayerMsg msg = new PlayerMsg(player, game);
+        client.sendMessage(msg);
+
+        //chiedere al gicatore quali carte leader vuole
         Shuffle();
         player.updateActionStructure(client);
 
         while(!game.Endgame(player)) {
             TurnManager turnManager = new TurnManager();
-            //Turn turn = new Turn();
-            //turn.setActualplayer(player);
             turnManager.main(client, game, 0);
             client.sendMessage("Turn Finished");
         }
