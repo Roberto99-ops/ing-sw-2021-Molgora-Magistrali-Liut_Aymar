@@ -76,7 +76,6 @@ public class CliManager {
 
             if(playerMsg.getSingleorNot()){
                 SingleGame.getLorenzo().setNumber(playerMsg.getLorenzo());
-               // SingleGame.getActionStructure().get.getActionSignal(0) = playerMsg.getSignal();i think this is to fix, it shouldn't work but it does
             }
 
 

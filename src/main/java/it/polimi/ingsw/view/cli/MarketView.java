@@ -23,7 +23,7 @@ public class MarketView extends Utility {
             market[5][i]=Color.BACKGROUND_GRAY + "═" + Color.RESET;
 
         drawArrows();
-
+        drawNumbers();
     }
 
     /**
@@ -179,6 +179,18 @@ public class MarketView extends Utility {
             }
     }
 
+    /**
+     * draw the number of the row/column to choose
+     */
+    private void drawNumbers()
+    {
+        for (Integer i = 0; i < 3; i++) {
+            market[8+i*6][8] = Color.BACKGROUND_GRAY + i.toString() + Color.RESET;
+        }
+        for (Integer i = 0; i < 4; i++) {
+            market[4][16+11*i] = Color.BACKGROUND_GRAY + i.toString() + Color.RESET;
+        }
+    }
 
     public void print()
     {
