@@ -285,15 +285,15 @@ public class Playerboard extends PaintCards {
         String[][] card1 = new String[12][15];
         String[][] card2 = new String[12][15];
         if(player.getLeadercards().getStructure().size()>0) {
-            drawLeadercard(player.getLeadercards().getStructure().get(0), card1, 0, 0);
+            drawLeadercard(player.getLeadercards().getStructure().get(0), card1, 0, 0, player.getSkill1());
             if(player.getLeadercards().getStructure().size()==2)
-                drawLeadercard(player.getLeadercards().getStructure().get(1), card2, 0, 0);
+                drawLeadercard(player.getLeadercards().getStructure().get(1), card2, 0, 0, player.getSkill2());
             else
-                drawLeadercard(null, card2, 0, 0);
+                drawLeadercard(null, card2, 0, 0, 0);
         }
         else
-        { drawLeadercard(null, card1, 0, 0);
-            drawLeadercard(null, card2, 0, 0);}
+        { drawLeadercard(null, card1, 0, 0, 0);
+            drawLeadercard(null, card2, 0, 0, 0);}
 
         for (int i = 0; i < MAX_VERT_SIZE-2; i++)
             for (int j = 0; j < MAX_HORIZ_SIZE-2; j++) {

@@ -13,10 +13,12 @@ public abstract class PaintCards extends Utility {
      * @param card: card to draw
      * @return
      */
-    public void drawLeadercard(LeaderCard card, String[][] space, int row, int column) {
+    public void drawLeadercard(LeaderCard card, String[][] space, int row, int column, int active) {
         int MAX_VERT_SIZE = (45 - 13 - 8) / 2;
         int MAX_HORIZ_SIZE = 17 - 2;
-        Color color = Color.BACKGROUND_PURPLE;
+        Color color;
+        if(active == 0) color = Color.BACKGROUND_RED;
+        else color = Color.BACKGROUND_PURPLE;
         String[][] leadercard = new String[MAX_VERT_SIZE][MAX_HORIZ_SIZE];
         for (int i = 0; i < MAX_VERT_SIZE; i++)
             for (int j = 0; j < MAX_HORIZ_SIZE; j++)
