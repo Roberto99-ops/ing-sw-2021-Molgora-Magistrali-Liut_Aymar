@@ -88,12 +88,7 @@ public class CliManager {
          */
         if(msg.getClass().equals(DevelopeDeckMsg.class)) {
             DevelopeDeckMsg DDeckMsg = (DevelopeDeckMsg) msg;
-            //perchè è stato modificato il messaggio developedecks?
             DDecks = DDeckMsg.getDecks();
-            /*for (int i = 0; i < 12; i++) {
-                DDecks[i] = DDeckMsg.getDecks();
-                DDecks[i].setStructure(DDeckMsg.getDeck()[i].getStructure());
-            }*/
             DevelopeDecksView DDecksView = new DevelopeDecksView(DDecks);
             DDecksView.print();
         }
@@ -103,8 +98,7 @@ public class CliManager {
          */
         if(msg.getClass().equals(LeaderDeckMsg.class)) {
             LeaderDeckMsg LDeckMsg = (LeaderDeckMsg) msg;
-            LDeck = new LeaderDeck();
-            LDeck.setStructure(LDeckMsg.getDeck().getStructure());
+            LDeck = LDeckMsg.getDeck();
             LeaderChooseView LView = new LeaderChooseView(LDeck);
             LView.print();
         }
@@ -115,8 +109,7 @@ public class CliManager {
         if(msg.getClass().equals(ActionSignalMsg.class)) {
            ActionSignalMsg ActionMsg = (ActionSignalMsg) msg;
            signal = new ActionSignal();
-           signal.setNumber(ActionMsg.getAction().getNumber()); //credo ci sia bisogno di un json per i signal e tutto, come per le carte
-           //actionview, che poi alla fine è un'estensione di playerboard FORSE
+           signal.setNumber(ActionMsg.getAction().getNumber());
         }
     }
 }

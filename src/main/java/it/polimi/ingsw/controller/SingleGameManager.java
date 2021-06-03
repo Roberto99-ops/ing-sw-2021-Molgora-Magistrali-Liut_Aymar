@@ -2,8 +2,10 @@ package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.Server.ClientHandler;
 import it.polimi.ingsw.Server.ObserverSingleGame;
+import it.polimi.ingsw.Server.messages.LeaderDeckMsg;
 import it.polimi.ingsw.Server.messages.PlayerMsg;
 import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.LeaderDeck;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.SingleGame;
 
@@ -32,11 +34,21 @@ public class SingleGameManager {
     public static void main() throws Exception {
         ObserverSingleGame player = client.getPlayer();
         game.getPlayers().add(player);
+
+        Shuffle();
+        LeaderDeck leaderChoice = game.leaderChoice();
+        LeaderDeckMsg mess = new LeaderDeckMsg(leaderChoice);
+        client.sendMessage(mess);
+        client.sendMessage("Choose one: ");
+        int choice = Integer.parseInt(client.receiveMessage());
+        player.getLeadercards().getStructure().add(leaderChoice.getStructure().get(choice));
+        client.sendMessage("Choose another one: ");
+        choice = Integer.parseInt(client.receiveMessage());
+        player.getLeadercards().getStructure().add(leaderChoice.getStructure().get(choice));
+
         PlayerMsg msg = new PlayerMsg(player, game);
         client.sendMessage(msg);
 
-        //chiedere al gicatore quali carte leader vuole
-        Shuffle();
         player.updateActionStructure(client);
 
         while(!game.callEndgame(player)) {
