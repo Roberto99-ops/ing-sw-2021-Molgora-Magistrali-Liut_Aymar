@@ -51,40 +51,52 @@ public class Market implements Serializable {
      */
 
 
-    public  ArrayList<Character> doMarket(int check, int number) {
+    public ArrayList<Character> doMarket(int check, int number) {
         char temporaryball = this.extraball;
         char[][] equalmatrix = new char[3][4];
 
 
-        for (int j = 0; j < 3; j ++) {
+        for (int j = 0; j < 3; j++) {
             for (int k = 0; k < 4; k++) {
-                equalmatrix [j][k] = this.matrix [j][k];
+                equalmatrix[j][k] = this.matrix[j][k];
             }
         }
 
         ArrayList<Character> vector = new ArrayList<Character>();
 
-        if (check == 2) {
-            for (int i = 0; i < 2; i++) {
-                this.matrix[1-i][number] = equalmatrix[2-i][number];
-                vector.add(equalmatrix[2-i][number]);
-            }
-            this.matrix[2][number] = temporaryball;
-            this.extraball = equalmatrix[0][number];
-            vector.add(equalmatrix[0][number]);
-        }
+
 
         if (check == 1) {
-            for (int i = 0; i < 3; i++) {
-                this.matrix[number][2-i] = equalmatrix[number][3-i];
-                vector.add(equalmatrix[number][3-i]);
+
+            for (int i = 1; i < 3; i++) {
+                this.matrix[2 - i][number] = equalmatrix[3 - i][number];
+                vector.add(equalmatrix[3-i][number]);
             }
-            this.matrix[number][3] = temporaryball;
-            this.extraball = equalmatrix[number][0];
-            vector.add(equalmatrix[number][0]);
+
+            vector.add(equalmatrix[0][number]);
+            this.matrix[2][number] = temporaryball;
+            this.extraball = equalmatrix[0][number];
+
         }
 
-        return vector; }
+
+            if (check == 2) {
+
+
+                for (int i = 1; i < 4; i++) {
+                    this.matrix[number][3-i] = equalmatrix[number][4-i];
+                    vector.add(equalmatrix[number][4-i]);
+                }
+
+                vector.add(equalmatrix[number][0]);
+                this.matrix[number][3] = temporaryball;
+                this.extraball = equalmatrix[number][0];
+
+            }
+
+
+            return vector;
+        }
 
 
 
