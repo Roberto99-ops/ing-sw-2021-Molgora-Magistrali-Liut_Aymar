@@ -70,11 +70,11 @@ public class GameManager {
 
         //1)
 
-
-        clientList.get(0).sendMessage("Do you want to start a game? yes (A) no (B)");
-
+        // clientList.get(0).handleClientConnection();
 
 
+
+       clientList.get(0).sendMessage("Do you want to start a game? yes (A) no (B)");
         if ((clientList.get(0).receiveMessage() == "A")) {
 
             // collegamento client-server primo giocatore
@@ -93,27 +93,25 @@ public class GameManager {
 
 
         clientList.get(0).sendMessage("Do you want to play alone(A) or against other players(B)?");
-        if ((scan.nextLine()) == "A") {
-
-            // answermessage
-
+        if ((clientList.get(0).receiveMessage() == "A")) {
+            clientList.get(0).sendMessage("Single Game against Lorenzo start now");
+            new SingleGameManager (clientList.get(0));
             SingleGameManager.main();
+
         } else if ((scan.nextLine()) == "B") {
 
-            // answermessage
-
+            clientList.get(0).sendMessage("Multi Game start now");
             clientList.get(0).sendMessage("Insert the number of players:");
-            int n_players = scan.nextInt();
-
-            // aanswermessage
+            int n_players = 4; // solo per codice corretto
+            // ???? int n_players = clientList.get(0).receiveMessage();
 
             for (int i = 1; i < n_players; i++) {
 
                 ObserverGame temporaryplayer = new ObserverGame();
                 game.getPlayers().add(temporaryplayer);
                 obsG.addObserver(temporaryplayer);
-                System.out.println("Choose your NAME"); // CLIENTHENDLER
-                game.getPlayers().get(i).setName(scan.nextLine());
+                System.out.println("Choose your NAME");
+                game.getPlayers().get(i).setName(clientList.get(i).receiveMessage() );
                 game.getPlayers().get(i).setNumber(i+1);
             }
 
