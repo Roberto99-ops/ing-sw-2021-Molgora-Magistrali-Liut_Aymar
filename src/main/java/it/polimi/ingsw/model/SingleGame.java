@@ -25,6 +25,7 @@ public class SingleGame extends Game {
         //leaderdeck = new LeaderDeck();
         //market = new Market();
         actionStructure = new ActionStructure();
+        actionStructure.ShuffleSignal();
         lorenzo = new Lorenzo();
     }
 
