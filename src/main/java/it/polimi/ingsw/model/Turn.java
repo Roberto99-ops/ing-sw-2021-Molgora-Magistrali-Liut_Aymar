@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model;
 import it.polimi.ingsw.Server.ClientHandler;
+import it.polimi.ingsw.Server.ObserverGame;
 import it.polimi.ingsw.Server.messages.DevelopeDeckMsg;
 import it.polimi.ingsw.Server.messages.MarketMsg;
 
@@ -9,7 +10,7 @@ import java.io.Serializable;
 
 public class Turn implements Serializable {
 
-    private Player actualplayer;
+    private ObserverGame actualplayer;
     private Game game;
     private ActionStructure aStructure;
     private ActionSignal signal;
@@ -39,12 +40,12 @@ public class Turn implements Serializable {
         return signal;
     }
 
-    public Player getActualplayer() {
+    public ObserverGame getActualplayer() {
 
         return actualplayer;
     }
 
-    public void setActualplayer(Player actualplayer) {
+    public void setActualplayer(ObserverGame actualplayer) {
 
         this.actualplayer = actualplayer;
     }
