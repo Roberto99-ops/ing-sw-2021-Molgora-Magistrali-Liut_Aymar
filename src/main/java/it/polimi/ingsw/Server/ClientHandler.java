@@ -45,8 +45,10 @@ public class ClientHandler implements Runnable {
 
     public ClientHandler(Socket client, int numberofsockets) {
         this.client = client;
-        this.player = new ObserverSingleGame();
+        this.singleplayer = new ObserverSingleGame();
+        this.player = new ObserverGame();
         this.number = numberofsockets;
+        this.singleplayer.setNumber(number);
         this.player.setNumber(number);
     }
 
@@ -104,6 +106,7 @@ public class ClientHandler implements Runnable {
             this.sendMessage("What's your name? ");
             String next = this.receiveMessage();
             player.setName(next);
+            singleplayer.setName(next);
 
             if(this.number==1) {
                 this.sendMessage(player.getName() + " do you want to play alone?(yes/no) ");
