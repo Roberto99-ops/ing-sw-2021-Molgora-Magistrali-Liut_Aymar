@@ -47,7 +47,7 @@ public class SingleGameManager {
         do {
             client.sendMessage("Choose another one: ");
             choice2 = Integer.parseInt(client.receiveMessage());
-        }while(choice2 == choice1);
+        } while(choice2 == choice1);
         player.getLeadercards().getStructure().add(leaderChoice.getStructure().get(choice2));
         client.sendMessage("clean screen");
 
