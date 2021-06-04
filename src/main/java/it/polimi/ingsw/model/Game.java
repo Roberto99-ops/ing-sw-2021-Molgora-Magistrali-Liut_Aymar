@@ -10,7 +10,7 @@ public class Game implements Serializable {
     public static int lonely;
     private static ArrayList<Player> players;
     private static int n_players;
-    private static DevelopeDecks[] developedecks;
+    private static DevelopeDecks[] developedecks = new DevelopeDecks[12];
     private static LeaderDeck leaderdeck;
     private static Market market;
     private static int VR=0;
@@ -20,7 +20,7 @@ public class Game implements Serializable {
     public Game()
     {
         players = new ArrayList<>();
-        developedecks = new DevelopeDecks[12];
+        //developedecks = new DevelopeDecks[12];
         for (int i = 0; i < 12; i++) {
             developedecks[i] = new DevelopeDecks();
         }
@@ -67,9 +67,9 @@ public class Game implements Serializable {
         return market;
     }
 
-    public static void setDevelopedecks(DevelopeDecks developedecks, int i) {
+    public static void setDevelopedecks(DevelopeDecks developedeck, int i) {
 
-        Game.developedecks[i] = developedecks;
+        developedecks[i] = developedeck;
     }
 
     public static int getTimer_VR() {

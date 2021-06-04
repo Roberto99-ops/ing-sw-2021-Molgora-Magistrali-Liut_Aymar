@@ -31,10 +31,12 @@ public class ActionStructureTest {
 
         //prendo la prima carta del secondo mazzo di Developedecks
         DevelopeCard card1 = Game.getDevelopedecks(2).getStructure().get(2);
+        DevelopeCard card2 = Game.getDevelopedecks(2).getStructure().get(0);
         //System.out.println(card1.getColour());
-        Signal.action(1); // prende il mazzo 2
+        Signal.action(1); // prende il mazzo blu
+        assertNotEquals(card2, Game.getDevelopedecks(2).getStructure().get(0));
         assertEquals(card1, Game.getDevelopedecks(2).getStructure().get(0));
-        //elimino un mazzo per controllare se Action:2 mi permette di spostarmi sul mazzo dopo e di effettuare l'azione del segnalino
+        //elimino un mazzo per controllare se Action=2 mi permette di spostarmi sul mazzo dopo e di effettuare l'azione del segnalino
         for (int i=0; i<4 ;i++){
             Game.getDevelopedecks(3).getStructure().remove(0);
         }
@@ -48,7 +50,7 @@ public class ActionStructureTest {
         card1 = Game.getDevelopedecks(4).getStructure().get(1);
         Signal.action(3); // prende il mazzo 2
         assertEquals(card1, Game.getDevelopedecks(4).getStructure().get(0));
-        //elimino i tre mazzi di un certo tipo ed eseguo Action:4 (questo metodo parte dal mazzo 1)
+        //elimino i tre mazzi di un certo tipo ed eseguo Action=4 (questo metodo parte dal mazzo 1)
         for (int c=1; c<11; c=c+4){
             for (int i=0; i<4; i++){
                 Game.getDevelopedecks(c).getStructure().remove(0);
@@ -59,9 +61,9 @@ public class ActionStructureTest {
 
         //case #5-6: Lorenzo moves forward by +2
         //Lorenzo lore = new Lorenzo();
-        System.out.println(SingleGame.getLorenzo().getNumber());
+        //System.out.println(SingleGame.getLorenzo().getNumber());
         Signal.action(5); //calls Lorenzomoves(2) -> position:2
-        System.out.println(SingleGame.getLorenzo().getNumber());
+        //System.out.println(SingleGame.getLorenzo().getNumber());
         assertEquals(2,SingleGame.getLorenzo().getNumber());
         //so, Lorenzo can move forward by +1 or +2
 
@@ -75,6 +77,10 @@ public class ActionStructureTest {
         assertEquals(0, actionStructure.getAS_Counter());
 
         SingleGame.getLorenzo().setNumber(0);
+
+
+
+
     }
 
     /**

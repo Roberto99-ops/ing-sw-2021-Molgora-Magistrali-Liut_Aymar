@@ -12,17 +12,17 @@ public class SingleGame extends Game {
     //private static LeaderDeck leaderdeck;
     //private static Market market;
     private static int VR_SG=0;
-    private static ActionStructure actionStructure;
-    private static Lorenzo lorenzo;
+    private static ActionStructure actionStructure = new ActionStructure();
+    private static Lorenzo lorenzo = new Lorenzo();
 
     public SingleGame()
     {
         //developedecks = new DevelopeDecks[12];
         //leaderdeck = new LeaderDeck();
         //market = new Market();
-        actionStructure = new ActionStructure();
+        //actionStructure = new ActionStructure();
         actionStructure.shuffleSignal();
-        lorenzo = new Lorenzo();
+        //lorenzo = new Lorenzo();
     }
 
 

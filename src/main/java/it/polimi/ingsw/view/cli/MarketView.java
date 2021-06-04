@@ -170,6 +170,12 @@ public class MarketView extends Utility {
                 market[19 + i][56 + j] = HorizArrow[i][j];
             }
 
+        /*numeri frecce orizzontali
+        market[7+MAX_VERT_SIZE1][65] = "1";
+        market[13+MAX_VERT_SIZE1][65] = "2";
+        market[19+MAX_VERT_SIZE1][65] = "3";
+        */
+
         for (int i = 0; i < MAX_VERT_SIZE2; i++)
             for (int j = 0; j < MAX_HORIZ_SIZE2; j++) {
                 market[24+i][13+j] = VertArrow[i][j];
