@@ -1,6 +1,7 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.Server.ClientHandler;
+import it.polimi.ingsw.Server.ObserverGame;
 import it.polimi.ingsw.Server.messages.PlayerMsg;
 import it.polimi.ingsw.model.FaithTrack;
 import it.polimi.ingsw.model.*;
@@ -31,13 +32,13 @@ public class TurnManager{
     public void main(ClientHandler client, Game game, int actualplayer) throws Exception {
         Turn turn = new Turn(client);
         turn.setActualplayer(game.getPlayers().get(actualplayer));
-        Player player = turn.getActualplayer();
+        ObserverGame player = turn.getActualplayer();
 
         //se sono in single game, ogni volta che tocca a me, prendo un segnalino ed eseguo la sua azione
         if (game.getClass().equals(SingleGame.class)) {
             ActionSignal signal = new ActionSignal();
             signal.action(SingleGame.getActionStructure().getActionSignal(0));
-            //ObserverSingleGame.updateActionStructure(); // è giusto inserirlo qui right ????
+            // ObserverSingleGame.updateActionStructure(); // è giusto inserirlo qui right ????
         }
 
         PlayerMsg msg = new PlayerMsg(player, game);
@@ -52,9 +53,9 @@ public class TurnManager{
 
             try {
                 if (action.equals("1")) turn.shopCard(game);
-                // ObserverGame.updateStorage();
-                // ObserverGame.updateStrongbox();
-                // ObserverGame.updateDevelopementSpace();
+                game.getPlayers().get(actualplayer).updateStorage(client);
+                game.getPlayers().get(actualplayer).updateStrongbox(client);
+                game.getPlayers().get(actualplayer).updateDevelopementSpace(client);
 
                 // CONTROLLER:
                 // IN) IL NUMERO DI CARTE DA COMPRARE
@@ -62,8 +63,7 @@ public class TurnManager{
 
 
                 if (action.equals("2")) turn.buyResource();
-
-                // ObserverGame.updateMarket();
+                game.getPlayers().get(actualplayer).updateMarket(client);
 
                 // CONTROLLER:
                 // IN) N^ COLONNA/RIGA DEL MERCATO
@@ -87,8 +87,8 @@ public class TurnManager{
                         if (!cardChosen.equals("0")) {
                             int card = cardChosen.charAt(0) - 48;  //converts a char into the correspondant int
                             turn.getActualplayer().getTopCardsOnBoard().getStructure().get(card - 1).doProduction(turn.getActualplayer());
-                            // ObserverGame.updateStorage();
-                            // ObserverGame.updateStrongbox();
+                            game.getPlayers().get(actualplayer).updateStorage(client);
+                            game.getPlayers().get(actualplayer).updateStrongbox(client);
                         }
 
                         client.sendMessage("Do you want to do another production(yes/no)?\n");
