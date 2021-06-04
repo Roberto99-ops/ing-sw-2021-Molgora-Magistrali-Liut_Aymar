@@ -29,7 +29,7 @@ public class Playerboard extends PaintCards {
         Developementspace(player.getDSpace());
         PointsSpace(game);
         if(game.getClass().equals(SingleGame.class))
-            DrawActionSignal(SingleGame.getActionStructure().getActionSignal(0));
+            DrawActionSignal(SingleGame.getActionStructure().getAS_Counter());
     }
 
     /**
@@ -434,6 +434,8 @@ public class Playerboard extends PaintCards {
             case 2: skill = "Green - 2";
                 break;
             case 3: skill = "Purple - 2";
+                break;
+            case 4: skill = "Yellow - 2";
                 break;
             case 5: skill = "Lorenzo + 2";
                 break;

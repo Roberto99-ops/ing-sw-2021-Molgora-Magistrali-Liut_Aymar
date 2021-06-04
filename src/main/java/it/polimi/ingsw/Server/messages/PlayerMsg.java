@@ -30,8 +30,9 @@ public class PlayerMsg extends NetworkMessage{
         if(gamein.getClass().equals(SingleGame.class))
         {
             SingleorNot = true;
-            Lorenzo=SingleGame.getLorenzo().getNumber();
-            signal = SingleGame.getActionStructure().getActionSignal(0);
+            Lorenzo = SingleGame.getLorenzo().getNumber();
+            signal = SingleGame.getActionStructure().getActionSignal(SingleGame.getActionStructure().getAS_Counter());
+            System.out.println(signal + "playermsg");
         }
     }
 

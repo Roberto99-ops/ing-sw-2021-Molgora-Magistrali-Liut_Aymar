@@ -1,6 +1,7 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.Server.ClientHandler;
+import it.polimi.ingsw.Server.messages.PlayerMsg;
 import it.polimi.ingsw.model.FaithTrack;
 import it.polimi.ingsw.model.*;
 
@@ -34,12 +35,13 @@ public class TurnManager{
 
         //se sono in single game, ogni volta che tocca a me, prendo un segnalino ed eseguo la sua azione
         if (game.getClass().equals(SingleGame.class)) {
-            System.out.println(SingleGame.getActionStructure().getActionSignal(0));
-            SingleGame.getActionStructure().pickSignal();
-            //turn.getSignal().action(turn.getaStructure().pickSignal());
+            ActionSignal signal = new ActionSignal();
+            signal.action(SingleGame.getActionStructure().getActionSignal(0));
             //ObserverSingleGame.updateActionStructure(); // è giusto inserirlo qui right ????
         }
 
+        PlayerMsg msg = new PlayerMsg(player, game);
+        client.sendMessage(msg);
 
 
         //1)

@@ -37,19 +37,19 @@ public class SingleGameManager {
         game.getPlayers().add(player);
 
         Shuffle();
+        int choice2;
         LeaderDeck leaderChoice = game.leaderChoice();
         LeaderDeckMsg mess = new LeaderDeckMsg(leaderChoice);
         client.sendMessage(mess);
         client.sendMessage("Choose one: ");
-        int choice = Integer.parseInt(client.receiveMessage());
-        player.getLeadercards().getStructure().add(leaderChoice.getStructure().get(choice));
-        client.sendMessage("Choose another one: ");
-        choice = Integer.parseInt(client.receiveMessage());
-        player.getLeadercards().getStructure().add(leaderChoice.getStructure().get(choice));
+        int choice1 = Integer.parseInt(client.receiveMessage());
+        player.getLeadercards().getStructure().add(leaderChoice.getStructure().get(choice1));
+        do {
+            client.sendMessage("Choose another one: ");
+            choice2 = Integer.parseInt(client.receiveMessage());
+        }while(choice2 == choice1);
+        player.getLeadercards().getStructure().add(leaderChoice.getStructure().get(choice2));
         client.sendMessage("clean screen");
-
-        PlayerMsg msg = new PlayerMsg(player, game);
-        client.sendMessage(msg);
 
         player.updateActionStructure(client);
 
@@ -57,6 +57,7 @@ public class SingleGameManager {
             TurnManager turnManager = new TurnManager();
             turnManager.main(client, game, 0);
             client.sendMessage("Turn Finished");
+            SingleGame.getActionStructure().incrementAS_COUNTER();
         }
 
         String winner = game.callVictory();

@@ -30,14 +30,14 @@ public class ActionStructure implements Serializable {
      * Picks the first Signal available on the stack, calls its action and puts it back, at the
      * end of the stack
      */
-    public int pickSignal(){
+    public void pickSignal(){
         ActionSignal Signal = new ActionSignal();
         Signal.action(structure[AS_Counter]); //chiamo il metodo del segnalino in base al suo numero
         AS_Counter++;
         if (AS_Counter==7){ //se arrivo alla fine della pila torno su, al posto 0
             AS_Counter=0;
         }
-        return AS_Counter;
+        return;
     }
 
     /**
@@ -52,7 +52,14 @@ public class ActionStructure implements Serializable {
             structure[i]=temp;
         }
         //Collections.shuffle(Arrays.asList(structure));
-        AS_Counter=6;
+        //AS_Counter=6;
+    }
+
+    public void incrementAS_COUNTER()
+    {
+        AS_Counter++;
+        if (AS_Counter==7)
+            AS_Counter=0;
     }
 
 }

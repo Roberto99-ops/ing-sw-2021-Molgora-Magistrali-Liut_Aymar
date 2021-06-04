@@ -76,6 +76,7 @@ public class CliManager {
 
             if(playerMsg.getSingleorNot()){
                 SingleGame.getLorenzo().setNumber(playerMsg.getLorenzo());
+                SingleGame.getActionStructure().setAS_Counter(playerMsg.getSignal());
             }
 
 
