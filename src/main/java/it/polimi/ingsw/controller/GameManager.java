@@ -102,20 +102,19 @@ public class GameManager {
 
             clientList.get(0).sendMessage("Multi Game start now");
             clientList.get(0).sendMessage("Insert the number of players:");
-            int n_players = 4; // solo per codice corretto
-            // ???? int n_players = clientList.get(0).receiveMessage();
+            Game.setN_players( 4 ); //clientList.get(0).receiveMessage()
 
-            for (int i = 1; i < n_players; i++) {
+            for (int i = 1; i < Game.getN_players() ; i++) {
 
                 ObserverGame temporaryplayer = new ObserverGame();
                 game.getPlayers().add(temporaryplayer);
                 obsG.addObserver(temporaryplayer);
-                System.out.println("Choose your NAME");
+                clientList.get(i).sendMessage("Choose your NAME");
                 game.getPlayers().get(i).setName(clientList.get(i).receiveMessage() );
                 game.getPlayers().get(i).setNumber(i+1);
             }
 
-            game.setPlayers(game.getPlayers());
+            game.setPlayers(game.getPlayers()); // perchè?
 
         } // aggiunta di errore nel caso in cui il carattere scelto non sia uno proposto
 
@@ -123,13 +122,14 @@ public class GameManager {
         while (true) {
             //3)
             //turnmanager.setActualplayer(game.getPlayers().get(actualplayer));
-            turnmanager.main(clientList.get(0), game, 0); // contatore per i players, non è get(0) ma get(i)
-
+            turnmanager.main(clientList.get(actualplayer), game, actualplayer);
 
             //4)
             if (game.callEndgame(game.getPlayers().get(actualplayer))) {
-                System.out.println("The winner is " + game.callVictory()); // CLIENTHENDLER
-                return;
+                for (int i = 1; i < Game.getN_players(); i++) {
+                    clientList.get(i).sendMessage("The winner is " + game.callVictory());
+                    return;
+                }
             }
 
             actualplayer++;
