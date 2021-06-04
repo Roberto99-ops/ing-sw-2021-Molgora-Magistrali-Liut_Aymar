@@ -34,7 +34,8 @@ public class TurnManager{
 
         //se sono in single game, ogni volta che tocca a me, prendo un segnalino ed eseguo la sua azione
         if (game.getClass().equals(SingleGame.class)) {
-            //turn.getaStructure().PickSignal();
+            System.out.println(SingleGame.getActionStructure().getActionSignal(0));
+            SingleGame.getActionStructure().pickSignal();
             //turn.getSignal().action(turn.getaStructure().pickSignal());
             //ObserverSingleGame.updateActionStructure(); // è giusto inserirlo qui right ????
         }
