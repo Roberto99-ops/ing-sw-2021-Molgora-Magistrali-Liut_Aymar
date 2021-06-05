@@ -10,7 +10,6 @@ import java.io.Serializable;
 public class Turn implements Serializable {
 
     private Player actualplayer;
-    private Game game;
     private ActionStructure aStructure;
     private ActionSignal signal;
     private ClientHandler client;
@@ -49,15 +48,6 @@ public class Turn implements Serializable {
         this.actualplayer = actualplayer;
     }
 
-    public Game getGame() {
-        return game;
-    }
-
-    public void setGame(Game game) {
-        this.game = game;
-    }
-
-
 
     /**
      * this method manages the purchase of a DevelopeCard.
@@ -65,7 +55,7 @@ public class Turn implements Serializable {
      * then checks if he owns enough resources and complete the transaction
      */
 
-    public int shopCard(Game game) throws Exception {
+    public int shopCard() throws Exception {
         DevelopeCard card;
         ResourceStructure newcost = new ResourceStructure();
         DevelopeDecks[] gameDeck = new DevelopeDecks[12];
@@ -81,6 +71,7 @@ public class Turn implements Serializable {
         String next = client.receiveMessage();
         int cardNum = next.charAt(0) - 48;
         card = gameDeck[cardNum].getStructure().get(0);
+        newcost = card.getCost();
 
         for (int i = 0; i < this.actualplayer.getLeadercards().getStructure().size(); i++)
             if (this.actualplayer.getLeadercards().getStructure().get(i).getSkill() == "PriceSkill")
@@ -91,26 +82,27 @@ public class Turn implements Serializable {
             //      Prima controllo se ho 2 o + W. Se ce le ho, passo a controllare se ho 1 o + Y
         //ex. if (newcost<=actualplayer.getStorage().countTypeS()+actualplayer.getStrongBox()...)
 
-        if (this.actualplayer.checkResources(newcost)==0) return 0;
+        int whereresource = this.actualplayer.checkResources(newcost);
+        if (whereresource==0) return 0;
 
-        if (this.actualplayer.checkResources(newcost)==1)
+        if (whereresource==1)
         {
             for(int i=0; i<newcost.getVector().size(); i++)
-                this.actualplayer.removeResource(newcost.getVector().get(i));
+                this.actualplayer.removeResourceStorage(newcost.getVector().get(i));
         }
 
-        if(this.actualplayer.checkResources(newcost)==2)
+        if(whereresource==2)
         {
             for(int i=0; i<newcost.getVector().size(); i++) {
 
                     if (this.actualplayer.getStorage().getPanel().contains(newcost.getVector().get(i)))
-                        this.actualplayer.removeResource(newcost.getVector().get(i));
+                        this.actualplayer.removeResourceStorage(newcost.getVector().get(i));
                     else
                         this.actualplayer.getStrongBox().deleteResource(newcost.getVector().get(i));
                 }
         }
 
-        this.actualplayer.getDevelopecards().getStructure().add(card);
+        //this.actualplayer.getDevelopecards().getStructure().add(card);
         return 1;
     }
 
@@ -122,7 +114,7 @@ public class Turn implements Serializable {
      * @return
      */
 
-    public ResourceStructure buyResource() throws IOException, ClassNotFoundException {
+    public void buyResource() throws IOException, ClassNotFoundException {
         ResourceStructure product = new ResourceStructure();
         int RoworCol = 0;
         int number;
@@ -150,10 +142,16 @@ public class Turn implements Serializable {
             if (this.actualplayer.getLeadercards().getStructure().get(i).getSkill() == "WhiteMarbSkil")
                 product = this.actualplayer.getLeadercards().getStructure().get(i).changeWhiteMarbleSkill(product);
 
+
+        for (int i = 0; i < product.size(); i++)
+            actualplayer.addResourceStorage(product.getVector().get(i));
+
         msg = new MarketMsg(Game.getMarket());
         client.sendMessage(msg);
+        client.sendMessage("here how is changed the market (press any key)");
+        client.receiveMessage();
 
-        return product;
+        return;
     }
 
 }

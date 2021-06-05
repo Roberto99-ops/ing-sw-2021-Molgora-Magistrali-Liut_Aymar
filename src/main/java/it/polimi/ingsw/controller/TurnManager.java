@@ -40,6 +40,21 @@ public class TurnManager{
             //ObserverSingleGame.updateActionStructure(); // è giusto inserirlo qui right ????
         }
 
+        for (int i = 0; i < 10; i++) {
+            player.addResourceStrongBox('B');
+            player.addResourceStrongBox('G');
+            player.addResourceStrongBox('Y');
+            player.addResourceStrongBox('P');
+            player.addResourceStrongBox('W');
+        }
+        player.getStorage().getPanel().set(0, 'B');
+        player.getStorage().getPanel().set(1, 'W');
+        player.getStorage().getPanel().set(2, 'W');
+        player.getStorage().getPanel().set(3, 'P');
+        player.getStorage().getPanel().set(4, 'P');
+        player.getStorage().getPanel().set(5, 'P');
+
+
         PlayerMsg msg = new PlayerMsg(player, game);
         client.sendMessage(msg);
 
@@ -51,7 +66,9 @@ public class TurnManager{
             String action = client.receiveMessage();
 
             try {
-                if (action.equals("1")) turn.shopCard(game);
+                if (action.equals("1")) {
+                    turn.shopCard();
+                }
                 // ObserverGame.updateStorage();
                 // ObserverGame.updateStrongbox();
                 // ObserverGame.updateDevelopementSpace();
@@ -61,8 +78,9 @@ public class TurnManager{
                 // OUT) RIMUOVE LE RISORSE DI COSTO CARTA DALLA PLANCIA e AGGIUNGE NELLE CARTE SVILUPPO DI PLAYER LE CARTE VOLUTE
 
 
-                if (action.equals("2")) turn.buyResource();
-
+                if (action.equals("2")) {
+                    turn.buyResource();
+                }
                 // ObserverGame.updateMarket();
 
                 // CONTROLLER:
@@ -91,11 +109,17 @@ public class TurnManager{
                             // ObserverGame.updateStrongbox();
                         }
 
+                        PlayerMsg plyrmsg = new PlayerMsg(player, game);
+                        client.sendMessage(plyrmsg);
+
                         client.sendMessage("Do you want to do another production(yes/no)?\n");
                         action = client.receiveMessage();
 
                     } while (action.equals("yes"));
                 }
+
+                PlayerMsg plyrmsg = new PlayerMsg(player, game);
+                client.sendMessage(plyrmsg);
 
             } catch (IOException e) {
                 System.out.println(e);
