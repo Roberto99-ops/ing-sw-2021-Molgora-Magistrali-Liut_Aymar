@@ -27,9 +27,41 @@ per aggiornamenti del tipo planciastringhe per messaggio "video" esempio su chi 
 public class ObserverGame extends Player {
 
 
+   public void updatePV (ClientHandler clh) throws IOException {
+       int actualPV = this.getPv();
+       clh.sendMessage("new PV" + actualPV);
+   }
 
 
-    public static void updateMarket(ClientHandler clh) throws IOException {
+    public void updateLeaderCards (ClientHandler clh) throws IOException {
+        LeaderDeck actualLeaderDeck = this.getLeadercards();
+        LeaderDeckMsg msg = new LeaderDeckMsg(actualLeaderDeck);
+        clh.sendMessage(msg);
+
+    }
+
+
+    public void updateSkill1 (ClientHandler clh) throws IOException {
+        int actualSkiil1 = this.getSkill1();
+        clh.sendMessage("new Skiil1" + actualSkiil1);
+    }
+
+    public void updateSkill2 (ClientHandler clh) throws IOException {
+        int actualSkiil2 = this.getSkill2();
+        clh.sendMessage("new Skiil2" + actualSkiil2);
+    }
+
+    public void updateDevelopementQuantity (ClientHandler clh) throws IOException {
+        int actualDQ = this.getSkill2();
+        clh.sendMessage("new DevelopementQuantity" + actualDQ);
+    }
+
+    public void updateFaithTrack (ClientHandler clh) throws IOException {
+        FaithTrack actualFaithtrack = this.getFaithTrack();
+        clh.sendMessage(actualFaithtrack);
+    }
+
+    public void updateMarket(ClientHandler clh) throws IOException {
         Market actualMarket = Game.getMarket();
         MarketMsg msg = new MarketMsg(actualMarket);
         clh.sendMessage(msg);
@@ -37,7 +69,7 @@ public class ObserverGame extends Player {
     }
 
 
-    public static void updateDevelopementDecks(ClientHandler clh) throws IOException {
+    public void updateDevelopementDecks(ClientHandler clh) throws IOException {
         for (int i = 0; i < 12; i++) {
             DevelopeDecks[] actualDevelopeDecks = new DevelopeDecks[12];
             for (int j = 0; j < 12; j++)
@@ -48,7 +80,7 @@ public class ObserverGame extends Player {
 
     }
 
-    public static void updateLeaderDeck(ClientHandler clh) throws IOException {
+    public void updateLeaderDeck(ClientHandler clh) throws IOException {
         LeaderDeck actualLeaderDeck = Game.getLeaderdeck();
         LeaderDeckMsg msg = new LeaderDeckMsg(actualLeaderDeck);
         clh.sendMessage(msg);

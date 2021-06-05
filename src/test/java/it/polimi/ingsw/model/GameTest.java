@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.Server.ObserverGame;
 import org.junit.Test;
 
 import java.io.FileNotFoundException;
@@ -10,9 +11,9 @@ import static org.junit.Assert.*;
 public class GameTest {
 
     Game giocotest = new Game();
-    Player francesco = new Player();
-    Player roberto = new Player();
-    Player juan = new Player();
+    ObserverGame francesco = new ObserverGame();
+    ObserverGame roberto = new ObserverGame();
+    ObserverGame juan = new ObserverGame();
 
 
     @Test
@@ -81,9 +82,13 @@ public class GameTest {
 
     @Test
 
+
+    /// ???????? non va!
+
+
     public void victorygametest() throws FileNotFoundException {
 
-        ArrayList<Player> players = new ArrayList<Player>();
+        ArrayList<ObserverGame> players = new ArrayList<ObserverGame>();
         giocotest.setPlayers(players);
         giocotest.getPlayers().add(francesco);
         giocotest.getPlayers().add(roberto);
