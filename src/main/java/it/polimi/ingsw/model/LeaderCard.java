@@ -175,7 +175,7 @@ public class LeaderCard implements Serializable {
             //(2)
             if(player.checkResources(resource)==1)
             {
-                player.removeResource(this.inputskill);
+                player.removeResourceStorage(this.inputskill);
 
                 player.addResourceStrongBox(resourcechosen); }
 
@@ -183,7 +183,7 @@ public class LeaderCard implements Serializable {
             if(player.checkResources(resource)==2)
             {
                 if(player.getStorage().getPanel().contains(this.inputskill))
-                        player.removeResource(this.inputskill);
+                        player.removeResourceStorage(this.inputskill);
                 else
                     player.getStrongBox().deleteResource(this.inputskill);
 

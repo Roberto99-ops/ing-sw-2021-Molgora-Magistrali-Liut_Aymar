@@ -2,8 +2,6 @@ package it.polimi.ingsw.model;
 import java.io.Serializable;
 import java.lang.String;
 import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.Collections;
 
 
 public class Player implements Serializable {
@@ -219,14 +217,14 @@ public class Player implements Serializable {
             System.out.println("You have the needed quantity of resources. These will be removed from your storage");
             //rimuovo tutte le risorse di cui ho bisogno, dallo storage
             for(i = vectorResources.size() - 1;i>=0 ;i--){
-                removeResource(vectorResources.get(i));
+                removeResourceStorage(vectorResources.get(i));
             }
 
         } else if (ableTo == 2) {
             System.out.println("You have the needed quantity of resources. These will be removed from your storage and strongbox");
             //rimuovo tutte le risorse di cui ho bisogno, dallo storage
             for(i = vectorResources.size() - 1;i>=0 ;i--) {
-                if (removeResource(vectorResources.get(i))) {
+                if (removeResourceStorage(vectorResources.get(i))) {
                     vectorResources.remove(i);//rimuovo l'elemento che viene trovato e rimosso dallo storage
                 }
             }
@@ -288,7 +286,7 @@ public class Player implements Serializable {
      * Removes one resource from the storage.
      * @param resource: the resource the player wants to delete
      */
-    public boolean removeResource(char resource) {
+    public boolean removeResourceStorage(char resource) {
         int i;
         ArrayList<Character> vector = new ArrayList<Character>();
         //aggiungo gli elementi dello storage nel vettore

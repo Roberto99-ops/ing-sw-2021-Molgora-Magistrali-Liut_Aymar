@@ -83,7 +83,7 @@ public class DevelopeCard implements Serializable {
             if(player.checkResources(this.inputproduction.getVector())==1)
             {
                 for(int i=0; i<this.inputproduction.getVector().size(); i++)
-                    player.removeResource(this.inputproduction.getVector().get(i));
+                    player.removeResourceStorage(this.inputproduction.getVector().get(i));
 
                 for(int i=0; i<this.outputproduction.getVector().size(); i++)
                     player.addResourceStrongBox(this.outputproduction.getVector().get(i)); }
@@ -93,7 +93,7 @@ public class DevelopeCard implements Serializable {
                 for(int i=0; i<this.inputproduction.getVector().size(); i++) {
                     {
                         if (player.getStorage().getPanel().contains(this.inputproduction.getVector().get(i)))
-                            player.removeResource(this.inputproduction.getVector().get(i));
+                            player.removeResourceStorage(this.inputproduction.getVector().get(i));
                         else
                             player.getStrongBox().deleteResource(this.inputproduction.getVector().get(i));
                     }

@@ -105,7 +105,7 @@ public class PlayerTest {
         player.getStorage().getExtrapanel().add('G');
         //scelgo la risorsa da eliminare
         char resource = 'B';
-        assertTrue(player.removeResource(resource));
+        assertTrue(player.removeResourceStorage(resource));
         assertTrue(player.getStorage().getPanel().get(2)=='N');
 
 

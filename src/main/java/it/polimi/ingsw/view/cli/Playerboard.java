@@ -126,12 +126,12 @@ public class Playerboard extends PaintCards {
 
         if(content==trackPosition) {
             square[1][(SQUARE_LENGHT - 1) / 2 - 1] = Color.PURPLE.getEscape() + Simbol.CROCE + Color.RESET;
-            square[1][((SQUARE_LENGHT - 1)/2)] = "";
+            square[1][((SQUARE_LENGHT - 1)/2)] = " ";
         }
 
         if(content==Lorenzo) {
             square[2][(SQUARE_LENGHT - 1) / 2] = Color.WHITE.getEscape() + Simbol.CROCE + Color.RESET;
-            square[2][((SQUARE_LENGHT - 1)/2) + 1] = "";
+            square[2][((SQUARE_LENGHT - 1)/2) + 1] = " ";
         }
 
         int inizialVert=9;
