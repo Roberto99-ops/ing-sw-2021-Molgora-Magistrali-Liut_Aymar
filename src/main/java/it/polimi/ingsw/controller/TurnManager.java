@@ -1,6 +1,7 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.Server.ClientHandler;
+import it.polimi.ingsw.Server.ObservableGame;
 import it.polimi.ingsw.Server.ObserverGame;
 import it.polimi.ingsw.Server.messages.PlayerMsg;
 import it.polimi.ingsw.model.FaithTrack;
@@ -8,17 +9,7 @@ import it.polimi.ingsw.model.*;
 
 import java.io.IOException;
 
-public class TurnManager{
-
-    // inizializzazione di view e model
-
-    /*
-    public Player actualplayer;
-    public Game game;
-    public int l = game.getLonely();
-    public ActionStructure aStructure;
-    public ActionSignal signal;
-     */
+public class TurnManager {
 
     /**
      * turnmanager manages all the turn.
@@ -28,11 +19,13 @@ public class TurnManager{
      * 2.2) do the same with our Developecards
      * then the turn ends
      */
+
     //actualplayer è la posizione del gocatore attuale nell'array dei giocatori di game
-    public void main(ClientHandler client, Game game, int actualplayer) throws Exception {
+    public void main(ClientHandler client, Game game, int actualplayer, ObservableGame observableGame) throws Exception {
         Turn turn = new Turn(client);
         turn.setActualplayer(game.getPlayers().get(actualplayer));
         ObserverGame player = turn.getActualplayer();
+        String reception = new String();
 
         //se sono in single game, ogni volta che tocca a me, prendo un segnalino ed eseguo la sua azione
         if (game.getClass().equals(SingleGame.class)) {
@@ -49,10 +42,10 @@ public class TurnManager{
         //sta roba la posso fare sempre no? indipendentemente che sia partita singola o con piu player
 
             client.sendMessage("What do you want to do?\n\t1)Shop a developement card\n\t2)Take resources at the market\n\t3)Active a production\n");
-            String action = client.receiveMessage();
+            int action = Integer.parseInt(client.receiveMessage());
 
             try {
-                if (action.equals("1")) turn.shopCard(game);
+                if (action == 1) turn.shopCard(game);
                 game.getPlayers().get(actualplayer).updateStorage(client);
                 game.getPlayers().get(actualplayer).updateStrongbox(client);
                 game.getPlayers().get(actualplayer).updateDevelopementSpace(client);
@@ -62,7 +55,7 @@ public class TurnManager{
                 // OUT) RIMUOVE LE RISORSE DI COSTO CARTA DALLA PLANCIA e AGGIUNGE NELLE CARTE SVILUPPO DI PLAYER LE CARTE VOLUTE
 
 
-                if (action.equals("2")) turn.buyResource();
+                if (action == 2) turn.buyResource();
                 game.getPlayers().get(actualplayer).updateMarket(client);
 
                 // CONTROLLER:
@@ -70,7 +63,7 @@ public class TurnManager{
                 // OUT) CAMBIA IL MERCATO e RITORNA LE RISORSE COMPRATE
 
 
-                if (action.equals("3")) {
+                if (action == 3) {
                     do { //2.1)
                         client.sendMessage("Which LeaderCard do you want to enable(0=none)?\n");
                         client.sendMessage(turn.getActualplayer().getLeadercards());
@@ -92,18 +85,25 @@ public class TurnManager{
                         }
 
                         client.sendMessage("Do you want to do another production(yes/no)?\n");
-                        action = client.receiveMessage();
+                        reception = client.receiveMessage();
 
-                    } while (action.equals("yes"));
+                    } while (reception.equals("yes"));
                 }
 
             } catch (IOException e) {
                 System.out.println(e);
             }
 
-        //Ad ogni turno, effettuo il controllo del Vatican Report
+        //Ad ogni turno, effettuo il controllo del Vatican Report e
+        // notifico tutti gli observer dei cambiamenti avvenuti durante il turno
+
         FaithTrack faithTrack = new FaithTrack();
         faithTrack.callVaticanReport(player, game);
+        player.updateFaithTrack(client);
+
+        observableGame.personalObservers(client, game.getPlayers().get(actualplayer));
+        observableGame.notifyAllObservers(client);
+
     }
 }
 
