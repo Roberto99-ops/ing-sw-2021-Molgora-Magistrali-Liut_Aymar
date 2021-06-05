@@ -7,11 +7,13 @@ import java.util.Collections;
 
 
 public class Player implements Serializable {
+
     //cose che appartengono solo al player:
     //Nome, Numero, PV, Posizione tracciato fede, Plancia, LeaderCards(2)
     //Carte Sviluppo acquistate
 
     public Player()
+
     {
         name = new String();
         PV=0;
@@ -23,8 +25,8 @@ public class Player implements Serializable {
         skill2 = 0;
         developementquantity = 0;
         faithTrack = new FaithTrack();
-
     }
+
     //Nome
     private String name;
     public String getName() {
