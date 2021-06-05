@@ -67,6 +67,10 @@ public class Player implements Serializable {
         this.storage = storage;
     }
 
+    public void setStrongBox(StrongBox strongBox) {
+        this.strongBox = strongBox;
+    }
+
     public StrongBox getStrongBox() {
         return strongBox;
     }

@@ -65,6 +65,7 @@ public class CliManager {
             player.setMinideck3(playerMsg.getPlayer().getMinideck3());
             player.setNumber(playerMsg.getPlayer().getNumber());
             player.setPv(playerMsg.getPlayer().getPv());
+            player.setStrongBox(playerMsg.getPlayer().getStrongBox());
 
             if(playerMsg.getSingleorNot())
                 game = new SingleGame();
