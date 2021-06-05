@@ -41,58 +41,58 @@ public class TurnManager {
         //1)
         //sta roba la posso fare sempre no? indipendentemente che sia partita singola o con piu player
 
-            client.sendMessage("What do you want to do?\n\t1)Shop a developement card\n\t2)Take resources at the market\n\t3)Active a production\n");
-            int action = Integer.parseInt(client.receiveMessage());
+        client.sendMessage("What do you want to do?\n\t1)Shop a developement card\n\t2)Take resources at the market\n\t3)Active a production\n");
+        int action = Integer.parseInt(client.receiveMessage());
 
-            try {
-                if (action == 1) turn.shopCard(game);
-                game.getPlayers().get(actualplayer).updateStorage(client);
-                game.getPlayers().get(actualplayer).updateStrongbox(client);
-                game.getPlayers().get(actualplayer).updateDevelopementSpace(client);
+        try {
+            if (action == 1) turn.shopCard(game);
+            game.getPlayers().get(actualplayer).updateStorage(client);
+            game.getPlayers().get(actualplayer).updateStrongbox(client);
+            game.getPlayers().get(actualplayer).updateDevelopementSpace(client);
 
-                // CONTROLLER:
-                // IN) IL NUMERO DI CARTE DA COMPRARE
-                // OUT) RIMUOVE LE RISORSE DI COSTO CARTA DALLA PLANCIA e AGGIUNGE NELLE CARTE SVILUPPO DI PLAYER LE CARTE VOLUTE
-
-
-                if (action == 2) turn.buyResource();
-                game.getPlayers().get(actualplayer).updateMarket(client);
-
-                // CONTROLLER:
-                // IN) N^ COLONNA/RIGA DEL MERCATO
-                // OUT) CAMBIA IL MERCATO e RITORNA LE RISORSE COMPRATE
+            // CONTROLLER:
+            // IN) IL NUMERO DI CARTE DA COMPRARE
+            // OUT) RIMUOVE LE RISORSE DI COSTO CARTA DALLA PLANCIA e AGGIUNGE NELLE CARTE SVILUPPO DI PLAYER LE CARTE VOLUTE
 
 
-                if (action == 3) {
-                    do { //2.1)
-                        client.sendMessage("Which LeaderCard do you want to enable(0=none)?\n");
-                        client.sendMessage(turn.getActualplayer().getLeadercards());
-                        String cardChosen = client.receiveMessage();
-                        if (!cardChosen.equals("0")) {
-                            int card = cardChosen.charAt(0) - 48;  //converts a char into the correspondant int
-                            turn.getActualplayer().getLeadercards().getStructure().get(card - 1).getSkill();
-                        }
+            if (action == 2) turn.buyResource();
+            game.getPlayers().get(actualplayer).updateMarket(client);
 
-                        //2.2)
-                        client.sendMessage("Which DevelopeCard do you want to enable(0=none)?\n");
-                        client.sendMessage(turn.getActualplayer().getTopCardsOnBoard());
-                        cardChosen = client.receiveMessage();
-                        if (!cardChosen.equals("0")) {
-                            int card = cardChosen.charAt(0) - 48;  //converts a char into the correspondant int
-                            turn.getActualplayer().getTopCardsOnBoard().getStructure().get(card - 1).doProduction(turn.getActualplayer());
-                            game.getPlayers().get(actualplayer).updateStorage(client);
-                            game.getPlayers().get(actualplayer).updateStrongbox(client);
-                        }
+            // CONTROLLER:
+            // IN) N^ COLONNA/RIGA DEL MERCATO
+            // OUT) CAMBIA IL MERCATO e RITORNA LE RISORSE COMPRATE
 
-                        client.sendMessage("Do you want to do another production(yes/no)?\n");
-                        reception = client.receiveMessage();
 
-                    } while (reception.equals("yes"));
-                }
+            if (action == 3) {
+                do { //2.1)
+                    client.sendMessage("Which LeaderCard do you want to enable(0=none)?\n");
+                    client.sendMessage(turn.getActualplayer().getLeadercards());
+                    String cardChosen = client.receiveMessage();
+                    if (!cardChosen.equals("0")) {
+                        int card = cardChosen.charAt(0) - 48;  //converts a char into the correspondant int
+                        turn.getActualplayer().getLeadercards().getStructure().get(card - 1).getSkill();
+                    }
 
-            } catch (IOException e) {
-                System.out.println(e);
+                    //2.2)
+                    client.sendMessage("Which DevelopeCard do you want to enable(0=none)?\n");
+                    client.sendMessage(turn.getActualplayer().getTopCardsOnBoard());
+                    cardChosen = client.receiveMessage();
+                    if (!cardChosen.equals("0")) {
+                        int card = cardChosen.charAt(0) - 48;  //converts a char into the correspondant int
+                        turn.getActualplayer().getTopCardsOnBoard().getStructure().get(card - 1).doProduction(turn.getActualplayer());
+                        game.getPlayers().get(actualplayer).updateStorage(client);
+                        game.getPlayers().get(actualplayer).updateStrongbox(client);
+                    }
+
+                    client.sendMessage("Do you want to do another production(yes/no)?\n");
+                    reception = client.receiveMessage();
+
+                } while (reception.equals("yes"));
             }
+
+        } catch (IOException e) {
+            System.out.println(e);
+        }
 
         //Ad ogni turno, effettuo il controllo del Vatican Report e
         // notifico tutti gli observer dei cambiamenti avvenuti durante il turno

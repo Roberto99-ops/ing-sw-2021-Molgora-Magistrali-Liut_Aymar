@@ -91,9 +91,9 @@ public class Turn implements Serializable {
             if (this.actualplayer.getLeadercards().getStructure().get(i).getSkill() == "PriceSkill")
                 newcost = this.actualplayer.getLeadercards().getStructure().get(i).changePriceSkill(card);
 
-            //se le risorse presenti in Storage e SB sono sufficienti allora le risorse richieste le elimino e attivo la produzione
-            //IDEA: controllare quante risorse di un tipo si necessitano per comprare. Ex: W W Y.
-            //      Prima controllo se ho 2 o + W. Se ce le ho, passo a controllare se ho 1 o + Y
+        //se le risorse presenti in Storage e SB sono sufficienti allora le risorse richieste le elimino e attivo la produzione
+        //IDEA: controllare quante risorse di un tipo si necessitano per comprare. Ex: W W Y.
+        //      Prima controllo se ho 2 o + W. Se ce le ho, passo a controllare se ho 1 o + Y
         //ex. if (newcost<=actualplayer.getStorage().countTypeS()+actualplayer.getStrongBox()...)
 
         if (this.actualplayer.checkResources(newcost)==0) return 0;
@@ -101,18 +101,18 @@ public class Turn implements Serializable {
         if (this.actualplayer.checkResources(newcost)==1)
         {
             for(int i=0; i<newcost.getVector().size(); i++)
-                this.actualplayer.removeResource(newcost.getVector().get(i));
+                this.actualplayer.addResourceStorage(newcost.getVector().get(i));
         }
 
         if(this.actualplayer.checkResources(newcost)==2)
         {
             for(int i=0; i<newcost.getVector().size(); i++) {
 
-                    if (this.actualplayer.getStorage().getPanel().contains(newcost.getVector().get(i)))
-                        this.actualplayer.removeResource(newcost.getVector().get(i));
-                    else
-                        this.actualplayer.getStrongBox().deleteResource(newcost.getVector().get(i));
-                }
+                if (this.actualplayer.getStorage().getPanel().contains(newcost.getVector().get(i)))
+                    this.actualplayer.removeResourceStorage(newcost.getVector().get(i));
+                else
+                    this.actualplayer.getStrongBox().deleteResource(newcost.getVector().get(i));
+            }
         }
 
         this.actualplayer.getDevelopecards().getStructure().add(card);
@@ -162,4 +162,3 @@ public class Turn implements Serializable {
     }
 
 }
-
