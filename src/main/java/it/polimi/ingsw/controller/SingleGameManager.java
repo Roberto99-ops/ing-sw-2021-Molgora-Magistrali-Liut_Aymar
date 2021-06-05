@@ -21,7 +21,7 @@ public class SingleGameManager {
     private static Game game;
     private static ClientHandler client;
     private static Player L;
-    // private static ObservableGame observablesinglegame;
+    private static ObservableGame observablesinglegame;
 
     /**
      * costructor. the clienthandler istance is passed so is easy to
@@ -38,7 +38,7 @@ public class SingleGameManager {
         client.sendMessage("clean screen");
         ObserverSingleGame player = client.getSinglePlayer();
         game.getPlayers().add(player);
-        // observablesinglegame.addObserver(player);
+        observablesinglegame.addObserver(player);
 
         Shuffle();
         player.updateActionStructure(client);
@@ -68,7 +68,7 @@ public class SingleGameManager {
 
         while(!game.callEndgame(player)) {
             TurnManager turnManager = new TurnManager();
-            turnManager.main(client, game, 0);
+            turnManager.main(client, game, 0, observablesinglegame);
             client.sendMessage("Turn Finished");
             SingleGame.getActionStructure().incrementAS_COUNTER();
         }
