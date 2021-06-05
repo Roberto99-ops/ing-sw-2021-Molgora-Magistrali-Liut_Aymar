@@ -266,6 +266,7 @@ public class ClientHandler implements Runnable {
     public void sendMessage(Object msg) throws IOException {
         output.writeObject(msg);
         output.flush();
+        output.reset();
     }
 
     /**
