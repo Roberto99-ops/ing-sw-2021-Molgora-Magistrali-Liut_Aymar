@@ -26,23 +26,10 @@ per aggiornamenti del tipo planciastringhe per messaggio "video" esempio su chi 
 
 public class ObserverGame extends Player {
 
-   /**
-    name = new String();
-    PV=0;
-    storage = new Storage();
-    strongBox = new StrongBox();
-    DSpace = new DevelopementSpace();
-    leadercards = new LeaderDeck();
-    skill1 = 0;
-    skill2 = 0;
-    developementquantity = 0;
-    faithTrack = new FaithTrack();
-*/
-
 
    public void updatePV (ClientHandler clh) throws IOException {
-
-
+       int actualPV = this.getPv();
+       clh.sendMessage("new PV" + actualPV);
    }
 
 
