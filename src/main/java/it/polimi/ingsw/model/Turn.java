@@ -24,6 +24,12 @@ public class Turn implements Serializable {
         actualplayer = client.getPlayer();
     }
 
+    /**
+     * getter and setter
+     *
+     * @return
+     */
+
     public ActionStructure getaStructure() {
         return aStructure;
     }
@@ -76,9 +82,7 @@ public class Turn implements Serializable {
 
         DevelopeDeckMsg msg = new DevelopeDeckMsg(gameDeck);
         client.sendMessage(msg);
-
-        client.sendMessage("Choose the number of the card you want to buy ");
-
+        client.sendMessage("Choose the number of the card you want to buy");
         String next = client.receiveMessage();
         int cardNum = next.charAt(0) - 48;
         card = gameDeck[cardNum].getStructure().get(0);
@@ -118,7 +122,6 @@ public class Turn implements Serializable {
     /**
      * this method manages the action of buying resources at the market.
      * the player choose which row/column and call the manager market method
-     *
      * @param
      * @return
      */
@@ -131,30 +134,31 @@ public class Turn implements Serializable {
         MarketMsg msg = new MarketMsg(Game.getMarket());
         client.sendMessage(msg);
 
-        client.sendMessage("Do you want to choose a row or a column? ");
+        client.sendMessage("Do you want to choose a row or a column?\n");
         String next = client.receiveMessage();
 
         if (next.equals("row")) {
-            client.sendMessage("Which row do you want to take?\n");
-            RoworCol = 1;
+            client.sendMessage("Which row do you want to take? (from 0 to 2) \n");
+            RoworCol = Integer.parseInt(client.receiveMessage());;
         }
         if (next.equals("column")) {
-            client.sendMessage("Which column do you want to take?\n");
-            RoworCol = 2;
+            client.sendMessage("Which column do you want to take? (from 0 to 3) \n");
+            RoworCol = Integer.parseInt(client.receiveMessage());;
         }
+
+        // cosa significa?
+
         next = client.receiveMessage();
         number = next.charAt(0) - 48;
 
         product.setVector(Game.getMarket().doMarket(RoworCol, number, actualplayer));
 
         for (int i = 0; i < this.actualplayer.getLeadercards().getStructure().size(); i++)
-            if (this.actualplayer.getLeadercards().getStructure().get(i).getSkill() == "WhiteMarbSkil")
+            if (this.actualplayer.getLeadercards().getStructure().get(i).getSkill() == "WhiteMarbleSkill")
                 product = this.actualplayer.getLeadercards().getStructure().get(i).changeWhiteMarbleSkill(product);
 
-        msg = new MarketMsg(Game.getMarket());
-        client.sendMessage(msg);
-
         return product;
+
     }
 
 }
