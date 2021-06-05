@@ -1,5 +1,8 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.Server.messages.MarketMsg;
+import it.polimi.ingsw.view.cli.MarketView;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -66,7 +69,7 @@ public class Market implements Serializable {
 
 
 
-        if (check == 1) {
+        if (check == 2) {
 
             for (int i = 1; i < 3; i++) {
                 this.matrix[2 - i][number] = equalmatrix[3 - i][number];
@@ -76,11 +79,10 @@ public class Market implements Serializable {
             vector.add(equalmatrix[0][number]);
             this.matrix[2][number] = temporaryball;
             this.extraball = equalmatrix[0][number];
-
         }
 
 
-            if (check == 2) {
+            if (check == 1) {
 
 
                 for (int i = 1; i < 4; i++) {
@@ -94,8 +96,7 @@ public class Market implements Serializable {
 
             }
 
-            for (int i = 0; i < 5 ; i ++ ) {
-
+            for (int i = 0; i < vector.size() ; i ++ ) {
                 actualplayer.getStorage().setinStorage(vector.get(i), 1);
             }
 
