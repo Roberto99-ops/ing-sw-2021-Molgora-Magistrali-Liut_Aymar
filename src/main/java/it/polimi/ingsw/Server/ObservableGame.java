@@ -158,7 +158,7 @@ public class ObservableGame {
     }
 
 
-   public void notifyAllObservers(ClientHandler clh) throws Exception {
+   public static void notifyAllObservers(ClientHandler clh) throws Exception {
        for (int i = 0; i < observers.size(); i++) {
            observers.get(i).updateDevelopementDecks(clh);
            observers.get(i).updateLeaderDeck(clh);
@@ -169,7 +169,7 @@ public class ObservableGame {
 
    }
 
-       public void personalObservers (ClientHandler clh, ObserverGame n_actualplayer) throws Exception {
+       public static void personalObservers (ClientHandler clh, ObserverGame n_actualplayer) throws Exception {
 
             n_actualplayer.updateDevelopementSpace(clh);
             n_actualplayer.updateStorage(clh);
