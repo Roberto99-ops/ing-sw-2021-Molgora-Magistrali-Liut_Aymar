@@ -66,25 +66,28 @@ public class DevelopementSpace implements Serializable {
 
         if (choice == 1) {
             i = minideck1.getStructure().size();
-            if (i == 0 || (minideck1.getStructure().get(i - 1).getColour() == card.getColour() && minideck1.getStructure().get(i - 1).getLevel() == card.getLevel() - 1))
+            if ((i == 0 && card.getLevel() == 1) || (i!=0 && minideck1.getStructure().get(i - 1).getColour() == card.getColour() && minideck1.getStructure().get(i - 1).getLevel() == card.getLevel() - 1)) {
                 minideck1.getStructure().add(card);
-            return true;
+                return true;
+            }
         }
 
 
         if (choice == 2) {
             i = minideck2.getStructure().size();
-            if (i == 0 || (minideck2.getStructure().get(i - 1).getColour() == card.getColour() && minideck2.getStructure().get(i - 1).getLevel() == card.getLevel() - 1))
+            if ((i == 0 && card.getLevel() == 1) || (i!=0 && minideck2.getStructure().get(i - 1).getColour() == card.getColour() && minideck2.getStructure().get(i - 1).getLevel() == card.getLevel() - 1)) {
                 minideck2.getStructure().add(card);
-            return true;
+                return true;
+            }
         }
 
 
         if (choice == 3) {
             i = minideck3.getStructure().size();
-            if (i == 0 || (minideck3.getStructure().get(i - 1).getColour() == card.getColour() && minideck3.getStructure().get(i - 1).getLevel() == card.getLevel() - 1))
+            if ((i == 0 && card.getLevel() == 1) || (i!=0 && minideck3.getStructure().get(i - 1).getColour() == card.getColour() && minideck3.getStructure().get(i - 1).getLevel() == card.getLevel() - 1)) {
                 minideck3.getStructure().add(card);
-            return true;
+                return true;
+            }
         }
         return false;
     }
