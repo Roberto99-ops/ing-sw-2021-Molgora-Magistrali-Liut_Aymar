@@ -26,7 +26,7 @@ per aggiornamenti del tipo planciastringhe per messaggio "video" esempio su chi 
 
 public class ObserverGame extends Player {
 
-
+/*
    public void updatePV (ClientHandler clh) throws IOException {
        int actualPV = this.getPv();
        clh.sendMessage("new PV" + actualPV);
@@ -60,7 +60,7 @@ public class ObserverGame extends Player {
         FaithTrack actualFaithtrack = this.getFaithTrack();
         clh.sendMessage(actualFaithtrack);
     }
-
+*/
     public void updateMarket(ClientHandler clh) throws IOException {
         Market actualMarket = Game.getMarket();
         MarketMsg msg = new MarketMsg(actualMarket);
@@ -86,6 +86,11 @@ public class ObserverGame extends Player {
         clh.sendMessage(msg);
     }
 
+    public void  updatePlayerBoard(ClientHandler clh, Game game) throws  IOException {
+        PlayerMsg msg = new PlayerMsg(this, game);
+        clh.sendMessage(msg);
+    }
+/*
     public void updateStorage(ClientHandler clh) throws IOException {
         Storage actualStorage = this.getStorage();
         StorageMsg msg = new StorageMsg(actualStorage);
@@ -116,6 +121,6 @@ public class ObserverGame extends Player {
         clh.sendMessage("new Timer_VR" + actualVR);
 
     }
-
+*/
 
 }

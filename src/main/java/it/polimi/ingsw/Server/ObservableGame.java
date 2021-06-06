@@ -163,15 +163,15 @@ public class ObservableGame {
            observers.get(i).updateDevelopementDecks(clh);
            observers.get(i).updateLeaderDeck(clh);
            observers.get(i).updateMarket(clh);
-           observers.get(i).updateTimer_VR(clh);
-           observers.get(i).updateVR(clh);
+           //observers.get(i).updateTimer_VR(clh);
+           //observers.get(i).updateVR(clh);
        }
 
    }
 
        public static void personalObservers (ClientHandler clh, ObserverGame n_actualplayer) throws Exception {
 
-            n_actualplayer.updateDevelopementSpace(clh);
+            /*n_actualplayer.updateDevelopementSpace(clh);
             n_actualplayer.updateStorage(clh);
             n_actualplayer.updateStrongbox(clh);
             n_actualplayer.updateLeaderCards(clh);
@@ -179,7 +179,7 @@ public class ObservableGame {
             n_actualplayer.updateSkill1(clh);
             n_actualplayer.updateSkill2(clh);
             n_actualplayer.updatePV(clh);
-            n_actualplayer.updateFaithTrack(clh);
+            n_actualplayer.updateFaithTrack(clh);*/
 
     }
 
