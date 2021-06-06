@@ -11,16 +11,16 @@ public class MarketView extends Utility {
 
     {
         market = new String[VERT_SIZE][HORIZ_SIZE];
-        Perimeter(market, VERT_SIZE, HORIZ_SIZE, Color.BACKGROUND_GRAY);
+        Perimeter(market, VERT_SIZE, HORIZ_SIZE, Color.BACKGROUND_CYAN);
 
         putString("MARKET", market, 1, 30);
         drawExtraMarble(gamemarket.getExtraball());
 
         space(gamemarket);
         for (int i = 20; i < VERT_SIZE-1; i++)
-            market[i][10]=Color.BACKGROUND_GRAY + "║" + Color.RESET;
+            market[i][10]=Color.BACKGROUND_CYAN + "║" + Color.RESET;
         for (int i = 50; i < HORIZ_SIZE-1; i++)
-            market[5][i]=Color.BACKGROUND_GRAY + "═" + Color.RESET;
+            market[5][i]=Color.BACKGROUND_CYAN + "═" + Color.RESET;
 
         drawArrows();
         drawNumbers();
@@ -61,7 +61,7 @@ public class MarketView extends Utility {
      */
     private void drawMarbleSquare(String[][] space, int row, int column, Character colorMarble)
     {
-        Color color = Color.BACKGROUND_GRAY;
+        Color color = Color.BACKGROUND_CYAN;
         String marbleColor = convertBackground(colorMarble);
         int MAX_HORIZ_SIZE=12;
         int MAX_VERT_SIZE=7;
@@ -81,7 +81,7 @@ public class MarketView extends Utility {
      */
     private void drawExtraMarble(Character colorMarble)
     {
-        Color color = Color.BACKGROUND_GRAY;
+        Color color = Color.BACKGROUND_CYAN;
         String marbleColor = convertBackground(colorMarble);
         int MAX_HORIZ_SIZE = 12;
         int MAX_VERT_SIZE = 7;
@@ -110,7 +110,7 @@ public class MarketView extends Utility {
 
         for (int i = 0; i < MAX_VERT_SIZE; i++)
             for (int j = 0; j < MAX_HORIZ_SIZE; j++)
-                marble[i][j]=Color.BACKGROUND_GRAY + " ";
+                marble[i][j]=Color.BACKGROUND_CYAN + " ";
 
         for (int i = 2; i < 6; i++) marble[0][i]=color + " ";
         for (int i = 1; i < 7; i++) marble[1][i]=color + " ";
@@ -134,7 +134,7 @@ public class MarketView extends Utility {
         int MAX_HORIZ_SIZE2 = 6;
         String[][] HorizArrow = new String[MAX_VERT_SIZE1][MAX_HORIZ_SIZE1];
         String[][] VertArrow = new String[MAX_VERT_SIZE2][MAX_HORIZ_SIZE2];
-        Color color = Color.BACKGROUND_GRAY;
+        Color color = Color.BACKGROUND_CYAN;
 
         for (int i = 0; i < MAX_VERT_SIZE1; i++)
             for (int j = 0; j < MAX_HORIZ_SIZE1; j++)
@@ -191,10 +191,10 @@ public class MarketView extends Utility {
     private void drawNumbers()
     {
         for (Integer i = 0; i < 3; i++) {
-            market[8+i*6][8] = Color.BACKGROUND_GRAY + i.toString() + Color.RESET;
+            market[8+i*6][8] = Color.BACKGROUND_CYAN + i.toString() + Color.RESET;
         }
         for (Integer i = 0; i < 4; i++) {
-            market[4][16+11*i] = Color.BACKGROUND_GRAY + i.toString() + Color.RESET;
+            market[4][16+11*i] = Color.BACKGROUND_CYAN + i.toString() + Color.RESET;
         }
     }
 
