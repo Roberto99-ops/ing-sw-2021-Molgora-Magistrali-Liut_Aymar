@@ -41,10 +41,11 @@ public class TurnManager {
         int action = Integer.parseInt(client.receiveMessage());
 
         try {
-            if (action == 1) turn.shopCard();
-            //game.getPlayers().get(actualplayer).updateStorage(client);
-            //game.getPlayers().get(actualplayer).updateStrongbox(client);
-            //game.getPlayers().get(actualplayer).updateDevelopementSpace(client);
+            if (action == 1) {
+                turn.shopCard();
+                client.sendMessage("clean screen");
+                game.getPlayers().get(actualplayer).updatePlayerBoard(client, game);
+            }
 
             // CONTROLLER:
             // IN) IL NUMERO DI CARTE DA COMPRARE
