@@ -50,7 +50,7 @@
 
     },
     {
-      "priceR": ["W", "W", "W", "W", "W"],
+      "priceR": ["G", "G", "G", "G", "G"],
       "priceC": [],
       "cardLevel": 0,
       "pv": 3,
@@ -86,7 +86,7 @@
       "pv": 5,
       "inputskill": "P",
       "number": 8,
-      "skill": "WhiteMarbSkil"
+      "skill": "GhiteMarbSkil"
 
     },
     {
@@ -96,7 +96,7 @@
       "pv": 5,
       "inputskill": "B",
       "number": 9,
-      "skill": "WhiteMarbSkil"
+      "skill": "GhiteMarbSkil"
 
     },
     {
@@ -106,7 +106,7 @@
       "pv": 5,
       "inputskill": "G",
       "number": 10,
-      "skill": "WhiteMarbSkil"
+      "skill": "GhiteMarbSkil"
 
     },
     {
@@ -116,7 +116,7 @@
       "pv": 5,
       "inputskill": "Y",
       "number": 11,
-      "skill": "WhiteMarbSkil"
+      "skill": "GhiteMarbSkil"
 
     },
     {
