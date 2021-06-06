@@ -31,7 +31,7 @@ public class SingleGameManager {
      */
     public SingleGameManager(ClientHandler clientin) {
         game = new SingleGame();
-        ObservableSingleGame observablesinglegame = new ObservableSingleGame();
+        observablesinglegame = new ObservableSingleGame();
         client = clientin;
     }
 
@@ -50,16 +50,16 @@ public class SingleGameManager {
         client.sendMessage("Choose one: ");
         int choice1 = Integer.parseInt(client.receiveMessage());
         player.getLeadercards().getStructure().add(leaderChoice.getStructure().get(choice1));
-        player.updateLeaderCards(client);
-        player.updateLeaderDeck(client);
+        //player.updateLeaderCards(client);
+        //player.updateLeaderDeck(client);
 
         do {
             client.sendMessage("Choose another one: ");
             choice2 = Integer.parseInt(client.receiveMessage());
         } while(choice2 == choice1);
         player.getLeadercards().getStructure().add(leaderChoice.getStructure().get(choice2));
-        player.updateLeaderCards(client);
-        player.updateLeaderDeck(client);
+        //player.updateLeaderCards(client);
+        //player.updateLeaderDeck(client);
         client.sendMessage("clean screen");
 
         // spostato a sopra
