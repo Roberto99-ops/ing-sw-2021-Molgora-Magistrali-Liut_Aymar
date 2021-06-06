@@ -185,6 +185,18 @@ public class Player implements Serializable {
         //flag per sapere se non possiedo tali risorse (0) o possiedo in storage (1) o in strongbox-storage (2)
         int ableTo = 0;
 
+        ArrayList<Character> vector = new ArrayList<Character>();
+        Character[] resources = {'B', 'Y', 'G', 'P'};
+        for (int i=0; i<4; i++){
+            for(int c=0; c<vectorResources.size();c++){
+                if(vectorResources.get(c).equals(resources[i]))
+                vector.add(vectorResources.get(c));
+            }
+        }
+        for (int i=0; i<vector.size(); i++){
+            System.out.println(vector.get(i));
+        }
+
         //la prima risorsa che considero è l'ultima della arraylist (che si suppone ordinato)
         int i = vectorResources.size()-1;
         char typeResource;
@@ -376,9 +388,9 @@ public class Player implements Serializable {
         //controllo se extrapanel sia dello stesso tipo e se ha degli spazi liberi
         if (storage.getTypeExtrapanel() == resource && countExtraN > 0) {
             if (storage.getExtrapanel().getVector().get(0) == 'N') {
-                storage.getExtrapanel().set(0, resource);
+                storage.getExtrapanel().getVector().set(0, resource);
             } else if (storage.getExtrapanel().getVector().get(1) == 'N') {
-                storage.getExtrapanel().set(1, resource);
+                storage.getExtrapanel().getVector().set(1, resource);
                 return true;
             }
         } //else if (storage.getTypeExtrapanel()!=resource && countExtraN== storage.countTypeS(resource))
