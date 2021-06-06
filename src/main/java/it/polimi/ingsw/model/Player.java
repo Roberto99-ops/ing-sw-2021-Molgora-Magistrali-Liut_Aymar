@@ -274,11 +274,11 @@ public class Player implements Serializable {
             return false;
         }
 
-        if(DSpace.getMinideck1().getStructure().size() == 0)   minideck=1;
-        if(DSpace.getMinideck2().getStructure().size() == 0)   minideck=2;
         if(DSpace.getMinideck3().getStructure().size() == 0)   minideck=3;
-        DSpace.setCard(card, minideck);
-        return true;
+        if(DSpace.getMinideck2().getStructure().size() == 0)   minideck=2;
+        if(DSpace.getMinideck1().getStructure().size() == 0)   minideck=1;
+        if(DSpace.setCard(card, minideck)) return true;
+        return false;
     }
     /*
      NON FARE
