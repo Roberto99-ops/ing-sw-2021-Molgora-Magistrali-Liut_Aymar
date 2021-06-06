@@ -42,7 +42,7 @@ public class SingleGameManager {
         observablesinglegame.setObserverSingleGame(player);
 
         Shuffle();
-        player.updateActionStructure(client);
+        //player.updateActionStructure(client);
         int choice2;
         LeaderDeck leaderChoice = game.leaderChoice();
         LeaderDeckMsg mess = new LeaderDeckMsg(leaderChoice);
@@ -70,8 +70,9 @@ public class SingleGameManager {
         while(!game.callEndgame(player)) {
             TurnManager turnManager = new TurnManager();
             turnManager.main(client, game, 0);
-            client.sendMessage("Turn Finished");
-            SingleGame.getActionStructure().incrementAS_COUNTER();
+            client.sendMessage("Turn Finished(press any key)");
+            client.receiveMessage();
+            //SingleGame.getActionStructure().incrementAS_COUNTER();
         }
 
         String winner = game.callVictory();

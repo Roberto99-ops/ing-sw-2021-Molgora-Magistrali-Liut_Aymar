@@ -96,10 +96,6 @@ public class Market implements Serializable {
 
             }
 
-            for (int i = 0; i < vector.size() ; i ++ ) {
-                actualplayer.getStorage().setinStorage(vector.get(i), 1);
-            }
-
             return vector;
         }
 

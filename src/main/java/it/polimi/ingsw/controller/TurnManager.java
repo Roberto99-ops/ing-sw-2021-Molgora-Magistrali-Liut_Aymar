@@ -31,7 +31,7 @@ public class TurnManager {
         //se sono in single game, ogni volta che tocca a me, prendo un segnalino ed eseguo la sua azione
         if (game.getClass().equals(SingleGame.class)) {
             ActionSignal signal = new ActionSignal();
-            signal.action(SingleGame.getActionStructure().getActionSignal(0));
+            SingleGame.getActionStructure().pickSignal();
             // ObserverSingleGame.updateActionStructure(); // è giusto inserirlo qui right ????
         }
 
@@ -56,9 +56,12 @@ public class TurnManager {
 
             if (action == 2) {
                 turn.buyResource();
+                client.sendMessage("clean screen");
                 game.getPlayers().get(actualplayer).updateMarket(client);
+                client.sendMessage("the market is changed (press any key)");
+                client.receiveMessage();
+                client.sendMessage("clean screen");
                 game.getPlayers().get(actualplayer).updatePlayerBoard(client, game);
-
             }
 
             // CONTROLLER:

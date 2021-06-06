@@ -54,16 +54,16 @@ public class Storage extends ArrayList<Character> implements Serializable {
     public int countTypeS(char neededRes) {
         int i=0, counterS=0;
             while(i!=this.panel.size()) {
-                if (neededRes == this.panel.get(i))
+                if (this.panel.get(i).equals(neededRes))
                     counterS++;
                 i++;
             }
 
             i=0;
-                 /** while(i!=this.extrapanel.size()){
-                    if(neededRes==this.extrapanel.get(i))
+                  while(i!=this.extrapanel.getVector().size()){
+                    if(this.extrapanel.getVector().get(i).equals(neededRes))
                         counterS++;
-                    i++;  } */
+                    i++;  }
 
 
         return counterS;

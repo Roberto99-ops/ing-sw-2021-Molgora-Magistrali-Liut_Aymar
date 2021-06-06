@@ -130,6 +130,7 @@ public class Turn implements Serializable {
      */
 
     public void buyResource() throws IOException, ClassNotFoundException {
+
         ResourceStructure product = new ResourceStructure();
         int RoworCol = 0;
         int number;
@@ -175,8 +176,9 @@ public class Turn implements Serializable {
         }
 
 
-        for (int i = 0; i < product.getVector().size(); i++)
+        for (int i = 0; i < product.getVector().size(); i++) {
             actualplayer.addResourceStorage(product.getVector().get(i));
+        }
 
         return;
 

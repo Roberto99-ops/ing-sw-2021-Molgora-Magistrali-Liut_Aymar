@@ -341,83 +341,66 @@ public class Player implements Serializable {
         if (storage.countTypeS('N')==0) {
             System.out.println("No more space available in Storage.");
             return false;
-            //la risorsa non può essere aggiunta e allora la elimino
-
-            /* CASO PRECEDENTE (sbagliato)
-            Do you want to delete" + resource + "(A) or something in your storage(B)?
-            //il player vede il suo magazzino e sceglie se non aggiungere la char resource oppure se vuole eliminarne
-            // qualcuna e quale risorsa eliminare
-            if (scan.nextLine().equals("A")) {
-                System.out.println(resource + " deleted.");
-                return;
-            } else if (scan.nextLine().equals("B")) {
-                System.out.println("Select the resource in your storage you want to delete:");
-                choice = scan.next().charAt(0);
-                removeResource(choice);
-            }
-            return;
-            //caso in cui il magazzino abbia uno o + spazi vuoti
-             */
-        } else {
-            int i = 5;
-            int countExtraN = 0;
-            for (int c = 1; c >= 0; c--) {
-                if (storage.getExtrapanel().getVector().get(c) == 'N') countExtraN++;
-            }
-            //controllo se extrapanel sia dello stesso tipo e se ha degli spazi liberi
-            if (storage.getTypeExtrapanel() == resource && countExtraN > 0) {
-                if (storage.getExtrapanel().getVector().get(0) == 'N') {
-                    storage.getExtrapanel().set(0, resource);
-                } else if (storage.getExtrapanel().getVector().get(1) == 'N') {
-                    storage.getExtrapanel().set(1, resource);
-                    return true;
-                }
-            } else if (storage.getTypeExtrapanel()!=resource && countExtraN== storage.countTypeS(resource)){
-                System.out.println("No more space available in Storage.");
-
-            }
-            //controllo panel:
-            //-se c'è già una presente vedo se aggiungerne un'altra
-            if (storage.getPanel().contains(resource)) {
-                while (storage.getPanel().get(i) != resource && i >= 0) {
-                    i--;
-                }
-                if (i == 0 || i == 2 || i == 5) {
-                    // i==0 : una risorsa di quel tipo presente in cima -> elimino la risorsa
-                    // i==2 : il secondo piano ha risorse di quel tipo -> elimino la risorsa
-                    // i==5 : il terzo piano ha risorse di quel tipo -> elimino la risorsa
-                    System.out.println(resource + " deleted. It already exists");
-                }
-                // in tutti gli altri casi in cui un posto nei piani è libero
-                switch (i) {
-                    case 1:
-                        storage.getPanel().set(2, resource); //posto i==2 ora occupato
-                        break;
-                    case 3:
-                        storage.getPanel().set(4, resource); //posto i==4 ora occupato
-                        break;
-                    case 4:
-                        storage.getPanel().set(5, resource); //posto i==5 ora occupato
-                        break;
-                }
-                return true;
-            } else {
-                //se la risorsa non c'è:
-                if (storage.getPanel().get(0) == 'N') {
-                    i = 0;
-                } else if ((storage.getPanel().get(1) == 'N') && (storage.getPanel().get(2) == 'N')) {
-                    i = 1;
-                } else if ((storage.getPanel().get(3) == 'N') && (storage.getPanel().get(4) == 'N') && (storage.getPanel().get(5) == 'N')) {
-                    i = 3;
-                }
-
-                storage.getPanel().set(i, resource); //aggiungo la risorsa nel primo piano (i==0) o nel secondo (i==1) o nel
-                // terzo (i==3)
-                return true;
-            }
-            //conto il numero di N in extrapanel
-
         }
+
+        //caso in cui il magazzino abbia uno o + spazi vuoti
+
+        int i = 5;
+        int countExtraN = 0;
+        for (int c = 1; c >= 0; c--) {
+            if (storage.getExtrapanel().getVector().get(c) == 'N') countExtraN++;
+        }
+        //controllo se extrapanel sia dello stesso tipo e se ha degli spazi liberi
+        if (storage.getTypeExtrapanel() == resource && countExtraN > 0) {
+            if (storage.getExtrapanel().getVector().get(0) == 'N') {
+                storage.getExtrapanel().set(0, resource);
+            } else if (storage.getExtrapanel().getVector().get(1) == 'N') {
+                storage.getExtrapanel().set(1, resource);
+                return true;
+            }
+        } //else if (storage.getTypeExtrapanel()!=resource && countExtraN== storage.countTypeS(resource))
+        //System.out.println("No more space available in Storage.");
+
+        //controllo panel:
+        //-se c'è già una presente vedo se aggiungerne un'altra
+        if (storage.getPanel().contains(resource)) {
+            while (storage.getPanel().get(i) != resource && i >= 0) {
+                i--;
+            }
+            if (i == 0 || i == 2 || i == 5) {
+                // i==0 : una risorsa di quel tipo presente in cima -> elimino la risorsa
+                // i==2 : il secondo piano ha risorse di quel tipo -> elimino la risorsa
+                // i==5 : il terzo piano ha risorse di quel tipo -> elimino la risorsa
+                System.out.println(resource + " deleted. It already exists");
+            }
+            // in tutti gli altri casi in cui un posto nei piani è libero
+            switch (i) {
+                case 1:
+                    storage.getPanel().set(2, resource); //posto i==2 ora occupato
+                break;
+                case 3:
+                    storage.getPanel().set(4, resource); //posto i==4 ora occupato
+                break;
+                case 4:
+                    storage.getPanel().set(5, resource); //posto i==5 ora occupato
+                break;
+            }
+            return true;
+        } else {
+            //se la risorsa non c'è:
+            if (storage.getPanel().get(0) == 'N') {
+                i = 0;
+            } else if ((storage.getPanel().get(1) == 'N') && (storage.getPanel().get(2) == 'N')) {
+                i = 1;
+            } else if ((storage.getPanel().get(3) == 'N') && (storage.getPanel().get(4) == 'N') && (storage.getPanel().get(5) == 'N')) {
+                i = 3;
+            }
+            storage.getPanel().set(i, resource); //aggiungo la risorsa nel primo piano (i==0) o nel secondo (i==1) o nel
+            // terzo (i==3)
+            return true;
+        }
+        //conto il numero di N in extrapanel
+
     }
 
     /**
