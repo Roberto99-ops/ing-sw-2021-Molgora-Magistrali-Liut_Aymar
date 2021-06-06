@@ -2,6 +2,7 @@ package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.Server.ClientHandler;
 import it.polimi.ingsw.Server.ObservableGame;
+import it.polimi.ingsw.Server.ObservableSingleGame;
 import it.polimi.ingsw.Server.ObserverGame;
 import it.polimi.ingsw.Server.messages.PlayerMsg;
 import it.polimi.ingsw.model.FaithTrack;
@@ -22,10 +23,10 @@ public class TurnManager {
 
     //actualplayer è la posizione del gocatore attuale nell'array dei giocatori di game
     public void main(ClientHandler client, Game game, int actualplayer) throws Exception {
-        Turn turn = new Turn(client);
+        Turn turn = new Turn(client, game);
         turn.setActualplayer(game.getPlayers().get(actualplayer));
         ObserverGame player = turn.getActualplayer();
-        String reception = new String();
+        String reception;
 
         //se sono in single game, ogni volta che tocca a me, prendo un segnalino ed eseguo la sua azione
         if (game.getClass().equals(SingleGame.class)) {
@@ -34,9 +35,7 @@ public class TurnManager {
             // ObserverSingleGame.updateActionStructure(); // è giusto inserirlo qui right ????
         }
 
-        PlayerMsg msg = new PlayerMsg(player, game);
-        client.sendMessage(msg);
-
+        player.updatePlayerBoard(client, game);
 
         //1)
         //sta roba la posso fare sempre no? indipendentemente che sia partita singola o con piu player
@@ -45,18 +44,22 @@ public class TurnManager {
         int action = Integer.parseInt(client.receiveMessage());
 
         try {
-            if (action == 1) turn.shopCard(game);
-            game.getPlayers().get(actualplayer).updateStorage(client);
-            game.getPlayers().get(actualplayer).updateStrongbox(client);
-            game.getPlayers().get(actualplayer).updateDevelopementSpace(client);
+            if (action == 1) turn.shopCard();
+            //game.getPlayers().get(actualplayer).updateStorage(client);
+            //game.getPlayers().get(actualplayer).updateStrongbox(client);
+            //game.getPlayers().get(actualplayer).updateDevelopementSpace(client);
 
             // CONTROLLER:
             // IN) IL NUMERO DI CARTE DA COMPRARE
             // OUT) RIMUOVE LE RISORSE DI COSTO CARTA DALLA PLANCIA e AGGIUNGE NELLE CARTE SVILUPPO DI PLAYER LE CARTE VOLUTE
 
 
-            if (action == 2) turn.buyResource();
-            game.getPlayers().get(actualplayer).updateMarket(client);
+            if (action == 2) {
+                turn.buyResource();
+                game.getPlayers().get(actualplayer).updateMarket(client);
+                game.getPlayers().get(actualplayer).updatePlayerBoard(client, game);
+
+            }
 
             // CONTROLLER:
             // IN) N^ COLONNA/RIGA DEL MERCATO
@@ -80,8 +83,8 @@ public class TurnManager {
                     if (!cardChosen.equals("0")) {
                         int card = cardChosen.charAt(0) - 48;  //converts a char into the correspondant int
                         turn.getActualplayer().getTopCardsOnBoard().getStructure().get(card - 1).doProduction(turn.getActualplayer());
-                        game.getPlayers().get(actualplayer).updateStorage(client);
-                        game.getPlayers().get(actualplayer).updateStrongbox(client);
+                        //game.getPlayers().get(actualplayer).updateStorage(client);
+                        //game.getPlayers().get(actualplayer).updateStrongbox(client);
                     }
 
                     client.sendMessage("Do you want to do another production(yes/no)?\n");
@@ -99,7 +102,7 @@ public class TurnManager {
 
         FaithTrack faithTrack = new FaithTrack();
         faithTrack.callVaticanReport(player, game);
-        player.updateFaithTrack(client);
+        //player.updateFaithTrack(client);
 
         ObservableGame.personalObservers(client, game.getPlayers().get(actualplayer));
         ObservableGame.notifyAllObservers(client);
