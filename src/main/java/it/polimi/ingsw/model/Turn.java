@@ -3,25 +3,28 @@ import it.polimi.ingsw.Server.ClientHandler;
 import it.polimi.ingsw.Server.ObserverGame;
 import it.polimi.ingsw.Server.messages.DevelopeDeckMsg;
 import it.polimi.ingsw.Server.messages.MarketMsg;
+import it.polimi.ingsw.Server.messages.PlayerMsg;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Collection;
 
 
 public class Turn implements Serializable {
 
     private ObserverGame actualplayer;
-    private Game game;
     private ActionStructure aStructure;
     private ActionSignal signal;
     private ClientHandler client;
+    private Game game;
 
-    public Turn(ClientHandler clientin)
+    public Turn(ClientHandler clientin, Game gamein)
     {
         aStructure = new ActionStructure();
         signal = new ActionSignal();
         client = clientin;
         actualplayer = client.getPlayer();
+        game = gamein;
     }
 
     /**
@@ -72,7 +75,7 @@ public class Turn implements Serializable {
      * then checks if he owns enough resources and complete the transaction
      */
 
-    public int shopCard(Game game) throws Exception {
+    public int shopCard() throws Exception {
         DevelopeCard card;
         ResourceStructure newcost = new ResourceStructure();
         DevelopeDecks[] gameDeck = new DevelopeDecks[12];
@@ -126,7 +129,7 @@ public class Turn implements Serializable {
      * @return
      */
 
-    public ResourceStructure buyResource() throws IOException, ClassNotFoundException {
+    public void buyResource() throws IOException, ClassNotFoundException {
         ResourceStructure product = new ResourceStructure();
         int RoworCol = 0;
         int number;
@@ -139,25 +142,43 @@ public class Turn implements Serializable {
 
         if (next.equals("row")) {
             client.sendMessage("Which row do you want to take? (from 0 to 2) \n");
-            RoworCol = Integer.parseInt(client.receiveMessage());;
+            RoworCol = 1;
         }
         if (next.equals("column")) {
             client.sendMessage("Which column do you want to take? (from 0 to 3) \n");
-            RoworCol = Integer.parseInt(client.receiveMessage());;
+            RoworCol = 2;
         }
 
-        // cosa significa?
-
         next = client.receiveMessage();
-        number = next.charAt(0) - 48;
+        number = Integer.parseInt(next);
 
         product.setVector(Game.getMarket().doMarket(RoworCol, number, actualplayer));
 
-        for (int i = 0; i < this.actualplayer.getLeadercards().getStructure().size(); i++)
-            if (this.actualplayer.getLeadercards().getStructure().get(i).getSkill() == "WhiteMarbleSkill")
-                product = this.actualplayer.getLeadercards().getStructure().get(i).changeWhiteMarbleSkill(product);
+        if (this.actualplayer.getLeadercards().getStructure().get(0).getSkill().equals("WhiteMarbleSkill") && actualplayer.getSkill1() == 1)
+                product = this.actualplayer.getLeadercards().getStructure().get(0).changeWhiteMarbleSkill(product);
+        if (this.actualplayer.getLeadercards().getStructure().get(1).getSkill().equals("WhiteMarbleSkill") && actualplayer.getSkill2() == 1)
+            product = this.actualplayer.getLeadercards().getStructure().get(1).changeWhiteMarbleSkill(product);
 
-        return product;
+        //we "clean" the vector
+        for (int i = 0; i < product.getVector().size(); i++){
+            if(product.getVector().get(i).equals('R')) {
+                actualplayer.increaseTrackposition();
+                product.getVector().set(i, 'W');
+            }
+        }
+        for (int i = 0; i < product.getVector().size(); i++) {
+            if(product.getVector().get(i).equals('W'))
+            {
+                product.getVector().remove(i);
+                i--;
+            }
+        }
+
+
+        for (int i = 0; i < product.getVector().size(); i++)
+            actualplayer.addResourceStorage(product.getVector().get(i));
+
+        return;
 
     }
 
