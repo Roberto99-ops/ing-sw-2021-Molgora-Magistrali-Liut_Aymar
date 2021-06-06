@@ -12,7 +12,7 @@
     "colour": "P",
     "pv": 1,
     "cost": ["P", "P"],
-    "inputproduction": ["W"],
+    "inputproduction": ["G"],
     "outputproduction": ["R"]
   },
   {
@@ -27,7 +27,7 @@
     "level": 1,
     "colour": "Y",
     "pv": 1,
-    "cost": ["W", "W"],
+    "cost": ["G", "G"],
     "inputproduction": ["P"],
     "outputproduction": ["R"]
   },
@@ -35,8 +35,8 @@
     "level": 1,
     "colour": "G",
     "pv": 2,
-    "cost": ["B", "P", "W"],
-    "inputproduction": ["W"],
+    "cost": ["B", "P", "G"],
+    "inputproduction": ["G"],
     "outputproduction": ["P"]
   },
   {
@@ -51,15 +51,15 @@
     "level": 1,
     "colour": "B",
     "pv": 2,
-    "cost": ["Y", "P", "W"],
+    "cost": ["Y", "P", "G"],
     "inputproduction": ["P"],
-    "outputproduction": ["W"]
+    "outputproduction": ["G"]
   },
   {
     "level": 1,
     "colour": "Y",
     "pv": 2,
-    "cost": ["B", "Y", "W"],
+    "cost": ["B", "Y", "G"],
     "inputproduction": ["B"],
     "outputproduction": ["Y"]
   },
@@ -69,7 +69,7 @@
     "pv": 3,
     "cost": ["B", "B", "B"],
     "inputproduction": ["P", "P"],
-    "outputproduction": ["Y", "B", "W"]
+    "outputproduction": ["Y", "B", "G"]
   },
   {
     "level": 1,
@@ -77,52 +77,52 @@
     "pv": 3,
     "cost": ["P", "P", "P"],
     "inputproduction": ["Y", "Y"],
-    "outputproduction": ["P", "B", "W"]
+    "outputproduction": ["P", "B", "G"]
   },
   {
     "level": 1,
     "colour": "B",
     "pv": 3,
     "cost": ["Y", "Y", "Y"],
-    "inputproduction": ["W", "W"],
+    "inputproduction": ["G", "G"],
     "outputproduction": ["Y", "B", "P"]
   },
   {
     "level": 1,
     "colour": "Y",
     "pv": 3,
-    "cost": ["W", "W", "W"],
+    "cost": ["G", "G", "G"],
     "inputproduction": ["B", "B"],
-    "outputproduction": ["P", "Y", "W"]
+    "outputproduction": ["P", "Y", "G"]
   },
   {
     "level": 1,
     "colour": "G",
     "pv": 4,
     "cost": ["B", "B", "Y", "Y"],
-    "inputproduction": ["P", "W"],
+    "inputproduction": ["P", "G"],
     "outputproduction": ["Y", "Y", "R"]
   },
   {
     "level": 1,
     "colour": "P",
     "pv": 4,
-    "cost": ["P", "P", "W", "W"],
+    "cost": ["P", "P", "G", "G"],
     "inputproduction": ["Y", "B"],
-    "outputproduction": ["W", "W", "R"]
+    "outputproduction": ["G", "G", "R"]
   },
   {
     "level": 1,
     "colour": "B",
     "pv": 4,
     "cost": ["P", "P", "Y", "Y"],
-    "inputproduction": ["B", "W"],
+    "inputproduction": ["B", "G"],
     "outputproduction": ["P", "P", "R"]
   },{
     "level": 1,
     "colour": "Y",
     "pv": 4,
-    "cost": ["B", "B", "W", "W"],
+    "cost": ["B", "B", "G", "G"],
     "inputproduction": ["Y", "P"],
     "outputproduction": ["B", "B", "R"]
   },
@@ -131,7 +131,7 @@
     "colour": "G",
     "pv": 5,
     "cost": ["B", "B", "B", "B"],
-    "inputproduction": ["W"],
+    "inputproduction": ["G"],
     "outputproduction": ["R", "R"]
   },
   {
@@ -154,7 +154,7 @@
     "level": 2,
     "colour": "Y",
     "pv": 5,
-    "cost": ["W", "W", "W", "W"],
+    "cost": ["G", "G", "G", "G"],
     "inputproduction": ["B"],
     "outputproduction": ["R", "R"]
   },
@@ -164,7 +164,7 @@
     "pv": 6,
     "cost": ["B", "B", "B", "P", "P"],
     "inputproduction": ["B", "P"],
-    "outputproduction": ["W", "W", "W"]
+    "outputproduction": ["G", "G", "G"]
   },
   {
     "level": 2,
@@ -177,16 +177,16 @@
     "level": 2,
     "colour": "B",
     "pv": 6,
-    "cost": ["Y", "Y", "Y", "W", "W"],
-    "inputproduction": ["Y", "W"],
+    "cost": ["Y", "Y", "Y", "G", "G"],
+    "inputproduction": ["Y", "G"],
     "outputproduction": ["P", "P", "P"]
   },
   {
     "level": 2,
     "colour": "Y",
     "pv": 6,
-    "cost": ["W", "W", "W", "B", "B"],
-    "inputproduction": ["W", "B"],
+    "cost": ["G", "G", "G", "B", "B"],
+    "inputproduction": ["G", "B"],
     "outputproduction": ["Y", "Y", "Y"]
   },
   {
@@ -195,14 +195,14 @@
     "pv": 7,
     "cost": ["B", "B", "B", "B", "B"],
     "inputproduction": ["Y", "Y"],
-    "outputproduction": ["W", "W", "R", "R"]
+    "outputproduction": ["G", "G", "R", "R"]
     },
   {
     "level": 2,
     "colour": "P",
     "pv": 7,
     "cost": ["P", "P", "P", "P", "P"],
-    "inputproduction": ["W", "W"],
+    "inputproduction": ["G", "G"],
     "outputproduction": ["Y", "Y", "R", "R"]
   },
   {
@@ -217,7 +217,7 @@
     "level": 2,
     "colour": "Y",
     "pv": 7,
-    "cost": ["W", "W", "W", "W", "W"],
+    "cost": ["G", "G", "G", "G", "G"],
     "inputproduction": ["B", "B"],
     "outputproduction": ["P", "P", "R", "R"]
   },
@@ -234,22 +234,22 @@
     "colour": "P",
     "pv": 8,
     "cost": ["B", "B", "B", "P", "P", "P"],
-    "inputproduction": ["W"],
+    "inputproduction": ["G"],
     "outputproduction": ["P", "P", "R"]
   },
   {
     "level": 2,
     "colour": "B",
     "pv": 8,
-    "cost": ["W", "W", "W", "Y", "Y", "Y"],
+    "cost": ["G", "G", "G", "Y", "Y", "Y"],
     "inputproduction": ["P"],
-    "outputproduction": ["W", "W", "R"]
+    "outputproduction": ["G", "G", "R"]
   },
   {
     "level": 2,
     "colour": "Y",
     "pv": 8,
-    "cost": ["W", "W", "W", "P", "P", "P"],
+    "cost": ["G", "G", "G", "P", "P", "P"],
     "inputproduction": ["B"],
     "outputproduction": ["Y", "Y", "R"]
   },
@@ -259,14 +259,14 @@
     "pv": 9,
     "cost": ["B", "B", "B", "B", "B", "B"],
     "inputproduction": ["Y", "Y"],
-    "outputproduction": ["W", "W", "W", "R", "R"]
+    "outputproduction": ["G", "G", "G", "R", "R"]
   },
   {
     "level": 3,
     "colour": "P",
     "pv": 9,
     "cost": ["P", "P", "P", "P", "P", "P"],
-    "inputproduction": ["W", "W"],
+    "inputproduction": ["G", "G"],
     "outputproduction": ["Y", "Y", "Y", "R", "R"]
   },
   {
@@ -281,7 +281,7 @@
     "level": 3,
     "colour": "Y",
     "pv": 9,
-    "cost": ["W", "W", "W", "W", "W", "W"],
+    "cost": ["G", "G", "G", "G", "G", "G"],
     "inputproduction": ["B", "B"],
     "outputproduction": ["P", "P", "P", "R", "R"]
   },
@@ -291,30 +291,30 @@
     "pv": 10,
     "cost": ["B", "B", "B", "B", "B", "P", "P"],
     "inputproduction": ["Y", "P"],
-    "outputproduction": ["B", "B", "W", "W", "R"]
+    "outputproduction": ["B", "B", "G", "G", "R"]
   },
   {
     "level": 3,
     "colour": "P",
     "pv": 10,
     "cost": ["Y", "Y", "P", "P", "P", "P", "P"],
-    "inputproduction": ["W", "B"],
+    "inputproduction": ["G", "B"],
     "outputproduction": ["Y", "Y", "P", "P", "R"]
   },
   {
     "level": 3,
     "colour": "B",
     "pv": 10,
-    "cost": ["Y", "Y", "Y", "Y", "Y", "W", "W"],
+    "cost": ["Y", "Y", "Y", "Y", "Y", "G", "G"],
     "inputproduction": ["Y", "B"],
-    "outputproduction": ["P", "P", "W", "W", "R"]
+    "outputproduction": ["P", "P", "G", "G", "R"]
   },
   {
     "level": 3,
     "colour": "Y",
     "pv": 10,
-    "cost": ["W", "W", "W", "W", "W", "P", "P"],
-    "inputproduction": ["W", "P"],
+    "cost": ["G", "G", "G", "G", "G", "P", "P"],
+    "inputproduction": ["G", "P"],
     "outputproduction": ["B", "B", "Y", "Y", "R"]
   },
   {
@@ -331,21 +331,21 @@
     "pv": 11,
     "cost": ["P", "P", "P", "P", "P", "P", "P"],
     "inputproduction": ["Y"],
-    "outputproduction": ["W", "R", "R", "R"]
+    "outputproduction": ["G", "R", "R", "R"]
   },
   {
     "level": 3,
     "colour": "B",
     "pv": 11,
     "cost": ["Y", "Y", "Y", "Y", "Y", "Y", "Y"],
-    "inputproduction": ["W"],
+    "inputproduction": ["G"],
     "outputproduction": ["B", "R", "R", "R"]
   },
   {
     "level": 3,
     "colour": "Y",
     "pv": 11,
-    "cost": ["W", "W", "W", "W", "W", "W", "W"],
+    "cost": ["G", "G", "G", "G", "G", "G", "G"],
     "inputproduction": ["B"],
     "outputproduction": ["P", "R", "R", "R"]
   },
@@ -354,7 +354,7 @@
     "colour": "G",
     "pv": 12,
     "cost": ["B", "B", "B", "B", "Y", "Y", "Y", "Y"],
-    "inputproduction": ["W"],
+    "inputproduction": ["G"],
     "outputproduction": ["Y", "Y", "Y", "B"]
   },
   {
@@ -363,13 +363,13 @@
     "pv": 12,
     "cost": ["B", "B", "B", "B", "P", "P", "P", "P"],
     "inputproduction": ["Y"],
-    "outputproduction": ["W", "W", "W", "P"]
+    "outputproduction": ["G", "G", "G", "P"]
   },
   {
     "level": 3,
     "colour": "B",
     "pv": 12,
-    "cost": ["W", "W", "W", "W", "Y", "Y", "Y", "Y"],
+    "cost": ["G", "G", "G", "G", "Y", "Y", "Y", "Y"],
     "inputproduction": ["P"],
     "outputproduction": ["B", "B", "Y", "B"]
   },
@@ -377,9 +377,9 @@
     "level": 3,
     "colour": "Y",
     "pv": 12,
-    "cost": ["P", "P", "P", "P", "W", "W", "W", "W"],
+    "cost": ["P", "P", "P", "P", "G", "G", "G", "G"],
     "inputproduction": ["B"],
-    "outputproduction": ["P", "P", "P", "W"]
+    "outputproduction": ["P", "P", "P", "G"]
   }
 
 
