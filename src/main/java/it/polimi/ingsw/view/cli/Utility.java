@@ -120,7 +120,7 @@ public abstract class Utility {
                 returned = Color.BACKGROUND_PURPLE.getEscape();
                 break;
             case 'G':
-                returned = Color.BACKGROUND_GREEN.getEscape();
+                returned = Color.BACKGROUND_GRAY.getEscape();
                 break;
             case 'W':
                 returned = Color.BLACK.getEscape();

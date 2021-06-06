@@ -203,11 +203,11 @@ public class Playerboard extends PaintCards {
             int lung1 = playerStorage.getExtrapanel().size();
             if (lung1 > 0) {
                 ArrayList<Character> panel = new ArrayList<>();
-                panel.add(playerStorage.getExtrapanel().get(0));
+                panel.add(playerStorage.getExtrapanel().getVector().get(0));
                 convertSymbols(panel, storage, 17, 17);
                 if (lung1 > 1) {
                     panel.remove(0);
-                    panel.add(playerStorage.getExtrapanel().get(1));
+                    panel.add(playerStorage.getExtrapanel().getVector().get(1));
                     convertSymbols(panel, storage, 17, 21);
                 }
             }
