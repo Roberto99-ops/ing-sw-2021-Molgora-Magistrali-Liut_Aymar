@@ -257,6 +257,29 @@ public class Player implements Serializable {
         return TopCardsOnBoard ;//ritorna l'arraylist;
     }
 
+    /**
+     * this method add if possible a deelopecard to the player DSpace
+     * @param card: card to add
+     * @return: the action response
+     */
+    public boolean addDevelopCard(DevelopeCard card)
+    {
+        char color = card.getColour();
+        int minideck = DSpace.colorPresent(color);
+
+        if(minideck == 4)   return false;
+        if(minideck != 0)
+        {
+            if(DSpace.setCard(card, minideck)) return true;
+            return false;
+        }
+
+        if(DSpace.getMinideck1().getStructure().size() == 0)   minideck=1;
+        if(DSpace.getMinideck2().getStructure().size() == 0)   minideck=2;
+        if(DSpace.getMinideck3().getStructure().size() == 0)   minideck=3;
+        DSpace.setCard(card, minideck);
+        return true;
+    }
     /*
      NON FARE
     public ResourceStructure getResourcesStorage()
