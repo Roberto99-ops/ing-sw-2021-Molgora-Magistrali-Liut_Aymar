@@ -77,6 +77,7 @@ public class Client {
                     String string = scan.nextLine();
                     output.writeObject(string);
                     output.flush();
+                    output.reset();
                 }
             }
             else
