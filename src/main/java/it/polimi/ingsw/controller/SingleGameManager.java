@@ -1,11 +1,9 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.Server.ClientHandler;
-import it.polimi.ingsw.Server.ObservableGame;
-import it.polimi.ingsw.Server.ObservableSingleGame;
-import it.polimi.ingsw.Server.ObserverSingleGame;
+import it.polimi.ingsw.Server.MessageSingleGameManager;
+import it.polimi.ingsw.Server.SingleGameHandler;
 import it.polimi.ingsw.Server.messages.LeaderDeckMsg;
-import it.polimi.ingsw.Server.messages.PlayerMsg;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.LeaderDeck;
 import it.polimi.ingsw.model.Player;
@@ -22,7 +20,7 @@ public class SingleGameManager {
     private static Game game;
     private static ClientHandler client;
     private static Player L;
-    private static ObservableSingleGame observablesinglegame;
+    private static MessageSingleGameManager observablesinglegame;
 
     /**
      * costructor. the clienthandler istance is passed so is easy to
@@ -31,15 +29,15 @@ public class SingleGameManager {
      */
     public SingleGameManager(ClientHandler clientin) {
         game = new SingleGame();
-        observablesinglegame = new ObservableSingleGame();
+        observablesinglegame = new MessageSingleGameManager();
         client = clientin;
     }
 
     public static void main() throws Exception {
         client.sendMessage("clean screen");
-        ObserverSingleGame player = client.getSinglePlayer();
+        SingleGameHandler player = client.getSinglePlayer();
         game.getPlayers().add(player);
-        observablesinglegame.setObserverSingleGame(player);
+        observablesinglegame.setSingleGameHendler(player);
 
         Shuffle();
         player.updateActionStructure(client);
