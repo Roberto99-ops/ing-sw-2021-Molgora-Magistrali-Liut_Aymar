@@ -2,6 +2,7 @@ package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.Server.ClientHandler;
 import it.polimi.ingsw.Server.ObservableGame;
+import it.polimi.ingsw.Server.ObservableSingleGame;
 import it.polimi.ingsw.Server.ObserverSingleGame;
 import it.polimi.ingsw.Server.messages.LeaderDeckMsg;
 import it.polimi.ingsw.Server.messages.PlayerMsg;
@@ -21,7 +22,7 @@ public class SingleGameManager {
     private static Game game;
     private static ClientHandler client;
     private static Player L;
-    private static ObservableGame observablesinglegame;
+    private static ObservableSingleGame observablesinglegame;
 
     /**
      * costructor. the clienthandler istance is passed so is easy to
@@ -30,7 +31,7 @@ public class SingleGameManager {
      */
     public SingleGameManager(ClientHandler clientin) {
         game = new SingleGame();
-        ObservableGame observablesinglegame = new ObservableGame();
+        ObservableSingleGame observablesinglegame = new ObservableSingleGame();
         client = clientin;
     }
 
@@ -38,7 +39,7 @@ public class SingleGameManager {
         client.sendMessage("clean screen");
         ObserverSingleGame player = client.getSinglePlayer();
         game.getPlayers().add(player);
-        observablesinglegame.addObserver(player);
+        observablesinglegame.setObserverSingleGame(player);
 
         Shuffle();
         player.updateActionStructure(client);
@@ -68,7 +69,7 @@ public class SingleGameManager {
 
         while(!game.callEndgame(player)) {
             TurnManager turnManager = new TurnManager();
-            turnManager.main(client, game, 0, observablesinglegame);
+            turnManager.main(client, game, 0);
             client.sendMessage("Turn Finished");
             SingleGame.getActionStructure().incrementAS_COUNTER();
         }
