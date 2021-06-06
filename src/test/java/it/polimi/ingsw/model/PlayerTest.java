@@ -162,13 +162,13 @@ public class PlayerTest {
 
         //caso4b: decido di aggiungere una risorsa in Extrapanel di tipo B
         assertTrue(player.addResourceStorage('B'));
-        assertTrue(player.getStorage().getExtrapanel().get(0)=='B');
-        assertTrue(player.getStorage().getExtrapanel().get(1)=='N');
+        assertTrue(player.getStorage().getExtrapanel().getVector().get(0)=='B');
+        assertTrue(player.getStorage().getExtrapanel().getVector().get(1)=='N');
 
         //caso 4c: elimino la risorsa in cima allo storage e aggiungo una rsorsa di tipo B. questa dovrebbe andare in extrapanel
         player.getStorage().getPanel().set(0,'N');
         assertTrue(player.addResourceStorage('B'));
-        assertTrue(player.getStorage().getExtrapanel().get(1)=='B');
+        assertTrue(player.getStorage().getExtrapanel().getVector().get(1)=='B');
 
 
 

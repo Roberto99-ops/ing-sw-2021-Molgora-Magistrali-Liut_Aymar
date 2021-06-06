@@ -297,7 +297,7 @@ public class Player implements Serializable {
         }
         //aggiungo gli elemento dello strongbox
         for (int c=0; c<2; c++){
-            vector.add(storage.getExtrapanel().get(c));
+            vector.add(storage.getExtrapanel().getVector().get(c));
         }
         //caso in cui l'abilità del piano aggiuntivo sia abilitata:
         /*if (leadercards.getStructure().get(0).getSkill().equals("StorageSkill") || leadercards.getStructure().get(1).getSkill().equals("StorageSkill")){
@@ -362,13 +362,13 @@ public class Player implements Serializable {
             int i = 5;
             int countExtraN = 0;
             for (int c = 1; c >= 0; c--) {
-                if (storage.getExtrapanel().get(c) == 'N') countExtraN++;
+                if (storage.getExtrapanel().getVector().get(c) == 'N') countExtraN++;
             }
             //controllo se extrapanel sia dello stesso tipo e se ha degli spazi liberi
             if (storage.getTypeExtrapanel() == resource && countExtraN > 0) {
-                if (storage.getExtrapanel().get(0) == 'N') {
+                if (storage.getExtrapanel().getVector().get(0) == 'N') {
                     storage.getExtrapanel().set(0, resource);
-                } else if (storage.getExtrapanel().get(1) == 'N') {
+                } else if (storage.getExtrapanel().getVector().get(1) == 'N') {
                     storage.getExtrapanel().set(1, resource);
                     return true;
                 }
