@@ -1,28 +1,18 @@
 package it.polimi.ingsw.Server;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import it.polimi.ingsw.Server.messages.*;
 import it.polimi.ingsw.controller.GameManager;
 import it.polimi.ingsw.controller.SingleGameManager;
-import it.polimi.ingsw.model.*;
 
-import javax.swing.*;
 import java.io.*;
-import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Random;
 
 public class ClientHandler implements Runnable {
 
-    public ObserverGame getPlayer() {
+    public GameHandler getPlayer() {
         return player;
     }
 
-    public ObserverSingleGame getSinglePlayer() {
+    public SingleGameHandler getSinglePlayer() {
         return singleplayer;
     }
 
@@ -31,8 +21,8 @@ public class ClientHandler implements Runnable {
     private ObjectInputStream input;
     private GameManager gameManager;  //non sono attributi
     private SingleGameManager singleGameManager; //non sono attributi
-    private ObserverSingleGame singleplayer;
-    private ObserverGame player;
+    private SingleGameHandler singleplayer;
+    private GameHandler player;
     private int number;
 
 
@@ -45,8 +35,8 @@ public class ClientHandler implements Runnable {
 
     public ClientHandler(Socket client, int numberofsockets) {
         this.client = client;
-        this.singleplayer = new ObserverSingleGame();
-        this.player = new ObserverGame();
+        this.singleplayer = new SingleGameHandler();
+        this.player = new GameHandler();
         this.number = numberofsockets;
         this.singleplayer.setNumber(number);
         this.player.setNumber(number);

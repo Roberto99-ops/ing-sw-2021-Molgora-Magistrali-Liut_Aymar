@@ -1,6 +1,6 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.Server.ObserverGame;
+import it.polimi.ingsw.Server.GameHandler;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -15,10 +15,10 @@ public class FaithTrackTest {
     @Test
     public void vaticanReport() {
         Game game = new Game();
-        ObserverGame player1 = new ObserverGame();
-        ObserverGame player2 = new ObserverGame();
-        ObserverGame player3 = new ObserverGame();
-        ArrayList<ObserverGame> plyr = new ArrayList<ObserverGame>();
+        GameHandler player1 = new GameHandler();
+        GameHandler player2 = new GameHandler();
+        GameHandler player3 = new GameHandler();
+        ArrayList<GameHandler> plyr = new ArrayList<GameHandler>();
         plyr.add(player1);
         plyr.add(player2);
         plyr.add(player3);

@@ -1,16 +1,15 @@
 package it.polimi.ingsw.model;
-import it.polimi.ingsw.Server.ObserverGame;
+import it.polimi.ingsw.Server.GameHandler;
 
 import java.io.FileNotFoundException;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 
 public class Game implements Serializable {
 
     public static int lonely;
-    private static ArrayList<ObserverGame> players;
+    private static ArrayList<GameHandler> players;
     private static int n_players;
     private static DevelopeDecks[] developedecks = new DevelopeDecks[12];
     private static LeaderDeck leaderdeck;
@@ -35,13 +34,13 @@ public class Game implements Serializable {
      * getter and setter
      * @return
      */
-    public ArrayList<ObserverGame> getPlayers() {
+    public ArrayList<GameHandler> getPlayers() {
 
         return players;
     }
 
 
-    public void setPlayers(ArrayList<ObserverGame> players) {
+    public void setPlayers(ArrayList<GameHandler> players) {
 
         Game.players = players;
     }

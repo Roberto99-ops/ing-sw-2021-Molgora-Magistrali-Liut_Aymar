@@ -1,6 +1,6 @@
 package it.polimi.ingsw.view.cli;
 
-import it.polimi.ingsw.Server.ObserverGame;
+import it.polimi.ingsw.Server.GameHandler;
 import it.polimi.ingsw.model.*;
 import org.junit.Test;
 
@@ -11,7 +11,7 @@ public class PlayerboardTest {
 
     @Test
     public void print() throws FileNotFoundException {
-        ObserverGame player = new ObserverGame();
+        GameHandler player = new GameHandler();
         player.setName("Gianfrancioschio");
         player.setTrackposition(8);
         LeaderCard card1 = new LeaderCard();
@@ -55,7 +55,7 @@ public class PlayerboardTest {
         SingleGame game = new SingleGame();
         SingleGame.getLorenzo().setNumber(10);
         for (int i = 0; i < 4; i++) {
-            ObserverGame person = new ObserverGame();
+            GameHandler person = new GameHandler();
             person.setName("RICARDOMARTINEZ");
             person.setPv(100);
             game.getPlayers().add(person);

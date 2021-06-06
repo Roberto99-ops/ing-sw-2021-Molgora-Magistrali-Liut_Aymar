@@ -1,10 +1,8 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.Server.ClientHandler;
-import it.polimi.ingsw.Server.ObservableGame;
-import it.polimi.ingsw.Server.ObservableSingleGame;
-import it.polimi.ingsw.Server.ObserverGame;
-import it.polimi.ingsw.Server.messages.PlayerMsg;
+import it.polimi.ingsw.Server.MessageGameManager;
+import it.polimi.ingsw.Server.GameHandler;
 import it.polimi.ingsw.model.FaithTrack;
 import it.polimi.ingsw.model.*;
 
@@ -25,7 +23,7 @@ public class TurnManager {
     public void main(ClientHandler client, Game game, int actualplayer) throws Exception {
         Turn turn = new Turn(client, game);
         turn.setActualplayer(game.getPlayers().get(actualplayer));
-        ObserverGame player = turn.getActualplayer();
+        GameHandler player = turn.getActualplayer();
         String reception;
 
         //se sono in single game, ogni volta che tocca a me, prendo un segnalino ed eseguo la sua azione
@@ -107,8 +105,8 @@ public class TurnManager {
         faithTrack.callVaticanReport(player, game);
         //player.updateFaithTrack(client);
 
-        ObservableGame.personalObservers(client, game.getPlayers().get(actualplayer));
-        ObservableGame.notifyAllObservers(client);
+        MessageGameManager.personalChanges(client, game.getPlayers().get(actualplayer), game);
+        MessageGameManager.generalChanges(client);
 
     }
 }

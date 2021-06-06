@@ -1,7 +1,6 @@
 package it.polimi.ingsw.Server.messages;
 
-import it.polimi.ingsw.Server.ObserverGame;
-import it.polimi.ingsw.model.ActionSignal;
+import it.polimi.ingsw.Server.GameHandler;
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.SingleGame;
@@ -9,8 +8,8 @@ import it.polimi.ingsw.model.SingleGame;
 import java.util.ArrayList;
 
 public class PlayerMsg extends NetworkMessage{
-    private ObserverGame player;
-    private ArrayList<ObserverGame> players;
+    private GameHandler player;
+    private ArrayList<GameHandler> players;
     private boolean SingleorNot = false;
     private int signal;
     private int Lorenzo;
@@ -21,7 +20,7 @@ public class PlayerMsg extends NetworkMessage{
      * @param player: data requested about the player
      * @param gamein: the game we are playing
      */
-    public PlayerMsg(ObserverGame player, Game gamein){
+    public PlayerMsg(GameHandler player, Game gamein){
         this.player = player;
         players = new ArrayList<>();
         for (int i = 0; i < gamein.getPlayers().size(); i++) {
@@ -43,7 +42,7 @@ public class PlayerMsg extends NetworkMessage{
         return player;
     }
 
-    public ArrayList<ObserverGame> getPlayers() {
+    public ArrayList<GameHandler> getPlayers() {
         return players;
     }
 
