@@ -25,7 +25,7 @@ public class PlayerboardTest {
         Random mixer = new Random();
         for (int i = 0; i < 300; i++) {
             int mix = mixer.nextInt(4);
-            player.addResourceStrongBox(resources[mix]);
+            player.getStrongBox().getStructure().addResource(1, resources[mix]);
         }
 
         ResourceStructure panel = new ResourceStructure();
