@@ -1,8 +1,8 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.Server.ClientHandler;
-import it.polimi.ingsw.Server.ObservableGame;
-import it.polimi.ingsw.Server.ObserverGame;
+import it.polimi.ingsw.Server.MessageGameManager;
+import it.polimi.ingsw.Server.GameHandler;
 import it.polimi.ingsw.model.*;
 
 import java.util.ArrayList;
@@ -60,7 +60,7 @@ public class GameManager {
         //(ma forse lo saranno su istanze diverse di gamemanager?) forse farlo static?
         //game = new Game();
 
-        ObservableGame obsG = new ObservableGame();
+        MessageGameManager obsG = new MessageGameManager();
         SingleGame singleGame = new SingleGame();
         // Game.getLeaderdeck() = new LeaderDeck();
         // leaderdeck = new LeaderDeck();
@@ -78,9 +78,9 @@ public class GameManager {
         if ((clientList.get(0).receiveMessage() == "A")) {
 
             // collegamento client-server primo giocatore
-            ObserverGame player1 = new ObserverGame();
+            GameHandler player1 = new GameHandler();
             game.getPlayers().add(player1);
-            obsG.addObserver(player1);
+            obsG.addHendlers(player1);
             clientList.get(0).sendMessage("Choose a Name");
             game.getPlayers().get(0).setName(clientList.get(0).receiveMessage());
             game.getPlayers().get(0).setNumber(1);
@@ -106,9 +106,9 @@ public class GameManager {
 
             for (int i = 1; i < Game.getN_players() ; i++) {
 
-                ObserverGame temporaryplayer = new ObserverGame();
+                GameHandler temporaryplayer = new GameHandler();
                 game.getPlayers().add(temporaryplayer);
-                obsG.addObserver(temporaryplayer);
+                obsG.addHendlers(temporaryplayer);
                 clientList.get(i).sendMessage("Choose your NAME");
                 game.getPlayers().get(i).setName(clientList.get(i).receiveMessage() );
                 game.getPlayers().get(i).setNumber(i+1);
