@@ -24,7 +24,7 @@ public class Playerboard extends PaintCards {
         drawFaithTrack(player.getTrackposition(), game);
         putString(player.getName(), playerboard, 1, 70);
         drawStorage(player.getStorage());
-        drawStrongbox(player.getStrongBox().getStructure());
+        drawStrongbox(player.getStrongBox().getStructure().getVector());
         LeaderSpace(player);
         Developementspace(player.getDSpace());
         PointsSpace(game);
@@ -224,7 +224,7 @@ public class Playerboard extends PaintCards {
      * it draws the strongbox space inside the playerboard
      * @param box: the player strongbox
      */
-    private void drawStrongbox(ResourceStructure box)
+    private void drawStrongbox(ArrayList<Character> box)
     {
         int MAX_VERT_SIZE = VERT_SIZE/4;
         int MAX_HORIZ_SIZE = HORIZ_SIZE/4;
@@ -349,13 +349,13 @@ public class Playerboard extends PaintCards {
             }
         }
 
-        //draw first minideck
+        //draw third minideck
         int minideck3Leng = DSpace.getMinideck3().getStructure().size();
-        if(minideck1Leng > 0) {
+        if(minideck3Leng > 0) {
             drawDevelopecard(DSpace.getMinideck3().getStructure().get(0), developementspace, 14, 70);
-            if(minideck1Leng > 1) {
+            if(minideck3Leng > 1) {
                 drawDevelopecard(DSpace.getMinideck3().getStructure().get(1), developementspace, 12, 70);
-                if(minideck1Leng > 2)
+                if(minideck3Leng > 2)
                     drawDevelopecard(DSpace.getMinideck3().getStructure().get(2), developementspace, 10, 70);
             }
         }
