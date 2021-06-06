@@ -55,32 +55,57 @@ public class DevelopementSpace implements Serializable {
     }
 
 
-    public void setCard(DevelopeCard structure, int choice) {
+    /**
+     * put a card into a specific minideck if possible
+     * @param card: card to put
+     * @param choice: minidick where to put
+     * @return
+     */
+    public boolean setCard(DevelopeCard card, int choice) {
         int i;
 
         if (choice == 1) {
             i = minideck1.getStructure().size();
-            if (i == 0 || (minideck1.getStructure().get(i - 1).getColour() == structure.getColour() && minideck1.getStructure().get(i - 1).getLevel() == structure.getLevel() - 1))
-                minideck1.getStructure().add(structure);
+            if (i == 0 || (minideck1.getStructure().get(i - 1).getColour() == card.getColour() && minideck1.getStructure().get(i - 1).getLevel() == card.getLevel() - 1))
+                minideck1.getStructure().add(card);
+            return true;
         }
 
 
         if (choice == 2) {
             i = minideck2.getStructure().size();
-            if (i == 0 || (minideck2.getStructure().get(i - 1).getColour() == structure.getColour() && minideck2.getStructure().get(i - 1).getLevel() == structure.getLevel() - 1))
-                minideck2.getStructure().add(structure);
+            if (i == 0 || (minideck2.getStructure().get(i - 1).getColour() == card.getColour() && minideck2.getStructure().get(i - 1).getLevel() == card.getLevel() - 1))
+                minideck2.getStructure().add(card);
+            return true;
         }
 
 
         if (choice == 3) {
             i = minideck3.getStructure().size();
-            if (i == 0 || (minideck3.getStructure().get(i - 1).getColour() == structure.getColour() && minideck3.getStructure().get(i - 1).getLevel() == structure.getLevel() - 1))
-                minideck3.getStructure().add(structure);
+            if (i == 0 || (minideck3.getStructure().get(i - 1).getColour() == card.getColour() && minideck3.getStructure().get(i - 1).getLevel() == card.getLevel() - 1))
+                minideck3.getStructure().add(card);
+            return true;
         }
-
-
+        return false;
     }
 
+    /**
+     * tell if there is already a card with that color in the DSpace
+     * @param color: color to check
+     * @return: minideck that contains the card. returns 0 if we can put it into an empty minideck. returns 4 if we have a fourth color
+     */
+    public int colorPresent(Character color)
+    {
+        if(minideck1.getStructure().size() != 0 && color.equals(minideck1.getStructure().get(0).getColour())) return 1;
+
+        if(minideck2.getStructure().size() != 0 && color.equals(minideck2.getStructure().get(0).getColour())) return 2;
+
+        if(minideck3.getStructure().size() != 0 && color.equals(minideck3.getStructure().get(0).getColour())) return 3;
+
+        if(minideck1.getStructure().size() != 0 && minideck2.getStructure().size() != 0 && minideck3.getStructure().size() != 0) return 4;
+
+        return 0;
+    }
 
     public boolean checkDeck(DevelopeDecks minideck) {
         if ((minideck.getStructure().size() == 3) && ((minideck.getStructure().get(2).getColour()) == (minideck.getStructure().get(1).getColour())) &&
