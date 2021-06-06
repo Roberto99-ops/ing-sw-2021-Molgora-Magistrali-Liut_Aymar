@@ -122,7 +122,7 @@ public class GameManager {
         while (true) {
             //3)
             //turnmanager.setActualplayer(game.getPlayers().get(actualplayer));
-            turnmanager.main(clientList.get(actualplayer), game, actualplayer, obsG);
+            turnmanager.main(clientList.get(actualplayer), game, actualplayer);
 
             //4)
             if (game.callEndgame(game.getPlayers().get(actualplayer))) {
