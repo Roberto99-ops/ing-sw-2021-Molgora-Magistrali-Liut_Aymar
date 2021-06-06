@@ -7,7 +7,11 @@ public class ActionStructure implements Serializable {
 
     private  int[] structure = {1,2,3,4,5,6,7};
     private  int AS_Counter=0;//ActionSignal_counter conta il segnalino che è stato preso (da 0 a 6 -> posti nella pila)
+    private int OLD_AS_COUNTER=0;
 
+    public int getOLD_AS_COUNTER() {
+        return OLD_AS_COUNTER;
+    }
     public  int getAS_Counter() {
         return AS_Counter;
     }
@@ -31,6 +35,7 @@ public class ActionStructure implements Serializable {
      * end of the stack
      */
     public void pickSignal(){
+        OLD_AS_COUNTER = AS_Counter;
         ActionSignal Signal = new ActionSignal();
         Signal.action(structure[AS_Counter]); //chiamo il metodo del segnalino in base al suo numero
         AS_Counter++;

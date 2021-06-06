@@ -116,7 +116,7 @@ public class ActionSignal {
 
             case 7://+1&Shuffle
                 SingleGame.getLorenzo().forwardOne();
-                SingleGame.getActionStructure().shuffleSignal();  //not tested
+                SingleGame.getActionStructure().shuffleSignal();
                 //Lorenzo.Lorenzomoves(1);
                 break;
         }

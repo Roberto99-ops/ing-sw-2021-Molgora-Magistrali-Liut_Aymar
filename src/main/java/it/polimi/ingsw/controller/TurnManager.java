@@ -28,7 +28,7 @@ public class TurnManager {
 
         //se sono in single game, ogni volta che tocca a me, prendo un segnalino ed eseguo la sua azione
         if (game.getClass().equals(SingleGame.class)) {
-            ActionSignal signal = new ActionSignal();
+            //ActionSignal signal = new ActionSignal();
             SingleGame.getActionStructure().pickSignal();
             // ObserverSingleGame.updateActionStructure(); // è giusto inserirlo qui right ????
         }
@@ -36,7 +36,6 @@ public class TurnManager {
         player.updatePlayerBoard(client, game);
 
         //1)
-        //sta roba la posso fare sempre no? indipendentemente che sia partita singola o con piu player
 
         client.sendMessage("What do you want to do?\n\t1)Shop a developement card\n\t2)Take resources at the market\n\t3)Active a production\n");
         int action = Integer.parseInt(client.receiveMessage());
