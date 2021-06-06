@@ -21,7 +21,7 @@ public class TurnManager {
      */
 
     //actualplayer è la posizione del gocatore attuale nell'array dei giocatori di game
-    public void main(ClientHandler client, Game game, int actualplayer, ObservableGame observableGame) throws Exception {
+    public void main(ClientHandler client, Game game, int actualplayer) throws Exception {
         Turn turn = new Turn(client);
         turn.setActualplayer(game.getPlayers().get(actualplayer));
         ObserverGame player = turn.getActualplayer();
@@ -101,8 +101,8 @@ public class TurnManager {
         faithTrack.callVaticanReport(player, game);
         player.updateFaithTrack(client);
 
-        observableGame.personalObservers(client, game.getPlayers().get(actualplayer));
-        observableGame.notifyAllObservers(client);
+        ObservableGame.personalObservers(client, game.getPlayers().get(actualplayer));
+        ObservableGame.notifyAllObservers(client);
 
     }
 }
