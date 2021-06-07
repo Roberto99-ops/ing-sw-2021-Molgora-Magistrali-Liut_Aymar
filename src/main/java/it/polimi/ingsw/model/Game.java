@@ -27,6 +27,7 @@ public class Game implements Serializable {
         }
         leaderdeck = new LeaderDeck();
         market = new Market();
+        winner = new Player();
     }
 
 
