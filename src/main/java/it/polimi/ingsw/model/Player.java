@@ -185,69 +185,64 @@ public class Player implements Serializable {
         //flag per sapere se non possiedo tali risorse (0) o possiedo in storage (1) o in strongbox-storage (2)
         int ableTo = 0;
 
-        ArrayList<Character> vector = new ArrayList<Character>();
-        Character[] resources = {'B', 'Y', 'G', 'P'};
-        for (int i=0; i<4; i++){
-            for(int c=0; c<vectorResources.size();c++){
-                if(vectorResources.get(c).equals(resources[i]))
-                vector.add(vectorResources.get(c));
-            }
-        }
-        for (int i=0; i<vector.size(); i++){
-            System.out.println(vector.get(i));
-        }
-
-        //la prima risorsa che considero è l'ultima della arraylist (che si suppone ordinato)
-        int i = vectorResources.size()-1;
-        char typeResource;
-
-        while (i >= 0) {
+        for (int i = 0; i < vectorResources.size(); i++) {
             int countType=0;
-            //vedo qual'è la risorsa i-esima che sto considerando
-            typeResource = vectorResources.get(i);
+            char typeResource = vectorResources.get(i);
+
             //conto quanto c'è bisogno di una determinata risorsa nel vettore dato
-            while ( i >= 0) {
-                if (vectorResources.get(i) == typeResource) countType++;
-                i--;
-            }
-            //int countType = (int) storage.getPanel().getVector().stream().count();
+            for (int j = 0; j < vectorResources.size(); j++)
+                if (vectorResources.get(i).equals(typeResource)) countType++;
+
             //una volta finito di contare le risorse dello stesso tipo
             //confronto quantità richiesta con quantità presente o in storage o in strongbox e storage
-            if (countType > storage.countTypeS(typeResource) + strongBox.countTypeSB(typeResource)) {
+            int storageCount = storage.countTypeS(typeResource);
+            int strongboxCount = strongBox.countTypeSB(typeResource);
+            if (countType > (storageCount + strongboxCount)) {
                 //risorse insufficienti
                 System.out.println("Not enough resources.");
                 return 0;
+            }
 
-            } else if (countType <= storage.countTypeS(typeResource) + strongBox.countTypeSB(typeResource)) {
+            //ableTo!=2 because if once we had ableTo=2 ->it's impossible that we have all the resources in the storage
+            if (countType <= storage.countTypeS(typeResource) && ableTo != 2) {
+                ableTo = 1;
+                System.out.println("You have the needed quantity of resources in the storage.");
+            }
+            else {
                 ableTo = 2;
-                if (countType <= storage.countTypeS(typeResource)) {
-                    ableTo = 1;
-                }
+                System.out.println("You have the needed quantity of resources in storage + strongbox");
             }
-            //ricomincio il while
-            i = i - countType;
         }
-        if (ableTo == 1) {
-            System.out.println("You have the needed quantity of resources. These will be removed from your storage");
-            //rimuovo tutte le risorse di cui ho bisogno, dallo storage
-            for(i = vectorResources.size() - 1;i>=0 ;i--){
-                removeResourceStorage(vectorResources.get(i));
-            }
 
-        } else if (ableTo == 2) {
-            System.out.println("You have the needed quantity of resources. These will be removed from your storage and strongbox");
-            //rimuovo tutte le risorse di cui ho bisogno, dallo storage
-            for(i = vectorResources.size() - 1;i>=0 ;i--) {
+        return ableTo;
+    }
+
+    /**
+     * deletes the resources i need from the storage or the strongbox
+     * @param ableTo: where i have to delete it (1->storage, 2->storage+strongbox)
+     * @param vector: vector of resources
+     */
+    public void deleteResources(int ableTo, ArrayList<Character> vector) {
+        ArrayList<Character> vectorResources = vector;
+        //removes from storage
+        if (ableTo == 1) {
+            for (int i = vectorResources.size() - 1; i >= 0; i--)
+                removeResourceStorage(vectorResources.get(i));
+            return;
+        }
+
+        //removes from storage and strongbox
+        if (ableTo == 2) {
+            for (int i = vectorResources.size() - 1; i >= 0; i--) {
                 if (removeResourceStorage(vectorResources.get(i))) {
-                    vectorResources.remove(i);//rimuovo l'elemento che viene trovato e rimosso dallo storage
+                    vectorResources.remove(i);
                 }
             }
-            //ottengo così il vettore aggiornato con le risorse da cercare nello strongbox
-            for(i= vectorResources.size()-1;i>=0;i--){
-                strongBox.getStructure().remove(vectorResources.get(i)); //elimino la risorsa voluta dallo strongbox
-            }
+            for (int i = vectorResources.size() - 1; i >= 0; i--)
+                strongBox.getStructure().getVector().remove(vectorResources.get(i));
         }
-        return 1;
+
+        return;
     }
 
     /**
@@ -270,7 +265,7 @@ public class Player implements Serializable {
     }
 
     /**
-     * this method add if possible a deelopecard to the player DSpace
+     * this method adds if possible a developecard to the player DSpace
      * @param card: card to add
      * @return: the action response
      */
@@ -330,7 +325,7 @@ public class Player implements Serializable {
         for (int c=0;c<6;c++){
             vector.add(storage.getPanel().get(c));
         }
-        //aggiungo gli elemento dello strongbox
+        //aggiungo gli elemento dell'extrapanel
         for (int c=0; c<2; c++){
             vector.add(storage.getExtrapanel().getVector().get(c));
         }
