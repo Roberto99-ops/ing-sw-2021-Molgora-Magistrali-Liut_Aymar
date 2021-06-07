@@ -217,7 +217,7 @@ public class Player implements Serializable {
             }
         }
 
-        if (ableTo == 0) System.out.println("Not enough resources for");
+        if (ableTo == 0) System.out.println("Not enough resources");
         if (ableTo == 1) System.out.println("You have the needed quantity of resources in storage");
         if (ableTo == 2) System.out.println("You have the needed quantity of resources in storage + strongbox");
         return ableTo;
