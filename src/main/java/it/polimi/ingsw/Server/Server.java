@@ -79,7 +79,7 @@ public class Server {
             return;
         }
         //...e il server si mette in ascolto.
-        // Per ogni nuova connessione stabilita, viene creato un nuovo thread di ClientHandlerù
+        // Per ogni nuova connessione stabilita, viene creato un nuovo thread di ClientHandler
         int numberofsockets=0; //serve cosicchè il primo giocatore sappia di essere il primo e crei la partita
         while (true) {
             /* accepts connections; for every connection we accept,
@@ -89,7 +89,7 @@ public class Server {
                 if(i==20) i=0;
                 try {
                     client = openSockets.get(i).accept();
-                }catch (IOException e) {}
+                } catch (IOException e) {}
                 //if (client.isConnected()) break;
             }
             //il clientHandler si occupa di gestire la connessione con il client
