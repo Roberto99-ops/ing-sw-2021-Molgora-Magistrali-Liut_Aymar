@@ -253,4 +253,52 @@ public class PlayerTest {
             assertEquals(strongbox.getStructure().get(i), player.getStrongBox().getStructure().get(i));
 
     }
+
+    @Test
+
+    public void addDevelopementCards () throws Exception   {
+
+        Player player = new Player();
+        //creo il primo minideck
+        DevelopeCard card1 = new DevelopeCard();
+        DevelopeCard card2 = new DevelopeCard();
+        DevelopeCard card3 = new DevelopeCard();
+        DevelopeCard card4 = new DevelopeCard();
+        DevelopeCard card5 = new DevelopeCard();
+        DevelopeCard card6 = new DevelopeCard();
+        DevelopeCard card7 = new DevelopeCard();
+
+
+        player.getDSpace().getMinideck1().getStructure().add(card1.setCard(4));
+        player.getDSpace().getMinideck1().getStructure().add(card2.setCard(20));
+        player.getDSpace().getMinideck2().getStructure().add(card3.setCard(14));
+
+
+        assertEquals('G',player.getDSpace().getMinideck1().getStructure().get(0).getColour());
+        assertEquals('G',player.getDSpace().getMinideck1().getStructure().get(1).getColour());
+        assertEquals('B',player.getDSpace().getMinideck2().getStructure().get(0).getColour());
+
+        assertTrue(player.addDevelopCard(card4.setCard(32)));
+        assertTrue(player.addDevelopCard(card5.setCard(1)));
+        assertTrue(player.addDevelopCard(card6.setCard(25)));
+        assertFalse(player.addDevelopCard(card7.setCard(16)));
+
+        player.getDSpace().getMinideck1().getStructure().add(card4.setCard(32));
+        player.getDSpace().getMinideck1().getStructure().add(card5.setCard(1));
+        player.getDSpace().getMinideck2().getStructure().add(card6.setCard(25));
+
+        /*
+
+        assertEquals(true ,player.getDSpace().checkDeck(player.getMinideck1()));
+        assertEquals(true ,player.getDSpace().checkDeck(player.getMinideck2()));
+        assertEquals(true ,player.getDSpace().checkDeck(player.getMinideck3()));
+
+        */
+
+    }
+
+
+
+    // test finiti
+
 }
