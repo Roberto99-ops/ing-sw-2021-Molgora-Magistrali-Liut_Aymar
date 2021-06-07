@@ -186,35 +186,42 @@ public class Player implements Serializable {
         int ableTo = 0;
 
         for (int i = 0; i < vectorResources.size(); i++) {
-            int countType=0;
+            int countType = 0;
             char typeResource = vectorResources.get(i);
 
             //conto quanto c'è bisogno di una determinata risorsa nel vettore dato
-            for (int j = 0; j < vectorResources.size(); j++)
-                if (vectorResources.get(i).equals(typeResource)) countType++;
+            for (int j = 0; j < vectorResources.size(); j++) {
+                if (vectorResources.get(j).equals(typeResource))
+                    countType++;
+            }
 
-            //una volta finito di contare le risorse dello stesso tipo
-            //confronto quantità richiesta con quantità presente o in storage o in strongbox e storage
-            int storageCount = storage.countTypeS(typeResource);
-            int strongboxCount = strongBox.countTypeSB(typeResource);
+            // y b y
+
+        //una volta finito di contare le risorse dello stesso tipo
+        //confronto quantità richiesta con quantità presente o in storage o in strongbox e storage
+        int storageCount = storage.countTypeS(typeResource);
+        int strongboxCount = strongBox.countTypeSB(typeResource);
+
             if (countType > (storageCount + strongboxCount)) {
                 //risorse insufficienti
-                System.out.println("Not enough resources.");
-                return 0;
+                ableTo = 0;
             }
 
             //ableTo!=2 because if once we had ableTo=2 ->it's impossible that we have all the resources in the storage
-            if (countType <= storage.countTypeS(typeResource) && ableTo != 2) {
+            if (countType <= storageCount && ableTo != 2) {
                 ableTo = 1;
-                System.out.println("You have the needed quantity of resources in the storage.");
             }
-            else {
+
+            if (countType <= (strongboxCount + storageCount) && !(countType <= storageCount) ) {
                 ableTo = 2;
-                System.out.println("You have the needed quantity of resources in storage + strongbox");
             }
         }
 
+        if (ableTo == 0) System.out.println("Not enough resources for");
+        if (ableTo == 1) System.out.println("You have the needed quantity of resources in storage");
+        if (ableTo == 2) System.out.println("You have the needed quantity of resources in storage + strongbox");
         return ableTo;
+
     }
 
     /**
