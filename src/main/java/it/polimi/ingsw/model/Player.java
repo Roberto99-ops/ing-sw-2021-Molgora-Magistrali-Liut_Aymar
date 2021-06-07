@@ -185,64 +185,69 @@ public class Player implements Serializable {
         //flag per sapere se non possiedo tali risorse (0) o possiedo in storage (1) o in strongbox-storage (2)
         int ableTo = 0;
 
-        for (int i = 0; i < vectorResources.size(); i++) {
+        ArrayList<Character> vector = new ArrayList<Character>();
+        Character[] resources = {'B', 'Y', 'G', 'P'};
+        for (int i=0; i<4; i++){
+            for(int c=0; c<vectorResources.size();c++){
+                if(vectorResources.get(c).equals(resources[i]))
+                vector.add(vectorResources.get(c));
+            }
+        }
+        for (int i=0; i<vector.size(); i++){
+            System.out.println(vector.get(i));
+        }
+
+        //la prima risorsa che considero è l'ultima della arraylist (che si suppone ordinato)
+        int i = vectorResources.size()-1;
+        char typeResource;
+
+        while (i >= 0) {
             int countType=0;
-            char typeResource = vectorResources.get(i);
-
+            //vedo qual'è la risorsa i-esima che sto considerando
+            typeResource = vectorResources.get(i);
             //conto quanto c'è bisogno di una determinata risorsa nel vettore dato
-            for (int j = 0; j < vectorResources.size(); j++)
-                if (vectorResources.get(i).equals(typeResource)) countType++;
-
+            while ( i >= 0) {
+                if (vectorResources.get(i) == typeResource) countType++;
+                i--;
+            }
+            //int countType = (int) storage.getPanel().getVector().stream().count();
             //una volta finito di contare le risorse dello stesso tipo
             //confronto quantità richiesta con quantità presente o in storage o in strongbox e storage
-            int storageCount = storage.countTypeS(typeResource);
-            int strongboxCount = strongBox.countTypeSB(typeResource);
-            if (countType > (storageCount + strongboxCount)) {
+            if (countType > storage.countTypeS(typeResource) + strongBox.countTypeSB(typeResource)) {
                 //risorse insufficienti
                 System.out.println("Not enough resources.");
                 return 0;
-            }
 
-            //ableTo!=2 because if once we had ableTo=2 ->it's impossible that we have all the resources in the storage
-            if (countType <= storage.countTypeS(typeResource) && ableTo != 2) {
-                ableTo = 1;
-                System.out.println("You have the needed quantity of resources in the storage.");
-            }
-            else {
+            } else if (countType <= storage.countTypeS(typeResource) + strongBox.countTypeSB(typeResource)) {
                 ableTo = 2;
-                System.out.println("You have the needed quantity of resources in storage + strongbox");
-            }
-        }
-
-        return ableTo;
-    }
-
-    /**
-     * deletes the resources i need from the srìtorage or the strongbox
-     * @param ableTo: where i have to delete it (1->storage, 2->storage+strongbox)
-     * @param vector: vector of resources
-     */
-    public void deleteResources(int ableTo, ArrayList<Character> vector) {
-        ArrayList<Character> vectorResources = vector;
-        //removes from storage
-        if (ableTo == 1) {
-            for (int i = vectorResources.size() - 1; i >= 0; i--)
-                removeResourceStorage(vectorResources.get(i));
-            return;
-        }
-
-        //removes from storage and strongbox
-        if (ableTo == 2) {
-            for (int i = vectorResources.size() - 1; i >= 0; i--) {
-                if (removeResourceStorage(vectorResources.get(i))) {
-                    vectorResources.remove(i);
+                if (countType <= storage.countTypeS(typeResource)) {
+                    ableTo = 1;
                 }
             }
-            for (int i = vectorResources.size() - 1; i >= 0; i--)
-                strongBox.getStructure().getVector().remove(vectorResources.get(i));
+            //ricomincio il while
+            i = i - countType;
         }
+        if (ableTo == 1) {
+            System.out.println("You have the needed quantity of resources. These will be removed from your storage");
+            //rimuovo tutte le risorse di cui ho bisogno, dallo storage
+            for(i = vectorResources.size() - 1;i>=0 ;i--){
+                removeResourceStorage(vectorResources.get(i));
+            }
 
-        return;
+        } else if (ableTo == 2) {
+            System.out.println("You have the needed quantity of resources. These will be removed from your storage and strongbox");
+            //rimuovo tutte le risorse di cui ho bisogno, dallo storage
+            for(i = vectorResources.size() - 1;i>=0 ;i--) {
+                if (removeResourceStorage(vectorResources.get(i))) {
+                    vectorResources.remove(i);//rimuovo l'elemento che viene trovato e rimosso dallo storage
+                }
+            }
+            //ottengo così il vettore aggiornato con le risorse da cercare nello strongbox
+            for(i= vectorResources.size()-1;i>=0;i--){
+                strongBox.getStructure().remove(vectorResources.get(i)); //elimino la risorsa voluta dallo strongbox
+            }
+        }
+        return 1;
     }
 
     /**
@@ -325,7 +330,7 @@ public class Player implements Serializable {
         for (int c=0;c<6;c++){
             vector.add(storage.getPanel().get(c));
         }
-        //aggiungo gli elemento dell'extrapanel
+        //aggiungo gli elemento dello strongbox
         for (int c=0; c<2; c++){
             vector.add(storage.getExtrapanel().getVector().get(c));
         }
@@ -383,9 +388,9 @@ public class Player implements Serializable {
         //controllo se extrapanel sia dello stesso tipo e se ha degli spazi liberi
         if (storage.getTypeExtrapanel() == resource && countExtraN > 0) {
             if (storage.getExtrapanel().getVector().get(0) == 'N') {
-                storage.getExtrapanel().set(0, resource);
+                storage.getExtrapanel().getVector().set(0, resource);
             } else if (storage.getExtrapanel().getVector().get(1) == 'N') {
-                storage.getExtrapanel().set(1, resource);
+                storage.getExtrapanel().getVector().set(1, resource);
                 return true;
             }
         } //else if (storage.getTypeExtrapanel()!=resource && countExtraN== storage.countTypeS(resource))

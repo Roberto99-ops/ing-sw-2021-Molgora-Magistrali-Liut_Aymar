@@ -10,6 +10,24 @@ public class Storage extends ArrayList<Character> implements Serializable {
     private ArrayList<Character> panel;
     private ResourceStructure extrapanel;
     private char typeExtrapanel= 'Z';  //carattere che per noi significa che il pannello extra non è attivo, non so se si può inzializzare così
+    private int counterSP=0;
+    private int counterSEP=0;
+
+    public int getCounterSP() {
+        return counterSP;
+    }
+
+    public void setCounterSP(int counterSP) {
+        this.counterSP = counterSP;
+    }
+
+    public int getCounterSEP() {
+        return counterSEP;
+    }
+
+    public void setCounterSEP(int counterSEP) {
+        this.counterSEP = counterSEP;
+    }
 
     public Storage(){
         panel = new ArrayList <Character> (List.of('N','N','N','N','N','N')); // arraylist di 6 spazi di base
@@ -51,22 +69,22 @@ public class Storage extends ArrayList<Character> implements Serializable {
 
     //metodo che conta le risorse per verificare se è possibile usarle per acquistare una carta sviluppo
 
+    //QUESTO METODO E' SBAGLIATO
     public int countTypeS(char neededRes) {
-        int i=0, counterS=0;
-            while(i!=this.panel.size()) {
-                if (this.panel.get(i).equals(neededRes))
-                    counterS++;
-                i++;
-            }
+        int count=0;
+        for (int i=0;i<6 ;i++) {
+                if (this.panel.get(i)==neededRes)
+                    count++;
+        }
+        setCounterSP(count);
 
-            i=0;
-                  while(i!=this.extrapanel.getVector().size()){
-                    if(this.extrapanel.getVector().get(i).equals(neededRes))
-                        counterS++;
-                    i++;  }
+        for (int i=0;i<2;i++){
+            if(this.extrapanel.getVector().get(i)==neededRes)
+                count++;
+        }
+        setCounterSEP(count-counterSP);
 
-
-        return counterS;
+        return count;
     }
 
     //metodo che restituisce la quantità totale di risorse nel magazzino

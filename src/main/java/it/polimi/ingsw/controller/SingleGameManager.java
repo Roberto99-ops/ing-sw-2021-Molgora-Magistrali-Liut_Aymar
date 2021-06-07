@@ -64,6 +64,14 @@ public class SingleGameManager {
 
         // player.updateActionStructure(client);
 
+        /* FOR TESTING BUYING CARDS
+        for(int i=0; i<5; i++){
+            player.getStrongBox().getStructure().add('B');
+            player.getStrongBox().getStructure().add('Y');
+            player.getStrongBox().getStructure().add('G');
+            player.getStrongBox().getStructure().add('P');
+        }*/
+
 
         while(!game.callEndgame(player)) {
             TurnManager turnManager = new TurnManager();

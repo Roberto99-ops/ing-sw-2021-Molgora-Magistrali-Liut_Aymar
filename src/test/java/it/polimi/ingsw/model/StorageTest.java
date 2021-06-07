@@ -46,5 +46,24 @@ public class StorageTest {
 
     }
 
+    @Test
+
+    public void countTypeS(){
+        Player player = new Player();
+        //creo uno storage fittizio, non importa se non rispetta le regole del gioco
+        player.getStorage().getPanel().set(0,'B');
+        player.getStorage().getPanel().set(1,'Y');
+        player.getStorage().getPanel().set(2,'B');
+        player.getStorage().getPanel().set(3,'G');
+        player.getStorage().getPanel().set(4,'P');
+        player.getStorage().getPanel().set(5,'G');
+        player.getStorage().getExtrapanel().getVector().set(0,'P');
+        player.getStorage().getExtrapanel().getVector().set(1,'P');
+
+
+        assertEquals(2,player.getStorage().countTypeS('B'));
+        assertEquals(player.getStorage().countTypeS('G'), player.getStorage().countTypeS('P')-1);
+
+    }
 }
 
