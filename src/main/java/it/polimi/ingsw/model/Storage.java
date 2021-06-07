@@ -69,7 +69,6 @@ public class Storage extends ArrayList<Character> implements Serializable {
 
     //metodo che conta le risorse per verificare se è possibile usarle per acquistare una carta sviluppo
 
-    //QUESTO METODO E' SBAGLIATO
     public int countTypeS(char neededRes) {
         int count=0;
         for (int i=0;i<6 ;i++) {
