@@ -75,7 +75,7 @@ public class Turn implements Serializable {
 
     public void shopCard() throws Exception {
         DevelopeCard card;
-        ResourceStructure newcost = new ResourceStructure();
+        ResourceStructure cost = new ResourceStructure();
         DevelopeDecks[] gameDeck = new DevelopeDecks[12];
         for (int i = 0; i < 12; i++) {
             gameDeck[i] = Game.getDevelopedecks(i);
@@ -83,51 +83,33 @@ public class Turn implements Serializable {
 
         DevelopeDeckMsg msg = new DevelopeDeckMsg(gameDeck);
         client.sendMessage(msg);
-        client.sendMessage("Choose the number of the card you want to buy");
+        client.sendMessage("Choose the number of the card you want to buy ");
         String next = client.receiveMessage();
         int cardNum = Integer.parseInt(next);
         card = gameDeck[cardNum].getStructure().get(0);
-
+        cost.setVector(card.getCost().getVector());
 
         if (this.actualplayer.getLeadercards().getStructure().get(0).getSkill() == "PriceSkill" && actualplayer.getSkill1() == 1)
-            newcost = this.actualplayer.getLeadercards().getStructure().get(0).changePriceSkill(card);
+            cost = this.actualplayer.getLeadercards().getStructure().get(0).changePriceSkill(card);
         if (this.actualplayer.getLeadercards().getStructure().get(1).getSkill() == "PriceSkill" && actualplayer.getSkill2() == 1)
-            newcost = this.actualplayer.getLeadercards().getStructure().get(1).changePriceSkill(card);
+            cost = this.actualplayer.getLeadercards().getStructure().get(1).changePriceSkill(card);
 
-        //se le risorse presenti in Storage e SB sono sufficienti allora le risorse richieste le elimino e attivo la produzione
-        //IDEA: controllare quante risorse di un tipo si necessitano per comprare. Ex: W W Y.
-        //      Prima controllo se ho 2 o + W. Se ce le ho, passo a controllare se ho 1 o + Y
-        //ex. if (newcost<=actualplayer.getStorage().countTypeS()+actualplayer.getStrongBox()...)
-
-        if (this.actualplayer.checkResources(newcost)==0)
+        //here the server checks if the player own enough resources and, if it is, where
+        int check = actualplayer.checkResources(cost.getVector());
+        if (check == 0)
         {
-            client.sendMessage("you don't own enough resources(press any key)");
+            client.sendMessage("You don't own enough resources(press enter)");
             client.receiveMessage();
             return;
         }
 
-        if (this.actualplayer.checkResources(newcost)==1)
-        {
-            for(int i=0; i<newcost.getVector().size(); i++)
-                this.actualplayer.addResourceStorage(newcost.getVector().get(i));
-        }
 
-        if(this.actualplayer.checkResources(newcost)==2)
-        {
-            for(int i=0; i<newcost.getVector().size(); i++) {
-
-                if (this.actualplayer.getStorage().getPanel().contains(newcost.getVector().get(i)))
-                    this.actualplayer.removeResourceStorage(newcost.getVector().get(i));
-                else
-                    this.actualplayer.getStrongBox().deleteResource(newcost.getVector().get(i));
-            }
-        }
-
-        //add the developecard if possible
+        //add the developecard if possible and remove the cost resources from the player
         if(actualplayer.addDevelopCard(card))
         {
             gameDeck[cardNum].getStructure().remove(0);
             Game.getDevelopedecks(cardNum).getStructure().remove(0);
+            actualplayer.deleteResources(check, cost.getVector());
             msg = new DevelopeDeckMsg(gameDeck);
             client.sendMessage(msg);
             client.sendMessage("these are the new developedecks(press any key)");
