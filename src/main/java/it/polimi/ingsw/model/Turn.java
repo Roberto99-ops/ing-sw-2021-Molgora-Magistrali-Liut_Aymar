@@ -96,30 +96,35 @@ public class Turn implements Serializable {
 
         //here the server checks if the player own enough resources and, if it is, where
         int check = actualplayer.checkResources(cost.getVector());
+
         if (check == 0)
         {
-            client.sendMessage("You don't own enough resources(press enter)");
+            client.sendMessage("You don't own enough resources( press enter )");
             client.receiveMessage();
             return;
         }
 
 
         //add the developecard if possible and remove the cost resources from the player
-        if(actualplayer.addDevelopCard(card))
+        if(actualplayer.addDevelopCard(card) && (check == 1 || check == 2) )
+
         {
+
             gameDeck[cardNum].getStructure().remove(0);
             Game.getDevelopedecks(cardNum).getStructure().remove(0);
             actualplayer.deleteResources(check, cost.getVector());
             msg = new DevelopeDeckMsg(gameDeck);
             client.sendMessage(msg);
-            client.sendMessage("these are the new developedecks(press any key)");
+            client.sendMessage("these are the new developedecks( press any key )");
             client.receiveMessage();
             return;
+
         }
 
-        client.sendMessage("you can't buy this card(press any key)");
+        client.sendMessage("you can't buy this card( press any key )");
         client.receiveMessage();
         return;
+
     }
 
     /**
