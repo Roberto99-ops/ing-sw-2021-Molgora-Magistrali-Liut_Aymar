@@ -425,8 +425,10 @@ public class Player implements Serializable {
             } else if ((storage.getPanel().get(3) == 'N') && (storage.getPanel().get(4) == 'N') && (storage.getPanel().get(5) == 'N')) {
                 i = 3;
             }
-            storage.getPanel().set(i, resource); //aggiungo la risorsa nel primo piano (i==0) o nel secondo (i==1) o nel
-            // terzo (i==3)
+            if(i < 4) //this if is here to avoid the case which we have a fourth type of resource, so is not contained in the storage yet, but we don't have to put it inside
+                storage.getPanel().set(i, resource); //aggiungo la risorsa nel primo piano (i==0) o nel secondo (i==1) o nel terzo (i==3)
+            else
+                System.out.println(resource + " deleted. It can't be put in the storage");
             return true;
         }
         //conto il numero di N in extrapanel
