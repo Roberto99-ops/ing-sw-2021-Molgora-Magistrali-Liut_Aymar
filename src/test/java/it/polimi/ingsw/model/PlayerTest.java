@@ -38,17 +38,44 @@ public class PlayerTest {
         player.getStorage().getPanel().set(5,'Y');
         player.getStorage().getExtrapanel().getVector().set(0,'G');
         player.getStorage().getExtrapanel().getVector().set(1,'G');
+
         //inizializzo strongbox
-        player.getStrongBox().getStructure().getVector().add('N');
-        //mi viene dato un arraylist di risorse desiderate
-        ArrayList<Character> vector = new ArrayList<Character>();
-        vector.add('Y');
-        vector.add('B');
-        vector.add('Y');
-        assertEquals(1,player.checkResources(vector));
-        assertTrue(player.getStorage().getPanel().get(2)=='N');
-        assertTrue(player.getStorage().getPanel().get(4)=='N');
-        assertTrue(player.getStorage().getPanel().get(5)=='N');
+
+        player.getStrongBox().getStructure().getVector().add('B');
+        player.getStrongBox().getStructure().getVector().add('B');
+        player.getStrongBox().getStructure().getVector().add('B');
+        player.getStrongBox().getStructure().getVector().add('G');
+        player.getStrongBox().getStructure().getVector().add('G');
+
+        //VECTOR 1
+
+        ArrayList<Character> vector0 = new ArrayList<Character>();
+        vector0.add('B');
+        vector0.add('B');
+        vector0.add('B');
+        vector0.add('B');
+        vector0.add('B');
+        vector0.add('B');
+        assertEquals(0,player.checkResources(vector0));
+
+        ArrayList<Character> vector1= new ArrayList<Character>();
+        vector1.add('Y');
+        vector1.add('B');
+        vector1.add('Y');
+        assertEquals(1,player.checkResources(vector1));
+
+        ArrayList<Character> vector2 = new ArrayList<Character>();
+        vector2.add('Y');
+        vector2.add('B');
+        vector2.add('B');
+        vector2.add('B');
+        vector2.add('Y');
+        assertEquals(2,player.checkResources(vector2));
+
+
+        //assertTrue(player.getStorage().getPanel().get(2)=='N');
+        //assertTrue(player.getStorage().getPanel().get(4)=='N');
+        //assertTrue(player.getStorage().getPanel().get(5)=='N');
 
     }
 
