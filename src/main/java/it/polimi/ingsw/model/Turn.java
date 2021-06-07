@@ -98,8 +98,9 @@ public class Turn implements Serializable {
         int check = actualplayer.checkResources(cost.getVector());
 
         if (check == 0)
+
         {
-            client.sendMessage("You don't own enough resources( press enter )");
+            client.sendMessage("You don't own enough resources ( press enter )");
             client.receiveMessage();
             return;
         }
@@ -115,6 +116,7 @@ public class Turn implements Serializable {
             actualplayer.deleteResources(check, cost.getVector());
             msg = new DevelopeDeckMsg(gameDeck);
             client.sendMessage(msg);
+            // actualplayer.updateDevelopementDecks(client);
             client.sendMessage("these are the new developedecks( press any key )");
             client.receiveMessage();
             return;
