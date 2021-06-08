@@ -7,7 +7,7 @@ import it.polimi.ingsw.model.DevelopeDecks;
  */
 public class DevelopeDecksView extends PaintCards {
     private final int VERT_SIZE = 40;
-    private final int HORIZ_SIZE = 66;
+    private final int HORIZ_SIZE = 77;
     private String [][] space;
 
     public DevelopeDecksView(DevelopeDecks[] decks)
@@ -44,12 +44,12 @@ public class DevelopeDecksView extends PaintCards {
 
     private void putIndicators()
     {
-        space[VERT_SIZE-10][HORIZ_SIZE-1] = "0";
-        space[VERT_SIZE-22][HORIZ_SIZE-1] = "4";
-        space[VERT_SIZE-34][HORIZ_SIZE-1] = "8";
-        space[VERT_SIZE-3][HORIZ_SIZE-27] = "1";
-        space[VERT_SIZE-3][HORIZ_SIZE-42] = "2";
-        space[VERT_SIZE-3][HORIZ_SIZE-59] = "3";
+        putString("<-- 3 2 1 0", space, VERT_SIZE-10, HORIZ_SIZE-13);
+        putString("<-- 7 6 5 4", space, VERT_SIZE-22, HORIZ_SIZE-13);
+        putString("<-- 11 10 9 8", space, VERT_SIZE-34, HORIZ_SIZE-13);
+
+        //space[VERT_SIZE-22][HORIZ_SIZE-1] = "4";
+        //space[VERT_SIZE-34][HORIZ_SIZE-1] = "8";
     }
 
     public void print()
