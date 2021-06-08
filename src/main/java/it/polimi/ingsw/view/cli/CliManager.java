@@ -88,8 +88,8 @@ public class CliManager {
         /**
          * in case we receive a DDeck message we update it and print.
          */
-        if(msg.getClass().equals(DevelopeDeckMsg.class)) {
-            DevelopeDeckMsg DDeckMsg = (DevelopeDeckMsg) msg;
+        if(msg.getClass().equals(DevelopeDecksMsg.class)) {
+            DevelopeDecksMsg DDeckMsg = (DevelopeDecksMsg) msg;
             DDecks = DDeckMsg.getDecks();
             DevelopeDecksView DDecksView = new DevelopeDecksView(DDecks);
             DDecksView.print();

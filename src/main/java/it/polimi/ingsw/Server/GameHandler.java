@@ -44,11 +44,11 @@ public class GameHandler extends Player {
 
     }
 
-    public void updateDevelDeck(ClientHandler clh) throws IOException {
+  /*  public void updateDevelDeck(ClientHandler clh) throws IOException {
         DevelopeDecks playercards = clh.getPlayer().getTopCardsOnBoard();
         DevelopeCardsMsg msg = new DevelopeCardsMsg(playercards);
         clh.sendMessage(msg);
-    }
+    }*/
 
 
     public void updateLeaderDeck(ClientHandler clh) throws IOException {
