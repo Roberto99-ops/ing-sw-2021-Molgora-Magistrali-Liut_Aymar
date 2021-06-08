@@ -110,7 +110,7 @@ public class TurnManager {
                 }
 
                 //in case we have done only 0 or 1 leaderactions during our turn, we can do another one at the end of the turn
-                if(leaderaction<2) {
+                if(leaderaction<2 && (action == 1 || action == 2 || action == 3)) {
                     client.sendMessage("Do you want to do a Leader action? (yes/no) ");
                     reception = client.receiveMessage();
                     if(reception.equals("yes")) additionalAction = true;
@@ -118,15 +118,18 @@ public class TurnManager {
 
                 //we activate a leader card if possible
                 if ((action == 4 && leaderaction < 2) || additionalAction) {
-                    leaderaction++;
                     client.sendMessage("Do you want to remove a card or to activate one? (remove/activate) ");
                     String choice = client.receiveMessage();
 
-                    if(choice.equals("remove"))
+                    if(choice.equals("remove")) {
                         turn.removeLeader();
+                        leaderaction++;
+                    }
 
-                    if(choice.equals("activate"))
+                    if(choice.equals("activate")) {
                         turn.activateLeader();
+                        leaderaction++;
+                    }
 
                     player.updatePlayerBoard(client, game);
                 }
@@ -134,7 +137,7 @@ public class TurnManager {
             } catch (IOException e) {
                 System.out.println(e);
             }
-        }while(action != 1 || action != 2 || action != 3);
+        }while(action != 1 && action != 2 && action != 3);
         //Ad ogni turno, effettuo il controllo del Vatican Report e
         // notifico tutti gli observer dei cambiamenti avvenuti durante il turno
 

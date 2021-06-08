@@ -93,9 +93,9 @@ public class Turn implements Serializable {
         card = gameDeck[cardNum].getStructure().get(0);
         cost.setVector(card.getCost().getVector());
 
-        if (this.actualplayer.getLeadercards().getStructure().get(0).getSkill() == "PriceSkill" && actualplayer.getSkill1() == 1)
+        if (actualplayer.getSkill1() == 1 && this.actualplayer.getLeadercards().getStructure().get(0).getSkill() == "PriceSkill")
             cost = this.actualplayer.getLeadercards().getStructure().get(0).changePriceSkill(card);
-        if (this.actualplayer.getLeadercards().getStructure().get(1).getSkill() == "PriceSkill" && actualplayer.getSkill2() == 1)
+        if (actualplayer.getSkill2() == 1 && this.actualplayer.getLeadercards().getStructure().get(1).getSkill() == "PriceSkill" )
             cost = this.actualplayer.getLeadercards().getStructure().get(1).changePriceSkill(card);
 
         //here the server checks if the player owns enough resources and, if it is, where
@@ -267,7 +267,7 @@ public class Turn implements Serializable {
      * @throws ClassNotFoundException
      */
     public void removeLeader() throws IOException, ClassNotFoundException {
-        client.sendMessage("Which card do you want to activate?(from up to down 0 1. enter=none) ");
+        client.sendMessage("Which card do you want to remove?(from up to down 0 1. enter=none) ");
         String choice = client.receiveMessage();
         LeaderDeck deck = actualplayer.getLeadercards();
 
@@ -277,6 +277,8 @@ public class Turn implements Serializable {
             if(deck.getStructure().size() > num) {
                 actualplayer.getLeadercards().getStructure().remove(num);
                 actualplayer.increaseTrackposition();
+                if(num == 0)    actualplayer.setSkill1(0);
+                if(num == 1)    actualplayer.setSkill2(0);
             }
         }
     }
