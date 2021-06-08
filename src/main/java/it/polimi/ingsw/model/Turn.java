@@ -107,7 +107,7 @@ public class Turn implements Serializable {
 
 
         //add the developecard if possible and remove the cost resources from the player
-        if(actualplayer.addDevelopCard(card) && (check == 1 || check == 2) )
+        if(actualplayer.addDevelopCard(card))
 
         {
 

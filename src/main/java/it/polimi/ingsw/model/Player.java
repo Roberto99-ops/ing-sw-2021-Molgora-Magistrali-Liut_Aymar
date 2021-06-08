@@ -186,42 +186,35 @@ public class Player implements Serializable {
         int ableTo = 0;
 
         for (int i = 0; i < vectorResources.size(); i++) {
-            int countType = 0;
+            int countType=0;
             char typeResource = vectorResources.get(i);
 
             //conto quanto c'è bisogno di una determinata risorsa nel vettore dato
-            for (int j = 0; j < vectorResources.size(); j++) {
-                if (vectorResources.get(j).equals(typeResource))
-                    countType++;
-            }
+            for (int j = 0; j < vectorResources.size(); j++)
+                if (vectorResources.get(i).equals(typeResource)) countType++;
 
-            // y b y
-
-        //una volta finito di contare le risorse dello stesso tipo
-        //confronto quantità richiesta con quantità presente o in storage o in strongbox e storage
-        int storageCount = storage.countTypeS(typeResource);
-        int strongboxCount = strongBox.countTypeSB(typeResource);
-
+            //una volta finito di contare le risorse dello stesso tipo
+            //confronto quantità richiesta con quantità presente o in storage o in strongbox e storage
+            int storageCount = storage.countTypeS(typeResource);
+            int strongboxCount = strongBox.countTypeSB(typeResource);
             if (countType > (storageCount + strongboxCount)) {
                 //risorse insufficienti
-                ableTo = 0;
+                System.out.println("Not enough resources.");
+                return 0;
             }
 
             //ableTo!=2 because if once we had ableTo=2 ->it's impossible that we have all the resources in the storage
-            if (countType <= storageCount && ableTo != 2) {
+            if (countType <= storage.countTypeS(typeResource) && ableTo != 2) {
                 ableTo = 1;
+                System.out.println("You have the needed quantity of resources in the storage.");
             }
-
-            if (countType <= (strongboxCount + storageCount) && !(countType <= storageCount) ) {
+            else {
                 ableTo = 2;
+                System.out.println("You have the needed quantity of resources in storage + strongbox");
             }
         }
 
-        if (ableTo == 0) System.out.println("Not enough resources");
-        if (ableTo == 1) System.out.println("You have the needed quantity of resources in storage");
-        if (ableTo == 2) System.out.println("You have the needed quantity of resources in storage + strongbox");
         return ableTo;
-
     }
 
     /**
@@ -371,19 +364,14 @@ public class Player implements Serializable {
      * @param resource : the resource the player will put in Storage
      */
     public boolean addResourceStorage(char resource) {
-        /*IDEA: scelgo una risorsa e questa , che si trova dentro il resourcestructure,
-        va inserita dentro il magazzino
+        /*IDEA: scelgo una risorsa e questa , che si trova dentro il resourcestructure, va inserita dentro il magazzino
         (se viene dal mercato)
         */
         //caso in cui il magazzino sia pieno (sia extrapanel sia panel)
-
-
         if (storage.countTypeS('N')==0) {
-            storage.getExtrapanel().getVector().add(resource);
             System.out.println("No more space available in Storage.");
             return false;
         }
-
 
         //caso in cui il magazzino abbia uno o + spazi vuoti
 
@@ -405,39 +393,29 @@ public class Player implements Serializable {
 
         //controllo panel:
         //-se c'è già una presente vedo se aggiungerne un'altra
-
         if (storage.getPanel().contains(resource)) {
             while (storage.getPanel().get(i) != resource && i >= 0) {
                 i--;
             }
-
             if (i == 0 || i == 2 || i == 5) {
                 // i==0 : una risorsa di quel tipo presente in cima -> elimino la risorsa
                 // i==2 : il secondo piano ha risorse di quel tipo -> elimino la risorsa
                 // i==5 : il terzo piano ha risorse di quel tipo -> elimino la risorsa
-                System.out.println(resource + "deleted. It already exists");
+                System.out.println(resource + " deleted. It already exists");
             }
-
             // in tutti gli altri casi in cui un posto nei piani è libero
             switch (i) {
                 case 1:
-                    storage.getExtrapanel().remove('N');
-                    storage.getExtrapanel().add(storage.getPanel().get(2));
                     storage.getPanel().set(2, resource); //posto i==2 ora occupato
                 break;
                 case 3:
-                    storage.getExtrapanel().remove('N');
-                    storage.getExtrapanel().add(storage.getPanel().get(4));
                     storage.getPanel().set(4, resource); //posto i==4 ora occupato
                 break;
                 case 4:
-                    storage.getExtrapanel().remove('N');
-                    storage.getExtrapanel().add(storage.getPanel().get(5));
                     storage.getPanel().set(5, resource); //posto i==5 ora occupato
                 break;
             }
             return true;
-
         } else {
             //se la risorsa non c'è:
             if (storage.getPanel().get(0) == 'N') {
@@ -447,7 +425,6 @@ public class Player implements Serializable {
             } else if ((storage.getPanel().get(3) == 'N') && (storage.getPanel().get(4) == 'N') && (storage.getPanel().get(5) == 'N')) {
                 i = 3;
             }
-
             if(i < 4) //this if is here to avoid the case which we have a fourth type of resource, so is not contained in the storage yet, but we don't have to put it inside
                 storage.getPanel().set(i, resource); //aggiungo la risorsa nel primo piano (i==0) o nel secondo (i==1) o nel terzo (i==3)
             else
@@ -457,9 +434,6 @@ public class Player implements Serializable {
         //conto il numero di N in extrapanel
 
     }
-
-
-
 
     /**
      * Adds a single specified resource inside the StrongBox
@@ -481,7 +455,7 @@ public class Player implements Serializable {
      //* Counts all the available resources in Storage and in StrongBox
     // */
     /*
-    public void TotAvailableResources () {
+    public void TotAvailableResources (){
         int tot=0;
         tot+= storage.getTotResourceStorage(); //registro risorse nel magazzino
         tot+= SBox.getTotResourceSB();//registro risorse nel SB
