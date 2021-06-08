@@ -11,11 +11,11 @@ import java.util.ArrayList;
  * Every element of the array is the position of that card into the json file.
  */
 
-public class DevelopeDeckMsg extends NetworkMessage {
+public class DevelopeDecksMsg extends NetworkMessage {
 
     private DevelopeDecks[] developeDecks;
 
-    public DevelopeDeckMsg(DevelopeDecks[] decks)
+    public DevelopeDecksMsg(DevelopeDecks[] decks)
     {
         developeDecks = new DevelopeDecks[12];
         for (int i = 0; i < 12; i++) {
