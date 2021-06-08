@@ -140,15 +140,6 @@ public class Player implements Serializable {
         this.minideck3 = minideck3;
     }
 
-    private DevelopeCard minideck1Top;
-    private DevelopeCard minideck2Top;
-    private DevelopeCard minideck3Top;
-    private DevelopeDecks TopCardsOnBoard;
-
-    public DevelopeDecks getTopCardsOnBoard() {
-        return TopCardsOnBoard;
-    }
-
     private int developementquantity;
     public int getDevelopementquantity() {
         return developementquantity;
@@ -246,22 +237,36 @@ public class Player implements Serializable {
     }
 
     /**
-     * Gets the first card of each minideck in the DevelopementSpace
+     * Gets card on the top of each minideck in the DevelopementSpace
      * @return arraylist of minidecks' topcards
      */
     //deve "intreccarsi" con la plancia in modo da restituire
     //la lista delle carte sviluppo in cima ai mazzetti, forse servono solo quelli
     //della prima fila in quanto la produzioni si fanno solo
     //con le carte in cima ai mazzetti
-    public DevelopeDecks getDevelopecards() throws Exception {
-        minideck1Top=DSpace.getMinideck1().getStructure().get(0);
-        TopCardsOnBoard.getStructure().add(minideck1Top);
-        minideck2Top=DSpace.getMinideck2().getStructure().get(0);
-        TopCardsOnBoard.getStructure().add(minideck2Top);
-        minideck3Top=DSpace.getMinideck3().getStructure().get(0);
-        TopCardsOnBoard.getStructure().add(minideck3Top);
-        //ho creato un arraylist con le carte in cima ai minideck
-        return TopCardsOnBoard ;//ritorna l'arraylist;
+    public DevelopeDecks getTopCards() throws Exception {
+        DevelopeDecks TopCardsOnBoard = new DevelopeDecks();
+        DevelopeCard card;
+        int size1 = DSpace.getMinideck1().getStructure().size();
+        int size2 = DSpace.getMinideck2().getStructure().size();
+        int size3 = DSpace.getMinideck3().getStructure().size();
+
+        if(size1 > 0) {
+            card = DSpace.getMinideck1().getStructure().get(size1-1);
+            TopCardsOnBoard.getStructure().add(card);
+        }
+
+        if(size2 > 0) {
+            card = DSpace.getMinideck2().getStructure().get(size2-1);
+            TopCardsOnBoard.getStructure().add(card);
+        }
+
+        if(size3 > 0) {
+            card = DSpace.getMinideck3().getStructure().get(size3-1);
+            TopCardsOnBoard.getStructure().add(card);
+        }
+
+        return TopCardsOnBoard ;
     }
 
     /**
