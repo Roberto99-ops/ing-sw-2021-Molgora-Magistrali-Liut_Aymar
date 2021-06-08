@@ -215,15 +215,22 @@ public class Turn implements Serializable {
                     client.sendMessage("You don't own enough resources. (press enter)");
                     client.receiveMessage();
                 }
-                else
+                else {
                     actualplayer.setSkill1(1);
+                    if(card.getSkill().equals("StorageSkill"))
+                        actualplayer.getStorage().setTypeExtrapanel(card.getInputskill());
+                }
             }
 
             //the leadercard cost is in terms of developecards
             else {
                 cost = card.getPriceC();
                 int level = card.getCardLevel();
-                if(actualplayer.checkCards(level, cost)) actualplayer.setSkill1(1);
+                if(actualplayer.checkCards(level, cost)){
+                    actualplayer.setSkill1(1);
+                    if(card.getSkill().equals("StorageSkill"))
+                        actualplayer.getStorage().setTypeExtrapanel(card.getInputskill());
+                }
                 else {
                     client.sendMessage("You don't own enough Developecards. ( press enter )");
                     client.receiveMessage();
@@ -243,15 +250,22 @@ public class Turn implements Serializable {
                     client.sendMessage("You don't own enough resources. (press enter)");
                     client.receiveMessage();
                 }
-                else
+                else {
                     actualplayer.setSkill2(1);
+                    if(card.getSkill().equals("StorageSkill"))
+                        actualplayer.getStorage().setTypeExtrapanel(card.getInputskill());
+                }
             }
 
             //the leadercard cost is in terms of developecards
             else {
                 cost = card.getPriceC();
                 int level = card.getCardLevel();
-                if(actualplayer.checkCards(level, cost)) actualplayer.setSkill2(1);
+                if(actualplayer.checkCards(level, cost)) {
+                    actualplayer.setSkill2(1);
+                    if(card.getSkill().equals("StorageSkill"))
+                        actualplayer.getStorage().setTypeExtrapanel(card.getInputskill());
+                }
                 else {
                     client.sendMessage("You don't own enough Developecards. ( press enter )");
                     client.receiveMessage();
@@ -275,10 +289,17 @@ public class Turn implements Serializable {
         {
             int num = Integer.parseInt(choice);
             if(deck.getStructure().size() > num) {
+                LeaderCard card = actualplayer.getLeadercards().getStructure().get(num);
                 actualplayer.getLeadercards().getStructure().remove(num);
                 actualplayer.increaseTrackposition();
                 if(num == 0)    actualplayer.setSkill1(0);
                 if(num == 1)    actualplayer.setSkill2(0);
+                if(card.getSkill().equals("StorageSkill")) {
+                    actualplayer.getStorage().setTypeExtrapanel('Z');
+                    ResourceStructure empty = new ResourceStructure();
+                    empty.addResource(2, 'N');
+                    actualplayer.getStorage().setExtrapanel(empty);
+                }
             }
         }
     }
