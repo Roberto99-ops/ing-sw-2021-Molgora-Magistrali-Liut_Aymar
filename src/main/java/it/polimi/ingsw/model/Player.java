@@ -191,7 +191,7 @@ public class Player implements Serializable {
 
             //conto quanto c'è bisogno di una determinata risorsa nel vettore dato
             for (int j = 0; j < vectorResources.size(); j++)
-                if (vectorResources.get(i).equals(typeResource)) countType++;
+                if (vectorResources.get(j).equals(typeResource)) countType++;
 
             //una volta finito di contare le risorse dello stesso tipo
             //confronto quantità richiesta con quantità presente o in storage o in strongbox e storage
@@ -204,7 +204,7 @@ public class Player implements Serializable {
             }
 
             //ableTo!=2 because if once we had ableTo=2 ->it's impossible that we have all the resources in the storage
-            if (countType <= storage.countTypeS(typeResource) && ableTo != 2) {
+            if (countType <= storageCount && ableTo != 2) {
                 ableTo = 1;
                 System.out.println("You have the needed quantity of resources in the storage.");
             }
