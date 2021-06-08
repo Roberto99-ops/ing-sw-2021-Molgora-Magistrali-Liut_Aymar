@@ -5,8 +5,12 @@ import it.polimi.ingsw.Server.MessageGameManager;
 import it.polimi.ingsw.Server.GameHandler;
 import it.polimi.ingsw.model.*;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+// import javax.swing.Timer;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -48,6 +52,44 @@ public class GameManager {
     private static int actualturn = 0;
     private static SingleGameManager singleGameManager;
 
+    private static Timer timer = new Timer();
+
+            /* metodo 1 con javax (60000, new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            System.out.println("rbjfb");
+
+            while (true) {
+
+                System.out.println("rbjfb");
+
+                if (clientList.size() == 4)
+                    break;
+
+            }
+        }
+    });
+    +/
+
+             */
+
+     /* metodo 2 con util
+     private static TimerTask timertask = new TimerTask() {
+
+        @Override
+        public void run() {
+            while (true) {
+
+                System.out.println("rbjfb");
+
+                if (clientList.size() == 4)
+                    break;
+
+            }
+        }
+    };
+ */
 
 
     public GameManager(ClientHandler temporary, GameHandler player) {
@@ -73,26 +115,18 @@ public class GameManager {
         // il timer serve per mettere in attesa i vari giocatori fino a che scade
         // e si inizia a giocare con i giocatori connessi (max 4)
 
-        Timer timer = new Timer();
-
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-
-                while (true) {
-                    if (clientList.size() == 4)
-                        break;
-                }
-            }
-        }, 0,1*60*1000);
+        // timer.start();
+        // timer.schedule;
 
         // se nessuno si collega entro un minuto parte singlegame del primo giocatore che si è collegato
 
+        /*
         if (clientList.size() == 1)
+
             clientList.get(0).sendMessage("Nobody is connected with you\nStart a Single Game");
             singleGameManager.main();
 
-
+*/
 
         while (actualturn < 4) {
 
