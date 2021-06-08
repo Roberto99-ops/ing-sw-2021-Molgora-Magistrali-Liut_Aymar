@@ -21,7 +21,10 @@ public class Turn implements Serializable {
         aStructure = new ActionStructure();
         signal = new ActionSignal();
         client = clientin;
-        actualplayer = client.getPlayer();
+        if(gamein.getClass().equals(SingleGame.class))
+            actualplayer = client.getSinglePlayer();
+        else
+            actualplayer = client.getPlayer();
         game = gamein;
     }
 
