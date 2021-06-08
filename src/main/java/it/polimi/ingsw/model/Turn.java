@@ -191,6 +191,12 @@ public class Turn implements Serializable {
 
     }
 
+
+    /**
+     * this method implements the activation of a leadercard
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     public void activateLeader() throws IOException, ClassNotFoundException {
 
         client.sendMessage("Which card do you want to activate?(from up to down 0 1. enter=none) ");
@@ -250,6 +256,27 @@ public class Turn implements Serializable {
                     client.sendMessage("You don't own enough Developecards. ( press enter )");
                     client.receiveMessage();
                 }
+            }
+        }
+    }
+
+
+    /**
+     * this method allow to the client to remove a leadercard from his leaderboard
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
+    public void removeLeader() throws IOException, ClassNotFoundException {
+        client.sendMessage("Which card do you want to activate?(from up to down 0 1. enter=none) ");
+        String choice = client.receiveMessage();
+        LeaderDeck deck = actualplayer.getLeadercards();
+
+        if(!choice.equals(""))
+        {
+            int num = Integer.parseInt(choice);
+            if(deck.getStructure().size() > num) {
+                actualplayer.getLeadercards().getStructure().remove(num);
+                actualplayer.increaseTrackposition();
             }
         }
     }
