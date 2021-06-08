@@ -6,6 +6,7 @@ import it.polimi.ingsw.Server.messages.MarketMsg;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 
 public class Turn implements Serializable {
@@ -188,6 +189,69 @@ public class Turn implements Serializable {
 
         return;
 
+    }
+
+    public void activateLeader() throws IOException, ClassNotFoundException {
+
+        client.sendMessage("Which card do you want to activate?(from up to down 0 1. enter=none) ");
+        String choice = client.receiveMessage();
+
+        //player choose first card
+        if (choice.equals("0")) {
+            LeaderCard card = actualplayer.getLeadercards().getStructure().get(0);
+            ArrayList<Character> cost;
+
+            //the leadercard cost is in terms of resources
+            if (card.getPriceR().getVector().size() != 0) {
+                cost = card.getPriceR().getVector();
+                int check = actualplayer.checkResources(cost);
+                if (check == 0) {
+                    client.sendMessage("You don't own enough resources. (press enter)");
+                    client.receiveMessage();
+                }
+                else
+                    actualplayer.setSkill1(1);
+            }
+
+            //the leadercard cost is in terms of developecards
+            else {
+                cost = card.getPriceC();
+                int level = card.getCardLevel();
+                if(actualplayer.checkCards(level, cost)) actualplayer.setSkill1(1);
+                else {
+                    client.sendMessage("You don't own enough Developecards. ( press enter )");
+                    client.receiveMessage();
+                }
+            }
+        }
+
+        if (choice.equals("1")) {
+            LeaderCard card = actualplayer.getLeadercards().getStructure().get(1);
+            ArrayList<Character> cost;
+
+            //the leadercard cost is in terms of resources
+            if (card.getPriceR().getVector().size() != 0) {
+                cost = card.getPriceR().getVector();
+                int check = actualplayer.checkResources(cost);
+                if (check == 0) {
+                    client.sendMessage("You don't own enough resources. (press enter)");
+                    client.receiveMessage();
+                }
+                else
+                    actualplayer.setSkill2(1);
+            }
+
+            //the leadercard cost is in terms of developecards
+            else {
+                cost = card.getPriceC();
+                int level = card.getCardLevel();
+                if(actualplayer.checkCards(level, cost)) actualplayer.setSkill2(1);
+                else {
+                    client.sendMessage("You don't own enough Developecards. ( press enter )");
+                    client.receiveMessage();
+                }
+            }
+        }
     }
 
 }
