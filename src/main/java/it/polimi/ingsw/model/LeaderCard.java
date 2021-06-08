@@ -2,6 +2,8 @@ package it.polimi.ingsw.model;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import it.polimi.ingsw.Server.ClientHandler;
+import it.polimi.ingsw.Server.GameHandler;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -88,29 +90,6 @@ public class LeaderCard implements Serializable {
     }
 
 
-    //idea, switch con parametro e che a sua volta chiama una delle
-    //4 funzioni di Skill che poi fanno il vero lavoro
-    //OPPURE mi sa che è meglio semplicemente trattare tutti i casi nella classe player o turno --> perciò attributo
-    //skill delle carte diventa un char
-    //number è il numero della carta ovvero la sua posizione nell'array
-   /* public ResourceStructure Skill()
-    {
-        try {
-            if (this.number < 12) {
-                if (this.number < 8) {
-                    if (this.number < 4) {
-                        return this.PriceSkill(boh, this.skill);
-                    }
-                    return this.AdditionalStorageSkill(this.inputskill);
-                }
-               return this.ConvertWhiteMarbleSkill(this.skill, boh);
-            }
-            return this.AdditionalProductionSkill(this.skill, boh);
-        } catch(Exception e){System.out.println("Inexistent LeaderCard");}
-        return null;
-    }
-*/
-
     /**
      * this skill decreases the develope card price of a specify resource
      * @param card: card in input to decrease price
@@ -155,42 +134,52 @@ public class LeaderCard implements Serializable {
      * this method do a production.
      * (1)checks if the player owns enough resources to activate the production;
      * (2)then if storage contains enough resources, it removes from there the input resources and add the output resources to the strongbox;
-     * (3)if the storage doesn't contain enough resources it does the same thing with the strongbox.
+     * (3)if the storage doesn't contains enough resources it does the same thing with the strongbox.
      * it uses the (0,1,2) logic defined into the player.checkresources method to check where the resources are.
-     * @param player: is the player who wants to do a production
+     * @param client: is the client who wants to do a production
+     * @param game: game passed (necessary because of the different definition of the player in singlegame or game)
+     * @return
+     * @throws IOException
+     * @throws ClassNotFoundException
      */
-    public void doProductionSkill(Player player) throws IOException {
+    public int doProductionSkill(ClientHandler client, Game game) throws IOException, ClassNotFoundException {
+        GameHandler player;
+        if(game.getClass().equals(SingleGame.class))
+            player = client.getSinglePlayer();
+        else
+            player = client.getPlayer();
 
-        char resourcechosen;
-        ResourceStructure resource = new ResourceStructure();
-        resource.add(this.inputskill);
+        ArrayList<Character> list = new ArrayList<>();
+        list.add(this.inputskill);
+        int check = player.checkResources(list);
 
         //(1)
-        if(player.checkResources(resource)!=0) {
-
-            player.increaseTrackposition();
-            System.out.println("What resource do you want to produce?\n(B, G, Y, P)\t");
-            resourcechosen = (char)System.in.read();
-
+        if(check != 0) {
             //(2)
-            if(player.checkResources(resource)==1)
+            if(check == 1)
             {
-                player.removeResourceStorage(this.inputskill);
-
-                player.addResourceStrongBox(resourcechosen); }
-
+                player.deleteResources(1, list);
+                player.increaseTrackposition();
+                client.sendMessage("What resource do you want? (Y, P, G, B) ");
+                char resource = client.receiveMessage().charAt(0);
+                player.getStrongBox().getStructure().addResource(1, resource); }
             //(3)
-            if(player.checkResources(resource)==2)
+            if(check == 2)
             {
-                if(player.getStorage().getPanel().contains(this.inputskill))
-                        player.removeResourceStorage(this.inputskill);
-                else
-                    player.getStrongBox().deleteResource(this.inputskill);
-
-                player.addResourceStrongBox(resourcechosen); }
+                player.deleteResources(2, list);
+                player.increaseTrackposition();
+                client.sendMessage("What resource do you want? (Y, P, G, B) ");
+                char resource = client.receiveMessage().charAt(0);
+                player.getStrongBox().getStructure().addResource(1, resource); }
+            return 1;
         }
-        else System.out.println("You don't own enough Resources");
+        else {
+            client.sendMessage("You don't own enough Resources. (press enter)");
+            client.receiveMessage();
+        }
+        return 0;
     }
+
 
 
     //serve solo per testare la classe

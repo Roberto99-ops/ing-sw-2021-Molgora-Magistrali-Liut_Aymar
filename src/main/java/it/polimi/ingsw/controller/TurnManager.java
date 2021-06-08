@@ -73,16 +73,16 @@ public class TurnManager {
 
                 if (action == 3) {
                     do { //2.1)
-                        if (player.getSkill1() == 1 || player.getSkill2() == 1) {
-                            client.sendMessage("Which LeaderCard do you want to enable(form up to down 0 1. enter=none)?\n");
-                            //player.updateLeaderDeck(client);
+                        if ((player.getSkill1() == 1 && player.getLeadercards().getStructure().get(0).getSkill().equals("Prod.Skill")) ||
+                                (player.getSkill2() == 1 && player.getLeadercards().getStructure().get(1).getSkill().equals("Prod.Skill"))) {
+                            client.sendMessage("Which LeaderCard do you want to enable(from up to down -> 0 1. enter=none)?\n");
                             String cardChosen = client.receiveMessage();
-                            if (!cardChosen.equals("")) {
+                            if (cardChosen.equals("0") || cardChosen.equals("1")) {
                                 int card = cardChosen.charAt(0) - 48;  //converts a char into the correspondant int
-                                if (card == 0 && player.getSkill1() == 1)
-                                    turn.getActualplayer().getLeadercards().getStructure().get(0).getSkill();
-                                if (card == 1 && player.getSkill2() == 1)
-                                    turn.getActualplayer().getLeadercards().getStructure().get(1).getSkill();
+                                if (card == 0 && player.getSkill1() == 1 && player.getLeadercards().getStructure().get(0).getSkill().equals("Prod.Skill"))
+                                    player.getLeadercards().getStructure().get(0).doProductionSkill(client, game);
+                                if (card == 1 && player.getSkill2() == 1 && player.getLeadercards().getStructure().get(1).getSkill().equals("Prod.Skill"))
+                                    player.getLeadercards().getStructure().get(1).doProductionSkill(client, game);
                             }
                         }
 

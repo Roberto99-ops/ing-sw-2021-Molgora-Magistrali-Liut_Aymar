@@ -79,6 +79,10 @@ public class DevelopeCard implements Serializable {
      * (3)if the storage doesn't contains enough resources it does the same thing with the strongbox.
      * it uses the (0,1,2) logic defined into the player.checkresources method to check where the resources are.
      * @param client: is the client who wants to do a production
+     * @param game: game passed (necessary because of the different definition of the player in singlegame or game)
+     * @return
+     * @throws IOException
+     * @throws ClassNotFoundException
      */
     public int doProduction(ClientHandler client, Game game) throws IOException, ClassNotFoundException {
         GameHandler player;
@@ -87,7 +91,6 @@ public class DevelopeCard implements Serializable {
         else
             player = client.getPlayer();
 
-        ArrayList<Character> vector = this.inputproduction.getVector();
         int check = player.checkResources(this.inputproduction.getVector());
 
         //(1)
