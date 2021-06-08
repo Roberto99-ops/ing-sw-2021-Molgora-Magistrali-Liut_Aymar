@@ -5,8 +5,14 @@ import it.polimi.ingsw.Server.MessageGameManager;
 import it.polimi.ingsw.Server.GameHandler;
 import it.polimi.ingsw.model.*;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+// import javax.swing.Timer;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /*
 
@@ -40,19 +46,63 @@ public class GameManager {
 
     // inizializzazione di view e model
 
+
     private static final Game game = new Game();
-    private static ArrayList<ClientHandler> clientList;
-    private static ClientHandler firstclient;
+    private static ArrayList<ClientHandler> clientList = new ArrayList<>();
+    private static int actualturn = 0;
+    private static SingleGameManager singleGameManager;
+
+    private static Timer timer = new Timer();
+
+            /* metodo 1 con javax (60000, new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            System.out.println("rbjfb");
+
+            while (true) {
+
+                System.out.println("rbjfb");
+
+                if (clientList.size() == 4)
+                    break;
+
+            }
+        }
+    });
+    +/
+
+             */
+
+     /* metodo 2 con util
+     private static TimerTask timertask = new TimerTask() {
+
+        @Override
+        public void run() {
+            while (true) {
+
+                System.out.println("rbjfb");
+
+                if (clientList.size() == 4)
+                    break;
+
+            }
+        }
+    };
+ */
 
 
-    public GameManager() {
-        clientList = new ArrayList<>();
-        clientList.add(0, firstclient);
+    public GameManager(ClientHandler temporary, GameHandler player) {
+        clientList.add(temporary);
+        game.getPlayers().add(player);
+        singleGameManager = new SingleGameManager(clientList.get(0));
     }
 
 
 
+
     public static void main() throws Exception {
+
         //passare a questa classe l'istanza di clienthandler così da poter chiamare
         //i supi metodi per inviare e ricevere e poter anche condividire l'istanza
         //comune a tutti di game? ciò vuol dire fare attenzione alla sincronizzazione
@@ -60,11 +110,53 @@ public class GameManager {
         //(ma forse lo saranno su istanze diverse di gamemanager?) forse farlo static?
         //game = new Game();
 
+        TurnManager turnmanager = new TurnManager();
+
+        // il timer serve per mettere in attesa i vari giocatori fino a che scade
+        // e si inizia a giocare con i giocatori connessi (max 4)
+
+        // timer.start();
+        // timer.schedule;
+
+        // se nessuno si collega entro un minuto parte singlegame del primo giocatore che si è collegato
+
+        /*
+        if (clientList.size() == 1)
+
+            clientList.get(0).sendMessage("Nobody is connected with you\nStart a Single Game");
+            singleGameManager.main();
+
+*/
+
+        while (actualturn < 4) {
+
+
+            turnmanager.main(clientList.get(actualturn), game, actualturn);
+
+
+            if (game.callEndgame(game.getPlayers().get(actualturn))) {
+                for (int i = 1; i < Game.getN_players(); i++) {
+                    clientList.get(i).sendMessage("The winner is " + game.callVictory());
+                    return;
+                }
+            }
+
+
+            actualturn++;
+            if (actualturn == 5) actualturn = 0;
+        }
+
+    }
+
+}
+
+
+
+        /*
+
         MessageGameManager obsG = new MessageGameManager();
-        SingleGame singleGame = new SingleGame();
         // Game.getLeaderdeck() = new LeaderDeck();
         // leaderdeck = new LeaderDeck();
-        TurnManager turnmanager = new TurnManager();
         int actualplayer = 0;
         Scanner scan = new Scanner(System.in);
 
@@ -138,4 +230,4 @@ public class GameManager {
     }
 }
 
-
+*/
