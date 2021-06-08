@@ -27,6 +27,8 @@ public class TurnManager {
         GameHandler player = turn.getActualplayer();
         String reception;
         int action;
+        int leaderaction = 0;
+        boolean additionalAction = false;
 
         //se sono in single game, ogni volta che tocca a me, prendo un segnalino ed eseguo la sua azione
         if (game.getClass().equals(SingleGame.class)) {
@@ -107,8 +109,16 @@ public class TurnManager {
                     } while (reception.equals("yes"));
                 }
 
+                //in case we have done only 0 or 1 leaderactions during our turn, we can do another one at the end of the turn
+                if(leaderaction<2) {
+                    client.sendMessage("Do you want to do a Leader action? (yes/no) ");
+                    reception = client.receiveMessage();
+                    if(reception.equals("yes")) additionalAction = true;
+                }
+
                 //we activate a leader card if possible
-                if (action == 4) {
+                if ((action == 4 && leaderaction < 2) || additionalAction) {
+                    leaderaction++;
                     client.sendMessage("Do you want to remove a card or to activate one? (remove/activate) ");
                     String choice = client.receiveMessage();
 
