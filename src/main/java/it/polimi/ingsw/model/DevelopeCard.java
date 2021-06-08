@@ -2,10 +2,15 @@ package it.polimi.ingsw.model;
 
 import com.google.gson.*;
 import com.google.gson.JsonParser;
+import it.polimi.ingsw.Server.ClientHandler;
+import it.polimi.ingsw.Server.GameHandler;
 
+import javax.swing.*;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class DevelopeCard implements Serializable {
 
@@ -71,24 +76,32 @@ public class DevelopeCard implements Serializable {
      * this method do a production.
      * (1)checks if the player owns enough resources to activate the production;
      * (2)then if storage contains enough resources, it removes from there the input resources and add the output resources to the strongbox;
-     * (3)if the storage doesn't contain enough resources it does the same thing with the strongbox.
+     * (3)if the storage doesn't contains enough resources it does the same thing with the strongbox.
      * it uses the (0,1,2) logic defined into the player.checkresources method to check where the resources are.
-     * @param player: is the player who wants to do a production
+     * @param client: is the client who wants to do a production
      */
-    public int doProduction(Player player)
-    {
+    public int doProduction(ClientHandler client, Game game) throws IOException, ClassNotFoundException {
+        GameHandler player;
+        if(game.getClass().equals(SingleGame.class))
+            player = client.getSinglePlayer();
+        else
+            player = client.getPlayer();
+
+        ArrayList<Character> vector = this.inputproduction.getVector();
+        int check = player.checkResources(this.inputproduction.getVector());
+
         //(1)
-        if(player.checkResources(this.inputproduction.getVector())!=0) {
+        if(check != 0) {
         //(2)
-            if(player.checkResources(this.inputproduction.getVector())==1)
+            if(check == 1)
             {
                 for(int i=0; i<this.inputproduction.getVector().size(); i++)
-                    player.removeResourceStorage(this.inputproduction.getVector().get(i));
+                    player.removeResourceStorage(vector.get(i));
 
                 for(int i=0; i<this.outputproduction.getVector().size(); i++)
-                    player.addResourceStrongBox(this.outputproduction.getVector().get(i)); }
+                    player.getStrongBox().getStructure().addResource(1, this.outputproduction.getVector().get(i)); }
         //(3)
-            if(player.checkResources(this.inputproduction.getVector())==2)
+            if(check == 2)
             {
                 for(int i=0; i<this.inputproduction.getVector().size(); i++) {
                     {
@@ -99,10 +112,13 @@ public class DevelopeCard implements Serializable {
                     }
                 }
                 for(int i=0; i<this.outputproduction.getVector().size(); i++)
-                    player.addResourceStrongBox(this.outputproduction.getVector().get(i)); }
+                    player.getStrongBox().getStructure().addResource(1, this.outputproduction.getVector().get(i)); }
             return 1;
            }
-        else System.out.println("You don't own enough Resources");
+        else {
+            client.sendMessage("You don't own enough Resources. (press enter)");
+            client.receiveMessage();
+        }
         return 0;
     }
 
