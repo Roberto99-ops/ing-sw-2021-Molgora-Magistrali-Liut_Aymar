@@ -39,7 +39,7 @@ public class TurnManager {
         do {
             //1)
 
-            client.sendMessage("What do you want to do?\n\t1)Shop a developement card\n\t2)Take resources at the market\n\t3)Active a production\n\t4)Active a Leader action\n");
+            client.sendMessage("What do you want to do?\n\t1)Shop a developement card\n\t2)Take resources at the market\n\t3)Active a production\n\t4)Do a Leader action\n");
             action = Integer.parseInt(client.receiveMessage());
 
             try {
@@ -112,8 +112,8 @@ public class TurnManager {
                     client.sendMessage("Do you want to remove a card or to activate one? (remove/activate) ");
                     String choice = client.receiveMessage();
 
-                    if(choice.equals("remove")){
-                    }
+                    if(choice.equals("remove"))
+                        turn.removeLeader();
 
                     if(choice.equals("activate"))
                         turn.activateLeader();
