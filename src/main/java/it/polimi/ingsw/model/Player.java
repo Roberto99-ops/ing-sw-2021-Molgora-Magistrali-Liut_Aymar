@@ -279,11 +279,10 @@ public class Player implements Serializable {
         char color = card.getColour();
         int minideck = DSpace.colorPresent(color);
 
-        if(minideck == 4)   return false;
+        //if(minideck == 4)   return false;
         if(minideck != 0)
         {
             if(DSpace.setCard(card, minideck)) return true;
-            return false;
         }
 
         if(DSpace.getMinideck3().getStructure().size() == 0)   minideck=3;

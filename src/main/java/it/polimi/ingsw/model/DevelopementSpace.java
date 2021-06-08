@@ -105,7 +105,7 @@ public class DevelopementSpace implements Serializable {
 
         if(minideck3.getStructure().size() != 0 && color.equals(minideck3.getStructure().get(0).getColour())) return 3;
 
-        if(minideck1.getStructure().size() != 0 && minideck2.getStructure().size() != 0 && minideck3.getStructure().size() != 0) return 4;
+        //if(minideck1.getStructure().size() != 0 && minideck2.getStructure().size() != 0 && minideck3.getStructure().size() != 0) return 4;
 
         return 0;
     }
