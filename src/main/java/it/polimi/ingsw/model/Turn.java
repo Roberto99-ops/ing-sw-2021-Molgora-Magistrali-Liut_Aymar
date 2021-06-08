@@ -1,7 +1,7 @@
 package it.polimi.ingsw.model;
 import it.polimi.ingsw.Server.ClientHandler;
 import it.polimi.ingsw.Server.GameHandler;
-import it.polimi.ingsw.Server.messages.DevelopeDeckMsg;
+import it.polimi.ingsw.Server.messages.DevelopeDecksMsg;
 import it.polimi.ingsw.Server.messages.MarketMsg;
 
 import java.io.IOException;
@@ -81,7 +81,7 @@ public class Turn implements Serializable {
             gameDeck[i] = Game.getDevelopedecks(i);
         }
 
-        DevelopeDeckMsg msg = new DevelopeDeckMsg(gameDeck);
+        DevelopeDecksMsg msg = new DevelopeDecksMsg(gameDeck);
         client.sendMessage(msg);
         client.sendMessage("Choose the number of the card you want to buy ");
         String next = client.receiveMessage();
@@ -94,11 +94,9 @@ public class Turn implements Serializable {
         if (this.actualplayer.getLeadercards().getStructure().get(1).getSkill() == "PriceSkill" && actualplayer.getSkill2() == 1)
             cost = this.actualplayer.getLeadercards().getStructure().get(1).changePriceSkill(card);
 
-        //here the server checks if the player own enough resources and, if it is, where
+        //here the server checks if the player owns enough resources and, if it is, where
         int check = actualplayer.checkResources(cost.getVector());
-
         if (check == 0)
-
         {
             client.sendMessage("You don't own enough resources ( press enter )");
             client.receiveMessage();
@@ -108,19 +106,16 @@ public class Turn implements Serializable {
 
         //add the developecard if possible and remove the cost resources from the player
         if(actualplayer.addDevelopCard(card))
-
         {
-
             gameDeck[cardNum].getStructure().remove(0);
             Game.getDevelopedecks(cardNum).getStructure().remove(0);
             actualplayer.deleteResources(check, cost.getVector());
-            msg = new DevelopeDeckMsg(gameDeck);
+            msg = new DevelopeDecksMsg(gameDeck);
             client.sendMessage(msg);
             // actualplayer.updateDevelopementDecks(client);
             client.sendMessage("these are the new developedecks( press any key )");
             client.receiveMessage();
             return;
-
         }
 
         client.sendMessage("you can't buy this card( press any key )");
