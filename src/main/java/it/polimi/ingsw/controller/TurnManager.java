@@ -79,11 +79,13 @@ public class TurnManager {
 
                     //2.2)
                     client.sendMessage("Which DevelopeCard do you want to enable(0=none)?\n");
-                    client.sendMessage(turn.getActualplayer().getTopCardsOnBoard());
+                    client.sendMessage(turn.getActualplayer().getTopCards());
                     cardChosen = client.receiveMessage();
                     if (!cardChosen.equals("0")) {
                         int card = cardChosen.charAt(0) - 48;  //converts a char into the correspondant int
-                        turn.getActualplayer().getTopCardsOnBoard().getStructure().get(card - 1).doProduction(turn.getActualplayer());
+                        turn.getActualplayer().getTopCards().getStructure().get(card - 1).doProduction(client , game);
+
+
                         //game.getPlayers().get(actualplayer).updateStorage(client);
                         //game.getPlayers().get(actualplayer).updateStrongbox(client);
                     }
