@@ -46,8 +46,11 @@ public class Storage extends ArrayList<Character> implements Serializable {
         System.out.println("\n");
     }
 
-
     public  ResourceStructure getExtrapanel() { return extrapanel;}
+
+    public void setExtrapanel(ResourceStructure extrapanel) {
+        this.extrapanel = extrapanel;
+    }
 
     public ArrayList <Character> getPanel() {
         return panel;
@@ -94,7 +97,7 @@ public class Storage extends ArrayList<Character> implements Serializable {
      * It also prints quantities of each resource
      * @return sum: how many resources are available inside the storage
      */
-//Secondo me(Juan), può essere rimpiazzato dal metodo sopra
+
  public int getTotResourceStorage() {
      int counterB = 0;
      int counterP = 0;
@@ -268,7 +271,17 @@ public class Storage extends ArrayList<Character> implements Serializable {
      * check the extra resources that increase the faith points of the other players
      */
 
-            public int returnMoves () {
-                    return this.extrapanel.getVector().size();
+            public int returnMoves() {
+                int moves = 0;
+                for (int i = 0; i < 2; i++)
+                    if (!this.getExtrapanel().get(i).equals('N')) {
+                        moves++;
+                    }
+                return moves;
                 }
+
+
+
+
+
         }
