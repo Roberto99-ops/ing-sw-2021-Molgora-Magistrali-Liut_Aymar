@@ -1,11 +1,9 @@
 package it.polimi.ingsw.Server;
 
 import it.polimi.ingsw.Server.messages.*;
-import it.polimi.ingsw.client.Client;
 import it.polimi.ingsw.model.*;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 
 /*
@@ -40,11 +38,18 @@ public class GameHandler extends Player {
             DevelopeDecks[] actualDevelopeDecks = new DevelopeDecks[12];
             for (int j = 0; j < 12; j++)
                 actualDevelopeDecks[i] = Game.getDevelopedecks(i);
-            DevelopeDeckMsg msg = new DevelopeDeckMsg(actualDevelopeDecks);
+            DevelopeDecksMsg msg = new DevelopeDecksMsg(actualDevelopeDecks);
             clh.sendMessage(msg);
         }
 
     }
+
+    public void updateDevelDeck(ClientHandler clh) throws IOException {
+        DevelopeDecks playercards = clh.getPlayer().getTopCardsOnBoard();
+        DevelopeCardsMsg msg = new DevelopeCardsMsg(playercards);
+        clh.sendMessage(msg);
+    }
+
 
     public void updateLeaderDeck(ClientHandler clh) throws IOException {
         LeaderDeck actualLeaderDeck = Game.getLeaderdeck();
