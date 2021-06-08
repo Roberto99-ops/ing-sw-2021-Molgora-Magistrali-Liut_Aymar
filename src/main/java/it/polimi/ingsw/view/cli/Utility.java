@@ -58,6 +58,9 @@ public abstract class Utility {
                 case 'G':
                     simbols += Color.GRAY.getEscape() + Simbol.PALLINO;
                     break;
+                case 'F':
+                    simbols += Color.GREEN.getEscape() + Simbol.PALLINO;
+                    break;
                 case 'R':
                     simbols += Color.RED.getEscape() + Simbol.PALLINO;
                     break;

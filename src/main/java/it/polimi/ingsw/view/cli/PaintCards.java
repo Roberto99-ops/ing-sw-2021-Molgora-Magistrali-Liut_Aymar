@@ -39,7 +39,10 @@ public abstract class PaintCards extends Utility {
             putString("PV: " + card.getPv(), leadercard, 3, 1);
             if (card.getPriceC().size() != 0) {
                 putString("priceC:", leadercard, 5, 1);
-                convertSymbols(card.getPriceC(), leadercard, 5, 8);
+                ArrayList<Character> newprice = card.getPriceC();
+                for (int i = 0; i < newprice.size(); i++)
+                    if(newprice.get(i).equals('G')) newprice.set(i, 'F');
+                convertSymbols(newprice, leadercard, 5, 8);
             } else {
                 putString("priceR:", leadercard, 5, 1);
                 convertSymbols(card.getPriceR().getVector(), leadercard, 5, 8);

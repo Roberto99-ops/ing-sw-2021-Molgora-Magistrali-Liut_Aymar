@@ -103,11 +103,11 @@ public class Player implements Serializable {
     }
 
     public void setSkill1(int skill){
-        skill1=skill;
+        this.skill1=skill;
     }
 
     public void setSkill2(int skill){
-        skill2=skill;
+        this.skill2=skill;
     }
 
 
@@ -279,17 +279,18 @@ public class Player implements Serializable {
         char color = card.getColour();
         int minideck = DSpace.colorPresent(color);
 
-        if(minideck == 4)   return false;
+        //if(minideck == 4)   return false;
         if(minideck != 0)
         {
             if(DSpace.setCard(card, minideck)) return true;
-            return false;
         }
 
-        if(DSpace.getMinideck3().getStructure().size() == 0)   minideck=3;
-        if(DSpace.getMinideck2().getStructure().size() == 0)   minideck=2;
-        if(DSpace.getMinideck1().getStructure().size() == 0)   minideck=1;
-        if(DSpace.setCard(card, minideck)) return true;
+        //if(DSpace.getMinideck3().getStructure().size() == 0)   minideck=3;
+        //if(DSpace.getMinideck2().getStructure().size() == 0)   minideck=2;
+        //if(DSpace.getMinideck1().getStructure().size() == 0)   minideck=1;
+        if(DSpace.setCard(card, 1)) return true;
+        if(DSpace.setCard(card, 2)) return true;
+        if(DSpace.setCard(card, 3)) return true;
         return false;
     }
     /*
@@ -438,6 +439,38 @@ public class Player implements Serializable {
         }
         //conto il numero di N in extrapanel
 
+    }
+
+    /**
+     * this method checks if the player own enough developecards to activate a leadercard
+     * @param level: minimum level of the developecards
+     * @param colours: color of the cards
+     * @return
+     */
+    public boolean checkCards(int level, ArrayList<Character> colours)
+    {
+        int cont = 0; //at the end if cont is = colours.size it means i have al the cards I need
+        DevelopeDecks deck = new DevelopeDecks();
+        for (int i = 0; i < this.DSpace.getMinideck1().getStructure().size(); i++)
+            deck.getStructure().add(this.DSpace.getMinideck1().getStructure().get(i));
+        for (int i = 0; i < this.DSpace.getMinideck2().getStructure().size(); i++)
+            deck.getStructure().add(this.DSpace.getMinideck2().getStructure().get(i));
+        for (int i = 0; i < this.DSpace.getMinideck3().getStructure().size(); i++)
+            deck.getStructure().add(this.DSpace.getMinideck3().getStructure().get(i));
+
+        for (int i = 0; i < colours.size(); i++) {
+            for (int j = 0; j < deck.getStructure().size(); j++) {
+                if (colours.get(i).equals(deck.getStructure().get(j).getColour()) && deck.getStructure().get(j).getLevel() >= level)
+                {
+                    deck.getStructure().remove(j);
+                    cont++;
+                }
+            }
+        }
+
+        if(cont == colours.size()) return true;
+
+        return false;
     }
 
     /**
