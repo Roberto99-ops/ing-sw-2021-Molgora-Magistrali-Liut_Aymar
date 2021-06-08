@@ -66,6 +66,8 @@ public class CliManager {
             player.setNumber(playerMsg.getPlayer().getNumber());
             player.setPv(playerMsg.getPlayer().getPv());
             player.setStrongBox(playerMsg.getPlayer().getStrongBox());
+            player.setSkill1(playerMsg.getPlayer().getSkill1());
+            player.setSkill2(playerMsg.getPlayer().getSkill2());
 
             if(playerMsg.getSingleorNot())
                 game = new SingleGame();
