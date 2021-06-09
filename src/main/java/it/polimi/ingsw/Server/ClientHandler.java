@@ -94,15 +94,18 @@ public class ClientHandler implements Runnable {
                     singleGameManager.main();
                 }
                 else    {
-                    gameManager = new GameManager(this, player);
-                    gameManager.main();
+                    GameManager.addPlayer(this, player);
+                    Server.runGame();
+                    while (true){}
                 }
 
             }
-            else{
-                gameManager = new GameManager(this, player);
-                gameManager.main();
+            else {
+                GameManager.addPlayer(this, player);
+                while (true){}
+
             }
+
             output.close();
             input.close();
             client.close();
@@ -132,6 +135,7 @@ public class ClientHandler implements Runnable {
 
     public void sendMessage(Object msg) throws IOException {
         output.writeObject(msg);
+        output.flush();
         output.flush();
         output.reset();
     }

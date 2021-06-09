@@ -69,8 +69,13 @@ public class Client {
         Object next = input.readObject();
         do{
             if(next.getClass().equals(String.class)) {
-                if(next.equals("clean screen")){
-                    Utility.Clean();
+                if(next.equals("clean screen") /*|| ((String) next).charAt(0) == 'I'*/) {
+                    if (next.equals("clean screen")) {
+                        Utility.Clean();
+                    }
+                    if (((String) next).charAt(0) == 'I') {
+                        System.out.print("\n" + next);
+                    }
                 }
                 else {
                     System.out.print("\n" + next);
@@ -84,69 +89,6 @@ public class Client {
                 CliManager.update(next, player);
             next = input.readObject();
         }while(!next.equals("Turn Finished"));   //ci aspettiamo un messaggio di turno finito a fine turno
-
-
-
-        /*TURNO - FATTO
-        TurnMsg msg = (TurnMsg)next;
-        System.out.println(msg.getTurn().getActualplayer().getName());
-
-         */
-
-        /*PLAYER - FATTO
-        PlayerMsg msg = (PlayerMsg) next;
-        System.out.println(msg.getPlayer().getName()+"  "+msg.getPlayer().getDevelopementquantity()+"  "+msg.getPlayer().getPv());
-         */
-
-        /*PROVA CON STORAGE - FATTO
-        StorageMsg msg = (StorageMsg) next;
-        System.out.println(msg.getStorage().getPanel().get(0)); // controllo il posto 0 perchè è l'unico in cui ho messo qualcosa
-        //ho controllato anche i posti dove ho 'N' e risultano esserci->OK
-        */
-
-        /*PROVA CON DEVELOPECARD-FATTO
-        DevelopCardMsg msg = (DevelopCardMsg) next;
-        System.out.println(msg.getDevelopeCard().getColour());
-         */
-
-        /*PROVA CON TURN
-        String msg = (String) next;
-        System.out.println(msg);
-        /*PROVA CON STORAGE E SB - FATTO
-        String msg = (String) next;
-        System.out.println(msg);
-
-         */
-
-        /*PROVA CON LORENZO - FATTO
-        int msg = (int) next;
-        System.out.println(msg); //notifico posizione di Lore sul tracciato
-         */
-
-        /*PROVA CON ACTIONSTRUCTURE - FATTO
-        String msg = (String) next;
-        System.out.println(msg);
-        */
-
-        /*PROVA CON STRONGBOX
-        StrongboxMsg msg = (StrongboxMsg) next;
-        System.out.println(msg.getStrongBox().get(0));
-         */
-
-        /*
-        DataOutputStream output = new DataOutputStream(server.getOutputStream());
-        String something;
-        System.out.print("Write your name: ");
-        something = scan.nextLine();
-        output.writeUTF(something);
-        output.flush();
-
-        while(!server.isClosed()){
-            System.out.print("Write something: ");
-            something = scan.nextLine();
-            output.writeUTF(something);
-            output.flush();
-            if(something.equals("close")) { */
         try {
             server.close();
             input.close();
