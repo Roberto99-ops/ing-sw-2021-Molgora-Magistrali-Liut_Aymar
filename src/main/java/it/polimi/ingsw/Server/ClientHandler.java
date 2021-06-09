@@ -96,13 +96,13 @@ public class ClientHandler implements Runnable {
                 else    {
                     GameManager.addPlayer(this, player);
                     Server.runGame();
-                    while (true){}
+                    while (!client.isClosed()){}
                 }
 
             }
             else {
                 GameManager.addPlayer(this, player);
-                while (true){}
+                while (!client.isClosed()){}
 
             }
 
