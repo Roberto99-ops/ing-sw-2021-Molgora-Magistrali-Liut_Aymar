@@ -1,4 +1,7 @@
 package it.polimi.ingsw.model;
+import it.polimi.ingsw.Server.ClientHandler;
+import it.polimi.ingsw.controller.GameManager;
+
 import java.io.Serializable;
 import java.lang.String;
 import java.util.ArrayList;
@@ -360,8 +363,14 @@ public class Player implements Serializable {
         */
         //caso in cui il magazzino sia pieno (sia extrapanel sia panel)
 
+        ArrayList<ClientHandler> clients = GameManager.getClientList();
         if (storage.countTypeS('N') == 0) {
             System.out.println("No more space available in Storage.");
+
+            for (int i = 0; i < clients.size(); i++)
+                if(!this.equals(clients.get(i).getPlayer()))
+                    clients.get(i).getPlayer().increasePV(1);
+
             return false;
         }
 
@@ -383,9 +392,15 @@ public class Player implements Serializable {
 
             return true;
 
-        } else if (storage.getTypeExtrapanel() != resource && countExtraN == storage.countTypeS(resource))
+        } else if (storage.getTypeExtrapanel() != resource && countExtraN == storage.countTypeS(resource)) {
             System.out.println("No more space available in Storage");
 
+            for (int i = 0; i < clients.size(); i++)
+                if(!this.equals(clients.get(i).getPlayer()))
+                    clients.get(i).getPlayer().increasePV(1);
+
+                return false;
+        }
         //controllo panel:
 
 
@@ -402,7 +417,7 @@ public class Player implements Serializable {
 
                 // i==0 : provo a vedere se riesco a sostituire i piani
 
-                if (storage.switchresources(resource, 0) == true) {
+                if (storage.switchresources(resource, 0)) {
                     System.out.println(resource + " switched using best case");
                     return true;
                 } else {
@@ -411,7 +426,7 @@ public class Player implements Serializable {
 
                 // i==2 : provo a vedere se riesco a sostituire i piani
 
-                if (storage.switchresources(resource, 2) == true) {
+                if (storage.switchresources(resource, 2)) {
                     System.out.println(resource + " switched using best case");
                     return true;
                 } else System.out.println(resource + " can't be added because of is present in panel and panels can't be switched ");
@@ -422,6 +437,11 @@ public class Player implements Serializable {
             // i==5 : il terzo piano ha risorse di quel tipo -> elimino la risorsa
             if (i == 5) {
                 System.out.println(resource + " deleted. It already exists");
+
+                for (int j = 0; j < clients.size(); j++)
+                    if(!this.equals(clients.get(j).getPlayer()))
+                        clients.get(j).getPlayer().increasePV(1);
+
                 return false;
             }
 
@@ -458,6 +478,11 @@ public class Player implements Serializable {
                 return true;
             } else {
                 System.out.println(resource + " deleted. It can't be put in the storage");
+
+                for (int j = 0; j < clients.size(); j++)
+                    if(!this.equals(clients.get(j).getPlayer()))
+                        clients.get(j).getPlayer().increasePV(1);
+
                 return false;
             }
         }
