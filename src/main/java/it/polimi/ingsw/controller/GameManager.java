@@ -32,6 +32,10 @@ public class GameManager implements Runnable{
     private static SingleGameManager singleGameManager;
     private static boolean end = false;
 
+    public static ArrayList<ClientHandler> getClientList() {
+        return clientList;
+    }
+
     @Override
     public void run() {
 
