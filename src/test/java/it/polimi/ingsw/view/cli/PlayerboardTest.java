@@ -38,8 +38,8 @@ public class PlayerboardTest {
         player.getStorage().setPanel(panel);
 
         player.getStorage().setTypeExtrapanel('Y');
-        player.getStorage().getExtrapanel().add('P');
-        player.getStorage().getExtrapanel().add('Y');
+        player.getStorage().getExtrapanel().getVector().set(0, 'P');
+        player.getStorage().getExtrapanel().getVector().set(1, 'Y');
 
         for (int i = 0; i < 3; i++) {
             DevelopeCard Dcard1 = new DevelopeCard();
