@@ -9,9 +9,9 @@ public class Storage extends ArrayList<Character> implements Serializable {
 
     private ArrayList<Character> panel;
     private ResourceStructure extrapanel;
-    private char typeExtrapanel= 'Z';  //carattere che per noi significa che il pannello extra non è attivo, non so se si può inzializzare così
-    private int counterSP=0;
-    private int counterSEP=0;
+    private char typeExtrapanel = 'Z';  //carattere che per noi significa che il pannello extra non è attivo, non so se si può inzializzare così
+    private int counterSP = 0;
+    private int counterSEP = 0;
 
     public int getCounterSP() {
         return counterSP;
@@ -29,8 +29,8 @@ public class Storage extends ArrayList<Character> implements Serializable {
         this.counterSEP = counterSEP;
     }
 
-    public Storage(){
-        panel = new ArrayList <Character> (List.of('N','N','N','N','N','N')); // arraylist di 6 spazi di base
+    public Storage() {
+        panel = new ArrayList<Character>(List.of('N', 'N', 'N', 'N', 'N', 'N')); // arraylist di 6 spazi di base
         extrapanel = new ResourceStructure();
         extrapanel.addResource(2, 'N');
     }
@@ -39,20 +39,22 @@ public class Storage extends ArrayList<Character> implements Serializable {
         this.panel = panel;
     }
 
-    public void printPanel () {
-        for (int i = 0; i < 6; i ++) {
+    public void printPanel() {
+        for (int i = 0; i < 6; i++) {
             System.out.println(this.panel.get(i));
         }
         System.out.println("\n");
     }
 
-    public  ResourceStructure getExtrapanel() { return extrapanel;}
+    public ResourceStructure getExtrapanel() {
+        return extrapanel;
+    }
 
     public void setExtrapanel(ResourceStructure extrapanel) {
         this.extrapanel = extrapanel;
     }
 
-    public ArrayList <Character> getPanel() {
+    public ArrayList<Character> getPanel() {
         return panel;
     }
 
@@ -66,30 +68,79 @@ public class Storage extends ArrayList<Character> implements Serializable {
 
     /**
      * Counts the amount of one kind of resource in panel and extrapanel
+     *
      * @param neededRes: type of resource the player needs to pay/activate something
      * @return counterS: the amount of that resource in Storage
      */
 
     //metodo che conta le risorse per verificare se è possibile usarle per acquistare una carta sviluppo
-
     public int countTypeS(char neededRes) {
-        int count=0;
-        for (int i=0;i<6 ;i++) {
-                if (this.panel.get(i)==neededRes)
-                    count++;
+        int count = 0;
+        for (int i = 0; i < 6; i++) {
+            if (this.panel.get(i) == neededRes)
+                count++;
         }
         setCounterSP(count);
 
-        for (int i=0;i<2;i++){
-            if(this.extrapanel.getVector().get(i)==neededRes)
+        for (int i = 0; i < 2; i++) {
+            if (this.extrapanel.getVector().get(i) == neededRes)
                 count++;
         }
-        setCounterSEP(count-counterSP);
+        setCounterSEP(count - counterSP);
 
         return count;
     }
 
     //metodo che restituisce la quantità totale di risorse nel magazzino
+
+
+    // metodo che viene chiamato se voglio inserire una risorsa, già presente in storage in un piano full
+    // resource: risorsa da inserire; k: posizione in cui ho provato ad inserirla
+
+    public boolean switchresources(char resource, int k) {
+
+            if (k == 2) {
+
+            if (this.panel.get(3) != 'N' && this.panel.get(4) != 'N' && this.panel.get(5) == 'N') {
+                this.panel.set(1, this.panel.get(3));
+                this.panel.set(2, this.panel.get(4));
+                this.panel.set(3, resource);
+                this.panel.set(4, resource);
+                this.panel.set(5, resource);
+                return true;
+
+            } else if (this.panel.get(3) != 'N' && this.panel.get(4) == 'N' && this.panel.get(5) == 'N') {
+                this.panel.set(1, this.panel.get(3));
+                this.panel.set(2, this.panel.get(4));
+                this.panel.set(3, resource);
+                this.panel.set(4, resource);
+                this.panel.set(5, resource);
+                return true;
+
+            } else return false;
+
+        } else if (k == 0) {
+
+            if ((this.panel.get(1) != 'N' && this.panel.get(2) == 'N') || (this.panel.get(1) == 'N' && this.panel.get(2) == 'N')) {
+                this.panel.set(0, this.panel.get(1));
+                this.panel.set(1, resource);
+                this.panel.set(2, resource);
+                return true;
+
+            } else if (this.panel.get(1) != 'N' && this.panel.get(2) != 'N' && ((this.panel.get(3) != 'N' && this.panel.get(4) == 'N') || (this.panel.get(3) == 'N' && this.panel.get(4) == 'N'))) {
+
+                this.panel.set(0, this.panel.get(3));
+                this.panel.set(3, resource);
+                this.panel.set(4, resource);
+                return true;
+            }
+
+        } else return false;
+
+            return false;
+    }
+
+
 
 
     /**
