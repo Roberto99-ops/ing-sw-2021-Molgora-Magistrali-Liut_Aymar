@@ -69,11 +69,11 @@ public class Client {
         Object next = input.readObject();
         do{
             if(next.getClass().equals(String.class)) {
-                if(next.equals("clean screen") /*|| ((String) next).charAt(0) == 'I'*/) {
+                if(next.equals("clean screen") || ((String) next).charAt(0) == '\n') {
                     if (next.equals("clean screen")) {
                         Utility.Clean();
                     }
-                    if (((String) next).charAt(0) == 'I') {
+                    if (((String) next).charAt(0) == '\n') {
                         System.out.print("\n" + next);
                     }
                 }

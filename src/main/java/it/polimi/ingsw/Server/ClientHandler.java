@@ -106,9 +106,10 @@ public class ClientHandler implements Runnable {
 
             }
 
+
+            client.close();
             output.close();
             input.close();
-            client.close();
         } catch (ClassCastException | ClassNotFoundException e) {
             System.out.println("invalid stream from client");
         } catch (Exception e) {

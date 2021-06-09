@@ -144,13 +144,7 @@ public class GameManager implements Runnable{
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                try {
-                    clientList.get(actualturn).receiveMessage();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                }
+
                 for (int i = 0; i < clientList.size(); i++) {
                     if (i != actualturn) {
                         try {
