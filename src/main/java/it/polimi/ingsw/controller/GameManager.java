@@ -3,6 +3,7 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.Server.ClientHandler;
 import it.polimi.ingsw.Server.MessageGameManager;
 import it.polimi.ingsw.Server.GameHandler;
+import it.polimi.ingsw.Server.messages.LeaderDeckMsg;
 import it.polimi.ingsw.model.*;
 
 import java.awt.event.ActionEvent;
@@ -27,7 +28,7 @@ public class GameManager {
     private static ArrayList<ClientHandler> clientList = new ArrayList<>();
     private static int actualturn = 0;
     private static SingleGameManager singleGameManager;
-
+    private static boolean end = false;
 
 
     public GameManager(ClientHandler temporary, GameHandler player) {
@@ -35,8 +36,6 @@ public class GameManager {
         game.getPlayers().add(player);
         singleGameManager = new SingleGameManager(clientList.get(0));
     }
-
-
 
 
     public static void main() throws Exception {
@@ -58,124 +57,79 @@ public class GameManager {
 
         TimeUnit.SECONDS.sleep(10);
 
-        // se nessuno si collega entro30 secondi parte singlegame del primo giocatore che si è collegato
+        // se nessuno si collega entro 30 secondi parte singlegame del primo giocatore che si è collegato
 
 
         if (clientList.size() == 1) {
-            clientList.get(0).sendMessage("Nobody is connected with you\n\nIf you want to start a Single Game press enter");
+            clientList.get(0).sendMessage("\nNobody is connected with you\n\nIf you want to start a Single Game press enter");
             singleGameManager.main();
         }
 
 
         if (clientList.size() != 1) {
-            while (actualturn < 4) {
-                clientList.get(actualturn).sendMessage("It's your Turn " + clientList.get(actualturn).getPlayer().getName());
-                for (int i = 0; i < clientList.size()-1; i++) {
-                    if(i != actualturn)
-                        clientList.get(i).sendMessage("It's " + clientList.get(actualturn).getPlayer().getName() + " Turn.");
-                }
-                turnmanager.main(clientList.get(actualturn), game, actualturn);
-                if (game.callEndgame(game.getPlayers().get(actualturn))) {
-                    for (int i = 1; i < Game.getN_players(); i++) {
-                        clientList.get(i).sendMessage("The winner is " + game.callVictory());
-                        return;
-                    }
+
+            game.shuffle();
+
+            for (int i = 0; i < clientList.size(); i++) {
+                //player.updateActionStructure(client);
+                int choice2;
+                LeaderDeck leaderChoice = game.leaderChoice();
+                LeaderDeckMsg mess = new LeaderDeckMsg(leaderChoice);
+                clientList.get(i).sendMessage(mess);
+                clientList.get(i).sendMessage("\nChoose one: ");
+                int choice1 = Integer.parseInt(clientList.get(i).receiveMessage());
+                clientList.get(i).getPlayer().getLeadercards().getStructure().add(leaderChoice.getStructure().get(choice1));
+
+
+                do {
+                    clientList.get(i).sendMessage("\nChoose another one: ");
+                    choice2 = Integer.parseInt(clientList.get(i).receiveMessage());
+                } while (choice2 == choice1);
+                clientList.get(i).getPlayer().getLeadercards().getStructure().add(leaderChoice.getStructure().get(choice2));
+                clientList.get(i).sendMessage("\nclean screen");
+
+            }
+
+
+            while (actualturn < 4 && end == false) {
+
+                clientList.get(actualturn).sendMessage("\nIt's your Turn " + clientList.get(actualturn).getPlayer().getName());
+
+                for (int i = 0; i < clientList.size() - 1; i++) {
+                    if (i != actualturn)
+                        clientList.get(i).sendMessage("\nIt's " + clientList.get(actualturn).getPlayer().getName() + " Turn.");
                 }
 
+
+                turnmanager.main(clientList.get(actualturn), game, actualturn);
+
+
+                for (int i = 0; i < clientList.size(); i++) {
+
+                    if (game.callEndgame(clientList.get(i).getPlayer()) == true) end = true;
+
+                }
 
                 actualturn++;
-                if (actualturn == 5) actualturn = 0;
+                if (actualturn == clientList.size() - 1) actualturn = 0;
+
             }
 
-        }
 
+
+
+            for (int i = 0; i < clientList.size(); i++) {
+
+                clientList.get(i).sendMessage("\nThe winner is " + game.callVictory() + "Game is finished");
+
+            }
+
+
+        }
 
 
     }
 
 
-
-
 }
 
-
-
-        /*
-
-        MessageGameManager obsG = new MessageGameManager();
-        // Game.getLeaderdeck() = new LeaderDeck();
-        // leaderdeck = new LeaderDeck();
-        int actualplayer = 0;
-        Scanner scan = new Scanner(System.in);
-
-        //1)
-
-        // clientList.get(0).handleClientConnection();
-
-
-
-       clientList.get(0).sendMessage("Do you want to start a game? yes (A) no (B)");
-        if ((clientList.get(0).receiveMessage() == "A")) {
-
-            // collegamento client-server primo giocatore
-            GameHandler player1 = new GameHandler();
-            game.getPlayers().add(player1);
-            obsG.addHendlers(player1);
-            clientList.get(0).sendMessage("Choose a Name");
-            game.getPlayers().get(0).setName(clientList.get(0).receiveMessage());
-            game.getPlayers().get(0).setNumber(1);
-
-        } else if ((clientList.get(0).receiveMessage() == "B")) {
-
-            // chiudi il collegamento
-        }
-
-
-
-        clientList.get(0).sendMessage("Do you want to play alone(A) or against other players(B)?");
-        if ((clientList.get(0).receiveMessage() == "A")) {
-            clientList.get(0).sendMessage("Single Game against Lorenzo start now");
-            new SingleGameManager (clientList.get(0));
-            SingleGameManager.main();
-
-        } else if ((scan.nextLine()) == "B") {
-
-            clientList.get(0).sendMessage("Multi Game start now");
-            clientList.get(0).sendMessage("Insert the number of players:");
-            Game.setN_players( 4 ); //clientList.get(0).receiveMessage()
-
-            for (int i = 1; i < Game.getN_players() ; i++) {
-
-                GameHandler temporaryplayer = new GameHandler();
-                game.getPlayers().add(temporaryplayer);
-                obsG.addHendlers(temporaryplayer);
-                clientList.get(i).sendMessage("Choose your NAME");
-                game.getPlayers().get(i).setName(clientList.get(i).receiveMessage() );
-                game.getPlayers().get(i).setNumber(i+1);
-            }
-
-            game.setPlayers(game.getPlayers()); // perchè?
-
-        } // aggiunta di errore nel caso in cui il carattere scelto non sia uno proposto
-
-
-        while (true) {
-            //3)
-            //turnmanager.setActualplayer(game.getPlayers().get(actualplayer));
-            turnmanager.main(clientList.get(actualplayer), game, actualplayer);
-
-            //4)
-            if (game.callEndgame(game.getPlayers().get(actualplayer))) {
-                for (int i = 1; i < Game.getN_players(); i++) {
-                    clientList.get(i).sendMessage("The winner is " + game.callVictory());
-                    return;
-                }
-            }
-
-            actualplayer++;
-            if (actualplayer >= game.getPlayers().size()) actualplayer = 0;
-        }
-    }
-}
-
-*/

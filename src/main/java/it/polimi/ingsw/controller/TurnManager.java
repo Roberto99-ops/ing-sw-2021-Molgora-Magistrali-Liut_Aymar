@@ -36,6 +36,7 @@ public class TurnManager {
             player.updatePlayerBoard(client, game);
             if(SingleGame.getLorenzo().getNumber() == 24) return;
         }
+
         else
             player.updatePlayerBoard(client, game);
         do {
