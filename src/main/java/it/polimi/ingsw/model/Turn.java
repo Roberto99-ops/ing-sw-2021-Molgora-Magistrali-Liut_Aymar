@@ -93,10 +93,11 @@ public class Turn implements Serializable {
         card = gameDeck[cardNum].getStructure().get(0);
         cost.setVector(card.getCost().getVector());
 
-        if (actualplayer.getSkill1() == 1 && this.actualplayer.getLeadercards().getStructure().get(0).getSkill() == "PriceSkill")
-            cost = this.actualplayer.getLeadercards().getStructure().get(0).changePriceSkill(card);
-        if (actualplayer.getSkill2() == 1 && this.actualplayer.getLeadercards().getStructure().get(1).getSkill() == "PriceSkill" )
-            cost = this.actualplayer.getLeadercards().getStructure().get(1).changePriceSkill(card);
+
+        if (actualplayer.getSkill1() == 1 && actualplayer.getLeadercards().getStructure().get(0).getSkill().equals("PriceSkill"))
+            cost = actualplayer.getLeadercards().getStructure().get(0).changePriceSkill(card);
+        if (actualplayer.getSkill2() == 1 && actualplayer.getLeadercards().getStructure().get(1).getSkill().equals("PriceSkill"))
+            cost = actualplayer.getLeadercards().getStructure().get(1).changePriceSkill(card);
 
         //here the server checks if the player owns enough resources and, if it is, where
         int check = actualplayer.checkResources(cost.getVector());
@@ -292,8 +293,9 @@ public class Turn implements Serializable {
                 LeaderCard card = actualplayer.getLeadercards().getStructure().get(num);
                 actualplayer.getLeadercards().getStructure().remove(num);
                 actualplayer.increaseTrackposition();
-                if(num == 0)    actualplayer.setSkill1(0);
-                if(num == 1)    actualplayer.setSkill2(0);
+                if(num == 0)
+                    actualplayer.setSkill1(actualplayer.getSkill2());
+                actualplayer.setSkill2(0);
                 if(card.getSkill().equals("StorageSkill")) {
                     actualplayer.getStorage().setTypeExtrapanel('Z');
                     ResourceStructure empty = new ResourceStructure();
