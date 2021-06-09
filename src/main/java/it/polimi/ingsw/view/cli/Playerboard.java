@@ -200,7 +200,7 @@ public class Playerboard extends PaintCards {
         if(playerStorage.getTypeExtrapanel()!='Z') {
             putString("EXTRAPANEL", storage, 15, 15);
             for (int i = 0; i < 7; i++) storage[17][16 + i] = Color.RESET + "_";
-            int lung1 = playerStorage.getExtrapanel().size();
+            int lung1 = playerStorage.getExtrapanel().getVector().size();
             if (lung1 > 0) {
                 ArrayList<Character> panel = new ArrayList<>();
                 panel.add(playerStorage.getExtrapanel().getVector().get(0));
