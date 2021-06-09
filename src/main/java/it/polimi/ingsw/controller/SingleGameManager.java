@@ -60,23 +60,6 @@ public class SingleGameManager {
 
         // player.updateActionStructure(client);
 
-        player.addResourceStorage('B');
-        player.addResourceStorage('G');
-        player.addResourceStorage('P');
-        player.addResourceStorage('P');
-        player.addResourceStorage('P');
-        for (int i = 0; i < 3; i++) {
-            DevelopeCard card = new DevelopeCard();
-            int num = i*5;
-            card.setCard(num);
-            player.addDevelopCard(card);
-        }
-        for (int i = 0; i < 5; i++) {
-            player.addResourceStrongBox('P');
-            player.addResourceStrongBox('B');
-            player.addResourceStrongBox('G');
-            player.addResourceStrongBox('Y');
-        }
 
         while(!game.callEndgame(player)) {
             TurnManager turnManager = new TurnManager();

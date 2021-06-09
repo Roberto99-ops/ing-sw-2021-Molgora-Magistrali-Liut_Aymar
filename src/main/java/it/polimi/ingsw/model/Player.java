@@ -541,7 +541,6 @@ public class Player implements Serializable {
         int newPV = newQuantity/5;
         int diff = newPV - oldPV;
 
-        System.out.println("increased by " + diff + " for 5 resource mechanics");
         setResourcesQuantity(newQuantity);
 
         increasePV(diff);
