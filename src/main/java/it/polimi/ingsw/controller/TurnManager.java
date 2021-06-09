@@ -48,7 +48,7 @@ public class TurnManager {
                 if (action == 1) {
                     turn.shopCard();
                     client.sendMessage("clean screen");
-                    game.getPlayers().get(actualplayer).updatePlayerBoard(client, game);
+                   player.updatePlayerBoard(client, game);
                 }
 
                 // CONTROLLER:
@@ -63,7 +63,7 @@ public class TurnManager {
                     client.sendMessage("the market is changed (press any key)");
                     client.receiveMessage();
                     client.sendMessage("clean screen");
-                    game.getPlayers().get(actualplayer).updatePlayerBoard(client, game);
+                    player.updatePlayerBoard(client, game);
                 }
 
                 // CONTROLLER:
