@@ -162,7 +162,7 @@ public class LeaderCard implements Serializable {
                 player.increaseTrackposition();
                 client.sendMessage("What resource do you want? (Y, P, G, B) ");
                 char resource = client.receiveMessage().charAt(0);
-                player.getStrongBox().getStructure().addResource(1, resource); }
+                player.addResourceStrongBox(resource); }
             //(3)
             if(check == 2)
             {
@@ -170,7 +170,7 @@ public class LeaderCard implements Serializable {
                 player.increaseTrackposition();
                 client.sendMessage("What resource do you want? (Y, P, G, B) ");
                 char resource = client.receiveMessage().charAt(0);
-                player.getStrongBox().getStructure().addResource(1, resource); }
+                player.addResourceStrongBox(resource); }
             return 1;
         }
         else {

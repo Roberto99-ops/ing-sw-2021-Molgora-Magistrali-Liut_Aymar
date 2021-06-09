@@ -101,14 +101,14 @@ public class DevelopeCard implements Serializable {
                 player.deleteResources(1, this.inputproduction.getVector());
 
                 for(int i=0; i<this.outputproduction.getVector().size(); i++)
-                    player.getStrongBox().getStructure().addResource(1, this.outputproduction.getVector().get(i)); }
+                    player.addResourceStrongBox(this.outputproduction.getVector().get(i)); }
         //(3)
             if(check == 2)
             {
                 player.deleteResources(2, this.inputproduction.getVector());
 
                 for(int i=0; i<this.outputproduction.getVector().size(); i++)
-                    player.getStrongBox().getStructure().addResource(1, this.outputproduction.getVector().get(i)); }
+                    player.addResourceStrongBox(this.outputproduction.getVector().get(i)); }
             return 1;
            }
         else {

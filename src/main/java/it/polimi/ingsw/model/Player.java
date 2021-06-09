@@ -172,6 +172,11 @@ public class Player implements Serializable {
     }
 
 
+    private int resourcesQuantity = 0;
+    private void setResourcesQuantity(int resourcesQuantity) {
+        this.resourcesQuantity = resourcesQuantity;
+    }
+
 
     /**
      * Checks if the quantity of needed resources are available in the storage and/or in the strongbox
@@ -390,6 +395,7 @@ public class Player implements Serializable {
             else if (storage.getExtrapanel().getVector().get(1) == 'N')
                 storage.getExtrapanel().getVector().set(1, resource);
 
+            modifyPVforResources();
             return true;
 
         } else if (storage.getTypeExtrapanel() != resource && countExtraN == storage.countTypeS(resource)) {
@@ -419,6 +425,7 @@ public class Player implements Serializable {
 
                 if (storage.switchresources(resource, 0)) {
                     System.out.println(resource + " switched using best case");
+                    modifyPVforResources();
                     return true;
                 } else {
                     System.out.println(resource + " can't be added because of is present in panel and panels can't be switched ");
@@ -428,6 +435,7 @@ public class Player implements Serializable {
 
                 if (storage.switchresources(resource, 2)) {
                     System.out.println(resource + " switched using best case");
+                    modifyPVforResources();
                     return true;
                 } else System.out.println(resource + " can't be added because of is present in panel and panels can't be switched ");
 
@@ -457,7 +465,7 @@ public class Player implements Serializable {
                     storage.getPanel().set(5, resource); //posto i==5 ora occupato
                     break;
             }
-
+            modifyPVforResources();
             return true;
 
         } else {
@@ -475,6 +483,7 @@ public class Player implements Serializable {
             if (i < 4) {
                 //this if is here to avoid the case which we have a fourth type of resource, so is not contained in the storage yet, but we don't have to put it inside
                 storage.getPanel().set(i, resource); //aggiungo la risorsa nel primo piano (i==0) o nel secondo (i==1) o nel terzo (i==3)
+                modifyPVforResources();
                 return true;
             } else {
                 System.out.println(resource + " deleted. It can't be put in the storage");
@@ -520,6 +529,44 @@ public class Player implements Serializable {
         return false;
     }
 
+
+    /**
+     * this method modifies the pv in case we have lost or gained some resources.
+     * this because every 5 resources we gain 1 PV
+     */
+    private void modifyPVforResources(){
+        int newQuantity = countTotalResources();
+        int oldPV = resourcesQuantity/5;
+        int newPV = newQuantity/5;
+        int diff = newPV - oldPV;
+
+        setResourcesQuantity(newQuantity);
+
+        increasePV(diff);
+    }
+
+
+    /**
+     * this method counts all the resources of a player
+     * @return
+     */
+    private int countTotalResources() {
+        int total = 0;
+
+        for (int i = 0; i < 6; i++)
+            if(!storage.getPanel().get(i).equals('N'))
+                total++;
+
+        total+=strongBox.getStructure().getVector().size();
+
+        for (int i = 0; i < 2; i++)
+            if(!storage.getExtrapanel().get(i).equals('N'))
+                total++;
+
+        return total;
+    }
+
+
     /**
      * Adds a single specified resource inside the StrongBox
      * @param resource : the resource the player will put in strongbox
@@ -529,7 +576,8 @@ public class Player implements Serializable {
         /*IDEA: scelgo una risorsa e questa , che si trova dentro il resourcestructure, va inserita dentro il magazzino
         (se viene dal mercato)
         */
-        this.strongBox.getStructure().add(resource);
+        this.strongBox.getStructure().getVector().add(resource);
+        modifyPVforResources();
     }
 
 }
