@@ -9,23 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
-// import javax.swing.Timer;
-import java.util.Timer;
-import java.util.TimerTask;
-
-/*
-
-public static int lonely;
-private static ArrayList<Player> players;
-private static int n_players;
-private static DevelopeDecks[] developedecks = new DevelopeDecks[12];
-private static LeaderDeck leaderdeck;
-private static Market market;
-private static int VR=0;
-private static int timer_VR=0;
-
-        */
 
 /**
  * 1) shuffle all the decks and market
@@ -37,59 +22,12 @@ private static int timer_VR=0;
  */
 
 public class GameManager {
-    //private Game game;
-
-    /*public GameManager(Game gamein) throws Exception {
-        this.game = gamein;
-        this.main();
-    }*/
-
-    // inizializzazione di view e model
-
 
     private static final Game game = new Game();
     private static ArrayList<ClientHandler> clientList = new ArrayList<>();
     private static int actualturn = 0;
     private static SingleGameManager singleGameManager;
 
-    private static Timer timer = new Timer();
-
-            /* metodo 1 con javax (60000, new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-
-            System.out.println("rbjfb");
-
-            while (true) {
-
-                System.out.println("rbjfb");
-
-                if (clientList.size() == 4)
-                    break;
-
-            }
-        }
-    });
-    +/
-
-             */
-
-/*
-     private static TimerTask timertask = new TimerTask() {
-
-        @Override
-        public void run() {
-            while (true) {
-
-                System.out.println("TIMER FUNZIONANTE");
-
-                if (clientList.size() == 4)
-                    break;
-
-            }
-        }
-    };
-*/
 
 
     public GameManager(ClientHandler temporary, GameHandler player) {
@@ -117,52 +55,50 @@ public class GameManager {
 
         // timer.start();
 
-        System.out.println("1 minute loading");
 
-        timer.schedule(new TimerTask() {
+        TimeUnit.SECONDS.sleep(10);
 
-            @Override
-            public void run() {
-                while (true) {
 
-                    System.out.println("TIMER is running");
 
-                    if (clientList.size() == 4)
-                        break;
-
-                }
-            }
-        },0,60*1000);
 
         // se nessuno si collega entro un minuto parte singlegame del primo giocatore che si è collegato
 
-        /*
+
         if (clientList.size() == 1)
 
-            clientList.get(0).sendMessage("Nobody is connected with you\nStart a Single Game");
-            singleGameManager.main();
-
-*/
-
-        while (actualturn < 4) {
+            clientList.get(0).sendMessage("Nobody is connected with you\n\nIf you want to start a Single Game press enter");
+        singleGameManager.main();
 
 
-            turnmanager.main(clientList.get(actualturn), game, actualturn);
+        if (clientList.size() != 1) {
+
+            while (actualturn < 4) {
+
+                clientList.get(actualturn).sendMessage("It's your Turn " + clientList.get(actualturn).getPlayer().getName());
+
+                turnmanager.main(clientList.get(actualturn), game, actualturn);
 
 
-            if (game.callEndgame(game.getPlayers().get(actualturn))) {
-                for (int i = 1; i < Game.getN_players(); i++) {
-                    clientList.get(i).sendMessage("The winner is " + game.callVictory());
-                    return;
+                if (game.callEndgame(game.getPlayers().get(actualturn))) {
+                    for (int i = 1; i < Game.getN_players(); i++) {
+                        clientList.get(i).sendMessage("The winner is " + game.callVictory());
+                        return;
+                    }
                 }
+
+
+                actualturn++;
+                if (actualturn == 5) actualturn = 0;
             }
 
-
-            actualturn++;
-            if (actualturn == 5) actualturn = 0;
         }
 
+
+
     }
+
+
+
 
 }
 
