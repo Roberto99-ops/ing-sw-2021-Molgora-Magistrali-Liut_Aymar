@@ -53,6 +53,8 @@ public class Player implements Serializable {
     public  void setPv(int pv) {
         PV = pv;
     }
+    public void increasePV(int num) { PV+=num;}
+    public void decreasePV(int num) { PV-=num;}
 
 
     //Plancia
@@ -163,6 +165,7 @@ public class Player implements Serializable {
     public void setTrackposition(int num) { FTposition=num; }
     public void increaseTrackposition() {
         this.FTposition = FTposition + 1;
+        increasePV(1);
     }
 
 
@@ -282,43 +285,29 @@ public class Player implements Serializable {
         //if(minideck == 4)   return false;
         if(minideck != 0)
         {
-            if(DSpace.setCard(card, minideck)) return true;
+            if(DSpace.setCard(card, minideck)) {
+                increasePV(card.getPv());
+                return true;
+            }
         }
 
         //if(DSpace.getMinideck3().getStructure().size() == 0)   minideck=3;
         //if(DSpace.getMinideck2().getStructure().size() == 0)   minideck=2;
         //if(DSpace.getMinideck1().getStructure().size() == 0)   minideck=1;
-        if(DSpace.setCard(card, 1)) return true;
-        if(DSpace.setCard(card, 2)) return true;
-        if(DSpace.setCard(card, 3)) return true;
+        if(DSpace.setCard(card, 1)) {
+            increasePV(card.getPv());
+            return true;
+        }
+        if(DSpace.setCard(card, 2)) {
+            increasePV(card.getPv());
+            return true;
+        }
+        if(DSpace.setCard(card, 3)) {
+            increasePV(card.getPv());
+            return true;
+        }
         return false;
     }
-    /*
-     NON FARE
-    public ResourceStructure getResourcesStorage()
-    {
-        //stesso discorso della plancia anche qui,
-        //deve restituire le risorse totali, servono per attivare
-        //le produzioni
-        return this.storage.getPanel();
-    }
-
-
-    public ResourceStructure getResourcesStrongBox()
-    {
-        //stesso discorso della plancia anche qui,
-        //deve restituire le risorse totali, servono per attivare
-        //le produzioni
-        return this.SBox.getStructure();
-    }
-*/
-
-
-    //chiedo quale risorsa vuole eliminare
-    //System.out.println ("Which type of resource would you like to remove from your Storage:? W,R,B,G,P,Y");
-    //try {choice = (char)System.in.read();} catch (IOException e) {
-    //    System.out.println("Choice not available");
-    //}
 
     /**
      * Removes one resource from the storage.
@@ -335,10 +324,6 @@ public class Player implements Serializable {
         for (int c=0; c<2; c++){
             vector.add(storage.getExtrapanel().getVector().get(c));
         }
-        //caso in cui l'abilità del piano aggiuntivo sia abilitata:
-        /*if (leadercards.getStructure().get(0).getSkill().equals("StorageSkill") || leadercards.getStructure().get(1).getSkill().equals("StorageSkill")){
-            vector.addAll(storage.getExtrapanel().getVector()); //aggiungo tutti gli elementi nel pannello extra nel vettore fittizio
-        }*/
         if (vector.contains(resource)) {
             for (i = vector.size() - 1; i >= 0; i--) {
                 //mi sposto nella struttura finchè non ottengo indice della risorsa che voglio eliminare
@@ -363,7 +348,6 @@ public class Player implements Serializable {
         }
     }
 
-    //Similar method is NOT needed in StrongBox since its space is unlimited.
 
     /**
      * Adds a single specified resource inside the Storage
@@ -485,19 +469,4 @@ public class Player implements Serializable {
         this.strongBox.getStructure().add(resource);
     }
 
-
-    //mostra a video la quantità totale di risorse disponibili;
-
-
-    /*
-     //* Counts all the available resources in Storage and in StrongBox
-    // */
-    /*
-    public void TotAvailableResources (){
-        int tot=0;
-        tot+= storage.getTotResourceStorage(); //registro risorse nel magazzino
-        tot+= SBox.getTotResourceSB();//registro risorse nel SB
-        System.out.println("Available Resources: "+ tot);
-    }
-    */
 }

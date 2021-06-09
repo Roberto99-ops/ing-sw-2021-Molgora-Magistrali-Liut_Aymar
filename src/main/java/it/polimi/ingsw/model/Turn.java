@@ -218,6 +218,7 @@ public class Turn implements Serializable {
                 }
                 else {
                     actualplayer.setSkill1(1);
+                    actualplayer.increasePV(card.getPv());
                     if(card.getSkill().equals("StorageSkill"))
                         actualplayer.getStorage().setTypeExtrapanel(card.getInputskill());
                 }
@@ -229,6 +230,7 @@ public class Turn implements Serializable {
                 int level = card.getCardLevel();
                 if(actualplayer.checkCards(level, cost)){
                     actualplayer.setSkill1(1);
+                    actualplayer.increasePV(card.getPv());
                     if(card.getSkill().equals("StorageSkill"))
                         actualplayer.getStorage().setTypeExtrapanel(card.getInputskill());
                 }
@@ -239,6 +241,7 @@ public class Turn implements Serializable {
             }
         }
 
+        //player choose second card
         if (choice.equals("1")) {
             LeaderCard card = actualplayer.getLeadercards().getStructure().get(1);
             ArrayList<Character> cost;
@@ -253,6 +256,7 @@ public class Turn implements Serializable {
                 }
                 else {
                     actualplayer.setSkill2(1);
+                    actualplayer.increasePV(card.getPv());
                     if(card.getSkill().equals("StorageSkill"))
                         actualplayer.getStorage().setTypeExtrapanel(card.getInputskill());
                 }
@@ -264,6 +268,7 @@ public class Turn implements Serializable {
                 int level = card.getCardLevel();
                 if(actualplayer.checkCards(level, cost)) {
                     actualplayer.setSkill2(1);
+                    actualplayer.increasePV(card.getPv());
                     if(card.getSkill().equals("StorageSkill"))
                         actualplayer.getStorage().setTypeExtrapanel(card.getInputskill());
                 }
@@ -293,8 +298,12 @@ public class Turn implements Serializable {
                 LeaderCard card = actualplayer.getLeadercards().getStructure().get(num);
                 actualplayer.getLeadercards().getStructure().remove(num);
                 actualplayer.increaseTrackposition();
-                if(num == 0)
+                if(num == 0) {
+                    if(actualplayer.getSkill1() == 1)   actualplayer.decreasePV(card.getPv());
                     actualplayer.setSkill1(actualplayer.getSkill2());
+                }
+                if(num == 1)
+                    if(actualplayer.getSkill2() == 1)   actualplayer.decreasePV(card.getPv());
                 actualplayer.setSkill2(0);
                 if(card.getSkill().equals("StorageSkill")) {
                     actualplayer.getStorage().setTypeExtrapanel('Z');
