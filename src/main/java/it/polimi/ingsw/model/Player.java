@@ -384,16 +384,16 @@ public class Player implements Serializable {
         int i = 5;
         int countExtraN = 0;
         for (int c = 1; c >= 0; c--) {
-            if (storage.getExtrapanel().getVector().get(c) == 'N') countExtraN++;
+            if (storage.getExtrapanel().getVector().get(c).equals('N')) countExtraN++;
         }
         //controllo se extrapanel sia dello stesso tipo e se ha degli spazi liberi
         if (storage.getTypeExtrapanel() == resource && countExtraN > 0) {
-            if (storage.getExtrapanel().getVector().get(0) == 'N') {
+            if (storage.getExtrapanel().getVector().get(0) == 'N')
                 storage.getExtrapanel().getVector().set(0, resource);
-            } else if (storage.getExtrapanel().getVector().get(1) == 'N') {
+             else if (storage.getExtrapanel().getVector().get(1) == 'N')
                 storage.getExtrapanel().getVector().set(1, resource);
-                return true;
-            }
+
+             return true;
         } //else if (storage.getTypeExtrapanel()!=resource && countExtraN== storage.countTypeS(resource))
         //System.out.println("No more space available in Storage.");
 
