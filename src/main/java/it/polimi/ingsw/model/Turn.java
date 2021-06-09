@@ -162,10 +162,10 @@ public class Turn implements Serializable {
 
         product.setVector(Game.getMarket().doMarket(RoworCol, number, actualplayer));
 
-        if (this.actualplayer.getLeadercards().getStructure().get(0).getSkill().equals("WhiteMarbleSkill") && actualplayer.getSkill1() == 1)
-                product = this.actualplayer.getLeadercards().getStructure().get(0).changeWhiteMarbleSkill(product);
-        if (this.actualplayer.getLeadercards().getStructure().get(1).getSkill().equals("WhiteMarbleSkill") && actualplayer.getSkill2() == 1)
-            product = this.actualplayer.getLeadercards().getStructure().get(1).changeWhiteMarbleSkill(product);
+        if (actualplayer.getSkill1() == 1 && actualplayer.getLeadercards().getStructure().get(0).getSkill().equals("WhiteMarbSkil"))
+                product = actualplayer.getLeadercards().getStructure().get(0).changeWhiteMarbleSkill(product);
+        if (actualplayer.getSkill2() == 1 && actualplayer.getLeadercards().getStructure().get(1).getSkill().equals("WhiteMarbSkil"))
+                product = actualplayer.getLeadercards().getStructure().get(1).changeWhiteMarbleSkill(product);
 
         //we "clean" the vector
         for (int i = 0; i < product.getVector().size(); i++){
