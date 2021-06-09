@@ -60,7 +60,7 @@ public class TurnManager {
                 if (action == 2) {
                     turn.buyResource();
                     client.sendMessage("clean screen");
-                    game.getPlayers().get(actualplayer).updateMarket(client);
+                    player.updateMarket(client);
                     client.sendMessage("the market is changed (press any key)");
                     client.receiveMessage();
                     client.sendMessage("clean screen");

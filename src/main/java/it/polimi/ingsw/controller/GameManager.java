@@ -8,6 +8,8 @@ import it.polimi.ingsw.model.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
@@ -22,7 +24,7 @@ import java.util.concurrent.TimeUnit;
  * @param
  */
 
-public class GameManager {
+public class GameManager implements Runnable{
 
     private static final Game game = new Game();
     private static ArrayList<ClientHandler> clientList = new ArrayList<>();
@@ -30,15 +32,8 @@ public class GameManager {
     private static SingleGameManager singleGameManager;
     private static boolean end = false;
 
-
-    public GameManager(ClientHandler temporary, GameHandler player) {
-        clientList.add(temporary);
-        game.getPlayers().add(player);
-        singleGameManager = new SingleGameManager(clientList.get(0));
-    }
-
-
-    public static void main() throws Exception {
+    @Override
+    public void run() {
 
         //passare a questa classe l'istanza di clienthandler così da poter chiamare
         //i supi metodi per inviare e ricevere e poter anche condividire l'istanza
@@ -55,72 +50,146 @@ public class GameManager {
         // timer.start();
 
 
-        TimeUnit.SECONDS.sleep(10);
+        try {
+            TimeUnit.SECONDS.sleep(10);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         // se nessuno si collega entro 30 secondi parte singlegame del primo giocatore che si è collegato
 
 
         if (clientList.size() == 1) {
-            clientList.get(0).sendMessage("\nNobody is connected with you\n\nIf you want to start a Single Game press enter");
-            singleGameManager.main();
+            try {
+                clientList.get(0).sendMessage("Nobody is connected with you.\nPress enter to start a single game");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                clientList.get(0).receiveMessage();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+            singleGameManager = new SingleGameManager(clientList.get(0));
+            try {
+                singleGameManager.main();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
 
+        //synchronized (this){
         if (clientList.size() != 1) {
-
-            game.shuffle();
-
+            try {
+                game.shuffle();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
             for (int i = 0; i < clientList.size(); i++) {
                 //player.updateActionStructure(client);
-                int choice2;
+                int choice2 = 0;
                 LeaderDeck leaderChoice = game.leaderChoice();
                 LeaderDeckMsg mess = new LeaderDeckMsg(leaderChoice);
-                clientList.get(i).sendMessage(mess);
-                clientList.get(i).sendMessage("\nChoose one " + clientList.get(i).getPlayer().getName() + ": ");
-                int choice1 = Integer.parseInt(clientList.get(i).receiveMessage());
+                try {
+                    clientList.get(i).sendMessage(mess);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    clientList.get(i).sendMessage("Choose one " + clientList.get(i).getPlayer().getName() + ": ");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                int choice1 = 0;
+                try {
+                    choice1 = Integer.parseInt(clientList.get(i).receiveMessage());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
                 clientList.get(i).getPlayer().getLeadercards().getStructure().add(leaderChoice.getStructure().get(choice1));
 
 
                 do {
-                    clientList.get(i).sendMessage("\nChoose another one " + clientList.get(i).getPlayer().getName() + ": ");
-                    choice2 = Integer.parseInt(clientList.get(i).receiveMessage());
+                    try {
+                        clientList.get(i).sendMessage("Choose another one " + clientList.get(i).getPlayer().getName() + ": ");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        choice2 = Integer.parseInt(clientList.get(i).receiveMessage());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
                 } while (choice2 == choice1);
                 clientList.get(i).getPlayer().getLeadercards().getStructure().add(leaderChoice.getStructure().get(choice2));
-                clientList.get(i).sendMessage("\nclean screen");
+                try {
+                    clientList.get(i).sendMessage("clean screen");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
             }
 
 
-            while (actualturn < 4 && end == false) {
-
-                clientList.get(actualturn).sendMessage("\nIt's your Turn " + clientList.get(actualturn).getPlayer().getName());
-
-                for (int i = 0; i < clientList.size() - 1; i++) {
-                    if (i != actualturn)
-                        clientList.get(i).sendMessage("\nIt's " + clientList.get(actualturn).getPlayer().getName() + " Turn.");
+            while (!end) {
+                try {
+                    clientList.get(actualturn).sendMessage("\n\n\n\t\t\t\t\t\t\t\tIt's your turn " + clientList.get(actualturn).getPlayer().getName() + ". (press enter)");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    clientList.get(actualturn).receiveMessage();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                for (int i = 0; i < clientList.size(); i++) {
+                    if (i != actualturn) {
+                        try {
+                            clientList.get(i).sendMessage("\n\n\n\n\t\t\t\t\t\t\t\tIt's " + clientList.get(actualturn).getPlayer().getName() + " turn.\n\t\t\t\t\t\t\t\t(press enter & wait)");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
                 }
 
 
-                turnmanager.main(clientList.get(actualturn), game, actualturn);
+                try {
+                    turnmanager.main(clientList.get(actualturn), game, actualturn);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
 
                 for (int i = 0; i < clientList.size(); i++) {
 
-                    if (game.callEndgame(clientList.get(i).getPlayer()) == true) end = true;
+                    if (game.callEndgame(clientList.get(i).getPlayer())) end = true;
 
                 }
 
                 actualturn++;
-                if (actualturn == clientList.size() - 1) actualturn = 0;
+                if (actualturn == clientList.size()) actualturn = 0;
 
             }
-
+       // }
 
 
 
             for (int i = 0; i < clientList.size(); i++) {
 
-                clientList.get(i).sendMessage("\nThe winner is " + game.callVictory() + "Game is finished");
+                try {
+                    clientList.get(i).sendMessage("\nThe winner is " + game.callVictory() + "Game is finished");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
             }
 
@@ -128,6 +197,11 @@ public class GameManager {
         }
 
 
+    }
+
+    public static void addPlayer(ClientHandler temporary, GameHandler player){
+        clientList.add(temporary);
+        game.getPlayers().add(player);
     }
 
 
