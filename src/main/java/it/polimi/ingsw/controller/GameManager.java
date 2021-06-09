@@ -140,7 +140,7 @@ public class GameManager implements Runnable{
 
             while (!end) {
                 try {
-                    clientList.get(actualturn).sendMessage("\n\n\n\t\t\t\t\t\t\t\tIt's your turn " + clientList.get(actualturn).getPlayer().getName() + ". (press enter)");
+                    clientList.get(actualturn).sendMessage("\n\n\n\t\t\t\t\t\t\t\tIt's your turn " + clientList.get(actualturn).getPlayer().getName() + ".");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -148,7 +148,7 @@ public class GameManager implements Runnable{
                 for (int i = 0; i < clientList.size(); i++) {
                     if (i != actualturn) {
                         try {
-                            clientList.get(i).sendMessage("\n\n\n\n\t\t\t\t\t\t\t\tIt's " + clientList.get(actualturn).getPlayer().getName() + " turn.\n\t\t\t\t\t\t\t\t(press enter & wait)");
+                            clientList.get(i).sendMessage("\n\n\n\n\t\t\t\t\t\t\t\tIt's " + clientList.get(actualturn).getPlayer().getName() + " turn.\n\t\t\t\t\t\t\t(just wait)");
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
