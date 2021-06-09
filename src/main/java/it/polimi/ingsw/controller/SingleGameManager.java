@@ -4,10 +4,7 @@ import it.polimi.ingsw.Server.ClientHandler;
 import it.polimi.ingsw.Server.MessageSingleGameManager;
 import it.polimi.ingsw.Server.SingleGameHandler;
 import it.polimi.ingsw.Server.messages.LeaderDeckMsg;
-import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.LeaderDeck;
-import it.polimi.ingsw.model.Player;
-import it.polimi.ingsw.model.SingleGame;
+import it.polimi.ingsw.model.*;
 
 import java.io.FileNotFoundException;
 
@@ -19,7 +16,6 @@ public class SingleGameManager {
 
     private static Game game;
     private static ClientHandler client;
-    private static Player L;
     private static MessageSingleGameManager observablesinglegame;
 
     /**
@@ -64,25 +60,35 @@ public class SingleGameManager {
 
         // player.updateActionStructure(client);
 
-        /* FOR TESTING BUYING CARDS
-        for(int i=0; i<5; i++){
-            player.getStrongBox().getStructure().add('B');
-            player.getStrongBox().getStructure().add('Y');
-            player.getStrongBox().getStructure().add('G');
-            player.getStrongBox().getStructure().add('P');
-        }*/
-
+        player.addResourceStorage('B');
+        player.addResourceStorage('G');
+        player.addResourceStorage('P');
+        player.addResourceStorage('P');
+        player.addResourceStorage('P');
+        for (int i = 0; i < 3; i++) {
+            DevelopeCard card = new DevelopeCard();
+            int num = i*5;
+            card.setCard(num);
+            player.addDevelopCard(card);
+        }
+        for (int i = 0; i < 5; i++) {
+            player.addResourceStrongBox('P');
+            player.addResourceStrongBox('B');
+            player.addResourceStrongBox('G');
+            player.addResourceStrongBox('Y');
+        }
 
         while(!game.callEndgame(player)) {
             TurnManager turnManager = new TurnManager();
             turnManager.main(client, game, 0);
             client.sendMessage("Turn Finished(press any key)");
             client.receiveMessage();
-            //SingleGame.getActionStructure().incrementAS_COUNTER();
         }
 
         String winner = game.callVictory();
-        client.sendMessage(winner);
+        client.sendMessage("\t\t\t\t\t\t\t\t\t\t" + winner + " won!");
+
+        return;
     }
 
     private static void Shuffle() throws FileNotFoundException {
