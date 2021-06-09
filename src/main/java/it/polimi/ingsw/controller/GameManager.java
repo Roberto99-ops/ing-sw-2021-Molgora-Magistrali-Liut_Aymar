@@ -76,13 +76,13 @@ public class GameManager {
                 LeaderDeck leaderChoice = game.leaderChoice();
                 LeaderDeckMsg mess = new LeaderDeckMsg(leaderChoice);
                 clientList.get(i).sendMessage(mess);
-                clientList.get(i).sendMessage("\nChoose one: ");
+                clientList.get(i).sendMessage("\nChoose one " + clientList.get(i).getPlayer().getName() + ": ");
                 int choice1 = Integer.parseInt(clientList.get(i).receiveMessage());
                 clientList.get(i).getPlayer().getLeadercards().getStructure().add(leaderChoice.getStructure().get(choice1));
 
 
                 do {
-                    clientList.get(i).sendMessage("\nChoose another one: ");
+                    clientList.get(i).sendMessage("\nChoose another one " + clientList.get(i).getPlayer().getName() + ": ");
                     choice2 = Integer.parseInt(clientList.get(i).receiveMessage());
                 } while (choice2 == choice1);
                 clientList.get(i).getPlayer().getLeadercards().getStructure().add(leaderChoice.getStructure().get(choice2));
