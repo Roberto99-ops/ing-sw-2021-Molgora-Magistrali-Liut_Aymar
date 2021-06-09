@@ -58,27 +58,23 @@ public class GameManager {
 
         TimeUnit.SECONDS.sleep(10);
 
+        // se nessuno si collega entro30 secondi parte singlegame del primo giocatore che si è collegato
 
 
-
-        // se nessuno si collega entro un minuto parte singlegame del primo giocatore che si è collegato
-
-
-        if (clientList.size() == 1)
-
+        if (clientList.size() == 1) {
             clientList.get(0).sendMessage("Nobody is connected with you\n\nIf you want to start a Single Game press enter");
-        singleGameManager.main();
+            singleGameManager.main();
+        }
 
 
         if (clientList.size() != 1) {
-
             while (actualturn < 4) {
-
                 clientList.get(actualturn).sendMessage("It's your Turn " + clientList.get(actualturn).getPlayer().getName());
-
+                for (int i = 0; i < clientList.size()-1; i++) {
+                    if(i != actualturn)
+                        clientList.get(i).sendMessage("It's " + clientList.get(actualturn).getPlayer().getName() + " Turn.");
+                }
                 turnmanager.main(clientList.get(actualturn), game, actualturn);
-
-
                 if (game.callEndgame(game.getPlayers().get(actualturn))) {
                     for (int i = 1; i < Game.getN_players(); i++) {
                         clientList.get(i).sendMessage("The winner is " + game.callVictory());
