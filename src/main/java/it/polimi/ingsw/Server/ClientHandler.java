@@ -57,24 +57,12 @@ public class ClientHandler implements Runnable {
             System.out.println("could not open connection to " + client.getInetAddress());
             return;
         }
-
         System.out.println("Connected to: " + client.getInetAddress() + " at port #" + client.getLocalPort());
-
-        /*//mando messaggio con elenco delle porte aperte
-        try {
-            this.sendMessage("You can connect to one of these ports:\n\t1010\n\t1020\n\t1030\n\t1040\n\t1050\n");
-            String msg= this.receiveMessage();
-
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }*/
-
         try {
             handleClientConnection();
         } catch (IOException e) {
             System.out.println("client " + client.getInetAddress() + " connection dropped");
         }
-
         try {
             client.close();
         } catch (IOException e) {
@@ -111,124 +99,13 @@ public class ClientHandler implements Runnable {
                 }
 
             }
-
-
-            //GameManager.main(game);
-
-            //Turn turn = new Turn();
-            //turn.setActualplayer(player);
-
-           // TurnMsg msg = new TurnMsg(turn);
-           // output.writeObject(msg);
-           // output.flush();
-
-
-
-            /*PLAYER - FATTO
-            Player player = new Player();
-            player.setName("Mario Bros");
-            player.setDevelopementquantity(7);
-            player.setNumber(2);
-            player.setPv(100);
-            PlayerMsg msg = new PlayerMsg(player);
-            output.writeObject(msg);
-            output.flush();
-
-             */
-
-            /*DEVELOPCARD - FATTO
-
-            //caso in cui voglio una carta direttamente da json (es. la #5)
-            DevelopeCard developeCard = new DevelopeCard();
-            DevelopCardMsg msg = new DevelopCardMsg(developeCard);
-            msg.JsonDevelopCard(5);
-            //developeCard.setCard(0);
-            System.out.println(msg.getDevelopeCard().getColour());
-
-            //DevelopCardMsg msg = new DevelopCardMsg(developeCard);
-            output.writeObject(msg);
-            output.flush(); // così mando la carta
-
-             */
-
-            /*STORAGE E SB-FATTO
-            Storage storage = new Storage();
-            storage.getPanel().set(0,'B');
-            StrongBox strongBox = new StrongBox();
-            strongBox.getStructure().add('G');
-            StrongboxMsg msg = new StrongboxMsg(strongBox.getStructure());
-            //StorageMsg msg = new StorageMsg(storage);
-
-            output.writeObject(msg);
-            output.flush();
-            */
-
-            /* ACTIONSTRUCTURE - FATTO
-            //considero una struttura di segnalini azione
-            ActionStructure actionStructure = new ActionStructure();
-            //provo a modificare la struttura cambiando l'ordine dei segnalini
-            actionStructure.ShuffleSignal();
-
-            ActionStructureMsg msg = new ActionStructureMsg(actionStructure);
-            output.writeObject(msg.getAction());
-            output.flush();
- */
-
-            /*LORENZO - FATTO
-            Lorenzo lorenzo = new Lorenzo();
-            lorenzo.Lorenzomoves(2);
-            LorenzoMsg msg = new LorenzoMsg(lorenzo);
-            output.writeObject(msg.getTrackPositionLore());
-            output.flush();
-             */
-
-
-            /* FAITHTRACK - OBSOLETO
-            Game game = new Game(); // VR = 0
-            //setto il numero di giocatori = 0
-            game.setN_players(0);
-            Player player1 = new Player();
-            Player player2 = new Player();
-            //metto player1 in posizione per il VR e player2 nell'area VR
-            for (int i=0 ; i<9;i++){
-                player1.increaseTrackposition();
+            else{
+                gameManager = new GameManager(this, player);
+                gameManager.main();
             }
-            for (int i=0 ; i<6;i++){
-                player2.increaseTrackposition();
-            }
-            //chiamo il vaticanReport per player1
-            player1.getFaithTrack().VaticanReport(player1, game);
-            */
-
-            /* PROVA CON STRONGBOX - FATTO
-            StrongBox strongBox = new StrongBox();
-            Character[] resources = {'P', 'Y', 'G', 'B'};
-            Random mixer = new Random();
-            for (int i = 0; i < 20; i++) {
-                int mix = mixer.nextInt(4);
-                strongBox.getStructure().add(resources[mix]);
-            }
-            System.out.println(strongBox.getStructure());
-            System.out.println(strongBox.getStructure().getVector());
-
-            StrongboxMsg msg = new StrongboxMsg(strongBox.getStructure());
-            output.writeObject(msg);
-            output.flush();
-             */
-            //        String name = input.readUTF();//.readObject();
-            //        System.out.println("Name of the client is: " + name);
-
-            //        while (!client.isClosed()) {
-            /* read commands from the client, process them, and send replies */
-            //            String next = input.readUTF();
-            //CommandMsg command = (CommandMsg) next;//qui o pattern state o classi o json
-            //command.processMessage(this);
-            //            System.out.println("Client " + name + " sent: " + next);
-            //            if(next == "close")
             output.close();
             input.close();
             client.close();
-            //        }
         } catch (ClassCastException | ClassNotFoundException e) {
             System.out.println("invalid stream from client");
         } catch (Exception e) {
