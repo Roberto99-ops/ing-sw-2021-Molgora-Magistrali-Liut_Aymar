@@ -26,7 +26,7 @@ public class TurnManager {
         //turn.setActualplayer(game.getPlayers().get(actualplayer));
         GameHandler player = turn.getActualplayer();
         String reception;
-        int action;
+        int action = 0;
         int leaderaction = 0;
         boolean additionalAction = false;
 
@@ -43,7 +43,9 @@ public class TurnManager {
             //1)
 
             client.sendMessage("What do you want to do?\n\t1)Shop a developement card\n\t2)Take resources at the market\n\t3)Active a production\n\t4)Do a Leader action\n");
-            action = Integer.parseInt(client.receiveMessage());
+            String msg = client.receiveMessage();
+            if(!msg.equals(""))
+                action = msg.charAt(0) - 48;
 
             try {
                 if (action == 1) {
@@ -88,7 +90,7 @@ public class TurnManager {
                         }
 
                         //2.2)
-                        client.sendMessage("Which DevelopeCard do you want to enable(form left to right 0 1 2. enter=none)?\n");
+                        client.sendMessage("Which DevelopeCard do you want to enable(from left to right 0 1 2. enter=none)?\n");
                         //player.updateDevelDeck(client);
                         String cardChosen = client.receiveMessage();
                         if (!cardChosen.equals("")) {
@@ -132,6 +134,8 @@ public class TurnManager {
                         leaderaction++;
                     }
 
+                    additionalAction = false;
+
                     player.updatePlayerBoard(client, game);
                 }
 
@@ -149,7 +153,6 @@ public class TurnManager {
         MessageGameManager.personalChanges(client, game.getPlayers().get(actualplayer), game);
         MessageGameManager.generalChanges(client);
 
-        return;
     }
 }
 

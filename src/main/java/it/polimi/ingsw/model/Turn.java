@@ -78,6 +78,7 @@ public class Turn implements Serializable {
      */
 
     public void shopCard() throws Exception {
+        int cardNum;
         DevelopeCard card;
         ResourceStructure cost = new ResourceStructure();
         DevelopeDecks[] gameDeck = new DevelopeDecks[12];
@@ -87,9 +88,17 @@ public class Turn implements Serializable {
 
         DevelopeDecksMsg msg = new DevelopeDecksMsg(gameDeck);
         client.sendMessage(msg);
-        client.sendMessage("Choose the number of the card you want to buy ");
-        String next = client.receiveMessage();
-        int cardNum = Integer.parseInt(next);
+        do {
+            client.sendMessage("Choose the number of the card you want to buy ");
+            String next = client.receiveMessage();
+
+            cardNum = next.charAt(0) - 48;
+            if(next.length() == 2) {
+                cardNum = cardNum * 10 + next.charAt(1) - 48;   //to convert a number > 9
+            }
+
+            if(gameDeck[cardNum].getStructure().size() == 0)    cardNum = 20; //only to avoid to choose an empty deck
+        }while(cardNum<=0 || cardNum > 12);
         card = gameDeck[cardNum].getStructure().get(0);
         cost.setVector(card.getCost().getVector());
 
@@ -140,25 +149,31 @@ public class Turn implements Serializable {
 
         ResourceStructure product = new ResourceStructure();
         int RoworCol = 0;
-        int number;
-
+        int number = 0;
+        String next = new String();
         MarketMsg msg = new MarketMsg(Game.getMarket());
         client.sendMessage(msg);
 
-        client.sendMessage("Do you want to choose a row or a column?\n");
-        String next = client.receiveMessage();
-
-        if (next.equals("row")) {
-            client.sendMessage("Which row do you want to take? (from 0 to 2) \n");
-            RoworCol = 1;
-        }
-        if (next.equals("column")) {
-            client.sendMessage("Which column do you want to take? (from 0 to 3) \n");
-            RoworCol = 2;
+        while(!next.equals("row") && !next.equals("column")){
+            client.sendMessage("Do you want to choose a row or a column?\n");
+             next = client.receiveMessage();
         }
 
-        next = client.receiveMessage();
-        number = Integer.parseInt(next);
+        if (next.equals("row"))
+            do {
+                client.sendMessage("Which row do you want to take? (from 0 to 2) \n");
+                RoworCol = 1;
+                String num = client.receiveMessage();
+                number = num.charAt(0) - 48;
+            }while(number > 2 || number <0);
+
+        if (next.equals("column"))
+            do{
+                client.sendMessage("Which column do you want to take? (from 0 to 3) \n");
+                RoworCol = 2;
+                String num = client.receiveMessage();
+                number = num.charAt(0) - 48;
+        }while(number > 3 || number <0);
 
         product.setVector(Game.getMarket().doMarket(RoworCol, number, actualplayer));
 
@@ -187,8 +202,6 @@ public class Turn implements Serializable {
             actualplayer.addResourceStorage(product.getVector().get(i));
 
         }
-
-        return;
 
     }
 
