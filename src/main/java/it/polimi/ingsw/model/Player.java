@@ -230,6 +230,7 @@ public class Player implements Serializable {
         if (ableTo == 1) {
             for (int i = vectorResources.size() - 1; i >= 0; i--)
                 removeResourceStorage(vectorResources.get(i));
+            modifyPVforResources();
             return;
         }
 
@@ -244,7 +245,7 @@ public class Player implements Serializable {
                 strongBox.getStructure().getVector().remove(vectorResources.get(i));
         }
 
-        return;
+        modifyPVforResources();
     }
 
     /**
@@ -540,6 +541,7 @@ public class Player implements Serializable {
         int newPV = newQuantity/5;
         int diff = newPV - oldPV;
 
+        System.out.println("increased by " + diff + " for 5 resource mechanics");
         setResourcesQuantity(newQuantity);
 
         increasePV(diff);
@@ -560,7 +562,7 @@ public class Player implements Serializable {
         total+=strongBox.getStructure().getVector().size();
 
         for (int i = 0; i < 2; i++)
-            if(!storage.getExtrapanel().get(i).equals('N'))
+            if(!storage.getExtrapanel().getVector().get(i).equals('N'))
                 total++;
 
         return total;
