@@ -74,14 +74,14 @@ public class GameManager {
 
              */
 
-     /* metodo 2 con util
+/*
      private static TimerTask timertask = new TimerTask() {
 
         @Override
         public void run() {
             while (true) {
 
-                System.out.println("rbjfb");
+                System.out.println("TIMER FUNZIONANTE");
 
                 if (clientList.size() == 4)
                     break;
@@ -89,7 +89,7 @@ public class GameManager {
             }
         }
     };
- */
+*/
 
 
     public GameManager(ClientHandler temporary, GameHandler player) {
@@ -116,7 +116,23 @@ public class GameManager {
         // e si inizia a giocare con i giocatori connessi (max 4)
 
         // timer.start();
-        // timer.schedule;
+
+        System.out.println("1 minute loading");
+
+        timer.schedule(new TimerTask() {
+
+            @Override
+            public void run() {
+                while (true) {
+
+                    System.out.println("TIMER is running");
+
+                    if (clientList.size() == 4)
+                        break;
+
+                }
+            }
+        },0,60*1000);
 
         // se nessuno si collega entro un minuto parte singlegame del primo giocatore che si è collegato
 
