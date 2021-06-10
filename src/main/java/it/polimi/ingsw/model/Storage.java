@@ -103,22 +103,33 @@ public class Storage extends ArrayList<Character> implements Serializable {
 
             // sto provando ad inserirla nel secondo piano
 
-            if (k == 2) {
+            if (k == 2 && this.panel.get(5) == 'N') {
 
-            if (this.panel.get(3) != 'N' && this.panel.get(4) != 'N' && this.panel.get(5) == 'N') {
+            if (this.panel.get(3) != 'N' && this.panel.get(4) != 'N') {
 
                 temporary = this.panel.get(3);
 
-                this.panel.set(1, this.panel.get(3));
-                this.panel.set(2, this.panel.get(4));
+                this.panel.set(1, temporary);
+                this.panel.set(2, temporary);
                 this.panel.set(3, resource);
                 this.panel.set(4, resource);
                 this.panel.set(5, resource);
                 return true;
 
-            } else if (this.panel.get(3) != 'N' && this.panel.get(4) == 'N' && this.panel.get(5) == 'N') {
-                this.panel.set(1, this.panel.get(3));
-                this.panel.set(2, this.panel.get(4));
+            } else if (this.panel.get(3) != 'N' && this.panel.get(4) == 'N') {
+
+                temporary = this.panel.get(3);
+
+                this.panel.set(1, temporary);
+                this.panel.set(2, 'N');
+                this.panel.set(3, resource);
+                this.panel.set(4, resource);
+                this.panel.set(5, resource);
+                return true;
+
+            } else if (this.panel.get(3) == 'N' && this.panel.get(4) == 'N') {
+                this.panel.set(1, 'N');
+                this.panel.set(2, 'N');
                 this.panel.set(3, resource);
                 this.panel.set(4, resource);
                 this.panel.set(5, resource);
@@ -132,7 +143,8 @@ public class Storage extends ArrayList<Character> implements Serializable {
 
             if (k == 0) {
 
-            if ((this.panel.get(1) != 'N' && this.panel.get(2) == 'N') || (this.panel.get(1) == 'N' && this.panel.get(2) == 'N')) {
+            if ((this.panel.get(1) != 'N' && this.panel.get(2) == 'N') ||
+                    (this.panel.get(1) == 'N' && this.panel.get(2) == 'N')) {
 
                 this.panel.set(0, this.panel.get(1));
                 this.panel.set(1, resource);
