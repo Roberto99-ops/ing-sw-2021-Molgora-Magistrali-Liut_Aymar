@@ -387,6 +387,7 @@ public class Player implements Serializable {
 
 
         //controllo se extrapanel sia dello stesso tipo e se ha degli spazi liberi
+
         int countExtraN = 0;
         for (int c = 1; c >= 0; c--) {
             if (storage.getExtrapanel().getVector().get(c).equals('N')) countExtraN++;
