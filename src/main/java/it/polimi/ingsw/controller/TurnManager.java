@@ -142,7 +142,7 @@ public class TurnManager {
             } catch (IOException e) {
                 System.out.println(e);
             }
-        }while(action != 1 && action != 2 && action != 3);
+        } while(action != 1 && action != 2 && action != 3);
         //Ad ogni turno, effettuo il controllo del Vatican Report e
         // notifico tutti gli observer dei cambiamenti avvenuti durante il turno
 
