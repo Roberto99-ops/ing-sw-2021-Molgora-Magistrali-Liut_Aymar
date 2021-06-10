@@ -99,9 +99,16 @@ public class Storage extends ArrayList<Character> implements Serializable {
 
     public boolean switchresources(char resource, int k) {
 
+            char temporary = 'N';
+
+            // sto provando ad inserirla nel secondo piano
+
             if (k == 2) {
 
             if (this.panel.get(3) != 'N' && this.panel.get(4) != 'N' && this.panel.get(5) == 'N') {
+
+                temporary = this.panel.get(3);
+
                 this.panel.set(1, this.panel.get(3));
                 this.panel.set(2, this.panel.get(4));
                 this.panel.set(3, resource);
@@ -119,9 +126,14 @@ public class Storage extends ArrayList<Character> implements Serializable {
 
             } else return false;
 
-        } else if (k == 0) {
+        }
+
+            // sto provando ad inserirla nel primo piano
+
+            if (k == 0) {
 
             if ((this.panel.get(1) != 'N' && this.panel.get(2) == 'N') || (this.panel.get(1) == 'N' && this.panel.get(2) == 'N')) {
+
                 this.panel.set(0, this.panel.get(1));
                 this.panel.set(1, resource);
                 this.panel.set(2, resource);
@@ -132,6 +144,7 @@ public class Storage extends ArrayList<Character> implements Serializable {
                 this.panel.set(0, this.panel.get(3));
                 this.panel.set(3, resource);
                 this.panel.set(4, resource);
+
                 return true;
             }
 
