@@ -2,6 +2,7 @@ package it.polimi.ingsw.model;
 
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -158,7 +159,7 @@ public class PlayerTest {
 
     //FATTO
     @Test
-    public void addResourceStorage() {
+    public void addResourceStorage() throws IOException {
         Player player = new Player();
         player.getStorage().setTypeExtrapanel('B');
         //caso1: storage vuoto in cui aggiungo il primo elemnto in cima
