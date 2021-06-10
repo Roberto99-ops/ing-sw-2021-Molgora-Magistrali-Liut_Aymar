@@ -51,7 +51,7 @@ public class TurnManager {
                 if (action == 1) {
                     turn.shopCard();
                     client.sendMessage("clean screen");
-                   player.updatePlayerBoard(client, game);
+                    player.updatePlayerBoard(client, game);
                 }
 
                 // CONTROLLER:
