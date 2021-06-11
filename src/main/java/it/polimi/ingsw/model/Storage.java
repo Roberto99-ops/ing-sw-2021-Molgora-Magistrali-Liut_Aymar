@@ -99,11 +99,11 @@ public class Storage extends ArrayList<Character> implements Serializable {
 
     public boolean switchresources(char resource, int k) {
 
-            char temporary = 'N';
+        char temporary = 'N';
 
-            // sto provando ad inserirla nel secondo piano
+        // sto provando ad inserirla nel secondo piano
 
-            if (k == 2 && this.panel.get(5) == 'N') {
+        if (k == 2 && this.panel.get(5) == 'N') {
 
             if (this.panel.get(3) != 'N' && this.panel.get(4) != 'N') {
 
@@ -139,9 +139,9 @@ public class Storage extends ArrayList<Character> implements Serializable {
 
         }
 
-            // sto provando ad inserirla nel primo piano
+        // sto provando ad inserirla nel primo piano
 
-            if (k == 0) {
+        if (k == 0) {
 
             if ((this.panel.get(1) != 'N' && this.panel.get(2) == 'N') ||
                     (this.panel.get(1) == 'N' && this.panel.get(2) == 'N')) {
@@ -162,75 +162,74 @@ public class Storage extends ArrayList<Character> implements Serializable {
 
         } else return false;
 
-            return false;
+        return false;
     }
-
-
 
 
     /**
      * Counts how many resources are available inside the storage.
      * It also prints quantities of each resource
+     *
      * @return sum: how many resources are available inside the storage
      */
 
- public int getTotResourceStorage() {
-     int counterB = 0;
-     int counterP = 0;
-     int counterY = 0;
-     int counterR = 0;
-     int counterG = 0;
-     int counterW = 0;
-     int sum = 0;
+    public int getTotResourceStorage() {
+        int counterB = 0;
+        int counterP = 0;
+        int counterY = 0;
+        int counterR = 0;
+        int counterG = 0;
+        int counterW = 0;
+        int sum = 0;
 
-     for (int i = 5; i >= 0; i--) {
+        for (int i = 5; i >= 0; i--) {
 
-         switch (this.panel.get(i)) {
+            switch (this.panel.get(i)) {
 
-             case 'B': {
-                 counterB++;
-                 break;
-             }
+                case 'B': {
+                    counterB++;
+                    break;
+                }
 
-             case 'W': {
-                 counterW++;
-                 break;
-             }
+                case 'W': {
+                    counterW++;
+                    break;
+                }
 
-             case 'P': {
-                 counterP++;
-                 break;
-             }
+                case 'P': {
+                    counterP++;
+                    break;
+                }
 
-             case 'Y': {
-                 counterY++;
-                 break;
-             }
+                case 'Y': {
+                    counterY++;
+                    break;
+                }
 
-             case 'R': {
-                 counterR++;
-                 break;
-             }
+                case 'R': {
+                    counterR++;
+                    break;
+                }
 
-             case 'G': {
-                 counterG++;
-                 break;
-             }
-         }
-     }
+                case 'G': {
+                    counterG++;
+                    break;
+                }
+            }
+        }
 
-     System.out.println( " B : " + counterB);
-     System.out.println( " G : " + counterG);
-     System.out.println( " Y : " + counterY);
-     System.out.println( " P : " + counterP);
-     System.out.println( " R : " + counterR);
-     System.out.println( " W : " + counterW);
+        System.out.println(" B : " + counterB);
+        System.out.println(" G : " + counterG);
+        System.out.println(" Y : " + counterY);
+        System.out.println(" P : " + counterP);
+        System.out.println(" R : " + counterR);
+        System.out.println(" W : " + counterW);
 
 
-     sum = counterB + counterG  + counterY + counterP + counterW + counterR;
+        sum = counterB + counterG + counterY + counterP + counterW + counterR;
 
-     return sum;
- }
+        return sum;
+    }
 
 
     // classe int getResource che restituisce la quantità di un certo tipo di risorsa
@@ -239,125 +238,109 @@ public class Storage extends ArrayList<Character> implements Serializable {
      * returns the quantity of a certain type of resource
      */
 
-    public int returnQuantity (int quantity, Character type) {
+    public int returnQuantity(int quantity, Character type) {
         int counter = 0;
-        for (int i=0; i < 6; i ++) {
+        for (int i = 0; i < 6; i++) {
             if (this.panel.get(i) == type) {
-                counter++; }
-        } return counter; }
+                counter++;
+            }
+        }
+        return counter;
+    }
 
     //classe deleteresources che cancella una quantità di un tipo di risorsa
 
     /**
      * returns the quantity of a certain type of resource
      */
-    public void deleteResources (int quantity, Character type) {
+    public void deleteResources(int quantity, Character type) {
         int counter = 0;
         int i = 5;
         while (i >= 0 && counter < quantity) {
             if (this.panel.get(i) == type) {
-           this.panel.set(i, 'N');
-           counter ++;
+                this.panel.set(i, 'N');
+                counter++;
             }
             i--;
         }
     }
 
 
-        // controlla se sono presenti nel panel tot risorse di uno specifico tipo
+    // controlla se sono presenti nel panel tot risorse di uno specifico tipo
 
     /**
      * check if there are any resources of a specific type in the panel
      */
 
-        public boolean getinStorage (int quantity, Character type) {                    // OK!!!!!!
-           int counter = 0;
-           for (int i=0; i < 6; i ++) {
-               if (this.panel.get(i) == type) {
-               counter++;
-                                                 }
-           }
-           if (counter == quantity && this.checkStorage() == true) {
-               return true;
-           } else return false;
+    public boolean getinStorage(int quantity, Character type) {                    // OK!!!!!!
+        int counter = 0;
+        for (int i = 0; i < 6; i++) {
+            if (this.panel.get(i) == type) {
+                counter++;
+            }
         }
+        if (counter == quantity && this.checkStorage() == true) {
+            return true;
+        } else return false;
+    }
 
 
-
-        // inserisce nel panel una data risorsa (se si può)
+    // inserisce nel panel una data risorsa (se si può)
 
     /**
      * inserts a given resource in the panel (if possible)
      */
 
-        public void setinStorage (char type, int position) {
-            this.panel.set(position, type);
-        }
+    public void setinStorage(char type, int position) {
+        this.panel.set(position, type);
+    }
 
 
     /**
      * Check if the arraylist respects the rules of his impostationhow many resources are available inside the storage
+     *
      * @return true if it's correcltly implemented, false if it's there are errors
      */
 
-        public boolean checkStorage () {
+    public boolean checkStorage() {
 
 
-            if (   ( this.panel.get(0) != this.panel.get(1) ||
-                        this.panel.get(0) == 'N' ||
-                        this.panel.get(1) == 'N' )
+        if ((this.panel.get(0) != this.panel.get(1) ||
+                this.panel.get(0) == 'N' ||
+                this.panel.get(1) == 'N')
 
-                    &&
+                &&
 
-                    ( this.panel.get(1) != this.panel.get(3) ||
+                (this.panel.get(1) != this.panel.get(3) ||
                         this.panel.get(1) == 'N' ||
                         this.panel.get(3) == 'N')
-                    &&
+                &&
 
-                    ( this.panel.get(0) != this.panel.get(3) ||
+                (this.panel.get(0) != this.panel.get(3) ||
                         this.panel.get(0) == 'N' ||
                         this.panel.get(3) == 'N')
 
-                    &&
+                &&
 
-                    ( this.panel.get(1) == this.panel.get(2) ||
+                (this.panel.get(1) == this.panel.get(2) ||
                         this.panel.get(1) == 'N' ||
                         this.panel.get(2) == 'N')
-                    &&
+                &&
 
-                    (this.panel.get(3) == this.panel.get(4) ||
+                (this.panel.get(3) == this.panel.get(4) ||
                         this.panel.get(1) == 'N' ||
                         this.panel.get(2) == 'N'
-                    ) &&
+                ) &&
 
-                    ( this.panel.get(4) == this.panel.get(5) ||
-                    this.panel.get(4) == 'N' ||
-                    this.panel.get(5) == 'N')
+                (this.panel.get(4) == this.panel.get(5) ||
+                        this.panel.get(4) == 'N' ||
+                        this.panel.get(5) == 'N')
 
-                ) {
-                return true; }
-
-            else {
-                return false; }
+        ) {
+            return true;
+        } else {
+            return false;
         }
+    }
 
-        // controlla le risorse extra che vanno ad incrementare i puntifede degli altri giocatori
-
-    /**
-     * check the extra resources that increase the faith points of the other players
-     */
-
-            public int returnMoves() {
-                int moves = 0;
-                for (int i = 0; i < 2; i++)
-                    if (!this.getExtrapanel().get(i).equals('N')) {
-                        moves++;
-                    }
-                return moves;
-                }
-
-
-
-
-
-        }
+}
