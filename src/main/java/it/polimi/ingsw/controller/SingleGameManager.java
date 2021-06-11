@@ -23,11 +23,13 @@ public class SingleGameManager {
      * separate controller and network.
      * @param clientin: the clienthandler that manages the player.
      */
+
     public SingleGameManager(ClientHandler clientin) {
         game = new SingleGame();
         observablesinglegame = new MessageSingleGameManager();
         client = clientin;
     }
+
 
     public static void main() throws Exception {
         client.sendMessage("clean screen");
