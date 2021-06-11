@@ -37,6 +37,7 @@ public class Lorenzo implements Serializable {
     /**
      * Moves Lorenzo forward by 1, on the FaithTrack, and shuffles the Action Signal's Structure
      */
+
     public void forwardOne(){
         number++;
         SingleGame.getActionStructure().shuffleSignal();
