@@ -21,18 +21,20 @@ public class LeaderCard implements Serializable {
     private char inputskill;
     private int number;
 
+
+    /**
+     * getter and setter
+     */
+
     public String getSkill() {
         return skill;
     }
-
     public char getInputskill() {
         return inputskill;
     }
-
     public int getNumber() {
         return number;
     }
-
     public ResourceStructure getPriceR() {
         return priceR;
     }
@@ -41,6 +43,7 @@ public class LeaderCard implements Serializable {
      * return priceC, priceC is an arraylist witch every cell is a resource (char)
      * @return
      */
+
     public ArrayList<Character> getPriceC() {
         return priceC;
     }
@@ -54,6 +57,7 @@ public class LeaderCard implements Serializable {
     }
 
 
+
     /**
      * use the number in input to read on the Json file the LeaderCard I need.
      * return a LeaderCard with all the parametres of the card I meant.
@@ -61,6 +65,8 @@ public class LeaderCard implements Serializable {
      * @return
      * @throws FileNotFoundException
      */
+
+
     public LeaderCard setCard(int number) throws FileNotFoundException {
 
         priceR = new ResourceStructure();
@@ -90,11 +96,14 @@ public class LeaderCard implements Serializable {
     }
 
 
+
+
     /**
      * this skill decreases the develope card price of a specify resource
      * @param card: card in input to decrease price
      * @return: the "new" cost
      */
+
     public ResourceStructure changePriceSkill(DevelopeCard card)
     {
         ResourceStructure newCost = new ResourceStructure();
@@ -105,14 +114,21 @@ public class LeaderCard implements Serializable {
         return newCost;
     }
 
+
+
+
     /**
      * this skill activate the additional storage layer by specifying the type of resource it can contain
      * @param player: player that get the additional layer
      */
+
     public void addStorageSkill(Player player)
     {
         player.getStorage().setTypeExtrapanel(this.inputskill);
     }
+
+
+
 
 
     /**
@@ -120,6 +136,7 @@ public class LeaderCard implements Serializable {
      * @param row: is the row of the market containing marbles
      * @return: the "new" row, where white marbles are substituted by marbles of the given color
      */
+
     public ResourceStructure changeWhiteMarbleSkill(ResourceStructure row)
     {
         while(row.getVector().contains('W'))
@@ -129,6 +146,9 @@ public class LeaderCard implements Serializable {
         }
         return row;
     }
+
+
+
 
     /**
      * this method do a production.
@@ -142,6 +162,8 @@ public class LeaderCard implements Serializable {
      * @throws IOException
      * @throws ClassNotFoundException
      */
+
+
     public int doProductionSkill(ClientHandler client, Game game) throws IOException, ClassNotFoundException {
         GameHandler player;
         if(game.getClass().equals(SingleGame.class))
@@ -182,7 +204,11 @@ public class LeaderCard implements Serializable {
 
 
 
-    //serve solo per testare la classe
+
+    /**
+     * print the leadercard
+     */
+
     public void Print()
     {
         System.out.println("pv: " + this.pv);
