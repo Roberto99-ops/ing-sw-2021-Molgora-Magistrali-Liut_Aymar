@@ -7,29 +7,31 @@ public class DevelopementSpace implements Serializable {
     private DevelopeDecks minideck1 = new DevelopeDecks();
     private DevelopeDecks minideck2 = new DevelopeDecks();
     private DevelopeDecks minideck3 = new DevelopeDecks();
+
+
+    /**
+     * getter and setter
+     */
+
     public void setMinideck1(DevelopeDecks minideck1) {
         this.minideck1 = minideck1;
     }
-
     public void setMinideck2(DevelopeDecks minideck2) {
         this.minideck2 = minideck2;
     }
-
     public void setMinideck3(DevelopeDecks minideck3) {
         this.minideck3 = minideck3;
     }
-
     public DevelopeDecks getMinideck1() {
         return minideck1;
     }
-
     public DevelopeDecks getMinideck2() {
         return minideck2;
     }
-
     public DevelopeDecks getMinideck3() {
         return minideck3;
     }
+
 
     /**
      * Gets the first card on top of a specific minideck
@@ -37,8 +39,9 @@ public class DevelopementSpace implements Serializable {
      * @return  card on top of the selected minideck
      * @throws Exception in case the choice made doesn't exists
      */
-    public DevelopeCard getCard(int choice) throws Exception{
-        int i = 0;
+
+    public DevelopeCard getCard(int choice) throws Exception {
+        int i;
         try {
             if (choice == 1) {
                 i = minideck1.getStructure().size();
@@ -50,17 +53,20 @@ public class DevelopementSpace implements Serializable {
                 i = minideck3.getStructure().size();
                 return minideck3.getStructure().get(i - 1);
             }
-        }catch(Exception e){System.out.println("Choose one of the three spaces");}
+        } catch (Exception e) {System.out.println("Choose one of the three spaces");}
          return null;
     }
+
+
 
 
     /**
      * put a card into a specific minideck if possible
      * @param card: card to put
      * @param choice: minidick where to put
-     * @return
+     * @return boolean
      */
+
     public boolean setCard(DevelopeCard card, int choice) {
         int i;
 
@@ -89,15 +95,21 @@ public class DevelopementSpace implements Serializable {
                 return true;
             }
         }
+
         return false;
     }
+
+
+
 
     /**
      * tell if there is already a card with that color in the DSpace
      * @param color: color to check
-     * @return: minideck that contains the card. returns 0 if we can put it into an empty minideck. returns 4 if we have a fourth color
+     * @return: minideck that contains the color. returns 0 if we can put it into an empty minideck.
      */
+
     public int colorPresent(Character color)
+
     {
         if(minideck1.getStructure().size() != 0 && color.equals(minideck1.getStructure().get(0).getColour())) return 1;
 
@@ -105,10 +117,18 @@ public class DevelopementSpace implements Serializable {
 
         if(minideck3.getStructure().size() != 0 && color.equals(minideck3.getStructure().get(0).getColour())) return 3;
 
-        //if(minideck1.getStructure().size() != 0 && minideck2.getStructure().size() != 0 && minideck3.getStructure().size() != 0) return 4;
-
         return 0;
     }
+
+
+
+
+
+    /**
+     * tell if the DSpace is correctly structured: every minideck have got ordered cards from
+     * @param minideck: minideck to check
+     * @return: boolean: true if is correctly structured
+     */
 
     public boolean checkDeck(DevelopeDecks minideck) {
         if ((minideck.getStructure().size() == 3) && ((minideck.getStructure().get(2).getColour()) == (minideck.getStructure().get(1).getColour())) &&
@@ -122,6 +142,11 @@ public class DevelopementSpace implements Serializable {
         } else {
             return false;
         }
-
     }
+
+
+
+
+
+
 }
