@@ -160,6 +160,7 @@ public class PlayerTest {
     //FATTO
     @Test
     public void addResourceStorage() throws IOException {
+        Game game = new Game();
         Player player = new Player();
         player.getStorage().setTypeExtrapanel('B');
         //caso1: storage vuoto in cui aggiungo il primo elemnto in cima
@@ -171,18 +172,18 @@ public class PlayerTest {
             player.getStorage().getExtrapanel().getVector().add('N');
         }
         //riempiamo lo storage (in cima) del player con una sola risorsa
-        assertTrue(player.addResourceStorage('G'));
+        assertTrue(player.addResourceStorage('G', game));
         assertTrue(player.getStorage().getPanel().get(0)=='G');
 
         //caso2: ho una sola risorsa nel 2o piano
         player.getStorage().getPanel().set(1,'P');
-        assertTrue(player.addResourceStorage('P'));
+        assertTrue(player.addResourceStorage('P',game));
         assertEquals('P', (char) player.getStorage().getPanel().get(2)); //il terzo elemento (== il secondo sul secondo piano)
         //è quello inserito
 
         //caso3: ho risorse sul primo e secondo piano e un po' sul terzo e ne voglio aggiungere una in quest'ultimo
         for(int i=3; i<5 ;i++)player.getStorage().getPanel().set(i, 'Y');
-        assertTrue(player.addResourceStorage('Y'));
+        assertTrue(player.addResourceStorage('Y',game));
         assertEquals('Y', (char) player.getStorage().getPanel().get(5));
 
         for(int i=0; i<5;i++){
@@ -192,10 +193,10 @@ public class PlayerTest {
             System.out.println(player.getStorage().getExtrapanel().getVector().get(i));
         }
         //caso4a: ho lo storage completo e ho spazio in Extrapanel di tipo B. Dico che la risorsa da mettere è di tipo A
-        assertTrue(player.addResourceStorage('A')); //questo stampa una volta 'No more space available' giustamente
+        assertTrue(player.addResourceStorage('A',game)); //questo stampa una volta 'No more space available' giustamente
 
         //caso4b: decido di aggiungere una risorsa in Extrapanel di tipo B
-        assertTrue(player.addResourceStorage('B'));
+        assertTrue(player.addResourceStorage('B',game));
         /*for(int i=0; i<5;i++){
             System.out.println(player.getStorage().getPanel().get(i));
         }
@@ -210,7 +211,7 @@ public class PlayerTest {
 
         //caso 4c: elimino la risorsa in cima allo storage e aggiungo una rsorsa di tipo B. questa dovrebbe andare in extrapanel
         player.getStorage().getPanel().set(0,'N');
-        assertTrue(player.addResourceStorage('B'));
+        assertTrue(player.addResourceStorage('B',game));
         assertEquals('B', (char) player.getStorage().getExtrapanel().getVector().get(1));
         System.out.println(player.getStorage().getPanel().get(0));
         System.out.println(player.getStorage().getExtrapanel().getVector().get(1));
@@ -225,7 +226,7 @@ public class PlayerTest {
         }*/
         Character[] vector = {'B','G','G','B'};
         for(int i=0; i<4; i++){
-            player.addResourceStorage(vector[i]);
+            player.addResourceStorage(vector[i],game);
         }
         for (int i=0; i<6; i++ ) {
             System.out.println(player.getStorage().getPanel().get(i));
