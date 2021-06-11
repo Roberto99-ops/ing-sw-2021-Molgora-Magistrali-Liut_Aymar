@@ -370,7 +370,7 @@ public class Player implements Serializable {
      * Adds a single specified resource inside the Storage
      * @param resource : the resource the player will put in Storage
      */
-    public boolean addResourceStorage(char resource) throws IOException {
+    public boolean addResourceStorage(char resource, Game game) throws IOException {
         /*IDEA: scelgo una risorsa e questa , che si trova dentro il resourcestructure,
         va inserita dentro il magazzino
         (se viene dal mercato)
@@ -381,11 +381,12 @@ public class Player implements Serializable {
 
         if (storage.countTypeS('N') == 0) {
 
-            for (int i = 0; i < clients.size(); i++) {
-                if (!this.equals(clients.get(i).getPlayer()))
-                    clients.get(i).getPlayer().increasePV(1);
-            }
-
+            if (!game.getClass().equals(SingleGame.class)) {
+                for (int i = 0; i < clients.size(); i++) {
+                    if (!this.equals(clients.get(i).getPlayer()))
+                        clients.get(i).getPlayer().increasePV(1);
+                }
+            } else SingleGame.getLorenzo().forwardOne();
             return false;
 
         }
@@ -396,7 +397,7 @@ public class Player implements Serializable {
 
         //controllo se extrapanel sia dello stesso tipo e se ha degli spazi liberi
 
-        if (storage.getTypeExtrapanel() != 'Z') {
+        if (storage.getTypeExtrapanel() != 'Z' && storage.getTypeExtrapanel() == resource) {
 
             int countExtraN = 0;
             for (int c = 1; c >= 0; c--) {
@@ -412,25 +413,29 @@ public class Player implements Serializable {
                 modifyPVforResources();
                 return true;
 
+            }
+        }
+            /*
 
-            } else if (storage.getTypeExtrapanel() != resource && countExtraN == storage.countTypeS(resource))
+
+            else if (storage.getTypeExtrapanel() != resource && countExtraN == storage.countTypeS(resource))
 
             {
 
               for (int i = 0; i < clients.size(); i++)
                 if (!this.equals(clients.get(i).getPlayer()))
                     clients.get(i).getPlayer().increasePV(1);
-
                 return false;
+
             }
 
         }
+*/
+
+        // controllo panel:
 
 
-        //controllo panel:
-
-
-        //-se c'è già una presente vedo se aggiungerne un'altra
+        // -se c'è già una presente vedo se aggiungerne un'altra
 
 
         int i = 5;
@@ -440,7 +445,6 @@ public class Player implements Serializable {
                 i--;
             }
 
-            System.out.println(i);
 
             if (i == 0) {
 
@@ -449,18 +453,35 @@ public class Player implements Serializable {
                     modifyPVforResources();
                     return true;
                 } else {
+
+                    if (!game.getClass().equals(SingleGame.class)) {
+                        for (int c = 0; c < clients.size(); c++) {
+                            if (!this.equals(clients.get(c).getPlayer()))
+                                clients.get(c).getPlayer().increasePV(1);
+                        }
+                    } else SingleGame.getLorenzo().forwardOne();
+
                     return false;
+
                 }
 
             }
 
             if (i == 2) {
+
                 // i==2 : provo a vedere se riesco a sostituire i piani
 
                 if (storage.switchresources(resource, 2)) {
                     modifyPVforResources();
                     return true;
-                } else {
+                } else  {
+
+                    if (!game.getClass().equals(SingleGame.class)) {
+                        for (int c = 0; c < clients.size(); c++) {
+                            if (!this.equals(clients.get(c).getPlayer()))
+                                clients.get(c).getPlayer().increasePV(1);
+                        }
+                    } else SingleGame.getLorenzo().forwardOne();
                     return false;
                 }
 
@@ -470,10 +491,12 @@ public class Player implements Serializable {
             // i==5 : il terzo piano ha risorse di quel tipo -> elimino la risorsa
             if (i == 5) {
 
-                for (int j = 0; j < clients.size(); j++) {
-                    if (!this.equals(clients.get(j).getPlayer()))
-                        clients.get(j).getPlayer().increasePV(1);
-                }
+                    if (!game.getClass().equals(SingleGame.class)) {
+                        for (int c = 0; c < clients.size(); c++) {
+                            if (!this.equals(clients.get(c).getPlayer()))
+                                clients.get(c).getPlayer().increasePV(1);
+                        }
+                    } else SingleGame.getLorenzo().forwardOne();
 
                 return false;
             }
@@ -493,7 +516,6 @@ public class Player implements Serializable {
 
             if (i == 4) {
                 storage.getPanel().set(5, resource); //posto i==2 ora occupato
-                System.out.println(storage.getPanel().get(5));
                 modifyPVforResources();
                 return true;
             }
@@ -517,10 +539,14 @@ public class Player implements Serializable {
                 return true;
             }
 
+
+                if (!game.getClass().equals(SingleGame.class)) {
+
             for (int j = 0; j < clients.size(); j++) {
                 if (!this.equals(clients.get(j).getPlayer()))
-                    clients.get(j).getPlayer().increasePV(1);
-            }
+                    clients.get(j).getPlayer().increasePV(1); }
+            } else SingleGame.getLorenzo().forwardOne();
+
 
             return false;
 
