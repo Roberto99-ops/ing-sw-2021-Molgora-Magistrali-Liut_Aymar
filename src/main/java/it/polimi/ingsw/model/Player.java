@@ -373,13 +373,14 @@ public class Player implements Serializable {
         ArrayList<ClientHandler> clients = GameManager.getClientList();
 
         if (storage.countTypeS('N') == 0) {
-            // clients.get(number).sendMessage("No more space available in Storage.");
 
-            for (int i = 0; i < clients.size(); i++)
-                if(!this.equals(clients.get(i).getPlayer()))
+            for (int i = 0; i < clients.size(); i++) {
+                if (!this.equals(clients.get(i).getPlayer()))
                     clients.get(i).getPlayer().increasePV(1);
+            }
 
             return false;
+
         }
 
 
@@ -402,15 +403,17 @@ public class Player implements Serializable {
             modifyPVforResources();
             return true;
 
+
         } else if (storage.getTypeExtrapanel() != resource && countExtraN == storage.countTypeS(resource)) {
-            // clients.get(number).sendMessage("No more space available in Storage");
+
 
             for (int i = 0; i < clients.size(); i++)
-                if(!this.equals(clients.get(i).getPlayer()))
+                if (!this.equals(clients.get(i).getPlayer()))
                     clients.get(i).getPlayer().increasePV(1);
 
-                return false;
+            return false;
         }
+
         //controllo panel:
 
 
@@ -427,17 +430,15 @@ public class Player implements Serializable {
 
                 // i==0 : provo a vedere se riesco a sostituire i piani
                 if (storage.switchresources(resource, 0)) {
-                    // clients.get(number).sendMessage(resource + " switched using best case");
                     modifyPVforResources();
                     return true;
                 } else {
-                    // clients.get(number).sendMessage(resource + " can't be added because of is present in panel and panels can't be switched ");
                     return false;
                 }
 
             }
 
-                if (i == 2) {
+            if (i == 2) {
                 // i==2 : provo a vedere se riesco a sostituire i piani
 
                 if (storage.switchresources(resource, 2)) {
@@ -454,7 +455,6 @@ public class Player implements Serializable {
 
             // i==5 : il terzo piano ha risorse di quel tipo -> elimino la risorsa
             if (i == 5) {
-                // clients.get(number).sendMessage(resource + " deleted. It already exists");
 
                 for (int j = 0; j < clients.size(); j++) {
                     if (!this.equals(clients.get(j).getPlayer()))
@@ -465,19 +465,23 @@ public class Player implements Serializable {
             }
 
             // in tutti gli altri casi in cui un posto nei piani è libero
-            switch (i) {
-                case 1:
-                    storage.getPanel().set(2, resource); //posto i==2 ora occupato
-                    break;
-                case 3:
-                    storage.getPanel().set(4, resource); //posto i==4 ora occupato
-                    break;
-                case 4:
-                    storage.getPanel().set(5, resource); //posto i==5 ora occupato
-                    break;
+            if (i == 1) {
+                storage.getPanel().set(2, resource); //posto i==2 ora occupato
+                modifyPVforResources();
+                return true;
             }
-            modifyPVforResources();
-            return true;
+
+            if (i == 3) {
+                storage.getPanel().set(4, resource); //posto i==2 ora occupato
+                modifyPVforResources();
+                return true;
+            }
+
+            if (i == 4) {
+                storage.getPanel().set(5, resource); //posto i==2 ora occupato
+                modifyPVforResources();
+                return true;
+            }
 
         } else {
 
@@ -496,19 +500,21 @@ public class Player implements Serializable {
                 storage.getPanel().set(i, resource); //aggiungo la risorsa nel primo piano (i==0) o nel secondo (i==1) o nel terzo (i==3)
                 modifyPVforResources();
                 return true;
-            } else {
-
-                // clients.get(number).sendMessage(resource + " deleted. It can't be put in the storage");
-
-                for (int j = 0; j < clients.size(); j++) {
-                    if (!this.equals(clients.get(j).getPlayer()))
-                        clients.get(j).getPlayer().increasePV(1);
-                }
-
-                return false;
             }
+
+            for (int j = 0; j < clients.size(); j++) {
+                if (!this.equals(clients.get(j).getPlayer()))
+                    clients.get(j).getPlayer().increasePV(1);
+            }
+
+            return false;
+
         }
+
+    return false;
+
     }
+
 
     /**
      * this method checks if the player own enough developecards to activate a leadercard
