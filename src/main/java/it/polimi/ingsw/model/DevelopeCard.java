@@ -12,10 +12,12 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+
+
+
 public class DevelopeCard implements Serializable {
 
-    //Colori carte: G,B,Y,P
-    private char colour;
+    private char colour; // card's colours: G,B,Y,P
     private int level;
     private int pv;
     private ResourceStructure cost;
@@ -23,53 +25,22 @@ public class DevelopeCard implements Serializable {
     private ResourceStructure outputproduction;
 
 
-    public void setColour(char colour) {
-        this.colour = colour;
-    }
+    /**
+     * getter and setter
+     */
 
-    public void setLevel(int level) {
-        this.level = level;
-    }
-
-    public void setPv(int pv) {
-        this.pv = pv;
-    }
-
-    public void setCost(ResourceStructure cost) {
-        this.cost = cost;
-    }
-
-    public void setInputproduction(ResourceStructure inputproduction) {
-        this.inputproduction = inputproduction;
-    }
-
-    public void setOutputproduction(ResourceStructure outputproduction) {
-        this.outputproduction = outputproduction;
-    }
-
-    public char getColour() {
-        return colour;
-    }
-
-    public int getLevel() {
-        return level;
-    }
-
-    public int getPv() {
-        return pv;
-    }
-
-    public ResourceStructure getCost() {
-        return cost;
-    }
-
-    public ResourceStructure getInputproduction() {
-        return inputproduction;
-    }
-
-    public ResourceStructure getOutputproduction() {
-        return outputproduction;
-    }
+    public void setColour(char colour) { this.colour = colour; }
+    public void setLevel(int level) { this.level = level; }
+    public void setPv(int pv) { this.pv = pv; }
+    public void setCost(ResourceStructure cost) { this.cost = cost; }
+    public void setInputproduction(ResourceStructure inputproduction) { this.inputproduction = inputproduction; }
+    public void setOutputproduction(ResourceStructure outputproduction) { this.outputproduction = outputproduction; }
+    public char getColour() { return colour; }
+    public int getLevel() { return level; }
+    public int getPv() { return pv; }
+    public ResourceStructure getCost() { return cost; }
+    public ResourceStructure getInputproduction() { return inputproduction; }
+    public ResourceStructure getOutputproduction() { return outputproduction; }
 
 
     /**
@@ -84,25 +55,33 @@ public class DevelopeCard implements Serializable {
      * @throws IOException
      * @throws ClassNotFoundException
      */
+
+
     public int doProduction(ClientHandler client, Game game) throws IOException, ClassNotFoundException {
+
         GameHandler player;
-        if(game.getClass().equals(SingleGame.class))
+
+        if(game.getClass().equals(SingleGame.class)) {
             player = client.getSinglePlayer();
-        else
+        } else {
             player = client.getPlayer();
+        }
+
 
         int check = player.checkResources(this.inputproduction.getVector());
 
-        //(1)
+
         if(check != 0) {
-        //(2)
+
             if(check == 1)
             {
                 player.deleteResources(1, this.inputproduction.getVector());
 
                 for(int i=0; i<this.outputproduction.getVector().size(); i++)
                     player.addResourceStrongBox(this.outputproduction.getVector().get(i)); }
-        //(3)
+
+
+
             if(check == 2)
             {
                 player.deleteResources(2, this.inputproduction.getVector());
@@ -111,10 +90,13 @@ public class DevelopeCard implements Serializable {
                     player.addResourceStrongBox(this.outputproduction.getVector().get(i)); }
             return 1;
            }
+
+
         else {
             client.sendMessage("You don't own enough Resources. (press enter)");
             client.receiveMessage();
         }
+
         return 0;
     }
 
@@ -126,6 +108,8 @@ public class DevelopeCard implements Serializable {
      * @return
      * @throws FileNotFoundException
      */
+
+
     public DevelopeCard setCard(int number) throws FileNotFoundException {
 
         inputproduction = new ResourceStructure();
@@ -158,8 +142,14 @@ public class DevelopeCard implements Serializable {
         return this;
     }
 
-    public void print()
-    {
+
+
+
+    /**
+     * this method print the details about a developeCard: ONLY USED FOR TESTING
+     */
+
+    public void print() {
         System.out.println("pv: " + this.pv);
         System.out.println("colour: " + this.colour);
         System.out.println("cost: " + this.cost.getVector());
