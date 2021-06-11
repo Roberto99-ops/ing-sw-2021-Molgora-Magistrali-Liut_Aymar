@@ -18,10 +18,15 @@ public class Game implements Serializable {
     private static int timer_VR=0;
     private static Player winner;
 
+
+
+    /**
+     * Game initialization
+     */
+
     public Game()
     {
         players = new ArrayList<>();
-        //developedecks = new DevelopeDecks[12];
         for (int i = 0; i < 12; i++) {
             developedecks[i] = new DevelopeDecks();
         }
@@ -31,55 +36,27 @@ public class Game implements Serializable {
     }
 
 
+
+
     /**
      * getter and setter
-     * @return
      */
-    public ArrayList<GameHandler> getPlayers() {
 
-        return players;
-    }
-
-
-    public void setPlayers(ArrayList<GameHandler> players) {
-
-        Game.players = players;
-    }
-
+    public ArrayList<GameHandler> getPlayers() { return players; }
+    public void setPlayers(ArrayList<GameHandler> players) { Game.players = players; }
     public static LeaderDeck getLeaderdeck() {
         return leaderdeck;
     }
-
     public static void setLeaderdeck(LeaderDeck leaderdeck) {
         Game.leaderdeck = leaderdeck;
     }
-
-
-    public static int getLonely() {
-
-        return lonely;
-    }
-
-    public static DevelopeDecks getDevelopedecks(int i) {
-
-        return developedecks[i];
-    }
-
-    public static Market getMarket() {
-
-        return market;
-    }
-
-    public static void setDevelopedecks(DevelopeDecks developedeck, int i) {
-
-        developedecks[i] = developedeck;
-    }
-
+    public static int getLonely() { return lonely; }
+    public static DevelopeDecks getDevelopedecks(int i) { return developedecks[i]; }
+    public static Market getMarket() { return market; }
+    public static void setDevelopedecks(DevelopeDecks developedeck, int i) { developedecks[i] = developedeck; }
     public static int getTimer_VR() {
         return timer_VR;
     }
-
-
     public static void setTimer_VR(int timer_VR) {
         if (timer_VR>=3){
             VR++;
@@ -88,33 +65,19 @@ public class Game implements Serializable {
         }
         Game.timer_VR = timer_VR;
     }
-
     public static Player getWinner() {
         return winner;
     }
-
     public static void setWinner(Player winner) {
         Game.winner = winner;
     }
-
-
-
     public static int getN_players() {
         return n_players;
     }
-
-
     public static void setN_players(int num) {
         n_players=num;
     }
-
-
-    public static int getVR() {
-
-        return VR;
-    }
-
-
+    public static int getVR() { return VR; }
     public static void setVR(int num) {
         VR=num;
         return;
@@ -122,12 +85,14 @@ public class Game implements Serializable {
 
 
 
+
     /**
      * shuffle all the decks and the market calling the random function
      */
+
+
     public void shuffle() throws FileNotFoundException {
 
-        //k is needed to order the decks in the required order
         for (int i = 0; i < 12; i++) {
             int k = i;
             DevelopeDecks deck = new DevelopeDecks();
@@ -163,6 +128,7 @@ public class Game implements Serializable {
             card.setCard(i);
             leaderdeck.getStructure().add(card);
         }
+
         leaderdeck.setStructure(leaderdeck.shuffleDeck(leaderdeck.getStructure()));
 
 
@@ -184,18 +150,22 @@ public class Game implements Serializable {
     }
 
 
+
+
+
     /**
      * check if the game is ended, checking the actualplayer faith track(1) and developequantity(2)
      * @return boolean
      */
-    public boolean callEndgame(Player actualplayer)
-    {
+
+
+    public boolean callEndgame(Player actualplayer) {
             //1)
             if(actualplayer.getTrackposition()>=24)
                 return true;
 
             //2)
-            else if(actualplayer.getDevelopementquantity()>=7)
+            else if (actualplayer.getDevelopementquantity()>=7)
                 return true;
 
             else
@@ -203,11 +173,15 @@ public class Game implements Serializable {
     }
 
 
+
+
     /**
      * find the winner, for each player at 1) we check if the player is arrived at the end
      * of the faith track, at 2) we check which player has more Victory Points
      * @return string
      */
+
+
     public String callVictory()
     {
         winner.setPv(0);
@@ -225,12 +199,16 @@ public class Game implements Serializable {
         return winner.getName();
     }
 
+
+
+
     /**
      * this method give to the player 4 leadercards to choose
      * @return: the 4 cards
      */
-    public LeaderDeck leaderChoice()
-    {
+
+
+    public LeaderDeck leaderChoice() {
         LeaderDeck deck = new LeaderDeck();
         for (int i = 0; i < 4; i++) {
             LeaderCard card;
