@@ -139,6 +139,7 @@ public class SingleGame extends Game {
      * @param actualplayer: the player playing in that turn (the player or Lorenzo)
      * @return true if the game ends. False if not.
      */
+
     @Override
     public boolean callEndgame(Player actualplayer)
     {
