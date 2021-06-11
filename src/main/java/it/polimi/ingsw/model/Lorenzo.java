@@ -2,27 +2,32 @@ package it.polimi.ingsw.model;
 
 import java.io.Serializable;
 
+
+
 public class Lorenzo implements Serializable {
 
-    private static String name = "Lorenzo Il Magnifico";
+    /**
+     * attributes and getter and setter
+     */
 
+    private static String name = "Lorenzo Il Magnifico";
     public static String getName() {
         return name;
     }
-
-    private  int number = 0; //posizione su tracciato
-
+    private  int number = 0;  // position on the faithtrack
     public  int getNumber() {
         return number;
     }
-
     public  void setNumber(int num) {
         number = num;
     }
 
+
+
     /**
      * Moves Lorenzo forward by 2, on the FaithTrack
      */
+
     public void forwardTwo(){
         number+=2;
         if(number > 24)
