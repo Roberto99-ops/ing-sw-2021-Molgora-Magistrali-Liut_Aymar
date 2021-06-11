@@ -199,7 +199,7 @@ public class Turn implements Serializable {
 
 
         for (int i = 0; i < product.getVector().size(); i++) {
-            actualplayer.addResourceStorage(product.getVector().get(i));
+            actualplayer.addResourceStorage(product.getVector().get(i), game);
 
         }
 
