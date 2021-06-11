@@ -131,13 +131,11 @@ public class DevelopementSpace implements Serializable {
      */
 
     public boolean checkDeck(DevelopeDecks minideck) {
-        if ((minideck.getStructure().size() == 3) && ((minideck.getStructure().get(2).getColour()) == (minideck.getStructure().get(1).getColour())) &&
-                (minideck.getStructure().get(1).getColour()) == (minideck.getStructure().get(0).getColour()) &&
-                (minideck.getStructure().get(0).getLevel() == 1) && (minideck.getStructure().get(1).getLevel() == 2) && (minideck.getStructure().get(2).getLevel() == 3) ||
-                (minideck.getStructure().size() == 2) &&
-                        (minideck.getStructure().get(1).getColour()) == (minideck.getStructure().get(0).getColour()) &&
-                        (minideck.getStructure().get(0).getLevel() == 1) && (minideck.getStructure().get(1).getLevel() == 2)||
-                ((minideck.getStructure().size() == 1) && minideck.getStructure().get(0).getLevel() == 1)){
+        if (((minideck.getStructure().size() == 3) && (minideck.getStructure().get(0).getLevel() == 1) &&
+                (minideck.getStructure().get(1).getLevel() == 2) && (minideck.getStructure().get(2).getLevel() == 3)) ||
+                ((minideck.getStructure().size() == 2) && (minideck.getStructure().get(0).getLevel() == 1)
+                        && (minideck.getStructure().get(1).getLevel() == 2)) ||
+                ((minideck.getStructure().size() == 1) && minideck.getStructure().get(0).getLevel() == 1)) {
             return true;
         } else {
             return false;
