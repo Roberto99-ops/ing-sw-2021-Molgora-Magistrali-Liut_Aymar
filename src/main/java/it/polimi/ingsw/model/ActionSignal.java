@@ -2,9 +2,12 @@ package it.polimi.ingsw.model;
 
 
 public class ActionSignal {
-
-
     private int number;
+
+
+    /**
+     getter and setter
+     */
 
     public int getNumber() {
         return number;
@@ -25,99 +28,109 @@ public class ActionSignal {
     public void action(int number){
         int i;
         int countRemove=0;
-        //Lorenzo lorenzo = SingleGame.getLorenzo();
+
 
         switch (number){
-            case 1://blu-2
-                //prendo il mazzo, elimino la prima carta in cima e poi controllo se l'array è vuoto
-                //se non lo è, elimino l'altra carta. Se è vuoto invece, prendo un nuovo mazzo ed
-                //elimino la carta in cima
 
-                i=2; //liv 1 blu
+
+            case 1: // blu-2
+
+                i=2; // liv 1 blu
                 while (countRemove<2){
-                    while (((Game.getDevelopedecks(i).getStructure().isEmpty()) && i<=10)){
-                        i+=4; //mi sposto da un mazzo all'altro finchè non ne trovo uno cpn carte
+                    while (((Game.getDevelopedecks(i).getStructure().isEmpty()) && i<=10)) {
+                        i+=4;
                     }
-                    //caso: non ho più carte in nessun mazzo
-                    if (i==10 && (Game.getDevelopedecks(i).getStructure().isEmpty())){ //caso in cui arrivo all'ultimo mazzo
+
+                    if (i==10 && (Game.getDevelopedecks(i).getStructure().isEmpty())){
                         System.out.println("No more blue DevelopeCards available.");
                         return;
                     }
-                    if (!Game.getDevelopedecks(i).getStructure().isEmpty()){ //se il mazzo non è vuoto, elimino una carta
+                    if (!Game.getDevelopedecks(i).getStructure().isEmpty()){
                         Game.getDevelopedecks(i).getStructure().remove(0);
                     }
                     countRemove++;
                 }
                 return;
 
-            case 2://verde-2
+
+
+            case 2: // green-2
                 i=3;
-                while (countRemove<2){
+
+                while (countRemove<2) {
                     while (((Game.getDevelopedecks(i).getStructure().isEmpty()) && i<11)){
-                        i+=4; //mi sposto da un mazzo all'altro finchè non ne trovo uno con carte
+                        i+=4;
                     }
-                    //caso: non ho più carte in nessun mazzo
-                    if (i==11 && (Game.getDevelopedecks(i).getStructure().isEmpty())){ //caso in cui arrivo all'ultimo mazzo
+
+                    if (i==11 && (Game.getDevelopedecks(i).getStructure().isEmpty())) {
                         System.out.println("No more green DevelopeCards available.");
                         return;
                     }
-                    if (!Game.getDevelopedecks(i).getStructure().isEmpty()){ //se il mazzo non è vuoto, elimino una carta
+
+                    if (!Game.getDevelopedecks(i).getStructure().isEmpty()) {
                         Game.getDevelopedecks(i).getStructure().remove(0);
                     }
+
                     countRemove++;
                 }
                 return;
 
-            case 3://viola-2
+
+
+            case 3: // purple-2
                 i=0;
-                while (countRemove<2){
+                while (countRemove<2) {
                     while (((Game.getDevelopedecks(i).getStructure().isEmpty()) && i<8)){
-                        i+=4; //mi sposto da un mazzo all'altro finchè non ne trovo uno con carte
+                        i+=4;
                     }
-                    //caso: non ho più carte in nessun mazzo
-                    if (i==8 && (Game.getDevelopedecks(i).getStructure().isEmpty())){ //caso in cui arrivo all'ultimo mazzo
+
+                    if (i==8 && (Game.getDevelopedecks(i).getStructure().isEmpty())) {
                         System.out.println("No more violet DevelopeCards available.");
                         return;
                     }
-                    if (!Game.getDevelopedecks(i).getStructure().isEmpty()){ //se il mazzo non è vuoto, elimino una carta
+
+                    if (!Game.getDevelopedecks(i).getStructure().isEmpty()) {
                         Game.getDevelopedecks(i).getStructure().remove(0);
                     }
                     countRemove++;
                 }
                 return;
 
-            case 4://giallo-2
+
+            case 4: // yellow-2
                 i=1;
-                while (countRemove<2){
-                    while (((Game.getDevelopedecks(i).getStructure().isEmpty()) && i<9)){
-                        i+=4; //mi sposto da un mazzo all'altro finchè non ne trovo uno con carte
+                while (countRemove<2) {
+                    while (((Game.getDevelopedecks(i).getStructure().isEmpty()) && i<9)) {
+                        i+=4;
                     }
-                    //caso: non ho più carte in nessun mazzo
-                    if (i==9 && (Game.getDevelopedecks(i).getStructure().isEmpty())){ //caso in cui arrivo all'ultimo mazzo
+
+                    if (i==9 && (Game.getDevelopedecks(i).getStructure().isEmpty())){
                         System.out.println("No more yellow DevelopeCards available.");
                         return;
                     }
-                    if (!Game.getDevelopedecks(i).getStructure().isEmpty()){ //se il mazzo non è vuoto, elimino una carta
+
+                    if (!Game.getDevelopedecks(i).getStructure().isEmpty()) {
                         Game.getDevelopedecks(i).getStructure().remove(0);
                     }
+
                     countRemove++;
                 }
                 return;
 
+
             case 5://+2
                 SingleGame.getLorenzo().forwardTwo();
-                //Lorenzo.Lorenzomoves(2);
                 break;
+
 
             case 6://+2
                 SingleGame.getLorenzo().forwardTwo();
-                //Lorenzo.Lorenzomoves(2);
                 break;
+
 
             case 7://+1&Shuffle
                 SingleGame.getLorenzo().forwardOne();
                 SingleGame.getActionStructure().shuffleSignal();
-                //Lorenzo.Lorenzomoves(1);
                 break;
         }
     }
