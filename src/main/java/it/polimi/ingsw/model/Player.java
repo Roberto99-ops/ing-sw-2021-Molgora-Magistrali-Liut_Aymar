@@ -27,6 +27,13 @@ public class Player implements Serializable {
         skill2 = 0;
         developementquantity = 0;
         faithTrack = new FaithTrack();
+
+        for(int i=0; i<5; i++){
+            strongBox.getStructure().getVector().add('G');
+            strongBox.getStructure().getVector().add('P');
+            strongBox.getStructure().getVector().add('B');
+            strongBox.getStructure().getVector().add('Y');
+        }
     }
 
     //Nome
@@ -389,35 +396,42 @@ public class Player implements Serializable {
 
         //controllo se extrapanel sia dello stesso tipo e se ha degli spazi liberi
 
-        int countExtraN = 0;
-        for (int c = 1; c >= 0; c--) {
-            if (storage.getExtrapanel().getVector().get(c).equals('N')) countExtraN++;
-        }
+        if (storage.getTypeExtrapanel() != 'Z') {
 
-        if (storage.getTypeExtrapanel() == resource && countExtraN > 0) {
-            if (storage.getExtrapanel().getVector().get(0) == 'N')
-                storage.getExtrapanel().getVector().set(0, resource);
-            else if (storage.getExtrapanel().getVector().get(1) == 'N')
-                storage.getExtrapanel().getVector().set(1, resource);
+            int countExtraN = 0;
+            for (int c = 1; c >= 0; c--) {
+                if (storage.getExtrapanel().getVector().get(c) == 'N') countExtraN++;
+            }
 
-            modifyPVforResources();
-            return true;
+            if (storage.getTypeExtrapanel() == resource && countExtraN > 0) {
+                if (storage.getExtrapanel().getVector().get(0) == 'N')
+                    storage.getExtrapanel().getVector().set(0, resource);
+                else if (storage.getExtrapanel().getVector().get(1) == 'N')
+                    storage.getExtrapanel().getVector().set(1, resource);
+
+                modifyPVforResources();
+                return true;
 
 
-        } else if (storage.getTypeExtrapanel() != resource && countExtraN == storage.countTypeS(resource)) {
+            } else if (storage.getTypeExtrapanel() != resource && countExtraN == storage.countTypeS(resource))
 
+            {
 
-            for (int i = 0; i < clients.size(); i++)
+              for (int i = 0; i < clients.size(); i++)
                 if (!this.equals(clients.get(i).getPlayer()))
                     clients.get(i).getPlayer().increasePV(1);
 
-            return false;
+                return false;
+            }
+
         }
+
 
         //controllo panel:
 
 
         //-se c'è già una presente vedo se aggiungerne un'altra
+
 
         int i = 5;
 
@@ -425,6 +439,8 @@ public class Player implements Serializable {
             while (storage.getPanel().get(i) != resource && i >= 0) {
                 i--;
             }
+
+            System.out.println(i);
 
             if (i == 0) {
 
@@ -442,11 +458,9 @@ public class Player implements Serializable {
                 // i==2 : provo a vedere se riesco a sostituire i piani
 
                 if (storage.switchresources(resource, 2)) {
-                    // clients.get(number).sendMessage(resource + " switched using best case");
                     modifyPVforResources();
                     return true;
                 } else {
-                    // clients.get(number).sendMessage(resource + " can't be added because of is present in panel and panels can't be switched ");
                     return false;
                 }
 
@@ -479,13 +493,14 @@ public class Player implements Serializable {
 
             if (i == 4) {
                 storage.getPanel().set(5, resource); //posto i==2 ora occupato
+                System.out.println(storage.getPanel().get(5));
                 modifyPVforResources();
                 return true;
             }
 
         } else {
 
-            //se la risorsa non c'è
+            // se la risorsa non c'è
 
             if (storage.getPanel().get(0) == 'N') {
                 i = 0;
@@ -553,7 +568,8 @@ public class Player implements Serializable {
      * this method modifies the pv in case we have lost or gained some resources.
      * this because every 5 resources we gain 1 PV
      */
-    private void modifyPVforResources(){
+
+    private void modifyPVforResources() {
         int newQuantity = countTotalResources();
         int oldPV = resourcesQuantity/5;
         int newPV = newQuantity/5;
