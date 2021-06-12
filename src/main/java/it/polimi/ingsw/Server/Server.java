@@ -12,6 +12,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 
 //dobbiamo usare javaSE??
 
@@ -23,17 +24,23 @@ public class Server {
 
     public static void main(String[] args) throws IOException {
         System.out.println("Internal ip: " + InetAddress.getLocalHost());
+        Scanner scan = new Scanner(System.in);
+        String numberPort;
 
         //apro le porte # ...
         ArrayList<ServerSocket> openSockets = new ArrayList<>();
         ServerSocket socket;
         try {
             //... creando un socket per quei numeri di porta
-            for (int i=1000;i<1020;i++){
+            System.out.println("Which port do you want to open?");
+            numberPort = scan.nextLine();
+            socket = new ServerSocket(Integer.parseInt(numberPort));
+
+            /*for (int i=1000;i<1020;i++){
                 socket = new ServerSocket(i);
                 socket.setSoTimeout(SO_TIMEOUT);
                 openSockets.add(socket);
-            }
+            }*/
             System.out.println("Server is running");
         } catch (IOException e) {
             System.out.println("cannot open server socket");
@@ -49,13 +56,14 @@ public class Server {
             /* accepts connections; for every connection we accept,
              * create -- a new Thread executing a ClientHandler -- */
             Socket client= new Socket();
-            for(int i=0; !client.isConnected(); i++) {
+            client = socket.accept();
+            /*for(int i=0; !client.isConnected(); i++) {
                 if(i==20) i=0;
                 try {
                     client = openSockets.get(i).accept();
                 } catch (IOException e) {}
                 //if (client.isConnected()) break;
-            }
+            }*/
             //il clientHandler si occupa di gestire la connessione con il client
             numberofsockets++;
             ClientHandler clientHandler = new ClientHandler(client, numberofsockets);

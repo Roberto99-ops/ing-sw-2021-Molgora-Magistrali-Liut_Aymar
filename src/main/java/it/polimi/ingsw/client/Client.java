@@ -25,7 +25,7 @@ public class Client {
 
     private static DevelopeDecks[] DDecks;
 
-    private static final int DEFAULT_PORT = 1000;
+    //private static final int DEFAULT_PORT = 1000;
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         player = new Player();
@@ -41,17 +41,21 @@ public class Client {
 
         System.out.print("Insert IP address of Server: ");
         String ip = scan.nextLine();
-        System.out.print("\nInsert Port number of Server (if don't needed just press enter): ");
+        System.out.print("\nInsert Port number of Server:");
         String serverport = scan.nextLine();
+
 
 
         /*Per aprire connessione col server*/
         Socket server;
         try {
-            if(!serverport.equals(""))
+            /*if(!serverport.equals(""))
                 server = new Socket(ip, Integer.parseInt(serverport));  //ipServer Roby: 95.250.236.230
             else
                 server = new Socket(ip, 1000);
+            */
+            server = new Socket(ip, Integer.parseInt(serverport));  //ipServer Roby: 95.250.236.230
+
         } catch (IOException e) {
             System.out.println("\nserver unreachable");
             return;
