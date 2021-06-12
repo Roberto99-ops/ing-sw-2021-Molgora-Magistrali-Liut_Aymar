@@ -57,7 +57,7 @@ public class Client {
             server = new Socket(ip, Integer.parseInt(serverport));  //ipServer Roby: 95.250.236.230
 
         } catch (IOException e) {
-            System.out.println("\nserver unreachable");
+            System.out.println("\nServer unreachable");
             return;
         }
         System.out.println("\nConnected");
