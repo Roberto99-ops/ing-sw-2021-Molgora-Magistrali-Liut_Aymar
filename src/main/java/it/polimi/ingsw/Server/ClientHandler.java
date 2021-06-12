@@ -96,7 +96,7 @@ public class ClientHandler implements Runnable {
                 else    {
                     GameManager.addPlayer(this, player);
                     Server.runGame();
-                    while (!client.isClosed()){}
+                    while (!client.isClosed()){} //non va bene
                 }
 
             }
@@ -107,8 +107,8 @@ public class ClientHandler implements Runnable {
             }
 
 
-            client.close();
-            output.close();
+            client.close(); //togliere
+            output.close();  //togliere
             input.close();
         } catch (ClassCastException | ClassNotFoundException e) {
             System.out.println("invalid stream from client");
