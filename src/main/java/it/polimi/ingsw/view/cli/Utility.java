@@ -152,6 +152,7 @@ public abstract class Utility {
     public static void Clean()
     {
         System.out.println(Color.CLEAR);
+        System.out.flush();
     }
 
     /**

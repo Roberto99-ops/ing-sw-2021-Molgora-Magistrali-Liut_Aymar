@@ -42,7 +42,7 @@ public class TurnManager {
         do {
             //1)
 
-            client.sendMessage("What do you want to do?\n\t1)Shop a developement card\n\t2)Take resources at the market\n\t3)Active a production\n\t4)Do a Leader action\n");
+            client.sendMessage("What do you want to do?\n\t1)Shop a developement card\t2)Take resources at the market\n\t3)Active a production\t4)Do a Leader action ");
             String msg = client.receiveMessage();
             if(!msg.equals(""))
                 action = msg.charAt(0) - 48;
