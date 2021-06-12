@@ -37,7 +37,7 @@ public class ActionSignal {
 
                 i=2; // liv 1 blu
                 while (countRemove<2){
-                    while (((Game.getDevelopedecks(i).getStructure().isEmpty()) && i<=10)) {
+                    while (((Game.getDevelopedecks(i).getStructure().isEmpty()) && i<10)) {
                         i+=4;
                     }
 
