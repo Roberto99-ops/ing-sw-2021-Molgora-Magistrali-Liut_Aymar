@@ -13,7 +13,7 @@ public class Player implements Serializable {
     //cose che appartengono solo al player:
     //Nome, Numero, PV, Posizione tracciato fede, Plancia, LeaderCards(2)
     //Carte Sviluppo acquistate
-
+    private static final long serialVersionUID = 6721229633581248101L;
     public Player()
 
     {
