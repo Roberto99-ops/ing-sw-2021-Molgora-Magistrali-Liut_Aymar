@@ -68,6 +68,7 @@ public class DevelopementSpace implements Serializable {
      */
 
     public boolean setCard(DevelopeCard card, int choice) {
+
         int i;
 
         if (choice == 1) {
@@ -76,7 +77,24 @@ public class DevelopementSpace implements Serializable {
                 minideck1.getStructure().add(card);
                 return true;
             }
+
+            i = minideck2.getStructure().size();
+
+            if ((i == 0 && card.getLevel() == 1) || (i !=0 && minideck2.getStructure().get(i - 1).getLevel() == card.getLevel() - 1)) {
+                minideck2.getStructure().add(card);
+                return true;
+            }
+
+
+            i = minideck3.getStructure().size();
+
+            if ((i == 0 && card.getLevel() == 1) || (i !=0 && minideck3.getStructure().get(i - 1).getLevel() == card.getLevel() - 1)) {
+                minideck3.getStructure().add(card);
+                return true;
+            }
+
         }
+
 
 
         if (choice == 2) {
@@ -85,13 +103,45 @@ public class DevelopementSpace implements Serializable {
                 minideck2.getStructure().add(card);
                 return true;
             }
+
+            i = minideck1.getStructure().size();
+
+            if ((i == 0 && card.getLevel() == 1) || (i !=0 && minideck1.getStructure().get(i - 1).getLevel() == card.getLevel() - 1)) {
+                minideck1.getStructure().add(card);
+                return true;
+            }
+
+
+            i = minideck3.getStructure().size();
+
+            if ((i == 0 && card.getLevel() == 1) || (i !=0 && minideck3.getStructure().get(i - 1).getLevel() == card.getLevel() - 1)) {
+                minideck3.getStructure().add(card);
+                return true;
+            }
         }
+
+
 
 
         if (choice == 3) {
             i = minideck3.getStructure().size();
             if ((i == 0 && card.getLevel() == 1) || (i!=0 && minideck3.getStructure().get(i - 1).getLevel() == card.getLevel() - 1)) {
                 minideck3.getStructure().add(card);
+                return true;
+            }
+
+            i = minideck1.getStructure().size();
+
+            if ((i == 0 && card.getLevel() == 1) || (i !=0 && minideck1.getStructure().get(i - 1).getLevel() == card.getLevel() - 1)) {
+                minideck1.getStructure().add(card);
+                return true;
+            }
+
+
+            i = minideck2.getStructure().size();
+
+            if ((i == 0 && card.getLevel() == 1) || (i !=0 && minideck2.getStructure().get(i - 1).getLevel() == card.getLevel() - 1)) {
+                minideck2.getStructure().add(card);
                 return true;
             }
         }
