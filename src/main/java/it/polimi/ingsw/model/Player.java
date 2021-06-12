@@ -28,7 +28,7 @@ public class Player implements Serializable {
         developementquantity = 0;
         faithTrack = new FaithTrack();
 
-        for(int i=0; i<5; i++){
+        for(int i=0; i<10; i++){
             strongBox.getStructure().getVector().add('G');
             strongBox.getStructure().getVector().add('P');
             strongBox.getStructure().getVector().add('B');
@@ -294,15 +294,22 @@ public class Player implements Serializable {
      * @param card: card to add
      * @return: the action response
      */
-    public boolean addDevelopCard(DevelopeCard card)
+
+    /*
+    public boolean addDevelopCard(DevelopeCard card, int choice)
     {
-        char color = card.getColour();
-        int minideck = DSpace.colorPresent(color);
+
+
+    copia di setcard
+
+
 
         //if(minideck == 4)   return false;
-        if(minideck != 0)
+
+        if(choice != 0)
+
         {
-            if(DSpace.setCard(card, minideck)) {
+            if(DSpace.setCard(card, choice)) {
                 increasePV(card.getPv());
                 return true;
             }
@@ -311,21 +318,25 @@ public class Player implements Serializable {
         //if(DSpace.getMinideck3().getStructure().size() == 0)   minideck=3;
         //if(DSpace.getMinideck2().getStructure().size() == 0)   minideck=2;
         //if(DSpace.getMinideck1().getStructure().size() == 0)   minideck=1;
+
         if(DSpace.setCard(card, 1)) {
             increasePV(card.getPv());
             return true;
         }
+
         if(DSpace.setCard(card, 2)) {
             increasePV(card.getPv());
             return true;
         }
+
         if(DSpace.setCard(card, 3)) {
             increasePV(card.getPv());
             return true;
         }
+
         return false;
     }
-
+*/
     /**
      * Removes one resource from the storage.
      * @param resource: the resource the player wants to delete
