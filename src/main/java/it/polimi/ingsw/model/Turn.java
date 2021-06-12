@@ -98,7 +98,7 @@ public class Turn implements Serializable {
             }
 
             if(gameDeck[cardNum].getStructure().size() == 0)    cardNum = 20; //only to avoid to choose an empty deck
-        }while(cardNum<=0 || cardNum > 12);
+        } while(cardNum > 12);
         card = gameDeck[cardNum].getStructure().get(0);
         cost.setVector(card.getCost().getVector());
 
@@ -118,11 +118,20 @@ public class Turn implements Serializable {
         }
 
 
+        String c;
+        int choice;
+
+        do {
+            client.sendMessage("choose the space where you want to put this card( 1, 2 , 3)  ");
+            choice = client.receiveMessage().charAt(0) - 48;
+            c = client.receiveMessage();
+        } while (choice > 3 || choice == 0 || c.equals("\n")) ;
+
         //add the developecard if possible and remove the cost resources from the player
-        if(actualplayer.addDevelopCard(card))
+        if(actualplayer.getDSpace().setCard(card, choice))
         {
             gameDeck[cardNum].getStructure().remove(0);
-            Game.getDevelopedecks(cardNum).getStructure().remove(0);
+            // Game.getDevelopedecks(cardNum).getStructure().remove(0);
             actualplayer.deleteResources(check, cost.getVector());
             msg = new DevelopeDecksMsg(gameDeck);
             client.sendMessage(msg);
@@ -134,7 +143,6 @@ public class Turn implements Serializable {
 
         client.sendMessage("you can't buy this card( press any key )");
         client.receiveMessage();
-        return;
 
     }
 
