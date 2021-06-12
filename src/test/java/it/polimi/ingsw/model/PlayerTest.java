@@ -280,10 +280,11 @@ public class PlayerTest {
         assertEquals('G',player.getDSpace().getMinideck1().getStructure().get(1).getColour());
         assertEquals('B',player.getDSpace().getMinideck2().getStructure().get(0).getColour());
 
-        assertTrue(player.addDevelopCard(card4.setCard(32)));
-        assertTrue(player.addDevelopCard(card5.setCard(1)));
-        assertTrue(player.addDevelopCard(card6.setCard(25)));
-        assertFalse(player.addDevelopCard(card7.setCard(16)));
+        // da controllare
+        assertTrue(player.getDSpace().setCard(card4.setCard(32), 1));
+        assertTrue(player.getDSpace().setCard(card5.setCard(1),2));
+        assertTrue(player.getDSpace().setCard(card6.setCard(25),3));
+        assertFalse(player.getDSpace().setCard(card7.setCard(16),4));
 
         player.getDSpace().getMinideck1().getStructure().add(card4.setCard(32));
         player.getDSpace().getMinideck1().getStructure().add(card5.setCard(1));
