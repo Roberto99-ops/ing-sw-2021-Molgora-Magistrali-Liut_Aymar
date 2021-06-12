@@ -151,7 +151,7 @@ public abstract class Utility {
      */
     public static void Clean()
     {
-        for (int i = 0; i < 50; i++) System.out.print("\n");
+        System.out.println(Color.CLEAR);
     }
 
     /**
