@@ -20,7 +20,7 @@ public class Playerboard extends PaintCards {
 
     public Playerboard(Player player, Game game) throws FileNotFoundException {
         playerboard = new String[VERT_SIZE][HORIZ_SIZE];
-        Perimeter(playerboard, VERT_SIZE, HORIZ_SIZE, Color.BLACK);
+        Perimeter(playerboard, VERT_SIZE, HORIZ_SIZE, Color.WHITEonBLACK);
         drawFaithTrack(player.getTrackposition(), game);
         putString(player.getName(), playerboard, 1, 70);
         drawStorage(player.getStorage());
@@ -130,7 +130,7 @@ public class Playerboard extends PaintCards {
         }
 
         if(content==Lorenzo) {
-            square[2][(SQUARE_LENGHT - 1) / 2] = Color.BLACK.getEscape() + Simbol.CROCE + Color.RESET;
+            square[2][(SQUARE_LENGHT - 1) / 2] = Color.WHITEonBLACK.getEscape() + Simbol.CROCE + Color.RESET;
             square[2][((SQUARE_LENGHT - 1)/2) + 1] = " ";
         }
 

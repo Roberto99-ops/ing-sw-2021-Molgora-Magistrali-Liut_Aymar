@@ -1,7 +1,5 @@
 package it.polimi.ingsw.view.cli;
 
-import it.polimi.ingsw.model.LeaderCard;
-
 import java.util.ArrayList;
 
 public abstract class Utility {
@@ -123,7 +121,7 @@ public abstract class Utility {
                 returned = Color.BACKGROUND_GRAY.getEscape();
                 break;
             case 'W':
-                returned = Color.BLACK.getEscape();
+                returned = Color.BACKGROUND_WHITE.getEscape();
                 break;
             case 'R':
                 returned = Color.BACKGROUND_RED.getEscape();
