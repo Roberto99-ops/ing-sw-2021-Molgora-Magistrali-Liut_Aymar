@@ -250,15 +250,15 @@ public class Playerboard extends PaintCards {
 
         //here it draws the resources
         //!!!!it deletes all the resources in the strongbox
-       // for(int j=2; box.size()>0; j++) {
+        for(int j=2; box.size()>0; j++) {
             ArrayList<Character> resources = new ArrayList<>();
             for (int i = 0; box.size()>0 && i < MAX_HORIZ_SIZE-2; i++) {
                 resources.add((Character)box.get(0));
                 box.remove(0);
             }
 
-            convertSymbols(resources, strongbox, 1  , 1);
-        //}
+            convertSymbols(resources, strongbox, j  , 1);
+        }
 
         for (int i = 0; i < MAX_VERT_SIZE; i++)
             for (int j = 0; j < MAX_HORIZ_SIZE; j++)
