@@ -8,14 +8,13 @@ public enum Color {
     PURPLE("\u001B[95m"),
     GRAY("\u001B[37m"),
     LIGHT_BLUE("\u001B[96m"),
-    //WHITEonBLACK("\u001B[0m\u001B[97m\u001B[040m"), //scelta iniziale se usare una cli che riposa gli occhi oppure no?
     WHITEonBLACK("\u001B[0m\u001B[97m\u001B[040m"),
 
     BACKGROUND_YELLOW("\u001B[0m\u001B[0m\u001B[103m"),
     BACKGROUND_CYAN("\u001B[0m\u001B[30m\u001B[106m"),
     BACKGROUND_GRAY("\u001B[0m\u001B[30m\u001B[047m"),
     STRONGBOX_COLOR("\u001B[0m\u001B[90m\u001B[104m"),
-    BACKGROUND_GREEN("\u001B[0m\u001B[0m\u001B[042m"),
+    BACKGROUND_GREEN("\u001B[0m\u001B[97m\u001B[042m"),
     BACKGROUND_BLUE("\u001B[0m\u001B[0m\u001B[044m"),
     BACKGROUND_RED("\u001B[0m\u001B[0m\u001B[041m"),
     BACKGROUND_WHITE("\u001B[0m\u001B[0m\u001B[107m"),
