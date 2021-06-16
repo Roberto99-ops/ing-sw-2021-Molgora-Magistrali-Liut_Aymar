@@ -28,7 +28,7 @@ public class Player implements Serializable {
         developementquantity = 0;
         faithTrack = new FaithTrack();
 
-        for(int i=0; i<10; i++){
+        for(int i=0; i<3; i++){
             strongBox.getStructure().getVector().add('G');
             strongBox.getStructure().getVector().add('P');
             strongBox.getStructure().getVector().add('B');
@@ -648,8 +648,13 @@ public class Player implements Serializable {
         /*IDEA: scelgo una risorsa e questa , che si trova dentro il resourcestructure, va inserita dentro il magazzino
         (se viene dal mercato)
         */
+        if (resource == 'R') {
+            this.PV ++;
+            return;
+        }
         this.strongBox.getStructure().getVector().add(resource);
         modifyPVforResources();
+
     }
 
 }

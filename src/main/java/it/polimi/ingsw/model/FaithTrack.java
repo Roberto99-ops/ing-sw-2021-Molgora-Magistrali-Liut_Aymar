@@ -42,23 +42,6 @@ public class FaithTrack implements Serializable {
             return;
         }
 
-        /*if ((Tposition>=16)&&(VR==1)) {
-            PV+= 3; //il VR della seconda area vale 3 -> aggiungo i p.ti direttamente a Player
-            actualplayer.setPv(PV);
-            Game.setTimer_VR(0); //setto il timer a 0 per cominciare il conteggio dei turni
-            return;
-        } else if ((Tposition>=12)&&(VR==1)) {
-            if ((timer_VR<(n_player))){
-                PV+= 3;
-                actualplayer.setPv(PV);
-            }
-            timer_VR++;
-            Game.setTimer_VR(timer_VR); //una volta completato il giro, Vr viene settato a 2
-            if (timer_VR==n_player){
-                Game.setVR(2);//una volta completato il giro, Vr viene settato a 2
-            }
-            return;
-        }*/
 
         //un player arriva nell'area 3
 
@@ -73,24 +56,7 @@ public class FaithTrack implements Serializable {
             return;
         }
 
-        /*if ((Tposition>=24)&&(VR==2)) {
-            PV+= 4; //il VR della terza area vale 4 -> aggiungo i p.ti direttamente a Player
-            actualplayer.setPv(PV);
-            Game.setTimer_VR(0); //setto il timer a 0 per cominciare il conteggio dei turni
-        } else if ((Tposition>=19)&&(VR==2)) {
-            if ((timer_VR<(n_player))){
-                PV+= 4;
-                actualplayer.setPv(PV);
-            }
-            timer_VR++;
-            Game.setTimer_VR(timer_VR); //una volta completato il giro, Vr viene settato a 3
-            if (timer_VR==n_player){
-                Game.setVR(3);//una volta completato il giro, Vr viene settato a 3
-            }
 
-         */
-            //chiama EndGame() e Victory()
-            //Game.Endgame(Game.getPlayers().get(0)); //chiama poi victory()
     }
 
 }

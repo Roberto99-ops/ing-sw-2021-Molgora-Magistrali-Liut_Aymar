@@ -75,7 +75,7 @@ public class TurnManager {
 
 
                 if (action == 3) {
-                    do { //2.1)
+                     //2.1)
                         if ((player.getSkill1() == 1 && player.getLeadercards().getStructure().get(0).getSkill().equals("Prod.Skill")) ||
                                 (player.getSkill2() == 1 && player.getLeadercards().getStructure().get(1).getSkill().equals("Prod.Skill"))) {
                             client.sendMessage("Which LeaderCard do you want to enable(from up to down -> 0 1. enter=none)?\n");
@@ -90,8 +90,81 @@ public class TurnManager {
                         }
 
                         //2.2)
-                        client.sendMessage("Which DevelopeCard do you want to enable(from left to right 0 1 2. enter=none)?\n");
-                        //player.updateDevelDeck(client);
+
+                    ArrayList<Character> vectorProduction = new ArrayList<>();
+                    ArrayList<Character> collections = new ArrayList<>();
+                    collections.add('P');
+                    collections.add('R');
+                    collections.add('B');
+                    collections.add('Y');
+                    collections.add('G');
+                    collections.add('N');
+                    collections.add('W');
+
+                    do {
+                        vectorProduction.removeAll(collections);
+                        boolean[] checks = new boolean[4];
+                        char basicResource = 'N';
+                        for (int i = 0; i < 4; i ++) checks[i] = false;
+
+                        client.sendMessage("do you want to activate the basic production? (y/n)\n");
+                        if (client.receiveMessage().charAt(0) == 'y') {
+                            checks[0] = true;
+                            client.sendMessage("tell me the first resource you want to discard (P,B,G,Y)\n");
+                            vectorProduction.add(client.receiveMessage().charAt(0));
+                            client.sendMessage("tell me the second resource you want to discard (P,B,G,Y)\n");
+                            vectorProduction.add(client.receiveMessage().charAt(0));
+                            client.sendMessage("tell me the resource you want to product (R,P,B,G,Y)\n");
+                            basicResource = client.receiveMessage().charAt(0);
+                        }
+
+
+                        client.sendMessage("do you want to activate the production of the first column of developement space? (y/n)\n");
+                        if (client.receiveMessage().charAt(0) == 'y') {
+                            checks[1] = true;
+                            for (int i = 0; i < turn.getActualplayer().getTopCards().getStructure().get(0).getInputproduction().size(); i++) {
+                                vectorProduction.add(turn.getActualplayer().getTopCards().getStructure().get(0).getInputproduction().getVector().get(i));
+                            }
+                        }
+
+
+                        client.sendMessage("do you want to activate the production of the first column of developement space? (y/n)\n");
+                        if (client.receiveMessage().charAt(0) == 'y') {
+                            checks[2] = true;
+                            for (int i = 0; i < turn.getActualplayer().getTopCards().getStructure().get(1).getInputproduction().size(); i++) {
+                                vectorProduction.add(turn.getActualplayer().getTopCards().getStructure().get(1).getInputproduction().getVector().get(i));
+                            }
+                        }
+
+
+                        client.sendMessage("do you want to activate the production of the first column of developement space? (y/n)\n");
+                        if (client.receiveMessage().charAt(0) == 'y') {
+                            checks[3] = true;
+                            for (int i = 0; i < turn.getActualplayer().getTopCards().getStructure().get(2).getInputproduction().size(); i++) {
+                                vectorProduction.add(turn.getActualplayer().getTopCards().getStructure().get(2).getInputproduction().getVector().get(i));
+                            }
+                        }
+
+                        if (turn.getActualplayer().checkResources(vectorProduction) != 0) {
+                            client.sendMessage("You are able to do this production\n");
+                            turn.getActualplayer().deleteResources(turn.getActualplayer().checkResources(vectorProduction), vectorProduction);
+
+                            if (checks[0] == true) {
+                                if (basicResource == 'R') {
+                                    turn.getActualplayer().increasePV(1);
+                                } else turn.getActualplayer().addResourceStrongBox(basicResource);
+                                player.updatePlayerBoard(client,game);
+
+                            }
+
+
+                        } else client.sendMessage("You can't to do this production\n");
+
+                    } while (turn.getActualplayer().checkResources(vectorProduction) == 0);
+
+
+                        /*
+
                         String cardChosen = client.receiveMessage();
                         if (!cardChosen.equals("")) {
                             int card = cardChosen.charAt(0) - 48;  //converts a char into the correspondant int
@@ -106,10 +179,9 @@ public class TurnManager {
                             //game.getPlayers().get(actualplayer).updateStrongbox(client);
                         }
                         player.updatePlayerBoard(client, game);
-                        client.sendMessage("Do you want to do another production(yes/no)?\n");
-                        reception = client.receiveMessage();
 
-                    } while (reception.equals("yes"));
+                         */
+
                 }
 
                 //in case we have done only 0 or 1 leaderactions during our turn, we can do another one at the end of the turn
@@ -146,9 +218,9 @@ public class TurnManager {
         //Ad ogni turno, effettuo il controllo del Vatican Report e
         // notifico tutti gli observer dei cambiamenti avvenuti durante il turno
 
-        FaithTrack faithTrack = new FaithTrack();
-        faithTrack.callVaticanReport(player, game);
-        //player.updateFaithTrack(client);
+
+        player.getFaithTrack().callVaticanReport(player, game);
+        player.updatePlayerBoard(client, game);
 
         MessageGameManager.personalChanges(client, game.getPlayers().get(actualplayer), game);
         MessageGameManager.generalChanges(client);
