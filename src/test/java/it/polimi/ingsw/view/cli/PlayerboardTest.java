@@ -61,9 +61,21 @@ public class PlayerboardTest {
             game.getPlayers().add(person);
         }
 
+        SingleGame.setVR(1);
+        player.setTrackposition(4);
         SingleGame.getActionStructure().shuffleSignal();
         Playerboard playerboard = new Playerboard(player, game);
         playerboard.Print();
+
+        SingleGame.setVR(2);
+        player.setTrackposition(15);
+        Playerboard rick = new Playerboard(player, game);
+        rick.Print();
+
+        SingleGame.setVR(3);
+        player.setTrackposition(19);
+        Playerboard morty = new Playerboard(player, game);
+        morty.Print();
 
     }
 }
