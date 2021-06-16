@@ -153,6 +153,58 @@ public abstract class Utility {
         System.out.flush();
     }
 
+
+    /**
+     * this method draws the vatican cards.
+     * it colors them of the color we pass so we can know if we have
+     * activated them or not.
+     * @param color: green if card is activated for us, red if the card isn't been activated yet
+     * @param content: PV of the card (2, 3, 4)
+     * @return: the draw of the card
+     */
+    public String[][] drawVaticanCard(Color color, String content)
+    {
+        int MAX_VERT_SIZE = 7;
+        int MAX_HORIZ_SIZE = 14;
+        String[][] card = new String[MAX_VERT_SIZE][MAX_HORIZ_SIZE];
+        for (int i = 0; i < MAX_VERT_SIZE; i++) {
+            for (int j = 0; j < MAX_HORIZ_SIZE; j++) {
+                card[i][j] = color + " " + Color.RESET;
+            }
+        }
+
+        for (int i = 0; i < MAX_HORIZ_SIZE; i++) {
+            card[0][i] = Color.BACKGROUND_CYAN + "_" + Color.RESET;
+            card[MAX_VERT_SIZE - 1][i] = color + "_" + Color.RESET;
+        }
+        for (int i = 1; i < MAX_VERT_SIZE; i++) {
+            card[i][0] = color + "|" + Color.RESET;
+            card[i][MAX_HORIZ_SIZE - 1] = color + "|" + Color.RESET;
+        }
+
+        for (int i = 0; i < 4; i++) {
+            card[2][4 + i] = color + "꘏" + Color.RESET;
+            card[5][4 + i] = color + "꘏" + Color.RESET;
+        }
+        //this because every 2 ꘏ we have an extra position occupied
+        card[2][8] = color + "" + Color.RESET;
+        card[5][8] = color + "" + Color.RESET;
+        card[2][9] = color + "" + Color.RESET;
+        card[5][9] = color + "" + Color.RESET;
+
+        for (int i = 0; i < 2; i++) {
+            card[3+i][3] = color + "꘏" + Color.RESET;
+            card[3+i][9] = color + "꘏" + Color.RESET;
+            card[3+i][10] = color + "" + Color.RESET;
+        }
+
+        if(content.equals("2")) card[4][6] = color + "2" + Color.RESET;
+        if(content.equals("3")) card[4][6] = color + "3" + Color.RESET;
+        if(content.equals("4")) card[4][6] = color + "4" + Color.RESET;
+
+        return card;
+    }
+
     /**
      * it prints on the screen all the playeboard
      */
