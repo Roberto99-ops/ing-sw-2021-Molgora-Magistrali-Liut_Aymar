@@ -22,6 +22,7 @@ public enum Simbol {
     PALLINO("\u25CF"),
     //CROCE("\u271E"),
     CROCE("✞"),
+    VATICAN_CARD("*"),
     QUADRATO("■");
     //SMALL_SPACE("\u2006");
     private String form;
