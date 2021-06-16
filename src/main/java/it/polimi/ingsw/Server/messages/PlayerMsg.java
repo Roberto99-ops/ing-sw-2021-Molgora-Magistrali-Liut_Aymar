@@ -13,6 +13,7 @@ public class PlayerMsg extends NetworkMessage{
     private boolean SingleorNot = false;
     private int signal;
     private int Lorenzo;
+    private int VR;
 
     /**
      * Prepares the data of the Player (and the game because we need this message to build the playerboard)
@@ -26,7 +27,7 @@ public class PlayerMsg extends NetworkMessage{
         for (int i = 0; i < gamein.getPlayers().size(); i++) {
             players.add(gamein.getPlayers().get(i));
         }
-
+        VR = Game.getVR();
         if(gamein.getClass().equals(SingleGame.class))
         {
             SingleorNot = true;
@@ -58,5 +59,8 @@ public class PlayerMsg extends NetworkMessage{
         return Lorenzo;
     }
 
+    public int getVR() {
+        return VR;
+    }
 
 }

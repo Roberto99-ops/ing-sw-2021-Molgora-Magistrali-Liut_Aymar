@@ -76,6 +76,7 @@ public class CliManager {
 
             for (int i = 0; i < playerMsg.getPlayers().size(); i++)
                 game.getPlayers().add(playerMsg.getPlayers().get(i));
+            Game.setVR(playerMsg.getVR());
 
             if(playerMsg.getSingleorNot()){
                 SingleGame.getLorenzo().setNumber(playerMsg.getLorenzo());
