@@ -123,9 +123,9 @@ public class Turn implements Serializable {
 
         do {
             client.sendMessage("choose the space where you want to put this card( 1, 2 , 3)  ");
-            choice = client.receiveMessage().charAt(0) - 48;
             c = client.receiveMessage();
-        } while (choice > 3 || choice == 0 || c.equals("\n")) ;
+            choice = c.charAt(0) - 48;
+        } while (choice > 3 || choice <= 0);
 
         //add the developecard if possible and remove the cost resources from the player
         if(actualplayer.getDSpace().setCard(card, choice))
