@@ -15,6 +15,14 @@ import java.util.ArrayList;
 public class Playerboard extends PaintCards {
     private static final int VERT_SIZE = 45;
     private static final int HORIZ_SIZE = 150;
+    //these variables are used to check if the player has activated the vatican reports.
+    //they're set to 0 if the report isn't been activated yet,
+    //to 1 if it's been activated and this player has activated the vatican report,
+    //to 2 if it's been activated and this player hasn't activate the vatican report.
+    private static int vatican1 = 0;
+    private static int vatican2 = 0;
+    private static int vatican3 = 0;
+
 
     private String[][] playerboard;
 
@@ -54,6 +62,8 @@ public class Playerboard extends PaintCards {
             for (int j = 1; j < HORIZ_SIZE-1; j++)
                 playerboard[i][j]=basecolor + " " + Color.RESET;
 
+        drawVaticanCards(trackPosition);
+
         for (int i = 0; i < 25; i++) {
             int LeftHighCorner_VERT;
             int LeftHighCorner_HORIZ;
@@ -71,6 +81,7 @@ public class Playerboard extends PaintCards {
 
             drawSquare(LeftHighCorner_VERT, LeftHighCorner_HORIZ, content, trackPosition, Lorenzo);
         }
+
     }
 
     /**
@@ -141,6 +152,93 @@ public class Playerboard extends PaintCards {
                 playerboard[inizialVert-SQUARE_HEIGHT*LeftHighCorner_VERT+i][inizialHoriz+SQUARE_LENGHT*LeftHighCorner_HORIZ+j]= square[i][j];
     }
 
+    /**
+     * this method draws the vatican cards and their activation.
+     * it uses the global variables vatican1, 2, 3 to set if we have activated them.
+     * @param trackposition: position of the player
+     */
+    private void drawVaticanCards(int trackposition)
+    {
+        int MAX_VERT_SIZE = 7;
+        int MAX_HORIZ_SIZE = 14;
+        String[][] card1 = new String[MAX_VERT_SIZE][MAX_HORIZ_SIZE];
+        String[][] card2 = new String[MAX_VERT_SIZE][MAX_HORIZ_SIZE];
+        String[][] card3 = new String[MAX_VERT_SIZE][MAX_HORIZ_SIZE];
+        int VR = Game.getVR();
+        //this switch manages the drawing of the cards using the VR variable in Game class
+            switch (VR) {
+                case 0:
+                    card1 = drawVaticanCard(Color.BACKGROUND_RED, "2");
+                    card2 = drawVaticanCard(Color.BACKGROUND_RED, "3");
+                    card3 = drawVaticanCard(Color.BACKGROUND_RED, "4");
+                    break;
+                case 1://case we have activated the first vatican report. we set vatican1 to 2 if we can't use
+                    // the vaticanreport so we won't activate it in the future for mistake. else we set to 1.
+                    if(trackposition>4 && vatican1!=2) {
+                        vatican1 = 1;
+                        card1 = drawVaticanCard(Color.BACKGROUND_GREEN, "2");
+                    }
+                    else
+                        vatican1=2;
+
+                    card2 = drawVaticanCard(Color.BACKGROUND_RED, "3");
+                    card3 = drawVaticanCard(Color.BACKGROUND_RED, "4");
+                    break;
+                case 2:
+                    if(vatican1 == 1)
+                        card1 = drawVaticanCard(Color.BACKGROUND_GREEN, "2");
+
+                    if(trackposition>11 && vatican2!=2) {
+                        vatican2 = 1;
+                        card2 = drawVaticanCard(Color.BACKGROUND_GREEN, "3");
+                    }
+                    else
+                        vatican2=2;
+
+                    card3 = drawVaticanCard(Color.BACKGROUND_RED, "4");
+                    break;
+                case 3:
+                    if(vatican1 == 1)
+                        card1 = drawVaticanCard(Color.BACKGROUND_GREEN, "2");
+                    if(vatican2 == 1)
+                        card2 = drawVaticanCard(Color.BACKGROUND_GREEN, "3");
+
+                    if(trackposition>18 && vatican3!=2) {
+                        vatican3 = 1;
+                        card3 = drawVaticanCard(Color.BACKGROUND_GREEN, "4");
+                    }
+                    else
+                        vatican3=2;
+                    break;
+            }
+
+            //draw first card
+        if(vatican1 != 2) {
+            int inizialVert = 4;
+            int inizialHoriz = 35;
+            for (int i = 0; i < MAX_VERT_SIZE; i++)
+                for (int j = 0; j < MAX_HORIZ_SIZE; j++)
+                    playerboard[inizialVert + i][inizialHoriz + j] = card1[i][j];
+        }
+
+            //draw second card
+        if(vatican2 != 2) {
+            int inizialVert = 2;
+            int inizialHoriz = 70;
+            for (int i = 0; i < MAX_VERT_SIZE; i++)
+                for (int j = 0; j < MAX_HORIZ_SIZE; j++)
+                    playerboard[inizialVert + i][inizialHoriz + j] = card2[i][j];
+        }
+
+            //draw third card
+        if(vatican3 != 2) {
+            int inizialVert = 4;
+            int inizialHoriz = 112;
+            for (int i = 0; i < MAX_VERT_SIZE; i++)
+                for (int j = 0; j < MAX_HORIZ_SIZE; j++)
+                    playerboard[inizialVert + i][inizialHoriz + j] = card3[i][j];
+        }
+    }
 
     /**
      * it draws the storage space inside the playerboard
