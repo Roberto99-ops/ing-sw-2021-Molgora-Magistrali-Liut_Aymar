@@ -7,6 +7,7 @@ import it.polimi.ingsw.model.*;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 /**
@@ -69,8 +70,9 @@ public class Playerboard extends PaintCards {
             int LeftHighCorner_HORIZ;
             int content;
 
-            FileReader stringa = new FileReader("src/main/resources/CellsPosition.json");
-            Object obj = JsonParser.parseReader(stringa);
+            //FileReader stringa = new FileReader("src/main/resources/CellsPosition.json");
+            InputStreamReader reader = new InputStreamReader(this.getClass().getResourceAsStream("/CellsPosition.json"));
+            Object obj = JsonParser.parseReader(reader);
             JsonObject jsonObject = (JsonObject)obj;
             JsonArray cardsArray = (JsonArray)jsonObject.get("CellsPosition");
             JsonObject card = (JsonObject)cardsArray.get(i);

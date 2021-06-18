@@ -5,10 +5,7 @@ import com.google.gson.JsonParser;
 import it.polimi.ingsw.Server.ClientHandler;
 import it.polimi.ingsw.Server.GameHandler;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Serializable;
+import java.io.*;
 import java.util.ArrayList;
 
 public class LeaderCard implements Serializable {
@@ -73,8 +70,9 @@ public class LeaderCard implements Serializable {
         priceC = new ArrayList<Character>();
         int size;
 
-        FileReader stringa = new FileReader("src/main/resources/LeaderCards.json");
-        Object obj = JsonParser.parseReader(stringa);
+        //FileReader stringa = new FileReader("src/main/resources/LeaderCards.json");
+        InputStreamReader reader = new InputStreamReader(this.getClass().getResourceAsStream("/LeaderCards.json"));
+        Object obj = JsonParser.parseReader(reader);
         JsonObject jsonObject = (JsonObject) obj;
         JsonArray cardsArray = (JsonArray) jsonObject.get("LeaderCards");
         JsonObject card = (JsonObject) cardsArray.get(number);

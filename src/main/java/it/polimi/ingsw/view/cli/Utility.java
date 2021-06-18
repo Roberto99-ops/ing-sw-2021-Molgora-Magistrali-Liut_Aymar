@@ -182,20 +182,14 @@ public abstract class Utility {
             card[i][MAX_HORIZ_SIZE - 1] = color + "|" + Color.RESET;
         }
 
-        for (int i = 0; i < 4; i++) {
-            card[2][4 + i] = color + "꘏" + Color.RESET;
-            card[5][4 + i] = color + "꘏" + Color.RESET;
+        for (int i = 0; i < 5; i++) {
+            card[2][4 + i] = color + Simbol.VATICAN_CARD.getForm() + Color.RESET;
+            card[5][4 + i] = color + Simbol.VATICAN_CARD.getForm() + Color.RESET;
         }
-        //this because every 2 ꘏ we have an extra position occupied
-        card[2][8] = color + "" + Color.RESET;
-        card[5][8] = color + "" + Color.RESET;
-        card[2][9] = color + "" + Color.RESET;
-        card[5][9] = color + "" + Color.RESET;
 
         for (int i = 0; i < 2; i++) {
-            card[3+i][3] = color + "꘏" + Color.RESET;
-            card[3+i][9] = color + "꘏" + Color.RESET;
-            card[3+i][10] = color + "" + Color.RESET;
+            card[3+i][3] = color + Simbol.VATICAN_CARD.getForm() + Color.RESET;
+            card[3+i][9] = color + Simbol.VATICAN_CARD.getForm() + Color.RESET;
         }
 
         if(content.equals("2")) card[4][6] = color + "2" + Color.RESET;

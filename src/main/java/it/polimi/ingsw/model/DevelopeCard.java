@@ -6,10 +6,7 @@ import it.polimi.ingsw.Server.ClientHandler;
 import it.polimi.ingsw.Server.GameHandler;
 
 import javax.swing.*;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Serializable;
+import java.io.*;
 import java.util.ArrayList;
 
 
@@ -117,8 +114,9 @@ public class DevelopeCard implements Serializable {
         cost = new ResourceStructure();
         int size;
 
-        FileReader stringa = new FileReader("src/main/resources/DevelopeCards.json");
-        Object obj = JsonParser.parseReader(stringa);
+        //FileReader stringa = new FileReader("src/main/resources/DevelopeCards.json");
+        InputStreamReader reader = new InputStreamReader(this.getClass().getResourceAsStream("/DevelopeCards.json"));
+        Object obj = JsonParser.parseReader(reader);
         JsonObject jsonObject = (JsonObject)obj;
         JsonArray cardsArray = (JsonArray)jsonObject.get("DevelopeCards");
         JsonObject card = (JsonObject)cardsArray.get(number);
