@@ -122,7 +122,7 @@ public class Turn implements Serializable {
         int choice;
 
         do {
-            client.sendMessage("choose the space where you want to put this card( 1, 2 , 3)  ");
+            client.sendMessage("Choose the space where you want to put this card( 1, 2 , 3)  ");
             c = client.receiveMessage();
             choice = c.charAt(0) - 48;
         } while (choice > 3 || choice <= 0);
@@ -136,7 +136,7 @@ public class Turn implements Serializable {
             msg = new DevelopeDecksMsg(gameDeck);
             client.sendMessage(msg);
             // actualplayer.updateDevelopementDecks(client);
-            client.sendMessage("these are the new developedecks( press any key )");
+            client.sendMessage("These are the new developedecks( press any key )");
             client.receiveMessage();
             return;
         }
@@ -149,8 +149,6 @@ public class Turn implements Serializable {
     /**
      * this method manages the action of buying resources at the market.
      * the player choose which row/column and call the manager market method
-     * @param
-     * @return
      */
 
     public void buyResource() throws IOException, ClassNotFoundException {
