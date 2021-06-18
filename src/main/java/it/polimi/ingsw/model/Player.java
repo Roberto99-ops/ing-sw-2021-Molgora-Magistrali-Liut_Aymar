@@ -196,12 +196,22 @@ public class Player implements Serializable {
     public int checkResources(ArrayList<Character> vectorResources) {
         //flag per sapere se non possiedo tali risorse (0) o possiedo in storage (1) o in strongbox-storage (2)
         int ableTo = 0;
+        //ordino il vettore dato
+        char r;
+        ArrayList<Character> vectorOrganized = new ArrayList<>();
+        for (int j=0; j<vectorResources.size(); j++){
+            r=vectorResources.get(j);
+            if(!vectorOrganized.contains(r)) vectorOrganized.add(r);
+            for (int i=j+1; i< vectorResources.size(); i++){
+                if (r == (vectorResources.get(i))) vectorOrganized.add(r);
+            }
+        }
 
         for (int i = 0; i < vectorResources.size(); i++) {
             int countType=0;
             char typeResource = vectorResources.get(i);
 
-            //conto quanto c'è bisogno di una determinata risorsa nel vettore dato
+            //conto quanto c'è bisogno di una determinata risorsa nel vettore dato (si suppone che il vettore di costo sia ordinate)
             for (int j = 0; j < vectorResources.size(); j++)
                 if (vectorResources.get(j).equals(typeResource)) countType++;
 
@@ -209,6 +219,7 @@ public class Player implements Serializable {
             //confronto quantità richiesta con quantità presente o in storage o in strongbox e storage
             int storageCount = storage.countTypeS(typeResource);
             int strongboxCount = strongBox.countTypeSB(typeResource);
+            System.out.println(storageCount+"  "+strongboxCount+"  "+countType);
             if (countType > (storageCount + strongboxCount)) {
                 //risorse insufficienti
                 System.out.println("Not enough resources.");
@@ -228,6 +239,56 @@ public class Player implements Serializable {
 
         return ableTo;
     }
+/* DA NON TOGLIERE E DA CONFRONTARE COL METODO QUI SOPRA
+    //metodo per controllare la presenza di risorse o in storage o in strongbox o in entrambi
+    public int checkResources(ArrayList<Character> vectorResources){
+        int ableTo=0;
+        //riordino l'array che può essere in disordine
+        char r;
+        ArrayList<Character> vectorOrganized = new ArrayList<>();
+        for (int j=0; j<vectorResources.size(); j++){
+            r=vectorResources.get(j);
+            if(!vectorOrganized.contains(r)) vectorOrganized.add(r);
+            for (int i=j+1; i< vectorResources.size(); i++){
+                if (r == (vectorResources.get(i))) vectorOrganized.add(r);
+            }
+        }
+
+        //vedo quante risorse ho bisogno di un certo tipo
+        for (int j=0; j<vectorOrganized.size(); j++){
+            r=vectorOrganized.get(j);
+            int countType =0;
+            for (int i=0; i<vectorOrganized.size(); i++){
+                if (r== vectorOrganized.get(i)) countType++;
+                System.out.println(countType);
+            }
+            //conto nello storage e nello strongbox
+            //se il conteggio è piu alto di countType allora le risorse non sono disponibili
+            //altrimenti vedo dove sono disponibili le risorse
+
+            if (countType>(storage.countTypeS(r))+(strongBox.countTypeSB(r))) {
+                return ableTo=0;
+            } else if (countType<storage.countTypeS(r)+strongBox.countTypeSB(r)){
+                ableTo=2;
+                if (countType< storage.countTypeS(r))  ableTo=1;
+            } else if (countType<strongBox.countTypeSB(r))  ableTo=3;
+        }
+        return ableTo;
+    }
+
+ */
+
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * deletes the resources i need from the storage or the strongbox
@@ -235,29 +296,32 @@ public class Player implements Serializable {
      * @param vector: vector of resources
      */
     public void deleteResources(int ableTo, ArrayList<Character> vector) {
-        ArrayList<Character> vectorResources = vector;
+        //ArrayList<Character> vectorResources = vector;
         //removes from storage
         if (ableTo == 1) {
-            for (int i = vectorResources.size() - 1; i >= 0; i--)
-                removeResourceStorage(vectorResources.get(i));
+            for (int i = vector.size() - 1; i >= 0; i--)
+                removeResourceStorage(vector.get(i));
             modifyPVforResources();
             return;
         }
 
         //removes from storage and strongbox
         if (ableTo == 2) {
-            for (int i = vectorResources.size() - 1; i >= 0; i--) {
-                if (removeResourceStorage(vectorResources.get(i))) {
-                    vectorResources.remove(i);
+            for (int i = vector.size() - 1; i >= 0; i--) {
+                if (removeResourceStorage(vector.get(i))) {
+                    vector.remove(i);
                 }
             }
-            for (int i = vectorResources.size() - 1; i >= 0; i--)
-                strongBox.getStructure().getVector().remove(vectorResources.get(i));
+            for (int i = vector.size() - 1; i >= 0; i--)
+                strongBox.getStructure().getVector().remove(vector.get(i));
         }
 
         modifyPVforResources();
     }
 
+
+
+    //SI POTREBBE TOGLIERE
     /**
      * Gets card on the top of each minideck in the DevelopementSpace
      * @return arraylist of minidecks' topcards
@@ -365,7 +429,7 @@ public class Player implements Serializable {
             if (i > 5) {
                 //l'elemento si trova nel pannello extra
                 i=i-5;
-                storage.getExtrapanel().set(i,'N');
+                storage.getExtrapanel().getVector().set(i,'N');
             } else {
                 //l'elemento si trova nello storage normale
                 storage.getPanel().set(i,'N');//rimuovo la risorsa i-esima
@@ -651,7 +715,8 @@ public class Player implements Serializable {
         (se viene dal mercato)
         */
         if (resource == 'R') {
-            this.PV ++;
+            PV ++;
+            increaseTrackposition();
             return;
         }
         this.strongBox.getStructure().getVector().add(resource);
