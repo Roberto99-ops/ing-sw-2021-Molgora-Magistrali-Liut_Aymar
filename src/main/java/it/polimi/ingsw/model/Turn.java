@@ -245,6 +245,7 @@ public class Turn implements Serializable {
                 }
             }
 
+
             //the leadercard cost is in terms of developecards
             else {
                 cost = card.getPriceC();
@@ -261,6 +262,7 @@ public class Turn implements Serializable {
                 }
             }
         }
+
 
         //player choose second card
         if (choice.equals("1")) {
