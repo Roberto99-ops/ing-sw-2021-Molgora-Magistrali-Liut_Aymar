@@ -60,9 +60,9 @@ public class CliManager {
             player.setName(playerMsg.getPlayer().getName());
             player.setDSpace(playerMsg.getPlayer().getDSpace());
             player.setDevelopementquantity(playerMsg.getPlayer().getDevelopementquantity());
-            player.setMinideck1(playerMsg.getPlayer().getMinideck1());
-            player.setMinideck2(playerMsg.getPlayer().getMinideck2());
-            player.setMinideck3(playerMsg.getPlayer().getMinideck3());
+            player.getDSpace().setMinideck1(playerMsg.getPlayer().getDSpace().getMinideck1());
+            player.getDSpace().setMinideck2(playerMsg.getPlayer().getDSpace().getMinideck2());
+            player.getDSpace().setMinideck3(playerMsg.getPlayer().getDSpace().getMinideck3());
             player.setNumber(playerMsg.getPlayer().getNumber());
             player.setPv(playerMsg.getPlayer().getPv());
             player.setStrongBox(playerMsg.getPlayer().getStrongBox());
