@@ -125,7 +125,7 @@ public class Player implements Serializable {
 
 
     //carte sviluppo in DevelopementSpace
-    private DevelopeDecks minideck1;
+    /*private DevelopeDecks minideck1;
     private DevelopeDecks minideck2;
     private DevelopeDecks minideck3;
 
@@ -152,6 +152,8 @@ public class Player implements Serializable {
     public void setMinideck3(DevelopeDecks minideck3) {
         this.minideck3 = minideck3;
     }
+
+     */
 
     private int developementquantity;
     public int getDevelopementquantity() {
