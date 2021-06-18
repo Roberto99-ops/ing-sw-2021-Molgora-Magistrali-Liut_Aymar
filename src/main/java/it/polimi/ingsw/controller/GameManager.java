@@ -21,7 +21,6 @@ import java.util.concurrent.TimeUnit;
  * starts a loop that
  * 3) calls turn for every player and
  * 4) checks if the game is ended
- * @param
  */
 
 public class GameManager implements Runnable{
@@ -31,36 +30,19 @@ public class GameManager implements Runnable{
     private static int actualturn = 0;
     private static SingleGameManager singleGameManager;
     private static boolean end = false;
-
     public static ArrayList<ClientHandler> getClientList() {
         return clientList;
     }
 
     @Override
     public void run() {
-
-        //passare a questa classe l'istanza di clienthandler così da poter chiamare
-        //i supi metodi per inviare e ricevere e poter anche condividire l'istanza
-        //comune a tutti di game? ciò vuol dire fare attenzione alla sincronizzazione
-        //tra i thread perchè saranno tutti attivi contemporaneamente su gamemanager.
-        //(ma forse lo saranno su istanze diverse di gamemanager?) forse farlo static?
-        //game = new Game();
-
         TurnManager turnmanager = new TurnManager();
 
-        // il timer serve per mettere in attesa i vari giocatori fino a che scade
-        // e si inizia a giocare con i giocatori connessi (max 4)
-
-        // timer.start();
-
-
         try {
-            TimeUnit.SECONDS.sleep(10);
+            TimeUnit.SECONDS.sleep(10);  //if none is connected until 30 seconds, starts singlegame played by the first player that is been connected
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-        // se nessuno si collega entro 30 secondi parte singlegame del primo giocatore che si è collegato
 
 
         if (clientList.size() == 1) {
@@ -85,7 +67,6 @@ public class GameManager implements Runnable{
         }
 
 
-        //synchronized (this){
         if (clientList.size() != 1) {
             try {
                 game.shuffle();
@@ -93,7 +74,6 @@ public class GameManager implements Runnable{
                 e.printStackTrace();
             }
             for (int i = 0; i < clientList.size(); i++) {
-                //player.updateActionStructure(client);
                 int choice2 = 0;
                 LeaderDeck leaderChoice = game.leaderChoice();
                 LeaderDeckMsg mess = new LeaderDeckMsg(leaderChoice);
@@ -168,38 +148,34 @@ public class GameManager implements Runnable{
 
 
                 for (int i = 0; i < clientList.size(); i++) {
-
                     if (game.callEndgame(clientList.get(i).getPlayer())) end = true;
-
                 }
-
                 actualturn++;
                 if (actualturn == clientList.size()) actualturn = 0;
-
             }
-       // }
-
-
 
             for (int i = 0; i < clientList.size(); i++) {
-
                 try {
                     clientList.get(i).sendMessage("\nThe winner is " + game.callVictory() + "Game is finished");
+                    clientList.get(i).sendMessage("Game Ended");  //this isn't actually a message, is a string that communicates top the client to close the connection.
+                    KeepAlive.run();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
             }
-
-
         }
-
-
     }
 
-    public static void addPlayer(ClientHandler temporary, GameHandler player){
+    /**
+     * this method add a player to the game and to the KeepAlive class in a synchronized way, so we shouldn't have, for example,
+     *      GameManager.clientlist = [1, 2]   &&     KeepAlive.clientlist = [2, 1]
+     * @param temporary
+     * @param player
+     */
+    public static synchronized void addPlayer(ClientHandler temporary, GameHandler player){
         clientList.add(temporary);
         game.getPlayers().add(player);
+        KeepAlive.addClient(temporary);
     }
 
 

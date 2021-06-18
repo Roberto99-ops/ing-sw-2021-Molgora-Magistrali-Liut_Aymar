@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Server;
 
 import it.polimi.ingsw.controller.GameManager;
+import it.polimi.ingsw.model.Game;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,33 +15,25 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
-//dobbiamo usare javaSE??
 
 public class Server {
     private static Random random = new Random();
     private final static int SO_TIMEOUT = 10;
     private static GameManager gameManager = new GameManager();
-    private static Thread game = new Thread(gameManager, "gameManager_");
+    private static Thread game;
+    private static int numberofsockets = 0; //is used to allow the first player to start a new game
 
     public static void main(String[] args) throws IOException {
         System.out.println("Internal ip: " + InetAddress.getLocalHost());
         Scanner scan = new Scanner(System.in);
         String numberPort;
 
-        //apro le porte # ...
-        ArrayList<ServerSocket> openSockets = new ArrayList<>();
+        //asks what port we do want to open
         ServerSocket socket;
         try {
-            //... creando un socket per quei numeri di porta
             System.out.println("Which port do you want to open?");
             numberPort = scan.nextLine();
             socket = new ServerSocket(Integer.parseInt(numberPort));
-
-            /*for (int i=1000;i<1020;i++){
-                socket = new ServerSocket(i);
-                socket.setSoTimeout(SO_TIMEOUT);
-                openSockets.add(socket);
-            }*/
             System.out.println("Server is running");
         } catch (IOException e) {
             System.out.println("cannot open server socket");
@@ -48,34 +41,34 @@ public class Server {
             return;
         }
 
-
-        //...e il server si mette in ascolto.
-        // Per ogni nuova connessione stabilita, viene creato un nuovo thread di ClientHandler
-        int numberofsockets=0; //serve cosicchè il primo giocatore sappia di essere il primo e crei la partita
+        //starts a loop that accepts new connections
+        //the loop is set to true (so it will run infinitely) because a server is an entity that should be always open to accept new connections,
+        //the only reasons to allow a server to shut down itself are maybe reasons correlated to security (like too heat components or too many connections or a cyber attack),
+        //reasons that don't concern THIS server. obviously if the server manager (i'm talking the person who run it) would like to shut down the server could simply turn it off.
         while (true) {
-            /* accepts connections; for every connection we accept,
-             * create -- a new Thread executing a ClientHandler -- */
-            Socket client= new Socket();
+            Socket client;
             client = socket.accept();
-            /*for(int i=0; !client.isConnected(); i++) {
-                if(i==20) i=0;
-                try {
-                    client = openSockets.get(i).accept();
-                } catch (IOException e) {}
-                //if (client.isConnected()) break;
-            }*/
-            //il clientHandler si occupa di gestire la connessione con il client
             numberofsockets++;
             ClientHandler clientHandler = new ClientHandler(client, numberofsockets);
-            //bisogna creare un nuovo thread che si occupi di gestire il clienthandler
             Thread thread = new Thread(clientHandler, "server_" + client.getInetAddress());
             thread.start();
         }
     }
 
+    /**
+     * this method start a gamemanager
+     */
     public static void runGame()
     {
+        game = new Thread(gameManager, "gameManager_");
         game.start();
     }
 
+    /**
+     * this method close a game, so it close the socket and reset numberofsockets
+     */
+    public static void closeGame() {
+        numberofsockets=0;
+        game.stop();
+    }
 }

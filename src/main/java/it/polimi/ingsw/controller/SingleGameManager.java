@@ -23,7 +23,6 @@ public class SingleGameManager {
      * separate controller and network.
      * @param clientin: the clienthandler that manages the player.
      */
-
     public SingleGameManager(ClientHandler clientin) {
         game = new SingleGame();
         observablesinglegame = new MessageSingleGameManager();
@@ -38,7 +37,6 @@ public class SingleGameManager {
         observablesinglegame.setSingleGameHendler(player);
 
         Shuffle();
-        //player.updateActionStructure(client);
         int choice2;
         LeaderDeck leaderChoice = game.leaderChoice();
         LeaderDeckMsg mess = new LeaderDeckMsg(leaderChoice);
@@ -46,21 +44,13 @@ public class SingleGameManager {
         client.sendMessage("Choose one: ");
         int choice1 = Integer.parseInt(client.receiveMessage());
         player.getLeadercards().getStructure().add(leaderChoice.getStructure().get(choice1));
-        //player.updateLeaderCards(client);
-        //player.updateLeaderDeck(client);
 
         do {
             client.sendMessage("Choose another one: ");
             choice2 = Integer.parseInt(client.receiveMessage());
         } while(choice2 == choice1);
         player.getLeadercards().getStructure().add(leaderChoice.getStructure().get(choice2));
-        //player.updateLeaderCards(client);
-        //player.updateLeaderDeck(client);
         client.sendMessage("clean screen");
-
-        // spostato a sopra
-
-        // player.updateActionStructure(client);
 
 
         while(!game.callEndgame(player)) {
@@ -72,8 +62,8 @@ public class SingleGameManager {
 
         String winner = game.callVictory();
         client.sendMessage("\t\t\t\t\t\t\t\t\t\t" + winner + " won!");
-
-        return;
+        client.sendMessage("Game Ended");  //this isn't actually a message, is a string that communicates top the client to close the connection.
+        KeepAlive.run();
     }
 
     private static void Shuffle() throws FileNotFoundException {

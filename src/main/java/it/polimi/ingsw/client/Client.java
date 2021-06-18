@@ -13,49 +13,28 @@ import java.util.Scanner;
 import java.io.IOException;
 
 public class Client {
-    //Di seguito verranno istanziati elementi che il client userà per aggiornare l'utente sul gioco (questi elementi sono
-    // salvati dentro il ServerHandler che sta all'interno del Client stesso):
-    // questa è una copia  del player e dei suoi dati/carte presenti nel server. Questa istanza permette al client di
-    // avere tutti i dati ricevuti dal clienthandler in modo ordinato e di visualizzarli quando ne ha bisogno
-    private static Player player;
-    //questa è una copia del market nel caso in cui il giocatore giochi in compagnia
-    private static Market market;
-    //questa è una copia dei segnalini che possono essere pescati dal giocatore quando gioca da solo
-    private static ActionSignal actionSignal;
 
-    private static DevelopeDecks[] DDecks;
-
-    //private static final int DEFAULT_PORT = 1000;
-
+    /**
+     * this method starts a client, so:
+     * 1) creates the connection with the server
+     * 2) starts a loop where the client is always ready to receive some messages and:
+     *   2.1) if is a string it prints on the screen and in some cases wait for an answer
+     *   2.2) if is something else (so an update for the CLI) converts it into a readable CLI object and prints it calling CLIManager.Update
+     * @param args
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-        player = new Player();
-        //market = new Market();
-        actionSignal = new ActionSignal();
-        DDecks = new DevelopeDecks[12];
-        Playerboard board;
-        //MarketView marketView = new MarketView(market);
-        DevelopeDecksView DDecksView = new DevelopeDecksView(DDecks);
-        //actionsignalview
-
+        Player player = new Player();
         Scanner scan = new Scanner(System.in);
-
         System.out.print("Insert IP address of Server: ");
         String ip = scan.nextLine();
         System.out.print("\nInsert Port number of Server:");
         String serverport = scan.nextLine();
 
-
-
-        /*Per aprire connessione col server*/
         Socket server;
         try {
-            /*if(!serverport.equals(""))
-                server = new Socket(ip, Integer.parseInt(serverport));  //ipServer Roby: 95.250.236.230
-            else
-                server = new Socket(ip, 1000);
-            */
-            server = new Socket(ip, Integer.parseInt(serverport));  //ipServer Roby: 95.250.236.230
-
+            server = new Socket(ip, Integer.parseInt(serverport));
         } catch (IOException e) {
             System.out.println("\nServer unreachable");
             return;
@@ -84,24 +63,26 @@ public class Client {
                 else {
                     System.out.print("\n" + next);
                     String string = scan.nextLine();
-                    output.writeObject(string);
-                    output.flush();
-                    output.reset();
+                    try {
+                        output.writeObject(string);
+                        output.flush();
+                        output.reset();
+                    }catch (IOException e){ break;}
                 }
             }
             else
                 CliManager.update(next, player);
-            next = input.readObject();
-        }while(!next.equals("Turn Finished"));   //ci aspettiamo un messaggio di turno finito a fine turno
+            try {
+                next = input.readObject();
+            }catch (IOException e){
+                break;
+            }
+        }while(!next.equals("Game Ended"));
         try {
             server.close();
             input.close();
             output.close();
         } catch (IOException ex) { System.out.println("\nServer close gone wrong");}
     }
-
-
-
-
 
 }

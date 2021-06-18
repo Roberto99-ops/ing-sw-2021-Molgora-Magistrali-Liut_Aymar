@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Server;
 
 import it.polimi.ingsw.controller.GameManager;
+import it.polimi.ingsw.controller.KeepAlive;
 import it.polimi.ingsw.controller.SingleGameManager;
 
 import java.io.*;
@@ -19,20 +20,18 @@ public class ClientHandler implements Runnable {
     private Socket client;
     private ObjectOutputStream output;
     private ObjectInputStream input;
-    private GameManager gameManager;  //non sono attributi
-    private SingleGameManager singleGameManager; //non sono attributi
+    private GameManager gameManager;
+    private SingleGameManager singleGameManager;
     private SingleGameHandler singleplayer;
     private GameHandler player;
     private int number;
 
 
     /**
-     * Initializes a new handler using a specific socket connected to
-     * a client.
-     *
-     * @param client The socket connection to the client.
+     * Initializes a new handler using a specific socket connected to a client.
+     * @param client: The socket connection to the client.
+     * @param numberofsockets: the number of this player.
      */
-
     public ClientHandler(Socket client, int numberofsockets) {
         this.client = client;
         this.singleplayer = new SingleGameHandler();
@@ -44,12 +43,10 @@ public class ClientHandler implements Runnable {
 
 
     /**
-     * Connects to the client and runs the event loop.
+     * Connects to the client and runs the handleConnection method.
      */
-
     @Override
     public void run() {
-
         try {
             output = new ObjectOutputStream(client.getOutputStream());
             input = new ObjectInputStream(client.getInputStream());
@@ -63,24 +60,15 @@ public class ClientHandler implements Runnable {
         } catch (IOException e) {
             System.out.println("client " + client.getInetAddress() + " connection dropped");
         }
-        try {
-            client.close();
-        } catch (IOException e) {
-        }
     }
 
 
     /**
-     * An event loop that receives messages from the client and processes
-     * them in the order they are received.
-     *
+     *set the name of the player (asking it to the client) and if the player it's been the first to connect, asks him if he want to play alone
      * @throws IOException If a communication error occurs.
      */
-
     public void handleClientConnection() throws IOException {
         try {
-            //TURNO - FATTO
-
             this.sendMessage("What's your name? ");
             String next = this.receiveMessage();
             player.setName(next);
@@ -93,23 +81,16 @@ public class ClientHandler implements Runnable {
                     singleGameManager = new SingleGameManager(this);
                     singleGameManager.main();
                 }
-                else    {
+                else {
                     GameManager.addPlayer(this, player);
                     Server.runGame();
-                    while (!client.isClosed()){} //non va bene
                 }
 
             }
             else {
                 GameManager.addPlayer(this, player);
-                while (!client.isClosed()){}
-
             }
 
-
-            client.close(); //togliere
-            output.close();  //togliere
-            input.close();
         } catch (ClassCastException | ClassNotFoundException e) {
             System.out.println("invalid stream from client");
         } catch (Exception e) {
@@ -117,38 +98,62 @@ public class ClientHandler implements Runnable {
         }
     }
 
-
     /**
-     * The game instance associated with this client.
-     *
-     * @return The game instance.
+     * this method tells to the caller if the socket it's been already closed.
+     * (it returns true only if we have closed the socket with the socket.close command; so it doesn't detect if the client is crashed)
+     * @return: true if it's been closed.
      */
-    /*public Game getGame() {
-        return game;
-    }*/
+    public boolean isClose()
+    {
+        if(this.client.isClosed()) return true;
+        return false;
+    }
 
 
     /**
-     * this method send a message to the client
-     * @param msg: message to send (it could be any type of message so we pass an Object)
+     * thi method close a socket connection
      * @throws IOException
      */
-
-    public void sendMessage(Object msg) throws IOException {
-        output.writeObject(msg);
-        output.flush();
-        output.flush();
-        output.reset();
+    public void closeSocket() throws IOException {
+        try {
+            input.close();
+            output.close();
+            client.close();
+        }catch (IOException e){}
     }
 
     /**
-     * this method receive a message from the client
+     * this method send a message to the client. in case the client is crashed, it ends the game.
+     * @param msg: message to send (it could be any type of message so we pass an Object)
+     * @throws IOException
+     */
+    public void sendMessage(Object msg) throws IOException {
+        try {
+            output.writeObject(msg);
+            output.flush();
+            output.reset();
+        }catch (IOException e){
+            System.out.println("Error while writing " + msg.getClass() + " type message to " + this.client.getInetAddress() + " so the game ends.");
+            this.closeSocket();
+            KeepAlive.run();
+        }
+    }
+
+    /**
+     * this method receive a message from the client. in case the client is crashed, it ends the game.
      * @return: return a string as we expect always a string as a message from the client.
      * @throws IOException
      * @throws ClassNotFoundException
      */
     public String receiveMessage() throws IOException, ClassNotFoundException {
-        String next = (String)input.readObject();
-        return next;
+        try {
+            String next = (String) input.readObject();
+            return next;
+        }catch (IOException e){
+            System.out.println("Error while reading from " + this.client.getInetAddress() + " so the game ends.");
+            this.closeSocket();
+            KeepAlive.run();
+        }
+        return "";  //here only to return something, it doesn't have effects
     }
 }
