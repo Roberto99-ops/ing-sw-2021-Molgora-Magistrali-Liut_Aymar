@@ -88,11 +88,11 @@ public class TurnManager {
                                     player.getLeadercards().getStructure().get(1).doProductionSkill(client, game);
                             }
                         }
-
+                    boolean ableTo = false;
                         //2.2)
-
-                    ArrayList<Character> vectorinProduction = new ArrayList<>();
-                    ArrayList<Character> collections = new ArrayList<>();
+                    do{
+                    ArrayList<Character> vectorinProduction = new ArrayList<Character>();
+                    /*ArrayList<Character> collections = new ArrayList<Character>();
                     collections.add('P');
                     collections.add('R');
                     collections.add('B');
@@ -100,81 +100,111 @@ public class TurnManager {
                     collections.add('G');
                     collections.add('N');
                     collections.add('W');
-                    ArrayList<Character> vectoroutProduction = new ArrayList<>();
 
-                    do {
-                        vectorinProduction.removeAll(collections);
-                        vectoroutProduction.removeAll(collections);
+                     */
+                    ArrayList<Character> vectorOutProduction = new ArrayList<Character>();
+
+
+
+                        //vectorinProduction.removeAll(collections);
+                        //vectorOutProduction.removeAll(collections);
                         boolean[] checks = new boolean[4];
-                        char basicResource = 'N';
+                        char chosenResource = 'N';
                         for (int i = 0; i < 4; i ++) checks[i] = false;
 
-                        client.sendMessage("do you want to activate the basic production? (y/n)\n");
-                        if (client.receiveMessage().charAt(0) == 'y') {
+                        client.sendMessage("Do you want to activate the basic production? (y/n)\n");
+                        String s=client.receiveMessage();
+                        if (s.equals("y")) {
                             checks[0] = true;
-                            client.sendMessage("tell me the first resource you want to discard (P,B,G,Y)\n");
+                            client.sendMessage("Tell me the first resource you want to discard (P,B,G,Y)\n");
                             vectorinProduction.add(client.receiveMessage().charAt(0));
-                            client.sendMessage("tell me the second resource you want to discard (P,B,G,Y)\n");
+                            client.sendMessage("Tell me the second resource you want to discard (P,B,G,Y)\n");
                             vectorinProduction.add(client.receiveMessage().charAt(0));
-                            client.sendMessage("tell me the resource you want to product (P,B,G,Y)\n");
-                            basicResource = client.receiveMessage().charAt(0);
+                            client.sendMessage("Tell me the resource you want to product (P,B,G,Y)\n");
+                            do {
+                                chosenResource = client.receiveMessage().charAt(0);
+                            } while (chosenResource!='P'&& chosenResource!='B'&&chosenResource!='G'&& chosenResource!='Y');
                         }
 
+                        if (turn.getActualplayer().getDSpace().getMinideck1().getStructure().size() > 0) {
+                        client.sendMessage("Do you want to activate the production of the first column of development space? (y/n)\n");
+                        s=client.receiveMessage();
+                        if (s.equals("y")) {
+                                int c = turn.getActualplayer().getDSpace().getMinideck1().getStructure().size();
+                                checks[1] = true;
+                                for (int i = 0; i < turn.getActualplayer().getDSpace().getMinideck1().getStructure().get(c - 1).getInputproduction().size(); i++) {
+                                    vectorinProduction.add(turn.getActualplayer().getDSpace().getMinideck1().getStructure().get(c - 1).getInputproduction().getVector().get(i));
+                                }
 
-                        client.sendMessage("do you want to activate the production of the first column of developement space? (y/n)\n");
-                        if (client.receiveMessage().charAt(0) == 'y') {
-                            checks[1] = true;
-                            for (int i = 0; i < turn.getActualplayer().getTopCards().getStructure().get(0).getInputproduction().size(); i++) {
-                                vectorinProduction.add(turn.getActualplayer().getTopCards().getStructure().get(0).getInputproduction().getVector().get(i));
-                            }
-
-                            for (int i = 0; i < turn.getActualplayer().getTopCards().getStructure().get(0).getOutputproduction().size(); i++) {
-                                vectoroutProduction.add(turn.getActualplayer().getTopCards().getStructure().get(0).getOutputproduction().getVector().get(i));
-                            }
-                        }
-
-
-                        client.sendMessage("do you want to activate the production of the second column of developement space? (y/n)\n");
-                        if (client.receiveMessage().charAt(0) == 'y') {
-                            checks[2] = true;
-                            for (int i = 0; i < turn.getActualplayer().getTopCards().getStructure().get(1).getInputproduction().size(); i++) {
-                                vectorinProduction.add(turn.getActualplayer().getTopCards().getStructure().get(1).getInputproduction().getVector().get(i));
-                            }
-                            for (int i = 0; i < turn.getActualplayer().getTopCards().getStructure().get(1).getOutputproduction().size(); i++) {
-                                vectoroutProduction.add(turn.getActualplayer().getTopCards().getStructure().get(1).getOutputproduction().getVector().get(i));
+                                for (int i = 0; i < turn.getActualplayer().getDSpace().getMinideck1().getStructure().get(c - 1).getOutputproduction().size(); i++) {
+                                    vectorOutProduction.add(turn.getActualplayer().getDSpace().getMinideck1().getStructure().get(c - 1).getOutputproduction().getVector().get(i));
+                                }
                             }
                         }
 
 
-                        client.sendMessage("do you want to activate the production of the third column of developement space? (y/n)\n");
-                        if (client.receiveMessage().charAt(0) == 'y') {
-                            checks[3] = true;
-                            for (int i = 0; i < turn.getActualplayer().getTopCards().getStructure().get(2).getInputproduction().size(); i++) {
-                                vectorinProduction.add(turn.getActualplayer().getTopCards().getStructure().get(2).getInputproduction().getVector().get(i));
-                            }
-                            for (int i = 0; i < turn.getActualplayer().getTopCards().getStructure().get(2).getOutputproduction().size(); i++) {
-                                vectoroutProduction.add(turn.getActualplayer().getTopCards().getStructure().get(2).getOutputproduction().getVector().get(i));
+
+                        if (turn.getActualplayer().getDSpace().getMinideck2().getStructure().size() > 0) {
+                            client.sendMessage("Do you want to activate the production of the second column of development space? (y/n)\n");
+                            s=client.receiveMessage();
+                            if (s.equals("y")) {
+                                int c = turn.getActualplayer().getDSpace().getMinideck2().getStructure().size();
+                                checks[2] = true;
+                                for (int i = 0; i < turn.getActualplayer().getDSpace().getMinideck2().getStructure().get(c - 1).getInputproduction().size(); i++) {
+                                    vectorinProduction.add(turn.getActualplayer().getDSpace().getMinideck2().getStructure().get(c - 1).getInputproduction().getVector().get(i));
+                                }
+
+                                for (int i = 0; i < turn.getActualplayer().getDSpace().getMinideck2().getStructure().get(c - 1).getOutputproduction().size(); i++) {
+                                    vectorOutProduction.add(turn.getActualplayer().getDSpace().getMinideck2().getStructure().get(c - 1).getOutputproduction().getVector().get(i));
+                                }
                             }
                         }
+
+                        if (turn.getActualplayer().getDSpace().getMinideck3().getStructure().size() > 0) {
+                            client.sendMessage("Do you want to activate the production of the third column of development space? (y/n)\n");
+                            s=client.receiveMessage();
+                            if (s.equals("y")) {
+                                int c = turn.getActualplayer().getDSpace().getMinideck3().getStructure().size();
+                                checks[3] = true;
+                                for (int i = 0; i < turn.getActualplayer().getDSpace().getMinideck3().getStructure().get(c - 1).getInputproduction().size(); i++) {
+                                    vectorinProduction.add(turn.getActualplayer().getDSpace().getMinideck3().getStructure().get(c - 1).getInputproduction().getVector().get(i));
+                                }
+
+                                for (int i = 0; i < turn.getActualplayer().getDSpace().getMinideck3().getStructure().get(c - 1).getOutputproduction().size(); i++) {
+                                    vectorOutProduction.add(turn.getActualplayer().getDSpace().getMinideck3().getStructure().get(c - 1).getOutputproduction().getVector().get(i));
+                                }
+                            }
+                        }
+                        /*for(int i=0; i<vectorinProduction.size(); i++){
+                            System.out.println(vectorinProduction.get(i));
+                        }
+                        System.out.println(turn.getActualplayer().checkResources(vectorinProduction));*/
 
                         if (turn.getActualplayer().checkResources(vectorinProduction) != 0) {
-                            client.sendMessage("You are able to do this production\n");
+                            client.sendMessage("You are able to do this production (press a key)\n");
+                            ableTo=true;
                             turn.getActualplayer().deleteResources(turn.getActualplayer().checkResources(vectorinProduction), vectorinProduction);
 
-                            for (int i = 0; i < vectoroutProduction.size(); i++) {
-                                turn.getActualplayer().addResourceStrongBox(vectoroutProduction.get(i));
+                            for (int i = 0; i < vectorOutProduction.size(); i++) {
+                                turn.getActualplayer().addResourceStrongBox(vectorOutProduction.get(i));
                             }
 
-                            if (checks[0] == true) {
-                                turn.getActualplayer().addResourceStrongBox(basicResource);
+                            if (checks[0]) {
+                                turn.getActualplayer().addResourceStrongBox(chosenResource);
                                 player.updatePlayerBoard(client,game);
 
                             }
 
 
-                        } else client.sendMessage("You can't to do this production\n");
+                        } else {
+                            client.sendMessage("You can't to do this production\nDo you want to retry to do a production? (y/n)\n");
+                            s = client.receiveMessage();
+                            if (s.equals("n")) {
+                                ableTo = true;
+                            }
+                        }
 
-                    } while (turn.getActualplayer().checkResources(vectorinProduction) == 0);
+                    } while (!ableTo);
 
 
                         /*
@@ -200,7 +230,7 @@ public class TurnManager {
 
                 //in case we have done only 0 or 1 leaderactions during our turn, we can do another one at the end of the turn
                 if(leaderaction<2 && (action == 1 || action == 2 || action == 3)) {
-                    client.sendMessage("Do you want to do a Leader action? (yes/no) ");
+                    client.sendMessage("Do you want to do a Leader action? (yes/no)\n ");
                     reception = client.receiveMessage();
                     if(reception.equals("yes")) additionalAction = true;
                 }
@@ -222,7 +252,7 @@ public class TurnManager {
 
                     additionalAction = false;
 
-                    player.updatePlayerBoard(client, game);
+                    //player.updatePlayerBoard(client, game);
                 }
 
             } catch (IOException e) {
