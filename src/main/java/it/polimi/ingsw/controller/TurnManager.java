@@ -91,7 +91,7 @@ public class TurnManager {
 
                         //2.2)
 
-                    ArrayList<Character> vectorProduction = new ArrayList<>();
+                    ArrayList<Character> vectorinProduction = new ArrayList<>();
                     ArrayList<Character> collections = new ArrayList<>();
                     collections.add('P');
                     collections.add('R');
@@ -100,9 +100,11 @@ public class TurnManager {
                     collections.add('G');
                     collections.add('N');
                     collections.add('W');
+                    ArrayList<Character> vectoroutProduction = new ArrayList<>();
 
                     do {
-                        vectorProduction.removeAll(collections);
+                        vectorinProduction.removeAll(collections);
+                        vectoroutProduction.removeAll(collections);
                         boolean[] checks = new boolean[4];
                         char basicResource = 'N';
                         for (int i = 0; i < 4; i ++) checks[i] = false;
@@ -111,10 +113,10 @@ public class TurnManager {
                         if (client.receiveMessage().charAt(0) == 'y') {
                             checks[0] = true;
                             client.sendMessage("tell me the first resource you want to discard (P,B,G,Y)\n");
-                            vectorProduction.add(client.receiveMessage().charAt(0));
+                            vectorinProduction.add(client.receiveMessage().charAt(0));
                             client.sendMessage("tell me the second resource you want to discard (P,B,G,Y)\n");
-                            vectorProduction.add(client.receiveMessage().charAt(0));
-                            client.sendMessage("tell me the resource you want to product (R,P,B,G,Y)\n");
+                            vectorinProduction.add(client.receiveMessage().charAt(0));
+                            client.sendMessage("tell me the resource you want to product (P,B,G,Y)\n");
                             basicResource = client.receiveMessage().charAt(0);
                         }
 
@@ -123,36 +125,48 @@ public class TurnManager {
                         if (client.receiveMessage().charAt(0) == 'y') {
                             checks[1] = true;
                             for (int i = 0; i < turn.getActualplayer().getTopCards().getStructure().get(0).getInputproduction().size(); i++) {
-                                vectorProduction.add(turn.getActualplayer().getTopCards().getStructure().get(0).getInputproduction().getVector().get(i));
+                                vectorinProduction.add(turn.getActualplayer().getTopCards().getStructure().get(0).getInputproduction().getVector().get(i));
+                            }
+
+                            for (int i = 0; i < turn.getActualplayer().getTopCards().getStructure().get(0).getOutputproduction().size(); i++) {
+                                vectoroutProduction.add(turn.getActualplayer().getTopCards().getStructure().get(0).getOutputproduction().getVector().get(i));
                             }
                         }
 
 
-                        client.sendMessage("do you want to activate the production of the first column of developement space? (y/n)\n");
+                        client.sendMessage("do you want to activate the production of the second column of developement space? (y/n)\n");
                         if (client.receiveMessage().charAt(0) == 'y') {
                             checks[2] = true;
                             for (int i = 0; i < turn.getActualplayer().getTopCards().getStructure().get(1).getInputproduction().size(); i++) {
-                                vectorProduction.add(turn.getActualplayer().getTopCards().getStructure().get(1).getInputproduction().getVector().get(i));
+                                vectorinProduction.add(turn.getActualplayer().getTopCards().getStructure().get(1).getInputproduction().getVector().get(i));
+                            }
+                            for (int i = 0; i < turn.getActualplayer().getTopCards().getStructure().get(1).getOutputproduction().size(); i++) {
+                                vectoroutProduction.add(turn.getActualplayer().getTopCards().getStructure().get(1).getOutputproduction().getVector().get(i));
                             }
                         }
 
 
-                        client.sendMessage("do you want to activate the production of the first column of developement space? (y/n)\n");
+                        client.sendMessage("do you want to activate the production of the third column of developement space? (y/n)\n");
                         if (client.receiveMessage().charAt(0) == 'y') {
                             checks[3] = true;
                             for (int i = 0; i < turn.getActualplayer().getTopCards().getStructure().get(2).getInputproduction().size(); i++) {
-                                vectorProduction.add(turn.getActualplayer().getTopCards().getStructure().get(2).getInputproduction().getVector().get(i));
+                                vectorinProduction.add(turn.getActualplayer().getTopCards().getStructure().get(2).getInputproduction().getVector().get(i));
+                            }
+                            for (int i = 0; i < turn.getActualplayer().getTopCards().getStructure().get(2).getOutputproduction().size(); i++) {
+                                vectoroutProduction.add(turn.getActualplayer().getTopCards().getStructure().get(2).getOutputproduction().getVector().get(i));
                             }
                         }
 
-                        if (turn.getActualplayer().checkResources(vectorProduction) != 0) {
+                        if (turn.getActualplayer().checkResources(vectorinProduction) != 0) {
                             client.sendMessage("You are able to do this production\n");
-                            turn.getActualplayer().deleteResources(turn.getActualplayer().checkResources(vectorProduction), vectorProduction);
+                            turn.getActualplayer().deleteResources(turn.getActualplayer().checkResources(vectorinProduction), vectorinProduction);
+
+                            for (int i = 0; i < vectoroutProduction.size(); i++) {
+                                turn.getActualplayer().addResourceStrongBox(vectoroutProduction.get(i));
+                            }
 
                             if (checks[0] == true) {
-                                if (basicResource == 'R') {
-                                    turn.getActualplayer().increasePV(1);
-                                } else turn.getActualplayer().addResourceStrongBox(basicResource);
+                                turn.getActualplayer().addResourceStrongBox(basicResource);
                                 player.updatePlayerBoard(client,game);
 
                             }
@@ -160,7 +174,7 @@ public class TurnManager {
 
                         } else client.sendMessage("You can't to do this production\n");
 
-                    } while (turn.getActualplayer().checkResources(vectorProduction) == 0);
+                    } while (turn.getActualplayer().checkResources(vectorinProduction) == 0);
 
 
                         /*
