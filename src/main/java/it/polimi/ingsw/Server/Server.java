@@ -22,6 +22,7 @@ public class Server {
     private static GameManager gameManager = new GameManager();
     private static Thread game;
     private static int numberofsockets = 0; //is used to allow the first player to start a new game
+    private static Thread firstClient; //here only to allow us to terminate the singlegame thread in case of errors
 
     public static void setNumberofsockets(int numberofsockets) {
         Server.numberofsockets = numberofsockets;
@@ -55,6 +56,7 @@ public class Server {
             numberofsockets++;
             ClientHandler clientHandler = new ClientHandler(client, numberofsockets);
             Thread thread = new Thread(clientHandler, "server_" + client.getInetAddress());
+            if(numberofsockets == 1)    firstClient = thread;
             thread.start();
         }
     }
@@ -73,6 +75,8 @@ public class Server {
      */
     public static void closeGame() {
         numberofsockets=0;
-        game.stop();
+        if(game != null)
+                game.stop();
+        firstClient.stop(); //used in case we are playing a single game
     }
 }
