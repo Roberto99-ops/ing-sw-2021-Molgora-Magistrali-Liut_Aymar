@@ -275,7 +275,7 @@ public class TurnManager {
 
 
         player.getFaithTrack().callVaticanReport(player, game);
-        player.updatePlayerBoard(client, game);
+        //player.updatePlayerBoard(client, game);
 
         MessageGameManager.personalChanges(client, game.getPlayers().get(actualplayer), game);
         MessageGameManager.generalChanges(client);
