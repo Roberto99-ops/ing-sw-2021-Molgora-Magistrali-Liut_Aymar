@@ -14,11 +14,10 @@ public class Player implements Serializable {
     //Nome, Numero, PV, Posizione tracciato fede, Plancia, LeaderCards(2)
     //Carte Sviluppo acquistate
     private static final long serialVersionUID = 6721229633581248101L;
-    public Player()
 
-    {
+    public Player() {
         name = new String();
-        PV=0;
+        PV = 0;
         storage = new Storage();
         strongBox = new StrongBox();
         DSpace = new DevelopementSpace();
@@ -28,19 +27,22 @@ public class Player implements Serializable {
         developementquantity = 0;
         faithTrack = new FaithTrack();
 
-        for(int i=0; i<3; i++){
+        for (int i = 0; i < 8; i++) {
             strongBox.getStructure().getVector().add('G');
             strongBox.getStructure().getVector().add('P');
             strongBox.getStructure().getVector().add('B');
             strongBox.getStructure().getVector().add('Y');
         }
+
     }
 
     //Nome
     private String name;
+
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -48,9 +50,11 @@ public class Player implements Serializable {
 
     //Numero
     private int number;
+
     public void setNumber(int number) {
         this.number = number;
     }
+
     public int getNumber() {
         return number;
     }
@@ -58,20 +62,29 @@ public class Player implements Serializable {
 
     //PV
     private int PV;
-    public  int getPv() {
+
+    public int getPv() {
         return PV;
     }
-    public  void setPv(int pv) {
+
+    public void setPv(int pv) {
         PV = pv;
     }
-    public void increasePV(int num) { PV+=num;}
-    public void decreasePV(int num) { PV-=num;}
+
+    public void increasePV(int num) {
+        PV += num;
+    }
+
+    public void decreasePV(int num) {
+        PV -= num;
+    }
 
 
     //Plancia
-    private  Storage storage;
+    private Storage storage;
     private StrongBox strongBox;
-    private  DevelopementSpace DSpace;
+    private DevelopementSpace DSpace;
+
     public Storage getStorage() {
         return storage;
     }
@@ -95,6 +108,7 @@ public class Player implements Serializable {
     public DevelopementSpace getDSpace() {
         return DSpace;
     }
+
     public void setDSpace(DevelopementSpace DSpace) {
         this.DSpace = DSpace;
     }
@@ -102,25 +116,32 @@ public class Player implements Serializable {
 
     //LeaderCards(2)
     private LeaderDeck leadercards;
-    public void setLeadercards(LeaderDeck leadercards){this.leadercards=leadercards;}
-    public LeaderDeck getLeadercards() { return leadercards; }
+
+    public void setLeadercards(LeaderDeck leadercards) {
+        this.leadercards = leadercards;
+    }
+
+    public LeaderDeck getLeadercards() {
+        return leadercards;
+    }
+
     private int skill1;
     private int skill2;
 
-    public int getSkill1(){
-        return  skill1;
+    public int getSkill1() {
+        return skill1;
     }
 
-    public int getSkill2(){
+    public int getSkill2() {
         return skill2;
     }
 
-    public void setSkill1(int skill){
-        this.skill1=skill;
+    public void setSkill1(int skill) {
+        this.skill1 = skill;
     }
 
-    public void setSkill2(int skill){
-        this.skill2=skill;
+    public void setSkill2(int skill) {
+        this.skill2 = skill;
     }
 
 
@@ -156,13 +177,18 @@ public class Player implements Serializable {
      */
 
     private int developementquantity;
+
     public int getDevelopementquantity() {
         return developementquantity;
     }
+
     /**
      * Adds 1 when the player buys a new DevelopementCard
      */
-    public void increaseDevelopQuantity() { this.developementquantity = developementquantity+1; }
+    public void increaseDevelopQuantity() {
+        this.developementquantity = developementquantity + 1;
+    }
+
     public void setDevelopementquantity(int developementquantity) {
         this.developementquantity = developementquantity;
     }
@@ -170,12 +196,21 @@ public class Player implements Serializable {
 
     //FaithTrack
     private FaithTrack faithTrack;
+
     public FaithTrack getFaithTrack() {
         return faithTrack;
     }
-    private int FTposition=0;
-    public  int getTrackposition() { return FTposition; }
-    public void setTrackposition(int num) { FTposition=num; }
+
+    private int FTposition = 0;
+
+    public int getTrackposition() {
+        return FTposition;
+    }
+
+    public void setTrackposition(int num) {
+        FTposition = num;
+    }
+
     public void increaseTrackposition() {
         this.FTposition = FTposition + 1;
         increasePV(1);
@@ -183,6 +218,7 @@ public class Player implements Serializable {
 
 
     private int resourcesQuantity = 0;
+
     private void setResourcesQuantity(int resourcesQuantity) {
         this.resourcesQuantity = resourcesQuantity;
     }
@@ -190,36 +226,29 @@ public class Player implements Serializable {
 
     /**
      * Checks if the quantity of needed resources are available in the storage and/or in the strongbox
+     *
      * @param vectorResources : arraylist of needed resources
      * @return a flag
      */
+
+
     public int checkResources(ArrayList<Character> vectorResources) {
         //flag per sapere se non possiedo tali risorse (0) o possiedo in storage (1) o in strongbox-storage (2)
         int ableTo = 0;
-        //ordino il vettore dato
-        char r;
-        ArrayList<Character> vectorOrganized = new ArrayList<>();
-        for (int j=0; j<vectorResources.size(); j++){
-            r=vectorResources.get(j);
-            if(!vectorOrganized.contains(r)) vectorOrganized.add(r);
-            for (int i=j+1; i< vectorResources.size(); i++){
-                if (r == (vectorResources.get(i))) vectorOrganized.add(r);
-            }
-        }
 
         for (int i = 0; i < vectorResources.size(); i++) {
-            int countType=0;
+            int countType = 0;
             char typeResource = vectorResources.get(i);
 
             //conto quanto c'è bisogno di una determinata risorsa nel vettore dato (si suppone che il vettore di costo sia ordinate)
             for (int j = 0; j < vectorResources.size(); j++)
-                if (vectorResources.get(j).equals(typeResource)) countType++;
+                if (vectorResources.get(j) == typeResource) countType++;
 
             //una volta finito di contare le risorse dello stesso tipo
             //confronto quantità richiesta con quantità presente o in storage o in strongbox e storage
             int storageCount = storage.countTypeS(typeResource);
             int strongboxCount = strongBox.countTypeSB(typeResource);
-            System.out.println(storageCount+"  "+strongboxCount+"  "+countType);
+            System.out.println(storageCount + "  " + strongboxCount + "  " + countType);
             if (countType > (storageCount + strongboxCount)) {
                 //risorse insufficienti
                 System.out.println("Not enough resources.");
@@ -227,20 +256,26 @@ public class Player implements Serializable {
             }
 
             //ableTo!=2 because if once we had ableTo=2 ->it's impossible that we have all the resources in the storage
-            if (countType <= storageCount && ableTo != 2) {
-                ableTo = 1;
-                System.out.println("You have the needed quantity of resources in the storage.");
-            }
-            else {
+            if (countType <= storageCount + strongboxCount) {
                 ableTo = 2;
-                System.out.println("You have the needed quantity of resources in storage + strongbox");
-            }
-        }
+                System.out.println("You have the needed quantity of resources in the storage + strongbox");
 
+                if (countType <= storageCount) {
+                    ableTo = 1;
+                    System.out.println("You have the needed quantity of resources in storage");
+                }
+
+            }
+
+        }
         return ableTo;
     }
-/* DA NON TOGLIERE E DA CONFRONTARE COL METODO QUI SOPRA
-    //metodo per controllare la presenza di risorse o in storage o in strongbox o in entrambi
+
+
+
+
+
+    /*
     public int checkResources(ArrayList<Character> vectorResources){
         int ableTo=0;
         //riordino l'array che può essere in disordine
@@ -276,7 +311,7 @@ public class Player implements Serializable {
         return ableTo;
     }
 
- */
+     */
 
 
 
