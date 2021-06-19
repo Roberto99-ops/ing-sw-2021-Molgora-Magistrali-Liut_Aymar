@@ -23,6 +23,10 @@ public class Server {
     private static Thread game;
     private static int numberofsockets = 0; //is used to allow the first player to start a new game
 
+    public static void setNumberofsockets(int numberofsockets) {
+        Server.numberofsockets = numberofsockets;
+    }
+
     public static void main(String[] args) throws IOException {
         System.out.println("Internal ip: " + InetAddress.getLocalHost());
         Scanner scan = new Scanner(System.in);

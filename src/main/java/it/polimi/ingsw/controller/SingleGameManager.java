@@ -2,6 +2,7 @@ package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.Server.ClientHandler;
 import it.polimi.ingsw.Server.MessageSingleGameManager;
+import it.polimi.ingsw.Server.Server;
 import it.polimi.ingsw.Server.SingleGameHandler;
 import it.polimi.ingsw.Server.messages.LeaderDeckMsg;
 import it.polimi.ingsw.model.*;
@@ -60,8 +61,13 @@ public class SingleGameManager {
 
         String winner = game.callVictory();
         client.sendMessage("\t\t\t\t\t\t\t\t\t\t" + winner + " won!");
+        System.out.println("Game Ended");
         client.sendMessage("Game Ended");  //this isn't actually a message, is a string that communicates top the client to close the connection.
-        KeepAlive.run();
+        game.getPlayers().remove(0);
+        while( GameManager.getClientList().size()>0) {
+            GameManager.getClientList().remove(0);
+        }
+        Server.setNumberofsockets(0);
     }
 
     private static void Shuffle() throws FileNotFoundException {

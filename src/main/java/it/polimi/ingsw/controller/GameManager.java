@@ -3,6 +3,7 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.Server.ClientHandler;
 import it.polimi.ingsw.Server.MessageGameManager;
 import it.polimi.ingsw.Server.GameHandler;
+import it.polimi.ingsw.Server.Server;
 import it.polimi.ingsw.Server.messages.LeaderDeckMsg;
 import it.polimi.ingsw.model.*;
 
@@ -61,6 +62,7 @@ public class GameManager implements Runnable{
             singleGameManager = new SingleGameManager(clientList.get(0));
             try {
                 singleGameManager.main();
+                Server.closeGame();
             } catch (Exception e) {
                 e.printStackTrace();
             }
