@@ -31,7 +31,6 @@ public class SingleGameManager {
 
 
     public static void main() throws Exception {
-        client.sendMessage("clean screen");
         SingleGameHandler player = client.getSinglePlayer();
         game.getPlayers().add(player);
         observablesinglegame.setSingleGameHendler(player);
@@ -50,7 +49,6 @@ public class SingleGameManager {
             choice2 = Integer.parseInt(client.receiveMessage());
         } while(choice2 == choice1);
         player.getLeadercards().getStructure().add(leaderChoice.getStructure().get(choice2));
-        client.sendMessage("clean screen");
 
 
         while(!game.callEndgame(player)) {

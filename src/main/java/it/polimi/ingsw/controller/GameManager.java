@@ -113,12 +113,6 @@ public class GameManager implements Runnable{
                     }
                 } while (choice2 == choice1);
                 clientList.get(i).getPlayer().getLeadercards().getStructure().add(leaderChoice.getStructure().get(choice2));
-                try {
-                    clientList.get(i).sendMessage("clean screen");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
             }
 
 

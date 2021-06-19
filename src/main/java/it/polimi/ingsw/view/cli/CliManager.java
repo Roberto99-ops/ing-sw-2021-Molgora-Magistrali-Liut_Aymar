@@ -34,21 +34,10 @@ public class CliManager {
             market.setMatrix(marketMsg.getMarket().getMatrix());
             market.setExtraball(marketMsg.getMarket().getExtraball());
             MarketView marketView = new MarketView(market);
+            Utility.Clean();
             marketView.print();
         }
 
-        /*if(msg.getClass().equals(StorageMsg.class)) {
-            StorageMsg storageMsg = (StorageMsg) msg;
-            player.setStorage(storageMsg.getStorage());
-        }
-        if(msg.getClass().equals(FaithTrackMsg.class)) {
-            FaithTrackMsg faithTrackMsg = (FaithTrackMsg) msg;
-            // player.setTrackposition();   implementare meglio faithtrackmsg, deve inviare un int con dentro trackposition
-        }
-        if(msg.getClass().equals(LeaderDeckMsg.class)) {
-            LeaderDeckMsg leaderDeckMsg = (LeaderDeckMsg) msg;
-            player.setLeadercards(leaderDeckMsg.getDeck());
-        }*/
         /**
          * in case we receive a player message we update the playerboard and print it
          */
@@ -85,6 +74,7 @@ public class CliManager {
 
 
             Playerboard board = new Playerboard(player, game);
+            Utility.Clean();
             board.Print();
         }
 
@@ -95,6 +85,7 @@ public class CliManager {
             DevelopeDecksMsg DDeckMsg = (DevelopeDecksMsg) msg;
             DDecks = DDeckMsg.getDecks();
             DevelopeDecksView DDecksView = new DevelopeDecksView(DDecks);
+            Utility.Clean();
             DDecksView.print();
         }
 
@@ -105,13 +96,14 @@ public class CliManager {
             LeaderDeckMsg LDeckMsg = (LeaderDeckMsg) msg;
             LDeck = LDeckMsg.getDeck();
             LeaderChooseView LView = new LeaderChooseView(LDeck);
+            Utility.Clean();
             LView.print();
         }
 
         /**
-         * in case we receive a ActionSignal message we update it and print it.
+         * in case we receive a ActionSignal message we update it.
          */
-        if(msg.getClass().equals(ActionSignalMsg.class)) {
+        if(msg.getClass().equals(ActionSignalMsg.class)) {   //maybe useless
            ActionSignalMsg ActionMsg = (ActionSignalMsg) msg;
            signal = new ActionSignal();
            signal.setNumber(ActionMsg.getAction().getNumber());
