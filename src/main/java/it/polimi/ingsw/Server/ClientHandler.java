@@ -135,7 +135,7 @@ public class ClientHandler implements Runnable {
         }catch (IOException e){
             System.out.println("Error while writing " + msg.getClass() + " type message to " + this.client.getInetAddress() + " so the game ends.");
             this.closeSocket();
-            KeepAlive.run();
+            KeepAlive.run(false);
         }
     }
 
@@ -152,7 +152,7 @@ public class ClientHandler implements Runnable {
         }catch (IOException e){
             System.out.println("Error while reading from " + this.client.getInetAddress() + " so the game ends.");
             this.closeSocket();
-            KeepAlive.run();
+            KeepAlive.run(false);
         }
         return "";  //here only to return something, it doesn't have effects
     }

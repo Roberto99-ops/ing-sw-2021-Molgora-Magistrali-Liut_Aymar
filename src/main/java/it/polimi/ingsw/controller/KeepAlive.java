@@ -19,10 +19,11 @@ public class KeepAlive{
     }
 
 
-    public static void run() throws IOException {
+    public static void run(boolean endgame) throws IOException {
         while (0 < clients.size()) {
             if(!clients.get(0).isClose()) {
-                clients.get(0).sendMessage("\nGame has ended");
+                if(!endgame)
+                    clients.get(0).sendMessage("\nGame has ended");
                 clients.get(0).closeSocket();
             }
             clients.remove(0);

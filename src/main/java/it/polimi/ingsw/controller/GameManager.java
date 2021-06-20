@@ -150,15 +150,23 @@ public class GameManager implements Runnable{
                 if (actualturn == clientList.size()) actualturn = 0;
             }
 
+
+            end = false;
+            String winner = game.callVictory();
             for (int i = 0; i < clientList.size(); i++) {
                 try {
-                    clientList.get(i).sendMessage("\nThe winner is " + game.callVictory() + "Game is finished");
+                    clientList.get(i).sendMessage("clean screen");
+                    clientList.get(i).sendMessage("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t\tThe winner is " + winner + ", game is finished\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
                     clientList.get(i).sendMessage("Game Ended");  //this isn't actually a message, is a string that communicates top the client to close the connection.
-                    KeepAlive.run();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
+            System.out.println("Game Ended");
+            while( clientList.size()>0) {
+                clientList.remove(0);
+            }
+            Server.setNumberofsockets(0);
         }
     }
 
