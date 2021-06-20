@@ -1,8 +1,12 @@
 # Software Engineering Project 2021
 
 Group project #61 
-Developed by :   - Roberto Molgora
+Developed by :   
+
+                 - Roberto Molgora
+
                  - David Juan Liut-Aymar
+                 
                  - Francesco Magistrali
                 
 Feautres developed : Complete rules + CLI + Single game
