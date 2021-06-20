@@ -140,6 +140,7 @@ public class Playerboard extends PaintCards {
         if(content==trackPosition) {
             square[1][(SQUARE_LENGHT - 1) / 2 - 1] = Color.PURPLE.getEscape() + Simbol.CROCE + Color.RESET;
             square[1][((SQUARE_LENGHT - 1)/2)] = " ";
+            if(content > 9) square[1][((SQUARE_LENGHT - 1)/2) + 1] = " ";
         }
 
         if(content==Lorenzo) {
