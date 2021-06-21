@@ -13,37 +13,50 @@ public class StrongBoxTest {
     public void totalcheck() throws FileNotFoundException {
 
         StrongBox tex = new StrongBox();
-        tex.setResource(2, 'B');
-        tex.setResource(1, 'W');
-        tex.setResource(5, 'Y');
-        tex.setResource(3, 'P');
-        tex.setResource(4, 'G');
-        tex.setResource(1, 'Y');
 
+        tex.getStructure().getVector().add('B');
+        tex.getStructure().getVector().add('B');
+        tex.getStructure().getVector().add('B');
+        tex.getStructure().getVector().add('B');
 
-        // B B W Y Y Y Y Y P P P G G G G Y = 16
+        tex.getStructure().getVector().add('G');
+        tex.getStructure().getVector().add('G');
+        tex.getStructure().getVector().add('G');
+
+        tex.getStructure().getVector().add('Y');
+        tex.getStructure().getVector().add('Y');
+        tex.getStructure().getVector().add('Y');
+        tex.getStructure().getVector().add('Y');
+
+        tex.getStructure().getVector().add('P');
+        tex.getStructure().getVector().add('P');
+        tex.getStructure().getVector().add('P');
 
         tex.printAll();
-        assertEquals(16, tex.counterResource());
-        assertEquals(true, tex.findResource(3,'P'));
-        assertEquals(false, tex.findResource(1,'P'));
-        assertEquals(2, tex.resourceNumber('B'));
-        // tex.getTotResourceSB();
-        assertEquals(1, tex.countTypeSB('W'));
-        tex.deleteAllTypeResource('Y');
-        tex.deleteAllTypeResource('G');
-        tex.deleteSpecifiedResource(1, 'P');
-        tex.deleteSpecifiedResource(2, 'B');
+
+        assertEquals(4, tex.countTypeSB('B'));
+        assertEquals(0, tex.countTypeSB('R'));
+        assertEquals(4, tex.countTypeSB('Y'));
+        assertEquals(3, tex.countTypeSB('P'));
+        assertEquals(3, tex.countTypeSB('G'));
+        assertEquals(0, tex.countTypeSB('T'));
+        // assertEquals(14, tex.getStructure().getVector().size());
+
+
+        tex.getStructure().getVector().remove('P');
+        tex.getStructure().getVector().remove('P');
+        tex.getStructure().getVector().remove('G');
+        tex.getStructure().getVector().add('Y');
+
         tex.printAll();
-        assertEquals(true, tex.findResource(2,'P'));
-        assertEquals(false, tex.findResource(1,'P'));
-        assertEquals(true, tex.findResource(0,'Y'));
-        assertEquals(false, tex.findResource(1,'Y'));
-        assertEquals(3, tex.counterResource());
+
+        assertEquals(1, tex.countTypeSB('P'));
+        assertEquals(2, tex.countTypeSB('G'));
+        assertEquals(5, tex.countTypeSB('Y'));
+        assertEquals(4, tex.countTypeSB('B'));
+        // assertEquals(12, tex.getStructure().getVector().size());
+
 
 
     }
 }
-    // B B W Y Y Y Y Y P P P G G G G Y
-    // W P P
-    // w p p
