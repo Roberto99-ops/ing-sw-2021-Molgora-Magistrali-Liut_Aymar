@@ -118,25 +118,194 @@ public class GameManager implements Runnable{
             }
 
 
-            while (!end) {
-                try {
-                    clientList.get(actualturn).sendMessage("\n\n\n\t\t\t\t\t\t\t\tIt's your turn " + clientList.get(actualturn).getPlayer().getName() + ".");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
 
-                for (int i = 0; i < clientList.size(); i++) {
-                    if (i != actualturn) {
+                // initialization of multiplayers
+
+
+                // initialization of second player
+                    if (clientList.size() >= 2) {
+
+                        String j = new String();
+
                         try {
-                            clientList.get(i).sendMessage("\n\n\n\n\t\t\t\t\t\t\t\tIt's " + clientList.get(actualturn).getPlayer().getName() + " turn.\n\t\t\t\t\t\t\t(just wait)");
+                            clientList.get(1).sendMessage("Do you want to add a resource in storage or strongbox?\n");
+                        }  catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        try {
+                            j = clientList.get(1).receiveMessage();
+                        }  catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (ClassNotFoundException e) {
+                            e.printStackTrace();
+                        }
+
+
+                        try {
+                            clientList.get(1).sendMessage("Tell me the initial resource that you want (P,B,G,Y) \n");
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-                    }
+
+                        try {
+                            if (j.equals("storage"))
+                                clientList.get(1).getPlayer().addResourceStorage(clientList.get(1).receiveMessage().charAt(0), game);
+                            if (j.equals("strongbox"))
+                                clientList.get(1).getPlayer().addResourceStrongBox(clientList.get(1).receiveMessage().charAt(0));
+                        }  catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (ClassNotFoundException e) {
+                            e.printStackTrace();
+                        }
+
+
+
+
                 }
 
 
-                try {
+                    // initialization of third player
+                if (clientList.size() >= 3) {
+
+                    String k = new String();
+
+                    try {
+                        clientList.get(2).sendMessage("Do you want to add a resource in storage or strongbox?\n");
+                    }  catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    try {
+                        k = clientList.get(2).receiveMessage();
+                    }  catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
+
+
+                    try {
+                        clientList.get(2).sendMessage("Tell me the initial resource that you want (P,B,G,Y) \n");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    try {
+
+                        if (k.equals("storage"))
+                            clientList.get(2).getPlayer().addResourceStorage(clientList.get(2).receiveMessage().charAt(0), game);
+                        if (k.equals("strongbox"))
+                            clientList.get(2).getPlayer().addResourceStrongBox(clientList.get(2).receiveMessage().charAt(0));
+                    }  catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
+
+                    clientList.get(2).getPlayer().increasePV(1);
+
+                }
+
+
+                // initialization of fourth player
+                if (clientList.size() == 4) {
+
+                    String r = new String();
+
+                    try {
+                        clientList.get(3).sendMessage("Do you want to add te first resource in storage or strongbox?\n");
+                    }  catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    try {
+                        r = clientList.get(3).receiveMessage();
+                    }  catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
+
+
+                    try {
+                        clientList.get(3).sendMessage("Tell me the first resource that you want (P,B,G,Y) \n");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    try {
+
+                        if (r.equals("storage"))
+                            clientList.get(3).getPlayer().addResourceStorage(clientList.get(3).receiveMessage().charAt(0), game);
+                        if (r.equals("strongbox"))
+                            clientList.get(3).getPlayer().addResourceStrongBox(clientList.get(3).receiveMessage().charAt(0));
+                    }  catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
+
+
+
+                    try {
+                        clientList.get(3).sendMessage("Do you want to add te second resource in storage or strongbox?\n");
+                    }  catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    try {
+                        r = clientList.get(3).receiveMessage();
+                    }  catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
+
+
+                    try {
+                        clientList.get(3).sendMessage("Tell me the second resource that you want (P,B,G,Y) \n");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    try {
+
+                        if (r.equals("storage"))
+                            clientList.get(3).getPlayer().addResourceStorage(clientList.get(3).receiveMessage().charAt(0), game);
+                        if (r.equals("strongbox"))
+                            clientList.get(3).getPlayer().addResourceStrongBox(clientList.get(3).receiveMessage().charAt(0));
+                    }  catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
+
+                    clientList.get(3).getPlayer().increasePV(1);
+
+                }
+
+
+                while (!end) {
+                    try {
+                        clientList.get(actualturn).sendMessage("\n\n\n\t\t\t\t\t\t\t\tIt's your turn " + clientList.get(actualturn).getPlayer().getName() + ".");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    for (int i = 0; i < clientList.size(); i++) {
+                        if (i != actualturn) {
+                            try {
+                                clientList.get(i).sendMessage("\n\n\n\n\t\t\t\t\t\t\t\tIt's " + clientList.get(actualturn).getPlayer().getName() + " turn.\n\t\t\t\t\t\t\t(just wait)");
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+
+
+                    try {
                     turnmanager.main(clientList.get(actualturn), game, actualturn);
                 } catch (Exception e) {
                     e.printStackTrace();
