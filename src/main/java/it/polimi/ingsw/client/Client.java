@@ -24,6 +24,7 @@ public class Client {
      * @throws IOException
      * @throws ClassNotFoundException
      */
+
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         Player player = new Player();
         Scanner scan = new Scanner(System.in);
@@ -67,7 +68,7 @@ public class Client {
                         output.writeObject(string);
                         output.flush();
                         output.reset();
-                    }catch (IOException e){ break;}
+                    } catch (IOException e){ break;}
                 }
             }
             else
