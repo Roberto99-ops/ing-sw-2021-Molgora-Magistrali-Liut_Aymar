@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class MarketTest {
 
@@ -13,7 +14,6 @@ public class MarketTest {
 
     public void checkDoMarket() throws FileNotFoundException {
 
-        Player actualpayer = new Player();
         Market bowl = new Market();
         char [][] pimpa = new char[3][4];
 
@@ -59,27 +59,41 @@ public class MarketTest {
 
         assertEquals(bowl.getExtraball(), 'B');
         assertEquals(bowl.getMatrix(), pimpa);
+
         ArrayList<Character> pre = new ArrayList<>();
 
-           pre.add('P');
-           pre.add('G');
-           pre.add('G');
-           pre.add('B');
+        pre.add('W');
+        pre.add('P');
+        pre.add('B');
 
-
-
-       // assertEquals( pre , bowl.doMarket(2, 0, actualpayer));
+        assertEquals (pre, bowl.doMarket(2, 0));
+        bowl.printMatrix();
 
         ArrayList<Character> dec = new ArrayList<>();
 
-        dec.add('W');
         dec.add('P');
-        dec.add('B');
+        dec.add('G');
+        dec.add('G');
+        dec.add('P');
 
         bowl.printMatrix();
 
+        assertEquals( dec , bowl.doMarket(1, 0));
 
-        // assertEquals( dec , bowl.doMarket(1, 0));
+
+        bowl.setResourceinMarket(1,3,'P');
+        bowl.setExtraball('Y');
+
+        ArrayList<Character> red = new ArrayList<>();
+
+        red.add('P');
+        red.add('Y');
+        red.add('R');
+        red.add('W');
+
+        assertEquals( red, bowl.doMarket(1, 1));
+
+        bowl.printMatrix();
 
     }
 
