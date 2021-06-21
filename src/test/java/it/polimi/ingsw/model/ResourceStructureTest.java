@@ -6,19 +6,6 @@ import java.util.Random;
 
 public class ResourceStructureTest extends TestCase {
 
-    public void testCheckEquality() {
-        ResourceStructure structure = new ResourceStructure();
-        structure.addResource(10, 'P');
-        assertTrue(structure.checkEquality(structure.getVector()));
-
-        Character[] resources = {'P', 'Y', 'G', 'B'};
-        Random mixer = new Random();
-        for (int i = 0; i < 20; i++) {
-            int mix = mixer.nextInt(4);
-            structure.addResource(1, resources[mix]);
-        }
-        assertFalse(structure.checkEquality(structure.getVector()));
-    }
 
     public void testAddResource() {
         ResourceStructure structure = new ResourceStructure();
