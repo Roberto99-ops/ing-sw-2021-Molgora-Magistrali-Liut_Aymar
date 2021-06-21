@@ -13,6 +13,7 @@ public class StorageTest {
 
     public void switchResourceTest() {
 
+        Game game = new Game();
         Player player = new Player();
         Storage box = new Storage();
         ArrayList <Character> obj = new ArrayList<>();
@@ -56,7 +57,6 @@ public class StorageTest {
         obj.set(1, 'P');
         obj.set(2, 'P');
         assertEquals(obj, box.getPanel());
-
     }
 
     @Test
