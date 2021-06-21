@@ -15,7 +15,7 @@ public class Market implements Serializable {
 
 
     /**
-     this method randomize market
+     * this method initialize and randomize market
      */
 
     public void randomizeMarket () {
@@ -49,12 +49,62 @@ public class Market implements Serializable {
 
 
     /**
-     inserts the extraball into the matrix + new extraball
-     check tells me if it is column / row from above / below and return
+     * ONLY USED FOR TESTING
+     * print all resources in strongbox
+     */
+
+    public void printMatrix () {
+
+        for (int j = 0; j < 3; j ++) {
+            for (int k = 0; k < 4; k++) {
+                System.out.println (this.matrix [j][k]);
+            }
+            System.out.println ("\n");
+        }
+    }
+
+
+    /**
+     * getter and setter
+     */
+
+    public char[][] getMatrix() {
+        return matrix;
+    }
+    public void setMatrix(char[][] matrix) {
+        this.matrix = matrix;
+    }
+    public char getExtraball() {
+        return extraball;
+    }
+    public void setExtraball(char extraball) {
+        this.extraball = extraball;
+    }
+
+
+    /**
+     * this method insert a resource in market
+     * @param row in which insert the resource
+     * @param column in which insert the resource
+     * @param input char that have to be inserted
+     */
+
+    public void setResourceinMarket (int row, int column, char input) {
+
+        this.matrix[row][column] = input;
+    }
+
+
+    /**
+     * this methodinserts the extraball into the matrix + new extraball
+     * check tells me if it is column / row from above / below and return
+     * @param check tells if it is column / row
+     * @param number tells if it is from above / below
+     * @return ArrayList<Character>
      */
 
 
-    public ArrayList<Character> doMarket(int check, int number, Player actualplayer) {
+    public ArrayList<Character> doMarket(int check, int number) {
         char temporaryball = this.extraball;
         char[][] equalmatrix = new char[3][4];
 
@@ -98,38 +148,6 @@ public class Market implements Serializable {
 
             return vector;
         }
-
-
-
-    public void printMatrix () {
-
-            for (int j = 0; j < 3; j ++) {
-                for (int k = 0; k < 4; k++) {
-                    System.out.println (this.matrix [j][k]);
-                }
-                System.out.println ("\n");
-            }
-        }
-
-    public void setResourceinMarket (int row, int column, char input) {
-            this.matrix[row][column] = input;
-    }
-
-    public char[][] getMatrix() {
-        return matrix;
-    }
-
-    public void setMatrix(char[][] matrix) {
-        this.matrix = matrix;
-    }
-
-    public char getExtraball() {
-        return extraball;
-    }
-
-    public void setExtraball(char extraball) {
-        this.extraball = extraball;
-    }
 
 
 }
