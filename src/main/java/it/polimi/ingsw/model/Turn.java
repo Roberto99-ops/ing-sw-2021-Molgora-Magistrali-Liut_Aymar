@@ -181,7 +181,7 @@ public class Turn implements Serializable {
                 number = num.charAt(0) - 48;
         }while(number > 3 || number <0);
 
-        product.setVector(Game.getMarket().doMarket(RoworCol, number, actualplayer));
+        product.setVector(Game.getMarket().doMarket(RoworCol, number));
 
         if (actualplayer.getSkill1() == 1 && actualplayer.getLeadercards().getStructure().get(0).getSkill().equals("WhiteMarbSkil"))
                 product = actualplayer.getLeadercards().getStructure().get(0).changeWhiteMarbleSkill(product);
