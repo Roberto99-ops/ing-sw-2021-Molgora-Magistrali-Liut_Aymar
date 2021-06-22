@@ -77,7 +77,7 @@ public class Turn implements Serializable {
      * then checks if he owns enough resources and complete the transaction
      */
 
-    public void shopCard() throws Exception {
+    public boolean shopCard() throws Exception {
         int cardNum;
         DevelopeCard card;
         ResourceStructure cost = new ResourceStructure();
@@ -114,7 +114,7 @@ public class Turn implements Serializable {
         {
             client.sendMessage("You don't own enough resources ( press enter )");
             client.receiveMessage();
-            return;
+            return false;
         }
 
 
@@ -139,11 +139,12 @@ public class Turn implements Serializable {
             // actualplayer.updateDevelopementDecks(client);
             client.sendMessage("These are the new developedecks( press any key )");
             client.receiveMessage();
-            return;
+            return true;
         }
 
         client.sendMessage("you can't buy this card( press any key )");
         client.receiveMessage();
+        return false;
 
     }
 
