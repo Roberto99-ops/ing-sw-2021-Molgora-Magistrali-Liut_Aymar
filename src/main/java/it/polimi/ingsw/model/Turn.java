@@ -318,10 +318,13 @@ public class Turn implements Serializable {
         if(!choice.equals(""))
         {
             int num = Integer.parseInt(choice);
+            if (deck.getStructure().size()<2 && num==1) num=0;
             if(deck.getStructure().size() > num) {
                 LeaderCard card = actualplayer.getLeadercards().getStructure().get(num);
+                //rimuovo la carta leader
                 actualplayer.getLeadercards().getStructure().remove(num);
                 actualplayer.increaseTrackPosition();
+                //parte che gestisce i punti associati alle carte
                 if(num == 0) {
                     if(actualplayer.getSkill1() == 1)   actualplayer.decreasePV(card.getPv());
                     actualplayer.setSkill1(actualplayer.getSkill2());
