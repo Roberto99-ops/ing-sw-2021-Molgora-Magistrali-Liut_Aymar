@@ -24,7 +24,7 @@ public class Player implements Serializable {
         leadercards = new LeaderDeck();
         skill1 = 0;
         skill2 = 0;
-        developementquantity = 0;
+        developmentQuantity = 0;
         faithTrack = new FaithTrack();
 
 
@@ -172,21 +172,21 @@ public class Player implements Serializable {
 
      */
 
-    private int developementquantity;
+    private int developmentQuantity;
 
-    public int getDevelopementquantity() {
-        return developementquantity;
+    public int getDevelopmentQuantity() {
+        return developmentQuantity;
     }
 
     /**
      * Adds 1 when the player buys a new DevelopementCard
      */
     public void increaseDevelopQuantity() {
-        this.developementquantity = developementquantity + 1;
+        this.developmentQuantity = developmentQuantity + 1;
     }
 
-    public void setDevelopementquantity(int developementquantity) {
-        this.developementquantity = developementquantity;
+    public void setDevelopmentQuantity(int developementquantity) {
+        this.developmentQuantity = developementquantity;
     }
 
 
@@ -197,44 +197,38 @@ public class Player implements Serializable {
         return faithTrack;
     }
 
-    private int FTposition = 0;
+    private int FtPosition = 0;
 
-    public int getTrackposition() {
-        return FTposition;
+    public int getTrackPosition() {
+        return FtPosition;
     }
 
-    public void setTrackposition(int num) {
-        FTposition = num;
+    public void setTrackPosition(int num) {
+        FtPosition = num;
     }
 
-    public void increaseTrackposition() {
+    public void increaseTrackPosition() {
 
-        this.FTposition = FTposition + 1;
+        this.FtPosition = FtPosition + 1;
 
-        if (this.FTposition == 3)
-        increasePV(1);
-
-        if (this.FTposition == 6)
-            increasePV(1);
-
-        if (this.FTposition == 9)
-            increasePV(2);
-
-        if (this.FTposition == 12)
-            increasePV(2);
-
-        if (this.FTposition == 15)
-            increasePV(3);
-
-        if (this.FTposition == 18)
-            increasePV(3);
-
-        if (this.FTposition == 21)
-            increasePV(4);
-
-        if (this.FTposition == 24)
-            increasePV(4);
-
+        switch(this.FtPosition){
+            case 3: increasePV(1);
+            break;
+            case 6: increasePV(1);
+            break;
+            case 9: increasePV(2);
+            break;
+            case 12: increasePV(2);
+            break;
+            case 15: increasePV(3);
+            break;
+            case 18: increasePV(3);
+            break;
+            case 21: increasePV(4);
+            break;
+            case 24: increasePV(4);
+            break;
+        }
 
     }
 
@@ -773,7 +767,7 @@ public class Player implements Serializable {
         */
         if (resource == 'R') {
             PV ++;
-            increaseTrackposition();
+            increaseTrackPosition();
             return;
         }
         this.strongBox.getStructure().getVector().add(resource);
