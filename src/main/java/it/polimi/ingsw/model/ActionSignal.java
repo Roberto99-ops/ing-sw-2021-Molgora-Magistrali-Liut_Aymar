@@ -12,7 +12,6 @@ public class ActionSignal {
     public int getNumber() {
         return number;
     }
-
     public void setNumber(int number) {
         this.number = number;
     }
@@ -25,6 +24,7 @@ public class ActionSignal {
      * Case 7: Lorenzo moves forward by one space
      * @param number: according to the number received, it calls a specific action
      */
+
     public void action(int number){
         int i;
         int countRemove=0;
