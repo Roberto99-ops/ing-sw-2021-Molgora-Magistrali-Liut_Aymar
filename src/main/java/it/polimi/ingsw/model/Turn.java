@@ -130,6 +130,7 @@ public class Turn implements Serializable {
         //add the developecard if possible and remove the cost resources from the player
         if(actualplayer.getDSpace().setCard(card, choice))
         {
+            actualplayer.increasePV(card.getPv());
             gameDeck[cardNum].getStructure().remove(0);
             // Game.getDevelopedecks(cardNum).getStructure().remove(0);
             actualplayer.deleteResources(check, cost.getVector());
@@ -234,6 +235,7 @@ public class Turn implements Serializable {
                 if (check == 0) {
                     client.sendMessage("You don't own enough resources. (press enter)");
                     client.receiveMessage();
+
                 }
                 else {
                     actualplayer.setSkill1(1);
