@@ -27,12 +27,6 @@ public class Player implements Serializable {
         developementquantity = 0;
         faithTrack = new FaithTrack();
 
-        for (int i = 0; i < 8; i++) {
-            strongBox.getStructure().getVector().add('G');
-            strongBox.getStructure().getVector().add('P');
-            strongBox.getStructure().getVector().add('B');
-            strongBox.getStructure().getVector().add('Y');
-        }
 
     }
 
