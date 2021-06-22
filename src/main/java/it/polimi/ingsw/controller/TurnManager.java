@@ -32,6 +32,7 @@ public class TurnManager {
         //se sono in single game, ogni volta che tocca a me, prendo un segnalino ed eseguo la sua azione
         if (game.getClass().equals(SingleGame.class)) {
             SingleGame.getActionStructure().pickSignal();
+            System.out.println(SingleGame.getActionStructure().getAS_Counter());
             player.updatePlayerBoard(client, game);
             if(SingleGame.getLorenzo().getNumber() == 24) return;
         }
@@ -217,25 +218,6 @@ public class TurnManager {
 
                     } while (!ableTo);
 
-
-                        /*
-
-                        String cardChosen = client.receiveMessage();
-                        if (!cardChosen.equals("")) {
-                            int card = cardChosen.charAt(0) - 48;  //converts a char into the correspondant int
-                            DevelopeDecks playercards = turn.getActualplayer().getTopCards();
-                            if (card < playercards.getStructure().size())
-                                playercards.getStructure().get(card).doProduction(client, game);
-                            else {
-                                client.sendMessage("You don't own that card.( press enter )");
-                                client.receiveMessage();
-                            }
-                            //game.getPlayers().get(actualplayer).updateStorage(client);
-                            //game.getPlayers().get(actualplayer).updateStrongbox(client);
-                        }
-                        player.updatePlayerBoard(client, game);
-
-                         */
 
                 }
 
