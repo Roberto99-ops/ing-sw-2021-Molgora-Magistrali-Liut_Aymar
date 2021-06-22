@@ -12,6 +12,7 @@ public class FaithTrackTest {
     /**
      * Tests if the VaticanReport is called and executed correctly in different situations
      */
+
     @Test
     public void vaticanReport() {
         Game game = new Game();
@@ -25,51 +26,55 @@ public class FaithTrackTest {
         game.setPlayers(plyr);
         game.setN_players(3);
 
-        //sposto player1 nella posizione #8, dentro area1 per il VR
-        for(int i=0; i<9;i++ ){
+
+        for(int i=0; i<8;i++ ){
             player1.increaseTrackposition();
         }
-        //sposto player2 nella posizione #5
+
         for(int i=0; i<5;i++ ){
             player2.increaseTrackposition();
         }
+
         FaithTrack faithTrack = new FaithTrack();
         faithTrack.callVaticanReport(player1, game);
-        //controllo che il giocatore abbia guadagnato due PV per essere arrivato per primo nella prima area del VR
-        assertEquals(2,player1.getPv()); //player1 ha guadagnato due PV
-        assertEquals(2,player2.getPv()); //player2 ha guadagnato due PV
-        assertEquals(0,player3.getPv()); //player3 non ha guadagnato due PV
-        assertEquals(1,Game.getVR()); //VR è stato settato a 1
 
-        //sposto player3 nella posizione #16, dentro area2 per il VR
+        assertEquals(4, player1.getPv());
+        assertEquals(3, player2.getPv());
+        assertEquals(0, player3.getPv());
+        assertEquals(1, Game.getVR());
+
+
         for(int i=0; i<16;i++ ){
             player3.increaseTrackposition();
         }
-        //sposto player2 nella posizione #12
+
         for(int i=0; i<7;i++ ){
             player2.increaseTrackposition();
         }
-        faithTrack.callVaticanReport(player3, game); //player3 chiama per primo il VR dell'area 2
-        //controllo che il giocatore abbia guadagnato tre PV per essere arrivato per primo nella prima area del VR
-        assertEquals(2,player1.getPv()); //player1 ha guadagnato due PV
-        assertEquals(5,player2.getPv()); //player2 ha guadagnato due PV
-        assertEquals(3,player3.getPv()); //player3 non ha guadagnato due PV
-        assertEquals(2,Game.getVR()); //VR è stato settato a 1
+        faithTrack.callVaticanReport(player3, game);
+        assertEquals(4,player1.getPv());
+        assertEquals(11,player2.getPv());
+        assertEquals(12,player3.getPv());
+        assertEquals(2,Game.getVR());
 
-        //sposto player1 nella posizione #24, dentro area3 per il VR
-        for(int i=0; i<15;i++ ){
+        for(int i=0; i<16;i++ ) {
             player1.increaseTrackposition();
         }
-        //sposto player2 nella posizione #19
-        for(int i=0; i<7;i++ ){
+
+        for(int i=0; i<9;i++ ) {
             player2.increaseTrackposition();
         }
-        faithTrack.callVaticanReport(player1, game); //player3 chiama per primo il VR dell'area 2
-        //controllo che il giocatore abbia guadagnato tre PV per essere arrivato per primo nella prima area del VR
-        assertEquals(6,player1.getPv()); //player1 ha guadagnato due PV
-        assertEquals(9,player2.getPv()); //player2 ha guadagnato due PV
-        assertEquals(3,player3.getPv()); //player3 non ha guadagnato due PV
-        assertEquals(3,Game.getVR()); //VR è stato settato a 1
+
+        for(int i=0; i<2;i++ ) {
+            player3.increaseTrackposition();
+        }
+
+        faithTrack.callVaticanReport(player1, game);
+
+        assertEquals(26,player1.getPv());
+        assertEquals(25,player2.getPv());
+        assertEquals(15,player3.getPv());
+        assertEquals(3,Game.getVR());
 
     }
 }
