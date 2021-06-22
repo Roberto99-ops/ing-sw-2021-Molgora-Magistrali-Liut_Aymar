@@ -9,6 +9,7 @@ public class LorenzoTest {
     /**
      * Tests if the number given to Lorenzo (character) is the one we gave to him
      */
+
     @Test
     public void setNumber() {
         Lorenzo lorenzo = new Lorenzo();
@@ -24,6 +25,7 @@ public class LorenzoTest {
      * It also checks if ActionStructure has been shuffled when the player picks ActionSignal #7-> Lorenzo moves forward
      * by 1 + shuffle ActionStructure
      */
+
     @Test
     public void lorenzomoves() {
         Lorenzo lorenzo = new Lorenzo();
@@ -31,6 +33,9 @@ public class LorenzoTest {
         assertEquals(2,lorenzo.getNumber());
         lorenzo.forwardOne();
         assertEquals(3, lorenzo.getNumber());
+        lorenzo.setNumber(23);
+        lorenzo.forwardTwo();
+        assertEquals(24, lorenzo.getNumber());
         int[] arr = {1,2,3,4,5,6,7};
         assertNotEquals(arr, SingleGame.getActionStructure());
     }
