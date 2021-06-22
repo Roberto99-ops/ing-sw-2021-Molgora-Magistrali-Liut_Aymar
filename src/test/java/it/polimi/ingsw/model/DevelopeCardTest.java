@@ -8,41 +8,6 @@ import static org.junit.Assert.*;
 
 public class DevelopeCardTest {
 
-    /**
-     * test the DoProduction method.
-     * (1) tests the case which the inputresources are all inside the storage
-     * (2) tests the case which the inputresources are all inside the strongbox
-     * (3) tests the case which the inputresources are divided by storage and strongbox
-     * (4) tests the case which the player doesn't own enough resources
-     * @throws FileNotFoundException
-     */
-    @Test
-    public void doProduction() throws FileNotFoundException {
-       /* DevelopeCard card = new DevelopeCard();
-        card.setCard(21);
-
-        //(1)
-        Player player = new Player();
-        ResourceStructure output = new ResourceStructure();
-        player.addResourceStorage('B');
-        player.addResourceStorage('P');
-        output.AddResource(3, 'W');
-        card.DoProduction(player);
-        assertEquals(null, player.getStorage());
-        assertTrue(player.getStorage().getinStorage(3, 'W'));
-
-        //(2)
-        Player player1 = new Player();
-        ResourceStructure output1 = new ResourceStructure();
-        player.addResourceStrongBox('B');
-        player.addResourceStrongBox('P');
-        output1.AddResource(3, 'W');
-        card.DoProduction(player1);
-        for(int i=0; i<player1.getStorage().size(); i++)    assertEquals(output1.getVector().get(i), player1.getStrongBox().getStructure().getVector().get(i));
-
-
-        */
-    }
 
     /**
      * this test tests that a developecard is picked and memorized correctly from the json file
@@ -51,6 +16,10 @@ public class DevelopeCardTest {
     @Test
     public void setCard() throws FileNotFoundException {
         DevelopeCard card = new DevelopeCard();
+        DevelopeCard card10 = new DevelopeCard();
+        DevelopeCard card22 = new DevelopeCard();
+        DevelopeCard card37 = new DevelopeCard();
+
         card.setCard(0);
 
         assertEquals(1, card.getLevel());
@@ -69,5 +38,68 @@ public class DevelopeCardTest {
         ResourceStructure array2 = new ResourceStructure();
         array2.addResource(1,'R');
         assertEquals(array2.getVector().get(0), card.getOutputproduction().getVector().get(0));
+
+
+
+        card10.setCard(10);
+
+        assertEquals(1, card10.getLevel());
+        assertEquals('B', card10.getColour());
+        assertEquals(3, card10.getPv());
+
+        ResourceStructure array10 = new ResourceStructure();
+        array10.addResource(3, 'Y');
+        assertEquals(array10.getVector().get(0), card10.getCost().getVector().get(0));
+        assertEquals(array10.getVector().get(1), card10.getCost().getVector().get(1));
+        assertEquals(array10.getVector().get(2), card10.getCost().getVector().get(2));
+
+        ResourceStructure array101 = new ResourceStructure();
+        array101.addResource(2,'G');
+        assertEquals(array101.getVector().get(0), card10.getInputproduction().getVector().get(0));
+        assertEquals(array101.getVector().get(1), card10.getInputproduction().getVector().get(0));
+
+        ResourceStructure array102 = new ResourceStructure();
+        array102.addResource(1,'Y');
+        array102.addResource(1,'B');
+        array102.addResource(1,'P');
+        assertEquals(array102.getVector().get(0), card10.getOutputproduction().getVector().get(0));
+        assertEquals(array102.getVector().get(1), card10.getOutputproduction().getVector().get(1));
+        assertEquals(array102.getVector().get(2), card10.getOutputproduction().getVector().get(2));
+
+
+
+
+        card22.setCard(22);
+
+        assertEquals(2, card22.getLevel());
+        assertEquals('B', card22.getColour());
+        assertEquals(6, card22.getPv());
+
+        ResourceStructure array22 = new ResourceStructure();
+        array22.addResource(3, 'Y');
+        array22.addResource(2, 'G');
+        assertEquals(array22.getVector().get(0), card22.getCost().getVector().get(0));
+        assertEquals(array22.getVector().get(1), card22.getCost().getVector().get(1));
+        assertEquals(array22.getVector().get(2), card22.getCost().getVector().get(2));
+        assertEquals(array22.getVector().get(3), card22.getCost().getVector().get(3));
+        assertEquals(array22.getVector().get(4), card22.getCost().getVector().get(4));
+
+        ResourceStructure array221 = new ResourceStructure();
+        array221.addResource(1,'Y');
+        array221.addResource(1,'G');
+        assertEquals(array221.getVector().get(0), card22.getInputproduction().getVector().get(0));
+        assertEquals(array221.getVector().get(1), card22.getInputproduction().getVector().get(1));
+
+        ResourceStructure array222 = new ResourceStructure();
+        array222.addResource(1,'P');
+        array222.addResource(1,'P');
+        array222.addResource(1,'P');
+        assertEquals(array222.getVector().get(0), card22.getOutputproduction().getVector().get(0));
+        assertEquals(array222.getVector().get(1), card22.getOutputproduction().getVector().get(1));
+        assertEquals(array222.getVector().get(2), card22.getOutputproduction().getVector().get(2));
     }
+
+
+
+
 }
