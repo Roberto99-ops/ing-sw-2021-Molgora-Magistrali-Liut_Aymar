@@ -145,6 +145,8 @@ public class Player implements Serializable {
     }
 
 
+
+
     //carte sviluppo in DevelopementSpace
     /*private DevelopeDecks minideck1;
     private DevelopeDecks minideck2;
@@ -212,8 +214,34 @@ public class Player implements Serializable {
     }
 
     public void increaseTrackposition() {
+
         this.FTposition = FTposition + 1;
+
+        if (this.FTposition == 3)
         increasePV(1);
+
+        if (this.FTposition == 6)
+            increasePV(1);
+
+        if (this.FTposition == 9)
+            increasePV(2);
+
+        if (this.FTposition == 12)
+            increasePV(2);
+
+        if (this.FTposition == 15)
+            increasePV(3);
+
+        if (this.FTposition == 18)
+            increasePV(3);
+
+        if (this.FTposition == 21)
+            increasePV(4);
+
+        if (this.FTposition == 24)
+            increasePV(4);
+
+
     }
 
 
