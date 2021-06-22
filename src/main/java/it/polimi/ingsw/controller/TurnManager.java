@@ -26,9 +26,10 @@ public class TurnManager {
         //turn.setActualplayer(game.getPlayers().get(actualplayer));
         GameHandler player = turn.getActualplayer();
         String reception;
-        int action = 0;
+        //int action = 0;
         int leaderaction = 0;
         boolean additionalAction = false;
+        boolean actionDone = true;
 
         //se sono in single game, ogni volta che tocca a me, prendo un segnalino ed eseguo la sua azione
         if (game.getClass().equals(SingleGame.class)) {
@@ -40,19 +41,58 @@ public class TurnManager {
         else
             player.updatePlayerBoard(client, game);
 
+        String c = new String();
         do {
-            //1)
+            /*//A)
+            client.sendMessage("Do you want to do a Leader action? (yes/no)\n ");
+            reception = client.receiveMessage();
+            if (reception.equals("yes")){
+                client.sendMessage("Do you want to remove a card or activate one? (remove/activate) ");
+                String choice = client.receiveMessage();
 
-            client.sendMessage("What do you want to do?\n\t1)Shop a developement card\t2)Take resources at the market\n\t3)Active a production\t4)Do a Leader action ");
-            String msg = client.receiveMessage();
-            if(!msg.equals(""))
-                action = msg.charAt(0) - 48;
+                if(choice.equals("remove")) {
+                    turn.removeLeader();
+                    leaderaction++;
+                }
+
+                if(choice.equals("activate")) {
+                    turn.activateLeader();
+                    leaderaction++;
+                }
+            }
+*/
+            //1)
+            if (!actionDone){
+                client.sendMessage("Since you have done no actions:\nWhat do you want to do?\n\t1)Shop a developement card\t2)Take resources at the market\n\t3)Active a production\n");
+            } else if (actionDone) {
+                client.sendMessage("What do you want to do?\n\t1)Shop a developement card\t2)Take resources at the market\n\t3)Active a production\n");//4)Do a Leader action ");
+            }
+                String msg = client.receiveMessage();
+            //if(!msg.equals(""))
+              //  msg.charAt(0) - 48 = msg.charAt(0) - 48;
 
             try {
-                if (action == 1) {
-                    turn.shopCard();
-                    client.sendMessage("clean screen");
-                    player.updatePlayerBoard(client, game);
+                System.out.println(msg.charAt(0) - 48);
+                if (msg.charAt(0) - 48 == 1) {
+                    if (!turn.shopCard()) {actionDone = false;}
+                    /*while (!turn.shopCard()) {
+                        do {
+                            client.sendMessage("Do you want to try buying another Develop Card (1) or doing another kind of action (2)?\n");
+                            msg = client.receiveMessage();
+                            action = msg.charAt(0) - 48;
+                        } while (action !=1 && action !=2);
+                        if (action == 2) {
+                            client.sendMessage("What do you want to do?\n\t2)Take resources at the market\n\t3)Active a production\t4)Do a Leader action ");
+                            String msg = client.receiveMessage();
+                            if(!msg.equals(""))
+                                action = msg.charAt(0) - 48;
+                        }
+
+                     */
+                    else {
+                        client.sendMessage("clean screen");
+                        player.updatePlayerBoard(client, game);
+                    }
                 }
 
                 // CONTROLLER:
@@ -60,7 +100,7 @@ public class TurnManager {
                 // OUT) RIMUOVE LE RISORSE DI COSTO CARTA DALLA PLANCIA e AGGIUNGE NELLE CARTE SVILUPPO DI PLAYER LE CARTE VOLUTE
 
 
-                if (action == 2) {
+                else if (msg.charAt(0) - 48 == 2) {
                     turn.buyResource();
                     client.sendMessage("clean screen");
                     player.updateMarket(client);
@@ -68,6 +108,7 @@ public class TurnManager {
                     client.receiveMessage();
                     client.sendMessage("clean screen");
                     player.updatePlayerBoard(client, game);
+                    actionDone = true;
                 }
 
                 // CONTROLLER:
@@ -75,10 +116,10 @@ public class TurnManager {
                 // OUT) CAMBIA IL MERCATO e RITORNA LE RISORSE COMPRATE
 
 
-                if (action == 3) {
+                else if (msg.charAt(0) - 48 == 3) {
                      //2.1)
 
-                    boolean ableTo = false;
+                    boolean ableTo;
 
                     do {
                         ArrayList<Character> vectorInProduction = new ArrayList<>();
@@ -188,7 +229,7 @@ public class TurnManager {
                         }
 
                          */
-                        System.out.println(vectorInProduction.get(0)+"  "+vectorOutProduction.get(0));
+                        //System.out.println(vectorInProduction.get(0)+"  "+vectorOutProduction.get(0));
 
 
                        // System.out.println(turn.getActualplayer().checkResources(vectorInProduction)); //
@@ -207,6 +248,7 @@ public class TurnManager {
                                 player.updatePlayerBoard(client,game);
 
                             }
+                            actionDone=true;
 
 
                         } else {
@@ -214,6 +256,7 @@ public class TurnManager {
                             s = client.receiveMessage();
                             if (s.equals("n")) {
                                 ableTo = true;
+                                actionDone=false;
                             }
                         }
 
@@ -223,14 +266,14 @@ public class TurnManager {
                 }
 
                 //in case we have done only 0 or 1 leaderactions during our turn, we can do another one at the end of the turn
-                if(leaderaction<2 && (action == 1 || action == 2 || action == 3)) {
+                if((leaderaction<2 && (msg.charAt(0) - 48 == 1 || msg.charAt(0) - 48 == 2 || msg.charAt(0) - 48 == 3)) && player.getLeadercards().getStructure().size()>0) {
                     client.sendMessage("Do you want to do a Leader action? (yes/no)\n ");
                     reception = client.receiveMessage();
                     if(reception.equals("yes")) additionalAction = true;
                 }
 
                 //we activate a leader card if possible
-                if ((action == 4 && leaderaction < 2) || additionalAction) {
+                if (/*action == 4 &&*/ leaderaction < 2 /*||*/ && additionalAction) {
                     client.sendMessage("Do you want to remove a card or to activate one? (remove/activate) ");
                     String choice = client.receiveMessage();
 
@@ -252,7 +295,8 @@ public class TurnManager {
             } catch (IOException e) {
                 System.out.println(e);
             }
-        } while(action != 1 && action != 2 && action != 3);
+            c = msg;
+        } while(!c.equals("1") && !c.equals("2") && !c.equals("3")|| !actionDone);
         //Ad ogni turno, effettuo il controllo del Vatican Report e
         // notifico tutti gli observer dei cambiamenti avvenuti durante il turno
 
