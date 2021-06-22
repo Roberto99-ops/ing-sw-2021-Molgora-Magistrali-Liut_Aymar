@@ -69,8 +69,11 @@ public class ClientHandler implements Runnable {
      */
     public void handleClientConnection() throws IOException {
         try {
-            this.sendMessage("What's your name? ");
-            String next = this.receiveMessage();
+            String next;
+            do {
+                this.sendMessage("What's your name? ");
+                next = this.receiveMessage();
+            } while(next.equals(""));
             player.setName(next);
             singleplayer.setName(next);
 
