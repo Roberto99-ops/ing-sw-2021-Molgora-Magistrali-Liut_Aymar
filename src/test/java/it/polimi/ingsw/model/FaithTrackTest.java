@@ -27,11 +27,11 @@ public class FaithTrackTest {
         game.setN_players(3);
 
 
-        for(int i=0; i<8;i++ ){
+        for(int i=0; i<8;i++ ) {
             player1.increaseTrackposition();
         }
 
-        for(int i=0; i<5;i++ ){
+        for(int i=0; i<5;i++ ) {
             player2.increaseTrackposition();
         }
 
