@@ -50,7 +50,7 @@ public class GameTest {
         //caso 1a: francesco arriva alla fine del tracciato
         //sposto il giocatore alla posizione 24
 
-        for(int i=0; i<24 ;i++) francesco.increaseTrackPosition();
+        for(int i=0; i<24 ;i++) // francesco.increaseTrackPosition();
         //controllo che il nome restituito sia francesco
         giocotest.callEndgame(francesco);
         assertTrue(giocotest.callEndgame(francesco));
@@ -58,7 +58,7 @@ public class GameTest {
 
         //considero ora la posizione di francesco in 23
 
-        francesco.setTrackPosition(23);
+        // francesco.setTrackPosition(23);
         assertFalse(giocotest.callEndgame(francesco));
         System.out.println("game is not finished because francesco haven't reached 24th position");
 
@@ -104,9 +104,9 @@ public class GameTest {
         roberto.setPv(45);
         juan.setPv(28);
 
-        francesco.setTrackPosition(19);
-        roberto.setTrackPosition(20);
-        juan.setTrackPosition(24);
+        // francesco.setTrackPosition(19);
+        // roberto.setTrackPosition(20);
+        // juan.setTrackPosition(24);
 
 
         assertNotEquals("Francesco", giocotest.callVictory());
