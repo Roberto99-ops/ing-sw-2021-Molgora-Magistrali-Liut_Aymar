@@ -27,75 +27,13 @@ public class DevelopeCard implements Serializable {
      */
 
     public void setColour(char colour) { this.colour = colour; }
-    public void setLevel(int level) { this.level = level; }
-    public void setPv(int pv) { this.pv = pv; }
-    public void setCost(ResourceStructure cost) { this.cost = cost; }
     public void setInputproduction(ResourceStructure inputproduction) { this.inputproduction = inputproduction; }
-    public void setOutputproduction(ResourceStructure outputproduction) { this.outputproduction = outputproduction; }
     public char getColour() { return colour; }
     public int getLevel() { return level; }
     public int getPv() { return pv; }
     public ResourceStructure getCost() { return cost; }
     public ResourceStructure getInputproduction() { return inputproduction; }
     public ResourceStructure getOutputproduction() { return outputproduction; }
-
-
-    /**
-     * this method do a production.
-     * (1)checks if the player owns enough resources to activate the production;
-     * (2)then if storage contains enough resources, it removes from there the input resources and add the output resources to the strongbox;
-     * (3)if the storage doesn't contains enough resources it does the same thing with the strongbox.
-     * it uses the (0,1,2) logic defined into the player.checkresources method to check where the resources are.
-     * @param client: is the client who wants to do a production
-     * @param game: game passed (necessary because of the different definition of the player in singlegame or game)
-     * @return
-     * @throws IOException
-     * @throws ClassNotFoundException
-     */
-
-
-    public int doProduction(ClientHandler client, Game game) throws IOException, ClassNotFoundException {
-
-        GameHandler player;
-
-        if(game.getClass().equals(SingleGame.class)) {
-            player = client.getSinglePlayer();
-        } else {
-            player = client.getPlayer();
-        }
-
-
-        int check = player.checkResources(this.inputproduction.getVector());
-
-
-        if(check != 0) {
-
-            if(check == 1)
-            {
-                player.deleteResources(1, this.inputproduction.getVector());
-
-                for(int i=0; i<this.outputproduction.getVector().size(); i++)
-                    player.addResourceStrongBox(this.outputproduction.getVector().get(i)); }
-
-
-
-            if(check == 2)
-            {
-                player.deleteResources(2, this.inputproduction.getVector());
-
-                for(int i=0; i<this.outputproduction.getVector().size(); i++)
-                    player.addResourceStrongBox(this.outputproduction.getVector().get(i)); }
-            return 1;
-           }
-
-
-        else {
-            client.sendMessage("You don't own enough Resources. (press enter)");
-            client.receiveMessage();
-        }
-
-        return 0;
-    }
 
 
     /**
@@ -114,7 +52,6 @@ public class DevelopeCard implements Serializable {
         cost = new ResourceStructure();
         int size;
 
-        //FileReader stringa = new FileReader("src/main/resources/DevelopeCards.json");
         InputStreamReader reader = new InputStreamReader(this.getClass().getResourceAsStream("/DevelopeCards.json"));
         Object obj = JsonParser.parseReader(reader);
         JsonObject jsonObject = (JsonObject)obj;
@@ -144,8 +81,10 @@ public class DevelopeCard implements Serializable {
 
 
     /**
-     * this method print the details about a developeCard: ONLY USED FOR TESTING
+     *  ONLY USED FOR TESTING
+     * this method print the details about a developeCard
      */
+
 
     public void print() {
         System.out.println("pv: " + this.pv);
