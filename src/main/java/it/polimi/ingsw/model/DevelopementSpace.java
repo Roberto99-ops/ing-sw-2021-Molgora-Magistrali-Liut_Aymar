@@ -2,6 +2,11 @@ package it.polimi.ingsw.model;
 
 import java.io.Serializable;
 
+
+/**
+ * getter and setter
+ */
+
 public class DevelopementSpace implements Serializable {
 
     private DevelopeDecks minideck1 = new DevelopeDecks();
@@ -147,49 +152,6 @@ public class DevelopementSpace implements Serializable {
         }
 
         return false;
-    }
-
-
-
-
-    /**
-     * tell if there is already a card with that color in the DSpace
-     * @param color: color to check
-     * @return: minideck that contains the color. returns 0 if we can put it into an empty minideck.
-     */
-
-    public int colorPresent(Character color)
-
-    {
-        if(minideck1.getStructure().size() != 0 && color.equals(minideck1.getStructure().get(0).getColour())) return 1;
-
-        if(minideck2.getStructure().size() != 0 && color.equals(minideck2.getStructure().get(0).getColour())) return 2;
-
-        if(minideck3.getStructure().size() != 0 && color.equals(minideck3.getStructure().get(0).getColour())) return 3;
-
-        return 0;
-    }
-
-
-
-
-
-    /**
-     * tell if the DSpace is correctly structured: every minideck have got ordered cards from
-     * @param minideck: minideck to check
-     * @return: boolean: true if is correctly structured
-     */
-
-    public boolean checkDeck(DevelopeDecks minideck) {
-        if (((minideck.getStructure().size() == 3) && (minideck.getStructure().get(0).getLevel() == 1) &&
-                (minideck.getStructure().get(1).getLevel() == 2) && (minideck.getStructure().get(2).getLevel() == 3)) ||
-                ((minideck.getStructure().size() == 2) && (minideck.getStructure().get(0).getLevel() == 1)
-                        && (minideck.getStructure().get(1).getLevel() == 2)) ||
-                ((minideck.getStructure().size() == 1) && minideck.getStructure().get(0).getLevel() == 1)) {
-            return true;
-        } else {
-            return false;
-        }
     }
 
 
