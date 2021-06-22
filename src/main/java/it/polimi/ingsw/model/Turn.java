@@ -77,7 +77,7 @@ public class Turn implements Serializable {
      * then checks if he owns enough resources and complete the transaction
      */
 
-    public void shopCard() throws Exception {
+    public boolean shopCard() throws Exception {
         int cardNum;
         DevelopeCard card;
         ResourceStructure cost = new ResourceStructure();
@@ -114,7 +114,7 @@ public class Turn implements Serializable {
         {
             client.sendMessage("You don't own enough resources ( press enter )");
             client.receiveMessage();
-            return;
+            return false;
         }
 
 
@@ -139,11 +139,12 @@ public class Turn implements Serializable {
             // actualplayer.updateDevelopementDecks(client);
             client.sendMessage("These are the new developedecks( press any key )");
             client.receiveMessage();
-            return;
+            return true;
         }
 
         client.sendMessage("you can't buy this card( press any key )");
         client.receiveMessage();
+        return false;
 
     }
 
@@ -192,7 +193,7 @@ public class Turn implements Serializable {
         //we "clean" the vector
         for (int i = 0; i < product.getVector().size(); i++){
             if(product.getVector().get(i).equals('R')) {
-                actualplayer.increaseTrackposition();
+                actualplayer.increaseTrackPosition();
                 product.getVector().set(i, 'W');
             }
         }
@@ -320,7 +321,7 @@ public class Turn implements Serializable {
             if(deck.getStructure().size() > num) {
                 LeaderCard card = actualplayer.getLeadercards().getStructure().get(num);
                 actualplayer.getLeadercards().getStructure().remove(num);
-                actualplayer.increaseTrackposition();
+                actualplayer.increaseTrackPosition();
                 if(num == 0) {
                     if(actualplayer.getSkill1() == 1)   actualplayer.decreasePV(card.getPv());
                     actualplayer.setSkill1(actualplayer.getSkill2());

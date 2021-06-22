@@ -13,7 +13,7 @@ public class PlayerboardTest {
     public void print() throws FileNotFoundException {
         GameHandler player = new GameHandler();
         player.setName("Gianfrancioschio");
-        player.setTrackposition(8);
+        player.setTrackPosition(8);
         LeaderCard card1 = new LeaderCard();
         LeaderCard card2 = new LeaderCard();
         card1.setCard(10);
@@ -62,18 +62,18 @@ public class PlayerboardTest {
         }
 
         SingleGame.setVR(1);
-        player.setTrackposition(4);
+        player.setTrackPosition(4);
         SingleGame.getActionStructure().shuffleSignal();
         Playerboard playerboard = new Playerboard(player, game);
         playerboard.Print();
 
         SingleGame.setVR(2);
-        player.setTrackposition(15);
+        player.setTrackPosition(15);
         Playerboard rick = new Playerboard(player, game);
         rick.Print();
 
         SingleGame.setVR(3);
-        player.setTrackposition(19);
+        player.setTrackPosition(19);
         Playerboard morty = new Playerboard(player, game);
         morty.Print();
 
