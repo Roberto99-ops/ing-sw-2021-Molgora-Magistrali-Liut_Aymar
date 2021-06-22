@@ -145,7 +145,7 @@ public class SingleGame extends Game {
     {
         //riprende i casi descritti in Game.Endgame +
         //1)
-        if(actualplayer.getTrackposition()>=24) {
+        if(actualplayer.getTrackPosition()>=24) {
             getWinner().setName(actualplayer.getName());
             return true; //vinci tu
         }
@@ -157,7 +157,7 @@ public class SingleGame extends Game {
         }
 
         //2)
-        if(actualplayer.getDevelopementquantity()>=7) {
+        if(actualplayer.getDevelopmentQuantity()>=7) {
             getWinner().setName(actualplayer.getName());
             return true; //vinci tu
         }

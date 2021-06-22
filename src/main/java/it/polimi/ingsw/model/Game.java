@@ -161,11 +161,11 @@ public class Game implements Serializable {
 
     public boolean callEndgame(Player actualplayer) {
             //1)
-            if(actualplayer.getTrackposition()>=24)
+            if(actualplayer.getTrackPosition()>=24)
                 return true;
 
             //2)
-            else if (actualplayer.getDevelopementquantity()>=7)
+            else if (actualplayer.getDevelopmentQuantity()>=7)
                 return true;
 
             else
@@ -188,7 +188,7 @@ public class Game implements Serializable {
         for(int i=0 ; i < players.size(); i++)
         {
             //1)
-            if(players.get(i).getTrackposition()>=24)
+            if(players.get(i).getTrackPosition()>=24)
                 return players.get(i).getName();
 
             //2)

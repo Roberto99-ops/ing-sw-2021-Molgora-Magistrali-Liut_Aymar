@@ -16,11 +16,11 @@ public class FaithTrack implements Serializable {
 
     public void callVaticanReport(Player actualplayer, Game game) {
 
-            if ((actualplayer.getTrackposition() >= 8) && (Game.getVR() == 0)) {
+            if ((actualplayer.getTrackPosition() >= 8) && (Game.getVR() == 0)) {
 
 
             for (int i = 0; i < game.getN_players(); i++) {
-                if (game.getPlayers().get(i).getTrackposition() >= 5) {
+                if (game.getPlayers().get(i).getTrackPosition() >= 5) {
                     game.getPlayers().get(i).setPv((game.getPlayers().get(i).getPv() + 2));
                 }
             }
@@ -30,10 +30,10 @@ public class FaithTrack implements Serializable {
 
 
 
-        if ((actualplayer.getTrackposition()>=16 && (Game.getVR() == 1))) {
+        if ((actualplayer.getTrackPosition()>=16 && (Game.getVR() == 1))) {
 
             for (int i=0; i<Game.getN_players(); i++){
-                if (game.getPlayers().get(i).getTrackposition()>=12){
+                if (game.getPlayers().get(i).getTrackPosition()>=12){
                     game.getPlayers().get(i).setPv((game.getPlayers().get(i).getPv()+3));
                 }
             }
@@ -42,10 +42,10 @@ public class FaithTrack implements Serializable {
         }
 
 
-        if ((actualplayer.getTrackposition()>=24 && (Game.getVR() == 2))) {
+        if ((actualplayer.getTrackPosition()>=24 && (Game.getVR() == 2))) {
 
             for (int i=0; i<game.getN_players(); i++){
-                if (game.getPlayers().get(i).getTrackposition()>=19) {
+                if (game.getPlayers().get(i).getTrackPosition()>=19) {
                     game.getPlayers().get(i).setPv((game.getPlayers().get(i).getPv()+4));
                 }
             }

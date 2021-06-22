@@ -192,7 +192,7 @@ public class Turn implements Serializable {
         //we "clean" the vector
         for (int i = 0; i < product.getVector().size(); i++){
             if(product.getVector().get(i).equals('R')) {
-                actualplayer.increaseTrackposition();
+                actualplayer.increaseTrackPosition();
                 product.getVector().set(i, 'W');
             }
         }
@@ -320,7 +320,7 @@ public class Turn implements Serializable {
             if(deck.getStructure().size() > num) {
                 LeaderCard card = actualplayer.getLeadercards().getStructure().get(num);
                 actualplayer.getLeadercards().getStructure().remove(num);
-                actualplayer.increaseTrackposition();
+                actualplayer.increaseTrackPosition();
                 if(num == 0) {
                     if(actualplayer.getSkill1() == 1)   actualplayer.decreasePV(card.getPv());
                     actualplayer.setSkill1(actualplayer.getSkill2());

@@ -13,9 +13,9 @@ public class PlayerTest {
     @Test
     public void increaseTrackposition() {
         Player player = new Player();
-        player.increaseTrackposition();
-        player.increaseTrackposition();
-        assertEquals(2, player.getTrackposition());
+        player.increaseTrackPosition();
+        player.increaseTrackPosition();
+        assertEquals(2, player.getTrackPosition());
     }
 
     @Test
@@ -23,7 +23,7 @@ public class PlayerTest {
         Player player = new Player();
         player.increaseDevelopQuantity();
         player.increaseDevelopQuantity();
-        assertEquals(2,player.getDevelopementquantity());
+        assertEquals(2,player.getDevelopmentQuantity());
     }
 
     //FATTO
