@@ -6,15 +6,21 @@ import java.io.Serializable;
 
 public class Lorenzo implements Serializable {
 
+
     /**
-     * attributes and getter and setter
+     * name: indicate the name of singleplayer
+     * number: indicate the position on faithtrack
      */
 
     private static String name = "Lorenzo Il Magnifico";
-    public static String getName() {
-        return name;
-    }
-    private  int number = 0;  // position on the faithtrack
+    private  int number = 0;
+
+
+
+    /**
+     * getter and setter
+     */
+
     public  int getNumber() {
         return number;
     }
@@ -34,6 +40,7 @@ public class Lorenzo implements Serializable {
             number = 24;
     }
 
+
     /**
      * Moves Lorenzo forward by 1, on the FaithTrack, and shuffles the Action Signal's Structure
      */
@@ -43,20 +50,5 @@ public class Lorenzo implements Serializable {
         SingleGame.getActionStructure().shuffleSignal();
     }
 
-    /*
-    /**
-     * Moves Lorenzo forward by 1 or 2 cells on the FaithTrack, according to the picked Signal
-     * @param forward
-     * @return
 
-    public static void Lorenzomoves(int forward){
-        if (forward==2){
-            number=number+2;
-        } else if (forward==1){
-            number++;
-            SingleGame.getActionStructure().ShuffleSignal();
-        }
-        return;
-    }
-    */
 }
