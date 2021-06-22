@@ -7,7 +7,7 @@ public class ActionStructure implements Serializable {
 
     private  int[] structure = {1,2,3,4,5,6,7};
     private  int AS_Counter=0;
-    private int OLD_AS_COUNTER=0;
+    private int OLD_Signal;
 
 
     /**
@@ -20,7 +20,7 @@ public class ActionStructure implements Serializable {
     public  int getActionSignal(int i){
         return structure[i];
     }
-    public int getOLD_AS_COUNTER() { return OLD_AS_COUNTER; }
+    public int getOLD_Signal() { return OLD_Signal; }
     public  void setAS_Counter(int AS_Counter) {
         this.AS_Counter = AS_Counter;
     }
@@ -40,7 +40,7 @@ public class ActionStructure implements Serializable {
 
     public void pickSignal() {
 
-        OLD_AS_COUNTER = AS_Counter;
+        OLD_Signal = structure[AS_Counter];
         ActionSignal Signal = new ActionSignal();
         Signal.action(structure[AS_Counter]);
         AS_Counter++;
@@ -70,6 +70,7 @@ public class ActionStructure implements Serializable {
             structure[indice]= structure[i];
             structure[i]=temp;
         }
+        AS_Counter = 0;
 
     }
 

@@ -7,6 +7,7 @@ import it.polimi.ingsw.model.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class TurnManager {
 
@@ -32,13 +33,13 @@ public class TurnManager {
         //se sono in single game, ogni volta che tocca a me, prendo un segnalino ed eseguo la sua azione
         if (game.getClass().equals(SingleGame.class)) {
             SingleGame.getActionStructure().pickSignal();
-            System.out.println(SingleGame.getActionStructure().getAS_Counter());
+            System.out.println(SingleGame.getActionStructure().getAS_Counter() + " \t" + SingleGame.getActionStructure().getOLD_Signal() +  " " + Arrays.toString(SingleGame.getActionStructure().getStructure()));
             player.updatePlayerBoard(client, game);
             if(SingleGame.getLorenzo().getNumber() == 24) return;
         }
-
         else
             player.updatePlayerBoard(client, game);
+
         do {
             //1)
 
