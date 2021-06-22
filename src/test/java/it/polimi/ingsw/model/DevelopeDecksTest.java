@@ -13,6 +13,7 @@ public class DevelopeDecksTest {
      * checks that the card returned is the expected one,
      * and checks that the "new" deck size is shorter.
      */
+
     public void getDeck() throws FileNotFoundException {
         DevelopeDecks deck = new DevelopeDecks();
         for(int i=0; i<5; i++)
@@ -43,6 +44,7 @@ public class DevelopeDecksTest {
      * and they are not equals.
      * so they contains the same cards but are different.
      */
+
     public void setDeck() throws FileNotFoundException {
         DevelopeDecks deck = new DevelopeDecks();
         DevelopeDecks oldDeck = new DevelopeDecks();
