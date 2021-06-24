@@ -1,18 +1,14 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.Server.ClientHandler;
-import it.polimi.ingsw.Server.MessageGameManager;
 import it.polimi.ingsw.Server.GameHandler;
 import it.polimi.ingsw.Server.Server;
 import it.polimi.ingsw.Server.messages.LeaderDeckMsg;
 import it.polimi.ingsw.model.*;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 
@@ -68,13 +64,14 @@ public class GameManager implements Runnable{
             }
         }
 
-
+//se i giocatori sono più di 1
         if (clientList.size() != 1) {
             try {
-                game.shuffle();
+                game.shuffle(); //preparo le risorse e le carte
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
+            //ogni giocatore sceglie le carte leader
             for (int i = 0; i < clientList.size(); i++) {
                 int choice2 = 0;
                 LeaderDeck leaderChoice = game.leaderChoice();
@@ -119,14 +116,15 @@ public class GameManager implements Runnable{
 
 
 
-                // initialization of multiplayers
+                // initialization of multiplayers' resources
+                //player 1: niente
 
 
-                // initialization of second player
+                // initialization of second player: 1R
                     if (clientList.size() >= 2) {
 
                         String j = new String();
-
+                        /*
                         try {
                             clientList.get(1).sendMessage("Do you want to add a resource in storage or strongbox?\n");
                         }  catch (IOException e) {
@@ -141,6 +139,8 @@ public class GameManager implements Runnable{
                             e.printStackTrace();
                         }
 
+                         */
+
 
                         try {
                             clientList.get(1).sendMessage("Tell me the initial resource that you want (P,B,G,Y) \n");
@@ -149,27 +149,20 @@ public class GameManager implements Runnable{
                         }
 
                         try {
-                            if (j.equals("storage"))
                                 clientList.get(1).getPlayer().addResourceStorage(clientList.get(1).receiveMessage().charAt(0), game);
-                            if (j.equals("strongbox"))
-                                clientList.get(1).getPlayer().addResourceStrongBox(clientList.get(1).receiveMessage().charAt(0));
-                        }  catch (IOException e) {
-                            e.printStackTrace();
-                        } catch (ClassNotFoundException e) {
+                            }  catch (IOException | ClassNotFoundException e) {
                             e.printStackTrace();
                         }
 
 
+                    }
 
 
-                }
-
-
-                    // initialization of third player
+                    // initialization of third player:1R 1FT
                 if (clientList.size() >= 3) {
 
                     String k = new String();
-
+                    /*
                     try {
                         clientList.get(2).sendMessage("Do you want to add a resource in storage or strongbox?\n");
                     }  catch (IOException e) {
@@ -184,26 +177,22 @@ public class GameManager implements Runnable{
                         e.printStackTrace();
                     }
 
+                     */
+
 
                     try {
                         clientList.get(2).sendMessage("Tell me the initial resource that you want (P,B,G,Y) \n");
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-
                     try {
-
-                        if (k.equals("storage"))
                             clientList.get(2).getPlayer().addResourceStorage(clientList.get(2).receiveMessage().charAt(0), game);
-                        if (k.equals("strongbox"))
-                            clientList.get(2).getPlayer().addResourceStrongBox(clientList.get(2).receiveMessage().charAt(0));
-                    }  catch (IOException e) {
-                        e.printStackTrace();
-                    } catch (ClassNotFoundException e) {
+                        }  catch (IOException | ClassNotFoundException e) {
                         e.printStackTrace();
                     }
 
-                    clientList.get(2).getPlayer().increasePV(1);
+                    //clientList.get(2).getPlayer().increasePV(1);
+                    clientList.get(2).getPlayer().increaseTrackPosition();
 
                 }
 
@@ -212,20 +201,6 @@ public class GameManager implements Runnable{
                 if (clientList.size() == 4) {
 
                     String r = new String();
-
-                    try {
-                        clientList.get(3).sendMessage("Do you want to add te first resource in storage or strongbox?\n");
-                    }  catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-                    try {
-                        r = clientList.get(3).receiveMessage();
-                    }  catch (IOException e) {
-                        e.printStackTrace();
-                    } catch (ClassNotFoundException e) {
-                        e.printStackTrace();
-                    }
 
 
                     try {
@@ -236,32 +211,11 @@ public class GameManager implements Runnable{
 
                     try {
 
-                        if (r.equals("storage"))
+
                             clientList.get(3).getPlayer().addResourceStorage(clientList.get(3).receiveMessage().charAt(0), game);
-                        if (r.equals("strongbox"))
-                            clientList.get(3).getPlayer().addResourceStrongBox(clientList.get(3).receiveMessage().charAt(0));
-                    }  catch (IOException e) {
-                        e.printStackTrace();
-                    } catch (ClassNotFoundException e) {
+                        }  catch (IOException | ClassNotFoundException e) {
                         e.printStackTrace();
                     }
-
-
-
-                    try {
-                        clientList.get(3).sendMessage("Do you want to add te second resource in storage or strongbox?\n");
-                    }  catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-                    try {
-                        r = clientList.get(3).receiveMessage();
-                    }  catch (IOException e) {
-                        e.printStackTrace();
-                    } catch (ClassNotFoundException e) {
-                        e.printStackTrace();
-                    }
-
 
                     try {
                         clientList.get(3).sendMessage("Tell me the second resource that you want (P,B,G,Y) \n");
@@ -271,17 +225,15 @@ public class GameManager implements Runnable{
 
                     try {
 
-                        if (r.equals("storage"))
+
                             clientList.get(3).getPlayer().addResourceStorage(clientList.get(3).receiveMessage().charAt(0), game);
-                        if (r.equals("strongbox"))
-                            clientList.get(3).getPlayer().addResourceStrongBox(clientList.get(3).receiveMessage().charAt(0));
-                    }  catch (IOException e) {
-                        e.printStackTrace();
-                    } catch (ClassNotFoundException e) {
+                       }  catch (IOException | ClassNotFoundException e) {
                         e.printStackTrace();
                     }
 
-                    clientList.get(3).getPlayer().increasePV(1);
+                    //clientList.get(3).getPlayer().increasePV(1);
+                    clientList.get(3).getPlayer().increaseTrackPosition();
+
 
                 }
 

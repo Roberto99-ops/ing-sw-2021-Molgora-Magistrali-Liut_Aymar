@@ -44,11 +44,11 @@ public class CliManager {
         if(msg.getClass().equals(PlayerMsg.class)) {
             PlayerMsg playerMsg = (PlayerMsg) msg;
             player.setLeadercards(playerMsg.getPlayer().getLeadercards());
-            player.setTrackposition(playerMsg.getPlayer().getTrackposition());
+            player.setTrackPosition(playerMsg.getPlayer().getTrackPosition());
             player.setStorage(playerMsg.getPlayer().getStorage());
             player.setName(playerMsg.getPlayer().getName());
             player.setDSpace(playerMsg.getPlayer().getDSpace());
-            player.setDevelopementquantity(playerMsg.getPlayer().getDevelopementquantity());
+            player.setDevelopmentQuantity(playerMsg.getPlayer().getDevelopmentQuantity());
             player.getDSpace().setMinideck1(playerMsg.getPlayer().getDSpace().getMinideck1());
             player.getDSpace().setMinideck2(playerMsg.getPlayer().getDSpace().getMinideck2());
             player.getDSpace().setMinideck3(playerMsg.getPlayer().getDSpace().getMinideck3());

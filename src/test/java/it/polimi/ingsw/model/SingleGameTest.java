@@ -36,14 +36,14 @@ public class SingleGameTest {
 
         //caso 1: Giocatore arriva alla fine del tracciato
         //sposto il giocatore alla posizione 24
-        for(int i=0; i<24 ;i++)  plyr.increaseTrackposition();
+        for(int i=0; i<24 ;i++)  // plyr.increaseTrackPosition();
         //controllo che il nome restituito sia quello del giocatore plyr
         singleGame.callEndgame(plyr);
         assertTrue(singleGame.callEndgame(plyr));
         assertEquals("Ale",singleGame.getWinner().getName());
 
         //considero ora la posizione di plyr in 23
-        plyr.setTrackposition(23);
+        // plyr.setTrackPosition(23);
 
         //caso2a: il giocatore ha solo 6 carte sviluppo
         //aumento la quantità di carte di plyr a 6
@@ -57,7 +57,7 @@ public class SingleGameTest {
         assertEquals("Ale",singleGame.getWinner().getName());
 
         //tolgo una carta a plyr: ora ha 6 carte
-        plyr.setDevelopementquantity(6);
+        // plyr.setDevelopmentQuantity(6);
 
         //caso 3 : tre mazzi dello stesso tipo sono tutti vuoti
         //svuoto i mazzi #0,4,8
@@ -67,7 +67,7 @@ public class SingleGameTest {
                 //Game.getDevelopedecks(i).getStructure().add(null);
             }
         }
-        System.out.println(plyr.getDevelopementquantity()+"   "+ plyr.getTrackposition()+"   "+Game.getDevelopedecks(0).getStructure());
+        // System.out.println(plyr.getDevelopmentQuantity()+"   "+ plyr.getTrackPosition()+"   "+Game.getDevelopedecks(0).getStructure());
         singleGame.callEndgame(plyr);
         assertTrue(singleGame.callEndgame(plyr));
         assertEquals("Lorenzo il Magnifico", singleGame.getWinner().getName());

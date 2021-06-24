@@ -6,7 +6,6 @@ import com.google.gson.JsonParser;
 import it.polimi.ingsw.model.*;
 
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
@@ -30,7 +29,7 @@ public class Playerboard extends PaintCards {
     public Playerboard(Player player, Game game) throws FileNotFoundException {
         playerboard = new String[VERT_SIZE][HORIZ_SIZE];
         Perimeter(playerboard, VERT_SIZE, HORIZ_SIZE, Color.WHITEonBLACK);
-        drawFaithTrack(player.getTrackposition(), game);
+        drawFaithTrack(player.getTrackPosition(), game);
         putString(player.getName(), playerboard, 1, 70);
         drawStorage(player.getStorage());
         drawStrongbox(player.getStrongBox().getStructure().getVector());

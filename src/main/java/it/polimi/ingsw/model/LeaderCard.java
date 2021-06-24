@@ -36,6 +36,7 @@ public class LeaderCard implements Serializable {
         return priceR;
     }
 
+
     /**
      * return priceC, priceC is an arraylist witch every cell is a resource (char)
      * @return
@@ -54,7 +55,6 @@ public class LeaderCard implements Serializable {
     }
 
 
-
     /**
      * use the number in input to read on the Json file the LeaderCard I need.
      * return a LeaderCard with all the parametres of the card I meant.
@@ -62,7 +62,6 @@ public class LeaderCard implements Serializable {
      * @return
      * @throws FileNotFoundException
      */
-
 
     public LeaderCard setCard(int number) throws FileNotFoundException {
 
@@ -94,8 +93,6 @@ public class LeaderCard implements Serializable {
     }
 
 
-
-
     /**
      * this skill decreases the develope card price of a specify resource
      * @param card: card in input to decrease price
@@ -112,9 +109,6 @@ public class LeaderCard implements Serializable {
         return newCost;
     }
 
-
-
-
     /**
      * this skill activate the additional storage layer by specifying the type of resource it can contain
      * @param player: player that get the additional layer
@@ -124,9 +118,6 @@ public class LeaderCard implements Serializable {
     {
         player.getStorage().setTypeExtrapanel(this.inputskill);
     }
-
-
-
 
 
     /**
@@ -146,8 +137,6 @@ public class LeaderCard implements Serializable {
     }
 
 
-
-
     /**
      * this method do a production.
      * (1)checks if the player owns enough resources to activate the production;
@@ -160,7 +149,6 @@ public class LeaderCard implements Serializable {
      * @throws IOException
      * @throws ClassNotFoundException
      */
-
 
     public int doProductionSkill(ClientHandler client, Game game) throws IOException, ClassNotFoundException {
         GameHandler player;
@@ -179,7 +167,7 @@ public class LeaderCard implements Serializable {
             if(check == 1)
             {
                 player.deleteResources(1, list);
-                player.increaseTrackposition();
+                player.increaseTrackPosition();
                 client.sendMessage("What resource do you want? (Y, P, G, B) ");
                 char resource = client.receiveMessage().charAt(0);
                 player.addResourceStrongBox(resource); }
@@ -187,7 +175,7 @@ public class LeaderCard implements Serializable {
             if(check == 2)
             {
                 player.deleteResources(2, list);
-                player.increaseTrackposition();
+                player.increaseTrackPosition();
                 client.sendMessage("What resource do you want? (Y, P, G, B) ");
                 char resource = client.receiveMessage().charAt(0);
                 player.addResourceStrongBox(resource); }
@@ -201,10 +189,8 @@ public class LeaderCard implements Serializable {
     }
 
 
-
-
     /**
-     * print the leadercard
+     * print the Leader Card
      */
 
     public void Print()
