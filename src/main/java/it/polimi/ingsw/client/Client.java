@@ -83,7 +83,7 @@ public class Client {
             server.close();
             input.close();
             output.close();
-        } catch (IOException ex) { System.out.println("\nServer close gone wrong");}
+        } catch (IOException ex) {}
     }
 
 }

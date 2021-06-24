@@ -336,6 +336,7 @@ public class GameManager implements Runnable{
                 clientList.remove(0);
             }
             Server.setNumberofsockets(0);
+            Server.setCloseserverTrue();
         }
     }
 

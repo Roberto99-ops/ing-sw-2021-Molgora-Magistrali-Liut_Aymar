@@ -36,6 +36,7 @@ public class SingleGameManager {
         game.getPlayers().add(player);
         observablesinglegame.setSingleGameHendler(player);
 
+        SingleGame.getLorenzo().setNumber(23);
         Shuffle();
         int choice2;
         LeaderDeck leaderChoice = game.leaderChoice();
@@ -68,6 +69,7 @@ public class SingleGameManager {
             GameManager.getClientList().remove(0);
         }
         Server.setNumberofsockets(0);
+        Server.setCloseserverTrue();
     }
 
     private static void Shuffle() throws FileNotFoundException {

@@ -21,8 +21,13 @@ public class Server {
     private final static int SO_TIMEOUT = 10;
     private static GameManager gameManager = new GameManager();
     private static Thread game;
+    private static boolean closeserver = false;
     private static int numberofsockets = 0; //is used to allow the first player to start a new game
     private static Thread firstClient; //here only to allow us to terminate the singlegame thread in case of errors
+
+    public static void setCloseserverTrue() {
+        closeserver = true;
+    }
 
     public static void setNumberofsockets(int numberofsockets) {
         Server.numberofsockets = numberofsockets;
@@ -39,6 +44,7 @@ public class Server {
             System.out.println("Which port do you want to open?");
             numberPort = scan.nextLine();
             socket = new ServerSocket(Integer.parseInt(numberPort));
+            socket.setSoTimeout(SO_TIMEOUT);
             System.out.println("Server is running");
         } catch (IOException e) {
             System.out.println("cannot open server socket");
@@ -46,18 +52,18 @@ public class Server {
             return;
         }
 
-        //starts a loop that accepts new connections
-        //the loop is set to true (so it will run infinitely) because a server is an entity that should be always open to accept new connections,
-        //the only reasons to allow a server to shut down itself are maybe reasons correlated to security (like too heat components or too many connections or a cyber attack),
-        //reasons that don't concern THIS server. obviously if the server manager (i'm talking the person who run it) would like to shut down the server could simply turn it off.
-        while (true) {
+        //starts a loop that accepts new connections and ends when the game comes to an end
+        //these socket acceptations have a timeout of 10 ms so the server can react in util time to a closeserver variable change
+        while (!closeserver) {
             Socket client;
-            client = socket.accept();
-            numberofsockets++;
-            ClientHandler clientHandler = new ClientHandler(client, numberofsockets);
-            Thread thread = new Thread(clientHandler, "server_" + client.getInetAddress());
-            if(numberofsockets == 1)    firstClient = thread;
-            thread.start();
+            try {
+                client = socket.accept();
+                numberofsockets++;
+                ClientHandler clientHandler = new ClientHandler(client, numberofsockets);
+                Thread thread = new Thread(clientHandler, "server_" + client.getInetAddress());
+                if (numberofsockets == 1) firstClient = thread;
+                thread.start();
+            }catch (IOException e){}
         }
     }
 
@@ -75,6 +81,7 @@ public class Server {
      */
     public static void closeGame() {
         numberofsockets=0;
+        Server.setCloseserverTrue();
         if(game != null)
                 game.stop();
         firstClient.stop(); //used in case we are playing a single game
