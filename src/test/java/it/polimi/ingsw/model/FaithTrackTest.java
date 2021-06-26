@@ -28,11 +28,11 @@ public class FaithTrackTest {
 
 
         for(int i=0; i<8;i++ ) {
-            // player1.increaseTrackPosition();
+            player1.increaseTrackPosition();
         }
 
         for(int i=0; i<5;i++ ) {
-            // player2.increaseTrackPosition();
+            player2.increaseTrackPosition();
         }
 
         FaithTrack faithTrack = new FaithTrack();
@@ -45,11 +45,11 @@ public class FaithTrackTest {
 
 
         for(int i=0; i<16;i++ ){
-            // player3.increaseTrackPosition();
+            player3.increaseTrackPosition();
         }
 
         for(int i=0; i<7;i++ ){
-            // player2.increaseTrackPosition();
+            player2.increaseTrackPosition();
         }
         faithTrack.callVaticanReport(player3, game);
         assertEquals(4,player1.getPv());
@@ -58,15 +58,15 @@ public class FaithTrackTest {
         assertEquals(2,Game.getVR());
 
         for(int i=0; i<16;i++ ) {
-            // player1.increaseTrackPosition();
+            player1.increaseTrackPosition();
         }
 
         for(int i=0; i<9;i++ ) {
-            // player2.increaseTrackPosition();
+            player2.increaseTrackPosition();
         }
 
         for(int i=0; i<2;i++ ) {
-            // player3.increaseTrackPosition();
+            player3.increaseTrackPosition();
         }
 
         faithTrack.callVaticanReport(player1, game);
