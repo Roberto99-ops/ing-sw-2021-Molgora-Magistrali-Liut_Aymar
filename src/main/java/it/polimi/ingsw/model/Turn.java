@@ -172,7 +172,8 @@ public class Turn implements Serializable {
                 client.sendMessage("Which row do you want to take? (from 0 to 2) \n");
                 RoworCol = 1;
                 String num = client.receiveMessage();
-                number = num.charAt(0) - 48;
+                if(num!= "")
+                    number = num.charAt(0) - 48;
             }while(number > 2 || number <0);
 
         if (next.equals("column"))
@@ -180,7 +181,8 @@ public class Turn implements Serializable {
                 client.sendMessage("Which column do you want to take? (from 0 to 3) \n");
                 RoworCol = 2;
                 String num = client.receiveMessage();
-                number = num.charAt(0) - 48;
+                if(num!= "")
+                    number = num.charAt(0) - 48;
         }while(number > 3 || number <0);
 
         product.setVector(Game.getMarket().doMarket(RoworCol, number));
