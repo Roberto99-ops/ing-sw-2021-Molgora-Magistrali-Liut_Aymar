@@ -138,49 +138,18 @@ public class Player implements Serializable {
         this.skill2 = skill;
     }
 
-
-
-
-    //carte sviluppo in DevelopementSpace
-    /*private DevelopeDecks minideck1;
-    private DevelopeDecks minideck2;
-    private DevelopeDecks minideck3;
-
-    public DevelopeDecks getMinideck1() {
-        return minideck1;
-    }
-
-    public void setMinideck1(DevelopeDecks minideck1) {
-        this.minideck1 = minideck1;
-    }
-
-    public DevelopeDecks getMinideck2() {
-        return minideck2;
-    }
-
-    public void setMinideck2(DevelopeDecks minideck2) {
-        this.minideck2 = minideck2;
-    }
-
-    public DevelopeDecks getMinideck3() {
-        return minideck3;
-    }
-
-    public void setMinideck3(DevelopeDecks minideck3) {
-        this.minideck3 = minideck3;
-    }
-
-     */
-
     private int developmentQuantity;
 
     public int getDevelopmentQuantity() {
         return developmentQuantity;
     }
 
+
+
     /**
      * Adds 1 when the player buys a new DevelopementCard
      */
+
     public void increaseDevelopQuantity() {
         this.developmentQuantity = developmentQuantity + 1;
     }
@@ -190,7 +159,7 @@ public class Player implements Serializable {
     }
 
 
-    //FaithTrack
+
     private FaithTrack faithTrack;
 
     public FaithTrack getFaithTrack() {
@@ -248,7 +217,7 @@ public class Player implements Serializable {
      */
 
 
-    public int checkResources(ArrayList<Character> vectorResources) {
+    public int checkResources (ArrayList<Character> vectorResources) {
         //flag per sapere se non possiedo tali risorse (0) o possiedo in storage (1) o in strongbox-storage (2)
         int ableTo = 0;
 
@@ -291,61 +260,12 @@ public class Player implements Serializable {
 
 
 
-    /*
-    public int checkResources(ArrayList<Character> vectorResources){
-        int ableTo=0;
-        //riordino l'array che può essere in disordine
-        char r;
-        ArrayList<Character> vectorOrganized = new ArrayList<>();
-        for (int j=0; j<vectorResources.size(); j++){
-            r=vectorResources.get(j);
-            if(!vectorOrganized.contains(r)) vectorOrganized.add(r);
-            for (int i=j+1; i< vectorResources.size(); i++){
-                if (r == (vectorResources.get(i))) vectorOrganized.add(r);
-            }
-        }
-
-        //vedo quante risorse ho bisogno di un certo tipo
-        for (int j=0; j<vectorOrganized.size(); j++){
-            r=vectorOrganized.get(j);
-            int countType =0;
-            for (int i=0; i<vectorOrganized.size(); i++){
-                if (r== vectorOrganized.get(i)) countType++;
-                System.out.println(countType);
-            }
-            //conto nello storage e nello strongbox
-            //se il conteggio è piu alto di countType allora le risorse non sono disponibili
-            //altrimenti vedo dove sono disponibili le risorse
-
-            if (countType>(storage.countTypeS(r))+(strongBox.countTypeSB(r))) {
-                return ableTo=0;
-            } else if (countType<storage.countTypeS(r)+strongBox.countTypeSB(r)){
-                ableTo=2;
-                if (countType< storage.countTypeS(r))  ableTo=1;
-            } else if (countType<strongBox.countTypeSB(r))  ableTo=3;
-        }
-        return ableTo;
-    }
-
-     */
-
-
-
-
-
-
-
-
-
-
-
-
-
     /**
      * deletes the resources i need from the storage or the strongbox
      * @param ableTo: where i have to delete it (1->storage, 2->storage+strongbox)
      * @param vector: vector of resources
      */
+
     public void deleteResources(int ableTo, ArrayList<Character> vector) {
         //ArrayList<Character> vectorResources = vector;
         //removes from storage
@@ -372,92 +292,12 @@ public class Player implements Serializable {
 
 
 
-    //SI POTREBBE TOGLIERE
-    /**
-     * Gets card on the top of each minideck in the DevelopementSpace
-     * @return arraylist of minidecks' topcards
-     */
-    //deve "intreccarsi" con la plancia in modo da restituire
-    //la lista delle carte sviluppo in cima ai mazzetti, forse servono solo quelli
-    //della prima fila in quanto la produzioni si fanno solo
-    //con le carte in cima ai mazzetti
-    public DevelopeDecks getTopCards() throws Exception {
-        DevelopeDecks TopCardsOnBoard = new DevelopeDecks();
-        DevelopeCard card;
-        int size1 = DSpace.getMinideck1().getStructure().size();
-        int size2 = DSpace.getMinideck2().getStructure().size();
-        int size3 = DSpace.getMinideck3().getStructure().size();
 
-        if(size1 > 0) {
-            card = DSpace.getMinideck1().getStructure().get(size1-1);
-            TopCardsOnBoard.getStructure().add(card);
-        }
-
-        if(size2 > 0) {
-            card = DSpace.getMinideck2().getStructure().get(size2-1);
-            TopCardsOnBoard.getStructure().add(card);
-        }
-
-        if(size3 > 0) {
-            card = DSpace.getMinideck3().getStructure().get(size3-1);
-            TopCardsOnBoard.getStructure().add(card);
-        }
-
-        return TopCardsOnBoard ;
-    }
-
-    /**
-     * this method adds if possible a developecard to the player DSpace
-     * @param card: card to add
-     * @return: the action response
-     */
-
-    /*
-    public boolean addDevelopCard(DevelopeCard card, int choice)
-    {
-
-
-    copia di setcard
-
-
-
-        //if(minideck == 4)   return false;
-
-        if(choice != 0)
-
-        {
-            if(DSpace.setCard(card, choice)) {
-                increasePV(card.getPv());
-                return true;
-            }
-        }
-
-        //if(DSpace.getMinideck3().getStructure().size() == 0)   minideck=3;
-        //if(DSpace.getMinideck2().getStructure().size() == 0)   minideck=2;
-        //if(DSpace.getMinideck1().getStructure().size() == 0)   minideck=1;
-
-        if(DSpace.setCard(card, 1)) {
-            increasePV(card.getPv());
-            return true;
-        }
-
-        if(DSpace.setCard(card, 2)) {
-            increasePV(card.getPv());
-            return true;
-        }
-
-        if(DSpace.setCard(card, 3)) {
-            increasePV(card.getPv());
-            return true;
-        }
-
-        return false;
-    }
-*/
     /**
      * Removes one resource from the storage.
      * @param resource: the resource the player wants to delete
      */
+
     public boolean removeResourceStorage(char resource) {
         int i;
         ArrayList<Character> vector = new ArrayList<Character>();
@@ -494,16 +334,14 @@ public class Player implements Serializable {
     }
 
 
+
+
     /**
      * Adds a single specified resource inside the Storage
      * @param resource : the resource the player will put in Storage
      */
+
     public boolean addResourceStorage(char resource, Game game) throws IOException {
-        /*IDEA: scelgo una risorsa e questa , che si trova dentro il resourcestructure,
-        va inserita dentro il magazzino
-        (se viene dal mercato)
-        */
-        //caso in cui il magazzino sia pieno (sia extrapanel sia panel)
 
         ArrayList<ClientHandler> clients = GameManager.getClientList();
 
@@ -691,6 +529,7 @@ public class Player implements Serializable {
      * @param colours: color of the cards
      * @return
      */
+
     public boolean checkCards(int level, ArrayList<Character> colours)
     {
         int cont = 0; //at the end if cont is = colours.size it means i have al the cards I need
