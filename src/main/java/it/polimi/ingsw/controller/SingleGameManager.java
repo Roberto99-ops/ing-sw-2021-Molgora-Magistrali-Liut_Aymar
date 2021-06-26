@@ -36,7 +36,6 @@ public class SingleGameManager {
         game.getPlayers().add(player);
         observablesinglegame.setSingleGameHendler(player);
 
-        SingleGame.getLorenzo().setNumber(23);
         Shuffle();
         int choice2;
         LeaderDeck leaderChoice = game.leaderChoice();
