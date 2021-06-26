@@ -40,12 +40,12 @@ public class StrongBoxTest {
         assertEquals(3, tex.countTypeSB('P'));
         assertEquals(3, tex.countTypeSB('G'));
         assertEquals(0, tex.countTypeSB('T'));
-        // assertEquals(14, tex.getStructure().getVector().size());
+        assertEquals(14, tex.getStructure().getVector().size());
 
 
-        tex.getStructure().getVector().remove('P');
-        tex.getStructure().getVector().remove('P');
-        tex.getStructure().getVector().remove('G');
+        tex.getStructure().getVector().remove(13);
+        tex.getStructure().getVector().remove(12);
+        tex.getStructure().getVector().remove(6);
         tex.getStructure().getVector().add('Y');
 
         tex.printAll();
@@ -54,7 +54,7 @@ public class StrongBoxTest {
         assertEquals(2, tex.countTypeSB('G'));
         assertEquals(5, tex.countTypeSB('Y'));
         assertEquals(4, tex.countTypeSB('B'));
-        // assertEquals(12, tex.getStructure().getVector().size());
+        assertEquals(12, tex.getStructure().getVector().size());
 
 
 
