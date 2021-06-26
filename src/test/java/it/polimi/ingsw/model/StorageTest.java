@@ -13,8 +13,6 @@ public class StorageTest {
 
     public void switchResourceTest() {
 
-        Game game = new Game();
-        Player player = new Player();
         Storage box = new Storage();
         ArrayList <Character> obj = new ArrayList<>();
 
