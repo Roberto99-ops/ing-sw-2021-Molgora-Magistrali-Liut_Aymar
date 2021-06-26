@@ -220,6 +220,7 @@ public class Player implements Serializable {
     public int checkResources (ArrayList<Character> vectorResources) {
         //flag per sapere se non possiedo tali risorse (0) o possiedo in storage (1) o in strongbox-storage (2)
         int ableTo = 0;
+        boolean notStorage = false;
 
         for (int i = 0; i < vectorResources.size(); i++) {
             int countType = 0;
@@ -245,10 +246,12 @@ public class Player implements Serializable {
                 ableTo = 2;
                 System.out.println("You have the needed quantity of resources in the storage + strongbox");
 
-                if (countType <= storageCount) {
+                if (!notStorage && countType <= storageCount) {
                     ableTo = 1;
                     System.out.println("You have the needed quantity of resources in storage");
                 }
+                else
+                    notStorage = true;
 
             }
 
