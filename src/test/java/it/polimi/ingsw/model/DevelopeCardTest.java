@@ -13,6 +13,7 @@ public class DevelopeCardTest {
      * this test tests that a developecard is picked and memorized correctly from the json file
      * @throws FileNotFoundException
      */
+
     @Test
     public void setCard() throws FileNotFoundException {
         DevelopeCard card = new DevelopeCard();
