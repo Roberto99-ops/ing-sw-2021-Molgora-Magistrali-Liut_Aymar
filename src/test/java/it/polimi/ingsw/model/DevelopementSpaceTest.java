@@ -75,10 +75,7 @@ public class DevelopementSpaceTest extends TestCase {
         }
     }
 
-    public void testCheckDeck() throws FileNotFoundException {
 
-
-    }
 
 
 
