@@ -99,8 +99,7 @@ public class PlayerTest {
     public void removeResource(){
         Player player = new Player();
         player.getStorage().setTypeExtrapanel('G');
-        //inizializzo lo storage (quindi panel ed extrapanel)
-        //considero panel ed extrapanel con elementi
+
         player.getStorage().getPanel().set(0,'G');
         for (int i=1; i<3; i++){
             player.getStorage().getPanel().set(i,'B');
@@ -110,7 +109,7 @@ public class PlayerTest {
         }
         player.getStorage().getExtrapanel().add('G');
         player.getStorage().getExtrapanel().add('G');
-        //scelgo la risorsa da eliminare
+
         char resource = 'B';
         assertTrue(player.removeResourceStorage(resource));
         assertTrue(player.getStorage().getPanel().get(2)=='N');
@@ -147,10 +146,9 @@ public class PlayerTest {
         for(int i=0; i<2;i++){
             System.out.println(player.getStorage().getExtrapanel().getVector().get(i));
         }
-        //caso4a: ho lo storage completo e ho spazio in Extrapanel di tipo B. Dico che la risorsa da mettere è di tipo A
-        assertFalse(player.addResourceStorage('A',game)); //questo stampa una volta 'No more space available' giustamente
 
-        //caso4b: decido di aggiungere una risorsa in Extrapanel di tipo B
+        assertFalse(player.addResourceStorage('A',game));
+
         assertTrue(player.addResourceStorage('B',game));
 
         assertEquals('B', (char) player.getStorage().getExtrapanel().getVector().get(0));
@@ -158,7 +156,7 @@ public class PlayerTest {
         System.out.println(player.getStorage().getExtrapanel().getVector().get(0));
         System.out.println(player.getStorage().getExtrapanel().getVector().get(1));
 
-        //caso 4c: elimino la risorsa in cima allo storage e aggiungo una rsorsa di tipo B. questa dovrebbe andare in extrapanel
+
         player.getStorage().getPanel().set(0,'N');
         assertTrue(player.addResourceStorage('B',game));
         assertEquals('B', (char) player.getStorage().getExtrapanel().getVector().get(1));
