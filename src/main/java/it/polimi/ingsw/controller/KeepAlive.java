@@ -11,6 +11,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * this class has only one method that in case a player is crashed, closes all the socket and ends the game
  */
+
 public class KeepAlive{
     private static ArrayList<ClientHandler> clients = new ArrayList<>();
 
