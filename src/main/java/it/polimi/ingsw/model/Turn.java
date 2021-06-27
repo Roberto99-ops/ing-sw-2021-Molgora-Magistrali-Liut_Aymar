@@ -9,6 +9,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 
+
+
 public class Turn implements Serializable {
 
     private GameHandler actualplayer;
@@ -16,6 +18,9 @@ public class Turn implements Serializable {
     private ActionSignal signal;
     private ClientHandler client;
     private Game game;
+
+
+
 
     public Turn(ClientHandler clientin, Game gamein)
     {
@@ -29,45 +34,18 @@ public class Turn implements Serializable {
         game = gamein;
     }
 
+
+
     /**
      * getter and setter
-     *
-     * @return
      */
 
-    public ActionStructure getaStructure() {
-        return aStructure;
-    }
-
-    public void setaStructure(ActionStructure aStructure) {
-        this.aStructure = aStructure;
-    }
-
-    public void setSignal(ActionSignal signal) {
-        this.signal = signal;
-    }
-
-    public ActionSignal getSignal() {
-        return signal;
-    }
 
     public GameHandler getActualplayer() {
 
         return actualplayer;
     }
 
-    public void setActualplayer(GameHandler actualplayer) {
-
-        this.actualplayer = actualplayer;
-    }
-
-    public Game getGame() {
-        return game;
-    }
-
-    public void setGame(Game game) {
-        this.game = game;
-    }
 
 
 
@@ -94,10 +72,10 @@ public class Turn implements Serializable {
 
             cardNum = next.charAt(0) - 48;
             if(next.length() == 2) {
-                cardNum = cardNum * 10 + next.charAt(1) - 48;   //to convert a number > 9
+                cardNum = cardNum * 10 + next.charAt(1) - 48;
             }
 
-            if(gameDeck[cardNum].getStructure().size() == 0)    cardNum = 20; //only to avoid to choose an empty deck
+            if(gameDeck[cardNum].getStructure().size() == 0)    cardNum = 20;
         } while(cardNum > 12);
         card = gameDeck[cardNum].getStructure().get(0);
         cost.setVector(card.getCost().getVector());
@@ -108,7 +86,7 @@ public class Turn implements Serializable {
         if (actualplayer.getSkill2() == 1 && actualplayer.getLeadercards().getStructure().get(1).getSkill().equals("PriceSkill"))
             cost = actualplayer.getLeadercards().getStructure().get(1).changePriceSkill(card);
 
-        //here the server checks if the player owns enough resources and, if it is, where
+
         int check = actualplayer.checkResources(cost.getVector());
         if (check == 0)
         {
@@ -127,16 +105,16 @@ public class Turn implements Serializable {
             choice = c.charAt(0) - 48;
         } while (choice > 3 || choice <= 0);
 
-        //add the developecard if possible and remove the cost resources from the player
+
         if(actualplayer.getDSpace().setCard(card, choice))
         {
             actualplayer.increasePV(card.getPv());
             gameDeck[cardNum].getStructure().remove(0);
-            // Game.getDevelopedecks(cardNum).getStructure().remove(0);
+
             actualplayer.deleteResources(check, cost.getVector());
             msg = new DevelopeDecksMsg(gameDeck);
             client.sendMessage(msg);
-            // actualplayer.updateDevelopementDecks(client);
+
             client.sendMessage("These are the new developedecks( press any key )");
             client.receiveMessage();
             return true;
@@ -148,9 +126,13 @@ public class Turn implements Serializable {
 
     }
 
+
+
     /**
      * this method manages the action of buying resources at the market.
      * the player choose which row/column and call the manager market method
+     * @throws IOException
+     * @throws ClassNotFoundException
      */
 
     public void buyResource() throws IOException, ClassNotFoundException {
@@ -192,7 +174,7 @@ public class Turn implements Serializable {
         if (actualplayer.getSkill2() == 1 && actualplayer.getLeadercards().getStructure().get(1).getSkill().equals("WhiteMarbSkil"))
                 product = actualplayer.getLeadercards().getStructure().get(1).changeWhiteMarbleSkill(product);
 
-        //we "clean" the vector
+
         for (int i = 0; i < product.getVector().size(); i++){
             if(product.getVector().get(i).equals('R')) {
                 actualplayer.increaseTrackPosition();
@@ -221,17 +203,18 @@ public class Turn implements Serializable {
      * @throws IOException
      * @throws ClassNotFoundException
      */
+
     public void activateLeader() throws IOException, ClassNotFoundException {
 
         client.sendMessage("Which card do you want to activate?(from up to down 0 1. enter=none) ");
         String choice = client.receiveMessage();
 
-        //player choose first card
+
         if (choice.equals("0")) {
             LeaderCard card = actualplayer.getLeadercards().getStructure().get(0);
             ArrayList<Character> cost;
 
-            //the leadercard cost is in terms of resources
+
             if (card.getPriceR().getVector().size() != 0) {
                 cost = card.getPriceR().getVector();
                 int check = actualplayer.checkResources(cost);
@@ -249,7 +232,7 @@ public class Turn implements Serializable {
             }
 
 
-            //the leadercard cost is in terms of developecards
+
             else {
                 cost = card.getPriceC();
                 int level = card.getCardLevel();
@@ -267,12 +250,11 @@ public class Turn implements Serializable {
         }
 
 
-        //player choose second card
         if (choice.equals("1")) {
             LeaderCard card = actualplayer.getLeadercards().getStructure().get(1);
             ArrayList<Character> cost;
 
-            //the leadercard cost is in terms of resources
+
             if (card.getPriceR().getVector().size() != 0) {
                 cost = card.getPriceR().getVector();
                 int check = actualplayer.checkResources(cost);
@@ -288,7 +270,7 @@ public class Turn implements Serializable {
                 }
             }
 
-            //the leadercard cost is in terms of developecards
+
             else {
                 cost = card.getPriceC();
                 int level = card.getCardLevel();
@@ -323,10 +305,8 @@ public class Turn implements Serializable {
             if (deck.getStructure().size()<2 && num==1) num=0;
             if(deck.getStructure().size() > num) {
                 LeaderCard card = actualplayer.getLeadercards().getStructure().get(num);
-                //rimuovo la carta leader
                 actualplayer.getLeadercards().getStructure().remove(num);
                 actualplayer.increaseTrackPosition();
-                //parte che gestisce i punti associati alle carte
                 if(num == 0) {
                     if(actualplayer.getSkill1() == 1)   actualplayer.decreasePV(card.getPv());
                     actualplayer.setSkill1(actualplayer.getSkill2());
