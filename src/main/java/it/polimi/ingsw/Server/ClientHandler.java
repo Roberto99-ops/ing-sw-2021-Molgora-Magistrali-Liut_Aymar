@@ -9,13 +9,16 @@ import java.net.Socket;
 
 public class ClientHandler implements Runnable {
 
+    /**
+     * getter and setter
+     */
+
     public GameHandler getPlayer() {
         return player;
     }
+    public SingleGameHandler getSinglePlayer() { return singleplayer; }
 
-    public SingleGameHandler getSinglePlayer() {
-        return singleplayer;
-    }
+
 
     private Socket client;
     private ObjectOutputStream output;
@@ -27,11 +30,13 @@ public class ClientHandler implements Runnable {
     private int number;
 
 
+
     /**
      * Initializes a new handler using a specific socket connected to a client.
      * @param client: The socket connection to the client.
      * @param numberofsockets: the number of this player.
      */
+
     public ClientHandler(Socket client, int numberofsockets) {
         this.client = client;
         this.singleplayer = new SingleGameHandler();
@@ -42,9 +47,11 @@ public class ClientHandler implements Runnable {
     }
 
 
+
     /**
      * Connects to the client and runs the handleConnection method.
      */
+
     @Override
     public void run() {
         try {
@@ -63,10 +70,13 @@ public class ClientHandler implements Runnable {
     }
 
 
+
     /**
-     *set the name of the player (asking it to the client) and if the player it's been the first to connect, asks him if he want to play alone
+     * set the name of the player (asking it to the client) and if the player it's been the first to connect,
+     * asks him if he want to play alone
      * @throws IOException If a communication error occurs.
      */
+
     public void handleClientConnection() throws IOException {
         try {
             String next;
@@ -101,11 +111,15 @@ public class ClientHandler implements Runnable {
         }
     }
 
+
+
     /**
      * this method tells to the caller if the socket it's been already closed.
-     * (it returns true only if we have closed the socket with the socket.close command; so it doesn't detect if the client is crashed)
+     * (it returns true only if we have closed the socket with the socket.close command;
+     * so it doesn't detect if the client is crashed)
      * @return: true if it's been closed.
      */
+
     public boolean isClose()
     {
         if(this.client.isClosed()) return true;
@@ -113,10 +127,12 @@ public class ClientHandler implements Runnable {
     }
 
 
+
     /**
-     * thi method close a socket connection
+     * this method close a socket connection
      * @throws IOException
      */
+
     public void closeSocket() throws IOException {
         try {
             input.close();
@@ -125,11 +141,15 @@ public class ClientHandler implements Runnable {
         }catch (IOException e){}
     }
 
+
+
+
     /**
      * this method send a message to the client. in case the client is crashed, it ends the game.
      * @param msg: message to send (it could be any type of message so we pass an Object)
      * @throws IOException
      */
+
     public void sendMessage(Object msg) throws IOException {
         try {
             output.writeObject(msg);
@@ -142,12 +162,15 @@ public class ClientHandler implements Runnable {
         }
     }
 
+
+
     /**
      * this method receive a message from the client. in case the client is crashed, it ends the game.
      * @return: return a string as we expect always a string as a message from the client.
      * @throws IOException
      * @throws ClassNotFoundException
      */
+
     public String receiveMessage() throws IOException, ClassNotFoundException {
         try {
             String next = (String) input.readObject();
@@ -157,6 +180,6 @@ public class ClientHandler implements Runnable {
             this.closeSocket();
             KeepAlive.run(false);
         }
-        return "";  //here only to return something, it doesn't have effects
+        return "";
     }
 }
