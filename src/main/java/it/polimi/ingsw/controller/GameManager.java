@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 
+
+
 /**
  * 1) shuffle all the decks and market
  * 2) add all the players
@@ -64,14 +66,15 @@ public class GameManager implements Runnable{
             }
         }
 
-//se i giocatori sono più di 1
+
         if (clientList.size() != 1) {
+
             try {
-                game.shuffle(); //preparo le risorse e le carte
+                game.shuffle();
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
-            //ogni giocatore sceglie le carte leader
+
             for (int i = 0; i < clientList.size(); i++) {
                 int choice2 = 0;
                 LeaderDeck leaderChoice = game.leaderChoice();
@@ -116,31 +119,10 @@ public class GameManager implements Runnable{
 
 
 
-                // initialization of multiplayers' resources
-                //player 1: niente
 
-
-                // initialization of second player: 1R
                     if (clientList.size() >= 2) {
 
                         String j = new String();
-                        /*
-                        try {
-                            clientList.get(1).sendMessage("Do you want to add a resource in storage or strongbox?\n");
-                        }  catch (IOException e) {
-                            e.printStackTrace();
-                        }
-
-                        try {
-                            j = clientList.get(1).receiveMessage();
-                        }  catch (IOException e) {
-                            e.printStackTrace();
-                        } catch (ClassNotFoundException e) {
-                            e.printStackTrace();
-                        }
-
-                         */
-
 
                         try {
                             clientList.get(1).sendMessage("Tell me the initial resource that you want (P,B,G,Y) \n");
@@ -158,27 +140,8 @@ public class GameManager implements Runnable{
                     }
 
 
-                    // initialization of third player:1R 1FT
+
                 if (clientList.size() >= 3) {
-
-                    String k = new String();
-                    /*
-                    try {
-                        clientList.get(2).sendMessage("Do you want to add a resource in storage or strongbox?\n");
-                    }  catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-                    try {
-                        k = clientList.get(2).receiveMessage();
-                    }  catch (IOException e) {
-                        e.printStackTrace();
-                    } catch (ClassNotFoundException e) {
-                        e.printStackTrace();
-                    }
-
-                     */
-
 
                     try {
                         clientList.get(2).sendMessage("Tell me the initial resource that you want (P,B,G,Y) \n");
@@ -191,13 +154,13 @@ public class GameManager implements Runnable{
                         e.printStackTrace();
                     }
 
-                    //clientList.get(2).getPlayer().increasePV(1);
+
                     clientList.get(2).getPlayer().increaseTrackPosition();
 
                 }
 
 
-                // initialization of fourth player
+
                 if (clientList.size() == 4) {
 
                     String r = new String();
@@ -231,7 +194,7 @@ public class GameManager implements Runnable{
                         e.printStackTrace();
                     }
 
-                    //clientList.get(3).getPlayer().increasePV(1);
+
                     clientList.get(3).getPlayer().increaseTrackPosition();
 
 
@@ -278,7 +241,7 @@ public class GameManager implements Runnable{
                 try {
                     clientList.get(i).sendMessage("clean screen");
                     clientList.get(i).sendMessage("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t\tThe winner is " + winner + ", game is finished\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-                    clientList.get(i).sendMessage("Game Ended");  //this isn't actually a message, is a string that communicates top the client to close the connection.
+                    clientList.get(i).sendMessage("Game Ended");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -292,12 +255,15 @@ public class GameManager implements Runnable{
         }
     }
 
+
+
     /**
      * this method add a player to the game and to the KeepAlive class in a synchronized way, so we shouldn't have, for example,
      *      GameManager.clientlist = [1, 2]   &&     KeepAlive.clientlist = [2, 1]
      * @param temporary
      * @param player
      */
+
     public static synchronized void addPlayer(ClientHandler temporary, GameHandler player){
         clientList.add(temporary);
         game.getPlayers().add(player);
