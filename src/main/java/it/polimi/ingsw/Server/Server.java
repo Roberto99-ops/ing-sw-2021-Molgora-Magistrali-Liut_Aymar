@@ -17,28 +17,28 @@ import java.util.Scanner;
 
 
 public class Server {
-    private static Random random = new Random();
+
     private final static int SO_TIMEOUT = 10;
     private static GameManager gameManager = new GameManager();
     private static Thread game;
     private static boolean closeserver = false;
-    private static int numberofsockets = 0; //is used to allow the first player to start a new game
-    private static Thread firstClient; //here only to allow us to terminate the singlegame thread in case of errors
+    private static int numberofsockets = 0;
+    private static Thread firstClient;
 
     public static void setCloseserverTrue() {
         closeserver = true;
     }
-
     public static void setNumberofsockets(int numberofsockets) {
         Server.numberofsockets = numberofsockets;
     }
+
+
 
     public static void main(String[] args) throws IOException {
         System.out.println("Internal ip: " + InetAddress.getLocalHost());
         Scanner scan = new Scanner(System.in);
         String numberPort;
 
-        //asks what port we do want to open
         ServerSocket socket;
         try {
             System.out.println("Which port do you want to open?");
@@ -52,8 +52,7 @@ public class Server {
             return;
         }
 
-        //starts a loop that accepts new connections and ends when the game comes to an end
-        //these socket acceptations have a timeout of 10 ms so the server can react in util time to a closeserver variable change
+
         while (!closeserver) {
             Socket client;
             try {
@@ -67,23 +66,29 @@ public class Server {
         }
     }
 
+
+
     /**
      * this method start a gamemanager
      */
+
     public static void runGame()
     {
         game = new Thread(gameManager, "gameManager_");
         game.start();
     }
 
+
+
     /**
      * this method close a game, so it close the socket and reset numberofsockets
      */
+
     public static void closeGame() {
         numberofsockets=0;
         Server.setCloseserverTrue();
         if(game != null)
                 game.stop();
-        firstClient.stop(); //used in case we are playing a single game
+        firstClient.stop();
     }
 }
