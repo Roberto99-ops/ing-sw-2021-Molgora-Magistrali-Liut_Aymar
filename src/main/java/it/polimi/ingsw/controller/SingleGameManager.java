@@ -1,7 +1,6 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.Server.ClientHandler;
-import it.polimi.ingsw.Server.MessageSingleGameManager;
 import it.polimi.ingsw.Server.Server;
 import it.polimi.ingsw.Server.SingleGameHandler;
 import it.polimi.ingsw.Server.messages.LeaderDeckMsg;
@@ -13,20 +12,21 @@ import java.io.FileNotFoundException;
  * it manages a game in singleplayer. it doesn't extend GameManger because
  * it would have simply overrided the main method that is static and that's not possible.
  */
+
 public class SingleGameManager {
 
     private static Game game;
     private static ClientHandler client;
-    private static MessageSingleGameManager observablesinglegame;
+
 
     /**
      * costructor. the clienthandler istance is passed so is easy to
      * separate controller and network.
      * @param clientin: the clienthandler that manages the player.
      */
+
     public SingleGameManager(ClientHandler clientin) {
         game = new SingleGame();
-        observablesinglegame = new MessageSingleGameManager();
         client = clientin;
     }
 
@@ -34,7 +34,6 @@ public class SingleGameManager {
     public static void main() throws Exception {
         SingleGameHandler player = client.getSinglePlayer();
         game.getPlayers().add(player);
-        observablesinglegame.setSingleGameHendler(player);
 
         Shuffle();
         int choice2;
@@ -62,7 +61,7 @@ public class SingleGameManager {
         String winner = game.callVictory();
         client.sendMessage("\t\t\t\t\t\t\t\t\t\t" + winner + " won!");
         System.out.println("Game Ended");
-        client.sendMessage("Game Ended");  //this isn't actually a message, is a string that communicates top the client to close the connection.
+        client.sendMessage("Game Ended");
         game.getPlayers().remove(0);
         while( GameManager.getClientList().size()>0) {
             GameManager.getClientList().remove(0);
