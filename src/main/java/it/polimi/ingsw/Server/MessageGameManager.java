@@ -126,24 +126,6 @@ public class MessageGameManager {
     };
 
 
-
-
-
-    public void addHendlers(GameHandler n_actualplayer) {
-
-        this.hendlers.add(n_actualplayer);
-
-    }
-
-
-
-    public void removeHendlers (GameHandler n_actualplayer) {
-
-        this.hendlers.remove(n_actualplayer);
-
-    }
-
-
    public static void generalChanges (ClientHandler clh) throws Exception {
 
        for (int i = 0; i < hendlers.size(); i++) {
