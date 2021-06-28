@@ -94,6 +94,7 @@ public class Playerboard extends PaintCards {
      * @param trackPosition: the position of the player on the track
      * @param Lorenzo: the position of Lorenzo on the track
      */
+
     private void drawSquare(int LeftHighCorner_VERT, int LeftHighCorner_HORIZ, int content, int trackPosition, int Lorenzo)
     {
         int SQUARE_HEIGHT = 4;
@@ -257,13 +258,13 @@ public class Playerboard extends PaintCards {
             for (int j = 0; j < MAX_HORIZ_SIZE; j++)
                 storage[i][j]=color + " " + Color.RESET;
 
-        //here I draw the storage spaces
+        //here draw the storage spaces
         putString("STORAGE", storage, 1, 16);
         for (int i = 0; i < 3; i++) storage[4][18+i] = Color.RESET + "_";
         for (int i = 0; i < 7; i++) storage[7][16+i] = Color.RESET + "_";
         for (int i = 0; i < 11; i++) storage[10][14+i] = Color.RESET + "_";
         
-        //here I draw the marbles in the storage
+        //here draw the marbles in the storage
         int lung = playerStorage.getPanel().size();
         if(lung > 0) {
             ArrayList<Character> panel = new ArrayList<>();
