@@ -36,9 +36,10 @@ public class GameManager implements Runnable{
     @Override
     public void run() {
         TurnManager turnmanager = new TurnManager();
-
+            //the servers waits 25 seconds, if none (except the actual player) connects,
+            //it starts automatically a single game
         try {
-            TimeUnit.SECONDS.sleep(10);
+            TimeUnit.SECONDS.sleep(25);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

@@ -16,16 +16,15 @@ public class ClientHandler implements Runnable {
     public GameHandler getPlayer() {
         return player;
     }
-    public SingleGameHandler getSinglePlayer() { return singleplayer; }
+    public GameHandler getSinglePlayer() { return singleplayer; }
 
 
 
     private Socket client;
     private ObjectOutputStream output;
     private ObjectInputStream input;
-    private GameManager gameManager;
     private SingleGameManager singleGameManager;
-    private SingleGameHandler singleplayer;
+    private GameHandler singleplayer;
     private GameHandler player;
     private int number;
 
@@ -39,7 +38,7 @@ public class ClientHandler implements Runnable {
 
     public ClientHandler(Socket client, int numberofsockets) {
         this.client = client;
-        this.singleplayer = new SingleGameHandler();
+        this.singleplayer = new GameHandler();
         this.player = new GameHandler();
         this.number = numberofsockets;
         this.singleplayer.setNumber(number);

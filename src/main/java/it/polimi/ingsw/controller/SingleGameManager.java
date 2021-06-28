@@ -1,8 +1,8 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.Server.ClientHandler;
+import it.polimi.ingsw.Server.GameHandler;
 import it.polimi.ingsw.Server.Server;
-import it.polimi.ingsw.Server.SingleGameHandler;
 import it.polimi.ingsw.Server.messages.LeaderDeckMsg;
 import it.polimi.ingsw.model.*;
 
@@ -34,7 +34,7 @@ import java.io.FileNotFoundException;
 
 
     public static void main() throws Exception {
-        SingleGameHandler player = client.getSinglePlayer();
+        GameHandler player = client.getSinglePlayer();
         game.getPlayers().add(player);
 
         Shuffle();
