@@ -36,7 +36,7 @@ public class GameManager implements Runnable{
         TurnManager turnmanager = new TurnManager();
 
         try {
-            TimeUnit.SECONDS.sleep(10);  //if none is connected until 30 seconds, starts singlegame played by the first player that is been connected
+            TimeUnit.SECONDS.sleep(20);  //if none is connected until 20 seconds, starts singlegame played by the first player that is been connected
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
