@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
  * this class recognizes what type of message the client received;
  * then updates the view.
  */
+
 public class CliManager {
 
     private static Market market;
@@ -17,6 +18,8 @@ public class CliManager {
     private static ActionSignal signal;
     private static Game game;
 
+
+
     /**
      * this method recognizes what type of message is receiving.
      * @param msg: msg received
@@ -24,10 +27,13 @@ public class CliManager {
      *              playerboard every time we receive an update)
      * @throws FileNotFoundException
      */
+
     public static void update(Object msg, Player player) throws FileNotFoundException {
+
         /**
          * in case we receive a Market message we update the Market view and print it.
          */
+
         if(msg.getClass().equals(MarketMsg.class)) {
             market = new Market();
             MarketMsg marketMsg = (MarketMsg)msg;
@@ -41,6 +47,7 @@ public class CliManager {
         /**
          * in case we receive a player message we update the playerboard and print it
          */
+
         if(msg.getClass().equals(PlayerMsg.class)) {
             PlayerMsg playerMsg = (PlayerMsg) msg;
             player.setLeadercards(playerMsg.getPlayer().getLeadercards());
@@ -81,6 +88,7 @@ public class CliManager {
         /**
          * in case we receive a DDeck message we update it and print.
          */
+
         if(msg.getClass().equals(DevelopeDecksMsg.class)) {
             DevelopeDecksMsg DDeckMsg = (DevelopeDecksMsg) msg;
             DDecks = DDeckMsg.getDecks();
@@ -92,6 +100,7 @@ public class CliManager {
         /**
          * in case we receive a LDeck message we and print (we receive it only at the start of the game)
          */
+
         if(msg.getClass().equals(LeaderDeckMsg.class)) {
             LeaderDeckMsg LDeckMsg = (LeaderDeckMsg) msg;
             LDeck = LDeckMsg.getDeck();
@@ -103,6 +112,7 @@ public class CliManager {
         /**
          * in case we receive a ActionSignal message we update it.
          */
+
         if(msg.getClass().equals(ActionSignalMsg.class)) {   //maybe useless
            ActionSignalMsg ActionMsg = (ActionSignalMsg) msg;
            signal = new ActionSignal();

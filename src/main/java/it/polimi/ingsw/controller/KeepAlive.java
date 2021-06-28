@@ -12,13 +12,21 @@ import java.util.concurrent.TimeUnit;
  * this class has only one method that in case a player is crashed, closes all the socket and ends the game
  */
 
-public class KeepAlive{
+public class KeepAlive {
+
     private static ArrayList<ClientHandler> clients = new ArrayList<>();
+
+
 
     public static void addClient(ClientHandler client){
         clients.add(client);
     }
 
+
+    /**
+     * this method closed the server in case a player is crashed
+     * @param endgame
+     */
 
     public static void run(boolean endgame) throws IOException {
         while (0 < clients.size()) {

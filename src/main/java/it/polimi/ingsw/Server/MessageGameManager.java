@@ -4,6 +4,11 @@ import java.util.*;
 import it.polimi.ingsw.model.Game;
 
 
+/**
+ * this class manage the relations between players, every time there is an update of playerboard: the player is notified
+ * every time there is an update of market/leaderdeck/developementdeck: all the players are notified
+ */
+
 public class MessageGameManager {
 
 
@@ -126,7 +131,14 @@ public class MessageGameManager {
     };
 
 
-   public static void generalChanges (ClientHandler clh) throws Exception {
+
+    /**
+     * send to all clients the new common structures
+     * @param clh
+     */
+
+
+    public static void generalChanges (ClientHandler clh) throws Exception {
 
        for (int i = 0; i < hendlers.size(); i++) {
 
@@ -136,6 +148,15 @@ public class MessageGameManager {
        }
 
    }
+
+
+
+    /**
+     * send to the the client his playerboard
+     * @param clh
+     * @param handler
+     * @param game
+     */
 
        public static void personalChanges (ClientHandler clh, GameHandler handler, Game game) throws Exception {
 

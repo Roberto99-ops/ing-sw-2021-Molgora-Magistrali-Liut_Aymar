@@ -14,13 +14,13 @@ import java.util.concurrent.TimeUnit;
 
 
 
-/**
- * 1) shuffle all the decks and market
- * 2) add all the players
- * starts a loop that
- * 3) calls turn for every player and
- * 4) checks if the game is ended
- */
+    /**
+     * 1) shuffle all the decks and market
+     * 2) add all the players
+     * starts a loop that
+     * 3) calls turn for every player and
+     * 4) checks if the game is ended
+     */
 
 public class GameManager implements Runnable{
 
@@ -38,7 +38,7 @@ public class GameManager implements Runnable{
         TurnManager turnmanager = new TurnManager();
 
         try {
-            TimeUnit.SECONDS.sleep(10);  //if none is connected until 30 seconds, starts singlegame played by the first player that is been connected
+            TimeUnit.SECONDS.sleep(10);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -259,7 +259,7 @@ public class GameManager implements Runnable{
 
     /**
      * this method add a player to the game and to the KeepAlive class in a synchronized way, so we shouldn't have, for example,
-     *      GameManager.clientlist = [1, 2]   &&     KeepAlive.clientlist = [2, 1]
+     * GameManager.clientlist = [1, 2] && KeepAlive.clientlist = [2, 1]
      * @param temporary
      * @param player
      */

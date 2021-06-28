@@ -36,16 +36,15 @@ public class Turn implements Serializable {
 
 
 
+
     /**
      * getter and setter
      */
-
 
     public GameHandler getActualplayer() {
 
         return actualplayer;
     }
-
 
 
 
@@ -198,6 +197,7 @@ public class Turn implements Serializable {
     }
 
 
+
     /**
      * this method implements the activation of a leadercard
      * @throws IOException
@@ -289,11 +289,13 @@ public class Turn implements Serializable {
     }
 
 
+
     /**
      * this method allow to the client to remove a leadercard from his leaderboard
      * @throws IOException
      * @throws ClassNotFoundException
      */
+
     public void removeLeader() throws IOException, ClassNotFoundException {
         client.sendMessage("Which card do you want to remove?(from up to down 0 1. enter=none) ");
         String choice = client.receiveMessage();

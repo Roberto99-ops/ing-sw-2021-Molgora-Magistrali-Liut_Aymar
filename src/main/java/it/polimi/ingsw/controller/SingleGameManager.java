@@ -8,15 +8,15 @@ import it.polimi.ingsw.model.*;
 
 import java.io.FileNotFoundException;
 
-/**
- * it manages a game in singleplayer. it doesn't extend GameManger because
- * it would have simply overrided the main method that is static and that's not possible.
- */
+    /**
+     * it manages a game in singleplayer. it doesn't extend GameManger because
+     * it would have simply overrided the main method that is static and that's not possible.
+     */
 
-public class SingleGameManager {
+    public class SingleGameManager {
 
-    private static Game game;
-    private static ClientHandler client;
+        private static Game game;
+        private static ClientHandler client;
 
 
     /**
@@ -29,6 +29,8 @@ public class SingleGameManager {
         game = new SingleGame();
         client = clientin;
     }
+
+
 
 
     public static void main() throws Exception {
@@ -69,6 +71,13 @@ public class SingleGameManager {
         Server.setNumberofsockets(0);
         Server.setCloseserverTrue();
     }
+
+
+
+    /**
+     * this method shuffle the deck of actionsignals
+     */
+
 
     private static void Shuffle() throws FileNotFoundException {
         SingleGame.getActionStructure().shuffleSignal();

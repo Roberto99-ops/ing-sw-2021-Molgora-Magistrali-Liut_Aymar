@@ -10,6 +10,11 @@ import java.io.IOException;
 public class GameHandler extends Player {
 
 
+    /**
+     * send to the client the new market
+     * @param clh
+     */
+
     public void updateMarket(ClientHandler clh) throws IOException {
         Market actualMarket = Game.getMarket();
         MarketMsg msg = new MarketMsg(actualMarket);
@@ -17,6 +22,12 @@ public class GameHandler extends Player {
 
     }
 
+
+
+    /**
+     * send to the client the new developementdecks
+     * @param clh
+     */
 
     public void updateDevelopementDecks(ClientHandler clh) throws IOException {
         for (int i = 0; i < 12; i++) {
@@ -30,12 +41,25 @@ public class GameHandler extends Player {
     }
 
 
+
+    /**
+     * send to the client the new leaderdeck
+     * @param clh
+     */
+
     public void updateLeaderDeck(ClientHandler clh) throws IOException {
         LeaderDeck actualLeaderDeck = Game.getLeaderdeck();
         LeaderDeckMsg msg = new LeaderDeckMsg(actualLeaderDeck);
         clh.sendMessage(msg);
     }
 
+
+
+    /**
+     * send to the client the new playerboard
+     * @param clh
+     * @param game
+     */
 
     public void updatePlayerBoard(ClientHandler clh, Game game) throws IOException {
         PlayerMsg msg = new PlayerMsg(this, game);

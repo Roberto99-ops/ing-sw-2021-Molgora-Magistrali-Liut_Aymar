@@ -1,5 +1,10 @@
 package it.polimi.ingsw.view.cli;
 
+
+/**
+
+ */
+
 public enum Color {
     RED("\u001B[31m"),
     GREEN("\u001B[92m"),
