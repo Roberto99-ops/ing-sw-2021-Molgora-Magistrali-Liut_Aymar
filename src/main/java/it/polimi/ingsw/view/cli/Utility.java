@@ -45,22 +45,22 @@ public abstract class Utility {
         for (int i = 0; i < resources.size(); i++) {
             switch (resources.get(i)) {
                 case 'B':
-                    simbols += Color.BLUE.getEscape() + Simbol.PALLINO;
+                    simbols += Color.BLUE.getEscape() + Simbol.CIRCLE;
                     break;
                 case 'Y':
-                    simbols += Color.YELLOW.getEscape() + Simbol.PALLINO;
+                    simbols += Color.YELLOW.getEscape() + Simbol.CIRCLE;
                     break;
                 case 'P':
-                    simbols += Color.PURPLE.getEscape() + Simbol.PALLINO;
+                    simbols += Color.PURPLE.getEscape() + Simbol.CIRCLE;
                     break;
                 case 'G':
-                    simbols += Color.GRAY.getEscape() + Simbol.PALLINO;
+                    simbols += Color.GRAY.getEscape() + Simbol.CIRCLE;
                     break;
                 case 'F': //F because G was already used
-                    simbols += Color.GREEN.getEscape() + Simbol.PALLINO;
+                    simbols += Color.GREEN.getEscape() + Simbol.CIRCLE;
                     break;
                 case 'R':
-                    simbols += Color.RED.getEscape() + Simbol.PALLINO;
+                    simbols += Color.RED.getEscape() + Simbol.CIRCLE;
                     break;
                 case 'N':
                     simbols += Color.RESET + '_';

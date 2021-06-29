@@ -133,17 +133,17 @@ public class Playerboard extends PaintCards {
             for (int i = 1; i < SQUARE_HEIGHT-1; i++)
                 for (int j = 1; j < SQUARE_LENGHT-1; j++)
                     square[i][j] = Color.BACKGROUND_PURPLE + " " + Color.RESET;
-            square[SQUARE_HEIGHT-1][(SQUARE_LENGHT-1)/2]=Color.PURPLE.getEscape() + Simbol.SEGNALINO_PAPALE.getForm();
+            square[SQUARE_HEIGHT-1][(SQUARE_LENGHT-1)/2]=Color.PURPLE.getEscape() + Simbol.POPE_SYMBOL.getForm();
         }
 
         if(content==trackPosition) {
-            square[1][(SQUARE_LENGHT - 1) / 2 - 1] = Color.PURPLE.getEscape() + Simbol.CROCE + Color.RESET;
+            square[1][(SQUARE_LENGHT - 1) / 2 - 1] = Color.PURPLE.getEscape() + Simbol.CROSS + Color.RESET;
             square[1][((SQUARE_LENGHT - 1)/2)] = " ";
             if(content > 9) square[1][((SQUARE_LENGHT - 1)/2) + 1] = " ";
         }
 
         if(content==Lorenzo) {
-            square[2][(SQUARE_LENGHT - 1) / 2] = Color.WHITEonBLACK.getEscape() + Simbol.CROCE + Color.RESET;
+            square[2][(SQUARE_LENGHT - 1) / 2] = Color.WHITEonBLACK.getEscape() + Simbol.CROSS + Color.RESET;
             square[2][((SQUARE_LENGHT - 1)/2) + 1] = " ";
         }
 
