@@ -40,14 +40,25 @@ public class TurnManager {
             player.updatePlayerBoard(client, game);
 
         String c;
+        String msg;
         do {
-
-            if (!actionDone){
-                client.sendMessage("Since you have done no actions:\nWhat do you want to do?\n\t1)Shop a developement card\t2)Take resources at the market\n\t3)Active a production\n");
-            } else {
-                client.sendMessage("What do you want to do?\n\t1)Shop a development card\t2)Take resources at the market\n\t3)Active a production\t4)Do a Leader action\n ");
-            }
-                String msg = client.receiveMessage();
+            do {
+                if (!actionDone) {
+                    if (player.getLeadercards().getStructure().size() > 0) {
+                        client.sendMessage("Since you have done no actions:\nWhat do you want to do?\n\t1)Shop a developement card\n\t2)Take resources at the market\n\t3)Active a production\n\t4)Do a Leader action\n");
+                    } else {
+                        client.sendMessage("Since you have done no actions:\nWhat do you want to do?\n\t1)Shop a developement card\n\t2)Take resources at the market\n\t3)Active a production\n");
+                    }
+                } else {
+                    if (player.getLeadercards().getStructure().size() > 0) {
+                        client.sendMessage("What do you want to do?\n\t1)Shop a development card\n\t2)Take resources at the market\n\t3)Active a production\n\t4)Do a Leader action\n");
+                    } else {
+                        client.sendMessage("What do you want to do?\n\t1)Shop a development card\n\t2)Take resources at the market\n\t3)Active a production\n");
+                    }
+                    actionDone = false;
+                }
+                 msg = client.receiveMessage();
+            }while(msg.charAt(0)-48 != 1 && msg.charAt(0)-48 != 2 && msg.charAt(0)-48 != 3 && msg.charAt(0)-48 != 4);
 
             //1)  Shop card
             try {
@@ -235,12 +246,16 @@ public class TurnManager {
 
 
                 }
-
-
-                if((leaderaction<2 && (msg.charAt(0) - 48 == 1 || msg.charAt(0) - 48 == 2 || msg.charAt(0) - 48 == 3 || msg.charAt(0) -48 == 4)) && player.getLeadercards().getStructure().size()>0) {
-                    client.sendMessage("Do you want to do a Leader action? (yes/no)\n ");
-                    reception = client.receiveMessage();
-                    if(reception.equals("yes")) additionalAction = true;
+                if((leaderaction<2 && (msg.charAt(0) - 48 == 1 || msg.charAt(0) - 48 == 2 || msg.charAt(0) - 48 == 3 || msg.charAt(0) -48 == 4))){
+                if (player.getLeadercards().getStructure().size()>0)
+                {
+                            client.sendMessage("Do you want to do a Leader action? (yes/no)\n ");
+                            reception = client.receiveMessage();
+                            if(reception.equals("yes")) additionalAction = true;
+                        }
+                }else if (msg.charAt(0)-48 == 4){
+                    client.sendMessage("You don't own enough Leader Cards (press enter)\n");
+                    client.receiveMessage();
                 }
 
 
@@ -268,7 +283,7 @@ public class TurnManager {
                 System.out.println(e);
             }
             c = msg;
-        } while(!c.equals("1") && !c.equals("2") && !c.equals("3") && !c.equals("4")|| !actionDone);
+        } while(/*!c.equals("1") && !c.equals("2") && !c.equals("3") && !c.equals("4")|| */!actionDone /*|| c.equals("")*/);
 
 
 
