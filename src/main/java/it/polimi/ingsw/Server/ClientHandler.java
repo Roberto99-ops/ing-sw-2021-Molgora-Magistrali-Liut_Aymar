@@ -87,8 +87,10 @@ public class ClientHandler implements Runnable {
             singleplayer.setName(next);
 
             if(this.number==1) {
-                this.sendMessage(player.getName() + " do you want to play alone?(yes/no) ");
-                next = this.receiveMessage();
+                do {
+                    this.sendMessage(player.getName() + " do you want to play alone?(yes/no) ");
+                    next = this.receiveMessage();
+                }while (!next.equals("yes") && !next.equals("no"));
                 if(next.equals("yes")) {
                     singleGameManager = new SingleGameManager(this);
                     singleGameManager.main();

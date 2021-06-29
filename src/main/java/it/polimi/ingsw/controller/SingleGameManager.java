@@ -39,17 +39,20 @@ import java.io.FileNotFoundException;
 
         Shuffle();
         int choice2;
+        int choice1;
         LeaderDeck leaderChoice = game.leaderChoice();
         LeaderDeckMsg mess = new LeaderDeckMsg(leaderChoice);
         client.sendMessage(mess);
-        client.sendMessage("Choose one: ");
-        int choice1 = Integer.parseInt(client.receiveMessage());
+        do {
+            client.sendMessage("Choose one: ");
+            choice1 = Integer.parseInt(client.receiveMessage());
+        }while (choice1!=0 && choice1!=1 && choice1!=2 && choice1!=3);
         player.getLeadercards().getStructure().add(leaderChoice.getStructure().get(choice1));
 
         do {
             client.sendMessage("Choose another one: ");
             choice2 = Integer.parseInt(client.receiveMessage());
-        } while(choice2 == choice1);
+        } while(choice2 == choice1 || (choice1!=0 && choice1!=1 && choice1!=2 && choice1!=3));
         player.getLeadercards().getStructure().add(leaderChoice.getStructure().get(choice2));
 
 
