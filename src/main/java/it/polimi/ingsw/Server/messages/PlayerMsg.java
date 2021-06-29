@@ -21,6 +21,7 @@ public class PlayerMsg extends NetworkMessage{
      * @param player: data requested about the player
      * @param gamein: the game we are playing
      */
+
     public PlayerMsg(GameHandler player, Game gamein){
         this.player = player;
         players = new ArrayList<>();

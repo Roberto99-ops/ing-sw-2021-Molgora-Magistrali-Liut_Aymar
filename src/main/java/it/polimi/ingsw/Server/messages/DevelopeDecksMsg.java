@@ -27,60 +27,7 @@ public class DevelopeDecksMsg extends NetworkMessage {
     {
         return developeDecks;
     }
-    //private ArrayList<Integer> array;
 
-    /*private ArrayList<Integer> getArray() {
-        return array;
-    }
-
-
-    /**
-     * Setter for the instance 'developeDecks': it will be the data sent to the client
-     * @param developeDecks
-     */
-   /* public void DevelopeDeckMsg(DevelopeDecks[] developeDecks){
-        int nDecks = developeDecks.length;
-        int totalCards = 0;
-        for (int i = 0; i < nDecks; i++) {
-            totalCards += developeDecks[i].getStructure().size();
-        }
-
-        for (int i = 0; i < totalCards; i++) {
-            array.add()
-        }
-    }
-
-    /*public void DevelopeDeckMsgAB()
-    {
-        array = new ArrayList<>();
-    }*/
-
-    /*
-    public ArrayList<Integer> getArray() {
-        return array;
-    }*/
-
-    /**
-     * Getter for the data we want the Server to send to the Client
-     * @return
-     */
-   // public DevelopeDecks getDeck(){return developeDecks;}
-
-    /**
-     * This method needs to be called by the receiver, to "unpack" the array of integer and
-     * transform it into a deck of Developecards.
-     * @return the deck of Developecards
-     * @throws FileNotFoundException
-     */
-    /*public DevelopeDecks[] getDeck() throws FileNotFoundException {
-        DevelopeDecks[] deck = new DevelopeDecks[12];
-        for (int i = 0; i < this.getArray().size(); i++) {
-            DevelopeCard card = new DevelopeCard();
-            card.setCard(this.getArray().get(i));
-            deck[i%4].getStructure().add(card);
-        }
-        return deck;
-    }*/
 
 
 }

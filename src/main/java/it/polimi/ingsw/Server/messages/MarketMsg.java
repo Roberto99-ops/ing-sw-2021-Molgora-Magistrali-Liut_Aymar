@@ -21,11 +21,4 @@ public class MarketMsg extends NetworkMessage {
         return market;
     }
 
-        /*
-
-        implementation
-
-         */
-
-
     }
