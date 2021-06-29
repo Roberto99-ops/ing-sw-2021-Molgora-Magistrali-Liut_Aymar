@@ -58,6 +58,7 @@ public class TurnManager {
                     actionDone = false;
                 }
                  msg = client.receiveMessage();
+                 if (msg.equals("")) msg = "Z";
             }while(msg.charAt(0)-48 != 1 && msg.charAt(0)-48 != 2 && msg.charAt(0)-48 != 3 && msg.charAt(0)-48 != 4);
 
             //1)  Shop card
@@ -216,6 +217,7 @@ public class TurnManager {
 
                         if (turn.getActualplayer().checkResources(vectorInProduction) != 0) { //
                             client.sendMessage("You are able to do this production (press a key)\n");
+                            client.receiveMessage();
                             ableTo=true;
                             turn.getActualplayer().deleteResources(turn.getActualplayer().checkResources(vectorInProduction), vectorInProduction); //
 
