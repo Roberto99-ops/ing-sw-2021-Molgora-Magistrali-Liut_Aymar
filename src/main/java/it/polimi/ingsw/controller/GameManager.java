@@ -15,9 +15,9 @@ import java.util.concurrent.TimeUnit;
 
 
     /**
-     * 1) shuffle all the decks and market
-     * 2) add all the players
-     * starts a loop that
+     * 1) shuffles all decks and the market
+     * 2) adds all the players
+     * It starts a loop that
      * 3) calls turn for every player and
      * 4) checks if the game is ended
      */
@@ -26,7 +26,7 @@ public class GameManager implements Runnable{
 
     private static final Game game = new Game();
     private static ArrayList<ClientHandler> clientList = new ArrayList<>();
-    private static int actualturn = 0;
+    private static int actualTurn = 0;
     private static SingleGameManager singleGameManager;
     private static boolean end = false;
     public static ArrayList<ClientHandler> getClientList() {
@@ -67,7 +67,7 @@ public class GameManager implements Runnable{
             }
         }
 
-
+        //if the number of players playing is more than one, the multi player Game starts
         if (clientList.size() != 1) {
 
             try {
@@ -76,6 +76,7 @@ public class GameManager implements Runnable{
                 e.printStackTrace();
             }
 
+            //The Game asks the player to choose two LeaderCards
             for (int i = 0; i < clientList.size(); i++) {
                 int choice2 = 0;
                 LeaderDeck leaderChoice = game.leaderChoice();
@@ -120,6 +121,11 @@ public class GameManager implements Runnable{
 
 
 
+                    //if players are more than two:
+                    //Player #1 receives) 0 resources 0 FaithPoints
+                    //#2) 1 resources  0 FaithPoints
+                    //#3) 1 resources  1 FaithPoints
+                    //#4) 2 resources  1 FaithPoints
 
                     if (clientList.size() >= 2) {
 
@@ -204,15 +210,15 @@ public class GameManager implements Runnable{
 
                 while (!end) {
                     try {
-                        clientList.get(actualturn).sendMessage("\n\n\n\t\t\t\t\t\t\t\tIt's your turn " + clientList.get(actualturn).getPlayer().getName() + ".");
+                        clientList.get(actualTurn).sendMessage("\n\n\n\t\t\t\t\t\t\t\tIt's your turn " + clientList.get(actualTurn).getPlayer().getName() + ".");
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
 
                     for (int i = 0; i < clientList.size(); i++) {
-                        if (i != actualturn) {
+                        if (i != actualTurn) {
                             try {
-                                clientList.get(i).sendMessage("\n\n\n\n\t\t\t\t\t\t\t\tIt's " + clientList.get(actualturn).getPlayer().getName() + " turn.\n\t\t\t\t\t\t\t(just wait)");
+                                clientList.get(i).sendMessage("\n\n\n\n\t\t\t\t\t\t\t\tIt's " + clientList.get(actualTurn).getPlayer().getName() + " turn.\n\t\t\t\t\t\t\t(just wait)");
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
@@ -222,7 +228,7 @@ public class GameManager implements Runnable{
 
 
                     try {
-                    turnmanager.main(clientList.get(actualturn), game, actualturn);
+                    turnmanager.main(clientList.get(actualTurn), game, actualTurn);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -231,8 +237,8 @@ public class GameManager implements Runnable{
                 for (int i = 0; i < clientList.size(); i++) {
                     if (game.callEndgame(clientList.get(i).getPlayer())) end = true;
                 }
-                actualturn++;
-                if (actualturn == clientList.size()) actualturn = 0;
+                actualTurn++;
+                if (actualTurn == clientList.size()) actualTurn = 0;
             }
 
 
@@ -259,7 +265,7 @@ public class GameManager implements Runnable{
 
 
     /**
-     * this method add a player to the game and to the KeepAlive class in a synchronized way, so we shouldn't have, for example,
+     * This method adds a player to the game and to the "KeepAlive" class in a synchronized way, so we shouldn't have, for example,
      * GameManager.clientlist = [1, 2] && KeepAlive.clientlist = [2, 1]
      * @param temporary
      * @param player

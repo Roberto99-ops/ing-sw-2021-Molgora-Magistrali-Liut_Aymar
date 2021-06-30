@@ -311,7 +311,7 @@ public class Turn implements Serializable {
             if(deck.getStructure().size() > num) {
                 LeaderCard card = actualPlayer.getLeadercards().getStructure().get(num);
                 actualPlayer.getLeadercards().getStructure().remove(num);
-                //... the player moves forwrd by one on the FaithTrack
+                //... the player moves forward by one on the FaithTrack
                 actualPlayer.increaseTrackPosition();
                 //it removes the skill of the deleted LeaderCard
                 if(num == 0) {

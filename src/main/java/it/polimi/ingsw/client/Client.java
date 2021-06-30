@@ -15,27 +15,29 @@ import java.io.IOException;
 public class Client {
 
     /**
-     * this method starts a client, so:
+     * This method starts a client:
      * 1) creates the connection with the server
-     * 2) starts a loop where the client is always ready to receive some messages and:
-     *   2.1) if is a string it prints on the screen and in some cases wait for an answer
-     *   2.2) if is something else (so an update for the CLI) converts it into a readable CLI object and prints it calling CLIManager.Update
-     * @param args
-     * @throws IOException
-     * @throws ClassNotFoundException
+     * 2) starts a loop during which the client is always ready to receive some messages and:
+     *   2.1) if it is a string, it prints it on screen and in some cases waits for an answer
+     *   2.2) if it is something else (so an update for the CLI), it converts it into a readable CLI object and prints
+     *   it calling CLIManager.Update
+     * @param args parameter
+     * @throws IOException if the choice made is not available
+     * @throws ClassNotFoundException if the choice made is not available
      */
 
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
+    public static void main (String[] args) throws IOException, ClassNotFoundException {
         Player player = new Player();
         Scanner scan = new Scanner(System.in);
+        //for the connection
         System.out.print("Insert IP address of Server: ");
         String ip = scan.nextLine();
         System.out.print("\nInsert Port number of Server:");
-        String serverport = scan.nextLine();
+        String serverPort = scan.nextLine();
 
         Socket server;
         try {
-            server = new Socket(ip, Integer.parseInt(serverport));
+            server = new Socket(ip, Integer.parseInt(serverPort));
         } catch (IOException e) {
             System.out.println("\nServer unreachable");
             return;
@@ -43,13 +45,9 @@ public class Client {
         System.out.println("\nConnected");
 
 
-        //try {
         ObjectOutputStream output = new ObjectOutputStream(server.getOutputStream());
         ObjectInputStream input = new ObjectInputStream(server.getInputStream());
-        //} catch (IOException e) {   System.out.println("server has died");
-        //        } catch (ClassCastException e) {
-        //            System.out.println("protocol violation");
-        //        }
+
         Object next = input.readObject();
         do{
             if(next.getClass().equals(String.class)) {

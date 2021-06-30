@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 /**
- * this class has only one method that in case a player is crashed, closes all the socket and ends the game
+ * This class has only one method that in case a player is crashed, closes all the socket and ends the game
  */
 
 public class KeepAlive {
@@ -24,8 +24,8 @@ public class KeepAlive {
 
 
     /**
-     * this method closed the server in case a player is crashed
-     * @param endgame
+     * This method closed the server in case a player is crashed
+     * @param endgame flag that tells if the Game is ended or not
      */
 
     public static void run(boolean endgame) throws IOException {

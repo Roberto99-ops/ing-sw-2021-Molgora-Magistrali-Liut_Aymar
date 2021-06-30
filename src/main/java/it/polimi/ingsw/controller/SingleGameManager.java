@@ -9,8 +9,8 @@ import it.polimi.ingsw.model.*;
 import java.io.FileNotFoundException;
 
     /**
-     * it manages a game in singleplayer. it doesn't extend GameManger because
-     * it would have simply overrided the main method that is static and that's not possible.
+     * It manages a game in SinglePlayer. It doesn't extend GameManger because
+     * it would have simply overridden the main method that is static, and that's not possible.
      */
 
     public class SingleGameManager {
@@ -20,14 +20,14 @@ import java.io.FileNotFoundException;
 
 
     /**
-     * costructor. the clienthandler istance is passed so is easy to
+     * It is a constructor: the ClientHandler instance is passed so it's more easy to
      * separate controller and network.
-     * @param clientin: the clienthandler that manages the player.
+     * @param clientIn: the clientHandler that manages the player.
      */
 
-    public SingleGameManager(ClientHandler clientin) {
+    public SingleGameManager(ClientHandler clientIn) {
         game = new SingleGame();
-        client = clientin;
+        client = clientIn;
     }
 
 
@@ -38,6 +38,8 @@ import java.io.FileNotFoundException;
         game.getPlayers().add(player);
 
         Shuffle();
+
+        //asks the player to choose which LeaderCards he wants
         int choice2;
         int choice1;
         LeaderDeck leaderChoice = game.leaderChoice();
@@ -55,14 +57,15 @@ import java.io.FileNotFoundException;
         } while(choice2 == choice1 || (choice1!=0 && choice1!=1 && choice1!=2 && choice1!=3));
         player.getLeadercards().getStructure().add(leaderChoice.getStructure().get(choice2));
 
-
+        //it divides turns
         while(!game.callEndgame(player)) {
             TurnManager turnManager = new TurnManager();
             turnManager.main(client, game, 0);
-            client.sendMessage("Turn Finished(press any key)");
+            client.sendMessage("Turn Finished (press any key)");
             client.receiveMessage();
         }
 
+        //when the game ends, it calls "Victory" method
         String winner = game.callVictory();
         client.sendMessage("\t\t\t\t\t\t\t\t\t\t" + winner + " won!");
         System.out.println("Game Ended");
@@ -78,9 +81,8 @@ import java.io.FileNotFoundException;
 
 
     /**
-     * this method shuffle the deck of actionsignals
+     * This method shuffle the deck of ActionSignals
      */
-
 
     private static void Shuffle() throws FileNotFoundException {
         SingleGame.getActionStructure().shuffleSignal();
