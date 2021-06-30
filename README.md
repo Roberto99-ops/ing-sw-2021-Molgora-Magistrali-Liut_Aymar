@@ -9,7 +9,7 @@ Developed by :
                  
                  - Francesco Magistrali
                 
-Feautres developed : Complete rules + CLI
+Feautres developed : Complete rules + CLI + Socket
                 
 1) How to play the game : 
 
