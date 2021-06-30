@@ -9,7 +9,7 @@ Developed by :
                  
                  - Francesco Magistrali
                 
-Feautres developed : Complete rules + CLI + Socket
+Features developed : Complete rules + CLI + Socket
                 
 1) How to play the game : 
 
@@ -32,7 +32,7 @@ Feautres developed : Complete rules + CLI + Socket
        N.B.
        The CLI it's been studied to work with "DejaVu sans mono for Powerline" font 
        (font size depends by your screen size; if you are form IntelliJ spaceline should be set to 0.8),
-       so before starting you have to install it on you PC or it could be bad visualize 
+       so before starting you have to install it on your PC or it could be bad visualized 
        (you can find the font here https://github.com/michele-bertoni/W10JavaCLI.git, 
        just download it, run and set it as default font in the program you're using).
        
