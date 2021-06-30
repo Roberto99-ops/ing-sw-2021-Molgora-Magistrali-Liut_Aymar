@@ -36,10 +36,10 @@ public class GameManager implements Runnable{
     @Override
     public void run() {
         TurnManager turnmanager = new TurnManager();
-            //the servers waits 25 seconds, if none (except the actual player) connects,
+            //the servers waits 20 seconds, if none (except the actual player) connects,
             //it starts automatically a single game
         try {
-            TimeUnit.SECONDS.sleep(25);
+            TimeUnit.SECONDS.sleep(20);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -218,7 +218,7 @@ public class GameManager implements Runnable{
                     for (int i = 0; i < clientList.size(); i++) {
                         if (i != actualTurn) {
                             try {
-                                clientList.get(i).sendMessage("\n\n\n\n\t\t\t\t\t\t\t\tIt's " + clientList.get(actualTurn).getPlayer().getName() + " turn.\n\t\t\t\t\t\t\t(just wait)");
+                                clientList.get(i).sendMessage("\n\t\t\t\t\t\t\t\tIt's " + clientList.get(actualTurn).getPlayer().getName() + " turn.\n\t\t\t\t\t\t\t\t(just wait)");
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }

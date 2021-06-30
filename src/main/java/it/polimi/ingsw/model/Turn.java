@@ -54,7 +54,7 @@ public class Turn implements Serializable {
      */
 
     public boolean shopCard() throws Exception {
-        int cardNum;
+        int cardNum = -1;
         DevelopCard card;
         ResourceStructure cost = new ResourceStructure();
         DevelopDecks[] gameDeck = new DevelopDecks[12];
@@ -68,13 +68,15 @@ public class Turn implements Serializable {
             client.sendMessage("Choose the number of the card you want to buy ");
             String next = client.receiveMessage();
 
-            cardNum = next.charAt(0) - 48;
-            if(next.length() == 2) {
-                cardNum = cardNum * 10 + next.charAt(1) - 48;
-            }
 
-            if(gameDeck[cardNum].getStructure().size() == 0)    cardNum = 20;
-        } while(cardNum > 12);
+            if(!next.equals("")) {
+                cardNum = next.charAt(0) - 48;
+                if (next.length() == 2) {
+                    cardNum = cardNum * 10 + next.charAt(1) - 48;
+                }
+                if (gameDeck[cardNum].getStructure().size() == 0) cardNum = 20;
+            }
+        } while(cardNum > 12 || cardNum == -1);
         card = gameDeck[cardNum].getStructure().get(0);
         cost.setVector(card.getCost().getVector());
 
@@ -155,6 +157,7 @@ public class Turn implements Serializable {
                 String num = client.receiveMessage();
                 if(num!= "")
                     number = num.charAt(0) - 48;
+                else number = -1;
             }while(number > 2 || number <0);
 
         if (next.equals("column"))
@@ -164,6 +167,7 @@ public class Turn implements Serializable {
                 String num = client.receiveMessage();
                 if(num!= "")
                     number = num.charAt(0) - 48;
+                else number = -1;
         }while(number > 3 || number <0);
 
         product.setVector(Game.getMarket().doMarket(RoworCol, number));

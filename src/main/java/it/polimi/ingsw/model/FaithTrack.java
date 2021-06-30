@@ -19,7 +19,7 @@ public class FaithTrack implements Serializable {
 
             for (int i = 0; i < game.getN_players(); i++) {
                 if (game.getPlayers().get(i).getTrackPosition() >= 5) {
-                    game.getPlayers().get(i).setPv((game.getPlayers().get(i).getPv() + 2));
+                    game.getPlayers().get(i).increasePV(2);
                 }
             }
             Game.setVR(1);
@@ -32,7 +32,7 @@ public class FaithTrack implements Serializable {
 
             for (int i=0; i<Game.getN_players(); i++){
                 if (game.getPlayers().get(i).getTrackPosition()>=12){
-                    game.getPlayers().get(i).setPv((game.getPlayers().get(i).getPv()+3));
+                    game.getPlayers().get(i).increasePV(3);
                 }
             }
             game.setVR(2);
@@ -44,7 +44,7 @@ public class FaithTrack implements Serializable {
 
             for (int i=0; i<game.getN_players(); i++){
                 if (game.getPlayers().get(i).getTrackPosition()>=19) {
-                    game.getPlayers().get(i).setPv((game.getPlayers().get(i).getPv()+4));
+                    game.getPlayers().get(i).increasePV(4);
                 }
             }
 

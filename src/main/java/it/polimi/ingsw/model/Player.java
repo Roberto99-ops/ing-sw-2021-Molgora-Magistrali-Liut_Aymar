@@ -338,7 +338,7 @@ public class Player implements Serializable {
             if (!game.getClass().equals(SingleGame.class)) {
                 for (int i = 0; i < clients.size(); i++) {
                     if (!this.equals(clients.get(i).getPlayer()))
-                        clients.get(i).getPlayer().increasePV(1);
+                        clients.get(i).getPlayer().increaseTrackPosition();
                 }
             } else SingleGame.getLorenzo().forwardOne();
             return false;
@@ -405,7 +405,7 @@ public class Player implements Serializable {
                     if (!game.getClass().equals(SingleGame.class)) {
                         for (int c = 0; c < clients.size(); c++) {
                             if (!this.equals(clients.get(c).getPlayer()))
-                                clients.get(c).getPlayer().increasePV(1);
+                                clients.get(c).getPlayer().increaseTrackPosition();
                         }
                     } else SingleGame.getLorenzo().forwardOne();
                     return false;
@@ -418,7 +418,7 @@ public class Player implements Serializable {
                     if (!game.getClass().equals(SingleGame.class)) {
                         for (int c = 0; c < clients.size(); c++) {
                             if (!this.equals(clients.get(c).getPlayer()))
-                                clients.get(c).getPlayer().increasePV(1);
+                                clients.get(c).getPlayer().increaseTrackPosition();
                         }
                     } else SingleGame.getLorenzo().forwardOne();
 
@@ -467,7 +467,7 @@ public class Player implements Serializable {
 
             for (int j = 0; j < clients.size(); j++) {
                 if (!this.equals(clients.get(j).getPlayer()))
-                    clients.get(j).getPlayer().increasePV(1); }
+                    clients.get(j).getPlayer().increaseTrackPosition(); }
             } else SingleGame.getLorenzo().forwardOne();
 
 

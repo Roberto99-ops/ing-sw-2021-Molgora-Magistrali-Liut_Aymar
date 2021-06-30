@@ -48,15 +48,15 @@ public class TurnManager {
                 if (!actionDone) {
                     //if one of the 3 actions has not been done, the Player can choose again
                     if (player.getLeadercards().getStructure().size() > 0) {
-                        client.sendMessage("Since you have done no actions:\nWhat do you want to do?\n\t1)Shop a developement card\n\t2)Take resources at the market\n\t3)Active a production\n\t4)Do a Leader action\n");
+                        client.sendMessage("Since you have done no actions: What do you want to do?\n  1)Shop a developement card\t2)Take resources at the market\n  3)Active a production\t4)Do a Leader action ");
                     } else {
-                        client.sendMessage("Since you have done no actions:\nWhat do you want to do?\n\t1)Shop a developement card\n\t2)Take resources at the market\n\t3)Active a production\n");
+                        client.sendMessage("Since you have done no actions: What do you want to do?\n  1)Shop a developement card\t2)Take resources at the market\n  3)Active a production ");
                     }
                 } else {
                     if (player.getLeadercards().getStructure().size() > 0) {
-                        client.sendMessage("What do you want to do?\n\t1)Shop a development card\n\t2)Take resources at the market\n\t3)Active a production\n\t4)Do a Leader action\n");
+                        client.sendMessage("What do you want to do?\n  1)Shop a development card\t2)Take resources at the market\n  3)Active a production\t4)Do a Leader action ");
                     } else {
-                        client.sendMessage("What do you want to do?\n\t1)Shop a development card\n\t2)Take resources at the market\n\t3)Active a production\n");
+                        client.sendMessage("What do you want to do?\n  1)Shop a development card\t2)Take resources at the market\n  3)Active a production ");
                     }
                     actionDone = false;
                 }
@@ -66,10 +66,10 @@ public class TurnManager {
 
             //1)  Shop card
             try {
-                System.out.println(msg.charAt(0) - 48);
                 if (msg.charAt(0) - 48 == 1) {
                     if (!turn.shopCard()) {actionDone = false;}
                     else {
+                        actionDone = true;
                         client.sendMessage("clean screen");
                         player.updatePlayerBoard(client, game);
                     }
@@ -143,16 +143,20 @@ public class TurnManager {
                         for (int i = 0; i < 4; i ++) checks[i] = false;
                         String s;
                         do {
-                            client.sendMessage("Do you want to activate the basic production? (y/n)\n");
+                            client.sendMessage("Do you want to activate the basic production? (yes/no)\n");
                             s = client.receiveMessage();
-                        }while(!s.equals("y") && !s.equals("n"));
+                        }while(!s.equals("yes") && !s.equals("no"));
 
                         //if basic production is enabled
-                        if (s.equals("y")) {
+                        if (s.equals("yes")) {
                             checks[0] = true;
                             do {
                                 client.sendMessage("Tell me the first resource you want to discard (P,B,G,Y)\n");
-                                chosenResource = client.receiveMessage().charAt(0);
+                                String resource = client.receiveMessage();
+                                if(resource.equals(""))
+                                    chosenResource = 'N';
+                                else
+                                    chosenResource = resource.charAt(0);
                             } while (chosenResource!='P'&& chosenResource!='B'&&chosenResource!='G'&& chosenResource!='Y');
                             vectorInProduction.add(chosenResource);
 
