@@ -1,6 +1,5 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.Server.GameHandler;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -32,14 +31,14 @@ public class StorageTest {
         box.printPanel();
         assertEquals(obj, box.getPanel());
 
-        box.switchresources('B',0);
+        box.switchResources('B',0);
         box.printPanel();
         obj.set(0, 'P');
         obj.set(1, 'B');
         obj.set(2, 'B');
         assertEquals(obj, box.getPanel());
 
-        box.switchresources('B',2);
+        box.switchResources('B',2);
         box.printPanel();
         obj.set(1, 'Y');
         obj.set(2, 'N');
@@ -49,7 +48,7 @@ public class StorageTest {
         assertEquals(obj, box.getPanel());
 
 
-        box.switchresources('P',0);
+        box.switchResources('P',0);
         box.printPanel();
         obj.set(0, 'Y');
         obj.set(1, 'P');
@@ -68,8 +67,8 @@ public class StorageTest {
         player.getStorage().getPanel().set(3,'G');
         player.getStorage().getPanel().set(4,'P');
         player.getStorage().getPanel().set(5,'G');
-        player.getStorage().getExtrapanel().getVector().set(0,'P');
-        player.getStorage().getExtrapanel().getVector().set(1,'P');
+        player.getStorage().getExtraPanel().getVector().set(0,'P');
+        player.getStorage().getExtraPanel().getVector().set(1,'P');
 
 
         assertEquals(2,player.getStorage().countTypeS('B'));

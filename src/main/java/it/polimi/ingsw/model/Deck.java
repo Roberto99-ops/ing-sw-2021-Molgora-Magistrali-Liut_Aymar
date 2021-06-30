@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 
 /**
- * abstract class with generics so we can override from developedeck and leaderdeck
+ * Abstract class with generics so we can override it from DevelopDeck and LeaderDeck
  * @param <T>
  */
 
@@ -16,7 +16,7 @@ public abstract class Deck <T> implements Serializable {
 
 
     /**
-     getter and setter
+     Getter and setter
      */
 
     public ArrayList<T> getStructure() {
@@ -30,9 +30,9 @@ public abstract class Deck <T> implements Serializable {
 
 
     /**
-     * method that allow us to pick the card on the top of the deck
-     * @param structure
-     * @return
+     * Method that allows us to pick the card on the top of the deck
+     * @param structure : it is the deck we are using
+     * @return the card on the top of the deck
      */
 
     public T pick(ArrayList<T> structure) {
@@ -47,9 +47,9 @@ public abstract class Deck <T> implements Serializable {
 
 
     /**
-     * method that randomly mix the deck
-     * @param structure
-     * @return
+     * Method that randomly mixes the deck
+     * @param structure : it is the deck we are using
+     * @return the shuffled deck
      */
 
     public ArrayList<T> shuffleDeck(ArrayList<T> structure) {

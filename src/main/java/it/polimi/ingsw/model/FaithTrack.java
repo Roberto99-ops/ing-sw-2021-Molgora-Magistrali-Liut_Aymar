@@ -6,31 +6,29 @@ public class FaithTrack implements Serializable {
 
 
     /**
-     * checks if a player has reached the Pope Space and the others are inside or not a Vatican Report Section
+     * Checks if the actual player has reached the Pope Space and the others are inside or not a Vatican Report Section.
      * VR changes according to which area is reached by the player ahead, so the others will not be able to call
      * the Vatican Report again when they reach that area.
-     * @param actualplayer
-     * @param game
+     * @param actualPlayer : the player who is playing in this turn
+     * @param game : the game the other players (if I am in multi player mode) and I are playing
      */
 
+    public void callVaticanReport(Player actualPlayer, Game game) {
 
-    public void callVaticanReport(Player actualplayer, Game game) {
-
-            if ((actualplayer.getTrackPosition() >= 8) && (Game.getVR() == 0)) {
-
+        if ((actualPlayer.getTrackPosition() >= 8) && (Game.getVR() == 0)) {
 
             for (int i = 0; i < game.getN_players(); i++) {
                 if (game.getPlayers().get(i).getTrackPosition() >= 5) {
                     game.getPlayers().get(i).setPv((game.getPlayers().get(i).getPv() + 2));
                 }
             }
-                Game.setVR(1);
-                return;
-            }
+            Game.setVR(1);
+            return;
+        }
 
 
 
-        if ((actualplayer.getTrackPosition()>=16 && (Game.getVR() == 1))) {
+        if ((actualPlayer.getTrackPosition()>=16 && (Game.getVR() == 1))) {
 
             for (int i=0; i<Game.getN_players(); i++){
                 if (game.getPlayers().get(i).getTrackPosition()>=12){
@@ -42,7 +40,7 @@ public class FaithTrack implements Serializable {
         }
 
 
-        if ((actualplayer.getTrackPosition()>=24 && (Game.getVR() == 2))) {
+        if ((actualPlayer.getTrackPosition()>=24 && (Game.getVR() == 2))) {
 
             for (int i=0; i<game.getN_players(); i++){
                 if (game.getPlayers().get(i).getTrackPosition()>=19) {

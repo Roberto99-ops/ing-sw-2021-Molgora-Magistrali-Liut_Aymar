@@ -1,10 +1,6 @@
 package it.polimi.ingsw.Server.messages;
 
-import it.polimi.ingsw.model.DevelopeCard;
-import it.polimi.ingsw.model.DevelopeDecks;
-
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
+import it.polimi.ingsw.model.DevelopDecks;
 
 /**
  * The structure sent is an array of integers.
@@ -13,19 +9,19 @@ import java.util.ArrayList;
 
 public class DevelopeDecksMsg extends NetworkMessage {
 
-    private DevelopeDecks[] developeDecks;
+    private DevelopDecks[] developDecks;
 
-    public DevelopeDecksMsg(DevelopeDecks[] decks)
+    public DevelopeDecksMsg(DevelopDecks[] decks)
     {
-        developeDecks = new DevelopeDecks[12];
+        developDecks = new DevelopDecks[12];
         for (int i = 0; i < 12; i++) {
-            developeDecks[i] = decks[i];
+            developDecks[i] = decks[i];
         }
     }
 
-    public DevelopeDecks[] getDecks()
+    public DevelopDecks[] getDecks()
     {
-        return developeDecks;
+        return developDecks;
     }
 
 

@@ -1,6 +1,6 @@
 package it.polimi.ingsw.view.cli;
 
-import it.polimi.ingsw.model.DevelopeCard;
+import it.polimi.ingsw.model.DevelopCard;
 import it.polimi.ingsw.model.LeaderCard;
 
 import java.util.ArrayList;
@@ -52,7 +52,7 @@ public abstract class PaintCards extends Utility {
 
             putString("inputskill:", leadercard, 10, 1);
             ArrayList<Character> input = new ArrayList<>();
-            input.add(card.getInputskill());
+            input.add(card.getInputSkill());
             convertSymbols(input, leadercard, 10, 12);
         } else
             for (int i = 1; i < MAX_VERT_SIZE - 1; i++)
@@ -67,7 +67,7 @@ public abstract class PaintCards extends Utility {
      * @param card
      * @return
      */
-    public void drawDevelopecard(DevelopeCard card, String[][] space, int row, int column) {
+    public void drawDevelopecard(DevelopCard card, String[][] space, int row, int column) {
         int MAX_VERT_SIZE = 12;
         int MAX_HORIZ_SIZE = 17 - 2;
         String color = convertColor(card.getColour());

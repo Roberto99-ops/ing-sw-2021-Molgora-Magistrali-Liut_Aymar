@@ -11,8 +11,8 @@ public class Storage extends ArrayList<Character> implements Serializable {
      * attribute: panel is an ArrayList of 6 char formed by 3 floors (0, 1-2, 3-4-5)
      * attribute: extrapanel
      * attribute: typExtrapanel is a char that is setted to 'Z' if extrapanel is not activated, or with the right type
-     * attribute: counterSP
-     * attribute: counterSEP
+     * attribute: counterSP (counts how many resource of a specific type I have inside the storage's common panel)
+     * attribute: counterSEP (counts how many resource of a specific type I have inside the storage's extraPanel)
      */
 
     private ArrayList<Character> panel;
@@ -23,7 +23,8 @@ public class Storage extends ArrayList<Character> implements Serializable {
 
 
     /**
-     * Initialization of Storage
+     * Initialization of Storage (panel and extraPanel, even if the player doesn't have a LeaderCard with "ExtraPanel"
+     * skill )
      */
 
     public Storage() {
@@ -45,19 +46,16 @@ public class Storage extends ArrayList<Character> implements Serializable {
         System.out.println("\n");
     }
 
-
-
-
     /**
-     * getter and setter
+     * Getter and setter
      */
 
     public void setPanel(ResourceStructure panel) { this.panel = panel; }
-    public ResourceStructure getExtrapanel() { return extrapanel; }
-    public void setExtrapanel(ResourceStructure extrapanel) { this.extrapanel = extrapanel; }
+    public ResourceStructure getExtraPanel() { return extrapanel; }
+    public void setExtraPanel(ResourceStructure extraPanel) { this.extrapanel = extraPanel; }
     public ArrayList<Character> getPanel() { return panel; }
-    public char getTypeExtrapanel() { return typeExtrapanel; }
-    public void setTypeExtrapanel(char typeExtrapanel) { this.typeExtrapanel = typeExtrapanel; }
+    public char getTypeExtraPanel() { return typeExtrapanel; }
+    public void setTypeExtraPanel(char typeExtraPanel) { this.typeExtrapanel = typeExtraPanel; }
     public void setCounterSP(int counterSP) {
         this.counterSP = counterSP;
     }
@@ -65,15 +63,14 @@ public class Storage extends ArrayList<Character> implements Serializable {
         this.counterSEP = counterSEP;
     }
 
-
-
     /**
-     * Counts the amount of one kind of resource in panel and extrapanel
+     * Counts the amount of resources of a certain type in panel and extraPanel
      * @param neededRes: type of resource the player needs to pay/activate something
      * @return counterS: the amount of that resource in Storage
      */
 
     public int countTypeS(char neededRes) {
+        //it counts in panel
         int count = 0;
         for (int i = 0; i < 6; i++) {
             if (this.panel.get(i) == neededRes)
@@ -81,6 +78,7 @@ public class Storage extends ArrayList<Character> implements Serializable {
         }
         setCounterSP(count);
 
+        //it counts in extraPanel
         for (int i = 0; i < 2; i++) {
             if (this.extrapanel.getVector().get(i) == neededRes)
                 count++;
@@ -93,13 +91,13 @@ public class Storage extends ArrayList<Character> implements Serializable {
 
 
     /**
-     * this method try to switch the resources of two floors that if one is full
+     * This method tries to switch the position of the resources in order to optimize the space inside the panel
      * @param resource: type of resource the player needs to insert in a full floor
      * @param k: position where the player want to insert the resource
      * @return boolean: true if the resources are switched, false if not
      */
 
-    public boolean switchresources(char resource, int k) {
+    public boolean switchResources(char resource, int k) {
 
         char temporary = 'N';
 

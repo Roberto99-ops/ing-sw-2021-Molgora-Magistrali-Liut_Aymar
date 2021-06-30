@@ -6,7 +6,7 @@ import java.io.FileNotFoundException;
 
 import static org.junit.Assert.*;
 
-public class DevelopeCardTest {
+public class DevelopCardTest {
 
 
     /**
@@ -16,10 +16,10 @@ public class DevelopeCardTest {
 
     @Test
     public void setCard() throws FileNotFoundException {
-        DevelopeCard card = new DevelopeCard();
-        DevelopeCard card10 = new DevelopeCard();
-        DevelopeCard card22 = new DevelopeCard();
-        DevelopeCard card37 = new DevelopeCard();
+        DevelopCard card = new DevelopCard();
+        DevelopCard card10 = new DevelopCard();
+        DevelopCard card22 = new DevelopCard();
+        DevelopCard card37 = new DevelopCard();
 
         card.setCard(0);
 

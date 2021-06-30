@@ -22,14 +22,14 @@ public class SingleGameTest {
         SingleGame singleGame = new SingleGame();
 
         for (int n=0; n<12 ;n++) {
-            DevelopeDecks deck = new DevelopeDecks();
+            DevelopDecks deck = new DevelopDecks();
             for (int i = 0; i < 4; i++) {
-                DevelopeCard card = new DevelopeCard();
+                DevelopCard card = new DevelopCard();
                 card.setCard(i);
                 deck.getStructure().add(card);
             }
 
-            Game.setDevelopedecks(deck, n);
+            Game.setDevelopDecks(deck, n);
         }
 
         plyr.setName("Ale");
@@ -58,7 +58,7 @@ public class SingleGameTest {
 
         for (int i=0; i<9; i=i+4) {
             for (int c = 0; c < 4; c++) {
-                Game.getDevelopedecks(i).getStructure().remove(0);
+                Game.getDevelopDecks(i).getStructure().remove(0);
 
             }
         }

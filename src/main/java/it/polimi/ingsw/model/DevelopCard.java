@@ -2,17 +2,11 @@ package it.polimi.ingsw.model;
 
 import com.google.gson.*;
 import com.google.gson.JsonParser;
-import it.polimi.ingsw.Server.ClientHandler;
-import it.polimi.ingsw.Server.GameHandler;
 
-import javax.swing.*;
 import java.io.*;
-import java.util.ArrayList;
 
 
-
-
-public class DevelopeCard implements Serializable {
+public class DevelopCard implements Serializable {
 
     private char colour; // card's colours: G,B,Y,P
     private int level;
@@ -23,11 +17,9 @@ public class DevelopeCard implements Serializable {
 
 
     /**
-     * getter and setter
+     * Getter and setter
      */
 
-    public void setColour(char colour) { this.colour = colour; }
-    public void setInputproduction(ResourceStructure inputproduction) { this.inputproduction = inputproduction; }
     public char getColour() { return colour; }
     public int getLevel() { return level; }
     public int getPv() { return pv; }
@@ -37,15 +29,15 @@ public class DevelopeCard implements Serializable {
 
 
     /**
-     * use the number in input to read on the Json file the DevelopeCard I need.
-     * return a DevelopeCard with all the parametres of the card i meant.
-     * @param number
-     * @return
-     * @throws FileNotFoundException
+     * Uses the number in input to read from the Json file the DevelopCard's info I need.
+     * Returns a DevelopCard with all the parameters of the card I want to use.
+     * @param number: index of the DevelopCard I need, inside the Json file
+     * @return the DevelopCard I want to use
+     * @throws FileNotFoundException: if the requested DevelopCard doesn't exist
      */
 
 
-    public DevelopeCard setCard(int number) throws FileNotFoundException {
+    public DevelopCard setCard(int number) throws FileNotFoundException {
 
         inputproduction = new ResourceStructure();
         outputproduction = new ResourceStructure();
@@ -82,7 +74,7 @@ public class DevelopeCard implements Serializable {
 
     /**
      *  ONLY USED FOR TESTING
-     * this method print the details about a developeCard
+     * this method print the details about a developCard
      */
 
 

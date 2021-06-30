@@ -4,7 +4,6 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Random;
 
 import static org.junit.Assert.*;
 
@@ -53,8 +52,8 @@ public class PlayerTest {
         player.getStorage().getPanel().set(3,'Y');
         player.getStorage().getPanel().set(4,'Y');
         player.getStorage().getPanel().set(5,'Y');
-        player.getStorage().getExtrapanel().getVector().set(0,'G');
-        player.getStorage().getExtrapanel().getVector().set(1,'G');
+        player.getStorage().getExtraPanel().getVector().set(0,'G');
+        player.getStorage().getExtraPanel().getVector().set(1,'G');
 
         //inizializzo strongbox
 
@@ -98,7 +97,7 @@ public class PlayerTest {
     @Test
     public void removeResource(){
         Player player = new Player();
-        player.getStorage().setTypeExtrapanel('G');
+        player.getStorage().setTypeExtraPanel('G');
 
         player.getStorage().getPanel().set(0,'G');
         for (int i=1; i<3; i++){
@@ -107,8 +106,8 @@ public class PlayerTest {
         for (int i=3; i<6; i++){
             player.getStorage().getPanel().set(i,'Y');
         }
-        player.getStorage().getExtrapanel().add('G');
-        player.getStorage().getExtrapanel().add('G');
+        player.getStorage().getExtraPanel().add('G');
+        player.getStorage().getExtraPanel().add('G');
 
         char resource = 'B';
         assertTrue(player.removeResourceStorage(resource));
@@ -121,13 +120,13 @@ public class PlayerTest {
     public void addResourceStorage() throws IOException {
         Game game = new Game();
         Player player = new Player();
-        player.getStorage().setTypeExtrapanel('B');
+        player.getStorage().setTypeExtraPanel('B');
 
         for(int i=0; i<6; i++){
             player.getStorage().getPanel().add('N');
         }
         for (int i=0; i<2; i++){
-            player.getStorage().getExtrapanel().getVector().add('N');
+            player.getStorage().getExtraPanel().getVector().add('N');
         }
 
         assertTrue(player.addResourceStorage('G', game));
@@ -144,33 +143,33 @@ public class PlayerTest {
             System.out.println(player.getStorage().getPanel().get(i));
         }
         for(int i=0; i<2;i++){
-            System.out.println(player.getStorage().getExtrapanel().getVector().get(i));
+            System.out.println(player.getStorage().getExtraPanel().getVector().get(i));
         }
 
         assertFalse(player.addResourceStorage('A',game));
 
         assertTrue(player.addResourceStorage('B',game));
 
-        assertEquals('B', (char) player.getStorage().getExtrapanel().getVector().get(0));
-        assertEquals('N', (char) player.getStorage().getExtrapanel().getVector().get(1));
-        System.out.println(player.getStorage().getExtrapanel().getVector().get(0));
-        System.out.println(player.getStorage().getExtrapanel().getVector().get(1));
+        assertEquals('B', (char) player.getStorage().getExtraPanel().getVector().get(0));
+        assertEquals('N', (char) player.getStorage().getExtraPanel().getVector().get(1));
+        System.out.println(player.getStorage().getExtraPanel().getVector().get(0));
+        System.out.println(player.getStorage().getExtraPanel().getVector().get(1));
 
 
         player.getStorage().getPanel().set(0,'N');
         assertTrue(player.addResourceStorage('B',game));
-        assertEquals('B', (char) player.getStorage().getExtrapanel().getVector().get(1));
+        assertEquals('B', (char) player.getStorage().getExtraPanel().getVector().get(1));
         System.out.println(player.getStorage().getPanel().get(0));
-        System.out.println(player.getStorage().getExtrapanel().getVector().get(1));
+        System.out.println(player.getStorage().getExtraPanel().getVector().get(1));
 
 
-        player.getStorage().setTypeExtrapanel('Z');
+        player.getStorage().setTypeExtraPanel('Z');
 
         for (int i=0; i<6; i++) {
             player.getStorage().getPanel().set(i, 'N');
         }
         for (int i=0; i<2; i++){
-            player.getStorage().getExtrapanel().getVector().set(i,'N');
+            player.getStorage().getExtraPanel().getVector().set(i,'N');
         }
 
         System.out.println("\n");
@@ -223,23 +222,23 @@ public class PlayerTest {
 
         Player player = new Player();
         //creo il primo minideck
-        DevelopeCard card1 = new DevelopeCard();
-        DevelopeCard card2 = new DevelopeCard();
-        DevelopeCard card3 = new DevelopeCard();
-        DevelopeCard card4 = new DevelopeCard();
-        DevelopeCard card5 = new DevelopeCard();
-        DevelopeCard card6 = new DevelopeCard();
-        DevelopeCard card7 = new DevelopeCard();
+        DevelopCard card1 = new DevelopCard();
+        DevelopCard card2 = new DevelopCard();
+        DevelopCard card3 = new DevelopCard();
+        DevelopCard card4 = new DevelopCard();
+        DevelopCard card5 = new DevelopCard();
+        DevelopCard card6 = new DevelopCard();
+        DevelopCard card7 = new DevelopCard();
 
 
-        player.getDSpace().getMinideck1().getStructure().add(card1.setCard(4));
-        player.getDSpace().getMinideck1().getStructure().add(card2.setCard(20));
-        player.getDSpace().getMinideck2().getStructure().add(card3.setCard(14));
+        player.getDSpace().getMiniDeck1().getStructure().add(card1.setCard(4));
+        player.getDSpace().getMiniDeck1().getStructure().add(card2.setCard(20));
+        player.getDSpace().getMiniDeck2().getStructure().add(card3.setCard(14));
 
 
-        assertEquals('G',player.getDSpace().getMinideck1().getStructure().get(0).getColour());
-        assertEquals('G',player.getDSpace().getMinideck1().getStructure().get(1).getColour());
-        assertEquals('B',player.getDSpace().getMinideck2().getStructure().get(0).getColour());
+        assertEquals('G',player.getDSpace().getMiniDeck1().getStructure().get(0).getColour());
+        assertEquals('G',player.getDSpace().getMiniDeck1().getStructure().get(1).getColour());
+        assertEquals('B',player.getDSpace().getMiniDeck2().getStructure().get(0).getColour());
 
 
         assertTrue(player.getDSpace().setCard(card4.setCard(32), 1));
@@ -247,9 +246,9 @@ public class PlayerTest {
         assertTrue(player.getDSpace().setCard(card6.setCard(25),3));
         assertFalse(player.getDSpace().setCard(card7.setCard(16),4));
 
-        player.getDSpace().getMinideck1().getStructure().add(card4.setCard(32));
-        player.getDSpace().getMinideck1().getStructure().add(card5.setCard(1));
-        player.getDSpace().getMinideck2().getStructure().add(card6.setCard(25));
+        player.getDSpace().getMiniDeck1().getStructure().add(card4.setCard(32));
+        player.getDSpace().getMiniDeck1().getStructure().add(card5.setCard(1));
+        player.getDSpace().getMiniDeck2().getStructure().add(card6.setCard(25));
 
 
     }

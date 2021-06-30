@@ -6,7 +6,7 @@ public class ActionSignal {
 
 
     /**
-     getter and setter
+     Getter and setter
      */
 
     public int getNumber() {
@@ -19,7 +19,7 @@ public class ActionSignal {
 
     /**
      * Applies actions described by ActionSignals
-     * Cases 1 - 4: modify DevelopeDecks by removing 2 cards
+     * Cases 1 - 4: modifies DevelopDecks, removing 2 cards
      * Cases 5 - 6: Lorenzo moves forward by two spaces
      * Case 7: Lorenzo moves forward by one space
      * @param number: according to the number received, it calls a specific action
@@ -32,43 +32,43 @@ public class ActionSignal {
 
         switch (number){
 
+            //1: 2 blue DevelopCards are deleted
+            case 1:
 
-            case 1: // blu-2
-
-                i=2; // liv 1 blu
+                i=2;
                 while (countRemove<2){
-                    while (((Game.getDevelopedecks(i).getStructure().isEmpty()) && i<10)) {
+                    while (((Game.getDevelopDecks(i).getStructure().isEmpty()) && i<10)) {
                         i+=4;
                     }
 
-                    if (i==10 && (Game.getDevelopedecks(i).getStructure().isEmpty())){
-                        System.out.println("No more blue DevelopeCards available.");
+                    if (i==10 && (Game.getDevelopDecks(i).getStructure().isEmpty())){
+                        System.out.println("No more blue DevelopCards available.");
                         return;
                     }
-                    if (!Game.getDevelopedecks(i).getStructure().isEmpty()){
-                        Game.getDevelopedecks(i).getStructure().remove(0);
+                    if (!Game.getDevelopDecks(i).getStructure().isEmpty()){
+                        Game.getDevelopDecks(i).getStructure().remove(0);
                     }
                     countRemove++;
                 }
                 return;
 
 
-
-            case 2: // green-2
+            //2: 2 green DevelopCards are deleted
+            case 2:
                 i=3;
 
                 while (countRemove<2) {
-                    while (((Game.getDevelopedecks(i).getStructure().isEmpty()) && i<11)){
+                    while (((Game.getDevelopDecks(i).getStructure().isEmpty()) && i<11)){
                         i+=4;
                     }
 
-                    if (i==11 && (Game.getDevelopedecks(i).getStructure().isEmpty())) {
-                        System.out.println("No more green DevelopeCards available.");
+                    if (i==11 && (Game.getDevelopDecks(i).getStructure().isEmpty())) {
+                        System.out.println("No more green DevelopCards available.");
                         return;
                     }
 
-                    if (!Game.getDevelopedecks(i).getStructure().isEmpty()) {
-                        Game.getDevelopedecks(i).getStructure().remove(0);
+                    if (!Game.getDevelopDecks(i).getStructure().isEmpty()) {
+                        Game.getDevelopDecks(i).getStructure().remove(0);
                     }
 
                     countRemove++;
@@ -76,59 +76,58 @@ public class ActionSignal {
                 return;
 
 
-
-            case 3: // purple-2
+            //3: 2 purple DevelopCards are deleted
+            case 3:
                 i=0;
                 while (countRemove<2) {
-                    while (((Game.getDevelopedecks(i).getStructure().isEmpty()) && i<8)){
+                    while (((Game.getDevelopDecks(i).getStructure().isEmpty()) && i<8)){
                         i+=4;
                     }
 
-                    if (i==8 && (Game.getDevelopedecks(i).getStructure().isEmpty())) {
-                        System.out.println("No more violet DevelopeCards available.");
+                    if (i==8 && (Game.getDevelopDecks(i).getStructure().isEmpty())) {
+                        System.out.println("No more violet DevelopCards available.");
                         return;
                     }
 
-                    if (!Game.getDevelopedecks(i).getStructure().isEmpty()) {
-                        Game.getDevelopedecks(i).getStructure().remove(0);
+                    if (!Game.getDevelopDecks(i).getStructure().isEmpty()) {
+                        Game.getDevelopDecks(i).getStructure().remove(0);
                     }
                     countRemove++;
                 }
                 return;
 
-
+            //4: 2 yellow DevelopCards are deleted
             case 4: // yellow-2
                 i=1;
                 while (countRemove<2) {
-                    while (((Game.getDevelopedecks(i).getStructure().isEmpty()) && i<9)) {
+                    while (((Game.getDevelopDecks(i).getStructure().isEmpty()) && i<9)) {
                         i+=4;
                     }
 
-                    if (i==9 && (Game.getDevelopedecks(i).getStructure().isEmpty())){
-                        System.out.println("No more yellow DevelopeCards available.");
+                    if (i==9 && (Game.getDevelopDecks(i).getStructure().isEmpty())){
+                        System.out.println("No more yellow DevelopCards available.");
                         return;
                     }
 
-                    if (!Game.getDevelopedecks(i).getStructure().isEmpty()) {
-                        Game.getDevelopedecks(i).getStructure().remove(0);
+                    if (!Game.getDevelopDecks(i).getStructure().isEmpty()) {
+                        Game.getDevelopDecks(i).getStructure().remove(0);
                     }
 
                     countRemove++;
                 }
                 return;
 
-
-            case 5://+2
+            case 5:
                 SingleGame.getLorenzo().forwardTwo();
                 break;
 
 
-            case 6://+2
+            case 6:
                 SingleGame.getLorenzo().forwardTwo();
                 break;
 
 
-            case 7://+1&Shuffle
+            case 7:
                 SingleGame.getLorenzo().forwardOne();
                 SingleGame.getActionStructure().shuffleSignal();
                 break;

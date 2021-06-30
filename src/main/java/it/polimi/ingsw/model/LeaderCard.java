@@ -2,8 +2,6 @@ package it.polimi.ingsw.model;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import it.polimi.ingsw.Server.ClientHandler;
-import it.polimi.ingsw.Server.GameHandler;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -20,13 +18,13 @@ public class LeaderCard implements Serializable {
 
 
     /**
-     * getter and setter
+     * Getter and setter
      */
 
     public String getSkill() {
         return skill;
     }
-    public char getInputskill() {
+    public char getInputSkill() {
         return inputskill;
     }
     public int getNumber() {
@@ -36,12 +34,7 @@ public class LeaderCard implements Serializable {
         return priceR;
     }
 
-
-    /**
-     * return priceC, priceC is an arraylist witch every cell is a resource (char)
-     * @return
-     */
-
+    //PriceC: it is an arrayList where every index is occupied with a specific resource
     public ArrayList<Character> getPriceC() {
         return priceC;
     }
@@ -56,11 +49,11 @@ public class LeaderCard implements Serializable {
 
 
     /**
-     * use the number in input to read on the Json file the LeaderCard I need.
-     * return a LeaderCard with all the parametres of the card I meant.
-     * @param number
-     * @return
-     * @throws FileNotFoundException
+     * Uses the input number to read from the Json file the LeaderCard I need.
+     * Returns a LeaderCard with all the parameters of the card I want to use.
+     * @param number : index of the Card I need, inside of the Json file
+     * @return the LeaderCard I want to use
+     * @throws FileNotFoundException : when the asked LeaderCard is not available
      */
 
     public LeaderCard setCard(int number) throws FileNotFoundException {
@@ -69,7 +62,6 @@ public class LeaderCard implements Serializable {
         priceC = new ArrayList<Character>();
         int size;
 
-        //FileReader stringa = new FileReader("src/main/resources/LeaderCards.json");
         InputStreamReader reader = new InputStreamReader(this.getClass().getResourceAsStream("/LeaderCards.json"));
         Object obj = JsonParser.parseReader(reader);
         JsonObject jsonObject = (JsonObject) obj;
@@ -94,15 +86,14 @@ public class LeaderCard implements Serializable {
 
 
     /**
-     * this skill decreases the develope card price of a specify resource
-     * @param card: card in input to decrease price
-     * @return: the "new" cost
+     * This skill decreases the DevelopCard's price by a specify resource
+     * @param card: the card whose price I want to decrease
+     * @return the "new" cost of the card given as input
      */
 
-    public ResourceStructure changePriceSkill(DevelopeCard card)
+    public ResourceStructure changePriceSkill(DevelopCard card)
     {
         ResourceStructure newCost = new ResourceStructure();
-        int pos;
         if(!card.getCost().getVector().contains(this.inputskill))  return card.getCost();
         card.getCost().removeThis(this.inputskill);
         newCost = card.getCost();
@@ -110,20 +101,20 @@ public class LeaderCard implements Serializable {
     }
 
     /**
-     * this skill activate the additional storage layer by specifying the type of resource it can contain
+     * This skill activates the additional storage layer by specifying the type of resource it can contain
      * @param player: player that get the additional layer
      */
 
     public void addStorageSkill(Player player)
     {
-        player.getStorage().setTypeExtrapanel(this.inputskill);
+        player.getStorage().setTypeExtraPanel(this.inputskill);
     }
 
 
     /**
-     * this skill "replace" white marbles in the row/column chosen, with marbles of a given colour
-     * @param row: is the row of the market containing marbles
-     * @return: the "new" row, where white marbles are substituted by marbles of the given color
+     * This skill changes white marbles in the row/column chosen, with marbles of a specific colour
+     * @param row: it is the row of the market containing marbles
+     * @return the "new" row, where white marbles are switched with marbles of a given color
      */
 
     public ResourceStructure changeWhiteMarbleSkill(ResourceStructure row)
@@ -138,59 +129,7 @@ public class LeaderCard implements Serializable {
 
 
     /**
-     * this method do a production.
-     * (1)checks if the player owns enough resources to activate the production;
-     * (2)then if storage contains enough resources, it removes from there the input resources and add the output resources to the strongbox;
-     * (3)if the storage doesn't contains enough resources it does the same thing with the strongbox.
-     * it uses the (0,1,2) logic defined into the player.checkresources method to check where the resources are.
-     * @param client: is the client who wants to do a production
-     * @param game: game passed (necessary because of the different definition of the player in singlegame or game)
-     * @return
-     * @throws IOException
-     * @throws ClassNotFoundException
-     */
-
-    public int doProductionSkill(ClientHandler client, Game game) throws IOException, ClassNotFoundException {
-        GameHandler player;
-        if(game.getClass().equals(SingleGame.class))
-            player = client.getSinglePlayer();
-        else
-            player = client.getPlayer();
-
-        ArrayList<Character> list = new ArrayList<>();
-        list.add(this.inputskill);
-        int check = player.checkResources(list);
-
-        //(1)
-        if(check != 0) {
-            //(2)
-            if(check == 1)
-            {
-                player.deleteResources(1, list);
-                player.increaseTrackPosition();
-                client.sendMessage("What resource do you want? (Y, P, G, B) ");
-                char resource = client.receiveMessage().charAt(0);
-                player.addResourceStrongBox(resource); }
-            //(3)
-            if(check == 2)
-            {
-                player.deleteResources(2, list);
-                player.increaseTrackPosition();
-                client.sendMessage("What resource do you want? (Y, P, G, B) ");
-                char resource = client.receiveMessage().charAt(0);
-                player.addResourceStrongBox(resource); }
-            return 1;
-        }
-        else {
-            client.sendMessage("You don't own enough Resources. (press enter)");
-            client.receiveMessage();
-        }
-        return 0;
-    }
-
-
-    /**
-     * print the Leader Card
+     * Prints the LeaderCard's info
      */
 
     public void Print()

@@ -3,11 +3,6 @@ package it.polimi.ingsw.model;
 import java.io.Serializable;
 import java.util.Random;
 
-    /**
-     * structure:
-     * AS_Counter:
-     * OLD_AS_COUNTER:
-     */
 
 public class ActionStructure implements Serializable {
 
@@ -17,14 +12,11 @@ public class ActionStructure implements Serializable {
 
 
     /**
-     getter and setter
+     Getter and setter
      */
 
     public  int getAS_Counter() {
         return AS_Counter;
-    }
-    public  int getActionSignal(int i){
-        return structure[i];
     }
     public int getOLD_Signal() { return OLD_Signal; }
     public  void setAS_Counter(int AS_Counter) {
@@ -54,23 +46,21 @@ public class ActionStructure implements Serializable {
             AS_Counter=0;
         }
 
-        return;
-
     }
 
 
 
     /**
-     * Shuffles the Signals' stack
+     * Shuffles the ActionSignals' stack
      */
 
     public void shuffleSignal() {
         Random random = new Random();
 
         for (int i=0; i < getStructure().length;i++) {
-            int indice = random.nextInt(getStructure().length);
-            int temp = getStructure()[indice];
-            structure[indice]= structure[i];
+            int index = random.nextInt(getStructure().length);
+            int temp = getStructure()[index];
+            structure[index]= structure[i];
             structure[i]=temp;
         }
         AS_Counter = 0;

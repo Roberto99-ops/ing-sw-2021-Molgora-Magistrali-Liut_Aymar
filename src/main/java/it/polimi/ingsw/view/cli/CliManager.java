@@ -13,7 +13,7 @@ import java.io.FileNotFoundException;
 public class CliManager {
 
     private static Market market;
-    private static DevelopeDecks[] DDecks;
+    private static DevelopDecks[] DDecks;
     private static LeaderDeck LDeck;
     private static ActionSignal signal;
     private static Game game;
@@ -38,7 +38,7 @@ public class CliManager {
             market = new Market();
             MarketMsg marketMsg = (MarketMsg)msg;
             market.setMatrix(marketMsg.getMarket().getMatrix());
-            market.setExtraball(marketMsg.getMarket().getExtraball());
+            market.setExtraBall(marketMsg.getMarket().getExtraBall());
             MarketView marketView = new MarketView(market);
             Utility.Clean();
             marketView.print();
@@ -56,9 +56,9 @@ public class CliManager {
             player.setName(playerMsg.getPlayer().getName());
             player.setDSpace(playerMsg.getPlayer().getDSpace());
             player.setDevelopmentQuantity(playerMsg.getPlayer().getDevelopmentQuantity());
-            player.getDSpace().setMinideck1(playerMsg.getPlayer().getDSpace().getMinideck1());
-            player.getDSpace().setMinideck2(playerMsg.getPlayer().getDSpace().getMinideck2());
-            player.getDSpace().setMinideck3(playerMsg.getPlayer().getDSpace().getMinideck3());
+            player.getDSpace().setMiniDeck1(playerMsg.getPlayer().getDSpace().getMiniDeck1());
+            player.getDSpace().setMiniDeck2(playerMsg.getPlayer().getDSpace().getMiniDeck2());
+            player.getDSpace().setMiniDeck3(playerMsg.getPlayer().getDSpace().getMiniDeck3());
             player.setNumber(playerMsg.getPlayer().getNumber());
             player.setPv(playerMsg.getPlayer().getPv());
             player.setStrongBox(playerMsg.getPlayer().getStrongBox());

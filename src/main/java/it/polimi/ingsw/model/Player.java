@@ -10,9 +10,8 @@ import java.util.ArrayList;
 
 public class Player implements Serializable {
 
-    //cose che appartengono solo al player:
-    //Nome, Numero, PV, Posizione tracciato fede, Plancia, LeaderCards(2)
-    //Carte Sviluppo acquistate
+    //All these attributes are the things that belong to the player: name, player number, PV, FaithTrack and his/her
+    //position on it, PlayerBoard, LeaderCards(2), bought DevelopCards
     private static final long serialVersionUID = 6721229633581248101L;
 
     public Player() {
@@ -20,7 +19,7 @@ public class Player implements Serializable {
         PV = 0;
         storage = new Storage();
         strongBox = new StrongBox();
-        DSpace = new DevelopementSpace();
+        DSpace = new DevelopmentSpace();
         leadercards = new LeaderDeck();
         skill1 = 0;
         skill2 = 0;
@@ -30,7 +29,7 @@ public class Player implements Serializable {
 
     }
 
-    //Nome
+    //Name
     private String name;
 
     public String getName() {
@@ -42,7 +41,7 @@ public class Player implements Serializable {
     }
 
 
-    //Numero
+    //Player Number
     private int number;
 
     public void setNumber(int number) {
@@ -74,10 +73,10 @@ public class Player implements Serializable {
     }
 
 
-    //Plancia
+    //PlayerBoard
     private Storage storage;
     private StrongBox strongBox;
-    private DevelopementSpace DSpace;
+    private DevelopmentSpace DSpace;
 
     public Storage getStorage() {
         return storage;
@@ -94,16 +93,12 @@ public class Player implements Serializable {
     public StrongBox getStrongBox() {
         return strongBox;
     }
-    /*public void setStrongBox(StrongBox strongBox) {
-        this.strongBox = strongBox;
-    }
-     */
 
-    public DevelopementSpace getDSpace() {
+    public DevelopmentSpace getDSpace() {
         return DSpace;
     }
 
-    public void setDSpace(DevelopementSpace DSpace) {
+    public void setDSpace(DevelopmentSpace DSpace) {
         this.DSpace = DSpace;
     }
 
@@ -144,22 +139,20 @@ public class Player implements Serializable {
         return developmentQuantity;
     }
 
-
-
     /**
-     * Adds 1 when the player buys a new DevelopementCard
+     * Adds 1 when the player buys a new DevelopmentCard
      */
 
     public void increaseDevelopQuantity() {
         this.developmentQuantity = developmentQuantity + 1;
     }
 
-    public void setDevelopmentQuantity(int developementquantity) {
-        this.developmentQuantity = developementquantity;
+    public void setDevelopmentQuantity(int developmentQuantity) {
+        this.developmentQuantity = developmentQuantity;
     }
 
 
-
+    //FaithTrack
     private FaithTrack faithTrack;
 
     public FaithTrack getFaithTrack() {
@@ -211,14 +204,13 @@ public class Player implements Serializable {
 
     /**
      * Checks if the quantity of needed resources are available in the storage and/or in the strongbox
-     *
      * @param vectorResources : arraylist of needed resources
-     * @return a flag
+     * @return a flag ("ableTo") in order to know if I can use the needed resources and where they are: 0) I don't have them
+     * 1) they are in the storage  2) they are in the storage and in the strongbox
      */
 
 
     public int checkResources (ArrayList<Character> vectorResources) {
-        //flag per sapere se non possiedo tali risorse (0) o possiedo in storage (1) o in strongbox-storage (2)
         int ableTo = 0;
         boolean notStorage = false;
 
@@ -226,29 +218,27 @@ public class Player implements Serializable {
             int countType = 0;
             char typeResource = vectorResources.get(i);
 
-            //conto quanto c'è bisogno di una determinata risorsa nel vettore dato (si suppone che il vettore di costo sia ordinate)
+            //the Game counts how much I need of a specific resource, using the vector of Resources given as parameter...
             for (int j = 0; j < vectorResources.size(); j++)
                 if (vectorResources.get(j) == typeResource) countType++;
 
-            //una volta finito di contare le risorse dello stesso tipo
-            //confronto quantità richiesta con quantità presente o in storage o in strongbox e storage
+            //... once the Game has finished counting, it checks if that specific is available and where it is
+            // This operation is done for every type of Resource inside the "vectorResources"
             int storageCount = storage.countTypeS(typeResource);
             int strongboxCount = strongBox.countTypeSB(typeResource);
-            System.out.println(storageCount + "  " + strongboxCount + "  " + countType);
+            //If the player doesn't have the needed resources
             if (countType > (storageCount + strongboxCount)) {
-                //risorse insufficienti
-                System.out.println("Not enough resources.");
+                //Not enough resources
                 return 0;
             }
 
-            //ableTo!=2 because if once we had ableTo=2 ->it's impossible that we have all the resources in the storage
             if (countType <= storageCount + strongboxCount) {
                 ableTo = 2;
-                System.out.println("You have the needed quantity of resources in the storage + strongbox");
+                //The needed quantity of resources is in the storage + strongbox
 
                 if (!notStorage && countType <= storageCount) {
                     ableTo = 1;
-                    System.out.println("You have the needed quantity of resources in storage");
+                    //The needed quantity of resources is in the storage
                 }
                 else
                     notStorage = true;
@@ -264,13 +254,12 @@ public class Player implements Serializable {
 
 
     /**
-     * deletes the resources i need from the storage or the strongbox
-     * @param ableTo: where i have to delete it (1->storage, 2->storage+strongbox)
+     * Deletes the resources I need from the storage or the strongbox
+     * @param ableTo: where I have to delete it (1->storage, 2->storage+strongbox)
      * @param vector: vector of resources
      */
 
     public void deleteResources(int ableTo, ArrayList<Character> vector) {
-        //ArrayList<Character> vectorResources = vector;
         //removes from storage
         if (ableTo == 1) {
             for (int i = vector.size() - 1; i >= 0; i--)
@@ -278,7 +267,6 @@ public class Player implements Serializable {
             modifyPVforResources();
             return;
         }
-
         //removes from storage and strongbox
         if (ableTo == 2) {
             for (int i = vector.size() - 1; i >= 0; i--) {
@@ -297,41 +285,38 @@ public class Player implements Serializable {
 
 
     /**
-     * Removes one resource from the storage.
+     * Removes one resource from the Storage, after having added all the resources on the storage's panels in one vector
      * @param resource: the resource the player wants to delete
      */
 
     public boolean removeResourceStorage(char resource) {
         int i;
         ArrayList<Character> vector = new ArrayList<Character>();
-        //aggiungo gli elementi dello storage nel vettore
         for (int c=0;c<6;c++){
             vector.add(storage.getPanel().get(c));
         }
-        //aggiungo gli elemento dell'extrapanel
         for (int c=0; c<2; c++){
-            vector.add(storage.getExtrapanel().getVector().get(c));
+            vector.add(storage.getExtraPanel().getVector().get(c));
         }
         if (vector.contains(resource)) {
+            //the Game moves to the index where the wanted resource is
             for (i = vector.size() - 1; i >= 0; i--) {
-                //mi sposto nella struttura finchè non ottengo indice della risorsa che voglio eliminare
                 if (resource == vector.get(i)) {
                     break;
                 }
             }
-            System.out.println("Resource "+vector.get(i)+" has been removed.");
+            //The index "i" tells me in which panel the wanted resource is
             if (i > 5) {
-                //l'elemento si trova nel pannello extra
+                //The wanted resource is inside the extraPanel
                 i=i-5;
-                storage.getExtrapanel().getVector().set(i,'N');
+                //The resource is changed with a letter 'N' (=null) to symbolize that this space is free
+                storage.getExtraPanel().getVector().set(i,'N');
             } else {
-                //l'elemento si trova nello storage normale
-                storage.getPanel().set(i,'N');//rimuovo la risorsa i-esima
+                //The wanted resource is inside the Storage's common panels
+                storage.getPanel().set(i,'N');
             }
             return true;
         } else {
-            //caso in cui non c'è la risorsa richiesta da eliminare
-            System.out.println("The asked resource is not in the storage.");
             return false;
         }
     }
@@ -357,56 +342,31 @@ public class Player implements Serializable {
                 }
             } else SingleGame.getLorenzo().forwardOne();
             return false;
-
         }
 
-
-        //caso in cui il magazzino abbia uno o + spazi vuoti
-
-
-        //controllo se extrapanel sia dello stesso tipo e se ha degli spazi liberi
-
-        if (storage.getTypeExtrapanel() != 'Z' && storage.getTypeExtrapanel() == resource) {
-
+        //I check if the extraPanel's type is the same as the resource I want to add to the Storage and if the ExtraPanel
+        //has some space left
+        if (storage.getTypeExtraPanel() != 'Z' && storage.getTypeExtraPanel() == resource) {
+            //CountExtraN: it counts how many empty spaces I have in the storage
             int countExtraN = 0;
             for (int c = 1; c >= 0; c--) {
-                if (storage.getExtrapanel().getVector().get(c) == 'N') countExtraN++;
+                if (storage.getExtraPanel().getVector().get(c) == 'N') countExtraN++;
             }
 
-            if (storage.getTypeExtrapanel() == resource && countExtraN > 0) {
-                if (storage.getExtrapanel().getVector().get(0) == 'N')
-                    storage.getExtrapanel().getVector().set(0, resource);
-                else if (storage.getExtrapanel().getVector().get(1) == 'N')
-                    storage.getExtrapanel().getVector().set(1, resource);
+            if (storage.getTypeExtraPanel() == resource && countExtraN > 0) {
+                if (storage.getExtraPanel().getVector().get(0) == 'N')
+                    storage.getExtraPanel().getVector().set(0, resource);
+                else if (storage.getExtraPanel().getVector().get(1) == 'N')
+                    storage.getExtraPanel().getVector().set(1, resource);
 
                 modifyPVforResources();
                 return true;
 
             }
         }
-            /*
 
-
-            else if (storage.getTypeExtrapanel() != resource && countExtraN == storage.countTypeS(resource))
-
-            {
-
-              for (int i = 0; i < clients.size(); i++)
-                if (!this.equals(clients.get(i).getPlayer()))
-                    clients.get(i).getPlayer().increasePV(1);
-                return false;
-
-            }
-
-        }
-*/
-
-        // controllo panel:
-
-
-        // -se c'è già una presente vedo se aggiungerne un'altra
-
-
+        //check inside the storage's common panels:
+        //- if there's already a resource of that type
         int i = 5;
 
         if (storage.getPanel().contains(resource)) {
@@ -417,8 +377,7 @@ public class Player implements Serializable {
 
             if (i == 0) {
 
-                // i==0 : provo a vedere se riesco a sostituire i piani
-                if (storage.switchresources(resource, 0)) {
+                if (storage.switchResources(resource, 0)) {
                     modifyPVforResources();
                     return true;
                 } else {
@@ -438,9 +397,7 @@ public class Player implements Serializable {
 
             if (i == 2) {
 
-                // i==2 : provo a vedere se riesco a sostituire i piani
-
-                if (storage.switchresources(resource, 2)) {
+                if (storage.switchResources(resource, 2)) {
                     modifyPVforResources();
                     return true;
                 } else  {
@@ -456,8 +413,6 @@ public class Player implements Serializable {
 
             }
 
-
-            // i==5 : il terzo piano ha risorse di quel tipo -> elimino la risorsa
             if (i == 5) {
 
                     if (!game.getClass().equals(SingleGame.class)) {
@@ -470,29 +425,28 @@ public class Player implements Serializable {
                 return false;
             }
 
-            // in tutti gli altri casi in cui un posto nei piani è libero
+            //-if other panels are free
             if (i == 1) {
-                storage.getPanel().set(2, resource); //posto i==2 ora occupato
+                storage.getPanel().set(2, resource);
                 modifyPVforResources();
                 return true;
             }
 
             if (i == 3) {
-                storage.getPanel().set(4, resource); //posto i==2 ora occupato
+                storage.getPanel().set(4, resource);
                 modifyPVforResources();
                 return true;
             }
 
             if (i == 4) {
-                storage.getPanel().set(5, resource); //posto i==2 ora occupato
+                storage.getPanel().set(5, resource);
                 modifyPVforResources();
                 return true;
             }
 
         } else {
 
-            // se la risorsa non c'è
-
+            //if the resource is not already available in the panel
             if (storage.getPanel().get(0) == 'N') {
                 i = 0;
             } else if ((storage.getPanel().get(1) == 'N') && (storage.getPanel().get(2) == 'N')) {
@@ -502,8 +456,8 @@ public class Player implements Serializable {
             }
 
             if (i < 4) {
-                //this if is here to avoid the case which we have a fourth type of resource, so is not contained in the storage yet, but we don't have to put it inside
-                storage.getPanel().set(i, resource); //aggiungo la risorsa nel primo piano (i==0) o nel secondo (i==1) o nel terzo (i==3)
+                //To avoid the case which we have a fourth type of resource, so is not contained in the storage yet, but we don't have to put it inside
+                storage.getPanel().set(i, resource);
                 modifyPVforResources();
                 return true;
             }
@@ -527,22 +481,22 @@ public class Player implements Serializable {
 
 
     /**
-     * this method checks if the player own enough developecards to activate a leadercard
-     * @param level: minimum level of the developecards
+     * This method checks if the player owns enough DevelopCards to activate a LeaderCard
+     * @param level: minimum level of the DevelopCards
      * @param colours: color of the cards
-     * @return
+     * @return a flag that tells the Game if the Player owns enough DevelopCards to activate a LeaderCard
      */
 
     public boolean checkCards(int level, ArrayList<Character> colours)
     {
         int cont = 0; //at the end if cont is = colours.size it means i have al the cards I need
-        DevelopeDecks deck = new DevelopeDecks();
-        for (int i = 0; i < this.DSpace.getMinideck1().getStructure().size(); i++)
-            deck.getStructure().add(this.DSpace.getMinideck1().getStructure().get(i));
-        for (int i = 0; i < this.DSpace.getMinideck2().getStructure().size(); i++)
-            deck.getStructure().add(this.DSpace.getMinideck2().getStructure().get(i));
-        for (int i = 0; i < this.DSpace.getMinideck3().getStructure().size(); i++)
-            deck.getStructure().add(this.DSpace.getMinideck3().getStructure().get(i));
+        DevelopDecks deck = new DevelopDecks();
+        for (int i = 0; i < this.DSpace.getMiniDeck1().getStructure().size(); i++)
+            deck.getStructure().add(this.DSpace.getMiniDeck1().getStructure().get(i));
+        for (int i = 0; i < this.DSpace.getMiniDeck2().getStructure().size(); i++)
+            deck.getStructure().add(this.DSpace.getMiniDeck2().getStructure().get(i));
+        for (int i = 0; i < this.DSpace.getMiniDeck3().getStructure().size(); i++)
+            deck.getStructure().add(this.DSpace.getMiniDeck3().getStructure().get(i));
 
         for (int i = 0; i < colours.size(); i++) {
             for (int j = 0; j < deck.getStructure().size(); j++) {
@@ -561,8 +515,8 @@ public class Player implements Serializable {
 
 
     /**
-     * this method modifies the pv in case we have lost or gained some resources.
-     * this because every 5 resources we gain 1 PV
+     * This method modifies the pv in case we have lost or gained some resources.
+     * According to the rules, for every 5 resources we gain 1 PV.
      */
 
     private void modifyPVforResources() {
@@ -578,8 +532,8 @@ public class Player implements Serializable {
 
 
     /**
-     * this method counts all the resources of a player
-     * @return
+     * This method counts all the resources of the player
+     * @return the total amount of resources the Player owns
      */
     private int countTotalResources() {
         int total = 0;
@@ -591,7 +545,7 @@ public class Player implements Serializable {
         total+=strongBox.getStructure().getVector().size();
 
         for (int i = 0; i < 2; i++)
-            if(!storage.getExtrapanel().getVector().get(i).equals('N'))
+            if(!storage.getExtraPanel().getVector().get(i).equals('N'))
                 total++;
 
         return total;
@@ -604,9 +558,7 @@ public class Player implements Serializable {
      */
     public void addResourceStrongBox(char resource)
     {
-        /*IDEA: scelgo una risorsa e questa , che si trova dentro il resourcestructure, va inserita dentro il magazzino
-        (se viene dal mercato)
-        */
+        //if the resource's type is 'R', the Game changes it with 1 PV and doesn't add it to the strongbox
         if (resource == 'R') {
             PV ++;
             increaseTrackPosition();

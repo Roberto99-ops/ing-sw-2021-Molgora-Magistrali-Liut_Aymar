@@ -6,7 +6,7 @@ import java.io.FileNotFoundException;
 
 import static org.junit.Assert.*;
 
-public class DevelopeDecksTest {
+public class DevelopDecksTest {
 
     @Test
     /**
@@ -15,17 +15,17 @@ public class DevelopeDecksTest {
      */
 
     public void getDeck() throws FileNotFoundException {
-        DevelopeDecks deck = new DevelopeDecks();
+        DevelopDecks deck = new DevelopDecks();
         for(int i=0; i<5; i++)
         {
-            DevelopeCard card = new DevelopeCard();
+            DevelopCard card = new DevelopCard();
             card.setCard(i);
             deck.getStructure().add(card);
         }
 
-        DevelopeCard card = new DevelopeCard();
+        DevelopCard card = new DevelopCard();
         card.setCard(0);
-        DevelopeCard card1 = deck.pick(deck.getStructure());
+        DevelopCard card1 = deck.pick(deck.getStructure());
 
         assertEquals(card.getColour(), card1.getColour());
         assertEquals(card.getCost().getVector(), card1.getCost().getVector());
@@ -46,11 +46,11 @@ public class DevelopeDecksTest {
      */
 
     public void setDeck() throws FileNotFoundException {
-        DevelopeDecks deck = new DevelopeDecks();
-        DevelopeDecks oldDeck = new DevelopeDecks();
+        DevelopDecks deck = new DevelopDecks();
+        DevelopDecks oldDeck = new DevelopDecks();
         for(int i=0; i<5; i++)
         {
-            DevelopeCard card = new DevelopeCard();
+            DevelopCard card = new DevelopCard();
             card.setCard(i);
             deck.getStructure().add(card);
             oldDeck.getStructure().add(card);

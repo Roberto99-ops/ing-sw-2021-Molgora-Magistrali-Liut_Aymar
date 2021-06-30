@@ -37,20 +37,20 @@ public class PlayerboardTest {
         panel.add('B');
         player.getStorage().setPanel(panel);
 
-        player.getStorage().setTypeExtrapanel('Y');
-        player.getStorage().getExtrapanel().getVector().set(0, 'P');
-        player.getStorage().getExtrapanel().getVector().set(1, 'Y');
+        player.getStorage().setTypeExtraPanel('Y');
+        player.getStorage().getExtraPanel().getVector().set(0, 'P');
+        player.getStorage().getExtraPanel().getVector().set(1, 'Y');
 
         for (int i = 0; i < 3; i++) {
-            DevelopeCard Dcard1 = new DevelopeCard();
-            DevelopeCard Dcard2 = new DevelopeCard();
-            DevelopeCard Dcard3 = new DevelopeCard();
+            DevelopCard Dcard1 = new DevelopCard();
+            DevelopCard Dcard2 = new DevelopCard();
+            DevelopCard Dcard3 = new DevelopCard();
             Dcard1.setCard(i);
             Dcard2.setCard(i + 10);
             Dcard3.setCard(i + 20);
-            player.getDSpace().getMinideck1().getStructure().add(Dcard1);
-            player.getDSpace().getMinideck2().getStructure().add(Dcard2);
-            player.getDSpace().getMinideck3().getStructure().add(Dcard3);
+            player.getDSpace().getMiniDeck1().getStructure().add(Dcard1);
+            player.getDSpace().getMiniDeck2().getStructure().add(Dcard2);
+            player.getDSpace().getMiniDeck3().getStructure().add(Dcard3);
         }
         SingleGame game = new SingleGame();
         SingleGame.getLorenzo().setNumber(10);

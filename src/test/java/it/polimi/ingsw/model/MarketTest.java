@@ -5,7 +5,6 @@ import org.junit.Test;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
-import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 
 public class MarketTest {
@@ -41,7 +40,7 @@ public class MarketTest {
 
         int i = 1;
 
-       bowl.setExtraball(obj.get(0));
+       bowl.setExtraBall(obj.get(0));
 
 
             for (int j = 0; j < 3; j ++) {
@@ -57,7 +56,7 @@ public class MarketTest {
 
 
 
-        assertEquals(bowl.getExtraball(), 'B');
+        assertEquals(bowl.getExtraBall(), 'B');
         assertEquals(bowl.getMatrix(), pimpa);
 
         ArrayList<Character> pre = new ArrayList<>();
@@ -81,8 +80,8 @@ public class MarketTest {
         assertEquals( dec , bowl.doMarket(1, 0));
 
 
-        bowl.setResourceinMarket(1,3,'P');
-        bowl.setExtraball('Y');
+        bowl.setResourceInMarket(1,3,'P');
+        bowl.setExtraBall('Y');
 
         ArrayList<Character> red = new ArrayList<>();
 

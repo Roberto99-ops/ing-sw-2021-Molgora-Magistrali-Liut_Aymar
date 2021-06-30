@@ -1,21 +1,18 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.Server.messages.MarketMsg;
-import it.polimi.ingsw.view.cli.MarketView;
-
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 
 public class Market implements Serializable {
 
+    //Matrix: Market's structure
     private char[][] matrix = new char[3][4];
-    private char extraball;
+    private char extraBall;
 
 
     /**
-     * this method initialize and randomize market
+     * This method initialize and randomize market
      */
 
     public void randomizeMarket () {
@@ -34,7 +31,7 @@ public class Market implements Serializable {
             obj.add('W');
             obj.add('W');
             Collections.shuffle(obj);
-            this.extraball = obj.get(0);
+            this.extraBall = obj.get(0);
             int i = 1;
 
             while (i < 13) {
@@ -50,7 +47,7 @@ public class Market implements Serializable {
 
     /**
      * ONLY USED FOR TESTING
-     * print all resources in strongbox
+     * Prints all resources in strongbox
      */
 
     public void printMatrix () {
@@ -65,7 +62,7 @@ public class Market implements Serializable {
 
 
     /**
-     * getter and setter
+     * Getter and setter
      */
 
     public char[][] getMatrix() {
@@ -74,44 +71,43 @@ public class Market implements Serializable {
     public void setMatrix(char[][] matrix) {
         this.matrix = matrix;
     }
-    public char getExtraball() {
-        return extraball;
+    public char getExtraBall() {
+        return extraBall;
     }
-    public void setExtraball(char extraball) {
-        this.extraball = extraball;
+    public void setExtraBall(char extraBall) {
+        this.extraBall = extraBall;
     }
 
 
     /**
-     * this method insert a resource in market
+     * This method inserts a resource in market (the resource added is the extraball)
      * @param row in which insert the resource
      * @param column in which insert the resource
-     * @param input char that have to be inserted
+     * @param input resource (char) that have to be inserted
      */
 
-    public void setResourceinMarket (int row, int column, char input) {
-
+    public void setResourceInMarket(int row, int column, char input) {
         this.matrix[row][column] = input;
     }
 
 
     /**
-     * this methodinserts the extraball into the matrix + new extraball
-     * check tells me if it is column / row from above / below and return
+     * This method inserts the extraBall inside the matrix: doing so, the extraBall changes its type of resource
+     * "Check" helps the Game to understand where I want to put the extraBall: in a column / row, from above / below.
      * @param check tells if it is column / row
      * @param number tells if it is from above / below
-     * @return ArrayList<Character>
+     * @return ArrayList<Character> that replace the row/column I've chosen at the beginning
      */
 
 
     public ArrayList<Character> doMarket(int check, int number) {
-        char temporaryball = this.extraball;
-        char[][] equalmatrix = new char[3][4];
+        char temporaryBall = this.extraBall;
+        char[][] equalMatrix = new char[3][4];
 
 
         for (int j = 0; j < 3; j++) {
             for (int k = 0; k < 4; k++) {
-                equalmatrix[j][k] = this.matrix[j][k];
+                equalMatrix[j][k] = this.matrix[j][k];
             }
         }
 
@@ -122,13 +118,13 @@ public class Market implements Serializable {
         if (check == 2) {
 
             for (int i = 1; i < 3; i++) {
-                this.matrix[2 - i][number] = equalmatrix[3 - i][number];
-                vector.add(equalmatrix[3-i][number]);
+                this.matrix[2 - i][number] = equalMatrix[3 - i][number];
+                vector.add(equalMatrix[3-i][number]);
             }
 
-            vector.add(equalmatrix[0][number]);
-            this.matrix[2][number] = temporaryball;
-            this.extraball = equalmatrix[0][number];
+            vector.add(equalMatrix[0][number]);
+            this.matrix[2][number] = temporaryBall;
+            this.extraBall = equalMatrix[0][number];
         }
 
 
@@ -136,13 +132,13 @@ public class Market implements Serializable {
 
 
                 for (int i = 1; i < 4; i++) {
-                    this.matrix[number][3-i] = equalmatrix[number][4-i];
-                    vector.add(equalmatrix[number][4-i]);
+                    this.matrix[number][3-i] = equalMatrix[number][4-i];
+                    vector.add(equalMatrix[number][4-i]);
                 }
 
-                vector.add(equalmatrix[number][0]);
-                this.matrix[number][3] = temporaryball;
-                this.extraball = equalmatrix[number][0];
+                vector.add(equalMatrix[number][0]);
+                this.matrix[number][3] = temporaryBall;
+                this.extraBall = equalMatrix[number][0];
 
             }
 

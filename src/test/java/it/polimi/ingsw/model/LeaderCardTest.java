@@ -27,7 +27,7 @@ public class LeaderCardTest {
 
         assertEquals(1, card.getCardLevel());
         assertEquals(2, card.getPv());
-        assertEquals('P', card.getInputskill());
+        assertEquals('P', card.getInputSkill());
         assertEquals(0, card.getNumber());
         assertEquals("PriceSkill", card.getSkill());
     }
@@ -38,7 +38,7 @@ public class LeaderCardTest {
      */
     @Test
     public void priceSkill() throws FileNotFoundException {
-        DevelopeCard develcard = new DevelopeCard();
+        DevelopCard develcard = new DevelopCard();
         LeaderCard leadercard = new LeaderCard();
         develcard.setCard(1);
         leadercard.setCard(0);
@@ -64,7 +64,7 @@ public class LeaderCardTest {
 
         card.addStorageSkill(player);
 
-        assertEquals('G', player.getStorage().getTypeExtrapanel());
+        assertEquals('G', player.getStorage().getTypeExtraPanel());
     }
 
 

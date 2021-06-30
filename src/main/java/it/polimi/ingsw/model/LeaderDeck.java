@@ -7,9 +7,8 @@ public class LeaderDeck extends Deck <LeaderCard> implements Serializable {
     private ArrayList<LeaderCard> structure = new ArrayList<LeaderCard>();
 
     /**
-     * these get and set let me to manage the structure
-     * to modify decks there are methods (generics) in Deck class
-     * @return
+     * These getter and setter let me manage the Deck's structure
+     * To modify decks, there are methods (generics) in Deck class
      */
 
     @Override

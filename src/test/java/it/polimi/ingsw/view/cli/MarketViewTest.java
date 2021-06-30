@@ -20,7 +20,7 @@ public class MarketViewTest {
             }
 
         int mix = mixer.nextInt(5);
-        market.setExtraball(resources[mix]);
+        market.setExtraBall(resources[mix]);
 
         MarketView marketview = new MarketView(market);
 

@@ -23,7 +23,7 @@ public class TurnManager {
 
     public void main(ClientHandler client, Game game, int actualplayer) throws Exception {
         Turn turn = new Turn(client, game);
-        GameHandler player = turn.getActualplayer();
+        GameHandler player = turn.getActualPlayer();
         String reception;
         int leaderaction = 0;
         boolean additionalAction = false;
@@ -108,7 +108,7 @@ public class TurnManager {
                                     chosenResource=client.receiveMessage().charAt(0);
                                 } while (chosenResource!='P'&& chosenResource!='B'&&chosenResource!='G'&& chosenResource!='Y');
                                 vectorOutProduction.add(chosenResource);
-                                vectorInProduction.add(player.getLeadercards().getStructure().get(0).getInputskill());
+                                vectorInProduction.add(player.getLeadercards().getStructure().get(0).getInputSkill());
                                 vectorOutProduction.add('R');
                             }
                         }
@@ -126,7 +126,7 @@ public class TurnManager {
                                             }while (chosenResource!='P'&& chosenResource!='B'&& chosenResource!='G'&& chosenResource!='Y');
 
                                                     vectorOutProduction.add(chosenResource);
-                                                    vectorInProduction.add(player.getLeadercards().getStructure().get(1).getInputskill());
+                                                    vectorInProduction.add(player.getLeadercards().getStructure().get(1).getInputSkill());
                                                     vectorOutProduction.add('R');
                                                 }
                                             }
@@ -150,21 +150,22 @@ public class TurnManager {
                                 client.sendMessage("Tell me the first resource you want to discard (P,B,G,Y)\n");
                                 chosenResource = client.receiveMessage().charAt(0);
                             } while (chosenResource!='P'&& chosenResource!='B'&&chosenResource!='G'&& chosenResource!='Y');
-                            vectorInProduction.add(client.receiveMessage().charAt(0));
+                            vectorInProduction.add(chosenResource);
 
                             do{
                                 client.sendMessage("Tell me the second resource you want to discard (P,B,G,Y)\n");
                                 chosenResource = client.receiveMessage().charAt(0);
                             } while (chosenResource!='P'&& chosenResource!='B'&&chosenResource!='G'&& chosenResource!='Y');
-                            vectorInProduction.add(client.receiveMessage().charAt(0));
+                            vectorInProduction.add(chosenResource);
 
                             do {
                             client.sendMessage("Tell me the resource you want to product (P,B,G,Y)\n");
                                 chosenResource = client.receiveMessage().charAt(0);
                             } while (chosenResource!='P'&& chosenResource!='B'&&chosenResource!='G'&& chosenResource!='Y');
+                            vectorOutProduction.add(chosenResource);
                         }
 
-                        if (turn.getActualplayer().getDSpace().getMinideck1().getStructure().size() > 0) {
+                        if (turn.getActualPlayer().getDSpace().getMiniDeck1().getStructure().size() > 0) {
                             do {
                                 client.sendMessage("Do you want to activate the production of the first column of development space? (y/n)\n");
                                 s = client.receiveMessage();
@@ -182,7 +183,7 @@ public class TurnManager {
 
 
 
-                        if (turn.getActualplayer().getDSpace().getMinideck2().getStructure().size() > 0) {
+                        if (turn.getActualPlayer().getDSpace().getMiniDeck2().getStructure().size() > 0) {
                             do {
                                 client.sendMessage("Do you want to activate the production of the second column of development space? (y/n)\n");
                                 s = client.receiveMessage();
@@ -198,7 +199,7 @@ public class TurnManager {
                             }
                         }
 
-                        if (turn.getActualplayer().getDSpace().getMinideck3().getStructure().size() > 0) {
+                        if (turn.getActualPlayer().getDSpace().getMiniDeck3().getStructure().size() > 0) {
                             do {
                                 client.sendMessage("Do you want to activate the production of the third column of development space? (y/n)\n");
                                 s = client.receiveMessage();
@@ -215,18 +216,18 @@ public class TurnManager {
                         }
 
 
-                        if (turn.getActualplayer().checkResources(vectorInProduction) != 0) { //
+                        if (turn.getActualPlayer().checkResources(vectorInProduction) != 0) { //
                             client.sendMessage("You are able to do this production (press a key)\n");
                             client.receiveMessage();
                             ableTo=true;
-                            turn.getActualplayer().deleteResources(turn.getActualplayer().checkResources(vectorInProduction), vectorInProduction); //
+                            turn.getActualPlayer().deleteResources(turn.getActualPlayer().checkResources(vectorInProduction), vectorInProduction); //
 
                             for (int i = 0; i < vectorOutProduction.size(); i++) {
-                                turn.getActualplayer().addResourceStrongBox(vectorOutProduction.get(i));
+                                turn.getActualPlayer().addResourceStrongBox(vectorOutProduction.get(i));
                             }
 
                             if (checks[0]) {
-                                turn.getActualplayer().addResourceStrongBox(chosenResource);
+                                turn.getActualPlayer().addResourceStrongBox(chosenResource);
                                 player.updatePlayerBoard(client,game);
 
                             }

@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class StrongBox implements Serializable {
 
     /**
-     * StrongBox is an arraylist of Resourcestructure
+     * StrongBox is an arraylist of ResourceStructure
      */
 
     private ResourceStructure structure = new ResourceStructure();
@@ -25,7 +25,6 @@ public class StrongBox implements Serializable {
      * @param neededRes: type of resource the player needs to pay/activate something
      * @return counterSB: the amount of that resource in StrongBox
      */
-
 
     public int countTypeSB(char neededRes) {
         int i = 0, counterSB = 0;

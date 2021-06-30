@@ -1,6 +1,6 @@
 package it.polimi.ingsw.view.cli;
 
-import it.polimi.ingsw.model.DevelopeDecks;
+import it.polimi.ingsw.model.DevelopDecks;
 
 /**
  * draw the decks of developecards of the game
@@ -10,7 +10,7 @@ public class DevelopeDecksView extends PaintCards {
     private final int HORIZ_SIZE = 77;
     private String [][] space;
 
-    public DevelopeDecksView(DevelopeDecks[] decks)
+    public DevelopeDecksView(DevelopDecks[] decks)
     {
         space = new String[VERT_SIZE][HORIZ_SIZE];
         for (int i = 0; i < VERT_SIZE; i++)
@@ -25,7 +25,7 @@ public class DevelopeDecksView extends PaintCards {
      * draw all developecards at the top of the decks
      * @param decks: all the 12 decks of the game
      */
-    private void drawCards(DevelopeDecks[] decks)
+    private void drawCards(DevelopDecks[] decks)
     {
         int contH=3;
         int contV=2;

@@ -7,18 +7,13 @@ import java.io.Serializable;
 public class Lorenzo implements Serializable {
 
 
-    /**
-     * name: indicate the name of singleplayer
-     * number: indicate the position on faithtrack
-     */
-
-    private static String name = "Lorenzo Il Magnifico";
+    //Number: it indicates Lorenzo's position on the FaithTrack
     private  int number = 0;
 
 
 
     /**
-     * getter and setter
+     * Getter and Setter
      */
 
     public  int getNumber() {

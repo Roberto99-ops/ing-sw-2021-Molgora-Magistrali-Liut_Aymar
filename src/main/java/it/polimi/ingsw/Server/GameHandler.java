@@ -31,10 +31,10 @@ public class GameHandler extends Player {
 
     public void updateDevelopementDecks(ClientHandler clh) throws IOException {
         for (int i = 0; i < 12; i++) {
-            DevelopeDecks[] actualDevelopeDecks = new DevelopeDecks[12];
+            DevelopDecks[] actualDevelopDecks = new DevelopDecks[12];
             for (int j = 0; j < 12; j++)
-                actualDevelopeDecks[i] = Game.getDevelopedecks(i);
-            DevelopeDecksMsg msg = new DevelopeDecksMsg(actualDevelopeDecks);
+                actualDevelopDecks[i] = Game.getDevelopDecks(i);
+            DevelopeDecksMsg msg = new DevelopeDecksMsg(actualDevelopDecks);
             clh.sendMessage(msg);
         }
 
@@ -48,7 +48,7 @@ public class GameHandler extends Player {
      */
 
     public void updateLeaderDeck(ClientHandler clh) throws IOException {
-        LeaderDeck actualLeaderDeck = Game.getLeaderdeck();
+        LeaderDeck actualLeaderDeck = Game.getLeaderDeck();
         LeaderDeckMsg msg = new LeaderDeckMsg(actualLeaderDeck);
         clh.sendMessage(msg);
     }

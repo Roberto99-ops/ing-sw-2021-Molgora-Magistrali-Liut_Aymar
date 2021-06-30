@@ -21,19 +21,19 @@ public class GameTest {
     public void shuffletest() throws FileNotFoundException {
 
     Market market = new Market();
-        market.setExtraball('B');
-        market.setResourceinMarket(0,0,'B');
-        market.setResourceinMarket(0,1,'G');
-        market.setResourceinMarket(0,2,'G');
-        market.setResourceinMarket(0,3,'P');
-        market.setResourceinMarket(1,0,'P');
-        market.setResourceinMarket(1,1,'R');
-        market.setResourceinMarket(1,2,'Y');
-        market.setResourceinMarket(1,3,'Y');
-        market.setResourceinMarket(2,0,'W');
-        market.setResourceinMarket(2,1,'W');
-        market.setResourceinMarket(2,2,'W');
-        market.setResourceinMarket(2,3,'W');
+        market.setExtraBall('B');
+        market.setResourceInMarket(0,0,'B');
+        market.setResourceInMarket(0,1,'G');
+        market.setResourceInMarket(0,2,'G');
+        market.setResourceInMarket(0,3,'P');
+        market.setResourceInMarket(1,0,'P');
+        market.setResourceInMarket(1,1,'R');
+        market.setResourceInMarket(1,2,'Y');
+        market.setResourceInMarket(1,3,'Y');
+        market.setResourceInMarket(2,0,'W');
+        market.setResourceInMarket(2,1,'W');
+        market.setResourceInMarket(2,2,'W');
+        market.setResourceInMarket(2,3,'W');
 
         giocotest.shuffle();
     Game.getMarket().printMatrix();

@@ -2,8 +2,6 @@ package it.polimi.ingsw.model;
 
 import junit.framework.TestCase;
 
-import java.util.Random;
-
 public class ResourceStructureTest extends TestCase {
 
 
@@ -19,7 +17,7 @@ public class ResourceStructureTest extends TestCase {
         structure.addResource(10, 'P');
         structure.addResource(3, 'Y');
 
-        assertEquals(10, structure.firstOccurance('Y'));
+        assertEquals(10, structure.firstOccurrence('Y'));
     }
 
     public void testRemove() {

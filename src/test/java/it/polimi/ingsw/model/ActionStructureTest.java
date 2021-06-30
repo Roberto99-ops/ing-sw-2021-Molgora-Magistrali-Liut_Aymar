@@ -18,45 +18,45 @@ public class ActionStructureTest {
         ActionSignal Signal = new ActionSignal();
 
         for (int n=0; n<12 ;n++) {
-            DevelopeDecks deck = new DevelopeDecks();
+            DevelopDecks deck = new DevelopDecks();
             for (int i = 0; i < 4; i++) {
-                DevelopeCard card = new DevelopeCard();
+                DevelopCard card = new DevelopCard();
                 card.setCard(i);
                 deck.getStructure().add(card);
             }
 
-            Game.setDevelopedecks(deck, n);
+            Game.setDevelopDecks(deck, n);
         }
 
 
-        DevelopeCard card1 = Game.getDevelopedecks(2).getStructure().get(2);
-        DevelopeCard card2 = Game.getDevelopedecks(2).getStructure().get(0);
+        DevelopCard card1 = Game.getDevelopDecks(2).getStructure().get(2);
+        DevelopCard card2 = Game.getDevelopDecks(2).getStructure().get(0);
 
         Signal.action(1);
-        assertNotEquals(card2, Game.getDevelopedecks(2).getStructure().get(0));
-        assertEquals(card1, Game.getDevelopedecks(2).getStructure().get(0));
+        assertNotEquals(card2, Game.getDevelopDecks(2).getStructure().get(0));
+        assertEquals(card1, Game.getDevelopDecks(2).getStructure().get(0));
 
         for (int i=0; i<4 ;i++){
-            Game.getDevelopedecks(3).getStructure().remove(0);
+            Game.getDevelopDecks(3).getStructure().remove(0);
         }
-        card1 = Game.getDevelopedecks(7).getStructure().get(2);
+        card1 = Game.getDevelopDecks(7).getStructure().get(2);
         Signal.action(2);
-        assertEquals(card1, Game.getDevelopedecks(7).getStructure().get(0));
+        assertEquals(card1, Game.getDevelopDecks(7).getStructure().get(0));
 
         for (int i=0; i<3 ;i++){
-            Game.getDevelopedecks(0).getStructure().remove(0);
+            Game.getDevelopDecks(0).getStructure().remove(0);
         }
-        card1 = Game.getDevelopedecks(4).getStructure().get(1);
+        card1 = Game.getDevelopDecks(4).getStructure().get(1);
         Signal.action(3);
-        assertEquals(card1, Game.getDevelopedecks(4).getStructure().get(0));
+        assertEquals(card1, Game.getDevelopDecks(4).getStructure().get(0));
 
         for (int c=1; c<11; c=c+4){
             for (int i=0; i<4; i++){
-                Game.getDevelopedecks(c).getStructure().remove(0);
+                Game.getDevelopDecks(c).getStructure().remove(0);
             }
         }
         Signal.action(4);
-        assertTrue(Game.getDevelopedecks(9).getStructure().isEmpty());
+        assertTrue(Game.getDevelopDecks(9).getStructure().isEmpty());
 
         Signal.action(5);
         assertEquals(2,SingleGame.getLorenzo().getNumber());

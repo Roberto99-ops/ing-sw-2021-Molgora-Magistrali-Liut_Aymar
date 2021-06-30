@@ -3,16 +3,8 @@ import java.util.ArrayList;
 public class ResourceStructure extends ArrayList {
 
 
-    /**
-     * Resourcestructure is an arraylist of char which can be W,R,B,G,P,Y
-     */
-
     private ArrayList<Character> vector;
 
-
-    /**
-     * costruction of Resourcestructure
-     */
 
     public ResourceStructure() {
         vector = new ArrayList<>();
@@ -21,8 +13,7 @@ public class ResourceStructure extends ArrayList {
 
 
     /**
-     * getter and setter
-     * * @return vectore of Resourcestructure (getter)
+     * Getter and setter
      */
 
     public ArrayList<Character> getVector() { return vector; }
@@ -31,10 +22,10 @@ public class ResourceStructure extends ArrayList {
 
 
     /**
-     * this method adds a given quantity of a resource type to the caller structure
-     * @param quantity
-     * @param resource
-     * @return the structure built with the parameters in input
+     * This method adds a specific amount of a given resource inside of a vector.
+     * @param quantity : the amount of the resource we want
+     * @param resource : the resource we want
+     * @return a vector with a specific amount of a given resource
      */
 
     public ArrayList<Character> addResource(int quantity, Character resource) {
@@ -44,11 +35,12 @@ public class ResourceStructure extends ArrayList {
 
 
     /**
-     * @param resource
-     * @return the position of the first element of a specific type of resource
+     * Tells me the position of the first element of a specific type of resource
+     * @param resource : the type of resource we are looking for
+     * @return the position of the first resource of a specific type
      */
 
-    public int firstOccurance(char resource)
+    public int firstOccurrence(char resource)
     {
         int i=0;
         while(this.getVector().get(i) != resource) i++;
@@ -57,14 +49,14 @@ public class ResourceStructure extends ArrayList {
 
 
     /**
-     * remove the first resource of a specific type
+     * Removes the first resource of a specific type
      * @param resource: resource to delete
      */
 
     public void removeThis(char resource)
     {
         int i=0;
-        i=this.firstOccurance(resource);
+        i=this.firstOccurrence(resource);
         this.getVector().remove(i);
     }
 

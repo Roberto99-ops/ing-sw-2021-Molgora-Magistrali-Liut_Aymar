@@ -298,17 +298,17 @@ public class Playerboard extends PaintCards {
         }
 
         //draw the extrapanel if the player has one
-        if(playerStorage.getTypeExtrapanel()!='Z') {
-            putString("EXTRAPANEL("+playerStorage.getTypeExtrapanel()+")", storage, 15, 15);
+        if(playerStorage.getTypeExtraPanel()!='Z') {
+            putString("EXTRAPANEL("+playerStorage.getTypeExtraPanel()+")", storage, 15, 15);
             for (int i = 0; i < 7; i++) storage[17][16 + i] = Color.RESET + "_";
-            int lung1 = playerStorage.getExtrapanel().getVector().size();
+            int lung1 = playerStorage.getExtraPanel().getVector().size();
             if (lung1 > 0) {
                 ArrayList<Character> panel = new ArrayList<>();
-                panel.add(playerStorage.getExtrapanel().getVector().get(0));
+                panel.add(playerStorage.getExtraPanel().getVector().get(0));
                 convertSymbols(panel, storage, 17, 17);
                 if (lung1 > 1) {
                     panel.remove(0);
-                    panel.add(playerStorage.getExtrapanel().getVector().get(1));
+                    panel.add(playerStorage.getExtraPanel().getVector().get(1));
                     convertSymbols(panel, storage, 17, 21);
                 }
             }
@@ -416,7 +416,7 @@ public class Playerboard extends PaintCards {
      * it draws the developement space inside the playerboard
      * @param DSpace: DSpace of the player
      */
-    private void Developementspace(DevelopementSpace DSpace)
+    private void Developementspace(DevelopmentSpace DSpace)
     {
         int MAX_VERT_SIZE = VERT_SIZE-13-2;
         int MAX_HORIZ_SIZE = HORIZ_SIZE/2+17;
@@ -429,35 +429,35 @@ public class Playerboard extends PaintCards {
         putString("DEVELOPEMENTSPACE", developementspace, 2, 39);
 
         //draw first minideck
-        int minideck1Leng = DSpace.getMinideck1().getStructure().size();
+        int minideck1Leng = DSpace.getMiniDeck1().getStructure().size();
         if(minideck1Leng > 0) {
-            drawDevelopecard(DSpace.getMinideck1().getStructure().get(0), developementspace, 14, 10);
+            drawDevelopecard(DSpace.getMiniDeck1().getStructure().get(0), developementspace, 14, 10);
             if(minideck1Leng > 1) {
-                drawDevelopecard(DSpace.getMinideck1().getStructure().get(1), developementspace, 12, 10);
+                drawDevelopecard(DSpace.getMiniDeck1().getStructure().get(1), developementspace, 12, 10);
                 if(minideck1Leng > 2)
-                    drawDevelopecard(DSpace.getMinideck1().getStructure().get(2), developementspace, 10, 10);
+                    drawDevelopecard(DSpace.getMiniDeck1().getStructure().get(2), developementspace, 10, 10);
             }
         }
 
         //draw second minideck
-        int minideck2Leng = DSpace.getMinideck2().getStructure().size();
+        int minideck2Leng = DSpace.getMiniDeck2().getStructure().size();
         if(minideck2Leng > 0) {
-            drawDevelopecard(DSpace.getMinideck2().getStructure().get(0), developementspace, 14, 40);
+            drawDevelopecard(DSpace.getMiniDeck2().getStructure().get(0), developementspace, 14, 40);
             if(minideck2Leng > 1) {
-                drawDevelopecard(DSpace.getMinideck2().getStructure().get(1), developementspace, 12, 40);
+                drawDevelopecard(DSpace.getMiniDeck2().getStructure().get(1), developementspace, 12, 40);
                 if(minideck2Leng > 2)
-                    drawDevelopecard(DSpace.getMinideck2().getStructure().get(2), developementspace, 10, 40);
+                    drawDevelopecard(DSpace.getMiniDeck2().getStructure().get(2), developementspace, 10, 40);
             }
         }
 
         //draw third minideck
-        int minideck3Leng = DSpace.getMinideck3().getStructure().size();
+        int minideck3Leng = DSpace.getMiniDeck3().getStructure().size();
         if(minideck3Leng > 0) {
-            drawDevelopecard(DSpace.getMinideck3().getStructure().get(0), developementspace, 14, 70);
+            drawDevelopecard(DSpace.getMiniDeck3().getStructure().get(0), developementspace, 14, 70);
             if(minideck3Leng > 1) {
-                drawDevelopecard(DSpace.getMinideck3().getStructure().get(1), developementspace, 12, 70);
+                drawDevelopecard(DSpace.getMiniDeck3().getStructure().get(1), developementspace, 12, 70);
                 if(minideck3Leng > 2)
-                    drawDevelopecard(DSpace.getMinideck3().getStructure().get(2), developementspace, 10, 70);
+                    drawDevelopecard(DSpace.getMiniDeck3().getStructure().get(2), developementspace, 10, 70);
             }
         }
 

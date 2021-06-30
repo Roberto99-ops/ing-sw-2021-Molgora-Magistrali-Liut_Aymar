@@ -11,7 +11,7 @@ public class Game implements Serializable {
     public static int lonely;
     private static ArrayList<GameHandler> players;
     private static int n_players;
-    private static DevelopeDecks[] developedecks = new DevelopeDecks[12];
+    private static DevelopDecks[] developDecks = new DevelopDecks[12];
     private static LeaderDeck leaderdeck;
     private static Market market;
     private static int VR=0;
@@ -21,14 +21,14 @@ public class Game implements Serializable {
 
 
     /**
-     * Game initialization
+     * Game initialization: the DevelopDecks, the LeaderDecks, the Market and the Players are prepared
      */
 
     public Game()
     {
         players = new ArrayList<>();
         for (int i = 0; i < 12; i++) {
-            developedecks[i] = new DevelopeDecks();
+            developDecks[i] = new DevelopDecks();
         }
         leaderdeck = new LeaderDeck();
         market = new Market();
@@ -39,32 +39,21 @@ public class Game implements Serializable {
 
 
     /**
-     * getter and setter
+     * Getter and setter
      */
 
     public ArrayList<GameHandler> getPlayers() { return players; }
     public void setPlayers(ArrayList<GameHandler> players) { Game.players = players; }
-    public static LeaderDeck getLeaderdeck() {
+    public static LeaderDeck getLeaderDeck() {
         return leaderdeck;
     }
-    public static void setLeaderdeck(LeaderDeck leaderdeck) {
+    public static void setLeaderDeck(LeaderDeck leaderdeck) {
         Game.leaderdeck = leaderdeck;
     }
     public static int getLonely() { return lonely; }
-    public static DevelopeDecks getDevelopedecks(int i) { return developedecks[i]; }
+    public static DevelopDecks getDevelopDecks(int i) { return developDecks[i]; }
     public static Market getMarket() { return market; }
-    public static void setDevelopedecks(DevelopeDecks developedeck, int i) { developedecks[i] = developedeck; }
-    public static int getTimer_VR() {
-        return timer_VR;
-    }
-    public static void setTimer_VR(int timer_VR) {
-        if (timer_VR>=3){
-            VR++;
-            setVR(VR);
-            timer_VR=0;
-        }
-        Game.timer_VR = timer_VR;
-    }
+    public static void setDevelopDecks(DevelopDecks developDeck, int i) { developDecks[i] = developDeck; }
     public static Player getWinner() {
         return winner;
     }
@@ -87,7 +76,7 @@ public class Game implements Serializable {
 
 
     /**
-     * shuffle all the decks and the market calling the random function
+     * Shuffles all the decks and the market, calling the random function
      */
 
 
@@ -95,9 +84,9 @@ public class Game implements Serializable {
 
         for (int i = 0; i < 12; i++) {
             int k = i;
-            DevelopeDecks deck = new DevelopeDecks();
+            DevelopDecks deck = new DevelopDecks();
             for (int j = 0; j < 4; j++) {
-                DevelopeCard card = new DevelopeCard();
+                DevelopCard card = new DevelopCard();
 
                 int num = (i) + j*4;
                 if(i >= 4)
@@ -115,12 +104,12 @@ public class Game implements Serializable {
             if (i==1 || i==5 || i==9) k -= 1;
             if (i==3 || i==7 || i==11) k -= 2;
 
-            developedecks[k].setStructure(deck.getStructure());
+            developDecks[k].setStructure(deck.getStructure());
         }
 
 
         for(int i=0; i<12; i++)
-            developedecks[i].setStructure(developedecks[i].shuffleDeck(developedecks[i].getStructure()));
+            developDecks[i].setStructure(developDecks[i].shuffleDeck(developDecks[i].getStructure()));
 
 
         for (int i = 0; i < 16; i++) {
@@ -132,19 +121,19 @@ public class Game implements Serializable {
         leaderdeck.setStructure(leaderdeck.shuffleDeck(leaderdeck.getStructure()));
 
 
-        market.setExtraball('B');
-        market.setResourceinMarket(0,0,'B');
-        market.setResourceinMarket(0,1,'G');
-        market.setResourceinMarket(0,2,'G');
-        market.setResourceinMarket(0,3,'P');
-        market.setResourceinMarket(1,0,'P');
-        market.setResourceinMarket(1,1,'R');
-        market.setResourceinMarket(1,2,'Y');
-        market.setResourceinMarket(1,3,'Y');
-        market.setResourceinMarket(2,0,'W');
-        market.setResourceinMarket(2,1,'W');
-        market.setResourceinMarket(2,2,'W');
-        market.setResourceinMarket(2,3,'W');
+        market.setExtraBall('B');
+        market.setResourceInMarket(0,0,'B');
+        market.setResourceInMarket(0,1,'G');
+        market.setResourceInMarket(0,2,'G');
+        market.setResourceInMarket(0,3,'P');
+        market.setResourceInMarket(1,0,'P');
+        market.setResourceInMarket(1,1,'R');
+        market.setResourceInMarket(1,2,'Y');
+        market.setResourceInMarket(1,3,'Y');
+        market.setResourceInMarket(2,0,'W');
+        market.setResourceInMarket(2,1,'W');
+        market.setResourceInMarket(2,2,'W');
+        market.setResourceInMarket(2,3,'W');
 
         market.randomizeMarket();
     }
@@ -154,8 +143,9 @@ public class Game implements Serializable {
 
 
     /**
-     * check if the game is ended, checking the actualplayer faith track(1) and developequantity(2)
-     * @return boolean
+     * Checks if the game is ended, checking the actualPlayer faith track(1) and DevelopQuantity(2)
+     * @return a boolean that tells the Game if someone has the requirements to end the game (position on the FaithTrack
+     * or 7 DevelopCards on his/her PlayerBoard)
      */
 
 
@@ -176,9 +166,9 @@ public class Game implements Serializable {
 
 
     /**
-     * find the winner, for each player at 1) we check if the player is arrived at the end
-     * of the faith track, at 2) we check which player has more Victory Points
-     * @return string
+     * Finds the winner, for each player: 1) checks if the player is arrived at the end
+     * of the faith track; 2) checks which player has more Victory Points
+     * @return a string with the name of the Player who has won the Game
      */
 
 
@@ -203,8 +193,8 @@ public class Game implements Serializable {
 
 
     /**
-     * this method give to the player 4 leadercards to choose
-     * @return: the 4 cards
+     * This method gives to the player 4 LeaderCards
+     * @return a deck of 4 LeaderCards from which the player must choose 2 at the beginning of the Game/SingleGame
      */
 
 
@@ -212,9 +202,9 @@ public class Game implements Serializable {
         LeaderDeck deck = new LeaderDeck();
         for (int i = 0; i < 4; i++) {
             LeaderCard card;
-            card = Game.getLeaderdeck().getStructure().get(0);
+            card = Game.getLeaderDeck().getStructure().get(0);
             deck.getStructure().add(card);
-            Game.getLeaderdeck().getStructure().remove(0);
+            Game.getLeaderDeck().getStructure().remove(0);
         }
         return deck;
     }
