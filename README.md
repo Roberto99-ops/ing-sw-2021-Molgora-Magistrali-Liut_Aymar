@@ -5,7 +5,7 @@ Developed by :
 
                  - Roberto Molgora
 
-                 - Juan David Liut-Aymar
+                 - Juan David Liut Aymar
                  
                  - Francesco Magistrali
                 
