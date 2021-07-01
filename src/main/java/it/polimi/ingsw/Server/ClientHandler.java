@@ -10,13 +10,13 @@ import java.net.Socket;
 public class ClientHandler implements Runnable {
 
     /**
-     * getter and setter
+     * Getter and setter
      */
 
     public GameHandler getPlayer() {
         return player;
     }
-    public GameHandler getSinglePlayer() { return singleplayer; }
+    public GameHandler getSinglePlayer() { return singlePlayer; }
 
 
 
@@ -24,7 +24,7 @@ public class ClientHandler implements Runnable {
     private ObjectOutputStream output;
     private ObjectInputStream input;
     private SingleGameManager singleGameManager;
-    private GameHandler singleplayer;
+    private GameHandler singlePlayer;
     private GameHandler player;
     private int number;
 
@@ -33,15 +33,15 @@ public class ClientHandler implements Runnable {
     /**
      * Initializes a new handler using a specific socket connected to a client.
      * @param client: The socket connection to the client.
-     * @param numberofsockets: the number of this player.
+     * @param numberOfSockets: the number of this player.
      */
 
-    public ClientHandler(Socket client, int numberofsockets) {
+    public ClientHandler(Socket client, int numberOfSockets) {
         this.client = client;
-        this.singleplayer = new GameHandler();
+        this.singlePlayer = new GameHandler();
         this.player = new GameHandler();
-        this.number = numberofsockets;
-        this.singleplayer.setNumber(number);
+        this.number = numberOfSockets;
+        this.singlePlayer.setNumber(number);
         this.player.setNumber(number);
     }
 
@@ -84,7 +84,7 @@ public class ClientHandler implements Runnable {
                 next = this.receiveMessage();
             } while(next.equals(""));
             player.setName(next);
-            singleplayer.setName(next);
+            singlePlayer.setName(next);
 
             if(this.number==1) {
                 do {

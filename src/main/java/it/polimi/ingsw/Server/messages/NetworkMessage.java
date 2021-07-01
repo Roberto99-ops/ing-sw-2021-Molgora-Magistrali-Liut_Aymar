@@ -7,6 +7,7 @@ import java.util.UUID;
 /**
  * A generic message sent over a network link.
  */
+
 public abstract class NetworkMessage implements Serializable
 {
     UUID identifier = UUID.randomUUID();

@@ -1,7 +1,7 @@
 package it.polimi.ingsw.model;
 import it.polimi.ingsw.Server.ClientHandler;
 import it.polimi.ingsw.Server.GameHandler;
-import it.polimi.ingsw.Server.messages.DevelopeDecksMsg;
+import it.polimi.ingsw.Server.messages.DevelopDecksMsg;
 import it.polimi.ingsw.Server.messages.MarketMsg;
 
 import java.io.IOException;
@@ -62,7 +62,7 @@ public class Turn implements Serializable {
             gameDeck[i] = Game.getDevelopDecks(i);
         }
 
-        DevelopeDecksMsg msg = new DevelopeDecksMsg(gameDeck);
+        DevelopDecksMsg msg = new DevelopDecksMsg(gameDeck);
         client.sendMessage(msg);
         do {
             client.sendMessage("Choose the number of the card you want to buy ");
@@ -113,7 +113,7 @@ public class Turn implements Serializable {
             gameDeck[cardNum].getStructure().remove(0);
 
             actualPlayer.deleteResources(check, cost.getVector());
-            msg = new DevelopeDecksMsg(gameDeck);
+            msg = new DevelopDecksMsg(gameDeck);
             client.sendMessage(msg);
 
             client.sendMessage("These are the new DevelopDecks (press any key)");

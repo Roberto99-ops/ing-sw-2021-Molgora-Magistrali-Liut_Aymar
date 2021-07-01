@@ -1,35 +1,29 @@
 package it.polimi.ingsw.Server;
 
 import it.polimi.ingsw.controller.GameManager;
-import it.polimi.ingsw.model.Game;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.UnknownHostException;
-import java.util.ArrayList;
-import java.util.Random;
 import java.util.Scanner;
 
 
 public class Server {
 
+
     private final static int SO_TIMEOUT = 10;
     private static GameManager gameManager = new GameManager();
     private static Thread game;
-    private static boolean closeserver = false;
-    private static int numberofsockets = 0;
+    private static boolean closeServer = false;
+    private static int numberOfSockets = 0;
     private static Thread firstClient;
 
-    public static void setCloseserverTrue() {
-        closeserver = true;
+    public static void setCloseServerTrue() {
+        closeServer = true;
     }
-    public static void setNumberofsockets(int numberofsockets) {
-        Server.numberofsockets = numberofsockets;
+    public static void setNumberOfSockets(int numberOfSockets) {
+        Server.numberOfSockets = numberOfSockets;
     }
 
 
@@ -39,6 +33,7 @@ public class Server {
         Scanner scan = new Scanner(System.in);
         String numberPort;
 
+        //This opens the socket port
         ServerSocket socket;
         try {
             System.out.println("Which port do you want to open?");
@@ -53,14 +48,14 @@ public class Server {
         }
 
 
-        while (!closeserver) {
+        while (!closeServer) {
             Socket client;
             try {
                 client = socket.accept();
-                numberofsockets++;
-                ClientHandler clientHandler = new ClientHandler(client, numberofsockets);
+                numberOfSockets++;
+                ClientHandler clientHandler = new ClientHandler(client, numberOfSockets);
                 Thread thread = new Thread(clientHandler, "server_" + client.getInetAddress());
-                if (numberofsockets == 1) firstClient = thread;
+                if (numberOfSockets == 1) firstClient = thread;
                 thread.start();
             }catch (IOException e){}
         }
@@ -69,7 +64,7 @@ public class Server {
 
 
     /**
-     * this method start a gamemanager
+     * This method starts a GameManager
      */
 
     public static void runGame()
@@ -81,12 +76,12 @@ public class Server {
 
 
     /**
-     * this method close a game, so it close the socket and reset numberofsockets
+     * This method closes a game, so it closes the socket and resets NumberOfSockets
      */
 
     public static void closeGame() {
-        numberofsockets=0;
-        Server.setCloseserverTrue();
+        numberOfSockets =0;
+        Server.setCloseServerTrue();
         if(game != null)
                 game.stop();
         firstClient.stop();

@@ -65,7 +65,7 @@ public class CliManager {
             player.setSkill1(playerMsg.getPlayer().getSkill1());
             player.setSkill2(playerMsg.getPlayer().getSkill2());
 
-            if(playerMsg.getSingleorNot())
+            if(playerMsg.getSingleOrNot())
                 game = new SingleGame();
             else
                 game = new Game();
@@ -74,7 +74,7 @@ public class CliManager {
                 game.getPlayers().add(playerMsg.getPlayers().get(i));
             Game.setVR(playerMsg.getVR());
 
-            if(playerMsg.getSingleorNot()){
+            if(playerMsg.getSingleOrNot()){
                 SingleGame.getLorenzo().setNumber(playerMsg.getLorenzo());
                 SingleGame.getActionStructure().setAS_Counter(playerMsg.getSignal());
             }
@@ -89,8 +89,8 @@ public class CliManager {
          * in case we receive a DDeck message we update it and print.
          */
 
-        if(msg.getClass().equals(DevelopeDecksMsg.class)) {
-            DevelopeDecksMsg DDeckMsg = (DevelopeDecksMsg) msg;
+        if(msg.getClass().equals(DevelopDecksMsg.class)) {
+            DevelopDecksMsg DDeckMsg = (DevelopDecksMsg) msg;
             DDecks = DDeckMsg.getDecks();
             DevelopeDecksView DDecksView = new DevelopeDecksView(DDecks);
             Utility.Clean();
