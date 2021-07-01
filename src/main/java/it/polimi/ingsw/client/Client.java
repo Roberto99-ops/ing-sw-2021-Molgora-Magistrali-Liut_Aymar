@@ -2,8 +2,6 @@ package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.view.cli.CliManager;
-import it.polimi.ingsw.view.cli.DevelopeDecksView;
-import it.polimi.ingsw.view.cli.Playerboard;
 import it.polimi.ingsw.view.cli.Utility;
 
 import java.io.ObjectInputStream;

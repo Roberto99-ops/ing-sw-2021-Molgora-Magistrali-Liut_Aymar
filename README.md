@@ -5,11 +5,11 @@ Developed by :
 
                  - Roberto Molgora
 
-                 - David Juan Liut-Aymar
+                 - Juan David Liut Aymar
                  
                  - Francesco Magistrali
                 
-Feautres developed : Complete rules + CLI
+Features developed : Complete rules + CLI + Socket
                 
 1) How to play the game : 
 
@@ -17,9 +17,13 @@ Feautres developed : Complete rules + CLI
  
     1.1) How to run the server :
    
-       The server can be run in every way you want; on IntelliJ it can be run just creating a configuration 
-       that runs the ServerJar.jar file. Else can be run on ubuntu or some other Linux-based virtual machines
-       or extension, by writing java -jar ServerJar.jar on the command line.
+       The server can be run in several ways; on IntelliJ it can be run just creating a configuration 
+       that runs the ServerJar.jar file. Else can be run just double clicking on the Server.bat file
+       (just be sure the .bat file is in the same directory of .jar file or it won't work).
+       N.B.
+       It should be possible to run it on ubuntu or some other Linux-based virtual machines
+       or extension, by writing java -jar ServerJar.jar on the command line, however it's not guaranteed 
+       this method will work.
        
    1.2) How to run the client :
    
@@ -32,7 +36,7 @@ Feautres developed : Complete rules + CLI
        N.B.
        The CLI it's been studied to work with "DejaVu sans mono for Powerline" font 
        (font size depends by your screen size; if you are form IntelliJ spaceline should be set to 0.8),
-       so before starting you have to install it on you PC or it could be bad visualize 
+       so before starting you have to install it on your PC or it could be bad visualized 
        (you can find the font here https://github.com/michele-bertoni/W10JavaCLI.git, 
        just download it, run and set it as default font in the program you're using).
        

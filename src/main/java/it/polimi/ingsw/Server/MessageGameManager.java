@@ -5,8 +5,8 @@ import it.polimi.ingsw.model.Game;
 
 
 /**
- * this class manage the relations between players, every time there is an update of playerboard: the player is notified
- * every time there is an update of market/leaderdeck/developementdeck: all the players are notified
+ * This class manages the relation between players, every time there is an update of PlayerBoard: the player is notified
+ * every time there is an update of market/leaderDeck/developmentDeck: all the players are notified
  */
 
 public class MessageGameManager {
@@ -133,8 +133,8 @@ public class MessageGameManager {
 
 
     /**
-     * send to all clients the new common structures
-     * @param clh
+     * Sends to all clients the new common structures (DevelopmentDecks, LeaderDeck, Market)
+     * @param clh: the clientHandler (Server) that will send the info to the Client
      */
 
 
@@ -152,10 +152,10 @@ public class MessageGameManager {
 
 
     /**
-     * send to the the client his playerboard
-     * @param clh
-     * @param handler
-     * @param game
+     * Sends to the the client his PlayerBoard
+     * @param clh: the clientHandler (Server) that will send the info to the Client
+     * @param handler: the GameHandler that manages the relation between Client and Server
+     * @param game: the actual game I'm playing
      */
 
        public static void personalChanges (ClientHandler clh, GameHandler handler, Game game) throws Exception {

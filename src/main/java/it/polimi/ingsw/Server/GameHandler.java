@@ -11,8 +11,8 @@ public class GameHandler extends Player {
 
 
     /**
-     * send to the client the new market
-     * @param clh
+     * Sends to the client the new Market
+     * @param clh: the clientHandler (Server) that will send the info to the Client
      */
 
     public void updateMarket(ClientHandler clh) throws IOException {
@@ -25,8 +25,8 @@ public class GameHandler extends Player {
 
 
     /**
-     * send to the client the new developementdecks
-     * @param clh
+     * Sends to the client the new DevelopmentDecks
+     * @param clh: the clientHandler (Server) that will send the info to the Client
      */
 
     public void updateDevelopementDecks(ClientHandler clh) throws IOException {
@@ -34,7 +34,7 @@ public class GameHandler extends Player {
             DevelopDecks[] actualDevelopDecks = new DevelopDecks[12];
             for (int j = 0; j < 12; j++)
                 actualDevelopDecks[i] = Game.getDevelopDecks(i);
-            DevelopeDecksMsg msg = new DevelopeDecksMsg(actualDevelopDecks);
+            DevelopDecksMsg msg = new DevelopDecksMsg(actualDevelopDecks);
             clh.sendMessage(msg);
         }
 
@@ -43,8 +43,8 @@ public class GameHandler extends Player {
 
 
     /**
-     * send to the client the new leaderdeck
-     * @param clh
+     * Sends to the client the new LeaderDeck
+     * @param clh: the clientHandler (Server) that will send the info to the Client
      */
 
     public void updateLeaderDeck(ClientHandler clh) throws IOException {
@@ -56,9 +56,9 @@ public class GameHandler extends Player {
 
 
     /**
-     * send to the client the new playerboard
-     * @param clh
-     * @param game
+     * Sends to the client the new PlayerBoard
+     * @param clh: the clientHandler (Server) that will send the info to the Client
+     * @param game: the actual game I'm playing
      */
 
     public void updatePlayerBoard(ClientHandler clh, Game game) throws IOException {

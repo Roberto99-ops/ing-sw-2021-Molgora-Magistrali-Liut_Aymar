@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public abstract class Utility {
 
     /**
-     * this class draw the perimeter of the playerboard
+     * This class draws the perimeter of the PlayerBoard
      */
     public void Perimeter(String[][] board, int VERT_SIZE, int HORIZ_SIZE, Color color)
     {
@@ -31,13 +31,11 @@ public abstract class Utility {
 
 
     /**
-     * generate a string containg a "ball" of the same colour of the colour of the resource for each resource.
-     * then put this string into the card and resize the card.
+     * It takes a string of resources and converts it into a row or column of colored balls
      * @param resources: resources to convert into balls
      * @param returned: matrix modified (it is the card)
-     * @param row: row where put the simbols
-     * @param column: column where put the simbols
-     * @return
+     * @param row: row where put the symbols
+     * @param column: column where put the symbols
      */
     public void convertSymbols(ArrayList<Character> resources, String[][] returned, int row, int column)
     {
@@ -75,9 +73,8 @@ public abstract class Utility {
     }
 
     /**
-     * converts a char color ('Y', 'P', 'G', 'B') into a real color
+     * Converts a char color ('Y', 'P', 'G', 'B') into its real and matching color
      * @param color: the color to convert
-     * @return
      */
     public String convertColor(Character color) {
 
@@ -100,9 +97,8 @@ public abstract class Utility {
     }
 
     /**
-     * converts a char color ('Y', 'P', 'G', 'B') into a real color (BACKGOURND)
+     * Converts a char color ('Y', 'P', 'G', 'B') into a real color (BACKGROUND)
      * @param color: the color to convert
-     * @return
      */
     public String convertBackground(Character color) {
 
@@ -131,12 +127,11 @@ public abstract class Utility {
     }
 
     /**
-     * puts a given string inside a given string matrix
+     * Puts a given string inside a given row/column of the matrix
      * @param string: string tu out inside
      * @param returned: matrix modified
      * @param row: position where put the string
      * @param column: position where put the string
-     * @return
      */
     public void putString(String string, String[][] returned, int row, int column)
     {
@@ -145,7 +140,7 @@ public abstract class Utility {
     }
 
     /**
-     * clean the screen
+     * Cleans the screen
      */
     public static void Clean()
     {
@@ -155,12 +150,12 @@ public abstract class Utility {
 
 
     /**
-     * this method draws the vatican cards.
-     * it colors them of the color we pass so we can know if we have
+     * This method draws the vatican cards.
+     * It colors them with green if we pass them so we can know if we have
      * activated them or not.
-     * @param color: green if card is activated for us, red if the card isn't been activated yet
+     * @param color: green if card is activated for us, red if the card isn't been activated yet/cannot be activated
      * @param content: PV of the card (2, 3, 4)
-     * @return: the draw of the card
+     * @return the drawing of the card
      */
     public String[][] drawVaticanCard(Color color, String content)
     {
@@ -200,7 +195,7 @@ public abstract class Utility {
     }
 
     /**
-     * it prints on the screen all the playeboard
+     * It prints on the screen the entire PlayerBoard
      */
     public void Print(String[][] board, int VERT_SIZE, int HORIZ_SIZE)
     {

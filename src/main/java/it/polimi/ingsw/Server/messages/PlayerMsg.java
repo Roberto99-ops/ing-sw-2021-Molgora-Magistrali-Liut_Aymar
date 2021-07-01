@@ -10,28 +10,28 @@ import java.util.ArrayList;
 public class PlayerMsg extends NetworkMessage{
     private GameHandler player;
     private ArrayList<GameHandler> players;
-    private boolean SingleorNot = false;
+    private boolean SingleOrNot = false;
     private int signal;
     private int Lorenzo;
     private int VR;
 
     /**
-     * Prepares the data of the Player (and the game because we need this message to build the playerboard)
-     * we want the Server to send to the Client
-     * @param player: data requested about the player
-     * @param gamein: the game we are playing
+     * Prepares the data of the Player (and the game because we need this message to build the PlayerBoard)
+     * We want the Server to send info about the Game to the Client
+     * @param player: data requested that concerns the player and his/her belongings
+     * @param gameIn: the game we are playing
      */
 
-    public PlayerMsg(GameHandler player, Game gamein){
+    public PlayerMsg(GameHandler player, Game gameIn){
         this.player = player;
         players = new ArrayList<>();
-        for (int i = 0; i < gamein.getPlayers().size(); i++) {
-            players.add(gamein.getPlayers().get(i));
+        for (int i = 0; i < gameIn.getPlayers().size(); i++) {
+            players.add(gameIn.getPlayers().get(i));
         }
         VR = Game.getVR();
-        if(gamein.getClass().equals(SingleGame.class))
+        if(gameIn.getClass().equals(SingleGame.class))
         {
-            SingleorNot = true;
+            SingleOrNot = true;
             Lorenzo = SingleGame.getLorenzo().getNumber();
             signal = SingleGame.getActionStructure().getOLD_Signal();
         }
@@ -48,8 +48,8 @@ public class PlayerMsg extends NetworkMessage{
         return players;
     }
 
-    public boolean getSingleorNot() {
-        return SingleorNot;
+    public boolean getSingleOrNot() {
+        return SingleOrNot;
     }
 
     public int getSignal() {

@@ -3,8 +3,9 @@ package it.polimi.ingsw.view.cli;
 import it.polimi.ingsw.model.LeaderDeck;
 
 /**
- * this class draw the 4 leadercard that the player can choose at the gamestart
+ * This class draws the 4 LeaderCard that the player can choose at the beginning of the Game
  */
+
 public class LeaderChooseView extends PaintCards{
     private final int VERT_SIZE = 30;
     private final int HORIZ_SIZE = 36;
@@ -25,9 +26,10 @@ public class LeaderChooseView extends PaintCards{
     }
 
     /**
-     * draw the 4 leadercards
-     * @param deck: the 4 leadercards
+     * Draws the 4 LeaderCards
+     * @param deck: the 4 LeaderCards
      */
+
     private void drawCard(LeaderDeck deck)
     {
         int contH=0;
@@ -37,7 +39,7 @@ public class LeaderChooseView extends PaintCards{
 
             if(i>=2) contV = 1;
 
-            drawLeadercard(deck.getStructure().get(i), space, 14 * contV+1, 18 * contH, 1);
+            drawLeaderCard(deck.getStructure().get(i), space, 14 * contV+1, 18 * contH, 1);
 
             contH++;
         }

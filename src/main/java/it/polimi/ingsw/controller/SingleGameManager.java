@@ -74,8 +74,8 @@ import java.io.FileNotFoundException;
         while( GameManager.getClientList().size()>0) {
             GameManager.getClientList().remove(0);
         }
-        Server.setNumberofsockets(0);
-        Server.setCloseserverTrue();
+        Server.setNumberOfSockets(0);
+        Server.setCloseServerTrue();
     }
 
 
