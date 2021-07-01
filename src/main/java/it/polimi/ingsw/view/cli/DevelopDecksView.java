@@ -3,14 +3,15 @@ package it.polimi.ingsw.view.cli;
 import it.polimi.ingsw.model.DevelopDecks;
 
 /**
- * draw the decks of developecards of the game
+ * Draws the decks of DevelopCards of the game
  */
-public class DevelopeDecksView extends PaintCards {
+
+public class DevelopDecksView extends PaintCards {
     private final int VERT_SIZE = 40;
     private final int HORIZ_SIZE = 77;
     private String [][] space;
 
-    public DevelopeDecksView(DevelopDecks[] decks)
+    public DevelopDecksView(DevelopDecks[] decks)
     {
         space = new String[VERT_SIZE][HORIZ_SIZE];
         for (int i = 0; i < VERT_SIZE; i++)
@@ -22,7 +23,7 @@ public class DevelopeDecksView extends PaintCards {
     }
 
     /**
-     * draw all developecards at the top of the decks
+     * Draws all DevelopCards at the top of the decks
      * @param decks: all the 12 decks of the game
      */
     private void drawCards(DevelopDecks[] decks)
@@ -36,11 +37,15 @@ public class DevelopeDecksView extends PaintCards {
             if(i>=8) contV = 0;
 
             if(decks[i]!=null && decks[i].getStructure().size() != 0)
-                drawDevelopecard(decks[i].getStructure().get(0), space, 12 * contV, 16 * contH);
+                drawDevelopCard(decks[i].getStructure().get(0), space, 12 * contV, 16 * contH);
 
             contH--;
         }
     }
+
+    /**
+     * These indicators appears when I try to buy a DevelopCard
+     */
 
     private void putIndicators()
     {

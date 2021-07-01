@@ -7,16 +7,21 @@ public class MarketView extends Utility {
     private static final int HORIZ_SIZE = 67;
     private String[][] market;
 
-    public MarketView(Market gamemarket)
+    /**
+     * It draws the rectangle that contains the Market
+     * @param gameMarket: market
+     */
+
+    public MarketView(Market gameMarket)
 
     {
         market = new String[VERT_SIZE][HORIZ_SIZE];
         Perimeter(market, VERT_SIZE, HORIZ_SIZE, Color.BACKGROUND_CYAN);
 
         putString("MARKET", market, 1, 30);
-        drawExtraMarble(gamemarket.getExtraBall());
+        drawExtraMarble(gameMarket.getExtraBall());
 
-        space(gamemarket);
+        space(gameMarket);
         for (int i = 20; i < VERT_SIZE-1; i++)
             market[i][10]=Color.BACKGROUND_CYAN + "║" + Color.RESET;
         for (int i = 50; i < HORIZ_SIZE-1; i++)
@@ -27,7 +32,7 @@ public class MarketView extends Utility {
     }
 
     /**
-     * draw the space composed by the 12 squares that coantain the marbles
+     * It draws the 12 squares of the Market that contains the marbles
      * @param gamemarket: the market to draw
      */
     private void space(Market gamemarket)
@@ -53,8 +58,8 @@ public class MarketView extends Utility {
     }
 
     /**
-     * draw the sqares where the 12 marbles are inside
-     * @param space: the space composed by the 12 squares
+     * Draws the squares where the 12 marbles are inside
+     * @param space: the space composed by 12 squares
      * @param row: row where to put the square
      * @param column: column where to put the square
      * @param colorMarble: color of the marble
@@ -76,8 +81,8 @@ public class MarketView extends Utility {
     }
 
     /**
-     * draw the extramarble
-     * @param colorMarble: color of the extramarble
+     * Draws the extraMarble
+     * @param colorMarble: color of the extraMarble
      */
     private void drawExtraMarble(Character colorMarble)
     {
@@ -98,7 +103,7 @@ public class MarketView extends Utility {
     }
 
     /**
-     * draw a marble
+     * Draw a marble
      * @param marbleSquare: where to draw it
      * @param color: color of the marble
      */

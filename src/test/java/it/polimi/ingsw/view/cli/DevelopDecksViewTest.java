@@ -20,7 +20,7 @@ public class DevelopDecksViewTest extends TestCase {
         }
 
         decks[6].getStructure().remove(0);
-        DevelopeDecksView Dview = new DevelopeDecksView(decks);
+        DevelopDecksView Dview = new DevelopDecksView(decks);
         Dview.print();
     }
 }

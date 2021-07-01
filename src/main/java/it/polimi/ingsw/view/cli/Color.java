@@ -1,8 +1,7 @@
 package it.polimi.ingsw.view.cli;
 
-
 /**
-
+ * These are all the colors are used for the CLI
  */
 
 public enum Color {

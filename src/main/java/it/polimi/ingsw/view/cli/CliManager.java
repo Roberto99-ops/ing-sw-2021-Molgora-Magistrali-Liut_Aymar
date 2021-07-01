@@ -21,18 +21,18 @@ public class CliManager {
 
 
     /**
-     * this method recognizes what type of message is receiving.
-     * @param msg: msg received
-     * @param player: old player istance (maybe not necessary, it depends if we can print
-     *              playerboard every time we receive an update)
-     * @throws FileNotFoundException
+     * This method recognizes what type of message is receiving.
+     * @param msg: message received
+     * @param player: old player instance (maybe not necessary, it depends if we can print
+     *                PlayerBoard every time we receive an update)
+     * @throws FileNotFoundException if the update cannot be done
      */
 
     public static void update(Object msg, Player player) throws FileNotFoundException {
 
-        /**
-         * in case we receive a Market message we update the Market view and print it.
-         */
+
+         //in case we receive a Market message we update the Market view and print it.
+
 
         if(msg.getClass().equals(MarketMsg.class)) {
             market = new Market();
@@ -44,9 +44,9 @@ public class CliManager {
             marketView.print();
         }
 
-        /**
-         * in case we receive a player message we update the playerboard and print it
-         */
+
+        //in case we receive a player message, we update the PlayerBoard and print it
+
 
         if(msg.getClass().equals(PlayerMsg.class)) {
             PlayerMsg playerMsg = (PlayerMsg) msg;
@@ -85,21 +85,20 @@ public class CliManager {
             board.Print();
         }
 
-        /**
-         * in case we receive a DDeck message we update it and print.
-         */
+
+         //in case we receive a DevelopDeck message, we update the DevelopDeck and print it.
+
 
         if(msg.getClass().equals(DevelopDecksMsg.class)) {
             DevelopDecksMsg DDeckMsg = (DevelopDecksMsg) msg;
             DDecks = DDeckMsg.getDecks();
-            DevelopeDecksView DDecksView = new DevelopeDecksView(DDecks);
+            DevelopDecksView DDecksView = new DevelopDecksView(DDecks);
             Utility.Clean();
             DDecksView.print();
         }
 
-        /**
-         * in case we receive a LDeck message we and print (we receive it only at the start of the game)
-         */
+         //in case we receive a LeaderDeck message, we print the 4 LeaderCards (we receive it only at the start of the game)
+
 
         if(msg.getClass().equals(LeaderDeckMsg.class)) {
             LeaderDeckMsg LDeckMsg = (LeaderDeckMsg) msg;
@@ -109,9 +108,9 @@ public class CliManager {
             LView.print();
         }
 
-        /**
-         * in case we receive a ActionSignal message we update it.
-         */
+
+         //in case we receive a ActionSignal message, we update the ActionSignal
+
 
         if(msg.getClass().equals(ActionSignalMsg.class)) {   //maybe useless
            ActionSignalMsg ActionMsg = (ActionSignalMsg) msg;

@@ -8,12 +8,10 @@ import java.util.ArrayList;
 public abstract class PaintCards extends Utility {
 
     /**
-     * draw the leadercards
-     *
+     * Draws the LeaderCards and their info
      * @param card: card to draw
-     * @return
      */
-    public void drawLeadercard(LeaderCard card, String[][] space, int row, int column, int active) {
+    public void drawLeaderCard(LeaderCard card, String[][] space, int row, int column, int active) {
         int MAX_VERT_SIZE = (45 - 13 - 8) / 2;
         int MAX_HORIZ_SIZE = 17 - 2;
         Color color;
@@ -35,22 +33,22 @@ public abstract class PaintCards extends Utility {
             leadercard[i][MAX_HORIZ_SIZE - 1] = color + "|" + Color.RESET;
 
         if (card!= null) {
-            putString("cardLevel: " + card.getCardLevel(), leadercard, 1, 1);
+            putString("CardLevel: " + card.getCardLevel(), leadercard, 1, 1);
             putString("PV: " + card.getPv(), leadercard, 3, 1);
             if (card.getPriceC().size() != 0) {
-                putString("priceC:", leadercard, 5, 1);
+                putString("PriceC:", leadercard, 5, 1);
                 ArrayList<Character> newprice = card.getPriceC();
                 for (int i = 0; i < newprice.size(); i++)
                     if(newprice.get(i).equals('G')) newprice.set(i, 'F');
                 convertSymbols(newprice, leadercard, 5, 8);
             } else {
-                putString("priceR:", leadercard, 5, 1);
+                putString("PriceR:", leadercard, 5, 1);
                 convertSymbols(card.getPriceR().getVector(), leadercard, 5, 8);
             }
-            putString("skill: ", leadercard, 7, 1);
+            putString("Skill: ", leadercard, 7, 1);
             putString(card.getSkill(), leadercard, 8, 1);
 
-            putString("inputskill:", leadercard, 10, 1);
+            putString("InputSkill:", leadercard, 10, 1);
             ArrayList<Character> input = new ArrayList<>();
             input.add(card.getInputSkill());
             convertSymbols(input, leadercard, 10, 12);
@@ -64,10 +62,10 @@ public abstract class PaintCards extends Utility {
     }
 
     /**
-     * @param card
-     * @return
+     * Draws DevelopCards
+     * @param card the card I'll draw
      */
-    public void drawDevelopecard(DevelopCard card, String[][] space, int row, int column) {
+    public void drawDevelopCard(DevelopCard card, String[][] space, int row, int column) {
         int MAX_VERT_SIZE = 12;
         int MAX_HORIZ_SIZE = 17 - 2;
         String color = convertColor(card.getColour());
@@ -86,13 +84,13 @@ public abstract class PaintCards extends Utility {
         for (int i = 1; i < MAX_VERT_SIZE; i++)
             developecard[i][MAX_HORIZ_SIZE - 1] = color + "|" + Color.RESET;
 
-        putString("cardLevel: " + card.getLevel(), developecard, 1, 1);
+        putString("CardLevel: " + card.getLevel(), developecard, 1, 1);
         putString("Cost:", developecard, 3, 1);
         convertSymbols(card.getCost().getVector(), developecard, 3, 6);
 
-        putString("inputprod.:", developecard, 5, 1);
+        putString("InputProd.:", developecard, 5, 1);
         convertSymbols(card.getInputproduction().getVector(), developecard, 6, 1);
-        putString("outputprod.:", developecard, 8, 1);
+        putString("OutputProd.:", developecard, 8, 1);
         convertSymbols(card.getOutputproduction().getVector(), developecard, 9, 1);
 
         putString("PV: " + card.getPv(), developecard, 10, 1);
