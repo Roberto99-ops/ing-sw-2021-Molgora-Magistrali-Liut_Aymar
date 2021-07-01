@@ -1,1 +1,1 @@
-java -jar PSP61.jar
+java -jar Server.jar
