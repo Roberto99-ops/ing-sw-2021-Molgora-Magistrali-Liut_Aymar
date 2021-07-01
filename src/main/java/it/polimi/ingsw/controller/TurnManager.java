@@ -170,7 +170,7 @@ public class TurnManager {
                             client.sendMessage("Tell me the resource you want to product (P,B,G,Y)\n");
                                 chosenResource = client.receiveMessage().charAt(0);
                             } while (chosenResource!='P'&& chosenResource!='B'&&chosenResource!='G'&& chosenResource!='Y');
-                            vectorOutProduction.add(chosenResource);
+                            //vectorOutProduction.add(chosenResource);
                         }
                         //the game asks the player which DevelopCard production he/she wants to use
                         if (turn.getActualPlayer().getDSpace().getMiniDeck1().getStructure().size() > 0) {
