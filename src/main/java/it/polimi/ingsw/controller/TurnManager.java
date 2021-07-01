@@ -48,13 +48,13 @@ public class TurnManager {
                 if (!actionDone) {
                     //if one of the 3 actions has not been done, the Player can choose again
                     if (player.getLeadercards().getStructure().size() > 0) {
-                        client.sendMessage("Since you have done no actions: What do you want to do?\n  1)Shop a developement card\t2)Take resources at the market\n  3)Active a production\t4)Do a Leader action ");
+                        client.sendMessage("Since you have done no actions: What do you want to do?\n  1)Shop a developement card\t2)Take resources at the market\n  3)Active a production\t\t4)Do a Leader action ");
                     } else {
                         client.sendMessage("Since you have done no actions: What do you want to do?\n  1)Shop a developement card\t2)Take resources at the market\n  3)Active a production ");
                     }
                 } else {
                     if (player.getLeadercards().getStructure().size() > 0) {
-                        client.sendMessage("What do you want to do?\n  1)Shop a development card\t2)Take resources at the market\n  3)Active a production\t4)Do a Leader action ");
+                        client.sendMessage("What do you want to do?\n  1)Shop a development card\t2)Take resources at the market\n  3)Active a production\t\t4)Do a Leader action ");
                     } else {
                         client.sendMessage("What do you want to do?\n  1)Shop a development card\t2)Take resources at the market\n  3)Active a production ");
                     }
