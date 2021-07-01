@@ -176,19 +176,19 @@ public class Player implements Serializable {
         switch(this.FtPosition){
             case 3: increasePV(1);
             break;
-            case 6: increasePV(1);
+            case 6: increasePV(2);
             break;
-            case 9: increasePV(2);
+            case 9: increasePV(4);
             break;
-            case 12: increasePV(2);
+            case 12: increasePV(6);
             break;
-            case 15: increasePV(3);
+            case 15: increasePV(9);
             break;
-            case 18: increasePV(3);
+            case 18: increasePV(12);
             break;
-            case 21: increasePV(4);
+            case 21: increasePV(16);
             break;
-            case 24: increasePV(4);
+            case 24: increasePV(20);
             break;
         }
 
