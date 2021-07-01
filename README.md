@@ -17,9 +17,12 @@ Features developed : Complete rules + CLI + Socket
  
     1.1) How to run the server :
    
-       The server can be run in every way you want; on IntelliJ it can be run just creating a configuration 
-       that runs the ServerJar.jar file. Else can be run on ubuntu or some other Linux-based virtual machines
-       or extension, by writing java -jar ServerJar.jar on the command line.
+       The server can be run in several ways; on IntelliJ it can be run just creating a configuration 
+       that runs the ServerJar.jar file. Else can be run just double clicking on the Server.bat file.
+       N.B.
+       It should be possible to run it on ubuntu or some other Linux-based virtual machines
+       or extension, by writing java -jar ServerJar.jar on the command line, however it's don't guaranteed 
+       this method will work.
        
    1.2) How to run the client :
    
